@@ -1,0 +1,1 @@
+In AWS NorthStar, components should not provide surrounding white space. Instead, spacing between components is entirely controlled by layout components. This approach ensures the spacing is consistent. With all the layout components, you can compose the whole UI page like playing with blocks. 

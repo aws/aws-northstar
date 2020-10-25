@@ -1,0 +1,19 @@
+{
+    branches: [
+                {name: 'mainline'},
+                {name: 'next', channel: 'next'}
+            ],
+    "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        ["@semantic-release/changelog", {
+            "changelogFile": "RELEASENOTES.md",
+        }],
+        ["@semantic-release/npm", {
+            "pkgRoot": "./build",
+        }],
+        ["@semantic-release/exec", {
+            "successCmd": "echo ${nextRelease.version} > RELEASED"
+        }],
+    ]
+}

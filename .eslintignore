@@ -1,0 +1,10 @@
+!/.storybook
+
+build/ 
+cdk.out/ 
+coverage/
+node_modules/ 
+**/node_modules/ 
+oss-attribution/ 
+storybook.out/ 
+styleguide.out/
