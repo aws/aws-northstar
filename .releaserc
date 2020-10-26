@@ -1,6 +1,6 @@
 {
     branches: [
-                {name: 'mainline'},
+                {name: 'main'},
                 {name: 'next', channel: 'next'}
             ],
     "plugins": [
