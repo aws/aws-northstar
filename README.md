@@ -1,6 +1,6 @@
 # AWS NorthStar - Prototyping Design System
 
-AWS NorthStar is an easy-to-use and high standard design system for delivering an AWS console like user experience.
+NorthStar aims to be the standard for rapidly prototyping intuitive, meaningful and accessible user experiences. It simplifies your work and ensures consistent, predictable experiences at scale for your customers. With NorthStar, you can focus on innovation and do more with less.
 
 Check out our [documentation website](https://northstar.aws-prototyping.cloud/) for more details.
 
