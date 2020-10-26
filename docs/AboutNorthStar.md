@@ -1,4 +1,4 @@
-## NorthStar empowers you to rapidly prototyping intuitive, meaningful and accessible user experiences at scale
+## NorthStar empowers you to rapidly prototype intuitive, meaningful and accessible user experiences at scale
 
 NorthStar aims to be the standard for rapidly prototyping intuitive, meaningful and accessible user experiences. It simplifies your work and ensures consistent, predictable experiences at scale for your customers. With NorthStar, you can focus on innovation and do more with less.
 
@@ -19,7 +19,7 @@ To be ** the ** holistic design system for rapidly prototyping rich, engaging us
 ## Tenets and key concepts
 
 #### 1. Convention over configuration. 
-Eliminate the need for configuration, simplifying the developer experience, decreasing the the from design to implementation.
+Eliminate the need for configuration, simplifying the developer experience, decreasing the time from design to implementation.
 
 #### 2. Be opinionated as it accelerates development
 NorthStar is a design system. It is prescriptive and should always care of the undifferentiated heavy lifting of CSS, layout and stlying.
