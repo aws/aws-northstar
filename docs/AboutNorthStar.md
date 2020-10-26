@@ -1,4 +1,4 @@
-## NorthStar empowers you to rapidly prototyping intuitive, meaningful and accessible user experiences at scale
+## NorthStar empowers you to rapidly prototype intuitive, meaningful and accessible user experiences at scale
 
 NorthStar aims to be the standard for rapidly prototyping intuitive, meaningful and accessible user experiences. It simplifies your work and ensures consistent, predictable experiences at scale for your customers. With NorthStar, you can focus on innovation and do more with less.
 
