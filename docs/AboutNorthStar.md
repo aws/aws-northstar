@@ -19,7 +19,7 @@ To be ** the ** holistic design system for rapidly prototyping rich, engaging us
 ## Tenets and key concepts
 
 #### 1. Convention over configuration. 
-Eliminate the need for configuration, simplifying the developer experience, decreasing the the from design to implementation.
+Eliminate the need for configuration, simplifying the developer experience, decreasing the time from design to implementation.
 
 #### 2. Be opinionated as it accelerates development
 NorthStar is a design system. It is prescriptive and should always care of the undifferentiated heavy lifting of CSS, layout and stlying.
