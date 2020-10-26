@@ -1,6 +1,6 @@
 {
   "name": "aws-northstar",
-  "version": "0.0.1-development",
+  "version": "1.0.0",
   "description": "AWS NorthStar Design System",
   "main": "index.js",
   "scripts": {
@@ -41,13 +41,6 @@
     "url": "https://github.com/aws/aws-northstar"
   },
   "devDependencies": {
-    "@aws-cdk/aws-codecommit": "^1.59.0",
-    "@aws-cdk/aws-codepipeline": "^1.59.0",
-    "@aws-cdk/aws-codepipeline-actions": "^1.59.0",
-    "@aws-cdk/aws-iam": "^1.59.0",
-    "@aws-cdk/aws-s3-deployment": "^1.59.0",
-    "@aws-cdk/aws-waf": "^1.59.0",
-    "@aws-cdk/core": "^1.59.0",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/exec": "^5.0.0",
     "@semantic-release/git": "^9.0.0",
