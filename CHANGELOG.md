@@ -1,0 +1,1 @@
+[//]: <> (The release notes will be generated in the pipeline during build time. This is a placeholder.)

@@ -7,7 +7,7 @@
         "@semantic-release/commit-analyzer",
         "@semantic-release/release-notes-generator",
         ["@semantic-release/changelog", {
-            "changelogFile": "RELEASENOTES.md",
+            "changelogFile": "CHANGELOG.md",
         }],
         ["@semantic-release/npm", {
             "pkgRoot": "./build",
@@ -15,5 +15,8 @@
         ["@semantic-release/exec", {
             "successCmd": "echo ${nextRelease.version} > RELEASED"
         }],
+        ["@semantic-release/git", {
+            "assets": ["CHANGELOG.md"],
+        }]
     ]
 }
