@@ -48,7 +48,8 @@ const Landing: React.FC = () => {
                         <img src="img/logo-full.png" alt="NorthStar" width="60%" />
                     </Box>
                     <Typography variant="h1">
-                        The design system for building AWS console like user experiences
+                        The design system to rapidly prototype intuitive, meaningful and accessible user experiences at
+                        scale
                     </Typography>
                 </Box>
             </Box>
