@@ -1,8 +1,74 @@
-## [1.0.2](https://github.com/aws/aws-northstar/compare/v1.0.1...v1.0.2) (2020-10-27)
+# 1.0.0 (2020-10-27)
 
+### Features
 
-### Bug Fixes
+* Add existing components
 
-* Trigger a patch release for testing ([f95e11b](https://github.com/aws/aws-northstar/commit/f95e11b7b44e1ce211d3b51fba93b51729548b26))
+    * Layout componets:
+        * AppLayout
+        * Box
+        * ColumnLayout/Column
+        * Container
+        * GetStarted
+        * Grid
+        * Hidden
+        * Inline
+        * Stack
+
+    * UI components:
+        * Alert
+        * Autosuggest
+        * Badge
+        * BreadcrumbGroup
+        * Button
+        * ButtonDropdown
+        * Card
+        * Checkbox
+        * DatePicker
+        * ExpandableSection
+        * Flashbar
+        * Form
+        * FormField
+        * FormGroup
+        * FormRenderer
+        * FormSection
+        * Header
+        * HeadingStripe
+        * HelpPanel
+        * Input
+        * KeyValuePair
+        * Link
+        * LoadingIndicator
+        * Map
+        * Modal
+        * Multiselect
+        * NorthStarThemeProvider
+        * Overlay
+        * PivotTable
+        * Placeholder
+        * ProgressBar
+        * RadioGroup
+        * Select
+        * SideNavigation
+        * StatusIndicator
+        * Table
+        * Tabs
+        * Text
+        * Textarea
+        * Toggle
+        * TokenGroup
+        * TreeView
+        * Wizard
+
+    * Chart components:
+        * AreaChart
+        * BarChart
+        * LineChart
+        * PieChart
+        * ScatterChart
+
+    * Advanced components:
+        * NotificationButton
+
 
 [//]: <> (The release notes will be generated in the pipeline during build time. This is a placeholder.)

@@ -3,6 +3,7 @@
   "version": "0.0.1-development",
   "description": "NorthStar Design System",
   "main": "index.js",
+  "keywords": ["ui", "design-system", "aws-northstar"],
   "scripts": {
     "build:build-readme": "cat ./docs/GettingStarted.md >> ./build/README.md",
     "build:copy-file": "cp ./{package.json,LICENSE,NOTICE,LICENSE-THIRD-PARTY} ./build/ && cp ./README_NPM_PACKAGE.md ./build/README.md",
