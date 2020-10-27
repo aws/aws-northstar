@@ -1,1 +1,1 @@
-Components are implementations of AWS NorthStar design patterns and guidelines. The React components are tested, responsive, and accessible.
+Components are implementations of NorthStar design patterns and guidelines. The React components are tested, responsive, and accessible.

@@ -1,4 +1,4 @@
-This documentation includes guidelines, best practices, programming styles and conventions that developers should adhere to when contributing to AWS NorthStar.
+This documentation includes guidelines, best practices, programming styles and conventions that developers should adhere to when contributing to NorthStar.
 
 ## General Guidelines
 

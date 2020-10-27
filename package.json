@@ -1,7 +1,7 @@
 {
   "name": "aws-northstar",
   "version": "0.0.1-development",
-  "description": "AWS NorthStar Design System",
+  "description": "NorthStar Design System",
   "main": "index.js",
   "scripts": {
     "build:build-readme": "cat ./docs/GettingStarted.md >> ./build/README.md",

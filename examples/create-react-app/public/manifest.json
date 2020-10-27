@@ -1,6 +1,6 @@
 {
-  "short_name": "AWS NorthStar Demo",
-  "name": "AWS NorthStar Design System Demo",
+  "short_name": "NorthStar Demo",
+  "name": "NorthStar Design System Demo",
   "icons": [
     {
       "src": "favicon.ico",

@@ -1,16 +1,16 @@
-With AWS NorthStar, you can easily design and develop your UI applications.
+With NorthStar, you can easily design and develop your UI applications.
 
 ## Before you start
 
-Before you start using AWS NorthStar for your project, please note that:
+Before you start using NorthStar for your project, please note that:
 
-* AWS NorthStar currently only supports the React framework. It supports the most recent versions of React, starting from 16.12.0.
+* NorthStar currently only supports the React framework. It supports the most recent versions of React, starting from 16.12.0.
 
-* AWS NorthStar supports the latest, stable releases of modern browsers - Chrome, Firefox and Safari.
+* NorthStar supports the latest, stable releases of modern browsers - Chrome, Firefox and Safari.
 
-* AWS NorthStar should be used as a rapid prototyping and design tool to ensure a consistent and repeatable design for your applications. Whilst NorthStar has been built from the ground up using best practices, you should carefully consider the use of NorthStar in a production environment.
+* NorthStar should be used as a rapid prototyping and design tool to ensure a consistent and repeatable design for your applications. Whilst NorthStar has been built from the ground up using best practices, you should carefully consider the use of NorthStar in a production environment.
 
-* AWS NorthStar is shipped with the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
+* NorthStar is shipped with the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
 
 ## Installation
 
@@ -42,7 +42,7 @@ export default () => (
 
 ### Font Family
 
-The default font family at AWS NorthStar is `"Roboto", "Helvetica Neue", "HelveticaNeue", "Helvetica", "Arial", sans-serif`. The Roboto font will **not** be automatically loaded by AWS NorthStar. `Roboto` is used if it has been installed in users' browsers. Otherwise, the next fallback font `Helvetica Neue` is used. If you want to ensure `Roboto` font is in place, you can add:
+The default font family at NorthStar is `"Roboto", "Helvetica Neue", "HelveticaNeue", "Helvetica", "Arial", sans-serif`. The Roboto font will **not** be automatically loaded by NorthStar. `Roboto` is used if it has been installed in users' browsers. Otherwise, the next fallback font `Helvetica Neue` is used. If you want to ensure `Roboto` font is in place, you can add:
 
 ```
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
@@ -96,7 +96,7 @@ We use [GitHub Issues](https://github.com/aws/aws-northstar/issues) as a bug tra
 
 If you are interested in our source code, our repo is at [https://github.com/aws/aws-northstar](https://github.com/aws/aws-northstar).
 
-We welcome your contribution to AWS NorthStar. Please check our [Contribution Guide](https://northstar.aws-prototyping.cloud/#/Contribution%20Guide) for more details. As a community run project, we rely on your contribution.
+We welcome your contribution to NorthStar. Please check our [Contribution Guide](https://northstar.aws-prototyping.cloud/#/Contribution%20Guide) for more details. As a community run project, we rely on your contribution.
 
 ## Release notes
 

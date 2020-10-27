@@ -18,7 +18,7 @@ const path = require('path');
 const fs = require('fs');
 
 module.exports = {
-    title: 'AWS NorthStar',
+    title: 'NorthStar',
     pagePerSection: true,
     usageMode: 'expand',
     showSidebar: true,

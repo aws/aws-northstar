@@ -6,12 +6,12 @@ import BreadcrumbGroup from 'aws-northstar/components/BreadcrumbGroup';
 
 const AppLayout: FunctionComponent = ( {children} ) => {
     const Header = useMemo(() => (
-        <HeaderBase title="AWS NorthStar Design System Demo" logoPath="/logo-light-full.png" />
+        <HeaderBase title="NorthStar Design System Demo" logoPath="/logo-light-full.png" />
     ), []);
     const Breadcrumbs = useMemo(() => <BreadcrumbGroup rootPath="Home" />, []);;
     const SideNavigation = useMemo(() => {
         return <SideNavigationBase 
-            header={{text: 'AWS NorthStar Demo', href: '/'}}
+            header={{text: 'NorthStar Demo', href: '/'}}
             items={[
                 {text: 'Home', type: SideNavigationItemType.LINK, href: '/'},
                 {text: 'Analytics', type: SideNavigationItemType.LINK, href: '/data'},

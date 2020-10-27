@@ -22,7 +22,7 @@ Make sure your report gets the attention it deserves: bug reports with missing i
 
 - What browser are you using? Chrome? Safari? Firefox? Internet Explorer? and which version is it? Chrome Version 81.0.4044.138 (Official Build) (64-bit)? Again, more detail is better.
 
-- Which version or versions of AWS NorthStar are you using? Ideally, you followed the advice above and have ruled out (or verified that the problem exists in) a few different versions.
+- Which version or versions of NorthStar are you using? Ideally, you followed the advice above and have ruled out (or verified that the problem exists in) a few different versions.
 
 - How can the developers recreate the bug on their end? If possible, include a copy of your code and screenshots (if applicable.)
 
@@ -34,7 +34,7 @@ A common tactic is to pare down your code until a simple (but still bug-causing)
 
 ### Licensing of contributed material
 
-Keep in mind as you contribute, that code, docs and other material submitted to AWS NorthStar are usually considered licensed under the same terms as the rest of the work.
+Keep in mind as you contribute, that code, docs and other material submitted to NorthStar are usually considered licensed under the same terms as the rest of the work.
 
 - Anything submitted to a project falls under the licensing terms in the repository’s top level LICENSE file.
 
@@ -45,7 +45,7 @@ Keep in mind as you contribute, that code, docs and other material submitted to 
 
 ### Licensing of third party dependencies
 
-Only third party dependencies with the following licenses can be used in AWS NorthStar.
+Only third party dependencies with the following licenses can be used in NorthStar.
 
 - MIT
 - Apache-2.0
