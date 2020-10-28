@@ -3,6 +3,7 @@
   "version": "0.0.1-development",
   "description": "NorthStar Design System",
   "main": "index.js",
+  "homepage": "https://northstar.aws-prototyping.cloud/",
   "keywords": [
     "ui",
     "design-system",
