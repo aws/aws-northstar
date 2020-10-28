@@ -3,7 +3,11 @@
   "version": "0.0.1-development",
   "description": "NorthStar Design System",
   "main": "index.js",
-  "keywords": ["ui", "design-system", "aws-northstar"],
+  "keywords": [
+    "ui",
+    "design-system",
+    "aws-northstar"
+  ],
   "scripts": {
     "build:build-readme": "cat ./docs/GettingStarted.md >> ./build/README.md",
     "build:copy-file": "cp ./{package.json,LICENSE,NOTICE,LICENSE-THIRD-PARTY} ./build/ && cp ./README_NPM_PACKAGE.md ./build/README.md",
@@ -44,7 +48,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/exec": "^5.0.0",
-    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.1.1",
     "@storybook/addon-a11y": "^6.0.21",
     "@storybook/addon-actions": "^6.0.21",
     "@storybook/addon-console": "^1.2.1",
