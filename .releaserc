@@ -15,6 +15,9 @@
         ["@semantic-release/exec", {
             "successCmd": "echo ${nextRelease.version} > RELEASED"
         }],
+        ["@semantic-release/git", {
+            "assets": ["CHANGELOG.md"],
+        }],
         ["@semantic-release/github", {
             "assets": ["CHANGELOG.md"],
         }]
