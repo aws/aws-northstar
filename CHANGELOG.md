@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/aws/aws-northstar/compare/v1.0.6...v1.0.7) (2020-10-28)
+
+
+### Bug Fixes
+
+* Update Travis to preinstall git-secrets and typescriptp ([#23](https://github.com/aws/aws-northstar/issues/23)) ([ed3606e](https://github.com/aws/aws-northstar/commit/ed3606e3ed956ddc8c37b3098fc5de823ea91724))
+
 ## [1.0.6](https://github.com/aws/aws-northstar/compare/v1.0.5...v1.0.6) (2020-10-28)
 
 
