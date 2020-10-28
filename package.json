@@ -10,8 +10,8 @@
     "aws-northstar"
   ],
   "scripts": {
-    "build:build-readme": "cat ./docs/GettingStarted.md >> ./build/README.md",
-    "build:copy-file": "cp ./{package.json,LICENSE,NOTICE,LICENSE-THIRD-PARTY} ./build/ && cp ./README_NPM_PACKAGE.md ./build/README.md",
+    "build:build-readme": "cp ./README_NPM_PACKAGE.md ./build/README.md && cat ./docs/GettingStarted.md >> ./build/README.md",
+    "build:copy-file": "cp ./package.json ./build/",
     "build": "tsc --build tsconfig.build.json && npm run generate:attribution && npm run build:copy-file && npm run build:build-readme",
     "check:all": "npm run test:all && npm run build && npm run storybook:build && npm run styleguide:build",
     "generate:attribution": "generate-attribution && mv oss-attribution/attribution.txt LICENSE-THIRD-PARTY",

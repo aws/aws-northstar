@@ -14,6 +14,11 @@ echo 'Remove build folder to make sure the npm package only includes clean built
 if [ -d "./build" ]; then rm -rf ./build; fi # 
 npm run build
 
+echo 'Copy license files'
+cp ./LICENSE ./build/
+cp ./NOTICE ./build/
+cp ./LICENSE-THIRD-PARTY ./build/
+
 echo 'Copy the examples to published examples folder'
 if [ ! -d "./styleguide.out/examples" ]; then mkdir -p styleguide.out/examples ; fi
 cd examples && tar -czvf ../styleguide.out/examples/create-react-app.tar.gz ./create-react-app && cd -
