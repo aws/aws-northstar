@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/aws/aws-northstar/compare/v1.0.3...v1.0.4) (2020-10-28)
+
+
+### Bug Fixes
+
+* Use github semantic release plugin ([#19](https://github.com/aws/aws-northstar/issues/19)) ([90180d4](https://github.com/aws/aws-northstar/commit/90180d4aef2f61121b6d0be20d5f1a42af3d012b))
+
 ## [1.0.3](https://github.com/aws/aws-northstar/compare/v1.0.2...v1.0.3) (2020-10-28)
 
 
