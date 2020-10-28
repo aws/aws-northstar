@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/aws/aws-northstar/compare/v1.0.5...v1.0.6) (2020-10-28)
+
+
+### Bug Fixes
+
+* Push ChangeLog back to main ([#21](https://github.com/aws/aws-northstar/issues/21)) ([2e0a265](https://github.com/aws/aws-northstar/commit/2e0a2651e7522caeca2e94ef088ce42420d299f3))
+
 ## [1.0.4](https://github.com/aws/aws-northstar/compare/v1.0.3...v1.0.4) (2020-10-28)
 
 
