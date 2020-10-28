@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/aws/aws-northstar/compare/v1.0.2...v1.0.3) (2020-10-28)
+
+
+### Bug Fixes
+
+* Changelog url and initial Changelog ([c39c7f8](https://github.com/aws/aws-northstar/commit/c39c7f8aaec9ffb9f5ba1d10841715a2c8d19822))
+
 # 1.0.0 (2020-10-27)
 
 ### Features
