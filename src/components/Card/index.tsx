@@ -34,7 +34,7 @@ export interface CardProps {
      * */
     children?: ReactNode;
     /**
-     * Fired when the user clicks on the car.
+     * Fired when the user clicks on the card.
      */
     onClick?: (event: MouseEvent<HTMLDivElement>) => void;
     /**
@@ -46,7 +46,7 @@ export interface CardProps {
      */
     onMouseMove?: (event: MouseEvent<HTMLDivElement>) => void;
     /**
-     * Fired when moving the mouse pointer out of the card:
+     * Fired when moving the mouse pointer out of the card.
      */
     onMouseOut?: (event: MouseEvent<HTMLDivElement>) => void;
 }
