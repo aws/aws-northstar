@@ -3,6 +3,7 @@
 [![CodeBuild Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiTm9JSkpnb2IrV09tcGcwU2E5c0diN1lJaVdkbEQza0FoeVVpWnljb3hSZHBEb09mS1pCMmwva3R5SXlYa2Fqem1NVVUrNGJaSFVMTCt5R1VKZ1hDRm5FPSIsIml2UGFyYW1ldGVyU3BlYyI6Ijkyd2FEMFc5cmlmN3hxUnYiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiTm9JSkpnb2IrV09tcGcwU2E5c0diN1lJaVdkbEQza0FoeVVpWnljb3hSZHBEb09mS1pCMmwva3R5SXlYa2Fqem1NVVUrNGJaSFVMTCt5R1VKZ1hDRm5FPSIsIml2UGFyYW1ldGVyU3BlYyI6Ijkyd2FEMFc5cmlmN3hxUnYiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
 [![Travis CI Status](https://travis-ci.org/aws/aws-northstar.svg?branch=main)](https://travis-ci.org/aws/aws-northstar)
 [![NPM latest version](https://img.shields.io/npm/v/aws-northstar)](https://www.npmjs.com/package/aws-northstar)
+[![Coverage Status](https://coveralls.io/repos/github/aws/aws-northstar/badge.svg?branch=main)](https://coveralls.io/github/aws/aws-northstar?branch=main)
 
 NorthStar aims to be the standard for rapidly prototyping intuitive, meaningful and accessible user experiences. It simplifies your work and ensures consistent, predictable experiences at scale for your customers. With NorthStar, you can focus on innovation and do more with less.
 
