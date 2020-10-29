@@ -142,8 +142,9 @@ export interface AppLayoutProps {
 }
 
 /**
- * Basic layout for application, with place holder for header, navigation area, content area, breadcrum and tools/help panel.
- * It should be placed as the top most component in Mezzanine content area. There should not be any spacing around it, it consumes 100% of the width and height of the Mezzanine content area, providing its own scrolling behavior.
+ * Basic layout for application, with place holder for header, navigation area, content area, breadcrumbs and tools/help panel.
+ * It should be placed as the top most component in main content area. There should not be any spacing around it, it consumes
+ * 100% of the width and height of the main content area, providing its own scrolling behavior.
  * By default it comes with a padding inside the content region. It can be removed by setting prop paddingContentArea == false.
  */
 const AppLayout: FunctionComponent<AppLayoutProps> = ({

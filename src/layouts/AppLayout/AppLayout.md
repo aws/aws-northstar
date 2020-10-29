@@ -30,7 +30,7 @@ const navigationItems = [
     {
         type: SideNavigationItemType.LINK,
         text: 'Documentation',
-        href: 'https://docs.aws.amazon.com',
+        href: 'https://docs.yoursite.com',
     }
 ];
 const navigation = (
@@ -47,7 +47,7 @@ const helpPanel = (
         header="Help panel title (h2)"
         learnMoreFooter={[
             <Link href="/docs">Link to internal documentation</Link>,
-            <Link href="https://www.amazon.com">Link to external documentation</Link>,
+            <Link href="https://www.yoursite.com">Link to external documentation</Link>,
         ]}
     >
         <Text variant="p">
