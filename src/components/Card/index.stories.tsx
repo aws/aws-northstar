@@ -40,6 +40,25 @@ export const FixContent = () => (
     </Box>
 );
 
+export const MouseEvents = () => (
+    <Box width="350px">
+        <Card
+            title="Card title"
+            subtitle="sub title"
+            onMouseEnter={event => {
+                event.stopPropagation();
+                console.log('OnMouseEnter');
+            }}
+            onMouseOut={event => {
+                event.stopPropagation();
+                console.log('OnMouseOut');
+            }}
+        >
+            <Placeholder />
+        </Card>
+    </Box>
+);
+
 export const ExpandableContent = () => (
     <Box width="350px">
         <Card title="Card title" subtitle="sub title">
