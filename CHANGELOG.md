@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/aws/aws-northstar/compare/v1.0.8...v1.0.9) (2020-10-30)
+
+
+### Bug Fixes
+
+* Push notification post release ([32eaadd](https://github.com/aws/aws-northstar/commit/32eaaddd13ebe4b72f20d86d2982d1209086dc98))
+
 ## [1.0.8](https://github.com/aws/aws-northstar/compare/v1.0.7...v1.0.8) (2020-10-30)
 
 
