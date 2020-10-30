@@ -16,7 +16,7 @@
 
 import * as React from 'react';
 import { MemoryRouter } from 'react-router';
-import { render, getByText, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import BreadcrumbGroup from '.';
 
 describe('BreadcrumbGroup', () => {
