@@ -13,7 +13,7 @@
             "pkgRoot": "./build",
         }],
         ["@semantic-release/exec", {
-            "successCmd": "echo ${nextRelease.version} > RELEASED"
+            "successCmd": "RELEASED_VERSION=${nextRelease.version} ./scripts/postRelease.sh"
         }],
         ["@semantic-release/git", {
             "assets": ["CHANGELOG.md"],
