@@ -98,6 +98,6 @@ If you are interested in our source code, our repo is at [https://github.com/aws
 
 We welcome your contribution to NorthStar. Please check our [Contribution Guide](https://northstar.aws-prototyping.cloud/#/Contribution%20Guide) for more details. As a community run project, we rely on your contribution.
 
-## Change Log
+## Changelog
 
-Check out the [Change Log](https://github.com/aws/aws-northstar/blob/main/CHANGELOG.md)
+Check out the [Changelog](https://github.com/aws/aws-northstar/blob/main/CHANGELOG.md)

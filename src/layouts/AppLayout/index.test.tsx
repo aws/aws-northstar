@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { render, cleanup, getByRole } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import Header from '../../components/Header';
 import AppLayout from '.';
 jest.mock('react-use-localstorage', () => ({

@@ -15,29 +15,13 @@
  ******************************************************************************************************************** */
 import React from 'react';
 import { render } from '@testing-library/react';
+import ButtonIcon from '.';
 
-import Text from '.';
+describe('ButtonIcon', () => {
+    beforeEach(() => jest.clearAllMocks());
 
-describe('Text', () => {
-    it('should render text', () => {
-        const { getByText, container } = render(<Text>sometext</Text>);
-
-        expect(getByText('sometext')).toBeInTheDocument();
-        expect(container.querySelector('span')).toBeInTheDocument();
-    });
-
-    it('should render text as p', () => {
-        const { container } = render(<Text variant="p">sometext</Text>);
-        expect(container.querySelector('p')).toBeInTheDocument();
-    });
-
-    it('should render children component', () => {
-        const { getByText } = render(
-            <Text>
-                <p>sometext</p>
-            </Text>
-        );
-
-        expect(getByText('sometext')).toContainHTML('<p>sometext</p>');
+    it('renders svg icon', () => {
+        const { container } = render(<ButtonIcon />);
+        expect(container.querySelector('svg')).toBeInTheDocument();
     });
 });
