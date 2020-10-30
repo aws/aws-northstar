@@ -30,7 +30,7 @@ export interface ButtonIconProps {
 export default (props: ButtonIconProps) => {
     switch (props.type) {
         case 'add_plus':
-            return <AddIcon fontSize="small" />;
+            return <AddIcon fontSize="small" role="add" />;
         case 'copy':
             return <FileCopyOutlinedIcon fontSize="small" />;
         case 'external':

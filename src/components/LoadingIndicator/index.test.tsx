@@ -23,4 +23,25 @@ describe('Alert', () => {
         const { getByText } = render(<LoadingIndicator label="the label" />);
         expect(getByText('the label')).toBeInTheDocument();
     });
+
+    it('renders progress bar', () => {
+        const { getByRole } = render(<LoadingIndicator label="the label" />);
+        expect(getByRole('progressbar')).toBeInTheDocument();
+        expect(getByRole('progressbar')).toHaveStyle('width: 16px; height: 16px;');
+    });
+
+    it('renders big progress bar', () => {
+        const { getByRole } = render(<LoadingIndicator label="the label" size="big" />);
+        expect(getByRole('progressbar')).toHaveStyle('width: 32px; height: 32px;');
+    });
+
+    it('renders large progress bar', () => {
+        const { getByRole } = render(<LoadingIndicator label="the label" size="large" />);
+        expect(getByRole('progressbar')).toHaveStyle('width: 48px; height: 48px;');
+    });
+
+    it('renders progress bar with custom size', () => {
+        const { getByRole } = render(<LoadingIndicator label="the label" size={100} />);
+        expect(getByRole('progressbar')).toHaveStyle('width: 100px; height: 100px;');
+    });
 });
