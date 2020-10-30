@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/aws/aws-northstar/compare/v1.0.7...v1.0.8) (2020-10-30)
+
+
+### Bug Fixes
+
+* **Card:** Add mouse events to the card ([#25](https://github.com/aws/aws-northstar/issues/25)) ([f3ea36e](https://github.com/aws/aws-northstar/commit/f3ea36e73cda1b755fba200332e9ac02ad7f2faf))
+
 ## [1.0.7](https://github.com/aws/aws-northstar/compare/v1.0.6...v1.0.7) (2020-10-28)
 
 
