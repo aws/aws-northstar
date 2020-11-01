@@ -16,7 +16,7 @@
 
 import * as React from 'react';
 import { MemoryRouter } from 'react-router';
-import { render, getByText } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import BreadcrumbGroup from '.';
 
 describe('BreadcrumbGroup', () => {
@@ -28,6 +28,21 @@ describe('BreadcrumbGroup', () => {
         );
         expect(getByText('Current')).toBeInTheDocument();
         expect(getByText('Route')).toBeInTheDocument();
+    });
+
+    it('preserves the casing of links when provided no items', () => {
+        const { getAllByRole } = render(
+            <MemoryRouter initialEntries={['/the/current/route/']}>
+                <BreadcrumbGroup />
+            </MemoryRouter>
+        );
+
+        // Casing of links should be preserved
+        const links = getAllByRole('link');
+        expect(links).toHaveLength(3);
+        expect(links[0]).toHaveAttribute('href', '/');
+        expect(links[1]).toHaveAttribute('href', '/the');
+        expect(links[2]).toHaveAttribute('href', '/the/current');
     });
 
     it('renders the items', () => {
