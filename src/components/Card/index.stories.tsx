@@ -40,6 +40,14 @@ export const FixContent = () => (
     </Box>
 );
 
+export const WithHover = () => (
+    <Box width="350px">
+        <Card title="Card title" subtitle="sub title" withHover>
+            Text content
+        </Card>
+    </Box>
+);
+
 export const MouseEvents = () => (
     <Box width="350px">
         <Card
@@ -65,6 +73,14 @@ export const ExpandableContent = () => (
             <ExpandableSection variant="borderless" header="expandableContent">
                 expandableContent
             </ExpandableSection>
+        </Card>
+    </Box>
+);
+
+export const WithOnClick = () => (
+    <Box width="350px">
+        <Card title="Card title" subtitle="sub title" onClick={() => alert('A card was clicked')}>
+            Show an alert when clicked
         </Card>
     </Box>
 );
