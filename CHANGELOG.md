@@ -1,3 +1,11 @@
+## [1.0.10](https://github.com/aws/aws-northstar/compare/v1.0.9...v1.0.10) (2020-11-01)
+
+
+### Bug Fixes
+
+* **Box:** Typo ([#29](https://github.com/aws/aws-northstar/issues/29)) ([fda4751](https://github.com/aws/aws-northstar/commit/fda4751624f36f3a6b1aadfbe42c64fafcfd7c68))
+* **BreadcrumbGroup:** Preserve casing of generated links. Fixes [#27](https://github.com/aws/aws-northstar/issues/27) ([#28](https://github.com/aws/aws-northstar/issues/28)) ([3777c4e](https://github.com/aws/aws-northstar/commit/3777c4eeb1e35519f923076dd3a8ea662ecedc32))
+
 ## [1.0.9](https://github.com/aws/aws-northstar/compare/v1.0.8...v1.0.9) (2020-10-30)
 
 
