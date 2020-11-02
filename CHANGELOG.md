@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/aws/aws-northstar/compare/v1.0.10...v1.0.11) (2020-11-02)
+
+
+### Features
+
+* Add a flag to determine whether to highlight the card when hover ([77cda70](https://github.com/aws/aws-northstar/commit/77cda70f34b0a736157ac6df5bbcdb36960d29ec))
+
 ## [1.0.10](https://github.com/aws/aws-northstar/compare/v1.0.9...v1.0.10) (2020-11-01)
 
 
