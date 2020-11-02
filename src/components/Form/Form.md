@@ -79,10 +79,10 @@ import Toggle from 'aws-northstar/components/Toggle';
                 ]}
             />
         </FormField>
-        <FormField>
+        <FormField controlId="formFieldId4">
             <Toggle label="Check me out" />
         </FormField>
-        <FormField>
+        <FormField controlId="formFieldId5">
             <Checkbox>Check me out</Checkbox>
         </FormField>
     </FormSection>
