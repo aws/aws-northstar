@@ -82,6 +82,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     mainContent: ({ notificationsBoxHeight }: any) => ({
         marginTop: notificationsBoxHeight,
+        '&:focus': {
+            outline: 'none',
+        },
     }),
     menu: {
         [theme.breakpoints.down('xs')]: {
