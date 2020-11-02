@@ -76,3 +76,11 @@ export const ExpandableContent = () => (
         </Card>
     </Box>
 );
+
+export const WithOnClick = () => (
+    <Box width="350px">
+        <Card title="Card title" subtitle="sub title" onClick={() => alert('A card was clicked')}>
+            Show an alert when clicked
+        </Card>
+    </Box>
+);
