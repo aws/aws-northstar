@@ -18,6 +18,7 @@ import React, { FunctionComponent, ReactNode, MouseEvent } from 'react';
 import MUICard from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Text from '../Text';
 
 export interface CardProps {
@@ -33,6 +34,10 @@ export interface CardProps {
      * Content of the card
      * */
     children?: ReactNode;
+    /**
+     * Determine whether to highlight the card when mouse pointer is hovered on the card.
+     */
+    withHover?: boolean;
     /**
      * Fired when the user clicks on the card.
      */
@@ -51,6 +56,15 @@ export interface CardProps {
     onMouseOut?: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
+const useStyles = makeStyles((theme: Theme) => ({
+    root: ({ withHover }: any) =>
+        withHover && {
+            '&:hover': {
+                backgroundColor: theme.palette.info.light,
+            },
+        },
+}));
+
 /**
  * A Card renders the basic information of a resource
  * */
@@ -62,14 +76,22 @@ const Card: FunctionComponent<CardProps> = ({
     onMouseEnter,
     onMouseMove,
     onMouseOut,
+    withHover,
 }) => {
+    const styles = useStyles({ withHover });
     const content = (
         <CardContent>
             {typeof children === 'string' ? <Text variant="p">{children}</Text> : <>{children}</>}
         </CardContent>
     );
     return (
-        <MUICard onClick={onClick} onMouseEnter={onMouseEnter} onMouseMove={onMouseMove} onMouseOut={onMouseOut}>
+        <MUICard
+            className={styles.root}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseMove={onMouseMove}
+            onMouseOut={onMouseOut}
+        >
             <CardHeader title={title} subheader={subtitle} />
             {content}
         </MUICard>

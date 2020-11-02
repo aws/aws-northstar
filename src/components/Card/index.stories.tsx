@@ -40,6 +40,14 @@ export const FixContent = () => (
     </Box>
 );
 
+export const WithHover = () => (
+    <Box width="350px">
+        <Card title="Card title" subtitle="sub title" withHover>
+            Text content
+        </Card>
+    </Box>
+);
+
 export const MouseEvents = () => (
     <Box width="350px">
         <Card
