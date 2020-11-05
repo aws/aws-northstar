@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent, memo } from 'react';
+import React, { FunctionComponent, memo, useMemo } from 'react';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 import FormSection from '../../../FormSection';
 import Box from '../../../../layouts/Box';
@@ -26,10 +26,19 @@ export interface SubformProps {
     expandable?: boolean;
     expanded?: boolean;
     expandableSectionVariant: ExpandableSectionVariant;
+    showError?: boolean;
 }
 
-const Subform: FunctionComponent<SubformProps> = ({ fields, title, description }) => {
+const Subform: FunctionComponent<SubformProps> = ({ title, description, ...props }) => {
     const { renderForm } = useFormApi();
+
+    const fields = useMemo(() => {
+        return props.fields.map((field: any) => ({
+            ...field,
+            showError: props.showError,
+        }));
+    }, [props.fields, props.showError]);
+
     return (
         <Box mb={2}>
             <FormSection header={title} description={description}>
