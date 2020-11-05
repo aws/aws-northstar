@@ -1,3 +1,10 @@
+## [1.0.13](https://github.com/aws/aws-northstar/compare/v1.0.12...v1.0.13) (2020-11-05)
+
+
+### Bug Fixes
+
+* Show Error when validation in SubForm used inside Wizard ([#35](https://github.com/aws/aws-northstar/issues/35)) ([b2987ca](https://github.com/aws/aws-northstar/commit/b2987ca1b8329f7bc81ebe9b5c95e1a89645ce21))
+
 ## [1.0.12](https://github.com/aws/aws-northstar/compare/v1.0.11...v1.0.12) (2020-11-02)
 
 ## [1.0.11](https://github.com/aws/aws-northstar/compare/v1.0.10...v1.0.11) (2020-11-02)
