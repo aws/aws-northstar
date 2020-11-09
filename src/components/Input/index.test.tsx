@@ -60,6 +60,13 @@ describe('Input', () => {
         expect(getByPlaceholderText('input-1')).toHaveAttribute('aria-required', 'true');
     });
 
+    it('should render a "text" input with autocomplete disabled', () => {
+        const { getByPlaceholderText } = render(<Input placeholder="input-1" autocomplete={false} />);
+
+        expect(getByPlaceholderText('input-1').getAttribute('type')).toEqual('text');
+        expect(getByPlaceholderText('input-1').getAttribute('autocomplete')).toEqual('off');
+    });
+
     describe('for search input', () => {
         it('does not render clear button on default', () => {
             const { getByPlaceholderText, queryByTestId } = render(<Input type="search" placeholder="input-1" />);

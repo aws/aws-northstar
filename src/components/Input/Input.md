@@ -34,6 +34,10 @@ import Stack from 'aws-northstar/layouts/Stack';
 import Container from 'aws-northstar/layouts/Container';
 
 <Stack>
+    <Container headingVariant='h4' title='Autocomplete disabled'>
+        <Input value="Autocomplete disabled" type="text" autocomplete={false} />
+    </Container>
+
     <Container headingVariant='h4' title='Read Only Input'>
         <Input value="Read only" readonly={true} type="text" />
     </Container>

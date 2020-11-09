@@ -52,6 +52,9 @@ export const Variations = () => (
             <Input value="Disable" disabled={true} type="text" />
         </Grid>
         <Grid item xs={4}>
+            <Input placeholder="Without autocomplete" type="text" autocomplete={false} />
+        </Grid>
+        <Grid item xs={4}>
             <Input value="Text" invalid={true} type="text" />
         </Grid>
         <Grid item xs={4}>
