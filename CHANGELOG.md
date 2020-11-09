@@ -1,3 +1,10 @@
+## [1.0.14](https://github.com/aws/aws-northstar/compare/v1.0.13...v1.0.14) (2020-11-09)
+
+
+### Bug Fixes
+
+* **Input:** swap autocomplete and autocorrect property usage ([#36](https://github.com/aws/aws-northstar/issues/36)) ([7613778](https://github.com/aws/aws-northstar/commit/7613778fe69bf44fbc6247572f55b09249eda422))
+
 ## [1.0.13](https://github.com/aws/aws-northstar/compare/v1.0.12...v1.0.13) (2020-11-05)
 
 
