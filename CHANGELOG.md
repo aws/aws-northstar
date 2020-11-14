@@ -1,3 +1,10 @@
+## [1.0.15](https://github.com/aws/aws-northstar/compare/v1.0.14...v1.0.15) (2020-11-14)
+
+
+### Features
+
+* **icon:** create icon component to render material ui icons ([#37](https://github.com/aws/aws-northstar/issues/37)) ([93fb3ac](https://github.com/aws/aws-northstar/commit/93fb3acb002566a5ff3d426957b515013d28eb2a))
+
 ## [1.0.14](https://github.com/aws/aws-northstar/compare/v1.0.13...v1.0.14) (2020-11-09)
 
 
