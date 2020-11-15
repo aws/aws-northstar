@@ -557,6 +557,7 @@ export const FieldArray = () => {
                                 name: 'type',
                                 label: 'Type',
                                 placeholder: 'Choose the type',
+                                isSearchable: true,
                                 options: [
                                     { label: 'Type 1', value: 'type1' },
                                     { label: 'Type 2', value: 'type2' },

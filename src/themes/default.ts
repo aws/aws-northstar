@@ -103,6 +103,12 @@ export const getTheme = (fontFamily?: string): ThemeOptions => ({
             },
         },
         MuiAutocomplete: {
+            inputRoot: {
+                "&[class*='MuiOutlinedInput-root'][class*='MuiOutlinedInput-marginDense']": {
+                    paddingTop: 0,
+                    paddingBottom: 0,
+                },
+            },
             option: {
                 '&[aria-selected="true"]': {
                     backgroundColor: COLOR_PALETTE['blue-light'].color,

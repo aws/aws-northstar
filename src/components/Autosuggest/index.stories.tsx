@@ -42,6 +42,21 @@ export const Default = () => (
     </FormField>
 );
 
+export const WithValue = () => (
+    <FormField label="Form field label" controlId="formFieldId1">
+        <Autosuggest
+            options={awsServices}
+            controlId="formFieldId1"
+            placeholder="AWS services"
+            onChange={action('onChange')}
+            value={{
+                label: 'Lambda - Amazon Lambda',
+                value: 'Lambda',
+            }}
+        />
+    </FormField>
+);
+
 export const Placeholder = () => (
     <FormField label="Form field label" controlId="formFieldId1">
         <Autosuggest
