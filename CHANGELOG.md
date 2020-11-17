@@ -1,3 +1,10 @@
+## [1.0.17](https://github.com/aws/aws-northstar/compare/v1.0.16...v1.0.17) (2020-11-17)
+
+
+### Features
+
+* **button:** extend usage of Material UI icons to button component ([#40](https://github.com/aws/aws-northstar/issues/40)) ([4f38206](https://github.com/aws/aws-northstar/commit/4f38206d8c45688a6719a72e2c8aa3442d05fd50))
+
 ## [1.0.16](https://github.com/aws/aws-northstar/compare/v1.0.15...v1.0.16) (2020-11-15)
 
 ## [1.0.15](https://github.com/aws/aws-northstar/compare/v1.0.14...v1.0.15) (2020-11-14)
