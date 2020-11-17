@@ -65,6 +65,21 @@ export const IconButtonsWithText = () => (
     </Inline>
 );
 
+export const IconButtonsMaterialUIIcons = () => (
+    <Inline>
+        <Button variant={'primary'} icon={'Cloud'} onClick={action('clicked')}>
+            Cloud
+        </Button>
+        <Button variant={'primary'} icon={'AccountCircleTwoTone'} onClick={action('clicked')}>
+            Account
+        </Button>
+        <Button icon={'Remove'} iconAlign="right" onClick={action('clicked')}>
+            Remove
+        </Button>
+        <Button variant={'icon'} label="Dns" icon={'Dns'} onClick={action('clicked')}></Button>
+    </Inline>
+);
+
 export const ReloadButton = () => {
     const [loading, setLoading] = useState(false);
     const [loading2, setLoading2] = useState(false);

@@ -20,8 +20,10 @@ import AddIcon from '@material-ui/icons/Add';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import LaunchOutlinedIcon from '@material-ui/icons/LaunchOutlined';
 import RefreshOutlinedIcon from '@material-ui/icons/RefreshOutlined';
+import * as icons from '@material-ui/icons';
+import Icon, { IconName } from '../../../Icon';
 
-export type ButtonIconType = 'add_plus' | 'copy' | 'external' | 'folder' | 'refresh' | 'settings';
+export type ButtonIconType = 'add_plus' | 'copy' | 'external' | 'folder' | 'refresh' | 'settings' | IconName;
 
 export interface ButtonIconProps {
     type?: ButtonIconType;
@@ -40,6 +42,10 @@ export default (props: ButtonIconProps) => {
         case 'refresh':
             return <RefreshOutlinedIcon fontSize="small" />;
         default:
+            if (Object.keys(icons).includes(props.type as string)) {
+                return <Icon name={props.type as IconName} fontSize="small" />;
+            }
+
             return <SettingsOutlinedIcon fontSize="small" />;
     }
 };

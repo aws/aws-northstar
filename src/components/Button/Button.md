@@ -26,6 +26,9 @@ import Inline from 'aws-northstar/layouts/Inline';
     <Button variant="primary" iconAlign="right" icon="add_plus">Add</Button>
     <Button icon="external">Launch</Button>
     <Button icon="folder" iconAlign="right">Folder</Button>
+    <Button icon="Cloud" iconAlign="right">Cloud</Button>
+    <Button icon="AccountCircleTwoTone" iconAlign="right">Account</Button>
+    <Button icon="Remove" iconAlign="right">Remove</Button>
   </Inline>
 </Container>
 ```

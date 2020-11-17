@@ -18,12 +18,13 @@ import * as icons from '@material-ui/icons';
 import React from 'react';
 
 export type IconVariant = 'Filled' | 'Outlined' | 'Rounded' | 'TwoTone' | 'Sharp';
+export type IconName = keyof typeof icons;
 
 export interface IconProps {
     /**
      * Define the icon name to be rendered
      */
-    name: keyof typeof icons;
+    name: IconName;
     /**
      * Define the icon variant
      */
