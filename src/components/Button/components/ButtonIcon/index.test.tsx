@@ -24,4 +24,9 @@ describe('ButtonIcon', () => {
         const { container } = render(<ButtonIcon />);
         expect(container.querySelector('svg')).toBeInTheDocument();
     });
+
+    it('should render and svg icon when Material UI icon is used', () => {
+        const { container } = render(<ButtonIcon type="Cloud" />);
+        expect(container.querySelector('svg')).toBeInTheDocument();
+    });
 });
