@@ -78,6 +78,11 @@ export interface ButtonProps {
      * The type of button.
      */
     type?: 'button' | 'submit' | 'reset';
+    /**
+     * The size of the button.
+     * `small` is equivalent to the dense button styling.
+     */
+    size?: 'small' | 'medium' | 'large';
 }
 const OffestCircularProgress = () => (
     <Box pr={0.6}>
@@ -94,11 +99,13 @@ const muiButtonProps = ({
     icon,
     iconAlign,
     type = 'button',
+    size = 'medium',
 }: Partial<ButtonProps>): MaterialButtonProps => {
     const muiButtonProps: MaterialButtonProps = {
         disabled: disabled,
         onClick,
         type,
+        size,
     };
 
     if (icon) {
@@ -140,6 +147,7 @@ const Button: FunctionComponent<ButtonProps> = ({
     disabled,
     children,
     type = 'button',
+    size = 'medium',
 }) => {
     const styles = useStyles({});
     const isDisabled = useMemo(() => disabled || loading, [disabled, loading]);
@@ -167,6 +175,7 @@ const Button: FunctionComponent<ButtonProps> = ({
                         icon,
                         iconAlign,
                         type,
+                        size,
                     })}
                 >
                     {children}
