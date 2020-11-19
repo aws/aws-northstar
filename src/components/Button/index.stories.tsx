@@ -44,6 +44,20 @@ export const LinkButton = () => (
     </Button>
 );
 
+export const ButtonsWithDifferentSize = () => (
+    <Inline>
+        <Button size="small" onClick={action('clicked')}>
+            Small Button
+        </Button>
+        <Button size="medium" onClick={action('clicked')}>
+            Medium Button
+        </Button>
+        <Button size="large" onClick={action('clicked')}>
+            Large Button
+        </Button>
+    </Inline>
+);
+
 export const IconButton = () => (
     <Button variant={'icon'} label="settings" icon={'settings'} onClick={action('clicked')}></Button>
 );
