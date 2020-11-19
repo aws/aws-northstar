@@ -14,17 +14,17 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 module.exports = {
-  stories: [
-      '../src/components/**/*.stories.tsx', 
-      '../src/layouts/**/*.stories.tsx',
-      '../src/charts/**/*.stories.tsx',
-      '../src/advanced/**/*.stories.tsx'
+    stories: [
+        '../src/components/**/*.stories.tsx',
+        '../src/layouts/**/*.stories.tsx',
+        '../src/charts/**/*.stories.tsx',
+        '../src/advanced/**/*.stories.tsx',
     ],
-  addons: [
-    '@storybook/addon-actions/register',
-    '@storybook/addon-links',
-    '@storybook/addon-storysource',
-    '@storybook/addon-a11y',
-    '@storybook/addon-viewport/register'
-  ]
+    addons: [
+        '@storybook/addon-actions/register',
+        '@storybook/addon-links',
+        '@storybook/addon-storysource',
+        '@storybook/addon-a11y',
+        '@storybook/addon-viewport/register',
+    ],
 };
