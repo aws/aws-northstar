@@ -112,5 +112,23 @@ describe('Button', () => {
                 expect(onClickMockFn).toBeCalled();
             });
         });
+        describe('different size', () => {
+            it('should render a small button', () => {
+                const { getByRole } = render(<Button size="small">test</Button>);
+                expect(getByRole('button')).toHaveClass('MuiButton-sizeSmall');
+            });
+
+            it('should render a medium button', () => {
+                const { getByRole } = render(<Button size="medium">test</Button>);
+                // medium size does not have a specific class, that's the standard case
+                expect(getByRole('button')).not.toHaveClass('MuiButton-sizeSmall');
+                expect(getByRole('button')).not.toHaveClass('MuiButton-sizeLarge');
+            });
+
+            it('should render a large button', () => {
+                const { getByRole } = render(<Button size="large">test</Button>);
+                expect(getByRole('button')).toHaveClass('MuiButton-sizeLarge');
+            });
+        });
     });
 });
