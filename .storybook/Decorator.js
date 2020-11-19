@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { StrictMode } from "react";
+import React, { StrictMode } from 'react';
 import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
 import Box from '../src/layouts/Box';
 
@@ -24,9 +24,7 @@ const Decorator = storyFn => {
                 <NorthStarThemeProvider>{storyFn()}</NorthStarThemeProvider>
             </Box>
         </StrictMode>
-    )
-}
+    );
+};
 
 export default Decorator;
-
-

@@ -13,13 +13,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import {
-  addDecorator,
-} from "@storybook/react";
+import { addDecorator } from '@storybook/react';
 import Decorator from './Decorator';
-import {
-  withConsole
-} from '@storybook/addon-console';
+import { withConsole } from '@storybook/addon-console';
 
 addDecorator(Decorator);
 addDecorator((storyFn, context) => withConsole()(storyFn)(context));

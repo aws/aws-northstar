@@ -1,7 +1,7 @@
-{ 
-    "extends": "react-app",
+{
+    "extends": ["react-app", "plugin:prettier/recommended", "prettier/react"],
     "plugins": ["header"],
-    "rules" : {
+    "rules": {
         "header/header": [2, "header.js"]
     }
 }

@@ -34,12 +34,12 @@ module.exports = {
                     from: './public',
                 },
             ],
-        })
+        }),
     ],
 
     optimization: {
         splitChunks: {
-          chunks: 'all',
+            chunks: 'all',
         },
     },
 
