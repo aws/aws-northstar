@@ -1,3 +1,10 @@
+## [1.0.18](https://github.com/aws/aws-northstar/compare/v1.0.17...v1.0.18) (2020-11-19)
+
+
+### Features
+
+* **button:** add size prop to button component ([#42](https://github.com/aws/aws-northstar/issues/42)) ([d447b4b](https://github.com/aws/aws-northstar/commit/d447b4b7ec58af6f5eb1ddb7a8b98f48672e075f))
+
 ## [1.0.17](https://github.com/aws/aws-northstar/compare/v1.0.16...v1.0.17) (2020-11-17)
 
 
