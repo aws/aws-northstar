@@ -45,3 +45,23 @@ describe('Simple card', () => {
         expect(getByText('subtitle')).toBeVisible();
     });
 });
+
+describe('custom header title', () => {
+    it('should render the header using custom titleTypographyProps', () => {
+        const { container, getByText } = render(
+            <Card
+                title="custom title"
+                subtitle="card subtitle"
+                titleTypographyProps={{ variant: 'h2', color: 'secondary', align: 'right', gutterBottom: true }}
+            >
+                <p>Content</p>
+            </Card>
+        );
+
+        expect(getByText('custom title')).toBeVisible();
+        expect(container.getElementsByClassName('MuiTypography-h2')).toHaveLength(1);
+        expect(container.getElementsByClassName('MuiTypography-colorSecondary')).toHaveLength(1);
+        expect(container.getElementsByClassName('MuiTypography-gutterBottom')).toHaveLength(1);
+        expect(container.getElementsByClassName('MuiTypography-alignRight')).toHaveLength(1);
+    });
+});
