@@ -53,6 +53,14 @@ export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
      * */
     disableBrowserAutocorrect?: boolean;
     /**
+     * If `true`, the Autocomplete is free solo, meaning that the user input is not bound to provided options.
+     */
+    freeSolo?: boolean;
+    /**
+     * If `true`, the input can't be cleared.
+     */
+    disableClearable?: boolean;
+    /**
      * Define the Icon to be used for the text input
      */
     icon?: false | IconName;
@@ -104,6 +112,8 @@ export default function Autosuggest({
     placeholder,
     invalid,
     ariaRequired = false,
+    freeSolo = false,
+    disableClearable = false,
     icon = undefined,
     ariaDescribedby,
     ariaLabelledby,
@@ -204,6 +214,8 @@ export default function Autosuggest({
                 disabled={disabled}
                 autoHighlight
                 popupIcon={null}
+                freeSolo={freeSolo}
+                disableClearable={disableClearable}
                 open={statusType === 'error' || statusType === 'loading' ? true : open}
                 id={controlId}
                 value={inputValue}

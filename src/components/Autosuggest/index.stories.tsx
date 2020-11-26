@@ -174,3 +174,19 @@ export const WithCustomIcon = () => (
         />
     </FormField>
 );
+
+export const WithFreeSolo = () => (
+    <FormField label="Form field label" controlId="formFieldId1">
+        <Autosuggest
+            icon={'Computer'}
+            filteringType="manual"
+            freeSolo={true}
+            disableClearable={true}
+            options={awsServices}
+            controlId="formFieldId1"
+            ariaDescribedby="This is a description"
+            onChange={action('onChange')}
+            onInputChange={action('onInputChange')}
+        />
+    </FormField>
+);
