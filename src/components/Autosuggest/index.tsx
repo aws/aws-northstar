@@ -25,6 +25,7 @@ import LoadingIndicator from '../LoadingIndicator';
 import StatusIndicator from '../StatusIndicator';
 import { AriaBaseProps } from '../../props/common';
 import { SelectBaseProps, SelectOption } from '../Select';
+import Icon, { IconName } from '../Icon';
 
 export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
     /**
@@ -51,6 +52,10 @@ export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
      * automatically correct user input, such as autocorrect and autocapitalize.
      * */
     disableBrowserAutocorrect?: boolean;
+    /**
+     * Define the Icon to be used for the text input
+     */
+    icon?: false | IconName;
     /**
      * Callback fired when the value changes.
      * */
@@ -99,6 +104,7 @@ export default function Autosuggest({
     placeholder,
     invalid,
     ariaRequired = false,
+    icon = undefined,
     ariaDescribedby,
     ariaLabelledby,
     onChange = () => {},
@@ -184,7 +190,8 @@ export default function Autosuggest({
                 type: 'search',
                 startAdornment: (
                     <InputAdornment position="start">
-                        <SearchIcon color="action" />
+                        {icon === undefined && <SearchIcon color="action" />}
+                        {icon && <Icon name={icon} color="action" />}
                     </InputAdornment>
                 ),
             }}

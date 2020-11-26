@@ -200,4 +200,27 @@ describe('Autosuggest', () => {
 
         expect(results).toHaveNoViolations();
     });
+
+    describe('icons', () => {
+        it('should render the component with default icon', () => {
+            const { container } = render(<Autosuggest options={awsServices} placeholder="input-1" />);
+            const svg = container.querySelector('.MuiSvgIcon-colorAction');
+
+            expect(svg).toBeInTheDocument();
+        });
+
+        it('should render the component with custom icon', () => {
+            const { container } = render(<Autosuggest options={awsServices} placeholder="input-1" icon="Dns" />);
+            const svg = container.querySelector('.MuiSvgIcon-colorAction');
+
+            expect(svg).toBeInTheDocument();
+        });
+
+        it('should render the component without an icon', () => {
+            const { container } = render(<Autosuggest options={awsServices} placeholder="input-1" icon={false} />);
+            const svg = container.querySelector('.MuiSvgIcon-colorAction');
+
+            expect(svg).not.toBeInTheDocument();
+        });
+    });
 });

@@ -150,3 +150,27 @@ export const AsyncWithError = () => {
         </FormField>
     );
 };
+
+export const WithoutIcon = () => (
+    <FormField label="Form field label" controlId="formFieldId1">
+        <Autosuggest
+            icon={false}
+            options={awsServices}
+            controlId="formFieldId1"
+            ariaDescribedby="This is a description"
+            onChange={action('onChange')}
+        />
+    </FormField>
+);
+
+export const WithCustomIcon = () => (
+    <FormField label="Form field label" controlId="formFieldId1">
+        <Autosuggest
+            icon={'DnsOutlined'}
+            options={awsServices}
+            controlId="formFieldId1"
+            ariaDescribedby="This is a description"
+            onChange={action('onChange')}
+        />
+    </FormField>
+);
