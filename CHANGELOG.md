@@ -1,3 +1,10 @@
+## [1.0.21](https://github.com/aws/aws-northstar/compare/v1.0.20...v1.0.21) (2020-11-27)
+
+
+### Features
+
+* **card:** Allow Card component to define custom typography for the title ([#46](https://github.com/aws/aws-northstar/issues/46)) ([bb4ccf6](https://github.com/aws/aws-northstar/commit/bb4ccf6b79f8b07612347a66498b3903940115f7))
+
 ## [1.0.20](https://github.com/aws/aws-northstar/compare/v1.0.19...v1.0.20) (2020-11-27)
 
 
