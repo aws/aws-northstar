@@ -1,3 +1,10 @@
+## [1.0.20](https://github.com/aws/aws-northstar/compare/v1.0.19...v1.0.20) (2020-11-27)
+
+
+### Bug Fixes
+
+* **Multiselect:** fix wrong behaviour on initial value see [#44](https://github.com/aws/aws-northstar/issues/44) ([#45](https://github.com/aws/aws-northstar/issues/45)) ([c5c4794](https://github.com/aws/aws-northstar/commit/c5c47947fc5e884132e69d09725de4b75f1882b8))
+
 ## [1.0.19](https://github.com/aws/aws-northstar/compare/v1.0.18...v1.0.19) (2020-11-27)
 
 
