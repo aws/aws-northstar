@@ -40,7 +40,6 @@ export interface CardProps {
     withHover?: boolean;
     /**
      * These props will be forwarded to the title
-     * (as long as disableTypography is not `true`).
      */
     titleTypographyProps?: any;
     /**
