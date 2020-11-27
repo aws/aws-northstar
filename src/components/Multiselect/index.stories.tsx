@@ -48,3 +48,21 @@ export const WithCheckboxes = () => (
         />
     </FormField>
 );
+
+export const WithInitialValue = () => (
+    <FormField label="Form field label" controlId="formFieldId2">
+        <Multiselect
+            options={awsServices}
+            controlId="formFieldId2"
+            ariaDescribedby="This is a description"
+            onChange={action('onChange')}
+            checkboxes={true}
+            value={[
+                {
+                    value: 'EC2',
+                    label: 'EC2 - Amazon Elastic Compute Cloud',
+                },
+            ]}
+        />
+    </FormField>
+);
