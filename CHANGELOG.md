@@ -1,3 +1,10 @@
+## [1.0.19](https://github.com/aws/aws-northstar/compare/v1.0.18...v1.0.19) (2020-11-27)
+
+
+### Features
+
+* **Autosuggest:** Add in option to define custom icon and custom input ([#47](https://github.com/aws/aws-northstar/issues/47)) ([9e1a142](https://github.com/aws/aws-northstar/commit/9e1a142557e3e45eae61c9a1db6a3d3a3a9993de))
+
 ## [1.0.18](https://github.com/aws/aws-northstar/compare/v1.0.17...v1.0.18) (2020-11-19)
 
 
