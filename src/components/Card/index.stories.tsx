@@ -84,3 +84,15 @@ export const WithOnClick = () => (
         </Card>
     </Box>
 );
+
+export const WithTitleTypographyProps = () => (
+    <Box width="350px">
+        <Card
+            title="Card title"
+            subtitle="sub title"
+            titleTypographyProps={{ variant: 'h2', color: 'secondary', align: 'right', gutterBottom: true }}
+        >
+            Show an alert when clicked
+        </Card>
+    </Box>
+);

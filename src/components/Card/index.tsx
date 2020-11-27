@@ -39,6 +39,10 @@ export interface CardProps {
      */
     withHover?: boolean;
     /**
+     * These props will be forwarded to the title
+     */
+    titleTypographyProps?: any;
+    /**
      * Fired when the user clicks on the card.
      */
     onClick?: (event: MouseEvent<HTMLDivElement>) => void;
@@ -71,6 +75,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Card: FunctionComponent<CardProps> = ({
     title = '',
     subtitle = '',
+    titleTypographyProps = {},
     children,
     onClick,
     onMouseEnter,
@@ -92,7 +97,7 @@ const Card: FunctionComponent<CardProps> = ({
             onMouseMove={onMouseMove}
             onMouseOut={onMouseOut}
         >
-            <CardHeader title={title} subheader={subtitle} />
+            <CardHeader title={title} subheader={subtitle} titleTypographyProps={titleTypographyProps} />
             {content}
         </MUICard>
     );
