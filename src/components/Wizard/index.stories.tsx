@@ -30,9 +30,8 @@ export default {
 export const Default = () => {
     const steps = [
         {
-            title: 'Choose instance type',
-            description:
-                ' Each instance type includes one or more instance sizes, allowing you to scale your resources to the requirements of your target workload.',
+            title: 'Step 1',
+            description: 'Enter general information',
             content: (
                 <FormSection header="Form section">
                     <FormField
@@ -60,7 +59,7 @@ export const Default = () => {
             ),
         },
         {
-            title: 'Add storage',
+            title: 'Step 2',
             content: (
                 <FormSection header="Form section">
                     <FormField label="Example select" controlId="formFieldId5">
@@ -78,7 +77,7 @@ export const Default = () => {
             ),
         },
         {
-            title: 'Configure security group',
+            title: 'Step 3',
             content: (
                 <FormSection header="Form section">
                     <FormField label="Example select" controlId="formFieldId6">

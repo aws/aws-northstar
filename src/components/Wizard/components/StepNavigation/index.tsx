@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Box from '../../../../layouts/Box';
 import Link from '../../../Link';
@@ -51,34 +51,37 @@ const StepNavigation: FunctionComponent<StepNavigationProps> = ({
     disableStepNavigation,
 }) => {
     const styles = useStyles();
-    const renderTitle = (step: WizardStepInfo, index: number) => {
-        if (index === activeStepIndex || disableStepNavigation) {
+    const renderTitle = useCallback(
+        (step: WizardStepInfo, index: number) => {
+            if (index === activeStepIndex || disableStepNavigation) {
+                return (
+                    <Box>
+                        <Text>{index === activeStepIndex ? <b>{step.title}</b> : step.title}</Text>
+                    </Box>
+                );
+            } else if (index < activeStepIndex || index <= maxStepIndex) {
+                return (
+                    <Link
+                        href="#"
+                        onClick={() => {
+                            if (onStepNavigationClick) {
+                                onStepNavigationClick({ requestedStepIndex: index });
+                            }
+                        }}
+                    >
+                        {step.title}
+                    </Link>
+                );
+            }
+
             return (
-                <Box>
-                    <Text>{index === activeStepIndex ? <b>{step.title}</b> : step.title}</Text>
+                <Box color="grey.400">
+                    <Text>{step.title}</Text>
                 </Box>
             );
-        } else if (index < activeStepIndex || index <= maxStepIndex) {
-            return (
-                <Link
-                    href="#"
-                    onClick={() => {
-                        if (onStepNavigationClick) {
-                            onStepNavigationClick({ requestedStepIndex: index });
-                        }
-                    }}
-                >
-                    {step.title}
-                </Link>
-            );
-        }
-
-        return (
-            <Box color="grey.400">
-                <Text>{step.title}</Text>
-            </Box>
-        );
-    };
+        },
+        [activeStepIndex, disableStepNavigation, onStepNavigationClick]
+    );
 
     const stepsLength = steps.length;
 
@@ -86,7 +89,11 @@ const StepNavigation: FunctionComponent<StepNavigationProps> = ({
         <nav>
             <Box maxWidth="200px">
                 {steps.map((step, index) => (
-                    <Box key={index} className={clsx(styles.step, index !== stepsLength && styles.stepNotLastChild)}>
+                    <Box
+                        key={index}
+                        data-testid="stepNavBox"
+                        className={clsx(styles.step, index !== stepsLength && styles.stepNotLastChild)}
+                    >
                         <Box color="grey.500">
                             <Text variant="small">
                                 {getStepNumberLabel(index + 1)}

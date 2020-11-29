@@ -25,19 +25,22 @@ describe('RadioButtonGroup', () => {
     const onChangeMockFn = jest.fn(event => event);
 
     describe('by default', () => {
-        describe('by default', () => {
-            it('renders RadioGroup with radio buttons as children', () => {
-                const { getAllByRole } = render(
-                    <RadioGroup
-                        items={[
-                            <RadioButton key="1">radio</RadioButton>,
-                            <RadioButton key="2">radio</RadioButton>,
-                            <RadioButton key="3">radio</RadioButton>,
-                        ]}
-                    />
-                );
-                expect(getAllByRole('radio')).toHaveLength(3);
-            });
+        it('renders RadioGroup with radio buttons as children', () => {
+            const { getAllByRole } = render(
+                <RadioGroup
+                    items={[
+                        <RadioButton key="1">radio</RadioButton>,
+                        <RadioButton key="2">radio</RadioButton>,
+                        <RadioButton key="3">radio</RadioButton>,
+                    ]}
+                />
+            );
+            expect(getAllByRole('radio')).toHaveLength(3);
+        });
+
+        it('renders 0 radio buttons when ', () => {
+            const { queryByRole } = render(<RadioGroup />);
+            expect(queryByRole('radio')).toBeNull();
         });
     });
 

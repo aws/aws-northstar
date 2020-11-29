@@ -115,7 +115,6 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
 
     const onRecoveryClickHandler = useCallback(
         (event: SyntheticEvent) => {
-            console.log('onRecoveryClickHandler');
             event.preventDefault();
             onRecoveryClick(event);
             event.stopPropagation();
@@ -260,6 +259,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
                 onClose={() => setOpen(false)}
                 getOptionLabel={option => option.label || ''}
                 classes={{ inputRoot: classes.muiAutocompleteOverride }}
+                data-testid="multiselect"
             />
             <TokenGroup items={inputValue || []} onDismiss={handleDeleteOption} />
         </Stack>

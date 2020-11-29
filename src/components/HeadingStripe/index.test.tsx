@@ -14,20 +14,21 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import Box from '../../layouts/Box';
+import { render } from '@testing-library/react';
 
-/** A placeholder component to be used to occupy a place for demo purpose.*/
-export default (props: any) => (
-    <Box
-        borderColor="primary.main"
-        border={2}
-        p={2}
-        textAlign="center"
-        bgcolor="secondary.main"
-        color="secondary.contrastText"
-        data-testid="placeholder"
-        {...props}
-    >
-        Component
-    </Box>
-);
+import HeadingStripe from '.';
+import Button from '../Button';
+
+describe('HeadingStripe', () => {
+    it('should render title', () => {
+        const { getByText } = render(<HeadingStripe title="title" />);
+
+        expect(getByText('title')).toBeVisible();
+    });
+
+    it('should render action groups', () => {
+        const { getByRole } = render(<HeadingStripe title="title" actionButtons={<Button>Update</Button>} />);
+
+        expect(getByRole('button')).toBeVisible();
+    });
+});

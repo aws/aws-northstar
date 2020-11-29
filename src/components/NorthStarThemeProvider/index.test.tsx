@@ -14,20 +14,13 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import Box from '../../layouts/Box';
+import { render } from '@testing-library/react';
+import NorthStarThemeProvider from '.';
 
-/** A placeholder component to be used to occupy a place for demo purpose.*/
-export default (props: any) => (
-    <Box
-        borderColor="primary.main"
-        border={2}
-        p={2}
-        textAlign="center"
-        bgcolor="secondary.main"
-        color="secondary.contrastText"
-        data-testid="placeholder"
-        {...props}
-    >
-        Component
-    </Box>
-);
+describe('NorthStarThemeProvider', () => {
+    it('should render children', () => {
+        const { getByText } = render(<NorthStarThemeProvider>Children</NorthStarThemeProvider>);
+
+        expect(getByText('Children')).toBeVisible();
+    });
+});

@@ -211,6 +211,7 @@ export default function Autosuggest({
     return (
         <div>
             <MaterialUIAutocomplete
+                data-testid="autosuggest"
                 disabled={disabled}
                 autoHighlight
                 popupIcon={null}

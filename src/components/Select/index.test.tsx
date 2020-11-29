@@ -223,7 +223,7 @@ describe('Select', () => {
         it('fires onRecoveryClick event and keep the select open', () => {
             const mockFn = jest.fn();
             const props: SelectProps = { options, statusType: 'error', recoveryText: 'retry', onRecoveryClick: mockFn };
-            const { getByRole, getByText, debug } = render(<Select {...props} />);
+            const { getByRole, getByText } = render(<Select {...props} />);
 
             expect(mockFn).toHaveBeenCalledTimes(0);
 

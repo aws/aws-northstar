@@ -15,7 +15,6 @@
  ******************************************************************************************************************** */
 import React from 'react';
 import TreeView, { TreeItemNode } from '.';
-import { action } from '@storybook/addon-actions';
 
 export default {
     component: TreeView,
@@ -45,23 +44,18 @@ const treeItem: TreeItemNode = {
 
 export const Default = () => (
     <>
-        <TreeView root={treeItem} defaultExpanded={['1']} onNodeSelect={action('onNodeSelect')} />
+        <TreeView root={treeItem} defaultExpanded={['1']} onNodeSelect={console.log} />
     </>
 );
 
 export const WithDefaultSelected = () => (
     <>
-        <TreeView
-            root={treeItem}
-            defaultExpanded={['1']}
-            onNodeSelect={action('onNodeSelect')}
-            defaultSelected={['4']}
-        />
+        <TreeView root={treeItem} defaultExpanded={['1']} onNodeSelect={console.log} defaultSelected={['4']} />
     </>
 );
 
 export const MultiSelect = () => (
     <>
-        <TreeView root={treeItem} defaultExpanded={['1']} onNodeSelect={action('onNodeSelect')} multiSelect />
+        <TreeView root={treeItem} defaultExpanded={['1']} onNodeSelect={console.log} multiSelect />
     </>
 );
