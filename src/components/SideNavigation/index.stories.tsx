@@ -50,7 +50,7 @@ export const Default = () => {
         {
             type: SideNavigationItemType.LINK,
             text: 'Documentation',
-            href: 'https://docs.aws.amazon.com',
+            href: 'https://www.mysite.com',
         },
     ];
     return (

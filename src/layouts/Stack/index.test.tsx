@@ -14,20 +14,30 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import Box from '../../layouts/Box';
+import { render } from '@testing-library/react';
+import Placeholder from '../../components/Placeholder';
+import Stack from '.';
 
-/** A placeholder component to be used to occupy a place for demo purpose.*/
-export default (props: any) => (
-    <Box
-        borderColor="primary.main"
-        border={2}
-        p={2}
-        textAlign="center"
-        bgcolor="secondary.main"
-        color="secondary.contrastText"
-        data-testid="placeholder"
-        {...props}
-    >
-        Component
-    </Box>
-);
+describe('Stack', () => {
+    it('renders 1 item', () => {
+        const { getAllByTestId } = render(
+            <Stack>
+                <Placeholder />
+            </Stack>
+        );
+
+        expect(getAllByTestId('placeholder')).toHaveLength(1);
+    });
+
+    it('renders a list of items', () => {
+        const { getAllByTestId } = render(
+            <Stack>
+                <Placeholder />
+                <Placeholder />
+                <Placeholder />
+            </Stack>
+        );
+
+        expect(getAllByTestId('placeholder')).toHaveLength(3);
+    });
+});

@@ -30,4 +30,13 @@ module.exports = {
     },
     setupFilesAfterEnv: ['./jest/jest.setup.ts'],
     transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
+    coverageThreshold: {
+        global: {
+            branches: 75,
+            functions: 75,
+            lines: 90,
+            statements: 90,
+        },
+    },
+    coveragePathIgnorePatterns: ['/node_modules/', '/components/index.ts', '.*/index.stories.tsx'],
 };

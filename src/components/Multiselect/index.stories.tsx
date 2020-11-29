@@ -18,11 +18,18 @@ import { action } from '@storybook/addon-actions';
 import Multiselect from '.';
 import FormField from '../FormField';
 import { awsServices } from '../Autosuggest/data/data';
+import { SelectOption, StatusType } from '../Select';
 
 export default {
     component: Multiselect,
     title: 'Multiselect',
 };
+
+function sleep(delay = 0) {
+    return new Promise(resolve => {
+        setTimeout(resolve, delay);
+    });
+}
 
 export const Default = () => (
     <FormField label="Form field label" controlId="formFieldId1">
@@ -66,3 +73,41 @@ export const WithInitialValue = () => (
         />
     </FormField>
 );
+
+export const AsyncLoading = () => {
+    const [shouldLoad, setLoadingStatus] = React.useState(false);
+    const [status, setStatus] = React.useState<StatusType>('finished');
+    const [options, setOptions] = React.useState<SelectOption[]>([]);
+
+    React.useEffect(() => {
+        const loading = shouldLoad && options.length === 0;
+        if (loading) {
+            (async () => {
+                setStatus('loading');
+                await sleep(1e3);
+
+                setStatus('finished');
+                setOptions(awsServices);
+                setLoadingStatus(false);
+            })();
+        }
+    }, [shouldLoad, options.length]);
+
+    return (
+        <FormField label="Form field label" controlId="formFieldId1">
+            <Multiselect
+                controlId="formFieldId1"
+                loadingText="Loading services"
+                statusType={status}
+                onFocus={() => {
+                    setOptions([]);
+                    setLoadingStatus(true);
+                    action('onFocus');
+                }}
+                options={options}
+                empty="No matching service found"
+                onChange={console.log}
+            />
+        </FormField>
+    );
+};

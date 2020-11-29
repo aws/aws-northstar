@@ -14,20 +14,17 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import Box from '../../layouts/Box';
+import { render } from '@testing-library/react';
+import Overlay from '.';
+import { Placeholder } from '..';
 
-/** A placeholder component to be used to occupy a place for demo purpose.*/
-export default (props: any) => (
-    <Box
-        borderColor="primary.main"
-        border={2}
-        p={2}
-        textAlign="center"
-        bgcolor="secondary.main"
-        color="secondary.contrastText"
-        data-testid="placeholder"
-        {...props}
-    >
-        Component
-    </Box>
-);
+describe('Overlay', () => {
+    it('renders children', () => {
+        const { getByTestId } = render(
+            <Overlay>
+                <Placeholder />
+            </Overlay>
+        );
+        expect(getByTestId('placeholder')).toBeInTheDocument();
+    });
+});

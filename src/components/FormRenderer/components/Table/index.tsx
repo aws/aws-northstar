@@ -38,9 +38,12 @@ const TableMapping = (props: any) => {
     } = useFieldApi(props);
     const controlId = input.name || uuidv4();
     const errorText = ((validateOnMount || submitFailed || showError) && error) || '';
-    const handleSelectionChange = useCallback((selectedItems: any[]) => {
-        input.onChange(selectedItems);
-    }, []);
+    const handleSelectionChange = useCallback(
+        (selectedItems: any[]) => {
+            input.onChange(selectedItems);
+        },
+        [input]
+    );
     const selectedRowIds = useMemo(() => {
         if (getRowId && input.value) {
             return input.value.map(getRowId);

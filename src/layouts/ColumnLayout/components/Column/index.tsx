@@ -23,7 +23,7 @@ export interface ColumnProps {
 
 export default ({ children }: ColumnProps) => {
     return (
-        <Grid container direction="column" justify="flex-start" alignItems="flex-start">
+        <Grid container direction="column" justify="flex-start" alignItems="flex-start" data-testid="column">
             {children}
         </Grid>
     );

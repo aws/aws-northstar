@@ -258,6 +258,7 @@ const Select: FunctionComponent<SelectProps> = ({
                 transitionDuration: 0,
                 getContentAnchorEl: null,
             }}
+            data-testid="select"
         >
             {placeholder && (
                 <MenuItem key="__placeholder__" value="" disabled className={classes.placeholder}>
