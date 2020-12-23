@@ -1,3 +1,10 @@
+## [1.0.22](https://github.com/aws/aws-northstar/compare/v1.0.21...v1.0.22) (2020-12-23)
+
+
+### Features
+
+* TimePicker ([#50](https://github.com/aws/aws-northstar/issues/50)) ([6728371](https://github.com/aws/aws-northstar/commit/6728371e63b015ecca9b6e2db743150164e75332))
+
 ## [1.0.21](https://github.com/aws/aws-northstar/compare/v1.0.20...v1.0.21) (2020-11-27)
 
 
