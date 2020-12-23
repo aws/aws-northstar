@@ -255,6 +255,17 @@ const baseSchema = {
             ],
         },
         {
+            component: componentTypes.TIME_PICKER,
+            name: 'timePicker',
+            label: 'Time picker',
+            isRequired: true,
+            validate: [
+                {
+                    type: validatorTypes.REQUIRED,
+                },
+            ],
+        },
+        {
             component: componentTypes.TREE_VIEW,
             label: 'this is a tree',
             helperText: 'this is a hint',
@@ -316,6 +327,7 @@ export const WithInitialValues = () => {
         ],
         confirm: true,
         datePicker: new Date(2020, 1, 1),
+        timePicker: '2020-01-01T00:00:00Z',
         tree: ['3', '5'],
     };
 
@@ -871,6 +883,17 @@ const wizardSchema = {
                             ],
                         },
                         {
+                            component: componentTypes.TIME_PICKER,
+                            name: 'timePicker',
+                            label: 'Time picker',
+                            isRequired: true,
+                            validate: [
+                                {
+                                    type: validatorTypes.REQUIRED,
+                                },
+                            ],
+                        },
+                        {
                             component: componentTypes.TREE_VIEW,
                             label: 'this is a tree',
                             helperText: 'this is a hint',
@@ -992,6 +1015,7 @@ export const WizardWithInitialValues = () => {
         name1: 'name',
         switch: true,
         datePicker: '2020-06-11T14:00:00.000Z',
+        timePicker: '2020-06-11T14:00:00.000Z',
         tree: ['3'],
         confirm: true,
         table: [
