@@ -232,6 +232,17 @@ const schema = {
             ],
         },
         {
+            component: componentTypes.TIME_PICKER,
+            name: 'timePicker',
+            label: 'Time picker',
+            isRequired: true,
+            validate: [
+                {
+                    type: validatorTypes.REQUIRED,
+                },
+            ],
+        },
+        {
             component: componentTypes.TREE_VIEW,
             label: 'this is a tree',
             helperText: 'this is a hint',
@@ -298,6 +309,7 @@ const initialValues = {
     ],
     confirm: true,
     datePicker: new Date(2020, 1, 1),
+    timePicker: '2020-01-01T00:00:00Z',
     tree: ['3', '5'],
 };
 
@@ -520,6 +532,17 @@ const schema = {
             component: componentTypes.DATE_PICKER,
             name: 'datePicker',
             label: 'Date picker',
+            isRequired: true,
+            validate: [
+                {
+                    type: validatorTypes.REQUIRED,
+                },
+            ],
+        },
+        {
+            component: componentTypes.TIME_PICKER,
+            name: 'timePicker',
+            label: 'Time picker',
             isRequired: true,
             validate: [
                 {
@@ -1118,6 +1141,17 @@ const schema = {
                             ],
                         },
                         {
+                            component: componentTypes.TIME_PICKER,
+                            name: 'timePicker',
+                            label: 'Time picker',
+                            isRequired: true,
+                            validate: [
+                                {
+                                    type: validatorTypes.REQUIRED,
+                                },
+                            ],
+                        },
+                        {
                             component: componentTypes.CHECKBOX,
                             name: 'confirm',
                             label: 'I understand the terms and condition',
@@ -1219,6 +1253,7 @@ const initialValues = {
     name1: 'name',
     switch: true,
     datePicker: '2020-06-11T14:00:00.000Z',
+    timePicker: '2020-06-11T14:00:00.000Z',
     confirm: true,
     table: [
         { id: 'id0000012', name: 'Engagement 12', createdDate: '2019-11-12' },

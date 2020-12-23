@@ -499,7 +499,52 @@ describe('FormRenderer', () => {
         });
     });
 
-    describe('Raido', () => {
+    describe('TimePicker', () => {
+        const schema = {
+            ...baseSchema,
+            fields: [
+                {
+                    component: componentTypes.TIME_PICKER,
+                    name: 'timePicker',
+                    label: 'Time picker',
+                    isRequired: true,
+                    validate: [
+                        {
+                            type: validatorTypes.REQUIRED,
+                        },
+                    ],
+                },
+            ],
+        };
+
+        it('should render a TimePicker', () => {
+            const { getByLabelText, getByText } = render(
+                <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
+            );
+
+            expect(getByText('Time picker')).toBeVisible();
+            act(() => {
+                fireEvent.change(getByLabelText('Time picker'), { target: { value: '10:35 AM' } });
+            });
+
+            fireEvent.click(getByText('Submit'));
+            expect(handleSubmit).toHaveBeenCalledWith(
+                { timePicker: expect.stringMatching(/.*T10:35:.*Z$/) },
+                expect.any(Object),
+                expect.any(Function)
+            );
+        });
+
+        it('should trigger validation', () => {
+            const { getByText } = render(
+                <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
+            );
+            fireEvent.click(getByText('Submit'));
+            expect(getByText('Required')).toBeVisible();
+        });
+    });
+
+    describe('Radio', () => {
         const schema = {
             ...baseSchema,
             fields: [

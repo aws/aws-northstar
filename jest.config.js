@@ -28,6 +28,7 @@ module.exports = {
     moduleNameMapper: {
         '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.ts',
     },
+    globalSetup: './jest/jest.globalsetup.js',
     setupFilesAfterEnv: ['./jest/jest.setup.ts'],
     transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
     coverageThreshold: {

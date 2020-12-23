@@ -20,6 +20,7 @@ import TextField from './components/TextField';
 import Checkbox from './components/Checkbox';
 import Radio from './components/Radio';
 import Datepicker from './components/Datepicker';
+import TimePicker from './components/TimePicker';
 import Switch from './components/Switch';
 import Textarea from './components/Textarea';
 import Select from './components/Select';
@@ -38,6 +39,7 @@ const componentMapper = {
     [componentTypes.SUB_FORM]: Subform,
     [componentTypes.RADIO]: Radio,
     [componentTypes.DATE_PICKER]: Datepicker,
+    [componentTypes.TIME_PICKER]: TimePicker,
     [componentTypes.SWITCH]: Switch,
     [componentTypes.TEXTAREA]: Textarea,
     [componentTypes.SELECT]: Select,
