@@ -1,3 +1,10 @@
+## [1.0.23](https://github.com/aws/aws-northstar/compare/v1.0.22...v1.0.23) (2020-12-24)
+
+
+### Bug Fixes
+
+* **TimePicker:** export timepicker component ([#51](https://github.com/aws/aws-northstar/issues/51)) ([649208e](https://github.com/aws/aws-northstar/commit/649208e9ca09c90bc5bd54ff7071582dcccfa5ef))
+
 ## [1.0.22](https://github.com/aws/aws-northstar/compare/v1.0.21...v1.0.22) (2020-12-23)
 
 
