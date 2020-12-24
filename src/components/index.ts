@@ -51,6 +51,7 @@ export { default as Table } from './Table';
 export { default as Tabs } from './Tabs';
 export { default as Text } from './Text';
 export { default as Textarea } from './Textarea';
+export { default as TimePicker } from './TimePicker';
 export { default as Toggle } from './Toggle';
 export { default as TokenGroup } from './TokenGroup';
 export { default as TreeView } from './TreeView';
