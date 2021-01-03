@@ -390,7 +390,17 @@ export const SubForms = () => {
                     {
                         component: componentTypes.TEXT_FIELD,
                         name: 'name2',
-                        label: 'Name',
+                        label: 'First name',
+                        validate: [
+                            {
+                                type: validatorTypes.REQUIRED,
+                            },
+                        ],
+                    },
+                    {
+                        component: componentTypes.TEXT_FIELD,
+                        name: 'name3',
+                        label: 'Last name',
                         validate: [
                             {
                                 type: validatorTypes.REQUIRED,
