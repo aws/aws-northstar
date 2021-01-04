@@ -16,6 +16,7 @@
 import React, { FunctionComponent, useMemo, useState, useEffect } from 'react';
 import { useFormApi, useFieldApi } from '@data-driven-forms/react-form-renderer';
 import ExpandableSection from '../../../ExpandableSection';
+import Stack from '../../../../layouts/Stack';
 import Box from '../../../../layouts/Box';
 
 const ExpandableSectionMapping: FunctionComponent = props => {
@@ -60,7 +61,9 @@ const ExpandableSectionMapping: FunctionComponent = props => {
                     setExpanded(open);
                 }}
             >
-                {renderForm(editedFields)}
+                <Box width="100%">
+                    <Stack>{renderForm(editedFields)}</Stack>
+                </Box>
             </ExpandableSection>
         </Box>
     );
