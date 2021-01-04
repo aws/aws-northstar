@@ -1,3 +1,10 @@
+## [1.0.24](https://github.com/aws/aws-northstar/compare/v1.0.23...v1.0.24) (2021-01-04)
+
+
+### Bug Fixes
+
+* ExpandableSection in FormRenderer renders all form fields in-line. Closes [#49](https://github.com/aws/aws-northstar/issues/49) ([#53](https://github.com/aws/aws-northstar/issues/53)) ([799550c](https://github.com/aws/aws-northstar/commit/799550c686327f313442e30906e6836d66d18617))
+
 ## [1.0.23](https://github.com/aws/aws-northstar/compare/v1.0.22...v1.0.23) (2020-12-24)
 
 
