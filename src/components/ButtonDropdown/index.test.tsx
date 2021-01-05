@@ -28,7 +28,7 @@ describe('ButtonDropdown', () => {
         expect(container.querySelector('svg')).not.toBeNull();
     });
 
-    it('does not render ArrowDropdown if disableArrowDropdown is true', () => {
+    it('should not render ArrowDropdown if disableArrowDropdown is true', () => {
         const { getByText, container } = render(<ButtonDropdown content="the content" disableArrowDropdown={true} />);
 
         expect(container.querySelector('svg')).toBeNull();
@@ -54,7 +54,7 @@ describe('ButtonDropdown', () => {
         expect(getByText('item3')).toBeVisible();
     });
 
-    it('Trigger content node onClick event', () => {
+    it('should trigger content node onClick event when it is clicked', () => {
         const props = {
             content: 'the content',
             items: [{ text: 'item1' }, { text: 'item2' }, { text: 'item3' }],
@@ -67,7 +67,7 @@ describe('ButtonDropdown', () => {
         expect(props.onClick).toBeCalled();
     });
 
-    it('Trigger item onClick event', () => {
+    it('should trigger item onClick event when it is clicked', () => {
         const handleClickMock = jest.fn();
         const props = {
             content: 'the content',
