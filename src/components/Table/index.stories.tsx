@@ -19,6 +19,7 @@ import { action } from '@storybook/addon-actions';
 import Table, { FetchDataOptions } from '.';
 import longData from './data/long';
 import shortData from './data/short';
+import groupByData from './data/groupBy';
 import columnDefinitions from './data/columnDefinitions';
 import orderBy from 'lodash.orderby';
 
@@ -65,7 +66,7 @@ export const MultiSelect = () => (
         items={shortData}
         selectedRowIds={['id0000012', 'id0000013']}
         onSelectionChange={action('onSelectionChange')}
-        getRowId={React.useCallback(data => data.id, [])}
+        getRowId={data => data.id}
     />
 );
 
@@ -77,7 +78,18 @@ export const SingleSelect = () => (
         multiSelect={false}
         selectedRowIds={['id0000012']}
         onSelectionChange={action('onSelectionChange')}
-        getRowId={React.useCallback(data => data.id, [])}
+        getRowId={data => data.id}
+    />
+);
+
+export const GroupBy = () => (
+    <Table
+        tableTitle={'GroupBy Table'}
+        columnDefinitions={columnDefinitions}
+        items={groupByData}
+        disableGroupBy={false}
+        disableRowSelect={true}
+        defaultGroups={['name']}
     />
 );
 

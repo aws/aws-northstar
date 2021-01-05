@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo, useState } from 'react';
-import { StepClickDetail, WizardStepInfo } from '../../../Wizard';
+import { WizardStepInfo } from '../../../Wizard';
 import WizardStep from './components/WizardStep';
 
 export interface WizardMappingProps {
@@ -25,10 +25,6 @@ export interface WizardMappingProps {
 const WizardMapping: FunctionComponent<WizardMappingProps> = props => {
     const [maxStepIndex, setMaxStepIndex] = useState(0);
     const [activeStepIndex, setActiveStepIndex] = useState(0);
-
-    const handleStepNativationClick = (stepClickDetail: StepClickDetail) => {
-        setActiveStepIndex(stepClickDetail.requestedStepIndex);
-    };
 
     const handleNextButtonClick = () => {
         const target = activeStepIndex + 1;
@@ -67,7 +63,6 @@ const WizardMapping: FunctionComponent<WizardMappingProps> = props => {
             submitButtonText={props.submitButtonText}
             onNextButtonClick={handleNextButtonClick}
             onPreviousButtonClick={handlePreviousButtonClick}
-            onStepNativationClick={handleStepNativationClick}
         />
     );
 };

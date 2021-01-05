@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo, useState, useEffect } from 'react';
-import { WizardInner, WizardStepInfo, StepClickDetail } from '../../../../../Wizard';
+import { WizardInner, WizardStepInfo } from '../../../../../Wizard';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 export interface WizardStepProps {
@@ -26,7 +26,6 @@ export interface WizardStepProps {
     maxStepIndex: number;
     onNextButtonClick: () => void;
     onPreviousButtonClick: () => void;
-    onStepNativationClick: (stepClickDetail: StepClickDetail) => void;
     submitButtonText?: string;
 }
 
@@ -39,7 +38,6 @@ const WizardStep: FunctionComponent<WizardStepProps> = ({
     stepsInfo,
     onNextButtonClick,
     onPreviousButtonClick,
-    onStepNativationClick,
     submitButtonText,
 }) => {
     const [showError, setShowError] = useState(false);
@@ -81,7 +79,6 @@ const WizardStep: FunctionComponent<WizardStepProps> = ({
             stepsInfo={stepsInfo}
             stepCount={stepsInfo.length}
             submitButtonText={submitButtonText}
-            onStepNavigationClick={onStepNativationClick}
             onNextButtonClick={handleNextButtonClick}
             onPreviousButtonClick={handlePreviousButtonClick}
             onCancelButtonClick={formOptions.onCancel}

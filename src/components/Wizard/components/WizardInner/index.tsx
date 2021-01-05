@@ -35,10 +35,10 @@ export interface WizardInnerProps {
     nextButtonText?: string;
     submitButtonText?: string;
     isLoadingNextStep?: boolean;
-    onCancelButtonClick?: () => void;
-    onPreviousButtonClick?: () => void;
-    onNextButtonClick?: () => void;
-    onSubmitButtonClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    onCancelButtonClick: () => void;
+    onPreviousButtonClick: () => void;
+    onNextButtonClick: () => void;
+    onSubmitButtonClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     onStepNavigationClick?: (stepClickDetail: StepClickDetail) => void;
     optionalText?: string;
     /**Indicates whether the step navigation is disabled. When it is enabled, validation will need to take it into consideration. */
@@ -59,11 +59,11 @@ const WizardInner: FunctionComponent<WizardInnerProps> = ({
     optionalText = 'optional',
     isLoadingNextStep = false,
     disableStepNavigation = false,
-    onNextButtonClick = () => {},
-    onPreviousButtonClick = () => {},
-    onStepNavigationClick = () => {},
-    onSubmitButtonClick = () => {},
-    onCancelButtonClick = () => {},
+    onNextButtonClick,
+    onPreviousButtonClick,
+    onStepNavigationClick,
+    onSubmitButtonClick,
+    onCancelButtonClick,
 }) => {
     const actions = useMemo(() => {
         if (activeStepIndex === 0) {

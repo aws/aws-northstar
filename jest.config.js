@@ -33,10 +33,10 @@ module.exports = {
     transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
     coverageThreshold: {
         global: {
-            branches: 75,
-            functions: 75,
-            lines: 90,
-            statements: 90,
+            branches: 80,
+            functions: 85,
+            lines: 95,
+            statements: 95,
         },
     },
     coveragePathIgnorePatterns: ['/node_modules/', '/components/index.ts', '.*/index.stories.tsx'],

@@ -27,7 +27,7 @@ export interface TableFooterProps<D extends object> {
         leftSpace: string;
     };
     colSpan: number;
-    page?: Row<D>[];
+    pageLength?: number;
     errorText?: string;
 }
 
@@ -36,9 +36,9 @@ export default function TableFooter<D extends object>({
     loading = false,
     styles,
     colSpan,
-    page = [],
+    pageLength = 0,
 }: TableFooterProps<D>) {
-    if (page.length == 0) {
+    if (pageLength == 0) {
         return (
             <BaseTableFooter>
                 <TableRow>

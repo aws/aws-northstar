@@ -14,10 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { render, fireEvent, cleanup, act, waitFor } from '@testing-library/react';
+import { render, fireEvent, cleanup, act } from '@testing-library/react';
 import FormRenderer, { componentTypes, validatorTypes } from '.';
-import { isYesterday } from 'date-fns';
-import { debug } from 'console';
 
 describe('FormRenderer', () => {
     afterEach(() => {
@@ -307,6 +305,25 @@ describe('FormRenderer', () => {
                 expect.any(Object),
                 expect.any(Function)
             );
+        });
+
+        it('should handle navigation', () => {
+            const { getByText, getAllByText, getByLabelText } = render(
+                <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
+            );
+            expect(getAllByText('Step 1')).toHaveLength(3);
+            act(() => {
+                fireEvent.change(getByLabelText('textarea'), { target: { value: 'my content' } });
+                fireEvent.click(getByText('Next'));
+            });
+
+            expect(getAllByText('Step 2')).toHaveLength(3);
+
+            act(() => {
+                fireEvent.click(getByText('Previous'));
+            });
+
+            expect(getAllByText('Step 1')).toHaveLength(3);
         });
 
         it('should trigger validation', () => {
@@ -764,6 +781,64 @@ describe('FormRenderer', () => {
                 expect.any(Object),
                 expect.any(Function)
             );
+        });
+    });
+
+    describe('Table', () => {
+        const schema = {
+            ...baseSchema,
+            fields: [
+                {
+                    component: componentTypes.TABLE,
+                    name: 'table',
+                    label: 'Table',
+                    description: 'This is a table',
+                    getRowId: (data: any) => data.id,
+                    items: [
+                        {
+                            id: 'id0000011',
+                            name: 'Order 11',
+                            createdDate: '2019-10-12',
+                        },
+                        {
+                            id: 'id0000012',
+                            name: 'Order 12',
+                            createdDate: '2019-11-12',
+                        },
+                    ],
+                    columnDefinitions: [
+                        {
+                            id: 'id',
+                            width: 200,
+                            Header: 'Id',
+                            accessor: 'id',
+                        },
+                        {
+                            id: 'name',
+                            width: 200,
+                            Header: 'Name',
+                            accessor: 'name',
+                        },
+                        {
+                            id: 'createdDate',
+                            width: 200,
+                            Header: 'Created date',
+                            accessor: 'createdDate',
+                        },
+                    ],
+                },
+            ],
+        };
+
+        it('should render Table', () => {
+            act(() => {
+                const { getByText } = render(
+                    <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
+                );
+
+                expect(getByText('Order 11')).toBeVisible();
+                expect(getByText('Order 12')).toBeVisible();
+            });
         });
     });
 });

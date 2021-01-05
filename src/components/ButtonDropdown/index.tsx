@@ -124,7 +124,7 @@ const useStyles = makeStyles((theme: Theme) =>
  * A button dropdown is used to group a set of actions under one button.
  */
 const ButtonDropdown: FunctionComponent<ButtonDropdownProps> = ({
-    content = '',
+    content,
     items = [],
     variant = 'normal',
     loading,

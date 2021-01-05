@@ -38,7 +38,7 @@ describe('Button', () => {
         describe('when loading', () => {
             it('disables button and renders loader icon instead of icon from prop', () => {
                 const props = { loading: true, variant: 'icon' as const, icon: 'add_plus' as ButtonIconType };
-                const { queryByRole, getByRole } = render(<Button {...props}>test</Button>);
+                const { queryByRole } = render(<Button {...props}>test</Button>);
                 expect(queryByRole('button')).toHaveAttribute('disabled');
                 expect(queryByRole('progressbar')).toBeInTheDocument();
             });

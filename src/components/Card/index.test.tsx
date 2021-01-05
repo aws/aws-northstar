@@ -19,36 +19,38 @@ import { render, RenderResult } from '@testing-library/react';
 
 import Card from '.';
 
-describe('Simple card', () => {
-    const requiredProps = {
-        title: 'card title',
-        subtitle: 'subtitle',
-        expandableContent: true,
-        expandableContentTitle: 'expandableContentTitle',
-    };
+const props = {
+    title: 'card title',
+    subtitle: 'card subtitle',
+    expandableContent: true,
+    expandableContentTitle: 'expandableContentTitle',
+};
 
-    const childrenNode = (
-        <label>
-            <span>Content</span>
-            <input />
-        </label>
-    );
+describe('Card', () => {
+    it('renders card components', () => {
+        const { getByText } = render(<Card {...props}>Content</Card>);
 
-    let component: RenderResult;
-    beforeEach(() => {
-        component = render(<Card {...requiredProps}>{childrenNode}</Card>);
+        expect(getByText('card title')).toBeVisible();
+        expect(getByText('card subtitle')).toBeVisible();
+        expect(getByText('Content')).toBeVisible();
     });
 
-    it('renders collapsible button', () => {
-        const { getByText } = component;
+    it('renders child node', () => {
+        const childrenNode = (
+            <div data-testid="content">
+                <span>Content</span>
+            </div>
+        );
 
-        expect(getByText('subtitle')).toBeVisible();
+        const { getByText, getByTestId } = render(<Card {...props}>{childrenNode}</Card>);
+
+        expect(getByText('card title')).toBeVisible();
+        expect(getByText('card subtitle')).toBeVisible();
+        expect(getByTestId('content')).toBeVisible();
     });
-});
 
-describe('custom header title', () => {
-    it('should render the header using custom titleTypographyProps', () => {
-        const { container, getByText } = render(
+    it('renders the header using custom titleTypographyProps', () => {
+        const { container } = render(
             <Card
                 title="custom title"
                 subtitle="card subtitle"
@@ -58,7 +60,6 @@ describe('custom header title', () => {
             </Card>
         );
 
-        expect(getByText('custom title')).toBeVisible();
         expect(container.getElementsByClassName('MuiTypography-h2')).toHaveLength(1);
         expect(container.getElementsByClassName('MuiTypography-colorSecondary')).toHaveLength(1);
         expect(container.getElementsByClassName('MuiTypography-gutterBottom')).toHaveLength(1);

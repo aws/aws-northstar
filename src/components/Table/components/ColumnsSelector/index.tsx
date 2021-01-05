@@ -17,7 +17,6 @@
 import React from 'react';
 import { Column } from 'react-table';
 import Checkbox from '../../../Checkbox';
-import { v4 as uuidv4 } from 'uuid';
 
 export interface ColumnsSelectorProps<D extends object> {
     columnDefinitions: Array<Column<D>>;
@@ -33,19 +32,21 @@ export interface ColumnsSelectorProps<D extends object> {
 export default function ColumnsSelectorProps<D extends object>({
     columnDefinitions,
     styles,
-    onShowColumnsChange = () => {},
+    onShowColumnsChange,
     showColumns,
 }: ColumnsSelectorProps<D>) {
     return (
         <div className={styles.verticalGrid}>
             <b>Show columns</b>
-            {columnDefinitions.map((c: Column<D>) => (
-                <div key={c.id || uuidv4()}>
-                    <Checkbox onChange={() => onShowColumnsChange(c.id)} checked={showColumns[c.id || ''] === true}>
-                        {c.Header}
-                    </Checkbox>
-                </div>
-            ))}
+            {columnDefinitions
+                .filter(c => typeof c.id != 'undefined')
+                .map((c: Column<D>) => (
+                    <div key={c.id}>
+                        <Checkbox onChange={() => onShowColumnsChange(c.id)} checked={showColumns[c.id!] === true}>
+                            {c.Header}
+                        </Checkbox>
+                    </div>
+                ))}
         </div>
     );
 }
