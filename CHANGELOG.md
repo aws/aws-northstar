@@ -1,3 +1,10 @@
+## [1.0.25](https://github.com/aws/aws-northstar/compare/v1.0.24...v1.0.25) (2021-01-06)
+
+
+### Features
+
+* Create esm package in build. Closes [#38](https://github.com/aws/aws-northstar/issues/38) ([#55](https://github.com/aws/aws-northstar/issues/55)) ([cd4b482](https://github.com/aws/aws-northstar/commit/cd4b48250ef717d6221e867d7ecb7bd43b6feaad))
+
 ## [1.0.24](https://github.com/aws/aws-northstar/compare/v1.0.23...v1.0.24) (2021-01-04)
 
 
