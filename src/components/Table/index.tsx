@@ -362,6 +362,7 @@ export default function Table<D extends object>({
                 pageSize: defaultPageSize,
                 selectedRowIds: selectedRowIdMap,
                 sortBy: defaultSortBy,
+                groupBy: defaultGroups,
             },
             getRowId,
             disableSortBy,
@@ -509,7 +510,7 @@ export default function Table<D extends object>({
         pageIndex: pageIndex || 0,
         pageSize: pageSize || 10,
         pageSizes: pageSizes || [10, 25, 50],
-        page: page || [],
+        pageLength: (page || []).length,
         rowCount,
         loading,
         disablePagination,
@@ -561,7 +562,7 @@ export default function Table<D extends object>({
         loading,
         styles,
         colSpan: columns.length,
-        page,
+        pageLength: page?.length,
     };
 
     return (

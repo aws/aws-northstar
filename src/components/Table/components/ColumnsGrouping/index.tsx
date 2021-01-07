@@ -38,13 +38,15 @@ export default function ColumnsGrouping<D extends object>({
     return (
         <div className={styles.verticalGrid}>
             <b>Group by</b>
-            {columnDefinitions.map((c: Column<D>) => (
-                <div key={c.id}>
-                    <Checkbox onChange={() => onGroupChange(c.id)} checked={groupBy[c.id || ''] === true}>
-                        {c.Header}
-                    </Checkbox>
-                </div>
-            ))}
+            {columnDefinitions
+                .filter(c => typeof c.id != 'undefined')
+                .map((c: Column<D>) => (
+                    <div key={c.id}>
+                        <Checkbox onChange={() => onGroupChange(c.id)} checked={groupBy[c.id!] === true}>
+                            {c.Header}
+                        </Checkbox>
+                    </div>
+                ))}
         </div>
     );
 }

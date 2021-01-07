@@ -18,13 +18,12 @@ import React, { ReactNode } from 'react';
 import { IconButton } from '@material-ui/core';
 import { FirstPage, LastPage, NavigateBefore, NavigateNext, SettingsOutlined } from '@material-ui/icons';
 import SettingsPopover from '../SettingsPopover';
-import { Row } from 'react-table';
 
 export interface SettingsBarProps<D extends object> {
     pageIndex: number;
     pageSize: number;
     pageSizes: number[];
-    page: Row<D>[];
+    pageLength: number;
     rowCount: number;
     disablePagination?: boolean;
     disableSettings?: boolean;
@@ -46,7 +45,7 @@ export default function SettingBar<D extends object>({
     pageIndex,
     pageSize,
     pageSizes,
-    page,
+    pageLength,
     loading,
     rowCount,
     disablePagination,
@@ -97,6 +96,7 @@ export default function SettingBar<D extends object>({
                             size={'small'}
                             aria-label="first page"
                             disabled={pageIndex === 0 || loading}
+                            data-testid="first-page"
                             onClick={() => gotoPage(0)}
                         >
                             <FirstPage />
@@ -105,16 +105,17 @@ export default function SettingBar<D extends object>({
                             size={'small'}
                             aria-label="previous page"
                             disabled={pageIndex == 0 || loading}
+                            data-testid="previous-page"
                             onClick={() => previousPage()}
                         >
                             <NavigateBefore />
                         </IconButton>
-                        <span>{`${pageIndex! * pageSize! + 1}-${pageIndex! * pageSize! +
-                            page.length} of ${rowCount}`}</span>
+                        <span>{`${pageIndex * pageSize + 1}-${pageIndex * pageSize + pageLength} of ${rowCount}`}</span>
                         <IconButton
                             aria-label="next page"
                             size={'small'}
-                            disabled={pageIndex! * pageSize! + page!.length >= rowCount || loading}
+                            disabled={pageIndex * pageSize + pageLength >= rowCount || loading}
+                            data-testid="next-page"
                             onClick={() => nextPage()}
                         >
                             <NavigateNext />
@@ -122,8 +123,9 @@ export default function SettingBar<D extends object>({
                         <IconButton
                             aria-label="last page"
                             size={'small'}
-                            disabled={pageIndex! * pageSize! + page!.length >= rowCount || loading}
-                            onClick={() => gotoPage!(Math.floor(rowCount / pageSize!))}
+                            data-testid="last-page"
+                            disabled={pageIndex! * pageSize + pageLength >= rowCount || loading}
+                            onClick={() => gotoPage(Math.ceil(rowCount / pageSize) - 1)}
                         >
                             <LastPage />
                         </IconButton>
@@ -137,6 +139,7 @@ export default function SettingBar<D extends object>({
                             className={styles.leftSpace}
                             aria-describedby={settingsId}
                             disabled={loading}
+                            data-testid="settings"
                             onClick={handleSettingsClick}
                         >
                             <SettingsOutlined fontSize={'small'} />

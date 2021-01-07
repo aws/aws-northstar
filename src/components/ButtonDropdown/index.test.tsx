@@ -14,23 +14,71 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import ButtonDropdown from '.';
 import { axe } from 'jest-axe';
 
 describe('ButtonDropdown', () => {
     beforeEach(() => jest.clearAllMocks());
 
-    it('renders an enabled button with the content by default', () => {
-        const { getByText } = render(<ButtonDropdown content="the content" />);
-        expect(getByText('the content')).toBeInTheDocument();
+    it('renders content and ArrowDropdown by default', () => {
+        const { getByText, container } = render(<ButtonDropdown content="the content" />);
+
+        expect(getByText('the content')).toBeVisible();
+        expect(container.querySelector('svg')).not.toBeNull();
     });
 
-    it('renders items props as children', () => {
-        const props = { content: 'some content', items: [{ text: 'the item' }] };
+    it('should not render ArrowDropdown if disableArrowDropdown is true', () => {
+        const { getByText, container } = render(<ButtonDropdown content="the content" disableArrowDropdown={true} />);
+
+        expect(container.querySelector('svg')).toBeNull();
+    });
+
+    it('renders one item', () => {
+        const props = { content: 'the content', items: [{ text: 'the item' }] };
         const { getByText } = render(<ButtonDropdown {...props} />);
 
-        expect(getByText(props.items[0].text)).toBeInTheDocument();
+        fireEvent.click(getByText('the content'));
+
+        expect(getByText('the item')).toBeVisible();
+    });
+
+    it('renders multiple items', () => {
+        const props = { content: 'the content', items: [{ text: 'item1' }, { text: 'item2' }, { text: 'item3' }] };
+        const { getByText } = render(<ButtonDropdown {...props} />);
+
+        fireEvent.click(getByText('the content'));
+
+        expect(getByText('item1')).toBeVisible();
+        expect(getByText('item2')).toBeVisible();
+        expect(getByText('item3')).toBeVisible();
+    });
+
+    it('should trigger content node onClick event when it is clicked', () => {
+        const props = {
+            content: 'the content',
+            items: [{ text: 'item1' }, { text: 'item2' }, { text: 'item3' }],
+            onClick: jest.fn(),
+        };
+        const { getByText } = render(<ButtonDropdown {...props} />);
+
+        fireEvent.click(getByText('the content'));
+
+        expect(props.onClick).toBeCalled();
+    });
+
+    it('should trigger item onClick event when it is clicked', () => {
+        const handleClickMock = jest.fn();
+        const props = {
+            content: 'the content',
+            items: [{ text: 'item1', onClick: handleClickMock }, { text: 'item2' }, { text: 'item3' }],
+        };
+        const { getByText } = render(<ButtonDropdown {...props} />);
+
+        fireEvent.click(getByText('the content'));
+        fireEvent.click(getByText('item1'));
+
+        expect(handleClickMock).toBeCalled();
     });
 
     it('renders accessible component', async () => {
