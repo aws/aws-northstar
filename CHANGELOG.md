@@ -1,3 +1,10 @@
+## [1.0.26](https://github.com/aws/aws-northstar/compare/v1.0.25...v1.0.26) (2021-01-07)
+
+
+### Bug Fixes
+
+* **Table:** defaultGroups and the last page calculation ([#54](https://github.com/aws/aws-northstar/issues/54)) ([ff377b4](https://github.com/aws/aws-northstar/commit/ff377b4dd34cc0ea3664e556b4643bcc61fd76d4))
+
 ## [1.0.25](https://github.com/aws/aws-northstar/compare/v1.0.24...v1.0.25) (2021-01-06)
 
 
