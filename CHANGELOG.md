@@ -1,3 +1,10 @@
+## [1.0.27](https://github.com/aws/aws-northstar/compare/v1.0.26...v1.0.27) (2021-01-15)
+
+
+### Features
+
+* Support programmatically open help panel (Closes [#57](https://github.com/aws/aws-northstar/issues/57)) ([#58](https://github.com/aws/aws-northstar/issues/58)) ([16f8f9c](https://github.com/aws/aws-northstar/commit/16f8f9c0c85fd2a14b2c4d91493904658a9a4b79))
+
 ## [1.0.26](https://github.com/aws/aws-northstar/compare/v1.0.25...v1.0.26) (2021-01-07)
 
 
