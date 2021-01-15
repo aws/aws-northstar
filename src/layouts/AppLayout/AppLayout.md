@@ -1,9 +1,28 @@
+### Open/Close Help Panel
+
+You can invoke the openHelpPanel method available from the AppLayoutContext from your component (must be descendants of AppLayout component) to trigger open of the help panel programmatically. 
+
+```jsx static
+import { useAppLayoutContext } from 'aws-northstar/layouts/AppLayout';
+
+...
+
+const { openHelpPanel } = useAppLayoutContext();
+
+...
+    return (
+        ...
+        <Button onClick={() => openHelpPanel()}>Open Help Panel</Button>
+        ...
+    )
+```
+
 ### Examples
 
 ```jsx
 import { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import AppLayout, { Notification } from 'aws-northstar/layouts/AppLayout';
+import AppLayout, { Notification, useAppLayoutContext } from 'aws-northstar/layouts/AppLayout';
 import Box from 'aws-northstar/layouts/Box';
 import Header from 'aws-northstar/components/Header';
 import SideNavigation, { SideNavigationItemType } from 'aws-northstar/components/SideNavigation';
@@ -13,6 +32,8 @@ import HelpPanel from 'aws-northstar/components/HelpPanel';
 import Link from 'aws-northstar/components/Link';
 import Text from 'aws-northstar/components/Text';
 import Heading from 'aws-northstar/components/Heading';
+import Stack from 'aws-northstar/layouts/Stack';
+import Button from 'aws-northstar/components/Button';
 
 const header = <Header title="HelloWorld" />;
 const navigationItems = [
@@ -103,13 +124,19 @@ const defaultNotifications = [
         content: 'This is warning content',
         dismissible: true,
     }
-];
+]; 
 
-const mainContent = (
-    <Box bgcolor="grey.300" width="100%" height="1000px">
-        Main Content
-    </Box>
-);
+const MainContent = () => {
+    const { openHelpPanel } = useAppLayoutContext();
+    return (<Box bgcolor="grey.300" width="100%" height="1000px">
+            <Stack>
+                Main Content
+                <Button onClick={() => openHelpPanel()}>Open Help Panel</Button>
+                <Button onClick={() => openHelpPanel(false)}>Close Help Panel</Button>
+            </Stack>
+        </Box>
+    )
+}
 
 const [notifications, setNotifications] = useState(defaultNotifications);
 
@@ -124,7 +151,7 @@ const handleDismiss = (id) => {
         breadcrumbs={breadcrumbGroup}
         notifications={notifications.map(n => ({ ...n, onDismiss: () => handleDismiss(n.id) }))}
     >
-        {mainContent}
+        <MainContent/>
     </AppLayout>
 </BrowserRouter>
 ```

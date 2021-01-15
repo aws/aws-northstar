@@ -15,16 +15,18 @@
  ******************************************************************************************************************** */
 import React, { useState, useEffect } from 'react';
 import { action } from '@storybook/addon-actions';
-import AppLayout, { Notification } from '.';
-import Header from '../../components/Header';
-import SideNavigation, { SideNavigationItemType } from '../../components/SideNavigation';
-import HelpPanel from '../../components/HelpPanel';
+import AppLayout, { Notification, useAppLayoutContext } from '.';
 import Badge from '../../components/Badge';
-import BreadcrumbGroup from '../../components/BreadcrumbGroup';
 import Box from '../Box';
-import Link from '../../components/Link';
-import Text from '../../components/Text';
+import BreadcrumbGroup from '../../components/BreadcrumbGroup';
+import Button from '../../components/Button';
+import Header from '../../components/Header';
 import Heading from '../../components/Heading';
+import HelpPanel from '../../components/HelpPanel';
+import Link from '../../components/Link';
+import SideNavigation, { SideNavigationItemType } from '../../components/SideNavigation';
+import Stack from '../Stack';
+import Text from '../../components/Text';
 
 export default {
     component: AppLayout,
@@ -172,6 +174,27 @@ export const WithoutContentPadding = () => {
     return (
         <AppLayout header={header} paddingContentArea={false}>
             {mainContent}
+        </AppLayout>
+    );
+};
+
+const ContentUsingContext = () => {
+    const { openHelpPanel } = useAppLayoutContext();
+    return (
+        <Box bgcolor="grey.300" width="100%" height="1000px">
+            <Stack>
+                Main Content
+                <Button onClick={() => openHelpPanel()}>Open Help Panel</Button>
+                <Button onClick={() => openHelpPanel(false)}>Close Help Panel</Button>
+            </Stack>
+        </Box>
+    );
+};
+
+export const OpenHelpPanel = () => {
+    return (
+        <AppLayout header={header} navigation={navigation} helpPanel={helpPanel}>
+            <ContentUsingContext />
         </AppLayout>
     );
 };

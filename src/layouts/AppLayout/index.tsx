@@ -15,9 +15,11 @@
  ******************************************************************************************************************** */
 
 import React, {
+    createContext,
     ReactNode,
     ReactElement,
     FunctionComponent,
+    useContext,
     useState,
     useLayoutEffect,
     useRef,
@@ -40,6 +42,8 @@ import useScrollPosition, { ScrollPosition } from '../../hooks/useScrollPosition
 import LoadingIndicator from '../../components/LoadingIndicator';
 import { SideNavigationProps } from '../../components/SideNavigation';
 import { HelpPanelProps } from '../../components/HelpPanel';
+
+import { LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, LOCAL_STORAGE_KEY_HELP_PANEL_OPEN } from './constants';
 
 const useStyles = makeStyles((theme: Theme) => ({
     flashbarContainer: {
@@ -123,6 +127,16 @@ export interface Notification extends FlashbarMessage {
     id: string;
 }
 
+export interface AppLayoutContextApi {
+    openHelpPanel: (open?: boolean) => void;
+}
+
+const initialState: AppLayoutContextApi = {
+    openHelpPanel: () => {},
+};
+
+const AppLayoutContext = createContext<AppLayoutContextApi>(initialState);
+
 export interface AppLayoutProps {
     /**The header */
     header: ReactNode;
@@ -161,8 +175,8 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     inProgress = false,
     notifications,
 }) => {
-    const [isSideNavigationOpen, setIsSideNavigationOpen] = useLocalStorage('AppLayout.sideNavigationOpen', 'false');
-    const [isHelpPanelOpen, setIsHelpPanelOpen] = useLocalStorage('AppLayout.helpPanelOpen', 'false');
+    const [isSideNavigationOpen, setIsSideNavigationOpen] = useLocalStorage(LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, 'false');
+    const [isHelpPanelOpen, setIsHelpPanelOpen] = useLocalStorage(LOCAL_STORAGE_KEY_HELP_PANEL_OPEN, 'false');
     const notificationsBoxRef = useRef(null);
     const mainContentRef = useRef(null);
     const [notificationsBoxHeight, setNotificationsBoxHeight] = useState(0);
@@ -204,6 +218,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                 <IconButton
                     color="inherit"
                     aria-label="open drawer"
+                    data-testid="open-nav-drawer"
                     onClick={() => setIsSideNavigationOpen('true')}
                     classes={{
                         root: rootClassname,
@@ -223,6 +238,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                 <IconButton
                     color="inherit"
                     aria-label="open drawer"
+                    data-testid="open-helppanel-drawer"
                     onClick={() => setIsHelpPanelOpen('true')}
                     classes={{
                         root: rootClassname,
@@ -236,8 +252,19 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
         [classes, setIsHelpPanelOpen]
     );
 
+    const openHelpPanel = useCallback(
+        (open: boolean = true) => {
+            setIsHelpPanelOpen(open.toString());
+        },
+        [setIsHelpPanelOpen]
+    );
+
     return (
-        <>
+        <AppLayoutContext.Provider
+            value={{
+                openHelpPanel,
+            }}
+        >
             {header}
             {(navigation || helpPanel) && (
                 <Box className={classes.menuBar}>
@@ -294,8 +321,10 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                     </Sidebar>
                 )}
             </Box>
-        </>
+        </AppLayoutContext.Provider>
     );
 };
+
+export const useAppLayoutContext = () => useContext(AppLayoutContext);
 
 export default AppLayout;
