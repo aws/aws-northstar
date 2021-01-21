@@ -13,19 +13,21 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { componentTypes as basicComponentTypes } from '@data-driven-forms/react-form-renderer';
-
-export interface Option {
-    label: string;
-    value: string;
-    disabled?: boolean;
+export interface FileMetadata {
+    /**
+     * File name.
+     */
+    name: string;
+    /**
+     * File size.
+     */
+    size: string;
+    /**
+     * Last modified date.
+     */
+    lastModifiedDate: string;
+    /**
+     * The image url of thumbnail - used in multiple files upload case only.
+     */
+    imageThumbnail?: string;
 }
-
-export const componentTypes = {
-    ...basicComponentTypes,
-    TREE_VIEW: 'TREE_VIEW',
-    EXPANDABLE_SECTION: 'EXPANDABLE_SECTION',
-    TABLE: 'TABLE',
-    REVIEW: 'REVIEW',
-    CUSTOM: 'CUSTOM',
-};

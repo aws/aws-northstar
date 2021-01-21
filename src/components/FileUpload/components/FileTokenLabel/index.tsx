@@ -13,19 +13,23 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { componentTypes as basicComponentTypes } from '@data-driven-forms/react-form-renderer';
+import React, { FunctionComponent } from 'react';
+import { FileMetadata } from '../../types';
+import Inline from '../../../../layouts/Inline';
+import Stack from '../../../../layouts/Stack';
+import StatusIndicator from '../../../StatusIndicator';
 
-export interface Option {
-    label: string;
-    value: string;
-    disabled?: boolean;
-}
-
-export const componentTypes = {
-    ...basicComponentTypes,
-    TREE_VIEW: 'TREE_VIEW',
-    EXPANDABLE_SECTION: 'EXPANDABLE_SECTION',
-    TABLE: 'TABLE',
-    REVIEW: 'REVIEW',
-    CUSTOM: 'CUSTOM',
+const FileTokenLabel: FunctionComponent<FileMetadata> = ({ name, size, lastModifiedDate }) => {
+    return (
+        <Inline spacing="xs">
+            <StatusIndicator statusType="positive" />
+            <Stack spacing="none">
+                <b>{name}</b>
+                {size}
+                {lastModifiedDate}
+            </Stack>
+        </Inline>
+    );
 };
+
+export default FileTokenLabel;

@@ -49,9 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-export interface FormFieldProps {
-    /** Control region can be used to display an input element, a textarea etc. */
-    children: ReactNode;
+export interface BaseFormFieldProps {
     /**
      * The id of the primary form control. Used for setting the label's "for" attribute for accessibility.
      */
@@ -87,6 +85,17 @@ export interface FormFieldProps {
      * Whether to use expendable section.
      */
     expandable?: boolean;
+    /**
+     * The footer content displayed below the hint text.
+     */
+    footer?: ReactNode;
+}
+
+export interface FormFieldProps extends BaseFormFieldProps {
+    /**
+     * Control region can be used to display an input element, a textarea etc.
+     * */
+    children: ReactNode;
     /**
      * Render the reload button as secondary control
      */
@@ -176,6 +185,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
     createNewLinkHref,
     stretch = false,
     expandable = false,
+    footer,
 }) => {
     const classes = useStyles();
 
@@ -202,6 +212,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
                 </div>
                 {errorText && <ErrorText errorText={errorText} />}
                 {hintText && <FormHelperText className={classes.formFieldControls}>{hintText}</FormHelperText>}
+                {footer && <Box marginTop={1}>{footer}</Box>}
             </Box>
         );
     }, [

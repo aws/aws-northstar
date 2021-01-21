@@ -18,6 +18,7 @@ import { action } from '@storybook/addon-actions';
 import FormRenderer, { componentTypes, validatorTypes } from '.';
 import { awsServices } from '../Autosuggest/data/data';
 import Box from '../../layouts/Box';
+import Text from '../../components/Text';
 
 export default {
     component: FormRenderer,
@@ -1041,4 +1042,35 @@ export const WizardWithInitialValues = () => {
             onCancel={action('Cancel')}
         />
     );
+};
+
+const CustomComponent = ({ label }) => <Text>{label}</Text>;
+
+export const Custom = () => {
+    const schema = {
+        fields: [
+            {
+                component: componentTypes.TEXT_FIELD,
+                name: 'name',
+                label: 'Name',
+                isRequired: true,
+                validate: [
+                    {
+                        type: validatorTypes.REQUIRED,
+                    },
+                ],
+            },
+            {
+                component: componentTypes.CUSTOM,
+                name: 'text',
+                label: 'This is the content of custom component',
+                CustomComponent,
+            },
+        ],
+        header: 'Data driven form with Custom Component',
+        description:
+            'Custom Component is an extention of Review Component which allows users to include custom business logic',
+    };
+
+    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
 };
