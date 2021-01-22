@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { render } from '@testing-library/react';
+import { getByText, render } from '@testing-library/react';
 
 import FormField from '.';
 
@@ -90,6 +90,21 @@ describe('FormField', () => {
         );
 
         expect(getByRole('button')).toBeVisible();
+    });
+
+    it('renders footer control if provided', () => {
+        const props = {
+            ...requiredProps,
+            footer: <>This is footer content</>,
+        };
+
+        const { getByText } = render(
+            <FormField {...props}>
+                <Input />
+            </FormField>
+        );
+
+        expect(getByText('This is footer content')).toBeVisible();
     });
 
     describe('stretch', () => {

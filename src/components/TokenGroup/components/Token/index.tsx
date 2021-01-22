@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent } from 'react';
+import React, { ReactNode, FunctionComponent } from 'react';
 import { Chip, makeStyles, Theme } from '@material-ui/core';
 import Close from '@material-ui/icons/Close';
 
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface Item {
-    label?: string;
+    label?: ReactNode;
     value?: string;
 }
 

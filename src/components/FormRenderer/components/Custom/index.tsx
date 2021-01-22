@@ -13,19 +13,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { componentTypes as basicComponentTypes } from '@data-driven-forms/react-form-renderer';
+import React, { FunctionComponent, memo } from 'react';
+import { useFieldApi, useFormApi } from '@data-driven-forms/react-form-renderer';
 
-export interface Option {
-    label: string;
-    value: string;
-    disabled?: boolean;
-}
+const CustomMapping: FunctionComponent = (props: any) => {
+    const { CustomComponent, ...rest } = useFieldApi(props);
+    const { getState } = useFormApi();
 
-export const componentTypes = {
-    ...basicComponentTypes,
-    TREE_VIEW: 'TREE_VIEW',
-    EXPANDABLE_SECTION: 'EXPANDABLE_SECTION',
-    TABLE: 'TABLE',
-    REVIEW: 'REVIEW',
-    CUSTOM: 'CUSTOM',
+    return <CustomComponent {...rest} data={getState().values} />;
 };
+
+export default memo(CustomMapping);

@@ -13,25 +13,41 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import Inline from '../../layouts/Inline';
+import Stack from '../../layouts/Stack';
 import Token, { Item } from './components/Token';
 
 export interface TokenGroupProps {
-    /** List of items to display in the token group */
+    /**
+     * List of items to display in the token group
+     * */
     items: Item[];
-    /** Callback when the token is dismissed */
+    /**
+     * Callback when the token is dismissed
+     * */
     onDismiss: (item: Item) => void;
+    /**
+     * Indicates whether to display multiple tokens inline
+     */
+    inline?: boolean;
 }
 
 /** A token group can be used to display dismissible tags or properties */
-const TokenGroup: FunctionComponent<TokenGroupProps> = ({ items, onDismiss }) => {
+const TokenGroup: FunctionComponent<TokenGroupProps> = ({ items, onDismiss, inline = true }) => {
+    const WrapperComponent = useMemo(() => {
+        if (inline) {
+            return Inline;
+        }
+
+        return Stack;
+    }, [inline]);
     return (
-        <Inline>
+        <WrapperComponent spacing={inline ? 'm' : 's'}>
             {items.map(item => (
                 <Token key={item.value} item={item} onDismiss={onDismiss} />
             ))}
-        </Inline>
+        </WrapperComponent>
     );
 };
 

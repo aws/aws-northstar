@@ -1268,3 +1268,88 @@ const initialValues = {
     onCancel={console.log('Cancel')}
 />
 ```
+
+```jsx
+import FormRenderer, { componentTypes } from 'aws-northstar/components/FormRenderer';
+import Container from 'aws-northstar/layouts/Container';
+import Box from 'aws-northstar/layouts/Box';
+import Input from 'aws-northstar/components/Input';
+import Text from 'aws-northstar/components/Text';
+
+const CustomComponentSimple = ({ label }) => <Text>{label}</Text>;
+
+const CustomComponentComplex = ({ input }) => <Input 
+    onChange={input.onChange} 
+    value={input.value}/>
+
+const schema = {
+    fields: [
+        {
+            component: componentTypes.CUSTOM,
+            name: 'text',
+            label: 'This is the content of custom component',
+            CustomComponent: CustomComponentSimple,
+        },
+        {
+            component: componentTypes.CUSTOM,
+            name: 'input',
+            CustomComponent: CustomComponentComplex,
+        },
+    ],
+    header: 'Data driven form with Custom Component',
+    description:
+        'Custom Component is an extention of Review Component which allows users to include custom business logic',
+};
+
+<Container>
+    <FormRenderer 
+        schema={schema} 
+        initialValues={{
+            input: 'initial input'
+        }}
+        onSubmit={console.log} 
+        onCancel={console.log} />
+</Container>
+```
+
+```jsx
+import { useCallback } from 'react';
+import FormRenderer, { componentTypes } from 'aws-northstar/components/FormRenderer';
+import Container from 'aws-northstar/layouts/Container';
+import FileUpload from 'aws-northstar/components/FileUpload';
+
+const FileUploadComponent = ({ name, input, onChange }) => {
+   const handleOnChange = useCallback(files => {
+            if(files && files.length > 0) {
+                if(onChange) {
+                    onChange(files);
+                }
+    
+                input.onChange(files.map(f => f.name));
+            }
+       },
+       [input, onChange]
+   );
+   return <FileUpload controlId={name} onChange={handleOnChange} />
+}
+
+const schema = {
+    fields: [
+        {
+            component: componentTypes.CUSTOM,
+            name: 'file',
+            CustomComponent: FileUploadComponent,
+            onChange: console.log
+        },
+    ],
+    header: 'Data driven form using FileUpload',
+    description:
+        'File upload logic can be implemented outside FormRenderer',
+};
+
+<FormRenderer 
+    schema={schema} 
+    onSubmit={console.log} 
+    onCancel={console.log} />;
+
+```

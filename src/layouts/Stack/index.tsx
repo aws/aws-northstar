@@ -32,7 +32,7 @@ const Stack: FunctionComponent<StackProps> = ({ children, spacing = 'm' }) => {
     const stackItems = Children.toArray(children);
     const lastIndex = stackItems.length - 1;
     return (
-        <Box>
+        <Box data-testid="layout-stack">
             {stackItems.map((child, index) => (
                 <Box key={index} mb={index === lastIndex ? 'undefined' : spacingMapping[spacing]}>
                     {child}
