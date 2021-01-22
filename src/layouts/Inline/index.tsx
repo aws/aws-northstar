@@ -43,7 +43,7 @@ const Inline: FunctionComponent<InlineProps> = ({ children, spacing = 'm' }) => 
     const stackItems = Children.toArray(children);
     const lastIndex = stackItems.length - 1;
     return (
-        <Box display="flex" flexDirection="row" flexWrap="wrap" className={styles.root}>
+        <Box display="flex" flexDirection="row" flexWrap="wrap" className={styles.root} data-testid="layout-inline">
             {stackItems.map((child, index) => (
                 <Box key={index} mr={index === lastIndex ? 'undefined' : spacingMapping[spacing]}>
                     {child}

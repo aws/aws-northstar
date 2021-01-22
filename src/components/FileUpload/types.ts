@@ -19,15 +19,15 @@ export interface FileMetadata {
      */
     name: string;
     /**
-     * File size.
+     * A DOMString representing the MIME type of the content that will be put into the file.
      */
-    size: string;
+    type?: string;
     /**
-     * Last modified date.
+     * File size in bytes.
      */
-    lastModifiedDate: string;
+    size?: number;
     /**
-     * The image url of thumbnail - used in multiple files upload case only.
+     * Last modified.
      */
-    imageThumbnail?: string;
+    lastModified?: number;
 }

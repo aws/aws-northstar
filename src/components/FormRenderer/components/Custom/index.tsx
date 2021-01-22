@@ -20,8 +20,6 @@ const CustomMapping: FunctionComponent = (props: any) => {
     const { CustomComponent, ...rest } = useFieldApi(props);
     const { getState } = useFormApi();
 
-    console.log(CustomComponent);
-
     return <CustomComponent {...rest} data={getState().values} />;
 };
 

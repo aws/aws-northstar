@@ -226,7 +226,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
     );
 
     const handleDeleteOption = useCallback(
-        (option: SelectOption) => {
+        option => {
             const tempData = inputValue.filter(o => o.value !== option.value);
             setInputValue(tempData);
             onChange(tempData);

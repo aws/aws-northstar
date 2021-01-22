@@ -14,6 +14,7 @@ An example of adding and removing tokens
 ```jsx
 import { useState } from 'react';
 import Inline from "aws-northstar/layouts/Inline";
+import Stack from "aws-northstar/layouts/Stack";
 import Button from "aws-northstar/components/Button";
 import Input from "aws-northstar/components/Input";
 
@@ -25,7 +26,7 @@ const WithManagedState = () => {
   ]);
 
   return (
-      <>
+      <Stack>
           <Inline>
               <Input value={inputValue} onChange={setInputValue} placeholder="Add a token..." />
               <Button variant="primary" onClick={() => setItems([ ...items, { label: inputValue, value: inputValue } ])}>Add Token</Button>
@@ -34,7 +35,7 @@ const WithManagedState = () => {
               const index = items.indexOf(item);
               setItems([...items.slice(0, index), ...items.slice(index + 1)])
           }} />
-      </>
+      </Stack>
   );
 };
 

@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode, FunctionComponent, useMemo, useState, useEffect } from 'react';
+import React, { ReactNode, FunctionComponent, useMemo } from 'react';
 import clsx from 'clsx';
 import { makeStyles, Grid, Theme, Typography, FormControl, InputLabel, FormHelperText } from '@material-ui/core';
 import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';

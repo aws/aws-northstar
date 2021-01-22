@@ -17,36 +17,35 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import FileUpload from '.';
 import Container from '../../layouts/Container';
-import { FileMetadata } from './types';
 
 export default {
     component: FileUpload,
     title: 'FileUpload',
 };
 
-const singleFile: FileMetadata[] = [
+const singleFile = [
     {
         name: 'file_name.file_type',
-        size: '100 bytes',
-        lastModifiedDate: 'last date modified',
+        size: 1001,
+        lastModified: 1611275279000,
     },
 ];
 
-const multiFiles: FileMetadata[] = [
+const multiFiles = [
     {
         name: 'very_long_long_long_long_long_long_long_long_long_file_name1.file_type1',
-        size: '10 kb',
-        lastModifiedDate: 'last date modified',
+        size: 10011,
+        lastModified: 1611275279000,
     },
     {
         name: 'file_name2.file_type2',
-        size: '10 kb',
-        lastModifiedDate: 'last date modified',
+        size: 1022222,
+        lastModified: 1611275279000,
     },
     {
         name: 'file_name3.file_type3',
-        size: '10 kb',
-        lastModifiedDate: 'last date modified',
+        size: 103333333,
+        lastModified: 1611275279000,
     },
 ];
 
@@ -54,10 +53,11 @@ export const SingleFile = () => {
     return (
         <Container title="Upload Single File">
             <FileUpload
-                controlId="file"
+                controlId="file1"
                 label="Form field label"
                 description="This is a description"
                 hintText="This is hint text with file requirements and constraints"
+                onChange={action('File Selection Change')}
             ></FileUpload>
         </Container>
     );
@@ -67,11 +67,12 @@ export const MultipleFiles = () => {
     return (
         <Container title="Upload Multiple Files">
             <FileUpload
-                controlId="file"
+                controlId="file2"
                 label="Form field label"
                 description="This is a description"
                 hintText="This is hint text with file requirements and constraints"
-                multiFile={true}
+                multiple={true}
+                onChange={action('File Selection Change')}
             ></FileUpload>
         </Container>
     );
@@ -81,11 +82,12 @@ export const ExistingSingleFile = () => {
     return (
         <Container title="Upload Single File">
             <FileUpload
-                controlId="file"
+                controlId="file3"
                 label="Form field label"
                 description="This is a description"
                 hintText="This is hint text with file requirements and constraints"
                 files={singleFile}
+                onChange={action('File Selection Change')}
             ></FileUpload>
         </Container>
     );
@@ -95,12 +97,14 @@ export const ExistingMultipleFiles = () => {
     return (
         <Container title="Upload Multiple Files">
             <FileUpload
-                controlId="file"
+                controlId="file4"
                 label="Form field label"
                 description="This is a description"
                 hintText="This is hint text with file requirements and constraints"
                 files={multiFiles}
-                multiFile={true}
+                multiple={true}
+                accept="image/*"
+                onChange={action('File Selection Change')}
             ></FileUpload>
         </Container>
     );

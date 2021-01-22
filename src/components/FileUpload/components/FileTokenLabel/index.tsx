@@ -13,20 +13,49 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent } from 'react';
-import { FileMetadata } from '../../types';
+import React, { FunctionComponent, useMemo } from 'react';
 import Inline from '../../../../layouts/Inline';
 import Stack from '../../../../layouts/Stack';
 import StatusIndicator from '../../../StatusIndicator';
+import { FileMetadata } from '../../types';
 
-const FileTokenLabel: FunctionComponent<FileMetadata> = ({ name, size, lastModifiedDate }) => {
+const FileTokenLabel: FunctionComponent<FileMetadata> = ({ name, size, lastModified }) => {
+    const displaySize = useMemo(() => {
+        if (size) {
+            let displayNumber = size;
+            let displayUnit = 'bytes';
+            if (size >= 1000 * 1000 * 1000) {
+                displayNumber = size / (1000 * 1000 * 1000);
+                displayUnit = 'GB';
+            } else if (size >= 1000 * 1000) {
+                displayNumber = size / (1000 * 1000);
+                displayUnit = 'MB';
+            } else if (size >= 1000) {
+                displayNumber = size / 1000;
+                displayUnit = 'KB';
+            }
+
+            return `Size: ${parseFloat(displayNumber.toFixed(2))} ${displayUnit}`;
+        }
+
+        return null;
+    }, [size]);
+
+    const displayLastModified = useMemo(() => {
+        if (lastModified) {
+            const date = new Date(lastModified);
+            return `Last modified: ${date.toLocaleString()}`;
+        }
+
+        return null;
+    }, [lastModified]);
     return (
         <Inline spacing="xs">
             <StatusIndicator statusType="positive" />
             <Stack spacing="none">
                 <b>{name}</b>
-                {size}
-                {lastModifiedDate}
+                {displaySize}
+                {displayLastModified}
             </Stack>
         </Inline>
     );

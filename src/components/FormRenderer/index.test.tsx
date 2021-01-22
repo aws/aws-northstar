@@ -346,6 +346,7 @@ describe('FormRenderer', () => {
 
     describe('Subform', () => {
         const schema = {
+            ...baseSchema,
             fields: [
                 {
                     component: componentTypes.SUB_FORM,
@@ -387,6 +388,71 @@ describe('FormRenderer', () => {
             );
             fireEvent.click(getByText('Submit'));
             expect(getByText('Required')).toBeVisible();
+        });
+    });
+
+    const CustomComponentSimple = ({ label }: any) => <>{label}</>;
+
+    const CustomComponentComplex = ({ input }: any) => (
+        <input type="text" onChange={input.onChange} value={input.value} data-testid="input" />
+    );
+
+    describe('Custom', () => {
+        it('renders custom component', () => {
+            const schema = {
+                ...baseSchema,
+                fields: [
+                    {
+                        component: componentTypes.CUSTOM,
+                        name: 'text',
+                        label: 'This is the content of custom component',
+                        CustomComponent: CustomComponentSimple,
+                    },
+                ],
+            };
+
+            const { getByText } = render(<FormRenderer schema={schema} onSubmit={jest.fn()} onCancel={jest.fn()} />);
+            expect(getByText('This is the content of custom component')).toBeVisible();
+        });
+
+        it('supports interaction', () => {
+            const handleSubmit = jest.fn();
+            const schema = {
+                ...baseSchema,
+                fields: [
+                    {
+                        component: componentTypes.CUSTOM,
+                        name: 'input',
+                        CustomComponent: CustomComponentComplex,
+                    },
+                ],
+            };
+
+            const { getByTestId, getByText } = render(
+                <FormRenderer
+                    schema={schema}
+                    onSubmit={handleSubmit}
+                    onCancel={jest.fn()}
+                    initialValues={{
+                        input: 'initial input',
+                    }}
+                />
+            );
+
+            expect(getByTestId('input')).toHaveValue('initial input');
+
+            act(() => {
+                fireEvent.change(getByTestId('input'), { target: { value: 'updated input' } });
+                fireEvent.click(getByText('Submit'));
+            });
+
+            expect(handleSubmit).toHaveBeenCalledWith(
+                {
+                    input: 'updated input',
+                },
+                expect.any(Object),
+                expect.any(Function)
+            );
         });
     });
 
