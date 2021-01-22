@@ -1,3 +1,10 @@
+## [1.0.28](https://github.com/aws/aws-northstar/compare/v1.0.27...v1.0.28) (2021-01-22)
+
+
+### Features
+
+* Add FileUpload component - Standalone or FormRenderer ([e7e00c5](https://github.com/aws/aws-northstar/commit/e7e00c54c184284fc13b24ac9e00a738c101ec73))
+
 ## [1.0.27](https://github.com/aws/aws-northstar/compare/v1.0.26...v1.0.27) (2021-01-15)
 
 
