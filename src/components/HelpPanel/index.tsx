@@ -74,7 +74,7 @@ const HelpPanel: FunctionComponent<HelpPanelProps> = ({
                 <Heading variant="h2">{headerLabel}</Heading>
             </Box>
         );
-    }, [headerLabel]);
+    }, [headerLabel, styles]);
 
     const content = useMemo(() => {
         return (
@@ -95,7 +95,7 @@ const HelpPanel: FunctionComponent<HelpPanelProps> = ({
                 )}
             </Box>
         );
-    }, [children, learnMoreFooter]);
+    }, [children, learnMoreFooter, styles]);
 
     return (
         <Box>
