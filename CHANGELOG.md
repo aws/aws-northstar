@@ -1,3 +1,10 @@
+## [1.0.29](https://github.com/aws/aws-northstar/compare/v1.0.28...v1.0.29) (2021-01-26)
+
+
+### Bug Fixes
+
+* **HelpPanel:** Add deps ([#63](https://github.com/aws/aws-northstar/issues/63)) ([222b1ab](https://github.com/aws/aws-northstar/commit/222b1ab959d99e9df8395a09f64a65256ed32c92))
+
 ## [1.0.28](https://github.com/aws/aws-northstar/compare/v1.0.27...v1.0.28) (2021-01-22)
 
 
