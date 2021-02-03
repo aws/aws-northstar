@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     main: {
         display: 'flex',
-        height: 'calc(100vh - 65px)',
+        height: ({ headerHeightInPx }: any) => `calc(100vh - ${headerHeightInPx}px)`,
     },
     content: ({ hasSideNavigration, isSideNavigationOpen, hasHelpPanel, isHelpPanelOpen }: any) => ({
         marginTop: 0,
@@ -156,6 +156,10 @@ export interface AppLayoutProps {
     notifications?: Notification[];
     /**Maxinum number of notifications to be displayed*/
     maxNotifications?: number;
+    /**
+     * Height Of Header in pixel when custom header is used.
+     * By default, 65px will be used for the <a href='/#/Components/Header'>NorthStar Header</a>. */
+    headerHeightInPx?: number;
 }
 
 /**
@@ -174,6 +178,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     maxNotifications = 2,
     inProgress = false,
     notifications,
+    headerHeightInPx = 65,
 }) => {
     const [isSideNavigationOpen, setIsSideNavigationOpen] = useLocalStorage(LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, 'false');
     const [isHelpPanelOpen, setIsHelpPanelOpen] = useLocalStorage(LOCAL_STORAGE_KEY_HELP_PANEL_OPEN, 'false');
@@ -210,6 +215,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
         inProgress,
         notificationsBoxHeight,
         mainContentScrollPosition,
+        headerHeightInPx,
     });
 
     const renderNavigationIcon = useCallback(
