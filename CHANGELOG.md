@@ -1,3 +1,10 @@
+## [1.0.30](https://github.com/aws/aws-northstar/compare/v1.0.29...v1.0.30) (2021-02-03)
+
+
+### Features
+
+* **AppLayout:** Allow set the height of header for custom header. Close [#39](https://github.com/aws/aws-northstar/issues/39) ([#64](https://github.com/aws/aws-northstar/issues/64)) ([224843d](https://github.com/aws/aws-northstar/commit/224843df6fe4e2adf6ee66dab199f3dcba2cd31c))
+
 ## [1.0.29](https://github.com/aws/aws-northstar/compare/v1.0.28...v1.0.29) (2021-01-26)
 
 
