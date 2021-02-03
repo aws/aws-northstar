@@ -199,6 +199,29 @@ export const OpenHelpPanel = () => {
     );
 };
 
+export const CustomHeader = () => {
+    const customHeader = (
+        <Box
+            display="flex"
+            width="100%"
+            height="100px"
+            bgcolor="primary.main"
+            fontSize={56}
+            alignItems="center"
+            paddingLeft={1}
+            paddingY="auto"
+            color="primary.contrastText"
+        >
+            Custom Header
+        </Box>
+    );
+    return (
+        <AppLayout header={customHeader} navigation={navigation} helpPanel={helpPanel} headerHeightInPx={100}>
+            {mainContent}
+        </AppLayout>
+    );
+};
+
 export const WithInprogressOverlay = () => {
     const [inProgress, setInProgress] = useState(false);
     useEffect(() => {
