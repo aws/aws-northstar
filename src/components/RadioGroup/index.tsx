@@ -26,6 +26,9 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center',
         width: 'fit-content',
     },
+    radio: {
+        transform: 'scale(1)',
+    },
 }));
 
 export interface RadioGroupProps {
@@ -50,7 +53,7 @@ const RadioGroup: FunctionComponent<RadioGroupProps> = ({ name, value, items = [
     const classes = useStyles();
     return (
         <div className={clsx(classes.root, classes.div)}>
-            <MaterialRadioButtonGroup value={value} name={name} onChange={onChange}>
+            <MaterialRadioButtonGroup className={clsx(classes.radio)} value={value} name={name} onChange={onChange}>
                 {items.map((item, index) => (
                     <Fragment key={index}>{item}</Fragment>
                 ))}
