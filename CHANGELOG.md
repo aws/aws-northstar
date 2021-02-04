@@ -1,3 +1,10 @@
+## [1.0.31](https://github.com/aws/aws-northstar/compare/v1.0.30...v1.0.31) (2021-02-04)
+
+
+### Bug Fixes
+
+* **RadioGroup:** Centre radio button dots in Safari, fixes [#60](https://github.com/aws/aws-northstar/issues/60) ([#65](https://github.com/aws/aws-northstar/issues/65)) ([60c901e](https://github.com/aws/aws-northstar/commit/60c901e96a9bade6432b22a2da30c1803328dc5c))
+
 ## [1.0.30](https://github.com/aws/aws-northstar/compare/v1.0.29...v1.0.30) (2021-02-03)
 
 
