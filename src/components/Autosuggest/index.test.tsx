@@ -20,21 +20,6 @@ import Autosuggest from '.';
 import { axe } from 'jest-axe';
 import FormField from '../FormField';
 
-jest.mock('popper.js', () => {
-    const PopperJS = jest.requireActual('popper.js');
-
-    return class {
-        static placements = PopperJS.placements;
-
-        constructor() {
-            return {
-                destroy: () => {},
-                scheduleUpdate: () => {},
-            };
-        }
-    };
-});
-
 describe('Autosuggest', () => {
     const mockEvent = jest.fn();
 
