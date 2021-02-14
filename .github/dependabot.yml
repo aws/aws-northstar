@@ -9,3 +9,12 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "react"
+      - dependency-name: "@types/react"
+      - dependency-name: "react-dom"
+      - dependency-name: "@types/react-dom"
+      - dependency-name: "react-router"
+      - dependency-name: "@types/react-router"
+      - dependency-name: "react-router-dom"
+      - dependency-name: "@types/react-router-dom"
