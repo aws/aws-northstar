@@ -141,7 +141,7 @@
     "date-fns": "^2.13.0",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
-    "match-sorter": "^4.0.2",
+    "match-sorter": "^6.2.0",
     "react-table": "7.0.0-rc.16",
     "react-use-localstorage": "^3.4.1",
     "recharts": "^1.8.5",
