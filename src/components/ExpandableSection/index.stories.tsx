@@ -54,7 +54,7 @@ export const WithActionButton = () => {
             </Box>
             <Box>
                 <Button
-                    onClick={event => {
+                    onClick={(event) => {
                         event.stopPropagation();
                         console.log('Action to group');
                     }}
@@ -76,7 +76,7 @@ export const Complex = () => {
     const [selectedOption, setSeletedOption] = useState<SelectOption | undefined>(options[0]);
 
     const onChange = (event: React.ChangeEvent<{ value: any }>) => {
-        setSeletedOption(options.find(o => o.value === String(event.target.value)));
+        setSeletedOption(options.find((o) => o.value === String(event.target.value)));
     };
 
     const header = (

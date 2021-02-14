@@ -132,7 +132,7 @@ const ButtonDropdown: FunctionComponent<ButtonDropdownProps> = ({
     disableArrowDropdown = false,
     menuItemClassName,
     darkTheme,
-    onClick = e => {},
+    onClick = (e) => {},
 }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);

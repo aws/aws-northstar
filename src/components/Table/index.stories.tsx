@@ -66,7 +66,7 @@ export const MultiSelect = () => (
         items={shortData}
         selectedRowIds={['id0000012', 'id0000013']}
         onSelectionChange={action('onSelectionChange')}
-        getRowId={data => data.id}
+        getRowId={(data) => data.id}
     />
 );
 
@@ -78,7 +78,7 @@ export const SingleSelect = () => (
         multiSelect={false}
         selectedRowIds={['id0000012']}
         onSelectionChange={action('onSelectionChange')}
-        getRowId={data => data.id}
+        getRowId={(data) => data.id}
     />
 );
 

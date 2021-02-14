@@ -25,7 +25,7 @@ import LoadingIndicator from '../LoadingIndicator';
 import Heading from '../Heading';
 import { Typography } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     header: {
         fontSize: '18px',
         padding: '20px 56px 20px 30px',

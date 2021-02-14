@@ -44,7 +44,7 @@ describe('RadioButton', () => {
             { propKey: 'name', propValue: 'the name', attribute: 'name' },
         ];
 
-        tests.forEach(t => {
+        tests.forEach((t) => {
             describe(t.propKey, () => {
                 it(`adds the ${t.attribute} attribute with the value`, () => {
                     const { getByRole } = render(<RadioButton {...{ [t.propKey]: t.propValue }} />);

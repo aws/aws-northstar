@@ -62,7 +62,7 @@ export const WithNotifications = () => {
     const [notifications, setNotifications] = useState(defaultNotifications);
     const handleDismissNotifications = useCallback(
         (id: string) => {
-            setNotifications(notifications.filter(n => n.id !== id));
+            setNotifications(notifications.filter((n) => n.id !== id));
         },
         [notifications, setNotifications]
     );

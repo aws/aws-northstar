@@ -46,7 +46,7 @@ const generateDataFromTheme = (theme: any) => {
     const palettes = ['primary', 'secondary', 'success', 'warning', 'error', 'info'];
     const tableData: {}[] = [];
 
-    palettes.map(palette => {
+    palettes.map((palette) => {
         const colorOptions = theme.palette[palette];
         tableData.push({
             displayValue: (

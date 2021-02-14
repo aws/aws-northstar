@@ -35,7 +35,7 @@ const renderGuidelines = (guidelines: WritingGuidelines) => {
         <Stack spacing="s">
             <Box pl={2}>{guidelines.header && <Heading variant="h4">{guidelines.header}</Heading>}</Box>
             <ul>
-                {guidelines.guidelines.map(guideline => (
+                {guidelines.guidelines.map((guideline) => (
                     <li>{typeof guideline === 'string' ? <Text>{guideline}</Text> : guideline}</li>
                 ))}
             </ul>
@@ -47,7 +47,7 @@ export default ({ title = 'Writing guidelines', guidelines }: WritingGuidelinesP
     return (
         <Container title={title} headingVariant="h3">
             <Stack>
-                {Array.isArray(guidelines) && guidelines.map(guideline => renderGuidelines(guideline))}
+                {Array.isArray(guidelines) && guidelines.map((guideline) => renderGuidelines(guideline))}
                 {!Array.isArray(guidelines) && renderGuidelines(guidelines)}
             </Stack>
         </Container>

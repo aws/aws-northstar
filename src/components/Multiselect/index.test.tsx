@@ -151,7 +151,7 @@ describe('MultiSelect', () => {
         fireEvent.click(getByTitle('Open'));
         fireEvent.click(getByText('Aoption 1'));
         fireEvent.click(getByTitle('Open'));
-        expect(getAllByRole('checkbox').filter(x => x.hasAttribute('checked'))).toHaveLength(1);
+        expect(getAllByRole('checkbox').filter((x) => x.hasAttribute('checked'))).toHaveLength(1);
     });
 
     describe('Event handlers', () => {

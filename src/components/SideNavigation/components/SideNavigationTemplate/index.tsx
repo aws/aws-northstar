@@ -19,7 +19,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Box from '../../../../layouts/Box';
 import Link from '../../../Link';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     header: {
         fontSize: '18px',
         padding: '20px 56px 20px 30px',

@@ -22,7 +22,7 @@ import RadioButton from './components/RadioButton';
 describe('RadioButtonGroup', () => {
     beforeEach(() => jest.clearAllMocks());
 
-    const onChangeMockFn = jest.fn(event => event);
+    const onChangeMockFn = jest.fn((event) => event);
 
     describe('by default', () => {
         it('renders RadioGroup with radio buttons as children', () => {

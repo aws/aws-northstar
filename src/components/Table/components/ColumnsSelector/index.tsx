@@ -39,7 +39,7 @@ export default function ColumnsSelectorProps<D extends object>({
         <div className={styles.verticalGrid}>
             <b>Show columns</b>
             {columnDefinitions
-                .filter(c => typeof c.id != 'undefined')
+                .filter((c) => typeof c.id != 'undefined')
                 .map((c: Column<D>) => (
                     <div key={c.id}>
                         <Checkbox onChange={() => onShowColumnsChange(c.id)} checked={showColumns[c.id!] === true}>

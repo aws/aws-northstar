@@ -25,7 +25,7 @@ describe('Alert', () => {
 
     afterEach(cleanup);
 
-    alertTypes.forEach(alertType => {
+    alertTypes.forEach((alertType) => {
         describe(`with the ${alertType} type`, () => {
             it(`should render the ${alertType} styled Alert`, () => {
                 const { getByTestId } = render(<Alert type={alertType} />);

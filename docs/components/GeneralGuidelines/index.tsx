@@ -50,7 +50,7 @@ const renderGuidelines = (guidelines: ReactNode[], positive: boolean, styles: an
                     {positive ? 'Do' : "Don't"}
                 </Typography>
                 <Stack>
-                    {guidelines.map(guideline => (
+                    {guidelines.map((guideline) => (
                         <Box pr={1} className={positive ? styles.positiveGuideline : styles.negativeGuideline}>
                             {typeof guideline === 'string' ? <Text>{guideline}</Text> : guideline}
                         </Box>

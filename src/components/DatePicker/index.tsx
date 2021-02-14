@@ -136,7 +136,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
     placeholder = 'YYYY/MM/DD',
     locale = 'en',
     disabled = false,
-    isDateDisabled = _ => false,
+    isDateDisabled = (_) => false,
     onChange = () => {},
     value,
     name,
@@ -168,7 +168,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
                 value={selectedDate}
                 disabled={disabled}
                 placeholder={placeholder}
-                onChange={date => handleDateChange(date)}
+                onChange={(date) => handleDateChange(date)}
                 format="yyyy/MM/dd"
                 shouldDisableDate={isDateDisabled}
                 inputProps={{
