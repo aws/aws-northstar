@@ -61,7 +61,7 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
             <Box flexGrow={1}>
                 {
                     <ColumnLayout renderDivider={false}>
-                        {editedFields.map(field => (
+                        {editedFields.map((field) => (
                             <Column key={field.key}>
                                 <Box width="100%" pr={1}>
                                     {formOptions.renderForm([field], formOptions)}

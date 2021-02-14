@@ -82,7 +82,7 @@ const WizardStep: FunctionComponent<WizardStepProps> = ({
             onNextButtonClick={handleNextButtonClick}
             onPreviousButtonClick={handlePreviousButtonClick}
             onCancelButtonClick={formOptions.onCancel}
-            onSubmitButtonClick={event => {
+            onSubmitButtonClick={(event) => {
                 event.preventDefault();
                 formOptions.handleSubmit();
             }}

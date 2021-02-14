@@ -22,7 +22,7 @@ export interface WizardMappingProps {
     submitButtonText?: string;
 }
 
-const WizardMapping: FunctionComponent<WizardMappingProps> = props => {
+const WizardMapping: FunctionComponent<WizardMappingProps> = (props) => {
     const [maxStepIndex, setMaxStepIndex] = useState(0);
     const [activeStepIndex, setActiveStepIndex] = useState(0);
 
@@ -42,7 +42,7 @@ const WizardMapping: FunctionComponent<WizardMappingProps> = props => {
     };
 
     const stepsInfo: WizardStepInfo[] = useMemo(() => {
-        return props.fields.map(field => ({
+        return props.fields.map((field) => ({
             title: field.title,
             isOptional: field.isOptional,
         }));

@@ -39,7 +39,7 @@ export default function ColumnsGrouping<D extends object>({
         <div className={styles.verticalGrid}>
             <b>Group by</b>
             {columnDefinitions
-                .filter(c => typeof c.id != 'undefined')
+                .filter((c) => typeof c.id != 'undefined')
                 .map((c: Column<D>) => (
                     <div key={c.id}>
                         <Checkbox onChange={() => onGroupChange(c.id)} checked={groupBy[c.id!] === true}>

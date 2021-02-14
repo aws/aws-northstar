@@ -40,7 +40,7 @@ const FormTemplate: FunctionComponent<FormTemplateProps> = ({
             </Button>
             <Button
                 variant="primary"
-                onClick={event => {
+                onClick={(event) => {
                     event.preventDefault();
                     handleSubmit(event);
                 }}

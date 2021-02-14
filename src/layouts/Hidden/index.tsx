@@ -19,7 +19,7 @@ import MaterialHidden, { HiddenProps } from '@material-ui/core/Hidden';
 /** Toggle the visibility value of components and more with the hidden utilities.
  * Hidden component is ported from Material UI Hidden component.
  * Refer to https://material-ui.com/components/hidden/ for more details.*/
-const Hidden: FunctionComponent<HiddenProps> = props => {
+const Hidden: FunctionComponent<HiddenProps> = (props) => {
     return <MaterialHidden {...props} />;
 };
 

@@ -61,7 +61,7 @@ export interface RadioButtonProps {
     description?: string;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         marginLeft: 0,
         '&:not(:first-child)': {

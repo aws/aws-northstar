@@ -85,7 +85,7 @@ function TabPanel(props: TabPanelProps) {
  */
 const Tabs = ({ tabs, activeId = '', variant = 'default', onChange }: TabsProps): ReactElement => {
     const classes = useStyles({});
-    const tabIndex = tabs.findIndex(tab => tab.id === activeId);
+    const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
     const [value, setValue] = React.useState(tabIndex === -1 ? 0 : tabIndex);
     const handleChange = (event: React.ChangeEvent<{}>, index: number) => {
         onChange && onChange(tabs[index].id);
@@ -101,7 +101,7 @@ const Tabs = ({ tabs, activeId = '', variant = 'default', onChange }: TabsProps)
             onChange={handleChange}
             className={clsx(variant === 'container' && classes.noBorder)}
         >
-            {tabs.map(tab => (
+            {tabs.map((tab) => (
                 <Tab key={tab.label} className={classes.tab} label={tab.label} disabled={tab.disabled} />
             ))}
         </MuiTabs>

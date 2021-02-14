@@ -120,7 +120,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
     const wizardProps = {
         key: activeStepIndex,
         step: steps[activeStepIndex],
-        stepsInfo: steps.map(step => ({
+        stepsInfo: steps.map((step) => ({
             title: step.title,
             isOptional: step.isOptional,
         })),

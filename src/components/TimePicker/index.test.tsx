@@ -61,7 +61,7 @@ describe('TimePicker', () => {
             { propKey: 'name', propValue: 'the name', attribute: 'name' },
         ];
 
-        textboxAttributes.forEach(t => {
+        textboxAttributes.forEach((t) => {
             describe(t.propKey, () => {
                 it(`adds the ${t.attribute} attribute with the value`, () => {
                     const { getByRole } = render(<TimePicker {...{ [t.propKey]: t.propValue }} />);

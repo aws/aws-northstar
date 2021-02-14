@@ -124,9 +124,9 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
 
     const flattenOptions = useMemo((): SelectOption[] => {
         const optionArray: SelectOption[] = [];
-        options.forEach(option => {
+        options.forEach((option) => {
             if (option.options) {
-                option.options.map(o => {
+                option.options.map((o) => {
                     optionArray.push({ label: o.label || o.value, value: o.value, group: option.label });
                 });
             } else {
@@ -211,7 +211,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
                 return (
                     <>
                         <Checkbox
-                            checked={inputValue.map(input => input.value).includes(option.value)}
+                            checked={inputValue.map((input) => input.value).includes(option.value)}
                             value={option.value}
                         >
                             {option.label}
@@ -226,8 +226,8 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
     );
 
     const handleDeleteOption = useCallback(
-        option => {
-            const tempData = inputValue.filter(o => o.value !== option.value);
+        (option) => {
+            const tempData = inputValue.filter((o) => o.value !== option.value);
             setInputValue(tempData);
             onChange(tempData);
         },
@@ -257,7 +257,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
                 onFocus={onFocus}
                 onOpen={() => setOpen(true)}
                 onClose={() => setOpen(false)}
-                getOptionLabel={option => option.label || ''}
+                getOptionLabel={(option) => option.label || ''}
                 classes={{ inputRoot: classes.muiAutocompleteOverride }}
                 data-testid="multiselect"
             />

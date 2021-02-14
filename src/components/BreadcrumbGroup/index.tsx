@@ -50,7 +50,7 @@ export interface BreadcrumbGroupProps {
 
 const matchRoute = (path: string, availableRoutes: RouteProps[]) => {
     if (availableRoutes.length > 0) {
-        return availableRoutes.some(r => matchPath(path, r));
+        return availableRoutes.some((r) => matchPath(path, r));
     }
 
     return true;
@@ -64,7 +64,7 @@ const BreadcrumbGroup = ({ items, rootPath = 'Home', availableRoutes = [] }: Bre
         return (
             <Route>
                 {({ location }: RouteProps) => {
-                    const pathnames = location!.pathname.split('/').filter(e => e);
+                    const pathnames = location!.pathname.split('/').filter((e) => e);
                     pathnames.unshift('/');
 
                     return (
@@ -75,7 +75,7 @@ const BreadcrumbGroup = ({ items, rootPath = 'Home', availableRoutes = [] }: Bre
                                 const to = segment.length == 1 ? '/' : `/${segment.slice(1).join('/')}`;
                                 const text = value
                                     .split(' ')
-                                    .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+                                    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
                                     .join(' ');
 
                                 return last ? (

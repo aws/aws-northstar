@@ -134,7 +134,7 @@ export interface PivotTableProps {
 /**
  * A pivot table with drag'n'drop functionality to enable data exploration and analysis by summarizing a data set into different presentational views such as a table or charts.
  */
-const PivotTable: FunctionComponent<PivotTableProps> = props => {
+const PivotTable: FunctionComponent<PivotTableProps> = (props) => {
     const classes = useStyles();
     const [state, setState] = useState(props);
     return (
