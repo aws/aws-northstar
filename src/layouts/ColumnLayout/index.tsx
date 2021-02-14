@@ -35,7 +35,7 @@ export interface ColumnLayoutProps {
     collapseBelow?: BreakPoint;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         '& hr': {

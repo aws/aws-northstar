@@ -28,7 +28,7 @@ import Inline from '../../layouts/Inline';
 import Link from '../Link';
 import SideNavigationTemplate, { SideNavigationHeader } from './components/SideNavigationTemplate';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     drawerList: {
         padding: 0,
     },
@@ -94,7 +94,7 @@ const populateInitialExpandedState = (
     items: SideNavigationItem[],
     initialState: { [itemText: string]: boolean } = {}
 ): { [itemText: string]: boolean } => {
-    items.forEach(item => {
+    items.forEach((item) => {
         if (item.expanded && item.text != undefined) {
             initialState[item.text] = true;
         }
@@ -197,7 +197,7 @@ export const SideNavigation: FunctionComponent<SideNavigationProps> = ({ header,
                         unmountOnExit
                     >
                         <List component="div" disablePadding className={classes.nestedItem}>
-                            {item.items.map(i => renderNavigationItem(i))}
+                            {item.items.map((i) => renderNavigationItem(i))}
                         </List>
                     </Collapse>
                 </div>

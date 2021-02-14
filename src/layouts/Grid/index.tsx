@@ -19,7 +19,7 @@ import MaterialGrid, { GridProps } from '@material-ui/core/Grid';
 /** Renders complicated layout grid for flexibility across different designs.
  * Grid component is ported from Material UI Grid component.
  * Refer to https://material-ui.com/components/grid/ for more details.*/
-const Grid: FunctionComponent<GridProps> = props => {
+const Grid: FunctionComponent<GridProps> = (props) => {
     return <MaterialGrid {...props} />;
 };
 

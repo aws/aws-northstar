@@ -1084,13 +1084,13 @@ export const Custom = () => {
 
 const FileUploadComponent = ({ name, input, onChange }) => {
     const handleOnChange = useCallback(
-        files => {
+        (files) => {
             if (files && files.length > 0) {
                 if (onChange) {
                     onChange(files);
                 }
 
-                input.onChange(files.map(f => f.name));
+                input.onChange(files.map((f) => f.name));
             }
         },
         [input, onChange]

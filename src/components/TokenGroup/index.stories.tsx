@@ -59,7 +59,7 @@ export const WithManagedState = () => {
             </Inline>
             <TokenGroup
                 items={items}
-                onDismiss={item => {
+                onDismiss={(item) => {
                     const index = items.indexOf(item);
                     setItems([...items.slice(0, index), ...items.slice(index + 1)]);
                 }}

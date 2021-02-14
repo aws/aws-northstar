@@ -158,7 +158,7 @@ const Input: FunctionComponent<InputProps> = ({ onChange = () => {}, ...props })
             }
             endAdornment={props.type == 'search' && showClearInputButton && clearSearchInput()}
             value={inputValue}
-            onChange={e => handleChange(e.target.value)}
+            onChange={(e) => handleChange(e.target.value)}
         />
     );
 };

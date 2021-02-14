@@ -84,7 +84,7 @@ export interface SidebarProps {
     renderIcon: (rootClasses: string) => ReactNode;
 }
 
-const Sidebar: FunctionComponent<SidebarProps> = props => {
+const Sidebar: FunctionComponent<SidebarProps> = (props) => {
     const classes = useStyles(props);
 
     const isOpen = useMemo(() => {

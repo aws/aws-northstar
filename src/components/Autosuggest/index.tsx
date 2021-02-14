@@ -138,9 +138,9 @@ export default function Autosuggest({
 
     const flattenOptions = useMemo((): SelectOption[] => {
         const optionArray: SelectOption[] = [];
-        options.forEach(option => {
+        options.forEach((option) => {
             if (option.options) {
-                option.options.map(o => {
+                option.options.map((o) => {
                     optionArray.push({ label: o.label || o.value, value: o.value, group: option.label });
                 });
             } else {
@@ -222,20 +222,20 @@ export default function Autosuggest({
                 value={inputValue}
                 noOptionsText={empty}
                 options={flattenOptions}
-                groupBy={option => option.group || ''}
+                groupBy={(option) => option.group || ''}
                 loadingText={loadingAndErrorText}
                 onChange={handleOnChange}
                 onInputChange={handleOnInput}
-                onOpen={e => {
+                onOpen={(e) => {
                     setOpen(true);
                     onFocus(e);
                 }}
-                onClose={e => {
+                onClose={(e) => {
                     setOpen(false);
                     onBlur(e);
                 }}
                 loading={statusType !== 'finished'}
-                getOptionLabel={option => option.label || ''}
+                getOptionLabel={(option) => option.label || ''}
                 renderInput={textfield}
                 classes={{ inputRoot: classes.muiAutocompleteOverride }}
             />

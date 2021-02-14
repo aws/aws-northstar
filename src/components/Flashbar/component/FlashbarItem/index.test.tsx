@@ -23,7 +23,7 @@ describe('FlashbarItem', () => {
 
     afterEach(cleanup);
 
-    messageTypes.forEach(messageType => {
+    messageTypes.forEach((messageType) => {
         describe(`with the ${messageType} type`, () => {
             it(`should render the ${messageType} styled FlashbarItem`, () => {
                 const { getByTestId } = render(<FlashbarItem type={messageType} header="header" content="content" />);

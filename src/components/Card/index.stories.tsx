@@ -53,11 +53,11 @@ export const MouseEvents = () => (
         <Card
             title="Card title"
             subtitle="sub title"
-            onMouseEnter={event => {
+            onMouseEnter={(event) => {
                 event.stopPropagation();
                 console.log('OnMouseEnter');
             }}
-            onMouseOut={event => {
+            onMouseOut={(event) => {
                 event.stopPropagation();
                 console.log('OnMouseOut');
             }}

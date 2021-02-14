@@ -23,7 +23,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '../../layouts/Box';
 import clsx from 'clsx';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         height: '65px',
         justifyContent: 'center',

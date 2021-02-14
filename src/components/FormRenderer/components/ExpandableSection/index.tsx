@@ -19,7 +19,7 @@ import ExpandableSection from '../../../ExpandableSection';
 import Stack from '../../../../layouts/Stack';
 import Box from '../../../../layouts/Box';
 
-const ExpandableSectionMapping: FunctionComponent = props => {
+const ExpandableSectionMapping: FunctionComponent = (props) => {
     const {
         fields,
         title,
@@ -57,7 +57,7 @@ const ExpandableSectionMapping: FunctionComponent = props => {
                 variant={variant}
                 description={description}
                 expanded={expanded}
-                onChange={open => {
+                onChange={(open) => {
                     setExpanded(open);
                 }}
             >

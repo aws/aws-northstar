@@ -71,10 +71,10 @@ export default ({
                         <b>Page size</b>
                         <ButtonDropdown
                             content={pageSize}
-                            items={pageSizes.map(pageSize => {
+                            items={pageSizes.map((pageSize) => {
                                 return {
                                     text: pageSize,
-                                    onClick: e => {
+                                    onClick: (e) => {
                                         setPageSize(Number(Number(e.target.textContent)));
                                         gotoPage(0);
                                     },

@@ -60,7 +60,7 @@ const renderTree = (node: TreeItemNode) => {
 
     return (
         <TreeItem classes={node.classes} key={node.id} nodeId={node.id} label={TreeItemLink}>
-            {Array.isArray(node.children) ? node.children.map(child => renderTree(child)) : null}
+            {Array.isArray(node.children) ? node.children.map((child) => renderTree(child)) : null}
         </TreeItem>
     );
 };

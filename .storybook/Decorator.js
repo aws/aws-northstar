@@ -17,7 +17,7 @@ import React, { StrictMode } from 'react';
 import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
 import Box from '../src/layouts/Box';
 
-const Decorator = storyFn => {
+const Decorator = (storyFn) => {
     return (
         <StrictMode>
             <Box p={2}>
