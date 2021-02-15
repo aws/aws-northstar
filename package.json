@@ -137,6 +137,7 @@
     "@types/react-table": "7.0.10",
     "@types/recharts": "^1.8.10",
     "@types/uuid": "^7.0.0",
+    "@uiw/react-md-editor": "^2.1.8",
     "clsx": "^1.1.1",
     "date-fns": "^2.13.0",
     "lodash.debounce": "^4.0.8",
