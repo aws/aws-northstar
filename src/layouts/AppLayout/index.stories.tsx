@@ -134,7 +134,7 @@ export const Default = () => {
     const [notifications, setNotifications] = useState(defaultNotifications);
 
     const handleDismiss = (id: string) => {
-        setNotifications(notifications.filter(n => n.id !== id));
+        setNotifications(notifications.filter((n) => n.id !== id));
     };
 
     return (
@@ -143,7 +143,7 @@ export const Default = () => {
             navigation={navigation}
             helpPanel={helpPanel}
             breadcrumbs={breadcrumbGroup}
-            notifications={notifications.map(n => ({ ...n, onDismiss: () => handleDismiss(n.id) }))}
+            notifications={notifications.map((n) => ({ ...n, onDismiss: () => handleDismiss(n.id) }))}
         >
             {mainContent}
         </AppLayout>

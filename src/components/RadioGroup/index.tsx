@@ -19,7 +19,7 @@ import { makeStyles, RadioGroup as MaterialRadioButtonGroup } from '@material-ui
 import clsx from 'clsx';
 import RadioButton from './components/RadioButton';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {},
     div: {
         extend: 'root',

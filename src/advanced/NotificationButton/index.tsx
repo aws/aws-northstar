@@ -89,7 +89,7 @@ const NotificationButton = ({ notifications = [], onDismissNotification }: Notif
     );
 
     const items = useMemo(() => {
-        return notifications.map(notification => ({
+        return notifications.map((notification) => ({
             text: (
                 <Alert
                     borderRadius={false}

@@ -44,7 +44,7 @@ const TokenGroup: FunctionComponent<TokenGroupProps> = ({ items, onDismiss, inli
     }, [inline]);
     return (
         <WrapperComponent spacing={inline ? 'm' : 's'}>
-            {items.map(item => (
+            {items.map((item) => (
                 <Token key={item.value} item={item} onDismiss={onDismiss} />
             ))}
         </WrapperComponent>

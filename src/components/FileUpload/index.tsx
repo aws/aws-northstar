@@ -80,8 +80,8 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
     }, [buttonText]);
 
     const handleFileSelectionDismiss = useCallback(
-        dismissedItem => {
-            const newFiles = selectedFiles.filter(file => file.name != dismissedItem.value);
+        (dismissedItem) => {
+            const newFiles = selectedFiles.filter((file) => file.name != dismissedItem.value);
 
             setSelectedFiles(newFiles);
             if (onChange) {
@@ -106,7 +106,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
             );
         }
 
-        const items = selectedFiles.map(file => ({
+        const items = selectedFiles.map((file) => ({
             label: <FileTokenLabel name={file.name} size={file.size} lastModified={file.lastModified} />,
             value: file.name,
         }));
@@ -121,7 +121,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
     }, [inputElement.current]);
 
     const handleFileSelectionChange = useCallback(
-        event => {
+        (event) => {
             let newFiles = [];
             if (multiple) {
                 newFiles = [...selectedFiles, ...event.target.files];
@@ -147,7 +147,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
             errorText={errorText}
         >
             <input
-                ref={input => {
+                ref={(input) => {
                     inputElement.current = input;
                 }}
                 id={controlId}

@@ -26,7 +26,7 @@ export default {
 };
 
 function sleep(delay = 0) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         setTimeout(resolve, delay);
     });
 }
@@ -140,7 +140,7 @@ export const AsyncWithError = () => {
                 onFocus={() => {
                     setLoadingStatus(true);
                 }}
-                onRecoveryClick={e => {
+                onRecoveryClick={(e) => {
                     setLoadingStatus(true);
                 }}
                 statusType={status}

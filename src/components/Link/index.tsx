@@ -38,7 +38,7 @@ export interface LinkProps {
 
 const externalPattern = /^((https?):\/\/)/;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     link: {
         display: 'inline-flex',
         alignItems: 'center',

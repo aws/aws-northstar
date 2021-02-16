@@ -18,6 +18,6 @@ import MaterialUIFormGroup, { FormGroupProps } from '@material-ui/core/FormGroup
 
 /** FormGroup wraps controls such as Checkbox and Switch.
  * It provides compact row layout. */
-const FormGroup: FunctionComponent<FormGroupProps> = props => <MaterialUIFormGroup {...props} />;
+const FormGroup: FunctionComponent<FormGroupProps> = (props) => <MaterialUIFormGroup {...props} />;
 
 export default FormGroup;
