@@ -26,19 +26,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     body: {
         padding: '0.8rem 1rem',
     },
-    '.body-size-small': {
+    'body-size-small': {
         maxWidth: '210px',
         '&.fixed-width': {
             width: '210px',
         },
     },
-    '.body-size-medium': {
+    'body-size-medium': {
         maxWidth: '310px',
         '&.fixed-width': {
             width: '310px',
         },
     },
-    '.body-size-large': {
+    'body-size-large': {
         maxWidth: '460px',
         '&.fixed-width': {
             width: '460px',
@@ -114,14 +114,13 @@ export interface PopoverProps {
 
     /**
      * Element that triggers the popover when selected by the user.
-     * @displayname trigger
      */
     children?: React.ReactNode;
 
     /**
      * Specifies optional header text for the popover.
      */
-    header?: string;
+    header?: React.ReactNode;
 
     /**
      * Content of the popover.
@@ -234,7 +233,7 @@ const Popover: FunctionComponent<PopoverProps> = ({
                             <div
                                 className={clsx(
                                     classes.body,
-                                    classes[`.body-size-${size}`],
+                                    classes[`body-size-${size}`],
                                     fixedWidth && 'fixed-width'
                                 )}
                                 role="dialog"

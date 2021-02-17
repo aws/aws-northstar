@@ -45,7 +45,7 @@ export const Medium = () => (
             position="bottom"
             size="medium"
             showDismissButton={false}
-            header="Memory Error"
+            header={<StatusIndicator statusType="negative">Memory Error</StatusIndicator>}
             triggerType="text"
             content={
                 <span>
