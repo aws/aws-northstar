@@ -13,28 +13,19 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
+import React, { createRef, useRef, } from 'react';
 import { render, fireEvent } from '@testing-library/react';
-
-import MarkdownTextarea, { mapTextareaProps, MarkdownTextareaProps } from '.';
+import MarkdownTextarea from '.';
 
 describe('MarkdownTextarea', () => {
-    const mockOnChange = jest.fn();
+
+    beforeEach(() => { })
     afterEach(() => {
         jest.clearAllMocks();
     });
 
-    it('maps props correctly', () => {
-        const inputProps: MarkdownTextareaProps = {
-            placeholder: 'placeholder',
-            controlId: 'textarea-48',
-            disabled: false,
-            name: 'textarea',
-            ariaRequired: true,
-            onChange: mockOnChange,
-            readonly: false,
-            disableBrowserAutocorrect: true,
-            autofocus: false,
-        };
-    });
+    it('renders an md-editor', () => {
+        const { getByRole } = render(<MarkdownTextarea value="test text" />)
+        expect(getByRole('textbox'))
+    })
 });

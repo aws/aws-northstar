@@ -15,21 +15,21 @@ const [content, setContent] = React.useState('');
         <MarkdownTextarea value="This is a textarea"/>
     </Container>
 
-    <Container headingVariant='h4' title="Error">
-        <MarkdownTextarea placeholder="Error" invalid={true} />
-    </Container>
-
     <Container headingVariant='h4' title="Read Only">
-        <MarkdownTextarea placeholder="This is a readOnly textarea" readonly={true} />
+        <MarkdownTextarea readOnly={true} value="# I am read only" />;
     </Container>
 
-    <Container headingVariant='h4' title="Disabled">
-        <MarkdownTextarea placeholder="This is a disabled textarea" disabled={true} />
+    <Container headingVariant='h4' title="Without Preview">
+        <<MarkdownTextarea preview={false} hideToolbar={true} value="# This is a textarea with no preview" />;
+    </Container>
+
+    <Container headingVariant='h4' title="With No Toolbar">
+        <MarkdownTextarea hideToolbar={true} value="# This is a textarea with no toolbar" />;
     </Container>
 
     <Container headingVariant='h4' title="With onChange">
         <>
-        <MarkdownTextarea placeholder="This is a disabled textarea" onChange={(e) => setContent(e.target.value)} />
+        <MarkdownTextarea value={value} onChange={(e) => setContent(e.target.value)} />
         <div>
             Content: {content}
         </div>

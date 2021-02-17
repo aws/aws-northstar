@@ -18,9 +18,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { makeStyles, TextareaAutosize, Theme, TextareaAutosizeProps } from '@material-ui/core';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
-import MDEditor from '@uiw/react-md-editor';
-import { ITextAreaProps } from '@uiw/react-md-editor/lib/cjs/components/TextArea';
-
+import MarkdownEditor, { IMarkdownEditor } from '@uiw/react-markdown-editor';
 const useStyles = makeStyles((theme: Theme) => ({
     textarea: {
         fontSize: theme.typography.fontSize,
@@ -49,11 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-export interface MarkdownTextareaProps {
-    /** Text entered into the element. */
-    value?: string;
-    /** Placeholder text rendered when the value is an empty string. */
-    placeholder?: string;
+export interface MarkdownTextareaProps extends IMarkdownEditor {
     /** The name of the control used in HTML forms. */
     name?: string;
     /**
@@ -63,22 +57,20 @@ export interface MarkdownTextareaProps {
      * */
     disabled?: boolean;
     /**
+     * Shows a preview that will be converted to html.
+     */
+    visible?: boolean
+    /**
      * Specifies that the textarea should be readonly, preventing the user from
      * modifying the value but including it in a form submission. A readonly textarea can receive focus.
      * */
     readonly?: boolean;
+    /**
+     * Specifies the height of the editor in pixels
+     */
+    height?: number
     /** Overrides invalidation state */
     invalid?: boolean;
-    /**
-     * Setting this to true will disable any native browser capabilities to automatically
-     * correct user input, such as autocorrect and autocapitalize
-     * */
-    disableBrowserAutocorrect?: boolean;
-    /**
-     * Allows you to indicate that the control is to be focused as soon as the load event triggers, allowing the user
-     * to just start typing without having to manually focus the input.
-     * */
-    autofocus?: boolean;
     /**
      * Id of the internal input.
      * Use in conjunction with Form Field to relate a label element "for" attribute to this control for better web accessibility.
@@ -92,72 +84,27 @@ export interface MarkdownTextareaProps {
     ariaDescribedby?: string;
     /** Adds aria-required on the native input */
     ariaRequired?: boolean;
-    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    /** Handler for the onFocus event */
-    onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
-    /** Handler for the onBlur event */
-    onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
+    /** specifies if in read only mode */
+    readOnly?: boolean
+    preview?: boolean
 }
 
-export interface MarkdownAreaProps {
-    hideToolbar?: boolean;
-    height?: number;
-    preview?: 'live' | 'edit' | 'preview';
-    readOnly?: boolean;
-    value?: string;
-}
-
-const mapTextareaProps = ({
-    rows = 3,
-    controlId,
-    invalid = false,
-    disableBrowserAutocorrect = false,
-    ...props
-}: MarkdownTextareaProps): ITextAreaProps => {
-    const id: string = controlId || uuidv4();
-
-    return {
-        id: id,
-        rows: rows,
-        required: props.ariaRequired,
-        placeholder: props.placeholder,
-        name: props.name,
-        disabled: props.disabled,
-        readOnly: props.readonly,
-        autoFocus: props.autofocus,
-        'aria-label': props.value || props.placeholder || id,
-        'aria-describedby': props.ariaDescribedby,
-        'aria-required': props.ariaRequired,
-        onChange: props.onChange,
-        onFocus: props.onFocus,
-        onBlur: props.onBlur,
-    };
-};
-
-/** A Textarea is a multi-line text input control. */
-const MarkdownTextarea: FunctionComponent<MarkdownTextareaProps & MarkdownAreaProps> = ({ invalid, ...props }) => {
+/** A MarkdownTextarea is a markdown input text control withg preview. */
+const MarkdownTextarea: FunctionComponent<MarkdownTextareaProps> = ({ invalid, ...props }) => {
     const classes = useStyles();
 
-    const _onChange = (e: any) => {
-        props.onChange && props.onChange(e);
-    };
-
-    if (props.readOnly) {
-        return <MDEditor.Markdown source={props.value || ''} />;
-    } else
-        return (
-            <MDEditor
-                hideToolbar={props.hideToolbar}
-                height={props.height || 200}
-                preview={props.preview || 'live'}
-                textareaProps={mapTextareaProps(props)}
-                className={clsx(classes.textarea, { [classes.invalid]: invalid })}
-                value={props?.value || ''}
-                onChange={_onChange}
+    return (
+        <>
+            <MarkdownEditor
+                height={400}
+                visible={props.preview || true}
+                {...props}
+                cursorBlinkRate={0} /** do not change - there is a bug in code mirror  */
+                options={{ ...props.options, readOnly: props.readOnly }}
             />
-        );
+        </>
+    );
 };
 
-export { mapTextareaProps };
 
 export default MarkdownTextarea;
