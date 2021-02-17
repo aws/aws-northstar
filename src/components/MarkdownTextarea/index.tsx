@@ -48,8 +48,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface MarkdownTextareaProps extends IMarkdownEditor {
-    /** 
-     * The name of the control used in HTML forms. 
+    /**
+     * The name of the control used in HTML forms.
      * */
     name?: string;
     /**
@@ -61,7 +61,7 @@ export interface MarkdownTextareaProps extends IMarkdownEditor {
     /**
      * Shows a preview that will be converted to html.
      */
-    visible?: boolean
+    visible?: boolean;
     /**
      * Specifies that the textarea should be readonly, preventing the user from
      * modifying the value but including it in a form submission. A readonly textarea can receive focus.
@@ -70,7 +70,7 @@ export interface MarkdownTextareaProps extends IMarkdownEditor {
     /**
      * Specifies the height of the editor in pixels
      */
-    height?: number
+    height?: number;
     /** Overrides invalidation state */
     invalid?: boolean;
     /**
@@ -88,12 +88,11 @@ export interface MarkdownTextareaProps extends IMarkdownEditor {
     ariaRequired?: boolean;
     /** specifies if in read only mode */
     readOnly?: boolean;
-};
+}
 
 /** A MarkdownTextarea is a markdown input text control withg preview. */
 const MarkdownTextarea: FunctionComponent<MarkdownTextareaProps> = ({ invalid, ...props }) => {
     const classes = useStyles();
-
 
     return (
         <>

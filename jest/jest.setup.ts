@@ -17,17 +17,17 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { toHaveNoViolations } from 'jest-axe';
-window.URL.createObjectURL = () => { };
-window.HTMLCanvasElement.prototype.getContext = () => { };
+window.URL.createObjectURL = () => {};
+window.HTMLCanvasElement.prototype.getContext = () => {};
 window.document.createRange = () => ({
-    setStart: () => { },
-    setEnd: () => { },
+    setStart: () => {},
+    setEnd: () => {},
     getBoundingClientRect: () => ({ height: 10, width: 10, x: 0, y: 0 }),
     getClientRects: () => ({}),
     commonAncestorContainer: {
         nodeName: 'BODY',
-        ownerDocument: document
-    }
+        ownerDocument: document,
+    },
 });
 
 expect.extend(toHaveNoViolations);

@@ -13,8 +13,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { createRef, useRef, } from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import React from 'react';
+import { render } from '@testing-library/react';
 import MarkdownTextarea from '.';
 
 describe('MarkdownTextarea', () => {
