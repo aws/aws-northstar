@@ -42,6 +42,7 @@ export { default as Multiselect } from './Multiselect';
 export { default as NorthStarThemeProvider } from './NorthStarThemeProvider';
 export { default as Overlay } from './Overlay';
 export { default as Placeholder } from './Placeholder';
+export { default as Popover } from './Popover';
 export { default as ProgressBar } from './ProgressBar';
 export { default as RadioGroup, RadioButton } from './RadioGroup';
 export { default as Select } from './Select';
