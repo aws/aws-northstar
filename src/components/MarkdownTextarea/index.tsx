@@ -14,39 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent, useState } from 'react';
-import { makeStyles, TextareaAutosize, Theme, TextareaAutosizeProps } from '@material-ui/core';
-import clsx from 'clsx';
-import { v4 as uuidv4 } from 'uuid';
+import React, { FunctionComponent } from 'react';
 import MarkdownEditor, { IMarkdownEditor } from '@uiw/react-markdown-editor';
-const useStyles = makeStyles((theme: Theme) => ({
-    textarea: {
-        fontSize: theme.typography.fontSize,
-        borderRadius: '2px',
-        border: `1px solid ${theme.palette.grey[400]}`,
-        width: '100%',
-        padding: '4px 10px',
-        '&:focus:not([class*="invalid"])': {
-            outline: '2px dotted transparent',
-            boxShadow: `0 0 0 1px ${theme.palette.info.dark}`,
-            border: `1px solid ${theme.palette.info.dark}`,
-        },
-        '&:hover:not([class*="invalid"]):not([disabled])': {
-            border: `1px solid ${theme.palette.info.dark}`,
-        },
-    },
-    invalid: {
-        border: `1px solid ${theme.palette.error.dark}`,
-        boxShadow: 'none',
-        outline: 'none',
-        '&:focus': {
-            outline: '2px dotted transparent',
-            boxShadow: `0 0 0 1px ${theme.palette.error.dark}`,
-            border: `1px solid ${theme.palette.error.dark}`,
-        },
-    },
-}));
-
 export interface MarkdownTextareaProps extends IMarkdownEditor {
     /**
      * The name of the control used in HTML forms.
@@ -92,19 +61,15 @@ export interface MarkdownTextareaProps extends IMarkdownEditor {
 
 /** A MarkdownTextarea is a markdown input text control withg preview. */
 const MarkdownTextarea: FunctionComponent<MarkdownTextareaProps> = ({ invalid, ...props }) => {
-    const classes = useStyles();
-
     return (
-        <>
-            <MarkdownEditor
-                height={200}
-                visible={true}
-                visibleEditor={true}
-                {...props}
-                cursorBlinkRate={0} /** do not change - there is a bug in code mirror  */
-                options={{ ...props.options, readOnly: props.readOnly }}
-            />
-        </>
+        <MarkdownEditor
+            height={200}
+            visible={true}
+            visibleEditor={true}
+            {...props}
+            cursorBlinkRate={0} /** do not change - there is a bug in code mirror  */
+            options={{ ...props.options, readOnly: props.readOnly }}
+        />
     );
 };
 
