@@ -12,24 +12,20 @@ const [content, setContent] = React.useState('');
     </Container>
 
     <Container headingVariant='h4' title="Default with value">
-        <MarkdownTextarea value="This is a textarea"/>
+        <MarkdownTextarea value="# This is a MarkdownTextarea\n\rSo nice to have markdown 😀 "/>
     </Container>
 
     <Container headingVariant='h4' title="Read Only">
-        <MarkdownTextarea readOnly={true} value="# I am read only" />;
+        <MarkdownTextarea readOnly={true} value="# I am a read only MarkdownTextarea" />
     </Container>
 
     <Container headingVariant='h4' title="Without Preview">
-        <<MarkdownTextarea preview={false} hideToolbar={true} value="# This is a textarea with no preview" />;
-    </Container>
-
-    <Container headingVariant='h4' title="With No Toolbar">
-        <MarkdownTextarea hideToolbar={true} value="# This is a textarea with no toolbar" />;
+        <MarkdownTextarea visible={false} value="# This is a MarkdownTextarea with no preview" />
     </Container>
 
     <Container headingVariant='h4' title="With onChange">
         <>
-        <MarkdownTextarea value={value} onChange={(e) => setContent(e.target.value)} />
+        <MarkdownTextarea value={content} onChange={(editor, data, value) => setContent(value)} />
         <div>
             Content: {content}
         </div>

@@ -21,7 +21,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     resolve: {
-        extensions: ['.ts', '.tsx', ".js", ".jsx"],
+        extensions: ['.ts', '.tsx'],
         alias: {
             'aws-northstar': path.resolve(__dirname, 'src/'),
         },

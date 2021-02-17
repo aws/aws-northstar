@@ -13,21 +13,19 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { useState } from 'react';
+import React from 'react';
 import MarkdownTextarea from '.';
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/addons'
-
 
 export default {
     component: MarkdownTextarea,
-    title: 'MarkdownTextarea',
+    title: 'MarkdownTextarea'
 };
 
-export const Default = () => <MarkdownTextarea value={'# This is a textarea'} onChange={action('onChange')} />
+export const Default = () => (<MarkdownTextarea value={'# This is a MarkdownTextarea'} onChange={action('onChange')} />);
 
-export const ReadOnly = () => <MarkdownTextarea readOnly={true} value="# I am read only" />;
+export const ReadOnly = () => (<MarkdownTextarea readOnly={true} value="# I am read only" />);
 
-export const DefaultNoPreview = () => <MarkdownTextarea preview={false} hideToolbar={true} value="This is a textarea" />;
+export const DefaultNoPreview = () => (<MarkdownTextarea visible={false} value="# This is a MarkdownTextarea" />);
 
-export const DefaultNoToolbar = () => <MarkdownTextarea hideToolbar={true} value="This is a textarea" />;
+export const DefaultNoEditor = () => (<MarkdownTextarea visibleEditor={false} value="# This is a MarkdownTextarea" />);

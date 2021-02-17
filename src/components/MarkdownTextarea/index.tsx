@@ -48,7 +48,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface MarkdownTextareaProps extends IMarkdownEditor {
-    /** The name of the control used in HTML forms. */
+    /** 
+     * The name of the control used in HTML forms. 
+     * */
     name?: string;
     /**
      * Specifies that the textarea should be disabled, preventing
@@ -85,19 +87,20 @@ export interface MarkdownTextareaProps extends IMarkdownEditor {
     /** Adds aria-required on the native input */
     ariaRequired?: boolean;
     /** specifies if in read only mode */
-    readOnly?: boolean
-    preview?: boolean
-}
+    readOnly?: boolean;
+};
 
 /** A MarkdownTextarea is a markdown input text control withg preview. */
 const MarkdownTextarea: FunctionComponent<MarkdownTextareaProps> = ({ invalid, ...props }) => {
     const classes = useStyles();
 
+
     return (
         <>
             <MarkdownEditor
-                height={400}
-                visible={props.preview || true}
+                height={200}
+                visible={true}
+                visibleEditor={true}
                 {...props}
                 cursorBlinkRate={0} /** do not change - there is a bug in code mirror  */
                 options={{ ...props.options, readOnly: props.readOnly }}
@@ -105,6 +108,5 @@ const MarkdownTextarea: FunctionComponent<MarkdownTextareaProps> = ({ invalid, .
         </>
     );
 };
-
 
 export default MarkdownTextarea;

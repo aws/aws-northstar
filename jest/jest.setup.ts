@@ -22,17 +22,12 @@ window.HTMLCanvasElement.prototype.getContext = () => { };
 window.document.createRange = () => ({
     setStart: () => { },
     setEnd: () => { },
-    getBoundingClientRect: () => ({
-        height: 10,
-        width: 10,
-        x: 0,
-        y: 0
-    }),
+    getBoundingClientRect: () => ({ height: 10, width: 10, x: 0, y: 0 }),
     getClientRects: () => ({}),
     commonAncestorContainer: {
         nodeName: 'BODY',
-        ownerDocument: document,
-    },
+        ownerDocument: document
+    }
 });
 
 expect.extend(toHaveNoViolations);

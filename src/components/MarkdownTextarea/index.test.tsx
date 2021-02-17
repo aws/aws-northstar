@@ -18,14 +18,12 @@ import { render, fireEvent } from '@testing-library/react';
 import MarkdownTextarea from '.';
 
 describe('MarkdownTextarea', () => {
-
-    beforeEach(() => { })
     afterEach(() => {
         jest.clearAllMocks();
     });
 
     it('renders an md-editor', () => {
-        const { getByRole } = render(<MarkdownTextarea value="test text" />)
-        expect(getByRole('textbox'))
-    })
+        const { getByRole } = render(<MarkdownTextarea value="test text" />);
+        expect(getByRole('textbox'));
+    });
 });
