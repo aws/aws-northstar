@@ -2,8 +2,8 @@
 ```jsx
 import Popover from 'aws-northstar/components/Popover';
 import Stack from 'aws-northstar/layouts/Stack';
-import StatusIndicator from '../StatusIndicator';
-import Button from '../Button';
+import StatusIndicator from 'aws-northstar/components/StatusIndicator';
+import Button from 'aws-northstar/components/Button';
 <Stack>
     <Popover
         position="right"
@@ -23,7 +23,7 @@ import Button from '../Button';
 ```jsx
 import Popover from 'aws-northstar/components/Popover';
 import Stack from 'aws-northstar/layouts/Stack';
-import StatusIndicator from '../StatusIndicator';
+import StatusIndicator from 'aws-northstar/components/StatusIndicator';
 <Stack>
     <Popover
         position="bottom"
@@ -45,9 +45,9 @@ import StatusIndicator from '../StatusIndicator';
 ```jsx
 import Popover from 'aws-northstar/components/Popover';
 import Stack from 'aws-northstar/layouts/Stack';
-import ColumnLayout, { Column } from '../../layouts/ColumnLayout';
-import StatusIndicator from '../StatusIndicator';
-import KeyValuePair from '../KeyValuePair';
+import ColumnLayout, { Column } from 'aws-northstar/layouts/ColumnLayout';
+import StatusIndicator from 'aws-northstar/components/StatusIndicator';
+import KeyValuePair from 'aws-northstar/components/KeyValuePair';
 <Stack>
     <Popover
         position="right"
