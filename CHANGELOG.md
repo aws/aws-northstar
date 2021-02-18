@@ -1,3 +1,10 @@
+## [1.0.32](https://github.com/aws/aws-northstar/compare/v1.0.31...v1.0.32) (2021-02-18)
+
+
+### Features
+
+* Add Popover component ([#87](https://github.com/aws/aws-northstar/issues/87)) ([4d12dcc](https://github.com/aws/aws-northstar/commit/4d12dcc73a85f7a36300725b3ce08b6cd603dcd9))
+
 ## [1.0.31](https://github.com/aws/aws-northstar/compare/v1.0.30...v1.0.31) (2021-02-04)
 
 
