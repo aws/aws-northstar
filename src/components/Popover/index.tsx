@@ -136,6 +136,11 @@ export interface PopoverProps {
      * Adds an `aria-label` to the dismiss button for accessibility.
      */
     dismissAriaLabel?: string;
+
+    /**
+     * Optional callback called when the popover is opened or closed
+     */
+    onChange?: (visible: boolean) => void;
 }
 
 /**
@@ -151,6 +156,7 @@ const Popover: FunctionComponent<PopoverProps> = ({
     content,
     dismissAriaLabel,
     header,
+    onChange,
     ...restProps
 }) => {
     const labelledById = useUniqueId('awsui-popover-');
@@ -161,11 +167,13 @@ const Popover: FunctionComponent<PopoverProps> = ({
 
     const onTriggerClick = useCallback(() => {
         setVisible(true);
-    }, []);
+        onChange && onChange(true);
+    }, [onChange]);
 
     const onPopoverClose = useCallback(() => {
         setVisible(false);
-    }, []);
+        onChange && onChange(false);
+    }, [onChange]);
 
     const mapPositionToMuiPopoverOrigins = useCallback(() => {
         let anchorOrigin: MaterialPopoverProps['anchorOrigin'],

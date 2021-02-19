@@ -19,6 +19,12 @@ import Popover, { PopoverProps } from '.';
 import { BrowserRouter } from 'react-router-dom';
 
 describe('Popover', () => {
+    const mockOnChange = jest.fn();
+
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
     it('renders text trigger correctly', () => {
         const { queryByRole, getByRole } = render(
             <Popover triggerType="text">
@@ -57,6 +63,19 @@ describe('Popover', () => {
         );
         getByText('Trigger').click();
         expect(getByText('popover content')).toHaveTextContent('popover content');
+    });
+
+    it('calls the onChange callback when the popover is opened and closed', () => {
+        const { getByText, queryByTestId } = render(
+            <Popover header="header text" content="popover content" onChange={mockOnChange}>
+                <span>Trigger</span>
+            </Popover>
+        );
+        expect(mockOnChange).not.toHaveBeenCalled();
+        getByText('Trigger').click();
+        expect(mockOnChange).toHaveBeenNthCalledWith(1, true);
+        queryByTestId('dismiss-button')!.click();
+        expect(mockOnChange).toHaveBeenNthCalledWith(2, false);
     });
 
     describe('Dismiss button', () => {
