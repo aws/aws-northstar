@@ -138,9 +138,14 @@ export interface PopoverProps {
     dismissAriaLabel?: string;
 
     /**
-     * Optional callback called when the popover is opened or closed
+     * Optional callback called when the popover is opened
      */
-    onChange?: (visible: boolean) => void;
+    onOpen?: () => void;
+
+    /**
+     * Optional callback called when the popover is closed
+     */
+    onClose?: () => void;
 }
 
 /**
@@ -156,7 +161,8 @@ const Popover: FunctionComponent<PopoverProps> = ({
     content,
     dismissAriaLabel,
     header,
-    onChange,
+    onOpen = () => {},
+    onClose = () => {},
     ...restProps
 }) => {
     const labelledById = useUniqueId('awsui-popover-');
@@ -167,13 +173,13 @@ const Popover: FunctionComponent<PopoverProps> = ({
 
     const onTriggerClick = useCallback(() => {
         setVisible(true);
-        onChange && onChange(true);
-    }, [onChange]);
+        onOpen();
+    }, [onOpen]);
 
     const onPopoverClose = useCallback(() => {
         setVisible(false);
-        onChange && onChange(false);
-    }, [onChange]);
+        onClose();
+    }, [onClose]);
 
     const mapPositionToMuiPopoverOrigins = useCallback(() => {
         let anchorOrigin: MaterialPopoverProps['anchorOrigin'],

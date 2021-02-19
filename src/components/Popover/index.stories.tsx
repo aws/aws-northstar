@@ -100,14 +100,15 @@ export const Large = () => (
     </Stack>
 );
 
-export const OnChange = () => (
+export const StateChangeCallbacks = () => (
     <Stack>
         <Popover
             position="right"
             size="small"
             triggerType="custom"
             content={<StatusIndicator statusType="positive">Code snippet copied</StatusIndicator>}
-            onChange={action('state changed')}
+            onOpen={action('opened')}
+            onClose={action('closed')}
         >
             <Button>Copy</Button>
         </Popover>
