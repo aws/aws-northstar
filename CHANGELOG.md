@@ -1,3 +1,10 @@
+## [1.0.33](https://github.com/aws/aws-northstar/compare/v1.0.32...v1.0.33) (2021-02-19)
+
+
+### Features
+
+* **Popover:** Add onOpen and onClosed callbacks ([#88](https://github.com/aws/aws-northstar/issues/88)) ([16cfc0e](https://github.com/aws/aws-northstar/commit/16cfc0e429d1cdc3a92c7e97f435bc22d26fae01))
+
 ## [1.0.32](https://github.com/aws/aws-northstar/compare/v1.0.31...v1.0.32) (2021-02-18)
 
 
