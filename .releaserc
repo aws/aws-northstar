@@ -13,20 +13,12 @@
             ]
         }],
         "@semantic-release/release-notes-generator",
-        ["@semantic-release/changelog", {
-            "changelogFile": "CHANGELOG.md",
-        }],
         ["@semantic-release/npm", {
             "pkgRoot": "./build",
         }],
         ["@semantic-release/exec", {
             "successCmd": "RELEASED_VERSION=${nextRelease.version} ./scripts/postRelease.sh"
         }],
-        ["@semantic-release/git", {
-            "assets": ["CHANGELOG.md"],
-        }],
-        ["@semantic-release/github", {
-            "assets": ["CHANGELOG.md"],
-        }]
+        ["@semantic-release/github"]
     ]
 }

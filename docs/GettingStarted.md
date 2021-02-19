@@ -100,4 +100,4 @@ We welcome your contribution to NorthStar. Please check our [Contribution Guide]
 
 ## Changelog
 
-Check out the [Changelog](https://github.com/aws/aws-northstar/blob/main/CHANGELOG.md)
+Check out the [Changelog](https://github.com/aws/aws-northstar/releases)
