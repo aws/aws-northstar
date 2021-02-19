@@ -14,11 +14,16 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { getByTestId, getByText, render } from '@testing-library/react';
-import Popover, { PopoverProps } from '.';
-import { BrowserRouter } from 'react-router-dom';
+import { render } from '@testing-library/react';
+import Popover from '.';
 
 describe('Popover', () => {
+    const mockOnChange = jest.fn();
+
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
     it('renders text trigger correctly', () => {
         const { queryByRole, getByRole } = render(
             <Popover triggerType="text">
@@ -57,6 +62,32 @@ describe('Popover', () => {
         );
         getByText('Trigger').click();
         expect(getByText('popover content')).toHaveTextContent('popover content');
+    });
+
+    it('calls the onOpen callback when the popover is opened', () => {
+        const { getByText, queryByTestId } = render(
+            <Popover header="header text" content="popover content" onOpen={mockOnChange}>
+                <span>Trigger</span>
+            </Popover>
+        );
+        expect(mockOnChange).not.toHaveBeenCalled();
+        getByText('Trigger').click();
+        expect(mockOnChange).toHaveBeenCalledTimes(1);
+        queryByTestId('dismiss-button')!.click();
+        expect(mockOnChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('calls the onClose callback when the popover is closed', () => {
+        const { getByText, queryByTestId } = render(
+            <Popover header="header text" content="popover content" onClose={mockOnChange}>
+                <span>Trigger</span>
+            </Popover>
+        );
+        expect(mockOnChange).not.toHaveBeenCalled();
+        getByText('Trigger').click();
+        expect(mockOnChange).not.toHaveBeenCalled();
+        queryByTestId('dismiss-button')!.click();
+        expect(mockOnChange).toHaveBeenCalledTimes(1);
     });
 
     describe('Dismiss button', () => {

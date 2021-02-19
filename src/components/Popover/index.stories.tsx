@@ -20,6 +20,7 @@ import ColumnLayout, { Column } from '../../layouts/ColumnLayout';
 import StatusIndicator from '../StatusIndicator';
 import Button from '../Button';
 import KeyValuePair from '../KeyValuePair';
+import { action } from '@storybook/addon-actions';
 
 export default {
     component: Popover,
@@ -95,6 +96,21 @@ export const Large = () => (
             }
         >
             eth0
+        </Popover>
+    </Stack>
+);
+
+export const StateChangeCallbacks = () => (
+    <Stack>
+        <Popover
+            position="right"
+            size="small"
+            triggerType="custom"
+            content={<StatusIndicator statusType="positive">Code snippet copied</StatusIndicator>}
+            onOpen={action('opened')}
+            onClose={action('closed')}
+        >
+            <Button>Copy</Button>
         </Popover>
     </Stack>
 );
