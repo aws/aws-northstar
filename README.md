@@ -59,3 +59,7 @@ Check all the tests passed, code built, storybook built, documentation built
 
 This project is licensed under the Apache-2.0 License.
 
+## Changelog
+
+Check out the [Changelog](https://github.com/aws/aws-northstar/releases)
+
