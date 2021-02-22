@@ -56,6 +56,8 @@ const columnDefinitions = [
     },
 ];
 
+jest.useFakeTimers();
+
 describe('Table', () => {
     it('renders table title, headers and data', () => {
         const { getByText } = render(

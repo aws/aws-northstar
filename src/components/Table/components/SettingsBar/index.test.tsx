@@ -48,7 +48,7 @@ describe('SettingsBar', () => {
     });
 
     it('renders SettingsBar for the last page', () => {
-        const { getByText, getByTestId, debug } = render(
+        const { getByText, getByTestId } = render(
             <SettingsBar
                 pageIndex={4}
                 pageSize={25}
@@ -68,7 +68,7 @@ describe('SettingsBar', () => {
     });
 
     it('renders SettingsBar for the first page', () => {
-        const { getByText, getByTestId, debug } = render(
+        const { getByText, getByTestId } = render(
             <SettingsBar
                 pageIndex={0}
                 pageSize={100}

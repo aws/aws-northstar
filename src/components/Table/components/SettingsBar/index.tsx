@@ -104,7 +104,7 @@ export default function SettingBar<D extends object>({
                         <IconButton
                             size={'small'}
                             aria-label="previous page"
-                            disabled={pageIndex == 0 || loading}
+                            disabled={pageIndex === 0 || loading}
                             data-testid="previous-page"
                             onClick={() => previousPage()}
                         >

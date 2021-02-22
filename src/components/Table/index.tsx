@@ -22,6 +22,7 @@ import {
     SortingRule,
     TableInstance as TableBaseInstance,
     TableState,
+    useAsyncDebounce,
     useBlockLayout,
     useExpanded,
     UseExpandedOptions,
@@ -59,7 +60,6 @@ import SettingsBar from './components/SettingsBar';
 import ColumnsSelector from './components/ColumnsSelector';
 import ColumnsGrouping from './components/ColumnsGrouping';
 import { RadioButton } from '../RadioGroup';
-import debounce from 'lodash.debounce';
 import isEqual from 'lodash.isequal';
 
 const useStyles = makeStyles((theme) => ({
@@ -125,7 +125,6 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 1,
     },
 }));
-
 export interface TableOptions<D extends object>
     extends UseExpandedOptions<D>,
         UseRowSelectOptions<D>,
@@ -212,7 +211,7 @@ export interface FetchDataOptions {
 
 type TableInstance<D extends object> = {} & TableBaseInstance<D> &
     Partial<
-        UsePaginationOptions<D> &
+        UsePaginationInstanceProps<D> &
             UseRowSelectInstanceProps<D> &
             UsePaginationInstanceProps<D> &
             UseFiltersInstanceProps<D> &
@@ -223,13 +222,16 @@ type TableInstance<D extends object> = {} & TableBaseInstance<D> &
     }> &
     Partial<{ selectedFlatRows: Row<D>[] }>;
 
+const DEFAULT_DEBOUNCE_TIMER = 250;
+const DEFAULT_PAGE_SIZE = 10;
+
 /** A table presents data in a two-dimensional format, arranged in columns and rows in a rectangular form. */
 export default function Table<D extends object>({
     actionGroup = null,
     columnDefinitions = [],
     defaultGroups = [],
     defaultPageIndex = 0,
-    defaultPageSize = 10,
+    defaultPageSize = DEFAULT_PAGE_SIZE,
     disableGroupBy = true,
     disablePagination = false,
     disableSettings = false,
@@ -267,6 +269,7 @@ export default function Table<D extends object>({
             }, {})
     );
     const [filterInput, setFilterInput] = useState<FilterProps>({ _all_: undefined });
+    const [controlledPageSize, setControlledPageSize] = useState(defaultPageSize);
 
     const columns = useMemo(() => {
         const columnsFiltered = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
@@ -330,7 +333,7 @@ export default function Table<D extends object>({
             });
         }
         return columnsFiltered;
-    }, [columnDefinitions, showColumns]);
+    }, [columnDefinitions, showColumns, disableFilters, disableRowSelect, multiSelect]);
 
     const rowCount = useMemo(() => {
         if (typeof props.rowCount === 'undefined') {
@@ -348,6 +351,14 @@ export default function Table<D extends object>({
         return map;
     }, [selectedRowIds]);
 
+    const pageCount = useMemo(() => {
+        if (onFetchData) {
+            return Math.ceil(rowCount / controlledPageSize);
+        }
+
+        return undefined;
+    }, [onFetchData, rowCount, controlledPageSize]);
+
     const tableOpts: TableOptions<D> & UseTableOptions<D> = useMemo(
         () => ({
             data: items || [],
@@ -359,11 +370,12 @@ export default function Table<D extends object>({
             },
             initialState: {
                 pageIndex: defaultPageIndex,
-                pageSize: defaultPageSize,
+                pageSize: controlledPageSize,
                 selectedRowIds: selectedRowIdMap,
                 sortBy: defaultSortBy,
                 groupBy: defaultGroups,
             },
+            pageCount,
             getRowId,
             disableSortBy,
             disableGroupBy,
@@ -377,7 +389,21 @@ export default function Table<D extends object>({
             autoResetPage: onFetchData === null,
             autoResetSelectedRows: onFetchData === null,
         }),
-        [items, columns, groupBy, filterInput]
+        [
+            items,
+            columns,
+            pageCount,
+            controlledPageSize,
+            defaultGroups,
+            defaultPageIndex,
+            defaultSortBy,
+            disableFilters,
+            disableGroupBy,
+            disableSortBy,
+            getRowId,
+            onFetchData,
+            selectedRowIdMap,
+        ]
     );
 
     const {
@@ -401,15 +427,19 @@ export default function Table<D extends object>({
         useGroupBy,
         useSortBy,
         useExpanded,
-        useRowSelect,
         usePagination,
+        useRowSelect,
         useResizeColumns
     );
 
-    const handleFilterChangeDebounce = debounce((value: string) => {
+    useEffect(() => {
+        setControlledPageSize(pageSize || DEFAULT_PAGE_SIZE);
+    }, [pageSize]);
+
+    const handleFilterChangeDebounce = useAsyncDebounce((value: string) => {
         setFilterInput({ _all_: value });
         setFilter!('_all_', value);
-    }, 250);
+    }, DEFAULT_DEBOUNCE_TIMER);
 
     const handleFilterChange = (value: string) => {
         handleFilterChangeDebounce(value);
@@ -450,37 +480,31 @@ export default function Table<D extends object>({
 
     const previousSelectedFlatRows = useRef<D[]>();
 
-    const onSelectionChangeDebounce = debounce(
-        (selectedFlatRows: Row<D>[]) => {
-            const selected = selectedFlatRows
-                .filter((row: Row<D> & Partial<UseGroupByRowProps<D>>) => !row.isGrouped)
-                .map((row: Row<D>) => row.original);
-            if (previousSelectedFlatRows.current) {
-                if (!isEqual(previousSelectedFlatRows.current, selected)) {
-                    onSelectionChange(selected);
-                    previousSelectedFlatRows.current = selected;
-                }
-            } else {
+    const handleSelectionChangeDebounce = useAsyncDebounce((selectedFlatRows: Row<D>[]) => {
+        const selected = selectedFlatRows
+            .filter((row: Row<D> & Partial<UseGroupByRowProps<D>>) => !row.isGrouped)
+            .map((row: Row<D>) => row.original);
+        if (previousSelectedFlatRows.current) {
+            if (!isEqual(previousSelectedFlatRows.current, selected)) {
                 onSelectionChange(selected);
                 previousSelectedFlatRows.current = selected;
             }
-        },
-        250,
-        { maxWait: 1000 }
-    );
+        } else {
+            onSelectionChange(selected);
+            previousSelectedFlatRows.current = selected;
+        }
+    }, DEFAULT_DEBOUNCE_TIMER);
 
     useEffect(() => {
         if (selectedFlatRows) {
-            onSelectionChangeDebounce(selectedFlatRows);
+            handleSelectionChangeDebounce(selectedFlatRows);
         }
-    }, [selectedFlatRows]);
-
-    const flattenGroupBy = () => Object.keys(groupBy).filter((key) => groupBy[key]);
-
-    const flattenShowColumns = () => Object.keys(showColumns).filter((key) => showColumns[key]);
+    }, [selectedFlatRows, handleSelectionChangeDebounce]);
 
     useEffect(() => {
         if (onFetchData) {
+            const flattenGroupBy = () => Object.keys(groupBy).filter((key) => groupBy[key]);
+            const flattenShowColumns = () => Object.keys(showColumns).filter((key) => showColumns[key]);
             onFetchData({
                 pageSize: pageSize || 0,
                 pageIndex: pageIndex || 0,
