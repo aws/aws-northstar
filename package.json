@@ -140,9 +140,13 @@
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
     "match-sorter": "^4.0.2",
+    "react-markdown": "^5.0.3",
+    "react-syntax-highlighter": "^15.4.3",
     "react-table": "7.0.0-rc.16",
     "react-use-localstorage": "^3.4.1",
     "recharts": "^1.8.5",
+    "remark-frontmatter": "^3.0.0",
+    "remark-gfm": "^1.0.0",
     "remove": "^0.1.5",
     "uuid": "^7.0.1"
   },

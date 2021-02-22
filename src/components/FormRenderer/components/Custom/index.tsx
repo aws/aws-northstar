@@ -15,12 +15,13 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent, memo } from 'react';
 import { useFieldApi, useFormApi } from '@data-driven-forms/react-form-renderer';
+import ReactMarkdown from 'react-markdown'
 
-const CustomMapping: FunctionComponent = (props: any) => {
+const MarkdownViewer: FunctionComponent = (props: any) => {
     const { CustomComponent, ...rest } = useFieldApi(props);
     const { getState } = useFormApi();
 
-    return <CustomComponent {...rest} data={getState().values} />;
+    return <ReactMarkdown {...rest} data={getState().values} />;
 };
 
-export default memo(CustomMapping);
+export default memo(MarkdownViewer);
