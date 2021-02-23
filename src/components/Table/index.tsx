@@ -29,6 +29,10 @@ import {
     useFilters,
     UseFiltersInstanceProps,
     UseFiltersOptions,
+    useGlobalFilter,
+    UseGlobalFiltersState,
+    UseGlobalFiltersInstanceProps,
+    UseGlobalFiltersOptions,
     useGroupBy,
     UseGroupByInstanceProps,
     UseGroupByOptions,
@@ -61,6 +65,9 @@ import ColumnsSelector from './components/ColumnsSelector';
 import ColumnsGrouping from './components/ColumnsGrouping';
 import { RadioButton } from '../RadioGroup';
 import isEqual from 'lodash.isequal';
+
+const DEFAULT_PAGE_SIZE = 10;
+const DEFAULT_DEBOUNCE_TIMER = 250;
 
 const useStyles = makeStyles((theme) => ({
     tableBar: {
@@ -129,6 +136,7 @@ export interface TableOptions<D extends object>
     extends UseExpandedOptions<D>,
         UseRowSelectOptions<D>,
         UseFiltersOptions<D>,
+        UseGlobalFiltersOptions<D>,
         UseGroupByOptions<D>,
         UseSortByOptions<D>,
         UseFiltersOptions<D>,
@@ -215,15 +223,13 @@ type TableInstance<D extends object> = {} & TableBaseInstance<D> &
             UseRowSelectInstanceProps<D> &
             UsePaginationInstanceProps<D> &
             UseFiltersInstanceProps<D> &
+            UseGlobalFiltersInstanceProps<D> &
             UseGroupByInstanceProps<D>
     > &
     Partial<{
-        state: Partial<TableState & UsePaginationState<D> & UseSortByState<D> & UseRowSelectState<D>>;
+        state: Partial<TableState & UsePaginationState<D> & UseSortByState<D> & UseRowSelectState<D> & UseGlobalFiltersState<D>>;
     }> &
     Partial<{ selectedFlatRows: Row<D>[] }>;
-
-const DEFAULT_DEBOUNCE_TIMER = 250;
-const DEFAULT_PAGE_SIZE = 10;
 
 /** A table presents data in a two-dimensional format, arranged in columns and rows in a rectangular form. */
 export default function Table<D extends object>({
@@ -306,6 +312,7 @@ export default function Table<D extends object>({
                                          The issue should be related to this Github issue https://github.com/tannerlinsley/react-table/issues/2170
                                          Once it is address we can remove the setTimeout */
                                         props.toggleAllRowsSelected(false);
+                                        
                                         setTimeout(() => {
                                             row.toggleRowSelected(true);
                                         }, 100);
@@ -318,20 +325,6 @@ export default function Table<D extends object>({
             });
         }
 
-        if (!disableFilters) {
-            columnsFiltered.push({
-                id: '_all_',
-                // @ts-ignore
-                show: false,
-                // @ts-ignore
-                filter: (rows: readonly Row[], id: string, filterValue: string) => {
-                    return matchSorter(rows, filterValue, {
-                        keys: columnDefinitions.map((c: { id?: string }) => `values.${c.id}`),
-                        threshold: matchSorter.rankings.WORD_STARTS_WITH,
-                    });
-                },
-            });
-        }
         return columnsFiltered;
     }, [columnDefinitions, showColumns, disableFilters, disableRowSelect, multiSelect]);
 
@@ -352,12 +345,8 @@ export default function Table<D extends object>({
     }, [selectedRowIds]);
 
     const pageCount = useMemo(() => {
-        if (onFetchData) {
-            return Math.ceil(rowCount / controlledPageSize);
-        }
-
-        return undefined;
-    }, [onFetchData, rowCount, controlledPageSize]);
+        return Math.ceil(rowCount / controlledPageSize);
+    }, [rowCount, controlledPageSize]);
 
     const tableOpts: TableOptions<D> & UseTableOptions<D> = useMemo(
         () => ({
@@ -385,9 +374,11 @@ export default function Table<D extends object>({
             manualPagination: onFetchData != null,
             manualSorting: onFetchData != null,
             manualSortBy: onFetchData != null,
+            manualGlobalFilter: onFetchData != null,
             autoResetSortBy: onFetchData === null,
             autoResetPage: onFetchData === null,
             autoResetSelectedRows: onFetchData === null,
+            autoResetGlobalFilter: onFetchData === null,
         }),
         [
             items,
@@ -414,16 +405,20 @@ export default function Table<D extends object>({
         page,
         gotoPage,
         nextPage,
+        canNextPage,
         previousPage,
+        canPreviousPage,
         setPageSize,
         selectedFlatRows,
         setFilter,
+        setGlobalFilter,
         toggleGroupBy,
-        state: { pageIndex, pageSize, sortBy },
+        state: { pageIndex, pageSize, sortBy, globalFilter },
     }: TableInstance<D> = useTable(
         tableOpts,
         useBlockLayout,
         useFilters,
+        useGlobalFilter,
         useGroupBy,
         useSortBy,
         useExpanded,
@@ -435,15 +430,6 @@ export default function Table<D extends object>({
     useEffect(() => {
         setControlledPageSize(pageSize || DEFAULT_PAGE_SIZE);
     }, [pageSize]);
-
-    const handleFilterChangeDebounce = useAsyncDebounce((value: string) => {
-        setFilterInput({ _all_: value });
-        setFilter!('_all_', value);
-    }, DEFAULT_DEBOUNCE_TIMER);
-
-    const handleFilterChange = (value: string) => {
-        handleFilterChangeDebounce(value);
-    };
 
     const handleShowColumnsChange = (headerId: IdType<string> | string | undefined) => {
         if (!headerId) {
@@ -511,10 +497,10 @@ export default function Table<D extends object>({
                 sortBy: sortBy || [],
                 groupBy: flattenGroupBy(),
                 showColumns: flattenShowColumns(),
-                filterText: filterInput._all_ || '',
+                filterText: globalFilter || '',
             });
         }
-    }, [onFetchData, pageIndex, pageSize, filterInput, sortBy, groupBy, showColumns]);
+    }, [onFetchData, pageIndex, pageSize, filterInput, sortBy, groupBy, showColumns, globalFilter]);
 
     const columnsSelectorProps = {
         columnDefinitions,
@@ -542,7 +528,9 @@ export default function Table<D extends object>({
         disableGroupBy,
         gotoPage,
         previousPage,
+        canPreviousPage,
         nextPage,
+        canNextPage,
         setPageSize,
         styles,
         columnsGroupingComponent: <ColumnsGrouping {...columnsGroupingProps} />,
@@ -552,7 +540,8 @@ export default function Table<D extends object>({
     const containerHeaderContentProps: ContainerHeaderContentProps = {
         disableFilters,
         loading,
-        onFilterChange: handleFilterChange,
+        setGlobalFilter,
+        globalFilter,
         styles,
         settingsBarComponent: <SettingsBar {...settingsBarProps} />,
     };

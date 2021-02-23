@@ -18,6 +18,7 @@ import React, { ReactNode } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import Input from '../../../Input';
 import clsx from 'clsx';
+import { useAsyncDebounce } from 'react-table';
 
 export interface ContainerHeaderContentProps {
     styles: {
@@ -29,17 +30,22 @@ export interface ContainerHeaderContentProps {
     };
     disableFilters: boolean;
     loading?: boolean;
-    onFilterChange?: (value: string) => void;
+    globalFilter?: string;
+    setGlobalFilter?: (value?: string) => void;
     settingsBarComponent: ReactNode;
 }
 
 export default ({
     loading,
-    onFilterChange = () => {},
+    setGlobalFilter = () => {},
     styles,
     disableFilters,
+    globalFilter,
     settingsBarComponent,
 }: ContainerHeaderContentProps) => {
+    const onChange = useAsyncDebounce((value) => {
+        setGlobalFilter(value || undefined);
+    }, 500);
     return (
         <div className={styles.tableBar}>
             {!disableFilters && (
@@ -50,8 +56,9 @@ export default ({
                     <Input
                         placeholder="Search"
                         type="search"
-                        onChange={onFilterChange}
+                        onChange={onChange}
                         disabled={loading}
+                        value={globalFilter}
                         ariaLabelledby={'table-search-label'}
                     />
                     {loading ? (

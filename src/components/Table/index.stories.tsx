@@ -131,6 +131,7 @@ export const RemoteFetch = () => {
     }, []);
     const handleFetchData = useCallback(
         (options: FetchDataOptions) => {
+            console.log('onFetchData', options);
             setLoading(true);
             const fetchId = ++fetchIdRef.current;
             setTimeout(() => {
@@ -138,7 +139,7 @@ export const RemoteFetch = () => {
                     // You could fetch your data from server.
                     const filterData = data.filter((d: Data) => {
                         if (options.filterText) {
-                            return d.name.indexOf(options.filterText) > 0;
+                            return d.name.indexOf(options.filterText) >= 0 || d.id.indexOf(options.filterText) >= 0;
                         }
 
                         return true;
