@@ -226,7 +226,9 @@ type TableInstance<D extends object> = {} & TableBaseInstance<D> &
             UseGroupByInstanceProps<D>
     > &
     Partial<{
-        state: Partial<TableState & UsePaginationState<D> & UseSortByState<D> & UseRowSelectState<D> & UseGlobalFiltersState<D>>;
+        state: Partial<
+            TableState & UsePaginationState<D> & UseSortByState<D> & UseRowSelectState<D> & UseGlobalFiltersState<D>
+        >;
     }> &
     Partial<{ selectedFlatRows: Row<D>[] }>;
 
@@ -311,7 +313,7 @@ export default function Table<D extends object>({
                                          The issue should be related to this Github issue https://github.com/tannerlinsley/react-table/issues/2170
                                          Once it is address we can remove the setTimeout */
                                         props.toggleAllRowsSelected(false);
-                                        
+
                                         setTimeout(() => {
                                             row.toggleRowSelected(true);
                                         }, 100);

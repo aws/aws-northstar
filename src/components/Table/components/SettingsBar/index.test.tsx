@@ -263,7 +263,8 @@ describe('SettingsBar', () => {
     });
 
     it('should render disabled next page icon when canNextPage is false', () => {
-        const { getByTestId } = render(<SettingsBar
+        const { getByTestId } = render(
+            <SettingsBar
                 pageIndex={1}
                 pageSize={10}
                 pageSizes={[10, 25, 100]}
@@ -274,7 +275,8 @@ describe('SettingsBar', () => {
                 styles={styles}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
                 columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
-        />);
+            />
+        );
         expect(getByTestId('next-page')).toHaveAttribute('disabled');
     });
 
@@ -304,7 +306,8 @@ describe('SettingsBar', () => {
     });
 
     it('should render disabled previous page icon when canPreviousPage is false', () => {
-        const { getByTestId } = render(<SettingsBar
+        const { getByTestId } = render(
+            <SettingsBar
                 pageIndex={1}
                 pageSize={10}
                 pageSizes={[10, 25, 100]}
@@ -315,7 +318,8 @@ describe('SettingsBar', () => {
                 styles={styles}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
                 columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
-        />);
+            />
+        );
         expect(getByTestId('previous-page')).toHaveAttribute('disabled');
     });
 
