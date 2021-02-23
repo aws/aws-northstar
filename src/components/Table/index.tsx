@@ -52,7 +52,6 @@ import {
     useTable,
     UseTableOptions,
 } from 'react-table';
-import matchSorter from 'match-sorter';
 import { makeStyles, Table as BaseTable } from '@material-ui/core';
 import Container from '../../layouts/Container';
 import Checkbox from '../Checkbox';
