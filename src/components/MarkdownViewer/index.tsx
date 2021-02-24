@@ -14,59 +14,39 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { Component, FunctionComponent, memo, ReactElement } from 'react';
-import { UseFieldApi, UseFormApi } from '@data-driven-forms/react-form-renderer';
-import gfm from 'remark-gfm'
-// import frontmatter from 'remark-frontmatter'
-import ReactMarkdown, { ReactMarkdownPropsBase } from 'react-markdown'
-import { codeblocks } from 'remark-code-blocks'
+import gfm from 'remark-gfm';
+import frontmatter from 'remark-frontmatter';
+import ReactMarkdown, { ReactMarkdownPropsBase } from 'react-markdown';
 import Container, { ContainerProps } from '../../layouts/Container';
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism"
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-
-
-export interface MarkdownViewerProps extends ContainerProps, ReactMarkdownPropsBase {
-    children?: any
+interface RenderProps {
+    language: string;
+    value: string;
 }
 
-const CodeBlock = ({ language, value }) => {
-
-    return (
-        <SyntaxHighlighter language={language} style={tomorrow}>
-            {value}
-        </SyntaxHighlighter>
-    )
+export interface MarkdownViewerProps extends ContainerProps, ReactMarkdownPropsBase {
+    children?: any;
 }
 
 const renderers = {
-    code: ({ language, value }) => {
-        return <SyntaxHighlighter style={tomorrow} language={language} children={value} />
-    }
-}
+    code: ({ language, value }: RenderProps) => {
+        return <SyntaxHighlighter style={tomorrow} language={language} children={value} />;
+    },
+};
 
 const MarkdownViewer: FunctionComponent<MarkdownViewerProps> = (props: MarkdownViewerProps) => {
     // const { CustomComponent, ...rest } = UseFieldApi(props);
     // const { getState } = UseFormApi();
 
-    const
-        {
-            actionGroup,
-            children,
-            headingVariant,
-            subtitle,
-            title
-
-        } = { ...props };
+    const { actionGroup, children, headingVariant, subtitle, title } = { ...props };
 
     return (
         <Container headingVariant={headingVariant} title={title} subtitle={subtitle} actionGroup={actionGroup}>
-            <ReactMarkdown
-                escapeHtml={false}
-                children={children}
-                plugins={[gfm]}
-                renderers={renderers} />
+            <ReactMarkdown escapeHtml={false} children={children} plugins={[gfm, frontmatter]} renderers={renderers} />
         </Container>
-    )
+    );
 };
 
 export default MarkdownViewer;

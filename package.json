@@ -145,6 +145,7 @@
     "react-table": "7.0.0-rc.16",
     "react-use-localstorage": "^3.4.1",
     "recharts": "^1.8.5",
+    "remark-code-blocks": "^2.0.1",
     "remark-frontmatter": "^3.0.0",
     "remark-gfm": "^1.0.0",
     "remove": "^0.1.5",

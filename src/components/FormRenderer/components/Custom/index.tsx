@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent, memo } from 'react';
 import { useFieldApi, useFormApi } from '@data-driven-forms/react-form-renderer';
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown';
 
 const MarkdownViewer: FunctionComponent = (props: any) => {
     const { CustomComponent, ...rest } = useFieldApi(props);

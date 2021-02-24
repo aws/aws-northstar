@@ -39,14 +39,15 @@ A paragraph with *emphasis* and **strong importance**.
 | - | :- | -: | :-: |
 | 1 | 2  | 3  |  4  |
 
-`
+`;
 
 export const Default = () => {
-    return <MarkdownViewer title={"A sample Markdown viewer"} subtitle={'Renders nice markdown from text'}>
-        {markdown}
-    </MarkdownViewer>;
+    return (
+        <MarkdownViewer title={'A sample Markdown viewer'} subtitle={'Renders nice markdown from text'}>
+            {markdown}
+        </MarkdownViewer>
+    );
 };
-
 
 export const DefaultWithCode = () => {
     const code = `
@@ -69,10 +70,11 @@ export const DefaultWithCode = () => {
     var Markdown = require('react-markdown');
     React.render()
     ~~~
-    `
+    `;
 
-    return <MarkdownViewer title={"A sample Markdown viewer"} subtitle={'Renders nice markdown from text'}>
-        {code}
-    </MarkdownViewer>;
+    return (
+        <MarkdownViewer title={'A sample Markdown viewer'} subtitle={'Renders nice markdown from text'}>
+            {code}
+        </MarkdownViewer>
+    );
 };
-
