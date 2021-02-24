@@ -22,12 +22,17 @@ import {
     SortingRule,
     TableInstance as TableBaseInstance,
     TableState,
+    useAsyncDebounce,
     useBlockLayout,
     useExpanded,
     UseExpandedOptions,
     useFilters,
     UseFiltersInstanceProps,
     UseFiltersOptions,
+    useGlobalFilter,
+    UseGlobalFiltersState,
+    UseGlobalFiltersInstanceProps,
+    UseGlobalFiltersOptions,
     useGroupBy,
     UseGroupByInstanceProps,
     UseGroupByOptions,
@@ -47,7 +52,6 @@ import {
     useTable,
     UseTableOptions,
 } from 'react-table';
-import matchSorter from 'match-sorter';
 import { makeStyles, Table as BaseTable } from '@material-ui/core';
 import Container from '../../layouts/Container';
 import Checkbox from '../Checkbox';
@@ -59,8 +63,9 @@ import SettingsBar from './components/SettingsBar';
 import ColumnsSelector from './components/ColumnsSelector';
 import ColumnsGrouping from './components/ColumnsGrouping';
 import { RadioButton } from '../RadioGroup';
-import debounce from 'lodash.debounce';
-import isEqual from 'lodash.isequal';
+
+const DEFAULT_PAGE_SIZE = 10;
+const DEFAULT_DEBOUNCE_TIMER = 250;
 
 const useStyles = makeStyles((theme) => ({
     tableBar: {
@@ -125,11 +130,11 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 1,
     },
 }));
-
 export interface TableOptions<D extends object>
     extends UseExpandedOptions<D>,
         UseRowSelectOptions<D>,
         UseFiltersOptions<D>,
+        UseGlobalFiltersOptions<D>,
         UseGroupByOptions<D>,
         UseSortByOptions<D>,
         UseFiltersOptions<D>,
@@ -212,14 +217,17 @@ export interface FetchDataOptions {
 
 type TableInstance<D extends object> = {} & TableBaseInstance<D> &
     Partial<
-        UsePaginationOptions<D> &
+        UsePaginationInstanceProps<D> &
             UseRowSelectInstanceProps<D> &
             UsePaginationInstanceProps<D> &
             UseFiltersInstanceProps<D> &
+            UseGlobalFiltersInstanceProps<D> &
             UseGroupByInstanceProps<D>
     > &
     Partial<{
-        state: Partial<TableState & UsePaginationState<D> & UseSortByState<D> & UseRowSelectState<D>>;
+        state: Partial<
+            TableState & UsePaginationState<D> & UseSortByState<D> & UseRowSelectState<D> & UseGlobalFiltersState<D>
+        >;
     }> &
     Partial<{ selectedFlatRows: Row<D>[] }>;
 
@@ -229,7 +237,7 @@ export default function Table<D extends object>({
     columnDefinitions = [],
     defaultGroups = [],
     defaultPageIndex = 0,
-    defaultPageSize = 10,
+    defaultPageSize = DEFAULT_PAGE_SIZE,
     disableGroupBy = true,
     disablePagination = false,
     disableSettings = false,
@@ -267,6 +275,7 @@ export default function Table<D extends object>({
             }, {})
     );
     const [filterInput, setFilterInput] = useState<FilterProps>({ _all_: undefined });
+    const [controlledPageSize, setControlledPageSize] = useState(defaultPageSize);
 
     const columns = useMemo(() => {
         const columnsFiltered = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
@@ -303,6 +312,7 @@ export default function Table<D extends object>({
                                          The issue should be related to this Github issue https://github.com/tannerlinsley/react-table/issues/2170
                                          Once it is address we can remove the setTimeout */
                                         props.toggleAllRowsSelected(false);
+
                                         setTimeout(() => {
                                             row.toggleRowSelected(true);
                                         }, 100);
@@ -315,22 +325,8 @@ export default function Table<D extends object>({
             });
         }
 
-        if (!disableFilters) {
-            columnsFiltered.push({
-                id: '_all_',
-                // @ts-ignore
-                show: false,
-                // @ts-ignore
-                filter: (rows: readonly Row[], id: string, filterValue: string) => {
-                    return matchSorter(rows, filterValue, {
-                        keys: columnDefinitions.map((c: { id?: string }) => `values.${c.id}`),
-                        threshold: matchSorter.rankings.WORD_STARTS_WITH,
-                    });
-                },
-            });
-        }
         return columnsFiltered;
-    }, [columnDefinitions, showColumns]);
+    }, [columnDefinitions, showColumns, disableFilters, disableRowSelect, multiSelect]);
 
     const rowCount = useMemo(() => {
         if (typeof props.rowCount === 'undefined') {
@@ -348,6 +344,10 @@ export default function Table<D extends object>({
         return map;
     }, [selectedRowIds]);
 
+    const pageCount = useMemo(() => {
+        return Math.ceil(rowCount / controlledPageSize);
+    }, [rowCount, controlledPageSize]);
+
     const tableOpts: TableOptions<D> & UseTableOptions<D> = useMemo(
         () => ({
             data: items || [],
@@ -359,11 +359,12 @@ export default function Table<D extends object>({
             },
             initialState: {
                 pageIndex: defaultPageIndex,
-                pageSize: defaultPageSize,
+                pageSize: controlledPageSize,
                 selectedRowIds: selectedRowIdMap,
                 sortBy: defaultSortBy,
                 groupBy: defaultGroups,
             },
+            pageCount,
             getRowId,
             disableSortBy,
             disableGroupBy,
@@ -373,11 +374,27 @@ export default function Table<D extends object>({
             manualPagination: onFetchData != null,
             manualSorting: onFetchData != null,
             manualSortBy: onFetchData != null,
+            manualGlobalFilter: onFetchData != null,
             autoResetSortBy: onFetchData === null,
             autoResetPage: onFetchData === null,
             autoResetSelectedRows: onFetchData === null,
+            autoResetGlobalFilter: onFetchData === null,
         }),
-        [items, columns, groupBy, filterInput]
+        [
+            items,
+            columns,
+            pageCount,
+            controlledPageSize,
+            defaultGroups,
+            defaultPageIndex,
+            defaultSortBy,
+            disableFilters,
+            disableGroupBy,
+            disableSortBy,
+            getRowId,
+            onFetchData,
+            selectedRowIdMap,
+        ]
     );
 
     const {
@@ -388,32 +405,31 @@ export default function Table<D extends object>({
         page,
         gotoPage,
         nextPage,
+        canNextPage,
         previousPage,
+        canPreviousPage,
         setPageSize,
         selectedFlatRows,
         setFilter,
+        setGlobalFilter,
         toggleGroupBy,
-        state: { pageIndex, pageSize, sortBy },
+        state: { pageIndex, pageSize, sortBy, globalFilter },
     }: TableInstance<D> = useTable(
         tableOpts,
         useBlockLayout,
         useFilters,
+        useGlobalFilter,
         useGroupBy,
         useSortBy,
         useExpanded,
-        useRowSelect,
         usePagination,
+        useRowSelect,
         useResizeColumns
     );
 
-    const handleFilterChangeDebounce = debounce((value: string) => {
-        setFilterInput({ _all_: value });
-        setFilter!('_all_', value);
-    }, 250);
-
-    const handleFilterChange = (value: string) => {
-        handleFilterChangeDebounce(value);
-    };
+    useEffect(() => {
+        setControlledPageSize(pageSize || DEFAULT_PAGE_SIZE);
+    }, [pageSize]);
 
     const handleShowColumnsChange = (headerId: IdType<string> | string | undefined) => {
         if (!headerId) {
@@ -448,49 +464,33 @@ export default function Table<D extends object>({
         toggleGroupBy!(headerId);
     };
 
-    const previousSelectedFlatRows = useRef<D[]>();
-
-    const onSelectionChangeDebounce = debounce(
-        (selectedFlatRows: Row<D>[]) => {
-            const selected = selectedFlatRows
-                .filter((row: Row<D> & Partial<UseGroupByRowProps<D>>) => !row.isGrouped)
-                .map((row: Row<D>) => row.original);
-            if (previousSelectedFlatRows.current) {
-                if (!isEqual(previousSelectedFlatRows.current, selected)) {
-                    onSelectionChange(selected);
-                    previousSelectedFlatRows.current = selected;
-                }
-            } else {
-                onSelectionChange(selected);
-                previousSelectedFlatRows.current = selected;
-            }
-        },
-        250,
-        { maxWait: 1000 }
-    );
+    const handleSelectionChangeDebounce = useAsyncDebounce((selectedFlatRows: Row<D>[]) => {
+        const selected = selectedFlatRows
+            .filter((row: Row<D> & Partial<UseGroupByRowProps<D>>) => !row.isGrouped)
+            .map((row: Row<D>) => row.original);
+        onSelectionChange(selected);
+    }, DEFAULT_DEBOUNCE_TIMER);
 
     useEffect(() => {
         if (selectedFlatRows) {
-            onSelectionChangeDebounce(selectedFlatRows);
+            handleSelectionChangeDebounce(selectedFlatRows);
         }
-    }, [selectedFlatRows]);
-
-    const flattenGroupBy = () => Object.keys(groupBy).filter((key) => groupBy[key]);
-
-    const flattenShowColumns = () => Object.keys(showColumns).filter((key) => showColumns[key]);
+    }, [selectedFlatRows, handleSelectionChangeDebounce]);
 
     useEffect(() => {
         if (onFetchData) {
+            const flattenGroupBy = () => Object.keys(groupBy).filter((key) => groupBy[key]);
+            const flattenShowColumns = () => Object.keys(showColumns).filter((key) => showColumns[key]);
             onFetchData({
                 pageSize: pageSize || 0,
                 pageIndex: pageIndex || 0,
                 sortBy: sortBy || [],
                 groupBy: flattenGroupBy(),
                 showColumns: flattenShowColumns(),
-                filterText: filterInput._all_ || '',
+                filterText: globalFilter || '',
             });
         }
-    }, [onFetchData, pageIndex, pageSize, filterInput, sortBy, groupBy, showColumns]);
+    }, [onFetchData, pageIndex, pageSize, filterInput, sortBy, groupBy, showColumns, globalFilter]);
 
     const columnsSelectorProps = {
         columnDefinitions,
@@ -518,7 +518,9 @@ export default function Table<D extends object>({
         disableGroupBy,
         gotoPage,
         previousPage,
+        canPreviousPage,
         nextPage,
+        canNextPage,
         setPageSize,
         styles,
         columnsGroupingComponent: <ColumnsGrouping {...columnsGroupingProps} />,
@@ -528,7 +530,8 @@ export default function Table<D extends object>({
     const containerHeaderContentProps: ContainerHeaderContentProps = {
         disableFilters,
         loading,
-        onFilterChange: handleFilterChange,
+        setGlobalFilter,
+        globalFilter,
         styles,
         settingsBarComponent: <SettingsBar {...settingsBarProps} />,
     };
