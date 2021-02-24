@@ -63,7 +63,6 @@ import SettingsBar from './components/SettingsBar';
 import ColumnsSelector from './components/ColumnsSelector';
 import ColumnsGrouping from './components/ColumnsGrouping';
 import { RadioButton } from '../RadioGroup';
-import isEqual from 'lodash.isequal';
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_DEBOUNCE_TIMER = 250;
@@ -465,21 +464,11 @@ export default function Table<D extends object>({
         toggleGroupBy!(headerId);
     };
 
-    const previousSelectedFlatRows = useRef<D[]>();
-
     const handleSelectionChangeDebounce = useAsyncDebounce((selectedFlatRows: Row<D>[]) => {
         const selected = selectedFlatRows
             .filter((row: Row<D> & Partial<UseGroupByRowProps<D>>) => !row.isGrouped)
             .map((row: Row<D>) => row.original);
-        if (previousSelectedFlatRows.current) {
-            if (!isEqual(previousSelectedFlatRows.current, selected)) {
-                onSelectionChange(selected);
-                previousSelectedFlatRows.current = selected;
-            }
-        } else {
-            onSelectionChange(selected);
-            previousSelectedFlatRows.current = selected;
-        }
+        onSelectionChange(selected);
     }, DEFAULT_DEBOUNCE_TIMER);
 
     useEffect(() => {
