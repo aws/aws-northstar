@@ -129,36 +129,32 @@ export const RemoteFetch = () => {
 
         return data;
     }, []);
-    const handleFetchData = useCallback(
-        (options: FetchDataOptions) => {
-            console.log('onFetchData', options);
-            setLoading(true);
-            const fetchId = ++fetchIdRef.current;
-            setTimeout(() => {
-                if (fetchId === fetchIdRef.current) {
-                    // You could fetch your data from server.
-                    const filterData = data.filter((d: Data) => {
-                        if (options.filterText) {
-                            return d.name.indexOf(options.filterText) >= 0 || d.id.indexOf(options.filterText) >= 0;
-                        }
-
-                        return true;
-                    });
-                    let tempData = filterData.slice(
-                        (options.pageIndex || 0) * (options.pageSize || 10),
-                        ((options.pageIndex || 0) + 1) * (options.pageSize || 10)
-                    );
-                    if (options.sortBy && options.sortBy.length > 0) {
-                        tempData = orderBy(tempData, options.sortBy[0].id, options.sortBy[0].desc ? 'desc' : 'asc');
+    const handleFetchData = useCallback((options: FetchDataOptions) => {
+        setLoading(true);
+        const fetchId = ++fetchIdRef.current;
+        setTimeout(() => {
+            if (fetchId === fetchIdRef.current) {
+                // You could fetch your data from server.
+                const filterData = data.filter((d: Data) => {
+                    if (options.filterText) {
+                        return d.name.indexOf(options.filterText) > 0;
                     }
-                    setItems(tempData);
-                    setRowCount(filterData.length);
-                    setLoading(false);
+
+                    return true;
+                });
+                let tempData = filterData.slice(
+                    (options.pageIndex || 0) * (options.pageSize || 10),
+                    ((options.pageIndex || 0) + 1) * (options.pageSize || 10)
+                );
+                if (options.sortBy && options.sortBy.length > 0) {
+                    tempData = orderBy(tempData, options.sortBy[0].id, options.sortBy[0].desc ? 'desc' : 'asc');
                 }
-            }, 1000);
-        },
-        [data]
-    );
+                setItems(tempData);
+                setRowCount(filterData.length);
+                setLoading(false);
+            }
+        }, 1000);
+    }, []);
     return (
         <Table
             tableTitle={'Remote Update Table'}

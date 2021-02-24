@@ -31,9 +31,7 @@ export interface SettingsBarProps<D extends object> {
     loading?: boolean;
     gotoPage?: (pageIndex: number) => void;
     previousPage?: () => void;
-    canPreviousPage?: boolean;
     nextPage?: () => void;
-    canNextPage?: boolean;
     setPageSize?: (size: number) => void;
     styles: {
         leftSpace: string;
@@ -60,8 +58,6 @@ export default function SettingBar<D extends object>({
     styles,
     columnsGroupingComponent,
     columnsSelectorComponent,
-    canPreviousPage = false,
-    canNextPage = false,
 }: SettingsBarProps<D>) {
     const [settingsAnchor, setSettingsAnchor] = React.useState<HTMLButtonElement | null>(null);
     const handleSettingsClick = (event: React.MouseEvent<any, MouseEvent>) => {
@@ -108,7 +104,7 @@ export default function SettingBar<D extends object>({
                         <IconButton
                             size={'small'}
                             aria-label="previous page"
-                            disabled={!canPreviousPage || loading}
+                            disabled={pageIndex == 0 || loading}
                             data-testid="previous-page"
                             onClick={() => previousPage()}
                         >
@@ -118,7 +114,7 @@ export default function SettingBar<D extends object>({
                         <IconButton
                             aria-label="next page"
                             size={'small'}
-                            disabled={!canNextPage || loading}
+                            disabled={pageIndex * pageSize + pageLength >= rowCount || loading}
                             data-testid="next-page"
                             onClick={() => nextPage()}
                         >
