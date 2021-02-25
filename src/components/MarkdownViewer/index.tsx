@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { Component, ElementType, FunctionComponent, memo, ReactElement } from 'react';
+import React, { FunctionComponent } from 'react';
 import gfm from 'remark-gfm';
 import frontmatter from 'remark-frontmatter';
 import ReactMarkdown, { ReactMarkdownPropsBase } from 'react-markdown';
@@ -21,15 +21,11 @@ import Container, { ContainerProps } from '../../layouts/Container';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Heading from '../Heading';
-import Text from '../Text';
 import _ from 'lodash';
-import Link from '../Link';
-
 interface RenderProps {
     language: string;
     value: string;
 }
-
 export interface MarkdownViewerProps extends ContainerProps, ReactMarkdownPropsBase {
     children?: any;
 }
