@@ -24,22 +24,21 @@ describe('MarkdownViewer', () => {
     });
 
     it('should render heading content correct;y', () => {
-        const { getByRole, getByText } = render(<MarkdownViewer>{` 
+        const { getByRole, getByText } = render(
+            <MarkdownViewer>{` 
 # Heading One 
 ## Heading Twp
 ### Heading Three
 #### Heading Four
 ##### Heading Five
 ###### Heading Six
-        `}</MarkdownViewer>);
+        `}</MarkdownViewer>
+        );
         expect(getByText('Heading One')).toHaveClass('MuiTypography-root MuiTypography-h1');
         expect(getByText('Heading Two')).toHaveClass('MuiTypography-root MuiTypography-h2');
         expect(getByText('Heading Three')).toHaveClass('MuiTypography-root MuiTypography-h3');
         expect(getByText('Heading Four')).toHaveClass('MuiTypography-root MuiTypography-h4');
         expect(getByText('Heading Five')).toHaveClass('MuiTypography-root MuiTypography-h5');
         expect(getByText('Heading Six')).toHaveClass('MuiTypography-root MuiTypography-h6');
-
-
     });
-
 });
