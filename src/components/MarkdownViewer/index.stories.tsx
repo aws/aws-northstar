@@ -40,7 +40,7 @@ A paragraph with *emphasis* and **strong importance**.
 | - | :- | -: | :-: |
 | 1 | 2  | 3  |  4  |
 
- `
+ `;
 
 export const Default = () => {
     return (

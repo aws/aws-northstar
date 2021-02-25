@@ -22,10 +22,8 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Heading from '../Heading';
 import Text from '../Text';
-import _ from 'lodash'
+import _ from 'lodash';
 import Link from '../Link';
-
-
 
 interface RenderProps {
     language: string;
@@ -41,14 +39,16 @@ const renderers = {
         return <SyntaxHighlighter style={tomorrow} language={language} children={value} />;
     },
     heading: (props: any) => {
-        const variant = `h${props.level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5'
-        return props.children.map((child: any, index: number) => <Heading key={index} variant={variant}>{child.props.value}</Heading>)
-    }
-
+        const variant = `h${props.level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+        return props.children.map((child: any, index: number) => (
+            <Heading key={index} variant={variant}>
+                {child.props.value}
+            </Heading>
+        ));
+    },
 };
 
 const MarkdownViewer: FunctionComponent<MarkdownViewerProps> = (props: MarkdownViewerProps) => {
-
     const { actionGroup, children, headingVariant, subtitle, title } = { ...props };
 
     return (
