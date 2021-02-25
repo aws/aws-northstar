@@ -17,34 +17,32 @@ import React from 'react';
 import { render, fireEvent, cleanup, act } from '@testing-library/react';
 import MarkdownViewer from '.';
 
-describe('FormRenderer', () => {
+describe('MarkdownViewer', () => {
+
+    const title = 'Title';
+    const bodyText = 'Body';
+    const subtitle = 'subtitle';
+    const buttonText = 'Action Button';
+
+
     afterEach(() => {
         jest.resetAllMocks();
         cleanup();
     });
 
-    const handleCancel = jest.fn();
-    const handleSubmit = jest.fn();
-
     it('should render header and description', () => {
-        const { getByText } = render(
-            <MarkdownViewer
-                title={'A sample Markdown viewer'}
-                subtitle={'Renders nice markdown from text'}
-            ></MarkdownViewer>
-        );
+        const { getByText } = render(<MarkdownViewer title={title} subtitle={subtitle}></MarkdownViewer>);
 
-        expect(getByText('header')).toBeVisible();
-        expect(getByText('subtitle')).toBeVisible();
+        expect(getByText(title)).toBeInTheDocument();
+        expect(getByText(bodyText)).toBeInTheDocument();
+        expect(getByText(title)).toBeVisible();
+        expect(getByText(subtitle)).toBeVisible();
+
     });
 
-    it('should render header and description', () => {
-        const { queryByRole, getByRole } = render(
-            <MarkdownViewer title={'A sample Markdown viewer'} subtitle={'Renders nice markdown from text'}>
-                # Heading A
-            </MarkdownViewer>
-        );
+    it('should render header and description with the correct content', () => {
+        const { queryByRole, getByRole } = render(<MarkdownViewer title={title} subtitle={subtitle}># Heading One</MarkdownViewer>);
         expect(queryByRole('h1')).not.toBeNull();
-        expect(getByRole('h1')).toHaveTextContent('Heading');
+        expect(getByRole('h1')).toHaveTextContent('Heading One');
     });
 });

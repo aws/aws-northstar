@@ -16,6 +16,7 @@
 
 import React from 'react';
 import MarkdownViewer from '.';
+import Heading from '../Heading';
 
 export default {
     component: MarkdownViewer,
@@ -23,7 +24,7 @@ export default {
 };
 
 const markdown = `
-# A Heading 
+# Heading
 
 A paragraph with *emphasis* and **strong importance**.
 
@@ -39,7 +40,7 @@ A paragraph with *emphasis* and **strong importance**.
 | - | :- | -: | :-: |
 | 1 | 2  | 3  |  4  |
 
-`;
+ `
 
 export const Default = () => {
     return (
@@ -51,26 +52,18 @@ export const Default = () => {
 
 export const DefaultWithCode = () => {
     const code = `
-    # Some code
+# Rendering code is easy
 
-    \`\`\`js
+\`\`\`js
     var React = require('react');
     var Markdown = require('react-markdown');
     React.render()
-    \`\`\`
+\`\`\`
 
-    ~~~javascript
-    var React = require('react');
-    var Markdown = require('react-markdown');
-    React.render()
-    ~~~
-
-    ~~~js
-    var React = require('react');
-    var Markdown = require('react-markdown');
-    React.render()
-    ~~~
-    `;
+\`\`\`js 
+const eventInLine: boolean = true 
+\`\`\`
+`;
 
     return (
         <MarkdownViewer title={'A sample Markdown viewer'} subtitle={'Renders nice markdown from text'}>
