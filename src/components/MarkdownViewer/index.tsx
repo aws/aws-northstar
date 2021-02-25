@@ -20,6 +20,9 @@ import ReactMarkdown, { ReactMarkdownPropsBase } from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import Heading from '../Heading';
+import Text from '../Text';
+import Link from '../Link';
+
 interface RenderProps {
     language: string;
     value: string;
@@ -35,6 +38,12 @@ const renderers = {
     heading: (props: any) => {
         const variant = `h${props.level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
         return <Heading variant={variant}>{props.children}</Heading>;
+    },
+    paragraph: (props: any) => {
+        return <Text variant="p">{props.children}</Text>;
+    },
+    link: (props: any) => {
+        return <Link href={props.href}>{props.children}</Link>;
     },
 };
 

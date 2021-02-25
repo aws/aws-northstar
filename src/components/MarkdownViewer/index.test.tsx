@@ -23,11 +23,11 @@ describe('MarkdownViewer', () => {
         cleanup();
     });
 
-    it('should render heading content correct;y', () => {
+    it('should render heading content correctly', () => {
         const { getByRole, getByText } = render(
             <MarkdownViewer>{` 
 # Heading One 
-## Heading Twp
+## Heading Two
 ### Heading Three
 #### Heading Four
 ##### Heading Five
@@ -40,5 +40,29 @@ describe('MarkdownViewer', () => {
         expect(getByText('Heading Four')).toHaveClass('MuiTypography-root MuiTypography-h4');
         expect(getByText('Heading Five')).toHaveClass('MuiTypography-root MuiTypography-h5');
         expect(getByText('Heading Six')).toHaveClass('MuiTypography-root MuiTypography-h6');
+    });
+
+    it('should render paragraph text correctly', () => {
+        const { getByRole, getByText } = render(
+            <MarkdownViewer>{` 
+# Heading One 
+This is just some text for testing
+        `}</MarkdownViewer>
+        );
+        expect(getByText('Heading One')).toHaveClass('MuiTypography-root MuiTypography-h1');
+        expect(getByText('This is just some text for testing')).toHaveClass('MuiTypography-root MuiTypography-body1');
+    });
+
+    it('should render a link correctly', () => {
+        const { getByRole, getByText } = render(
+            <MarkdownViewer>{` 
+# Heading One 
+This is just some text for testing
+https://reactjs.org
+        `}</MarkdownViewer>
+        );
+        expect(getByText('Heading One')).toHaveClass('MuiTypography-root MuiTypography-h1');
+        expect(getByText('This is just some text for testing')).toHaveClass('MuiTypography-root MuiTypography-body1');
+        expect(getByText('https://reactjs.org')).toHaveClass('MuiLink-root');
     });
 });

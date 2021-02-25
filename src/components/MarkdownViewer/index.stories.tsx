@@ -28,6 +28,8 @@ const markdown = `
 
 A paragraph with *emphasis* and **strong importance**.
 
+## Heading
+
 > A block quote with ~strikethrough~ and a URL: https://reactjs.org.
 
 * Lists
