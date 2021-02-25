@@ -30,7 +30,10 @@ module.exports = {
     },
     globalSetup: './jest/jest.globalsetup.js',
     setupFilesAfterEnv: ['./jest/jest.setup.ts'],
-    transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
+    transformIgnorePatterns: [
+        `/node_modules/(?!${esModules})`,
+        // `/node_modules/react-syntax-highlighter/dist/esm/styles/prism`,
+    ],
     coverageThreshold: {
         global: {
             branches: 80,

@@ -14,36 +14,32 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { render, fireEvent, cleanup, act } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import MarkdownViewer from './index';
 
 describe('MarkdownViewer', () => {
-    const title = 'Title';
-    const bodyText = 'Body';
-    const subtitle = 'subtitle';
-    const buttonText = 'Action Button';
-
     afterEach(() => {
         jest.resetAllMocks();
         cleanup();
     });
 
-    it('should render header and description', () => {
-        const { getByText } = render(<MarkdownViewer title={title} subtitle={subtitle}></MarkdownViewer>);
+    it('should render heading content correct;y', () => {
+        const { getByRole, getByText } = render(<MarkdownViewer>{` 
+# Heading One 
+## Heading Twp
+### Heading Three
+#### Heading Four
+##### Heading Five
+###### Heading Six
+        `}</MarkdownViewer>);
+        expect(getByText('Heading One')).toHaveClass('MuiTypography-root MuiTypography-h1');
+        expect(getByText('Heading Two')).toHaveClass('MuiTypography-root MuiTypography-h2');
+        expect(getByText('Heading Three')).toHaveClass('MuiTypography-root MuiTypography-h3');
+        expect(getByText('Heading Four')).toHaveClass('MuiTypography-root MuiTypography-h4');
+        expect(getByText('Heading Five')).toHaveClass('MuiTypography-root MuiTypography-h5');
+        expect(getByText('Heading Six')).toHaveClass('MuiTypography-root MuiTypography-h6');
 
-        expect(getByText(title)).toBeInTheDocument();
-        expect(getByText(bodyText)).toBeInTheDocument();
-        expect(getByText(title)).toBeVisible();
-        expect(getByText(subtitle)).toBeVisible();
+
     });
 
-    it('should render header and description with the correct content', () => {
-        const { queryByRole, getByRole } = render(
-            <MarkdownViewer title={title} subtitle={subtitle}>
-                # Heading One
-            </MarkdownViewer>
-        );
-        expect(queryByRole('h1')).not.toBeNull();
-        expect(getByRole('h1')).toHaveTextContent('Heading One');
-    });
 });

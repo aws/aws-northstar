@@ -43,11 +43,7 @@ A paragraph with *emphasis* and **strong importance**.
  `;
 
 export const Default = () => {
-    return (
-        <MarkdownViewer title={'A sample Markdown viewer'} subtitle={'Renders nice markdown from text'}>
-            {markdown}
-        </MarkdownViewer>
-    );
+    return <MarkdownViewer>{markdown}</MarkdownViewer>;
 };
 
 export const DefaultWithCode = () => {
@@ -65,9 +61,5 @@ const eventInLine: boolean = true
 \`\`\`
 `;
 
-    return (
-        <MarkdownViewer title={'A sample Markdown viewer'} subtitle={'Renders nice markdown from text'}>
-            {code}
-        </MarkdownViewer>
-    );
+    return <MarkdownViewer>{code}</MarkdownViewer>;
 };

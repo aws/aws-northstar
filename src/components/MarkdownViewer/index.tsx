@@ -17,16 +17,14 @@ import React, { FunctionComponent } from 'react';
 import gfm from 'remark-gfm';
 import frontmatter from 'remark-frontmatter';
 import ReactMarkdown, { ReactMarkdownPropsBase } from 'react-markdown';
-import Container, { ContainerProps } from '../../layouts/Container';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import Heading from '../Heading';
-import _ from 'lodash';
 interface RenderProps {
     language: string;
     value: string;
 }
-export interface MarkdownViewerProps extends ContainerProps, ReactMarkdownPropsBase {
+export interface MarkdownViewerProps extends ReactMarkdownPropsBase {
     children?: any;
 }
 
@@ -36,22 +34,14 @@ const renderers = {
     },
     heading: (props: any) => {
         const variant = `h${props.level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
-        return props.children.map((child: any, index: number) => (
-            <Heading key={index} variant={variant}>
-                {child.props.value}
-            </Heading>
-        ));
+        return <Heading variant={variant}>{props.children}</Heading>;
     },
 };
 
 const MarkdownViewer: FunctionComponent<MarkdownViewerProps> = (props: MarkdownViewerProps) => {
-    const { actionGroup, children, headingVariant, subtitle, title } = { ...props };
+    const { children } = { ...props };
 
-    return (
-        <Container headingVariant={headingVariant} title={title} subtitle={subtitle} actionGroup={actionGroup}>
-            <ReactMarkdown escapeHtml={true} children={children} plugins={[gfm, frontmatter]} renderers={renderers} />
-        </Container>
-    );
+    return <ReactMarkdown escapeHtml={true} children={children} plugins={[gfm, frontmatter]} renderers={renderers} />;
 };
 
 export default MarkdownViewer;
