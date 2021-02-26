@@ -186,7 +186,7 @@ const baseSchema = {
                 },
             ],
             renderReload: true,
-            onReloadClick: () => {},
+            onReloadClick: () => { },
             createNewLink: 'Create new option',
             createNewLinkHref: '/options/create',
         },
@@ -1110,6 +1110,23 @@ export const FileUploader = () => {
         ],
         header: 'Data driven form using FileUpload',
         description: 'File upload logic can be implemented outside FormRenderer',
+    };
+
+    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+};
+
+
+export const SimpleMarkdownEditor = ({ name, input, onChange }) => {
+    const schema = {
+        fields: [
+            {
+                component: componentTypes.MARKDOWN_EDITOR,
+                name: 'text',
+                label: 'This is a markdown editor'
+            }
+        ],
+        header: 'Markdown Editor',
+        description: 'Create markdown'
     };
 
     return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
