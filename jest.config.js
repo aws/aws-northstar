@@ -30,9 +30,7 @@ module.exports = {
     },
     globalSetup: './jest/jest.globalsetup.js',
     setupFilesAfterEnv: ['./jest/jest.setup.ts'],
-    transformIgnorePatterns: [
-        `/node_modules/(?!${esModules})`
-    ],
+    transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
     coverageThreshold: {
         global: {
             branches: 80,
