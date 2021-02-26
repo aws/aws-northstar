@@ -33,6 +33,8 @@ describe('SettingsBar', () => {
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
                 rowCount={120}
+                canNextPage={true}
+                canPreviousPage={true}
                 styles={styles}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
                 columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
@@ -48,13 +50,15 @@ describe('SettingsBar', () => {
     });
 
     it('renders SettingsBar for the last page', () => {
-        const { getByText, getByTestId, debug } = render(
+        const { getByText, getByTestId } = render(
             <SettingsBar
                 pageIndex={4}
                 pageSize={25}
                 pageSizes={[10, 25, 100]}
                 pageLength={20}
                 rowCount={120}
+                canNextPage={false}
+                canPreviousPage={true}
                 styles={styles}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
                 columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
@@ -68,13 +72,15 @@ describe('SettingsBar', () => {
     });
 
     it('renders SettingsBar for the first page', () => {
-        const { getByText, getByTestId, debug } = render(
+        const { getByText, getByTestId } = render(
             <SettingsBar
                 pageIndex={0}
                 pageSize={100}
                 pageSizes={[10, 25, 100]}
                 pageLength={100}
                 rowCount={120}
+                canNextPage={true}
+                canPreviousPage={false}
                 styles={styles}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
                 columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
@@ -95,6 +101,8 @@ describe('SettingsBar', () => {
                 pageSizes={[10, 25, 100]}
                 pageLength={100}
                 rowCount={120}
+                canNextPage={true}
+                canPreviousPage={true}
                 styles={styles}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
                 columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
@@ -114,6 +122,8 @@ describe('SettingsBar', () => {
                 pageSizes={[10, 25, 100]}
                 pageLength={100}
                 rowCount={120}
+                canNextPage={true}
+                canPreviousPage={true}
                 styles={styles}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
                 columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
@@ -136,6 +146,8 @@ describe('SettingsBar', () => {
                 pageSizes={[10, 25, 100]}
                 pageLength={100}
                 rowCount={120}
+                canNextPage={true}
+                canPreviousPage={true}
                 styles={styles}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
                 columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
@@ -159,6 +171,8 @@ describe('SettingsBar', () => {
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
                 rowCount={120}
+                canNextPage={true}
+                canPreviousPage={true}
                 styles={styles}
                 gotoPage={handleGoToPage}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
@@ -182,6 +196,8 @@ describe('SettingsBar', () => {
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
                 rowCount={120}
+                canNextPage={true}
+                canPreviousPage={true}
                 styles={styles}
                 gotoPage={handleGoToPage}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
@@ -205,6 +221,8 @@ describe('SettingsBar', () => {
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
                 rowCount={120}
+                canNextPage={true}
+                canPreviousPage={true}
                 styles={styles}
                 gotoPage={handleGoToPage}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
@@ -228,6 +246,8 @@ describe('SettingsBar', () => {
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
                 rowCount={120}
+                canNextPage={true}
+                canPreviousPage={true}
                 styles={styles}
                 nextPage={handleNextPage}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
@@ -242,6 +262,24 @@ describe('SettingsBar', () => {
         expect(handleNextPage).toHaveBeenCalled();
     });
 
+    it('should render disabled next page icon when canNextPage is false', () => {
+        const { getByTestId } = render(
+            <SettingsBar
+                pageIndex={1}
+                pageSize={10}
+                pageSizes={[10, 25, 100]}
+                pageLength={10}
+                rowCount={120}
+                canNextPage={false}
+                canPreviousPage={true}
+                styles={styles}
+                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
+                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
+            />
+        );
+        expect(getByTestId('next-page')).toHaveAttribute('disabled');
+    });
+
     it('should trigger previousPage event when previous page icon is clicked', () => {
         const handlePreviousPage = jest.fn();
         const { getByTestId } = render(
@@ -251,6 +289,8 @@ describe('SettingsBar', () => {
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
                 rowCount={120}
+                canNextPage={true}
+                canPreviousPage={true}
                 styles={styles}
                 previousPage={handlePreviousPage}
                 columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
@@ -263,6 +303,24 @@ describe('SettingsBar', () => {
         });
 
         expect(handlePreviousPage).toHaveBeenCalled();
+    });
+
+    it('should render disabled previous page icon when canPreviousPage is false', () => {
+        const { getByTestId } = render(
+            <SettingsBar
+                pageIndex={1}
+                pageSize={10}
+                pageSizes={[10, 25, 100]}
+                pageLength={10}
+                rowCount={120}
+                canNextPage={true}
+                canPreviousPage={false}
+                styles={styles}
+                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
+                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
+            />
+        );
+        expect(getByTestId('previous-page')).toHaveAttribute('disabled');
     });
 
     it('should render SettingsPopover when settings icon is clicked', () => {
