@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode, useMemo, useEffect, useState, useRef } from 'react';
+import React, { ReactNode, useMemo, useEffect, useState } from 'react';
 import {
     Column,
     IdType,
@@ -274,7 +274,7 @@ export default function Table<D extends object>({
                 return map;
             }, {})
     );
-    
+
     const [controlledPageSize, setControlledPageSize] = useState(defaultPageSize);
 
     const columns = useMemo(() => {
@@ -326,7 +326,7 @@ export default function Table<D extends object>({
         }
 
         return columnsFiltered;
-    }, [columnDefinitions, showColumns, disableFilters, disableRowSelect, multiSelect]);
+    }, [columnDefinitions, showColumns, disableRowSelect, multiSelect]);
 
     const rowCount = useMemo(() => {
         if (typeof props.rowCount === 'undefined') {
@@ -410,7 +410,6 @@ export default function Table<D extends object>({
         canPreviousPage,
         setPageSize,
         selectedFlatRows,
-        setFilter,
         setGlobalFilter,
         toggleGroupBy,
         state: { pageIndex, pageSize, sortBy, globalFilter },
