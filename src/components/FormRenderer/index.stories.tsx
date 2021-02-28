@@ -1115,18 +1115,24 @@ export const FileUploader = () => {
     return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
 };
 
-
-export const SimpleMarkdownEditor = ({ name, input, onChange }) => {
+export const SimpleMarkdownEditor = () => {
     const schema = {
         fields: [
             {
                 component: componentTypes.MARKDOWN_EDITOR,
                 name: 'text',
-                label: 'This is a markdown editor'
-            }
+                label: 'This is a markdown editor',
+                hintText: 'This will also render Markdown',
+                placeholder: '# TEST',
+                validate: [
+                    {
+                        type: validatorTypes.REQUIRED,
+                    },
+                ],
+            },
         ],
         header: 'Markdown Editor',
-        description: 'Create markdown'
+        description: 'Create markdown',
     };
 
     return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;

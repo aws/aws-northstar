@@ -13,12 +13,17 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent } from 'react';
-import useFieldApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-field-api';
-import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form-api';
+import React, { FunctionComponent, useState, setState } from 'react';
+import { useFormApi, useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';
 import Input from '../../../Input';
+import MarkdownViewer from '../../../MarkdownViewer';
+import Inline from '../../../../layouts/Inline'
+import Textarea, { TextareaProps } from '../../../Textarea';
+import Container from '../../../../layouts/Container';
+import Grid from '../../../../layouts/Grid';
+
 
 const MarkdownEditorMapping: FunctionComponent = (props: any) => {
     const {
@@ -29,18 +34,25 @@ const MarkdownEditorMapping: FunctionComponent = (props: any) => {
         isDisabled,
         isReadOnly,
         placeholder,
-        input,
         validateOnMount,
+        input,
+        rows,
         stretch,
         showError,
         secondaryControl,
+        value,
         meta: { error, submitFailed },
-        ...rest
     } = useFieldApi(props);
 
     const { getState } = useFormApi();
+    const [content, setContent] = useState(value || placeholder)
     const controlId = input.name || uuidv4();
     const errorText = ((validateOnMount || submitFailed || showError) && error) || '';
+
+    const updateState = (e: any) => {
+        e.persist();
+        setContent(e.target.value);
+    }
 
     return (
         <FormField
@@ -52,18 +64,28 @@ const MarkdownEditorMapping: FunctionComponent = (props: any) => {
             stretch={stretch}
             secondaryControl={secondaryControl}
         >
-            <Input
-                {...input}
-                placeholder={placeholder}
-                controlId={controlId}
-                disabled={isDisabled}
-                required={isRequired}
-                readonly={isReadOnly}
-                invalid={!!errorText}
-                {...rest}
-            />
+            <Grid container spacing={3}>
+                <Grid item xs={6}>
+                    <Textarea
+                        {...input}
+                        rows={rows || 10}
+                        value={content}
+                        placeholder={placeholder}
+                        controlId={controlId}
+                        disabled={isDisabled}
+                        required={isRequired}
+                        readonly={isReadOnly}
+                        invalid={!!errorText}
+                        onChange={updateState}
+                    /></Grid>
+                <Grid item xs={6}>
+                    <Container>
+                        <MarkdownViewer>{content}</MarkdownViewer>
+                    </Container>
+                </Grid>
+            </Grid>
         </FormField>
-    )
+    );
 };
 
 export default MarkdownEditorMapping;
