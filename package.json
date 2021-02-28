@@ -114,7 +114,6 @@
     "react-router-dom": "^5.1.2",
     "react-styleguidist": "^11.1.5",
     "react-test-renderer": "^17.0.1",
-    "regenerator-runtime": "^0.13.7",
     "storybook-react-router": "^1.0.8",
     "style-loader": "^2.0.0",
     "ts-jest": "^25.2.1",
@@ -135,9 +134,6 @@
     "@types/uuid": "^7.0.0",
     "clsx": "^1.1.1",
     "date-fns": "^2.13.0",
-    "lodash.debounce": "^4.0.8",
-    "lodash.isequal": "^4.5.0",
-    "match-sorter": "^4.0.2",
     "react-markdown": "^5.0.3",
     "react-syntax-highlighter": "^15.4.3",
     "react-table": "^7.6.3",
@@ -146,7 +142,7 @@
     "remark-code-blocks": "^2.0.1",
     "remark-frontmatter": "^3.0.0",
     "remark-gfm": "^1.0.0",
-    "remove": "^0.1.5",
+    "use-debounce": "^5.2.1",
     "uuid": "^7.0.1"
   },
   "peerDependencies": {

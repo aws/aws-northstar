@@ -22,7 +22,6 @@ import {
     SortingRule,
     TableInstance as TableBaseInstance,
     TableState,
-    useAsyncDebounce,
     useBlockLayout,
     useExpanded,
     UseExpandedOptions,
@@ -63,6 +62,7 @@ import SettingsBar from './components/SettingsBar';
 import ColumnsSelector from './components/ColumnsSelector';
 import ColumnsGrouping from './components/ColumnsGrouping';
 import { RadioButton } from '../RadioGroup';
+import { useDebouncedCallback } from 'use-debounce';
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_DEBOUNCE_TIMER = 250;
@@ -274,7 +274,7 @@ export default function Table<D extends object>({
                 return map;
             }, {})
     );
-    const [filterInput, setFilterInput] = useState<FilterProps>({ _all_: undefined });
+    
     const [controlledPageSize, setControlledPageSize] = useState(defaultPageSize);
 
     const columns = useMemo(() => {
@@ -464,7 +464,7 @@ export default function Table<D extends object>({
         toggleGroupBy!(headerId);
     };
 
-    const handleSelectionChangeDebounce = useAsyncDebounce((selectedFlatRows: Row<D>[]) => {
+    const { callback: handleSelectionChangeDebounce } = useDebouncedCallback((selectedFlatRows: Row<D>[]) => {
         const selected = selectedFlatRows
             .filter((row: Row<D> & Partial<UseGroupByRowProps<D>>) => !row.isGrouped)
             .map((row: Row<D>) => row.original);
@@ -490,7 +490,7 @@ export default function Table<D extends object>({
                 filterText: globalFilter || '',
             });
         }
-    }, [onFetchData, pageIndex, pageSize, filterInput, sortBy, groupBy, showColumns, globalFilter]);
+    }, [onFetchData, pageIndex, pageSize, sortBy, groupBy, showColumns, globalFilter]);
 
     const columnsSelectorProps = {
         columnDefinitions,

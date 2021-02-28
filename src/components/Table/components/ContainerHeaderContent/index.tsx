@@ -18,7 +18,7 @@ import React, { ReactNode } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import Input from '../../../Input';
 import clsx from 'clsx';
-import { useAsyncDebounce } from 'react-table';
+import { useDebouncedCallback } from 'use-debounce';
 
 export interface ContainerHeaderContentProps {
     styles: {
@@ -43,7 +43,7 @@ export default ({
     globalFilter,
     settingsBarComponent,
 }: ContainerHeaderContentProps) => {
-    const onChange = useAsyncDebounce((value) => {
+    const { callback: handleChange } = useDebouncedCallback((value) => {
         setGlobalFilter(value || undefined);
     }, 500);
     return (
@@ -56,7 +56,7 @@ export default ({
                     <Input
                         placeholder="Search"
                         type="search"
-                        onChange={onChange}
+                        onChange={handleChange}
                         disabled={loading}
                         value={globalFilter}
                         ariaLabelledby={'table-search-label'}
