@@ -918,7 +918,7 @@ describe('FormRenderer', () => {
                     name: 'markdownOne',
                     label: 'This is a markdown editor',
                     helperText: 'Helper text provides users some guidance.',
-                    value: '# I am a Markdown editor. \n\rHave a play.',
+                    value: '# I am a Markdown editor.\n\rHave a play.',
                 },
             ],
             header: 'Markdown Editor',
@@ -931,7 +931,7 @@ describe('FormRenderer', () => {
             );
 
             expect(getByText('Markdown Editor')).toBeVisible();
-            expect(getByText('I am a Markdown editor')).toHaveClass('MuiTypography-root MuiTypography-h1');
+            expect(getByText('I am a Markdown editor.')).toHaveClass('MuiTypography-root MuiTypography-h1');
             expect(getByText('Have a play.')).toHaveClass('MuiTypography-root MuiTypography-body1');
         });
     });
