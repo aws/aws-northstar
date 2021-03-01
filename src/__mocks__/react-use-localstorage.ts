@@ -13,28 +13,4 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-module.exports = {
-    roots: ['./src'],
-    transform: {
-        '^.+\\.tsx?$': 'ts-jest',
-        '^.+\\.ts?$': 'ts-jest',
-        '^.+\\.jsx?$': 'babel-jest',
-        '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx',
-    },
-    testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
-    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-    moduleNameMapper: {
-        '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.ts',
-    },
-    globalSetup: './jest/jest.globalsetup.js',
-    setupFilesAfterEnv: ['./jest/jest.setup.ts'],
-    coverageThreshold: {
-        global: {
-            branches: 80,
-            functions: 85,
-            lines: 95,
-            statements: 95,
-        },
-    },
-    coveragePathIgnorePatterns: ['/node_modules/', '/components/index.ts', '.*/index.stories.tsx'],
-};
+export default {};
