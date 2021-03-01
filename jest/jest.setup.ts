@@ -14,8 +14,10 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 // @ts-nocheck
+
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
+
 import { toHaveNoViolations } from 'jest-axe';
 window.URL.createObjectURL = () => {};
 window.HTMLCanvasElement.prototype.getContext = () => {};
