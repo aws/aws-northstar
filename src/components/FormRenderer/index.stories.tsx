@@ -21,6 +21,7 @@ import Box from '../../layouts/Box';
 import Text from '../Text';
 import Input from '../Input';
 import FileUpload from '../FileUpload';
+import Container from '../../layouts/Container';
 
 export default {
     component: FormRenderer,
@@ -186,7 +187,7 @@ const baseSchema = {
                 },
             ],
             renderReload: true,
-            onReloadClick: () => { },
+            onReloadClick: () => {},
             createNewLink: 'Create new option',
             createNewLinkHref: '/options/create',
         },
@@ -1117,23 +1118,37 @@ export const FileUploader = () => {
 
 export const SimpleMarkdownEditor = () => {
     const schema = {
+        submitLabel: 'Save',
+        cancelLabel: 'Back',
         fields: [
             {
                 component: componentTypes.MARKDOWN_EDITOR,
-                name: 'text',
+                name: 'markdownOne',
                 label: 'This is a markdown editor',
-                hintText: 'This will also render Markdown',
-                placeholder: '# TEST',
+                helperText: 'Helper text provides users some guidance.',
+                value: '# I am a Markdown editor. \n\rHave a play.',
+                onChange: action('Markdown content change'),
                 validate: [
                     {
                         type: validatorTypes.REQUIRED,
                     },
                 ],
             },
+            {
+                component: componentTypes.MARKDOWN_EDITOR,
+                name: 'markdownTwo',
+                label: 'This is a read only markdown editor',
+                isReadOnly: true,
+                value: '# I should be read only\n\rAnd you should not be able to edit me',
+            },
         ],
         header: 'Markdown Editor',
-        description: 'Create markdown',
+        description: 'This component allows a user to enter markdown and renders it in real-time.',
     };
 
-    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+    return (
+        <Container>
+            <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />
+        </Container>
+    );
 };

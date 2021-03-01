@@ -13,17 +13,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent, useState, setState } from 'react';
-import { useFormApi, useFieldApi } from '@data-driven-forms/react-form-renderer';
+import React, { FunctionComponent, useState } from 'react';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';
-import Input from '../../../Input';
 import MarkdownViewer from '../../../MarkdownViewer';
-import Inline from '../../../../layouts/Inline'
-import Textarea, { TextareaProps } from '../../../Textarea';
-import Container from '../../../../layouts/Container';
+import Textarea from '../../../Textarea';
 import Grid from '../../../../layouts/Grid';
-
+import { Box } from '../../../../layouts';
 
 const MarkdownEditorMapping: FunctionComponent = (props: any) => {
     const {
@@ -37,22 +34,25 @@ const MarkdownEditorMapping: FunctionComponent = (props: any) => {
         validateOnMount,
         input,
         rows,
-        stretch,
         showError,
         secondaryControl,
         value,
+        onChange,
         meta: { error, submitFailed },
     } = useFieldApi(props);
 
-    const { getState } = useFormApi();
-    const [content, setContent] = useState(value || placeholder)
+    const INITIAL_ROWS = 10;
+
+    const [content, setContent] = useState(value || placeholder);
     const controlId = input.name || uuidv4();
     const errorText = ((validateOnMount || submitFailed || showError) && error) || '';
 
     const updateState = (e: any) => {
         e.persist();
         setContent(e.target.value);
-    }
+        onChange && onChange(e);
+        input.onChange(e);
+    };
 
     return (
         <FormField
@@ -61,14 +61,14 @@ const MarkdownEditorMapping: FunctionComponent = (props: any) => {
             description={description}
             hintText={helperText}
             errorText={errorText}
-            stretch={stretch}
+            stretch={true}
             secondaryControl={secondaryControl}
         >
-            <Grid container spacing={3}>
-                <Grid item xs={6}>
+            <Grid container alignItems="stretch" spacing={3}>
+                <Grid item sm={6} xs={12}>
                     <Textarea
                         {...input}
-                        rows={rows || 10}
+                        rows={rows || INITIAL_ROWS}
                         value={content}
                         placeholder={placeholder}
                         controlId={controlId}
@@ -77,11 +77,19 @@ const MarkdownEditorMapping: FunctionComponent = (props: any) => {
                         readonly={isReadOnly}
                         invalid={!!errorText}
                         onChange={updateState}
-                    /></Grid>
-                <Grid item xs={6}>
-                    <Container>
+                    />
+                </Grid>
+                <Grid item sm={6} xs={12}>
+                    <Box
+                        bgcolor="grey.100"
+                        height="100%"
+                        p={1}
+                        style={{ wordWrap: 'break-word' }}
+                        overflow={'hidden'}
+                        width={'100%'}
+                    >
                         <MarkdownViewer>{content}</MarkdownViewer>
-                    </Container>
+                    </Box>
                 </Grid>
             </Grid>
         </FormField>
