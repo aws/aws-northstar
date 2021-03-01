@@ -18,3 +18,5 @@ updates:
       - dependency-name: "@types/react-router"
       - dependency-name: "react-router-dom"
       - dependency-name: "@types/react-router-dom"
+      - dependency-name: "husky"
+        versions: ["5.x"]
