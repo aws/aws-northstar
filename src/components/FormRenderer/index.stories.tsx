@@ -21,6 +21,7 @@ import Box from '../../layouts/Box';
 import Text from '../Text';
 import Input from '../Input';
 import FileUpload from '../FileUpload';
+import Container from '../../layouts/Container';
 
 export default {
     component: FormRenderer,
@@ -1113,4 +1114,41 @@ export const FileUploader = () => {
     };
 
     return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+};
+
+export const SimpleMarkdownEditor = () => {
+    const schema = {
+        submitLabel: 'Save',
+        cancelLabel: 'Back',
+        fields: [
+            {
+                component: componentTypes.MARKDOWN_EDITOR,
+                name: 'markdownOne',
+                label: 'This is a markdown editor',
+                helperText: 'Helper text provides users some guidance.',
+                initialValue: '# I am a Markdown editor.\n\rHave a play.',
+                onChange: action('Markdown content change'),
+                validate: [
+                    {
+                        type: validatorTypes.REQUIRED,
+                    },
+                ],
+            },
+            {
+                component: componentTypes.MARKDOWN_EDITOR,
+                name: 'markdownTwo',
+                label: 'This is a read only markdown editor',
+                isReadOnly: true,
+                initialValue: '# I should be read only\n\rAnd you should not be able to edit me',
+            },
+        ],
+        header: 'Markdown Editor',
+        description: 'This component allows a user to enter markdown and renders it in real-time.',
+    };
+
+    return (
+        <Container>
+            <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />
+        </Container>
+    );
 };

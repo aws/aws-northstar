@@ -33,7 +33,8 @@ export interface MarkdownViewerProps extends ReactMarkdownPropsBase {
 
 const renderers = {
     code: ({ language, value }: RenderProps) => {
-        return <SyntaxHighlighter style={tomorrow} language={language} children={value} />;
+        if (language && value) return <SyntaxHighlighter style={tomorrow} language={language} children={value} />;
+        else return <>{value}</>;
     },
     heading: (props: any) => {
         const variant = `h${props.level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
