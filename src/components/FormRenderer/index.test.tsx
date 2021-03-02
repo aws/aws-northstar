@@ -918,21 +918,16 @@ describe('FormRenderer', () => {
                     name: 'markdownOne',
                     label: 'This is a markdown editor',
                     helperText: 'Helper text provides users some guidance.',
-                    value: '# I am a Markdown editor.\n\rHave a play.',
+                    initialValue: '# I am a Markdown editor',
                 },
             ],
             header: 'Markdown Editor',
             description: 'This component allows a user to enter markdown and renders it in real-time.',
         };
 
-        act(() => {
-            const { getByText } = render(
-                <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
-            );
+        const { getByText } = render(<FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />);
 
-            expect(getByText('Markdown Editor')).toBeVisible();
-            expect(getByText('I am a Markdown editor.')).toHaveClass('MuiTypography-root MuiTypography-h1');
-            expect(getByText('Have a play.')).toHaveClass('MuiTypography-root MuiTypography-body1');
-        });
+        expect(getByText('Markdown Editor')).toBeVisible();
+        expect(getByText('I am a Markdown editor')).toBeInTheDocument();
     });
 });

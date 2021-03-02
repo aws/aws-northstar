@@ -1126,7 +1126,7 @@ export const SimpleMarkdownEditor = () => {
                 name: 'markdownOne',
                 label: 'This is a markdown editor',
                 helperText: 'Helper text provides users some guidance.',
-                value: '# I am a Markdown editor. \n\rHave a play.',
+                initialValue: '# I am a Markdown editor.\n\rHave a play.',
                 onChange: action('Markdown content change'),
                 validate: [
                     {
@@ -1139,7 +1139,7 @@ export const SimpleMarkdownEditor = () => {
                 name: 'markdownTwo',
                 label: 'This is a read only markdown editor',
                 isReadOnly: true,
-                value: '# I should be read only\n\rAnd you should not be able to edit me',
+                initialValue: '# I should be read only\n\rAnd you should not be able to edit me',
             },
         ],
         header: 'Markdown Editor',

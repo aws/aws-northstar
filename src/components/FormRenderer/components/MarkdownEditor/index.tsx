@@ -36,20 +36,16 @@ const MarkdownEditorMapping: FunctionComponent = (props: any) => {
         rows,
         showError,
         secondaryControl,
-        value,
         onChange,
         meta: { error, submitFailed },
     } = useFieldApi(props);
 
     const INITIAL_ROWS = 10;
 
-    const [content, setContent] = useState(value || placeholder);
     const controlId = input.name || uuidv4();
     const errorText = ((validateOnMount || submitFailed || showError) && error) || '';
 
     const updateState = (e: any) => {
-        e.persist();
-        setContent(e.target.value);
         onChange && onChange(e);
         input.onChange(e);
     };
@@ -69,7 +65,6 @@ const MarkdownEditorMapping: FunctionComponent = (props: any) => {
                     <Textarea
                         {...input}
                         rows={rows || INITIAL_ROWS}
-                        value={content}
                         placeholder={placeholder}
                         controlId={controlId}
                         disabled={isDisabled}
@@ -88,7 +83,7 @@ const MarkdownEditorMapping: FunctionComponent = (props: any) => {
                         overflow={'hidden'}
                         width={'100%'}
                     >
-                        <MarkdownViewer>{content}</MarkdownViewer>
+                        <MarkdownViewer>{input.value}</MarkdownViewer>
                     </Box>
                 </Grid>
             </Grid>
