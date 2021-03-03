@@ -32,6 +32,7 @@ import TextField from './components/TextField';
 import TimePicker from './components/TimePicker';
 import TreeView from './components/TreeView';
 import Wizard from './components/Wizard';
+import MarkdownEditor from './components/MarkdownEditor';
 import { componentTypes } from './types';
 
 const componentMapper = {
@@ -51,6 +52,7 @@ const componentMapper = {
     [componentTypes.TABLE]: Table,
     [componentTypes.REVIEW]: Review,
     [componentTypes.CUSTOM]: Custom,
+    [componentTypes.MARKDOWN_EDITOR]: MarkdownEditor,
 };
 
 export interface FormRendererProps {

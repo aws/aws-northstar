@@ -1353,3 +1353,43 @@ const schema = {
     onCancel={console.log} />;
 
 ```
+
+```jsx
+import Container from 'aws-northstar/layouts/Container';
+import FormRenderer, { componentTypes, validatorTypes } from 'aws-northstar/components/FormRenderer';
+
+
+    const schema = {
+        submitLabel: 'Save',
+        cancelLabel: 'Back',
+        fields: [
+            {
+                component: componentTypes.MARKDOWN_EDITOR,
+                name: 'markdownOne',
+                label: 'This is a markdown editor',
+                helperText: 'Helper text provides users some guidance.',
+                initialValue: '# I am a Markdown editor.\n\rHave a play.',
+                onChange: console.log,
+                validate: [
+                    {
+                        type: validatorTypes.REQUIRED,
+                    },
+                ],
+            },
+            {
+                component: componentTypes.MARKDOWN_EDITOR,
+                name: 'markdownTwo',
+                label: 'This is a read only markdown editor',
+                isReadOnly: true,
+                initialValue: '# I should be read only\n\rAnd you should not be able to edit me',
+            },
+        ],
+        header: 'Markdown Editor',
+        description: 'This component allows a user to enter markdown and renders it in real-time.',
+    };
+
+    <Container>
+        <FormRenderer schema={schema} onSubmit={console.log} onCancel={console.log} />
+    </Container>
+    
+```
