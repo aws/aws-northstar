@@ -9,6 +9,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    version_requirement_updates: "increase_versions"
     ignore:
       - dependency-name: "react"
       - dependency-name: "@types/react"
