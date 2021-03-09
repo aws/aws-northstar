@@ -79,6 +79,14 @@ export interface InputProps {
      * Mimics the native change event on inputs.
      */
     onChange?: (value: string) => void;
+    /**
+     * Mimics the native focus event on inputs
+     */
+    onFocus?: () => void;
+    /**
+     * Mimics the native blur event on inputs
+     */
+    onBlur?: () => void;
 }
 
 const mapProps = ({
@@ -159,6 +167,8 @@ const Input: FunctionComponent<InputProps> = ({ onChange = () => {}, ...props })
             endAdornment={props.type == 'search' && showClearInputButton && clearSearchInput()}
             value={inputValue}
             onChange={(e) => handleChange(e.target.value)}
+            onBlur={props.onBlur}
+            onFocus={props.onFocus}
         />
     );
 };
