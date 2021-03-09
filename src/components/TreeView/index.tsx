@@ -19,7 +19,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MuiTreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
+import TreeItem from '@material-ui/lab/TreeItem';
 import Link from '../Link';
 
 export interface TreeItemNode {
@@ -60,7 +60,7 @@ const renderTree = (node: TreeItemNode) => {
 
     return (
         <TreeItem classes={node.classes} key={node.id} nodeId={node.id} label={TreeItemLink}>
-            {Array.isArray(node.children) ? node.children.map((child) => renderTree(child)) : null}
+            {node.children && Array.isArray(node.children) ? node.children!.map((child) => renderTree(child)) : null}
         </TreeItem>
     );
 };
