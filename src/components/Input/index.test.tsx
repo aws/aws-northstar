@@ -32,6 +32,22 @@ describe('Input', () => {
         expect(mockOnChange).toHaveBeenCalledTimes(1);
     });
 
+    it('fires onFocus event', () => {
+        const { getByPlaceholderText } = render(<Input placeholder="input-1" onFocus={mockOnChange} />);
+
+        expect(mockOnChange).toHaveBeenCalledTimes(0);
+        fireEvent.focus(getByPlaceholderText('input-1'), { target: { value: '23' } });
+        expect(mockOnChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('fires onBlur event', () => {
+        const { getByPlaceholderText } = render(<Input placeholder="input-1" onBlur={mockOnChange} />);
+
+        expect(mockOnChange).toHaveBeenCalledTimes(0);
+        fireEvent.blur(getByPlaceholderText('input-1'), { target: { value: '23' } });
+        expect(mockOnChange).toHaveBeenCalledTimes(1);
+    });
+
     it('renders an input required', () => {
         const { getByPlaceholderText } = render(<Input required={true} placeholder="input-1" />);
 
