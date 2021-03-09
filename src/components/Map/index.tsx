@@ -14,8 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent } from 'react';
-// @ts-ignore
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import MapGL, { Marker, NavigationControl, MarkerProps, ViewportProps } from 'react-map-gl';
 import RoomIcon from '@material-ui/icons/Room';
 import { makeStyles, Theme } from '@material-ui/core';
@@ -70,22 +69,28 @@ const Map: FunctionComponent<MapProps> = ({
     viewportZoom = 5,
     pins,
 }) => {
-    const viewportInitialConfig = {
-        width: viewportWidth,
-        height: viewportHeight,
-        latitude: viewportLatitude,
-        longitude: viewportLongitude,
-        zoom: viewportZoom,
-        bearing: 0,
-        pitch: 0,
-    };
+    const viewportInitialConfig: ViewportProps = useMemo(
+        () => ({
+            width: viewportWidth,
+            height: viewportHeight,
+            latitude: viewportLatitude,
+            longitude: viewportLongitude,
+            zoom: viewportZoom,
+            bearing: 0,
+            pitch: 0,
+        }),
+        [viewportWidth, viewportHeight, viewportLatitude, viewportLongitude, viewportZoom]
+    );
     const classes = useStyles({});
-    const [viewport, setViewport] = React.useState(viewportInitialConfig);
+    const [viewport, setViewport] = React.useState<ViewportProps>(viewportInitialConfig);
 
-    const marker = ({ latitude, longitude }: MarkerProps) => (
-        <Marker latitude={latitude} longitude={longitude}>
-            <RoomIcon fontSize="large" color="secondary" classes={{ colorSecondary: classes.muiIconOverride }} />
-        </Marker>
+    const marker = useCallback(
+        ({ latitude, longitude }: MarkerProps) => (
+            <Marker key={`${latitude}-${longitude}`} latitude={latitude} longitude={longitude}>
+                <RoomIcon fontSize="large" color="secondary" classes={{ colorSecondary: classes.muiIconOverride }} />
+            </Marker>
+        ),
+        [classes]
     );
 
     return (
@@ -95,7 +100,7 @@ const Map: FunctionComponent<MapProps> = ({
             {...viewport}
             onViewportChange={(nextViewport: ViewportProps) => setViewport(nextViewport)}
         >
-            {pins.map((city, index) => marker({ ...city }))}
+            {pins.map((city) => marker({ ...city }))}
             <div className={classes.navStyle}>
                 <NavigationControl />
             </div>
