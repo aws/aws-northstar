@@ -21,11 +21,7 @@ import { useDebouncedCallback } from 'use-debounce';
 const mockCallback = jest.fn();
 
 jest.mock('use-debounce', () => ({
-    useDebouncedCallback: jest.fn().mockImplementation(() => {
-        return {
-            callback: mockCallback,
-        };
-    }),
+    useDebouncedCallback: jest.fn().mockImplementation(() => mockCallback),
 }));
 
 const styles = {

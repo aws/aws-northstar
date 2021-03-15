@@ -43,7 +43,7 @@ export default ({
     globalFilter,
     settingsBarComponent,
 }: ContainerHeaderContentProps) => {
-    const { callback: handleChange } = useDebouncedCallback((value) => {
+    const handleChange = useDebouncedCallback((value) => {
         setGlobalFilter(value || undefined);
     }, 500);
     return (

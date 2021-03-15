@@ -463,7 +463,7 @@ export default function Table<D extends object>({
         toggleGroupBy!(headerId);
     };
 
-    const { callback: handleSelectionChangeDebounce } = useDebouncedCallback((selectedFlatRows: Row<D>[]) => {
+    const handleSelectionChangeDebounce = useDebouncedCallback((selectedFlatRows: Row<D>[]) => {
         const selected = selectedFlatRows
             .filter((row: Row<D> & Partial<UseGroupByRowProps<D>>) => !row.isGrouped)
             .map((row: Row<D>) => row.original);

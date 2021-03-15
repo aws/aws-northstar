@@ -142,7 +142,7 @@
     "remark-code-blocks": "^2.0.1",
     "remark-frontmatter": "^3.0.0",
     "remark-gfm": "^1.0.0",
-    "use-debounce": "^5.2.1",
+    "use-debounce": "^6.0.0",
     "uuid": "^7.0.1"
   },
   "peerDependencies": {
