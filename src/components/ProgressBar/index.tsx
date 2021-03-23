@@ -71,8 +71,6 @@ export interface ProgressBarProps {
     additionalInfo?: string;
     /** Content that is displayed whenever status is set to "error" or "success". */
     resultText?: string;
-    /** Indicate whether to display heading above the progress bar */
-    displayHeading?: boolean;
     /** Indicate whether to display value on the right end */
     displayValue?: boolean;
     /** Fired when the user triggers the result state button. */
