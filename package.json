@@ -65,7 +65,7 @@
     "@storybook/cli": "^6.1.21",
     "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^6.1.21",
-    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/react-hooks": "^3.4.2",
     "@types/jest": "^26.0.20",
