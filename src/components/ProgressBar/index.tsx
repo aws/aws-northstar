@@ -15,7 +15,16 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, useMemo } from 'react';
-import { Box, CircularProgress, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import {
+    Box,
+    CircularProgress,
+    CircularProgressProps,
+    Grid,
+    LinearProgressProps,
+    makeStyles,
+    Theme,
+    Typography,
+} from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import StatusIndicator from '../StatusIndicator';
 import Button from '../Button';
@@ -28,6 +37,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     circularColorPrimary: {
         color: theme.palette.info.dark,
+        position: 'absolute',
+        left: 0,
+    },
+    circularColorBottom: {
+        color: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
     },
     barColorPrimary: {
         backgroundColor: theme.palette.info.dark,
@@ -82,7 +96,6 @@ export interface ProgressBarProps {
 interface ProgressBarComponentProps {
     value: number;
     displayValue: boolean;
-    props?: any[];
 }
 
 const statusMapping: { [key in 'error' | 'success']: 'negative' | 'positive' } = {
@@ -90,11 +103,9 @@ const statusMapping: { [key in 'error' | 'success']: 'negative' | 'positive' } =
     success: 'positive',
 };
 
-const LinearProgressComponent: React.FunctionComponent<ProgressBarComponentProps> = ({
-    value,
-    displayValue,
-    ...props
-}) => {
+const LinearProgressComponent: React.FunctionComponent<
+    ProgressBarComponentProps & Omit<LinearProgressProps, 'variant'>
+> = ({ value, displayValue, ...props }) => {
     const classes = useStyles();
 
     return (
@@ -102,7 +113,7 @@ const LinearProgressComponent: React.FunctionComponent<ProgressBarComponentProps
             <Grid item xs={value && displayValue ? 11 : 12}>
                 <LinearProgress
                     variant="determinate"
-                    value={value || 100}
+                    value={value}
                     classes={{
                         colorPrimary: classes.colorPrimary,
                         barColorPrimary: classes.barColorPrimary,
@@ -119,34 +130,38 @@ const LinearProgressComponent: React.FunctionComponent<ProgressBarComponentProps
     );
 };
 
-const CircularProgressWithLabel: React.FunctionComponent<ProgressBarComponentProps> = ({
-    value,
-    displayValue,
-    ...props
-}) => {
+const CircularProgressWithLabel: React.FunctionComponent<
+    ProgressBarComponentProps & Omit<CircularProgressProps, 'variant'>
+> = ({ value, displayValue, ...props }) => {
     const classes = useStyles();
 
     return (
         <Box position="relative" display="inline-flex">
             <CircularProgress
-                variant="static"
+                value={100}
+                variant={'static'}
+                classes={{ colorPrimary: classes.circularColorBottom }}
+                {...props}
+            />
+            <CircularProgress
+                variant={'static'}
                 value={value}
                 classes={{ colorPrimary: classes.circularColorPrimary }}
                 {...props}
             />
             {displayValue ? (
                 <Box
+                    display="flex"
                     top={0}
-                    left={0}
                     bottom={0}
                     right={0}
+                    left={0}
                     position="absolute"
-                    display="flex"
                     alignItems="center"
                     justifyContent="center"
                 >
                     <Typography variant="caption" component="div" color="textSecondary">{`${Math.round(
-                        value || 100
+                        value
                     )}%`}</Typography>
                 </Box>
             ) : (
@@ -159,7 +174,9 @@ const CircularProgressWithLabel: React.FunctionComponent<ProgressBarComponentPro
 /**
  * A progress bar is a horizontal progress-bar for indicating progress and activity.
  */
-const ProgressBar: FunctionComponent<ProgressBarProps> = ({
+const ProgressBar: FunctionComponent<
+    ProgressBarProps & Omit<LinearProgressProps & CircularProgressProps, 'variant'>
+> = ({
     value,
     displayValue = true,
     status = 'in-progress',
@@ -170,6 +187,7 @@ const ProgressBar: FunctionComponent<ProgressBarProps> = ({
     resultText,
     resultButtonText,
     resultButtonClick,
+    ...props
 }) => {
     const classes = useStyles();
 
@@ -191,7 +209,7 @@ const ProgressBar: FunctionComponent<ProgressBarProps> = ({
             );
         }
 
-        return <ProgressBarComponent value={value || 100} displayValue={displayValue} />;
+        return <ProgressBarComponent value={value || (value === 0 ? 0 : 100)} displayValue={displayValue} {...props} />;
     };
 
     const ProgressBarComponent = useMemo(
