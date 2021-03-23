@@ -33,6 +33,8 @@ export const Default = () => (
         />
         <ProgressBar value={60} displayValue={false} label="Progress bar label without value displayed" />
         <ProgressBar label="Progress bar completed" />
+        <ProgressBar value={60} displayValue={false} variant={'circular'} />
+        <ProgressBar value={100} displayValue={true} variant={'circular'} />
     </Stack>
 );
 

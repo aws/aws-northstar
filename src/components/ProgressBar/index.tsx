@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent } from 'react';
-import { makeStyles, Theme, Grid, Typography } from '@material-ui/core';
+import { makeStyles, Theme, Grid, Typography, Box, CircularProgress } from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import StatusIndicator from '../StatusIndicator';
 import Button from '../Button';
@@ -25,6 +25,9 @@ import Text from '../Text';
 const useStyles = makeStyles((theme: Theme) => ({
     colorPrimary: {
         marginTop: '8px',
+    },
+    circularColorPrimary: {
+        color: theme.palette.info.dark,
     },
     barColorPrimary: {
         backgroundColor: theme.palette.info.dark,
@@ -68,10 +71,14 @@ export interface ProgressBarProps {
     additionalInfo?: string;
     /** Content that is displayed whenever status is set to "error" or "success". */
     resultText?: string;
+    /** Indicate whether to display heading above the progress bar */
+    displayHeading?: boolean;
     /** Indicate whether to display value on the right end */
     displayValue?: boolean;
     /** Fired when the user triggers the result state button. */
     resultButtonClick?: () => void;
+    /** Indicate what type of progress bar to render */
+    variant?: 'linear' | 'circular';
 }
 
 const statusMapping: { [key in 'error' | 'success']: 'negative' | 'positive' } = {
@@ -84,8 +91,10 @@ const statusMapping: { [key in 'error' | 'success']: 'negative' | 'positive' } =
  */
 const ProgressBar: FunctionComponent<ProgressBarProps> = ({
     value,
+    displayHeading = true,
     displayValue = true,
     status = 'in-progress',
+    variant = 'linear',
     label,
     description,
     additionalInfo,
@@ -94,6 +103,66 @@ const ProgressBar: FunctionComponent<ProgressBarProps> = ({
     resultButtonClick,
 }) => {
     const classes = useStyles();
+
+    const LinearProgressComponent: React.FunctionComponent<{ value: number; displayValue: boolean; props?: any[] }> = ({
+        value,
+        displayValue,
+        ...props
+    }) => (
+        <Grid container spacing={3}>
+            <Grid item xs={value && displayValue ? 11 : 12}>
+                <LinearProgress
+                    variant="determinate"
+                    value={value || 100}
+                    classes={{
+                        colorPrimary: classes.colorPrimary,
+                        barColorPrimary: classes.barColorPrimary,
+                    }}
+                    {...props}
+                />
+            </Grid>
+            {displayValue && value && (
+                <Grid item xs={1}>
+                    <Text>{value}%</Text>
+                </Grid>
+            )}
+        </Grid>
+    );
+
+    const CircularProgressWithLabel: React.FunctionComponent<{
+        value: number;
+        displayValue: boolean;
+        props?: any[];
+    }> = ({ value, displayValue, ...props }) => {
+        return (
+            <Box position="relative" display="inline-flex">
+                <CircularProgress
+                    variant="static"
+                    value={value}
+                    classes={{ colorPrimary: classes.circularColorPrimary }}
+                    {...props}
+                />
+                {displayValue ? (
+                    <Box
+                        top={0}
+                        left={0}
+                        bottom={0}
+                        right={0}
+                        position="absolute"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
+                        <Typography variant="caption" component="div" color="textSecondary">{`${Math.round(
+                            value || 100
+                        )}%`}</Typography>
+                    </Box>
+                ) : (
+                    <></>
+                )}
+            </Box>
+        );
+    };
 
     const progressBody = (): React.ReactNode => {
         if (status === 'error' || status === 'success') {
@@ -110,29 +179,14 @@ const ProgressBar: FunctionComponent<ProgressBarProps> = ({
                 </div>
             );
         }
-        return (
-            <Grid container spacing={3}>
-                <Grid item xs={value && displayValue ? 11 : 12}>
-                    <LinearProgress
-                        variant="determinate"
-                        value={value || 100}
-                        classes={{
-                            colorPrimary: classes.colorPrimary,
-                            barColorPrimary: classes.barColorPrimary,
-                        }}
-                    />
-                </Grid>
-                {displayValue && value && (
-                    <Grid item xs={1}>
-                        <Text>{value}%</Text>
-                    </Grid>
-                )}
-            </Grid>
-        );
+
+        const ProgressBarComponent = variant === 'linear' ? LinearProgressComponent : CircularProgressWithLabel;
+
+        return <ProgressBarComponent value={value || 100} displayValue={displayValue} />;
     };
     return (
         <>
-            <Heading variant="h3">{label || ''}</Heading>
+            {displayHeading && <Heading variant="h3">{label || ''}</Heading>}
             {description && (
                 <Typography className={classes.description} variant="body1">
                     {description}
