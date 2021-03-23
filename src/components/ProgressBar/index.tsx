@@ -15,16 +15,7 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, useMemo } from 'react';
-import {
-    Box,
-    CircularProgress,
-    CircularProgressProps,
-    Grid,
-    LinearProgressProps,
-    makeStyles,
-    Theme,
-    Typography,
-} from '@material-ui/core';
+import { Box, CircularProgress, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import StatusIndicator from '../StatusIndicator';
 import Button from '../Button';
@@ -64,6 +55,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
+export interface CircularProgressBarProps {
+    /** CSS unit, e.g '1rem, 20px, etc */
+    size?: string;
+}
+
 export interface ProgressBarProps {
     /** Percentage value of the progress */
     value?: number;
@@ -93,8 +89,7 @@ export interface ProgressBarProps {
     variant?: 'linear' | 'circular';
     /** arbitrary properties to pass through */
     props?: {
-        circularProps?: CircularProgressProps;
-        linearProps?: LinearProgressProps;
+        circularProps?: CircularProgressBarProps;
     };
 }
 
@@ -102,8 +97,7 @@ interface ProgressBarComponentProps {
     value: number;
     displayValue: boolean;
     props?: {
-        circularProps?: CircularProgressProps;
-        linearProps?: LinearProgressProps;
+        circularProps?: CircularProgressBarProps;
     };
 }
 
@@ -129,7 +123,6 @@ const LinearProgressComponent: React.FunctionComponent<ProgressBarComponentProps
                         colorPrimary: classes.colorPrimary,
                         barColorPrimary: classes.barColorPrimary,
                     }}
-                    {...props?.linearProps}
                 />
             </Grid>
             {displayValue && value && (
