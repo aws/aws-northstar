@@ -129,10 +129,12 @@ export interface Notification extends FlashbarMessage {
 
 export interface AppLayoutContextApi {
     openHelpPanel: (open?: boolean) => void;
+    setHelpPanelContent: (content: ReactNode) => void;
 }
 
 const initialState: AppLayoutContextApi = {
     openHelpPanel: () => {},
+    setHelpPanelContent: (content) => {},
 };
 
 const AppLayoutContext = createContext<AppLayoutContextApi>(initialState);
@@ -180,6 +182,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     notifications,
     headerHeightInPx = 65,
 }) => {
+    const [helpPanelContent, setHelpPanelContent] = useState<ReactNode>(helpPanel);
     const [isSideNavigationOpen, setIsSideNavigationOpen] = useLocalStorage(LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, 'false');
     const [isHelpPanelOpen, setIsHelpPanelOpen] = useLocalStorage(LOCAL_STORAGE_KEY_HELP_PANEL_OPEN, 'false');
     const notificationsBoxRef = useRef(null);
@@ -269,16 +272,19 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
         <AppLayoutContext.Provider
             value={{
                 openHelpPanel,
+                setHelpPanelContent,
             }}
         >
             {header}
-            {(navigation || helpPanel) && (
+            {(navigation || helpPanelContent) && (
                 <Box className={classes.menuBar}>
                     {navigation && (
                         <Box className={classes.menuBarNavIcon}>{renderNavigationIcon(classes.menuBarIcon)}</Box>
                     )}
                     <Box width="100%" />
-                    {helpPanel && <Box className={classes.menuBarInfoIcon}>{renderInfoIcon(classes.menuBarIcon)}</Box>}
+                    {helpPanelContent && (
+                        <Box className={classes.menuBarInfoIcon}>{renderInfoIcon(classes.menuBarIcon)}</Box>
+                    )}
                 </Box>
             )}
             <Box className={classes.main}>
@@ -315,7 +321,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                         )}
                     </Box>
                 </div>
-                {helpPanel && (
+                {helpPanelContent && (
                     <Sidebar
                         sidebarWidth={WIDTH_HELP_PANEL}
                         isSidebarOpen={isHelpPanelOpen}
@@ -323,7 +329,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                         type={SidebarType.HELP_PANEL}
                         renderIcon={renderInfoIcon}
                     >
-                        {helpPanel}
+                        {helpPanelContent}
                     </Sidebar>
                 )}
             </Box>

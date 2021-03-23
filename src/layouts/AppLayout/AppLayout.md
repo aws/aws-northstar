@@ -17,6 +17,30 @@ const { openHelpPanel } = useAppLayoutContext();
     )
 ```
 
+### Dynamically set Help Panel content
+
+```jsx static
+import AppLayout, { useAppLayoutContext } from 'aws-northstar/layouts/AppLayout';
+import React from 'react';
+
+const DynamicHelpPanelSubComponent: React.FunctionComponent<any> = ({ children }) => {
+    const { setHelpPanelContent } = useAppLayoutContext();
+
+    useEffect(() => {
+        setHelpPanelContent(<div>Dynamic Content!</div>);
+    }, [setHelpPanelContent]);
+
+    return children;
+};
+
+export const DynamicHelpPanel = () => {
+    return (
+        <AppLayout header={<div>Header</div>}>
+            <DynamicHelpPanelSubComponent>{mainContent}</DynamicHelpPanelSubComponent>
+        </AppLayout>
+    );
+};
+```
 ### Examples
 
 ```jsx
