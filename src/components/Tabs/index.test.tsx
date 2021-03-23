@@ -18,6 +18,8 @@ import { render, fireEvent } from '@testing-library/react';
 
 import Tabs from '.';
 
+const THIRD_TAB_LABEL = 'Third tab label';
+
 const tabs = [
     {
         label: 'First tab label',
@@ -28,6 +30,11 @@ const tabs = [
         label: 'Second tab label',
         id: 'second',
         content: 'Second tab content area',
+    },
+    {
+        label: <div>{THIRD_TAB_LABEL}</div>,
+        id: 'third',
+        content: 'Third tab content area',
     },
 ];
 
@@ -72,7 +79,7 @@ describe('Tabs', () => {
         const onChangeMock = jest.fn();
         const props = { tabs, onChange: onChangeMock };
         const { getByText } = render(<Tabs {...props} />);
-        const tab = getByText(tabs[1].label).closest('button');
+        const tab = getByText(String(tabs[1].label)).closest('button');
         expect(onChangeMock).toBeCalledTimes(0);
 
         if (tab) {
@@ -82,5 +89,13 @@ describe('Tabs', () => {
         expect(getByText(tabs[1].content)).toBeVisible();
         expect(onChangeMock).toBeCalledTimes(1);
         expect(onChangeMock).toHaveBeenCalledWith(tabs[1].id);
+    });
+
+    it('arbitrary content can be rendered in a label', () => {
+        const props = { tabs };
+        const { getByText } = render(<Tabs {...props} />);
+        const labelContent = getByText(THIRD_TAB_LABEL);
+
+        expect(labelContent).toBeVisible();
     });
 });

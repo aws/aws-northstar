@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface TabItem {
-    label: string;
+    label: string | ReactNode;
     id: string;
     content: ReactNode;
     disabled?: boolean;
@@ -102,13 +102,13 @@ const Tabs = ({ tabs, activeId = '', variant = 'default', onChange }: TabsProps)
             className={clsx(variant === 'container' && classes.noBorder)}
         >
             {tabs.map((tab) => (
-                <Tab key={tab.label} className={classes.tab} label={tab.label} disabled={tab.disabled} />
+                <Tab key={tab.id} className={classes.tab} label={tab.label} disabled={tab.disabled} />
             ))}
         </MuiTabs>
     );
 
     const tabContent = tabs.map((tab, idx) => (
-        <TabPanel key={tab.label} value={value} index={idx}>
+        <TabPanel key={tab.id} value={value} index={idx}>
             {tab.content}
         </TabPanel>
     ));
