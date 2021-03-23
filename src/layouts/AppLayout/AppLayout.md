@@ -36,7 +36,9 @@ const DynamicHelpPanelSubComponent: React.FunctionComponent<any> = ({ children }
 export const DynamicHelpPanel = () => {
     return (
         <AppLayout header={<div>Header</div>}>
-            <DynamicHelpPanelSubComponent>{mainContent}</DynamicHelpPanelSubComponent>
+            <DynamicHelpPanelSubComponent>
+                <div>Main content</div>
+            </DynamicHelpPanelSubComponent>
         </AppLayout>
     );
 };
