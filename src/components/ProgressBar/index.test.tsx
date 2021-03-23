@@ -17,7 +17,6 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
 import ProgressBar from '.';
-import { SwitchProps } from '@material-ui/core';
 
 describe('ProgressBar', () => {
     const mockOnChange = jest.fn();
@@ -37,7 +36,19 @@ describe('ProgressBar', () => {
         expect(getByText('Description')).toBeInTheDocument();
     });
 
-    it('renders ProgressBar additional discription', () => {
+    it('renders circular ProgressBar status with displayValue', () => {
+        const { getByText } = render(<ProgressBar variant={'circular'} value={66} displayValue={true} />);
+
+        expect(getByText('66%')).toBeInTheDocument();
+    });
+
+    it('renders circular ProgressBar status without displayValue', () => {
+        const { queryByText } = render(<ProgressBar variant={'circular'} value={66} displayValue={false} />);
+
+        expect(queryByText('66%')).not.toBeInTheDocument();
+    });
+
+    it('renders ProgressBar additional description', () => {
         const { getByText } = render(<ProgressBar value={44} additionalInfo="Addition Description" />);
 
         expect(getByText('Addition Description')).toBeInTheDocument();
