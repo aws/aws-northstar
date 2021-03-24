@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import AppLayout, { Notification, useAppLayoutContext } from '.';
 import Badge from '../../components/Badge';
@@ -146,6 +146,24 @@ export const Default = () => {
             notifications={notifications.map((n) => ({ ...n, onDismiss: () => handleDismiss(n.id) }))}
         >
             {mainContent}
+        </AppLayout>
+    );
+};
+
+const DynamicHelpPanelSubComponent: React.FunctionComponent<any> = ({ children }) => {
+    const { setHelpPanelContent } = useAppLayoutContext();
+
+    useEffect(() => {
+        setHelpPanelContent(helpPanel);
+    }, [setHelpPanelContent]);
+
+    return children;
+};
+
+export const DynamicHelpPanel = () => {
+    return (
+        <AppLayout header={header} navigation={navigation}>
+            <DynamicHelpPanelSubComponent>{mainContent}</DynamicHelpPanelSubComponent>
         </AppLayout>
     );
 };

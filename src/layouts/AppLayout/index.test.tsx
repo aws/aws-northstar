@@ -137,6 +137,32 @@ describe('AppLayout', () => {
 
             expect(mockSetLocalStorage).toBeCalledWith('false');
         });
+
+        it('should trigger help panel content to be dynamically changed', () => {
+            const dynamicContent = 'Dynamic Content';
+
+            const ContentNode = () => {
+                const { setHelpPanelContent } = useAppLayoutContext();
+                return (
+                    <div>
+                        <button
+                            data-testid="trigger-update"
+                            onClick={() => setHelpPanelContent(<div>{dynamicContent}</div>)}
+                        />
+                    </div>
+                );
+            };
+            const { getByTestId, getByText } = render(
+                <AppLayout header={header} navigation={navigation}>
+                    <ContentNode />
+                </AppLayout>
+            );
+            act(() => {
+                fireEvent.click(getByTestId('trigger-update'));
+            });
+
+            expect(getByText(dynamicContent)).toBeInTheDocument();
+        });
     });
 
     describe('Notifications', () => {
