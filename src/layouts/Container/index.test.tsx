@@ -46,6 +46,16 @@ describe('Container', () => {
         expect(getByText(subtitle)).toBeInTheDocument();
     });
 
+    it('renders a container with subtitle being arbitrary react', () => {
+        const { getByText } = render(
+            <Container subtitle={<div>{subtitle}</div>}>
+                <Text>{bodyText}</Text>
+            </Container>
+        );
+
+        expect(getByText(subtitle)).toBeInTheDocument();
+    });
+
     it('renders a container with footer', () => {
         const footer = 'Footer';
         const { getByText } = render(
