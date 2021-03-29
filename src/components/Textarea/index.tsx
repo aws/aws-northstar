@@ -100,8 +100,8 @@ export interface TextareaProps {
     onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
     /** Handler for the onKeyUp event */
     onKeyUp?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-    /** Additional classes to apply */
-    classes?: string[];
+    /** Additional styling class to apply */
+    className?: string;
 }
 
 const mapTextareaProps = ({
@@ -144,7 +144,7 @@ const Textarea: FunctionComponent<TextareaProps> = ({ invalid, ...props }) => {
     return (
         <TextareaAutosize
             {...mapTextareaProps(props)}
-            className={clsx(classes.textarea, { [classes.invalid]: invalid }, props.classes)}
+            className={clsx(classes.textarea, { [classes.invalid]: invalid }, props.className)}
         />
     );
 };

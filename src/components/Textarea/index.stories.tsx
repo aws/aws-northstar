@@ -16,7 +16,8 @@
 import React from 'react';
 import Textarea from '.';
 import { action } from '@storybook/addon-actions';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(() => ({
     customBackground: {
@@ -52,13 +53,13 @@ export const WithOnKeyUpDown = () => (
     />
 );
 
-export const WithClasses = () => {
+export const WithClassName = () => {
     const classes = useStyles();
 
     return (
         <Textarea
             placeholder="This is a textarea with onChange() event"
-            classes={[classes.customBackground, classes.customWidth]}
+            className={clsx(classes.customBackground, classes.customWidth)}
         />
     );
 };
