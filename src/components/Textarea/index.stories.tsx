@@ -16,6 +16,16 @@
 import React from 'react';
 import Textarea from '.';
 import { action } from '@storybook/addon-actions';
+import { makeStyles, Theme } from '@material-ui/core';
+
+const useStyles = makeStyles(() => ({
+    customBackground: {
+        backgroundColor: 'lightgreen',
+    },
+    customWidth: {
+        width: '50%',
+    },
+}));
 
 export default {
     component: Textarea,
@@ -33,3 +43,22 @@ export const ReadOnly = () => <Textarea placeholder="This is a readOnly textarea
 export const WithOnChange = () => (
     <Textarea placeholder="This is a textarea with onChange() event" onChange={action('onChange')} />
 );
+
+export const WithOnKeyUpDown = () => (
+    <Textarea
+        placeholder="This is a textarea with onChange() event"
+        onKeyUp={action('onKeyUp')}
+        onKeyDown={action('onKeyDown')}
+    />
+);
+
+export const WithClasses = () => {
+    const classes = useStyles();
+
+    return (
+        <Textarea
+            placeholder="This is a textarea with onChange() event"
+            classes={[classes.customBackground, classes.customWidth]}
+        />
+    );
+};
