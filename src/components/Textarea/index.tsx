@@ -96,6 +96,12 @@ export interface TextareaProps {
     onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
     /** Handler for the onBlur event */
     onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
+    /** Handler for the onKeyDown event */
+    onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+    /** Handler for the onKeyUp event */
+    onKeyUp?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+    /** Additional styling class to the root element of the component */
+    className?: string;
 }
 
 const mapTextareaProps = ({
@@ -127,6 +133,8 @@ const mapTextareaProps = ({
         onChange: props.onChange,
         onFocus: props.onFocus,
         onBlur: props.onBlur,
+        onKeyDown: props.onKeyDown,
+        onKeyUp: props.onKeyUp,
     };
 };
 
@@ -136,7 +144,7 @@ const Textarea: FunctionComponent<TextareaProps> = ({ invalid, ...props }) => {
     return (
         <TextareaAutosize
             {...mapTextareaProps(props)}
-            className={clsx(classes.textarea, { [classes.invalid]: invalid })}
+            className={clsx(classes.textarea, { [classes.invalid]: invalid }, props.className)}
         />
     );
 };

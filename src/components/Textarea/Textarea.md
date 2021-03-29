@@ -35,5 +35,23 @@ const [content, setContent] = React.useState('');
         </div>
         </>
     </Container>
+
+    <Container headingVariant='h4' title="With onKeyUp">
+        <>
+            <Textarea placeholder="This is a textarea with onKeyUp" onKeyUp={(e) => setContent(e.key)} />
+            <div>
+                Key Down: {content}
+            </div>
+        </>
+    </Container>
+
+    <Container headingVariant='h4' title="With onKeyDown">
+        <>
+            <Textarea placeholder="This is a textarea with onKeyDown" onKeyDown={(e) => setContent(e.key)} />
+            <div>
+                Key Up: {content}
+            </div>
+        </>
+    </Container>
 </Stack>
 ```
