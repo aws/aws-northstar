@@ -63,7 +63,7 @@ export interface ContainerProps {
     /** Title of the stateful. */
     title?: string;
     /** Subtitle of the stateful. */
-    subtitle?: string;
+    subtitle?: string | ReactNode;
     /** Children components to render in the right portion of the header. Typically action buttons. */
     actionGroup?: ReactNode;
     /** Header content to display under the title. */
