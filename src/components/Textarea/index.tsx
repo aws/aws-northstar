@@ -100,7 +100,7 @@ export interface TextareaProps {
     onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
     /** Handler for the onKeyUp event */
     onKeyUp?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-    /** Additional styling class to apply */
+    /** Additional styling class to the root element of the component */
     className?: string;
 }
 
