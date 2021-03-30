@@ -19,6 +19,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Box from '../../../../../../layouts/Box';
 import Button from '../../../../../Button';
 import ColumnLayout, { Column } from '../../../../../../layouts/ColumnLayout';
+import { Grid } from '../../../../../../layouts';
 
 export interface FieldArrayItemProps {
     fields?: any[];
@@ -30,6 +31,7 @@ export interface FieldArrayItemProps {
     removeLabel: string;
     showError?: boolean;
     isReadOnly: boolean;
+    layout?: 'grid' | 'column';
 }
 
 const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
@@ -40,6 +42,7 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
     removeLabel,
     showError,
     isReadOnly,
+    layout,
 }) => {
     const formOptions = useFormApi();
     const editedFields = useMemo(() => {
@@ -59,7 +62,17 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
     return (
         <Box display="flex">
             <Box flexGrow={1}>
-                {
+                {layout === 'grid' ? (
+                    <Grid container>
+                        {editedFields.map((field) => (
+                            <Grid item key={field.key} xs={field.spacing || 3}>
+                                <Box width="100%" pr={1}>
+                                    {formOptions.renderForm([field], formOptions)}
+                                </Box>
+                            </Grid>
+                        ))}
+                    </Grid>
+                ) : (
                     <ColumnLayout renderDivider={false}>
                         {editedFields.map((field) => (
                             <Column key={field.key}>
@@ -69,7 +82,7 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
                             </Column>
                         ))}
                     </ColumnLayout>
-                }
+                )}
             </Box>
             {!isReadOnly && (
                 <Box display="flex" alignItems="flex-start" pt={fieldIndex === 0 ? 2.5 : 0.5}>
