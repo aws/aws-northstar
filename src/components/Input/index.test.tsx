@@ -83,6 +83,13 @@ describe('Input', () => {
         expect(getByPlaceholderText('input-1').getAttribute('autocomplete')).toEqual('off');
     });
 
+    it('renders falsy values', () => {
+        const { getByPlaceholderText } = render(
+            <Input type="number" placeholder="input-1" onChange={mockOnChange} value={0} />
+        );
+        expect(Number(getByPlaceholderText('input-1').getAttribute('value'))).toEqual(0);
+    });
+
     describe('for search input', () => {
         it('does not render clear button on default', () => {
             const { getByPlaceholderText, queryByTestId } = render(<Input type="search" placeholder="input-1" />);

@@ -125,11 +125,11 @@ const mapProps = ({
  */
 const Input: FunctionComponent<InputProps> = ({ onChange = () => {}, ...props }): ReactElement => {
     const [showClearInputButton, setShowClearInputButton] = React.useState(false);
-    const [inputValue, setInputValue] = React.useState(props.value || '');
+    const [inputValue, setInputValue] = React.useState(props.value === undefined ? '' : props.value);
     const id: string = props.controlId || uuidv4();
 
     useEffect(() => {
-        setInputValue(props.value || '');
+        setInputValue(props.value === undefined ? '' : props.value);
     }, [props.value]);
 
     const handleChange = (value: string): void => {
