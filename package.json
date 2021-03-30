@@ -23,6 +23,7 @@
     "license:check": "license-checker --summary --production --onlyAllow 'MIT;Apache-2.0;Unlicense;BSD;BSD*;BSD-2-Clause;BSD-3-Clause;ISC;Zlib;WTFPL;Custom: https://github.com/tmcw/jsonlint;Custom: http://badges.github.io/stability-badges/dist/stable.svg;Custom: https://github.com/substack/node-browserify'",
     "lint:fix": "eslint --fix --ext .ts --ext .tsx  --ext .js --ext .jsx .",
     "lint": "eslint --ext .ts --ext .tsx --ext .js --ext .jsx .",
+    "lint-staged": "lint-staged",
     "prettier": "prettier --write {src,infra,styleguide}{/**/,/}**.{js,jsx,ts,tsx}",
     "storybook:build": "build-storybook -s ./public -o storybook.out",
     "storybook": "start-storybook -s ./public -p 9090",
@@ -31,14 +32,8 @@
     "test:all": "npm run lint && npm run test:ci",
     "test:ci": "npm run test -- --coverage && npm run license:check && git secrets --scan",
     "test": "jest",
-    "test:watch": "jest --runInBand --watch ./src"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run test:ci",
-      "commit-msg": "./node_modules/git-conventional-commits/cli.js commit-msg-hook $HUSKY_GIT_PARAMS"
-    }
+    "test:watch": "jest --runInBand --watch ./src",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "(src|infra|styleguide|docs)(/**/|/*)**.(js|jsx|ts|tsx)": [
@@ -93,7 +88,7 @@
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^2.5.1",
     "git-conventional-commits": "^1.0.5",
-    "husky": "^4.3.8",
+    "husky": "^6.0.0",
     "jest": "26.6.3",
     "jest-axe": "^3.4.0",
     "license-checker": "^25.0.1",
