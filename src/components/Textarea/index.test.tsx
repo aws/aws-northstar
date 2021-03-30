@@ -18,6 +18,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import Textarea, { mapTextareaProps, TextareaProps } from '.';
 import { TextareaAutosizeProps } from '@material-ui/core';
+import clsx from 'clsx';
 
 describe('Textarea', () => {
     const mockOnChange = jest.fn();
@@ -39,10 +40,34 @@ describe('Textarea', () => {
         expect(mockOnChange).toHaveBeenCalledTimes(1);
     });
 
+    it('fires onKeyUp event', () => {
+        const { getByPlaceholderText } = render(<Textarea placeholder="textarea" onKeyUp={mockOnChange} />);
+
+        expect(mockOnChange).toHaveBeenCalledTimes(0);
+        fireEvent.keyUp(getByPlaceholderText('textarea'), { key: 'Enter' });
+        expect(mockOnChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('fires onKeyDown event', () => {
+        const { getByPlaceholderText } = render(<Textarea placeholder="textarea" onKeyDown={mockOnChange} />);
+
+        expect(mockOnChange).toHaveBeenCalledTimes(0);
+        fireEvent.keyDown(getByPlaceholderText('textarea'), { key: 'Enter' });
+        expect(mockOnChange).toHaveBeenCalledTimes(1);
+    });
+
     it('renders disabled textarea', () => {
         const { getByPlaceholderText } = render(<Textarea placeholder="textarea" disabled={true} />);
 
         expect(getByPlaceholderText('textarea')).toHaveAttribute('disabled');
+    });
+
+    it('renders custom className', () => {
+        const { getByPlaceholderText } = render(
+            <Textarea placeholder="textarea" className={clsx('custom1', 'custom2')} />
+        );
+
+        expect(getByPlaceholderText('textarea')).toHaveClass('custom1', 'custom2');
     });
 
     it('maps props correctly', () => {
