@@ -37,6 +37,7 @@ const FieldArrayMapping: FunctionComponent = (props: any) => {
         defaultItem = {},
         showError,
         meta: { submitFailed, error },
+        layout,
         minItems = 0,
         maxItems = Number.MAX_SAFE_INTEGER,
         buttonLabels,
@@ -68,6 +69,7 @@ const FieldArrayMapping: FunctionComponent = (props: any) => {
                             {map((name: any, index: number) => {
                                 return (
                                     <FieldArrayItem
+                                        layout={layout}
                                         key={name}
                                         fields={formFields}
                                         name={name}
