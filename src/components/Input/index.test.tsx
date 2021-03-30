@@ -87,7 +87,7 @@ describe('Input', () => {
         const { getByPlaceholderText } = render(
             <Input type="number" placeholder="input-1" onChange={mockOnChange} value={0} />
         );
-        expect(Number(getByPlaceholderText('input-1').getAttribute('value'))).toEqual(0);
+        expect(getByPlaceholderText('input-1').getAttribute('value')).toEqual('0');
     });
 
     describe('for search input', () => {
