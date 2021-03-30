@@ -812,7 +812,7 @@ describe('FormRenderer', () => {
             ],
         };
 
-        it('should render FieldArray', () => {
+        const fieldArrayTest = (schema: any) => {
             const { getByText, getAllByRole, getByLabelText } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
@@ -847,6 +847,14 @@ describe('FormRenderer', () => {
                 expect.any(Object),
                 expect.any(Function)
             );
+        };
+
+        it('should render FieldArray', () => {
+            fieldArrayTest(schema);
+        });
+
+        it('should render FieldArray with grid', () => {
+            fieldArrayTest({ ...schema, layout: 'grid' });
         });
     });
 
