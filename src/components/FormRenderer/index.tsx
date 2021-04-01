@@ -20,7 +20,7 @@ import Custom from './components/Custom';
 import Datepicker from './components/Datepicker';
 import ExpandableSection from './components/ExpandableSection';
 import FieldArray from './components/FieldArray';
-import buildFormTemplate from './components/FormTemplate';
+import FormTemplate from './components/FormTemplate';
 import Radio from './components/Radio';
 import Review from './components/Review';
 import Select from './components/Select';
@@ -85,12 +85,14 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
     initialValues,
     customComponentWrapper,
 }) => {
-    const FormTemplate = useMemo(() => buildFormTemplate({ isSubmitting }), [isSubmitting]);
+    const WrappedFormTemplate = useMemo(() => (props: any) => <FormTemplate {...props} isSubmitting={isSubmitting} />, [
+        isSubmitting,
+    ]);
 
     return (
         <FormRender
             componentMapper={{ ...componentMapper, ...customComponentWrapper }}
-            FormTemplate={FormTemplate}
+            FormTemplate={WrappedFormTemplate}
             schema={schema}
             onSubmit={onSubmit}
             onCancel={onCancel}

@@ -24,15 +24,15 @@ export interface FormTemplateProps {
     schema: any;
     cancelLabel?: string;
     submitLabel?: string;
-}
-
-export interface AdditionalFormTemplateProps {
     isSubmitting?: boolean;
 }
 
-const buildFormTemplate: (props: AdditionalFormTemplateProps) => FunctionComponent<FormTemplateProps> = ({
+const FormTemplate: FunctionComponent<FormTemplateProps> = ({
+    formFields,
+    schema: { cancelLabel = 'Cancel', submitLabel = 'Submit' },
+    schema,
     isSubmitting,
-}) => ({ formFields, schema: { cancelLabel = 'Cancel', submitLabel = 'Submit' }, schema }) => {
+}) => {
     const { handleSubmit, onCancel } = useFormApi();
 
     const actions = (
@@ -67,4 +67,4 @@ const buildFormTemplate: (props: AdditionalFormTemplateProps) => FunctionCompone
     );
 };
 
-export default buildFormTemplate;
+export default FormTemplate;
