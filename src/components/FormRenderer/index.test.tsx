@@ -16,6 +16,7 @@
 import React from 'react';
 import { render, fireEvent, cleanup, act } from '@testing-library/react';
 import FormRenderer, { componentTypes, validatorTypes } from '.';
+import Button from '../Button';
 
 describe('FormRenderer', () => {
     afterEach(() => {
@@ -85,6 +86,22 @@ describe('FormRenderer', () => {
             );
             expect(getByText('Custom Submit Label')).toBeVisible();
             expect(getByText('Custom Cancel Label')).toBeVisible();
+        });
+
+        it('should show a loading spinner while submitting', () => {
+            const { queryByRole } = render(
+                <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} isSubmitting={true} />
+            );
+
+            expect(queryByRole('progressbar')).toBeInTheDocument();
+        });
+
+        it('should not show a loading spinner by default', () => {
+            const { queryByRole } = render(
+                <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
+            );
+
+            expect(queryByRole('progressbar')).not.toBeInTheDocument();
         });
     });
 

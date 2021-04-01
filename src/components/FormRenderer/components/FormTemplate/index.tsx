@@ -24,22 +24,25 @@ export interface FormTemplateProps {
     schema: any;
     cancelLabel?: string;
     submitLabel?: string;
+    isSubmitting?: boolean;
 }
 
 const FormTemplate: FunctionComponent<FormTemplateProps> = ({
     formFields,
     schema: { cancelLabel = 'Cancel', submitLabel = 'Submit' },
     schema,
+    isSubmitting,
 }) => {
     const { handleSubmit, onCancel } = useFormApi();
 
     const actions = (
         <Inline spacing="s">
-            <Button variant="link" onClick={onCancel}>
+            <Button variant="link" onClick={onCancel} disabled={isSubmitting}>
                 {cancelLabel}
             </Button>
             <Button
                 variant="primary"
+                loading={isSubmitting}
                 onClick={(event) => {
                     event.preventDefault();
                     handleSubmit(event);

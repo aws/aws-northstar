@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent, ComponentType } from 'react';
+import React, { FunctionComponent, ComponentType, useMemo } from 'react';
 import FormRender, { validatorTypes } from '@data-driven-forms/react-form-renderer';
 import Checkbox from './components/Checkbox';
 import Custom from './components/Custom';
@@ -64,6 +64,8 @@ export interface FormRendererProps {
     onSubmit: (values: any) => void;
     /** A cancel callback, which receives values as the first argument. */
     onCancel?: () => void;
+    /** When true, the submit button is disabled with a loading spinner */
+    isSubmitting?: boolean;
     /** Custom component wrappers*/
     customComponentWrapper?: {
         [componentType: string]: ComponentType;
@@ -79,13 +81,18 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
     schema,
     onSubmit,
     onCancel,
+    isSubmitting,
     initialValues,
     customComponentWrapper,
 }) => {
+    const WrappedFormTemplate = useMemo(() => (props: any) => <FormTemplate {...props} isSubmitting={isSubmitting} />, [
+        isSubmitting,
+    ]);
+
     return (
         <FormRender
             componentMapper={{ ...componentMapper, ...customComponentWrapper }}
-            FormTemplate={FormTemplate}
+            FormTemplate={WrappedFormTemplate}
             schema={schema}
             onSubmit={onSubmit}
             onCancel={onCancel}
