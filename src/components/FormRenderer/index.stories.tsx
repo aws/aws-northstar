@@ -1116,6 +1116,21 @@ export const FileUploader = () => {
     return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
 };
 
+export const Submitting = () => {
+    const schema = {
+        fields: [
+            {
+                component: componentTypes.TEXT_FIELD,
+                name: 'input',
+                isDisabled: true,
+            },
+        ],
+        header: 'Spinner while submitting',
+    };
+
+    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} isSubmitting={true} />;
+};
+
 export const SimpleMarkdownEditor = () => {
     const schema = {
         submitLabel: 'Save',

@@ -1355,6 +1355,27 @@ const schema = {
 ```
 
 ```jsx
+import { useCallback } from 'react';
+import FormRenderer, { componentTypes } from 'aws-northstar/components/FormRenderer';
+import Container from 'aws-northstar/layouts/Container';
+
+const schema = {
+    fields: [
+        {
+            component: componentTypes.TEXT_FIELD,
+            name: 'input',
+            isDisabled: true,
+        },
+    ],
+    header: 'Spinner while submitting',
+};
+
+<Container>
+    <FormRenderer schema={schema} onSubmit={console.log} onCancel={console.log} isSubmitting={true} />
+</Container>
+```
+
+```jsx
 import Container from 'aws-northstar/layouts/Container';
 import FormRenderer, { componentTypes, validatorTypes } from 'aws-northstar/components/FormRenderer';
 

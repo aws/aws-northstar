@@ -13,14 +13,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent, ComponentType } from 'react';
+import React, { FunctionComponent, ComponentType, useMemo } from 'react';
 import FormRender, { validatorTypes } from '@data-driven-forms/react-form-renderer';
 import Checkbox from './components/Checkbox';
 import Custom from './components/Custom';
 import Datepicker from './components/Datepicker';
 import ExpandableSection from './components/ExpandableSection';
 import FieldArray from './components/FieldArray';
-import FormTemplate from './components/FormTemplate';
+import buildFormTemplate from './components/FormTemplate';
 import Radio from './components/Radio';
 import Review from './components/Review';
 import Select from './components/Select';
@@ -64,6 +64,8 @@ export interface FormRendererProps {
     onSubmit: (values: any) => void;
     /** A cancel callback, which receives values as the first argument. */
     onCancel?: () => void;
+    /** When true, the submit button is disabled with a loading spinner */
+    isSubmitting?: boolean;
     /** Custom component wrappers*/
     customComponentWrapper?: {
         [componentType: string]: ComponentType;
@@ -79,9 +81,12 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
     schema,
     onSubmit,
     onCancel,
+    isSubmitting,
     initialValues,
     customComponentWrapper,
 }) => {
+    const FormTemplate = useMemo(() => buildFormTemplate({ isSubmitting }), [isSubmitting]);
+
     return (
         <FormRender
             componentMapper={{ ...componentMapper, ...customComponentWrapper }}
