@@ -108,6 +108,33 @@ export const Complex = () => (
     />
 );
 
+export const UseState = () => {
+    const [selected, setSelected] = useState();
+
+    const handleSelectChange = useCallback(
+        (value) => {
+            if (value && value.length === 1 && selected !== value[0]) {
+                setSelected(value[0]);
+            } else {
+                setSelected(undefined);
+            }
+        },
+        [setSelected]
+    );
+
+    return (
+        <Table
+            onSelectionChange={handleSelectChange}
+            tableTitle={'Complex Table'}
+            columnDefinitions={columnDefinitions}
+            multiSelect={false}
+            selectedRowIds={selected && [selected]}
+            getRowId={(data) => data.id}
+            items={longData}
+        />
+    );
+};
+
 interface Data {
     id: string;
     name: string;
