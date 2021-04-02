@@ -67,7 +67,7 @@ export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
     /**
      * Callback fired when the value changes.
      * */
-    onChange?: (value: SelectOption | null) => void;
+    onChange?: (value: string | SelectOption | null) => void;
     /**
      * Callback fired when the input value changes.
      * */
@@ -126,7 +126,7 @@ export default function Autosuggest({
     statusType = 'finished',
 }: AutosuggestProps) {
     const classes = useStyles();
-    const [inputValue, setInputValue] = useState<SelectOption | null>(value || null);
+    const [inputValue, setInputValue] = useState<string | SelectOption | null>(value || null);
     const [open, setOpen] = React.useState(false);
     const autoCompleteString: string = disableBrowserAutocorrect ? 'off' : 'on';
 
@@ -151,7 +151,7 @@ export default function Autosuggest({
         return optionArray;
     }, [options]);
 
-    const handleOnChange = (event: React.ChangeEvent<{}>, value: SelectOption | null): void => {
+    const handleOnChange = (event: React.ChangeEvent<{}>, value: string | SelectOption | null): void => {
         onChange(value);
         setInputValue(value);
     };

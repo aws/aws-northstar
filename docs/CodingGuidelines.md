@@ -94,4 +94,4 @@ Please ensure that:
 - If applicable, general guidelines for the component are provided in the  `<Component>.md` file.
 - Storybook entries cover different use cases
 - If you add shared utility methods, methods and parameter lists need to be documented.
-- Run command `npm run check:all` to ensure all the tests pass, code builds, storybook builds, and documentation builds. 
+- Run command `yarn check:all` to ensure all the tests pass, code builds, storybook builds, and documentation builds. 
