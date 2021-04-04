@@ -113,8 +113,10 @@ export const UseState = () => {
 
     const handleSelectChange = useCallback(
         (value) => {
-            if (value && value.length === 1 && selected !== value[0]) {
-                setSelected(value[0]);
+            if (value && value.length === 1) {
+                if (selected !== value[0]) {
+                    setSelected(value[0]);
+                }
             } else {
                 setSelected(undefined);
             }
