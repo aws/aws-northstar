@@ -244,7 +244,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
                 id={controlId}
                 noOptionsText={empty}
                 value={inputValue}
-                getOptionSelected={(opt, v) => opt.value === v.value}
+                getOptionSelected={(opt: any, v: any) => opt.value === v.value}
                 open={statusType === 'error' || statusType === 'loading' ? true : open}
                 options={flattenOptions}
                 loadingText={loadingAndErrorText}

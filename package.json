@@ -16,9 +16,9 @@
   "scripts": {
     "build:build-readme": "cp ./README_NPM_PACKAGE.md ./build/README.md && cat ./docs/GettingStarted.md >> ./build/README.md",
     "build:copy-file": "cp ./package.json ./build/",
-    "build": "tsc --build tsconfig.build.json && npm run generate:attribution && npm run build:copy-file && npm run build:build-readme",
+    "build": "tsc --build tsconfig.build.json && yarn generate:attribution && yarn build:copy-file && yarn build:build-readme",
     "build:esm": "tsc --build tsconfig.build.esm.json",
-    "check:all": "npm run test:all && npm run build && npm run storybook:build && npm run styleguide:build",
+    "check:all": "yarn test:all && yarn build && yarn storybook:build && yarn styleguide:build",
     "generate:attribution": "generate-attribution && mv oss-attribution/attribution.txt LICENSE-THIRD-PARTY",
     "license:check": "license-checker --summary --production --onlyAllow 'MIT;Apache-2.0;Unlicense;BSD;BSD*;BSD-2-Clause;BSD-3-Clause;ISC;Zlib;WTFPL;Custom: https://github.com/tmcw/jsonlint;Custom: http://badges.github.io/stability-badges/dist/stable.svg;Custom: https://github.com/substack/node-browserify'",
     "lint:fix": "eslint --fix --ext .ts --ext .tsx  --ext .js --ext .jsx .",
@@ -29,15 +29,15 @@
     "storybook": "start-storybook -s ./public -p 9090",
     "styleguide:build": "styleguidist build",
     "styleguide": "styleguidist server",
-    "test:all": "npm run lint && npm run test:ci",
-    "test:ci": "npm run test -- --coverage && npm run license:check && git secrets --scan",
+    "test:all": "yarn lint && yarn test:ci",
+    "test:ci": "yarn test --coverage && yarn license:check && git secrets --scan",
     "test": "jest",
     "test:watch": "jest --runInBand --watch ./src",
     "prepare": "husky install"
   },
   "lint-staged": {
     "(src|infra|styleguide|docs)(/**/|/*)**.(js|jsx|ts|tsx)": [
-      "npm run lint:fix"
+      "yarn lint:fix"
     ]
   },
   "author": "Amazon Web Services",
@@ -115,7 +115,7 @@
     "ts-loader": "^8.0.17",
     "typescript": "^4.2.3",
     "url-loader": "^4.1.1",
-    "webpack": "^4.41.6"
+    "webpack": "4.46.0"
   },
   "dependencies": {
     "@data-driven-forms/react-form-renderer": "^2.5.3",
@@ -153,6 +153,9 @@
     "react-plotly.js": "^2.5.1",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2"
+  },
+  "resolutions": {
+    "**/webpack/**/terser-webpack-plugin": "3.1.0"
   },
   "browserslist": {
     "production": [

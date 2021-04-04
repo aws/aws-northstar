@@ -11,7 +11,7 @@ oss-attribution/
 .idea/
 
 LICENSE-THIRD-PARTY
-yarn.lock
+package-lock.json
 .DS_Store
 
 *.log

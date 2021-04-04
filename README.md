@@ -29,7 +29,7 @@ Contribution guide and coding guidelines are available at the [documentation web
 
 In the project directory, you can run:
 
-#### `npm run storybook`
+#### `yarn storybook`
 
 Runs storybook to navigate all the components.
 
@@ -37,21 +37,21 @@ Open [http://localhost:9090](http://localhost:9090) to view it in the browser. T
 
 **It is recommended to use storybook as development environment.**
 
-#### `npm run styleguide`
+#### `yarn styleguide`
 
 Runs documentation site to navigate all the components.
 
 Open [http://localhost:6060](http://localhost:6060) to view it in the browser. The page will reload if you make edits.
 
-#### `npm run test:watch`
+#### `yarn test:watch`
 
 Run jest tests in watch mode
 
-#### `npm run lint:fix`
+#### `yarn lint:fix`
 
 Fix lint problems automatically
 
-#### `npm run check:all`
+#### `yarn check:all`
 
 Check all the tests passed, code built, storybook built, documentation built
 
