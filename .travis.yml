@@ -5,6 +5,7 @@ install:
   - pushd /tmp && git clone --depth 1 https://github.com/awslabs/git-secrets.git && cd ./git-secrets && PREFIX=/tmp/git-secrets make install && popd
   - npm install -g typescript
   - npm install -g yarn
+  - npm install -g oss-attribution-generator
 script: 
   - export PATH=/tmp/git-secrets/bin:$PATH
   - ./scripts/build.sh

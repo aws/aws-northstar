@@ -16,7 +16,7 @@
   "scripts": {
     "build:build-readme": "cp ./README_NPM_PACKAGE.md ./build/README.md && cat ./docs/GettingStarted.md >> ./build/README.md",
     "build:copy-file": "cp ./package.json ./build/",
-    "build": "tsc --build tsconfig.build.json && yarn generate:attribution && yarn build:copy-file && yarn build:build-readme",
+    "build": "tsc --build tsconfig.build.json && yarn build:copy-file && yarn build:build-readme",
     "build:esm": "tsc --build tsconfig.build.esm.json",
     "check:all": "yarn test:all && yarn build && yarn storybook:build && yarn styleguide:build",
     "generate:attribution": "generate-attribution && mv oss-attribution/attribution.txt LICENSE-THIRD-PARTY",
@@ -94,7 +94,6 @@
     "license-checker": "^25.0.1",
     "lint-staged": "^10.0.9",
     "lodash.orderby": "^4.6.0",
-    "oss-attribution-generator": "^1.7.1",
     "plotly.js": "^1.54.7",
     "prettier": "^2.2.1",
     "react": "^16.12.0",
