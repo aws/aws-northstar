@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { render, cleanup, fireEvent, act } from '@testing-library/react';
 import Multiselect from '.';
 
 const options = [
@@ -44,11 +44,12 @@ describe('MultiSelect', () => {
     });
 
     it('should render all options when user click input', () => {
-        const { getByPlaceholderText, getAllByRole, getByText } = render(
-            <Multiselect options={options} placeholder="input-1" />
-        );
-        const input = getByPlaceholderText('input-1');
-        fireEvent.click(input);
+        const { getAllByRole, getByTitle, getByText } = render(<Multiselect options={options} placeholder="input-1" />);
+        act(() => {
+            const open = getByTitle('Open');
+            fireEvent.click(open);
+        });
+
         expect(getAllByRole('option')).toHaveLength(4);
         expect(getByText('Aoption 1')).toBeVisible();
         expect(getByText('Aoption 2')).toBeVisible();
