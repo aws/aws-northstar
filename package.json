@@ -30,7 +30,7 @@
     "styleguide:build": "styleguidist build",
     "styleguide": "styleguidist server",
     "test:all": "yarn lint && yarn test:ci",
-    "test:ci": "yarn test -- --coverage && yarn license:check && git secrets --scan",
+    "test:ci": "yarn test --coverage && yarn license:check && git secrets --scan",
     "test": "jest",
     "test:watch": "jest --runInBand --watch ./src",
     "prepare": "husky install"
