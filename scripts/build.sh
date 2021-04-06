@@ -6,7 +6,6 @@ set -ev
 
 yarn install
 yarn test:all
-yarn generate:attribution
 yarn styleguide:build
 yarn storybook:build
 
@@ -14,6 +13,7 @@ echo 'Remove build folder to make sure the npm package only includes clean built
 if [ -d "./build" ]; then rm -rf ./build; fi # 
 yarn build
 yarn build:esm
+yarn generate:attribution
 
 echo 'Copy license files'
 cp ./LICENSE ./build/
