@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { render, fireEvent, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import Popover from '.';
 
 describe('Popover', () => {
