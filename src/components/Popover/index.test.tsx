@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import Popover from '.';
 
 describe('Popover', () => {
@@ -62,6 +62,28 @@ describe('Popover', () => {
         );
         getByText('Trigger').click();
         expect(getByText('popover content')).toHaveTextContent('popover content');
+    });
+
+    it('renders and hides the popover on hover when variant is hover', async () => {
+        const { getByText, queryByText } = render(
+            <Popover header="header text" variant="hover">
+                <span>Trigger</span>
+            </Popover>
+        );
+        expect(queryByText('header text')).toBeNull();
+
+        fireEvent.mouseEnter(getByText('Trigger'));
+
+        await waitFor(() => getByText('header text'));
+        expect(getByText('header text')).toBeInTheDocument();
+
+        fireEvent.mouseLeave(getByText('Trigger'));
+
+        await waitFor(() => {
+            expect(queryByText('header text')).not.toBeInTheDocument();
+        });
+
+        expect(queryByText('header text')).toBeNull();
     });
 
     it('calls the onOpen callback when the popover is opened', () => {

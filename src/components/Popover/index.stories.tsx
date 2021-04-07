@@ -100,6 +100,22 @@ export const Large = () => (
     </Stack>
 );
 
+export const Hover = () => (
+    <Stack>
+        <Popover
+            position="bottom"
+            size="medium"
+            header="Hovered!"
+            triggerType="text"
+            variant="hover"
+            showDismissButton={false}
+            content={<span>This appears when you hover over the trigger region</span>}
+        >
+            <StatusIndicator statusType="positive">Hover</StatusIndicator>
+        </Popover>
+    </Stack>
+);
+
 export const StateChangeCallbacks = () => (
     <Stack>
         <Popover

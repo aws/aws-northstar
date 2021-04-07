@@ -110,7 +110,14 @@ export interface PopoverProps {
      * - `text` - Use for inline text triggers.
      * - `custom` - Use for the Northstar Button component.
      */
-    triggerType?: 'text' | 'custom';
+    triggerType?: 'text' | 'custom' | 'hover';
+
+    /**
+     * Specifies how the popover should be opened:
+     * - `click` (default) - click on the trigger region to open the popover
+     * - `hover` - hover the mouse over the trigger region to open the popover
+     */
+    variant?: 'click' | 'hover';
 
     /**
      * Element that triggers the popover when selected by the user.
@@ -157,6 +164,7 @@ const Popover: FunctionComponent<PopoverProps> = ({
     fixedWidth = false,
     size = 'medium',
     triggerType = 'text',
+    variant = 'click',
     children,
     content,
     dismissAriaLabel,
@@ -204,7 +212,9 @@ const Popover: FunctionComponent<PopoverProps> = ({
         // https://github.com/microsoft/TypeScript/issues/36659
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ref: triggerRef as any,
-        onClick: onTriggerClick,
+        onClick: variant !== 'hover' ? onTriggerClick : undefined,
+        onMouseEnter: variant === 'hover' ? onTriggerClick : undefined,
+        onMouseLeave: variant === 'hover' ? onPopoverClose : undefined,
         className: clsx(classes.trigger, classes[`trigger-type-${triggerType}`]),
     };
 
@@ -242,6 +252,7 @@ const Popover: FunctionComponent<PopoverProps> = ({
                         onClose={onPopoverClose}
                         anchorOrigin={anchorOrigin}
                         transformOrigin={transformOrigin}
+                        style={variant === 'hover' ? { pointerEvents: 'none' } : undefined}
                     >
                         <div className={classes.container}>
                             <div

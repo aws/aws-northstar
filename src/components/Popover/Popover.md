@@ -45,6 +45,29 @@ import StatusIndicator from 'aws-northstar/components/StatusIndicator';
 ```jsx
 import Popover from 'aws-northstar/components/Popover';
 import Stack from 'aws-northstar/layouts/Stack';
+import StatusIndicator from 'aws-northstar/components/StatusIndicator';
+<Stack>
+    <Popover
+        position="bottom"
+        size="medium"
+        header="Hovered"
+        triggerType="text"
+        variant="hover"
+        showDismissButton={false}
+        content={
+            <span>This appears when you hover over the trigger region</span>
+        }
+    >
+        <StatusIndicator statusType="positive">
+            Hover
+        </StatusIndicator>
+    </Popover>
+</Stack>
+```
+
+```jsx
+import Popover from 'aws-northstar/components/Popover';
+import Stack from 'aws-northstar/layouts/Stack';
 import ColumnLayout, { Column } from 'aws-northstar/layouts/ColumnLayout';
 import StatusIndicator from 'aws-northstar/components/StatusIndicator';
 import KeyValuePair from 'aws-northstar/components/KeyValuePair';
