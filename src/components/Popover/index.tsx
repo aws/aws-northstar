@@ -110,7 +110,7 @@ export interface PopoverProps {
      * - `text` - Use for inline text triggers.
      * - `custom` - Use for the Northstar Button component.
      */
-    triggerType?: 'text' | 'custom' | 'hover';
+    triggerType?: 'text' | 'custom';
 
     /**
      * Specifies how the popover should be opened:
