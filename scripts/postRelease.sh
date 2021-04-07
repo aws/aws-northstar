@@ -1,7 +1,4 @@
-
 #!/bin/bash
-
-echo ${nextRelease.version} > RELEASED
 
 echo "Sending notification to slack workflow"
 
