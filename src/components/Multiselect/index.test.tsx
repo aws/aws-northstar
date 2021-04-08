@@ -114,6 +114,20 @@ describe('MultiSelect', () => {
         expect(container.querySelector('.MuiChip-label')).toHaveTextContent('Aoption 2');
     });
 
+    it('should render the entered text as a token in freeSolo mode', () => {
+        const handleChange = jest.fn();
+        const { getByPlaceholderText, container } = render(
+            <Multiselect options={options} placeholder="input-1" onChange={handleChange} freeSolo />
+        );
+        const input = getByPlaceholderText('input-1');
+
+        fireEvent.change(input, { target: { value: 'Free Solo Text' } });
+        fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
+        expect(handleChange).toHaveBeenCalledTimes(1);
+        expect(handleChange).toHaveBeenCalledWith([{ value: 'Free Solo Text', label: 'Free Solo Text' }]);
+        expect(container.querySelector('.MuiChip-label')).toHaveTextContent('Free Solo Text');
+    });
+
     it('should render multiple selected options as tokens', () => {
         const handleChange = jest.fn();
         const { getByText, getByTitle, container } = render(

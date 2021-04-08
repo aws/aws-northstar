@@ -49,3 +49,18 @@ import { awsServices } from '../Autosuggest/data/data';
     />
 </FormField>
 ```
+
+Free Solo (Allowing custom text)
+```jsx
+import FormField from 'aws-northstar/components/FormField';
+import { awsServices } from '../Autosuggest/data/data';
+
+<FormField label="Form field label" controlId="formFieldId3">
+    <Multiselect
+        options={awsServices}
+        controlId="formFieldId3"
+        ariaDescribedby="This is a description"
+        freeSolo
+    />
+</FormField>
+```
