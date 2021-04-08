@@ -111,3 +111,17 @@ export const AsyncLoading = () => {
         </FormField>
     );
 };
+
+export const FreeSolo = () => (
+    <FormField label="Form field label" controlId="formFieldId1">
+        <Multiselect
+            options={awsServices}
+            controlId="formFieldId1"
+            ariaDescribedby="This is a description"
+            onChange={action('onChange')}
+            onFocus={action('onFocus')}
+            onBlur={action('onBlur')}
+            freeSolo
+        />
+    </FormField>
+);

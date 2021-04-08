@@ -53,6 +53,10 @@ export interface MultiselectProps extends SelectBaseProps, AriaBaseProps {
      * The default value is false, but we highly recommend to set this to true.
      */
     checkboxes?: boolean;
+    /**
+     * If `true`, the Multiselect is free solo, meaning that the user input is not bound to provided options.
+     */
+    freeSolo?: boolean;
     /** Callback fired when the value changes. */
     onChange?: (value: SelectOption[]) => void;
     /** Callback fired when the input value changes. */
@@ -91,6 +95,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
     placeholder,
     invalid,
     checkboxes = false,
+    freeSolo = false,
     ariaRequired = false,
     ariaDescribedby,
     ariaLabelledby,
@@ -138,9 +143,12 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
     }, [options]);
 
     const handleOnChange = useCallback(
-        (event: React.ChangeEvent<{}>, values: SelectOption[] | null): void => {
-            onChange(values || []);
-            setInputValue(values || []);
+        (event: React.ChangeEvent<{}>, values: (string | SelectOption)[] | null): void => {
+            const valuesAsOptions: SelectOption[] = (values || []).map((value) =>
+                typeof value === 'string' ? { value, label: value } : value
+            );
+            onChange(valuesAsOptions);
+            setInputValue(valuesAsOptions);
         },
         [onChange, setInputValue]
     );
@@ -242,6 +250,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
                 autoHighlight
                 popupIcon={null}
                 id={controlId}
+                freeSolo={freeSolo}
                 noOptionsText={empty}
                 value={inputValue}
                 getOptionSelected={(opt: any, v: any) => opt.value === v.value}
