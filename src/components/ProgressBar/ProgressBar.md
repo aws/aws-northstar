@@ -15,6 +15,7 @@ import Stack from 'aws-northstar/layouts/Stack';
 
     <Container headingVariant='h4' title="Circular progress bar">
         <ProgressBar label="Circular progress bar completed" variant={'circular'} value={100} displayValue={true} />
+        <ProgressBar label="Circular progress bar empty" variant={'circular'} value={0} displayValue={true} />
     </Container>
 </Stack>    
 ```
