@@ -1087,10 +1087,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@data-driven-forms/react-form-renderer@^2.5.3":
-  version "2.24.1"
-  resolved "https://registry.yarnpkg.com/@data-driven-forms/react-form-renderer/-/react-form-renderer-2.24.1.tgz"
-  integrity sha512-0UeHFFNPCc2XiYMHwnlW+N4Wrag9eygZD+mkPwKu6MAFweH1eWn4D4N3LUkE4O6FJw16mPMzfI3iizXN8T9uQA==
+"@data-driven-forms/react-form-renderer@^3.6.0":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@data-driven-forms/react-form-renderer/-/react-form-renderer-3.6.0.tgz#e87be0b8dbe7ad1d91b868a3fcc452b4ca50305f"
+  integrity sha512-xhO64BmQ2YI4ygkCaM2bT2sKfv3p7FrvnyWv9nSbhf5Ui2pVBldyeVv3+kEzAl8DqrP8ZRKa0w1T3fAAGLzD4g==
   dependencies:
     final-form "^4.20.0"
     final-form-arrays "^3.0.2"
