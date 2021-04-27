@@ -40,4 +40,17 @@ describe('Inline', () => {
 
         expect(getAllByTestId('placeholder')).toHaveLength(3);
     });
+
+    it('renders a list of items containing null', () => {
+        const { getByTestId } = render(
+            <Inline>
+                <Placeholder />
+                <></>
+                {null}
+                <Placeholder />
+            </Inline>
+        );
+
+        expect(getByTestId('layout-inline').children).toHaveLength(3);
+    });
 });

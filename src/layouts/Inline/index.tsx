@@ -40,7 +40,7 @@ export interface InlineProps {
  */
 const Inline: FunctionComponent<InlineProps> = ({ children, spacing = 'm' }) => {
     const styles = useStyles();
-    const stackItems = Children.toArray(children);
+    const stackItems = Children.toArray(children).filter((c) => c);
     const lastIndex = stackItems.length - 1;
     return (
         <Box display="flex" flexDirection="row" flexWrap="wrap" className={styles.root} data-testid="layout-inline">
