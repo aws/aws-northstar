@@ -67,7 +67,7 @@ describe('useScrollPosition', () => {
                 scrollTop: 100,
             },
         };
-        const { result, waitForNextUpdate } = renderHook(() => useScrollPosition(callback, element, 200));
+        const { result } = renderHook(() => useScrollPosition(callback, element, 200));
         act(() => {
             result.current.handleScroll();
         });

@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode, FunctionComponent, useCallback, useMemo, useEffect } from 'react';
+import React, { ReactNode, FunctionComponent, useCallback, useMemo } from 'react';
 import MaterialAlert, { AlertProps as MaterialAlertProps } from '@material-ui/lab/Alert';
 import MaterialAlertTitle from '@material-ui/lab/AlertTitle';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
@@ -122,7 +122,7 @@ const Alert: FunctionComponent<AlertProps> = ({
                 )}
             </>
         ),
-        [actionButton, show, onDismiss, setShow]
+        [actionButton, dissmissLabel, show, onDismiss, setShow]
     );
 
     const mapProps = useCallback(

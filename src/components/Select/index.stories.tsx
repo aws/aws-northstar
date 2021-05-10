@@ -101,9 +101,9 @@ const optionsWithGroup = [
 ];
 
 export const Default = () => {
-    const [selectedOption, setSeletedOption] = useState({ value: '' });
+    const [selectedOption, setSelectedOption] = useState({ value: '' });
     const onChange = (event: React.ChangeEvent<{ value: any }>) => {
-        setSeletedOption({ value: String(event.target.value) });
+        setSelectedOption({ value: String(event.target.value) });
     };
 
     return (
@@ -114,12 +114,10 @@ export const Default = () => {
 };
 
 export const WithIcon = () => {
-    const [selectedOption, setSeletedOption] = useState({ value: '' });
+    const [selectedOption, setSelectedOption] = useState({ value: '' });
     const onChange = (event: React.ChangeEvent<{ value: any }>) => {
-        setSeletedOption({ value: String(event.target.value) });
+        setSelectedOption({ value: String(event.target.value) });
     };
-
-    const actionNames = actions('onFocus', 'onBlur');
 
     return (
         <Box width="300px">
@@ -129,12 +127,10 @@ export const WithIcon = () => {
 };
 
 export const WithOptionGroups = () => {
-    const [selectedOption, setSeletedOption] = useState({ value: '' });
+    const [selectedOption, setSelectedOption] = useState({ value: '' });
     const onChange = (event: React.ChangeEvent<{ value: any }>) => {
-        setSeletedOption({ value: String(event.target.value) });
+        setSelectedOption({ value: String(event.target.value) });
     };
-
-    const actionNames = actions('onFocus', 'onBlur');
 
     return (
         <Box width="300px">
@@ -144,9 +140,9 @@ export const WithOptionGroups = () => {
 };
 
 export const PlaceholderWithExtraAriaTags = () => {
-    const [selectedOption, setSeletedOption] = useState({ value: '' });
+    const [selectedOption, setSelectedOption] = useState({ value: '' });
     const onChange = (event: React.ChangeEvent<{ value: any }>) => {
-        setSeletedOption({ value: String(event.target.value) });
+        setSelectedOption({ value: String(event.target.value) });
     };
 
     return (

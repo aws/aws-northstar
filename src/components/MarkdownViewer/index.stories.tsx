@@ -16,7 +16,6 @@
 
 import React from 'react';
 import MarkdownViewer from '.';
-import Heading from '../Heading';
 
 export default {
     component: MarkdownViewer,

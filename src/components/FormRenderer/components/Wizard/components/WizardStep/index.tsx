@@ -49,7 +49,7 @@ const WizardStep: FunctionComponent<WizardStepProps> = ({
         }));
 
         return formOptions.renderForm(editabledFields, formOptions);
-    }, [fields, showError]);
+    }, [fields, showError, formOptions]);
 
     useEffect(() => {
         setShowError(false); // When steps change

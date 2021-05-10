@@ -131,7 +131,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
         const optionArray: SelectOption[] = [];
         options.forEach((option) => {
             if (option.options) {
-                option.options.map((o) => {
+                option.options.forEach((o) => {
                     optionArray.push({ label: o.label || o.value, value: o.value, group: option.label });
                 });
             } else {
@@ -190,7 +190,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
                 autoCorrect={autoCompleteString}
                 placeholder={placeholder}
                 required={ariaRequired}
-                error={statusType === 'error' || invalid ? true : false}
+                error={!!(statusType === 'error' || invalid)}
                 {...params}
                 variant="outlined"
                 size="small"
@@ -210,7 +210,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
                 }}
             />
         ),
-        [autoCompleteString, placeholder, statusType, name, ariaRequired, ariaDescribedby, ariaLabelledby]
+        [autoCompleteString, placeholder, statusType, name, invalid, ariaRequired, ariaDescribedby, ariaLabelledby]
     );
 
     const renderOption = useCallback(

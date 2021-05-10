@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent, ReactElement, useEffect, useMemo } from 'react';
+import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import MaterialInput from '@material-ui/core/OutlinedInput';
 import { OutlinedInputProps as MaterialInputProps } from '@material-ui/core/OutlinedInput';
 import { v4 as uuidv4 } from 'uuid';
@@ -158,13 +158,13 @@ const Input: FunctionComponent<InputProps> = ({ onChange = () => {}, ...props })
             fullWidth={true}
             {...mapProps(props)}
             startAdornment={
-                props.type == 'search' && (
+                props.type === 'search' && (
                     <InputAdornment position="start">
                         <SearchIcon color="action" />
                     </InputAdornment>
                 )
             }
-            endAdornment={props.type == 'search' && showClearInputButton && clearSearchInput()}
+            endAdornment={props.type === 'search' && showClearInputButton && clearSearchInput()}
             value={inputValue}
             onChange={(e) => handleChange(e.target.value)}
             onBlur={props.onBlur}

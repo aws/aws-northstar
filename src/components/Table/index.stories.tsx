@@ -121,7 +121,7 @@ export const UseState = () => {
                 setSelected(undefined);
             }
         },
-        [setSelected]
+        [selected, setSelected]
     );
 
     return (

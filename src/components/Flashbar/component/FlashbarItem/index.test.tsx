@@ -16,7 +16,7 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import FlashbarItem from '.';
-import { FlashbarMessage, MessageType } from '../../types';
+import { MessageType } from '../../types';
 
 describe('FlashbarItem', () => {
     const messageTypes = ['success', 'warning', 'error', 'info'] as MessageType[];
