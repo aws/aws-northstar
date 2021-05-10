@@ -47,7 +47,7 @@ export interface Item {
 
 export interface TokenProps {
     item: Item;
-    onDismiss: (item: Item) => void;
+    onDismiss?: (item: Item) => void;
 }
 
 const Token: FunctionComponent<TokenProps> = ({ item, onDismiss }) => {
@@ -57,9 +57,13 @@ const Token: FunctionComponent<TokenProps> = ({ item, onDismiss }) => {
             className={styles.root}
             label={item.label}
             color="primary"
-            onDelete={() => {
-                onDismiss(item);
-            }}
+            onDelete={
+                onDismiss
+                    ? () => {
+                          onDismiss(item);
+                      }
+                    : undefined
+            }
             deleteIcon={<Close />}
         />
     );
