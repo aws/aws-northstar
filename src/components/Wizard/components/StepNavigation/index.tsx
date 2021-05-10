@@ -19,7 +19,6 @@ import Box from '../../../../layouts/Box';
 import Link from '../../../Link';
 import Text from '../../../Text';
 import { StepClickDetail, WizardStepInfo } from '../../types';
-import clsx from 'clsx';
 
 export interface StepNavigationProps {
     steps: WizardStepInfo[];
