@@ -118,7 +118,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
         if (inputElement.current) {
             inputElement.current.click();
         }
-    }, [inputElement.current]);
+    }, []);
 
     const handleFileSelectionChange = useCallback(
         (event) => {
@@ -134,7 +134,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
                 onChange(newFiles);
             }
         },
-        [selectedFiles, setSelectedFiles, onChange]
+        [selectedFiles, setSelectedFiles, onChange, multiple]
     );
 
     return (

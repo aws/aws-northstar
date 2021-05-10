@@ -87,7 +87,7 @@ const FlashbarItem: FunctionComponent<FlashbarMessage> = ({
                 )}
             </Box>
         );
-    }, [buttonText, show, onDismiss, setShow, dismissible]);
+    }, [buttonText, styles.button, onDismiss, onButtonClick, setShow, dismissible]);
 
     const body = useMemo(() => {
         const props = {
@@ -113,7 +113,7 @@ const FlashbarItem: FunctionComponent<FlashbarMessage> = ({
                 </MaterialAlert>
             </Paper>
         );
-    }, [type, actions, header, content]);
+    }, [type, actions, header, content, loading, styles]);
 
     return <Box data-testid={type}>{show && body}</Box>;
 };

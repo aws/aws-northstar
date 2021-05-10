@@ -80,7 +80,7 @@ const BreadcrumbGroup = ({ items, rootPath = 'Home', availableRoutes = [] }: Bre
 
                                 return last ? (
                                     <Typography color="inherit" key={to}>
-                                        {pathnames.length === 1 && value === '/' ? rootPath : value}
+                                        {pathnames.length === 1 && value === '/' ? rootPath : text}
                                     </Typography>
                                 ) : matchRoute(to, availableRoutes) ? (
                                     <Link key={to} href={to}>

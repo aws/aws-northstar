@@ -15,15 +15,11 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-import { Area as AreaComponent, AreaProps as AreaComponentProps } from 'recharts';
+import { Area as AreaComponent } from 'recharts';
 import getFillColor from '../../../utils/getFillColor';
 import getStrokeColor from '../../../utils/getStrokeColor';
 
 class Area extends AreaComponent {
-    constructor(props: AreaComponentProps) {
-        super(props);
-    }
-
     render() {
         const overrideFill = getFillColor(this.props.fill);
         const overrideStroke = getStrokeColor(this.props.stroke);
