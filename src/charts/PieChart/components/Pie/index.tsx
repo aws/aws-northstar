@@ -15,15 +15,11 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-import { Pie as PieComponent, PieProps as PieComponentProps } from 'recharts';
+import { Pie as PieComponent } from 'recharts';
 import getFillColor from '../../../utils/getFillColor';
 import getStrokeColor from '../../../utils/getStrokeColor';
 
 class Pie extends PieComponent {
-    constructor(props: PieComponentProps) {
-        super(props);
-    }
-
     render() {
         const overrideFill = getFillColor(this.props.fill);
         const overrideStroke = getStrokeColor(this.props.stroke);

@@ -202,10 +202,6 @@ export interface TableBaseOptions<D extends object> {
     sortBy?: SortingRule<string>[];
 }
 
-interface FilterProps {
-    _all_?: string;
-}
-
 export interface FetchDataOptions {
     pageSize?: number;
     pageIndex?: number;
@@ -305,10 +301,10 @@ export default function Table<D extends object>({
                                     name="select"
                                     checked={row.isSelected}
                                     onChange={() => {
-                                        /** React Table does not support Radio Button natively. 
+                                        /** React Table does not support Radio Button natively.
                                          A solution is to toggle all the row off and then toggle the current row on to ensure only current row is selected.
-                                         However, due the desynchronization of the toggleAllRowsSelected, 
-                                         if we do not wait a certian time, the solution does not work. 
+                                         However, due the desynchronization of the toggleAllRowsSelected,
+                                         if we do not wait a certian time, the solution does not work.
                                          The issue should be related to this Github issue https://github.com/tannerlinsley/react-table/issues/2170
                                          Once it is address we can remove the setTimeout */
                                         props.toggleAllRowsSelected(false);
@@ -330,7 +326,7 @@ export default function Table<D extends object>({
 
     const rowCount = useMemo(() => {
         if (typeof props.rowCount === 'undefined') {
-            return items ? items.length : 0;
+            return items?.length || 0;
         }
 
         return props.rowCount;

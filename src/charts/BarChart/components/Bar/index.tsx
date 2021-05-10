@@ -15,15 +15,11 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-import { Bar as BarComponent, BarProps as BarComponentProps } from 'recharts';
+import { Bar as BarComponent } from 'recharts';
 import getFillColor from '../../../utils/getFillColor';
 import getStrokeColor from '../../../utils/getStrokeColor';
 
 class Bar extends BarComponent {
-    constructor(props: BarComponentProps) {
-        super(props);
-    }
-
     render() {
         const overrideFill = getFillColor(this.props.fill);
         const overrideStroke = getStrokeColor(this.props.stroke);

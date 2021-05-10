@@ -95,7 +95,7 @@ const populateInitialExpandedState = (
     initialState: { [itemText: string]: boolean } = {}
 ): { [itemText: string]: boolean } => {
     items.forEach((item) => {
-        if (item.expanded && item.text != undefined) {
+        if (item.expanded && item.text !== undefined) {
             initialState[item.text] = true;
         }
 
@@ -170,23 +170,20 @@ export const SideNavigation: FunctionComponent<SideNavigationProps> = ({ header,
                 <Typography color={itemColor} className={cssClass}>
                     {item.text}
                 </Typography>
-                {item.info && item.info}
+                {item.info}
             </Inline>,
             item.href
         );
     };
 
     const renderListItem = (item: SideNavigationItem, cssClass?: string) => {
-        const itemText: string = item.text ? item.text : '';
+        const itemText: string = item.text || '';
         const itemLabel = renderItemLabel(item, cssClass);
 
-        if (item.text != undefined && item.items && item.items.length > 0) {
-            // @ts-ignore
-            const boundExpandToggle = expandToggle.bind(this, itemText);
-
+        if (item.text !== undefined && item.items && item.items.length > 0) {
             return (
                 <div key={uuidv4()}>
-                    <ListItem button={true} onClick={boundExpandToggle} className={classes.sectionHeader}>
+                    <ListItem button={true} onClick={() => expandToggle(itemText)} className={classes.sectionHeader}>
                         {expandedSections[itemText] ? <ExpandLess /> : <ExpandMore />}
                         <b>{itemLabel}</b>
                     </ListItem>

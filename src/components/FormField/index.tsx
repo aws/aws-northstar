@@ -218,6 +218,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
     }, [
         description,
         stretch,
+        footer,
         children,
         errorText,
         hintText,
@@ -225,7 +226,9 @@ const FormField: FunctionComponent<FormFieldProps> = ({
         secondaryControl,
         expandable,
         createNewLink,
+        createNewLinkHref,
         renderReload,
+        onReloadClick,
     ]);
 
     const header = useMemo(() => {

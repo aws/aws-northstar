@@ -77,11 +77,11 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
         }
 
         return 'Choose file';
-    }, [buttonText]);
+    }, [buttonText, multiple]);
 
     const handleFileSelectionDismiss = useCallback(
         (dismissedItem) => {
-            const newFiles = selectedFiles.filter((file) => file.name != dismissedItem.value);
+            const newFiles = selectedFiles.filter((file) => file.name !== dismissedItem.value);
 
             setSelectedFiles(newFiles);
             if (onChange) {
@@ -112,13 +112,13 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
         }));
 
         return <TokenGroup items={items} onDismiss={handleFileSelectionDismiss} inline={false} />;
-    }, [selectedFiles, handleFileSelectionDismiss]);
+    }, [selectedFiles, multiple, handleFileSelectionDismiss]);
 
     const handleFileSelectionButtonClick = useCallback(() => {
         if (inputElement.current) {
             inputElement.current.click();
         }
-    }, [inputElement.current]);
+    }, []);
 
     const handleFileSelectionChange = useCallback(
         (event) => {
@@ -134,7 +134,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
                 onChange(newFiles);
             }
         },
-        [selectedFiles, setSelectedFiles, onChange]
+        [selectedFiles, setSelectedFiles, onChange, multiple]
     );
 
     return (

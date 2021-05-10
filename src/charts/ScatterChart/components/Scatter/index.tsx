@@ -15,15 +15,11 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-import { Scatter as ScatterComponent, ScatterProps as ScatterComponentProps } from 'recharts';
+import { Scatter as ScatterComponent } from 'recharts';
 import getFillColor from '../../../utils/getFillColor';
 import getStrokeColor from '../../../utils/getStrokeColor';
 
 class Scatter extends ScatterComponent {
-    constructor(props: ScatterComponentProps) {
-        super(props);
-    }
-
     render() {
         const overrideFill = getFillColor(this.props.fill);
         const overrideStroke = getStrokeColor(this.props.stroke);

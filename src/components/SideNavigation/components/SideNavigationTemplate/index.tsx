@@ -61,7 +61,7 @@ const SideNavigationTemplate: FunctionComponent<SideNavigationTemplateProps> = (
                 )}
             </Box>
         ),
-        [header]
+        [header, styles.header]
     );
 
     return (

@@ -24,8 +24,6 @@ const TreeViewMapping: FunctionComponent = (props: any) => {
         label,
         description,
         helperText,
-        isRequired,
-        isDisabled,
         isReadOnly,
         input,
         validateOnMount,
@@ -34,11 +32,9 @@ const TreeViewMapping: FunctionComponent = (props: any) => {
         meta: { error, submitFailed },
         multiSelect, // from TreeView
         treeItems, // from TreeView
-        initialValue, // from TreeView
         onNodeToggle, // from TreeView
         defaultExpanded, // from TreeView
         name, // from TreeView
-        ...rest
     } = useFieldApi(props);
 
     const controlId = name || uuidv4();

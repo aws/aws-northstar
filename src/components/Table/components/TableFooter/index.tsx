@@ -18,7 +18,7 @@ import React from 'react';
 import { CircularProgress, TableCell, TableFooter as BaseTableFooter, TableRow } from '@material-ui/core';
 import Text from '../../../Text';
 
-export interface TableFooterProps<D extends object> {
+export interface TableFooterProps {
     loading?: boolean;
     styles: {
         footerCell: string;
@@ -30,13 +30,7 @@ export interface TableFooterProps<D extends object> {
     errorText?: string;
 }
 
-export default function TableFooter<D extends object>({
-    errorText,
-    loading = false,
-    styles,
-    colSpan,
-    pageLength = 0,
-}: TableFooterProps<D>) {
+export default function TableFooter({ errorText, loading = false, styles, colSpan, pageLength = 0 }: TableFooterProps) {
     if (pageLength === 0) {
         return (
             <BaseTableFooter>

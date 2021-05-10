@@ -88,38 +88,24 @@ const ColumnLayout: FunctionComponent<ColumnLayoutProps> = ({
 
     return (
         <Grid container justify="flex-start" alignItems="flex-start" className={classes.root}>
-            {columns.map((column, index) =>
-                index != columns.length - 1 ? (
-                    <Fragment key={`column${index}`}>
-                        <Grid
-                            item
-                            xs={12}
-                            sm={getBreakpointValue(collapseBelow, 'sm')}
-                            md={getBreakpointValue(collapseBelow, 'md')}
-                            lg={getBreakpointValue(collapseBelow, 'lg')}
-                            xl
-                            className={classes.column}
-                        >
-                            {column}
-                        </Grid>
-                        {renderDivider && matched && <Divider orientation="vertical" flexItem />}
-                    </Fragment>
-                ) : (
-                    <Fragment key={`column${index}`}>
-                        <Grid
-                            item
-                            xs={12}
-                            sm={getBreakpointValue(collapseBelow, 'sm')}
-                            md={getBreakpointValue(collapseBelow, 'md')}
-                            lg={getBreakpointValue(collapseBelow, 'lg')}
-                            xl
-                            className={classes.column}
-                        >
-                            {column}
-                        </Grid>
-                    </Fragment>
-                )
-            )}
+            {columns.map((column, index) => (
+                <Fragment key={`column${index}`}>
+                    <Grid
+                        item
+                        xs={12}
+                        sm={getBreakpointValue(collapseBelow, 'sm')}
+                        md={getBreakpointValue(collapseBelow, 'md')}
+                        lg={getBreakpointValue(collapseBelow, 'lg')}
+                        xl
+                        className={classes.column}
+                    >
+                        {column}
+                    </Grid>
+                    {index !== columns.length - 1 && renderDivider && matched && (
+                        <Divider orientation="vertical" flexItem />
+                    )}
+                </Fragment>
+            ))}
         </Grid>
     );
 };

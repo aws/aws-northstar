@@ -13,9 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-const glob = require('glob');
 const path = require('path');
-const fs = require('fs');
 
 module.exports = {
     title: 'NorthStar',
@@ -28,7 +26,7 @@ module.exports = {
     propsParser: require('react-docgen-typescript').withDefaultConfig({
         savePropValueAsString: true,
     }).parse,
-    webpackConfig: Object.assign({}, require('./webpack.config.js'), {}),
+    webpackConfig: require('./webpack.config.js'),
     styleguideComponents: {
         Wrapper: path.join(__dirname, 'styleguide/components/Wrapper'),
         StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuide'),

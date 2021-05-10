@@ -54,11 +54,8 @@ const FormTemplate: FunctionComponent<FormTemplateProps> = ({
     );
 
     const actionsVisible = useMemo(() => {
-        if (schema.fields && schema.fields.length > 0 && schema.fields[0].component === componentTypes.WIZARD) {
-            return false; // Hide the actions for Wizard
-        }
-        return true;
-    }, []);
+        return !(schema.fields && schema.fields.length > 0 && schema.fields[0].component === componentTypes.WIZARD);
+    }, [schema.fields]);
 
     return (
         <Form header={schema.header} description={schema.description} actions={actionsVisible ? actions : undefined}>

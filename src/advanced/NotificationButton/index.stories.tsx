@@ -16,7 +16,7 @@
 
 import React, { useState, useCallback } from 'react';
 import { action } from '@storybook/addon-actions';
-import NotificationButton, { NotificationSeverity } from '.';
+import NotificationButton from '.';
 import Box from '../../layouts/Box';
 
 export default {
