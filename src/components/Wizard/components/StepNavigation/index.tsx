@@ -19,7 +19,6 @@ import Box from '../../../../layouts/Box';
 import Link from '../../../Link';
 import Text from '../../../Text';
 import { StepClickDetail, WizardStepInfo } from '../../types';
-import clsx from 'clsx';
 
 export interface StepNavigationProps {
     steps: WizardStepInfo[];
@@ -35,9 +34,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     step: {
         paddingTop: theme.spacing(1.5),
         paddingBottom: theme.spacing(1.5),
-    },
-    stepNotLastChild: {
-        borderBottom: `1px solid ${theme.palette.grey[400]}`,
+        '&:not(:last-child)': {
+            borderBottom: `1px solid ${theme.palette.grey[400]}`,
+        },
     },
 }));
 
@@ -83,17 +82,11 @@ const StepNavigation: FunctionComponent<StepNavigationProps> = ({
         [activeStepIndex, disableStepNavigation, onStepNavigationClick]
     );
 
-    const stepsLength = steps.length;
-
     return (
         <nav>
             <Box maxWidth="200px">
                 {steps.map((step, index) => (
-                    <Box
-                        key={index}
-                        data-testid="stepNavBox"
-                        className={clsx(styles.step, index !== stepsLength && styles.stepNotLastChild)}
-                    >
+                    <Box key={index} data-testid="stepNavBox" className={styles.step}>
                         <Box color="grey.500">
                             <Text variant="small">
                                 {getStepNumberLabel(index + 1)}
