@@ -38,7 +38,7 @@ const ExpandableSectionMapping: FunctionComponent = (props) => {
             showError,
             name: `${input.name}.${field.name}`,
         }));
-    }, [fields, showError]);
+    }, [fields, input.name, showError]);
 
     const [expanded, setExpanded] = useState(rest.expanded || false);
     useEffect(() => {

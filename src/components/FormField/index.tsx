@@ -225,6 +225,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
         secondaryControl,
         expandable,
         createNewLink,
+        createNewLinkHref,
         renderReload,
     ]);
 

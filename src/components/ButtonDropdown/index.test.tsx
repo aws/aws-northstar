@@ -29,7 +29,7 @@ describe('ButtonDropdown', () => {
     });
 
     it('should not render ArrowDropdown if disableArrowDropdown is true', () => {
-        const { getByText, container } = render(<ButtonDropdown content="the content" disableArrowDropdown={true} />);
+        const { container } = render(<ButtonDropdown content="the content" disableArrowDropdown={true} />);
 
         expect(container.querySelector('svg')).toBeNull();
     });

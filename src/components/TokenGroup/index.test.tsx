@@ -45,7 +45,7 @@ describe('TokenGroup', () => {
 
     it('should handle dismiss event', () => {
         const handleDismiss = jest.fn();
-        const { queryByText, container } = render(<TokenGroup items={items} onDismiss={handleDismiss} />);
+        const { container } = render(<TokenGroup items={items} onDismiss={handleDismiss} />);
 
         act(() => {
             const dismissButtons = container.querySelectorAll('.MuiChip-deleteIcon');

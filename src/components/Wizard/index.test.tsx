@@ -179,7 +179,7 @@ describe('Wizard', () => {
     });
 
     it('renders accessible component', async () => {
-        const { container, getByText } = render(<Default />);
+        const { container } = render(<Default />);
         const results = await axe(container);
 
         expect(results).toHaveNoViolations();

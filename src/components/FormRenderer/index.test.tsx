@@ -16,7 +16,6 @@
 import React from 'react';
 import { render, fireEvent, cleanup, act } from '@testing-library/react';
 import FormRenderer, { componentTypes, validatorTypes } from '.';
-import Button from '../Button';
 
 describe('FormRenderer', () => {
     afterEach(() => {

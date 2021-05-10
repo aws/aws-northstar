@@ -79,7 +79,7 @@ const StepNavigation: FunctionComponent<StepNavigationProps> = ({
                 </Box>
             );
         },
-        [activeStepIndex, disableStepNavigation, onStepNavigationClick]
+        [activeStepIndex, disableStepNavigation, maxStepIndex, onStepNavigationClick]
     );
 
     return (

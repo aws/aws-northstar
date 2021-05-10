@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';

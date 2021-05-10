@@ -92,7 +92,7 @@ describe('Input', () => {
 
     describe('for search input', () => {
         it('does not render clear button on default', () => {
-            const { getByPlaceholderText, queryByTestId } = render(<Input type="search" placeholder="input-1" />);
+            const { queryByTestId } = render(<Input type="search" placeholder="input-1" />);
 
             expect(queryByTestId('input-1')).toBeNull();
         });

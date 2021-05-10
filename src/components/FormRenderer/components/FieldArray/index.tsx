@@ -62,7 +62,7 @@ const FieldArrayMapping: FunctionComponent = (props: any) => {
         >
             <FieldArrayBase key={controlId} name={controlId} validate={arrayValidator}>
                 {({ fields }: any) => {
-                    const { value = [], length, map, push, remove } = fields;
+                    const { length, map, push, remove } = fields;
                     return (
                         <Stack spacing="s">
                             {length === 0 && <Text>{noItemsMessage}</Text>}
