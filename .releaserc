@@ -8,7 +8,7 @@
             "preset": "angular",
             "releaseRules": [
                 {"type": "docs", "scope": "README", "release": "patch"},
-                {"type": "refactor", "message": "RENAME Props*", "release": "minor"},
+                {"type": "refactor", "message": "*RENAME Props*", "release": "minor"},
                 {"type": "feat", "release": "patch"},
                 {"type": "style", "release": "patch"}
             ]
