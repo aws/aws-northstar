@@ -30,15 +30,15 @@ export const Success = () => (
         <Alert type="success" header="Success header">
             Pinned
         </Alert>
-        <Alert type="success" dismissable={true} onDismiss={action('onDismiss-click')}>
-            Dismissable
+        <Alert type="success" dismissible={true} onDismiss={action('onDismiss-click')}>
+            Dismissible
         </Alert>
-        <Alert type="success" dismissable={true} dissmissLabel="Quit" onDismiss={action('onDismiss-click')}>
-            Dismissable with dismissable label
+        <Alert type="success" dismissible={true} dismissAriaLabel="Quit" onDismiss={action('onDismiss-click')}>
+            Dismissible with dismissible label
         </Alert>
         <Alert
             type="success"
-            dismissable={true}
+            dismissible={true}
             buttonText="Close"
             onDismiss={action('onDismiss-click')}
             onButtonClick={action('onButtonClick-click')}
@@ -54,15 +54,15 @@ export const Info = () => (
         <Alert type="info" header="Info header">
             Pinned
         </Alert>
-        <Alert type="info" dismissable={true} onDismiss={action('onDismiss-click')}>
-            Dismissable
+        <Alert type="info" dismissible={true} onDismiss={action('onDismiss-click')}>
+            Dismissible
         </Alert>
-        <Alert type="info" dismissable={true} dissmissLabel="Quit" onDismiss={action('onDismiss-click')}>
-            Dismissable with dismissable label
+        <Alert type="info" dismissible={true} dismissAriaLabel="Quit" onDismiss={action('onDismiss-click')}>
+            Dismissible with dismissible label
         </Alert>
         <Alert
             type="info"
-            dismissable={true}
+            dismissible={true}
             buttonText="Close"
             onDismiss={action('onDismiss-click')}
             onButtonClick={action('onButtonClick-click')}
@@ -78,15 +78,15 @@ export const Warning = () => (
         <Alert type="warning" header="Warning header">
             Pinned
         </Alert>
-        <Alert type="warning" dismissable={true} onDismiss={action('onDismiss-click')}>
-            Dismissable
+        <Alert type="warning" dismissible={true} onDismiss={action('onDismiss-click')}>
+            Dismissible
         </Alert>
-        <Alert type="warning" dismissable={true} dissmissLabel="Quit" onDismiss={action('onDismiss-click')}>
-            Dismissable with dismissable label
+        <Alert type="warning" dismissible={true} dismissAriaLabel="Quit" onDismiss={action('onDismiss-click')}>
+            Dismissible with dismissible label
         </Alert>
         <Alert
             type="warning"
-            dismissable={true}
+            dismissible={true}
             buttonText="Close"
             onDismiss={action('onDismiss-click')}
             onButtonClick={action('onButtonClick-click')}
@@ -102,15 +102,15 @@ export const Error = () => (
         <Alert type="error" header="Error header">
             Pinned
         </Alert>
-        <Alert type="error" dismissable={true} onDismiss={action('onDismiss-click')}>
-            Dismissable
+        <Alert type="error" dismissible={true} onDismiss={action('onDismiss-click')}>
+            Dismissible
         </Alert>
-        <Alert type="error" dismissable={true} dissmissLabel="Quit" onDismiss={action('onDismiss-click')}>
-            Dismissable with dismissable label
+        <Alert type="error" dismissible={true} dismissAriaLabel="Quit" onDismiss={action('onDismiss-click')}>
+            Dismissible with dismissible label
         </Alert>
         <Alert
             type="error"
-            dismissable={true}
+            dismissible={true}
             buttonText="Close"
             onDismiss={action('onDismiss-click')}
             onButtonClick={action('onButtonClick-click')}
