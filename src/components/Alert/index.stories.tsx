@@ -31,10 +31,10 @@ export const Success = () => (
             Pinned
         </Alert>
         <Alert type="success" dismissible={true} onDismiss={action('onDismiss-click')}>
-            Dismissable
+            Dismissible
         </Alert>
         <Alert type="success" dismissible={true} dismissAriaLabel="Quit" onDismiss={action('onDismiss-click')}>
-            Dismissable with dismissible label
+            Dismissible with dismissible label
         </Alert>
         <Alert
             type="success"
@@ -55,10 +55,10 @@ export const Info = () => (
             Pinned
         </Alert>
         <Alert type="info" dismissible={true} onDismiss={action('onDismiss-click')}>
-            Dismissable
+            Dismissible
         </Alert>
         <Alert type="info" dismissible={true} dismissAriaLabel="Quit" onDismiss={action('onDismiss-click')}>
-            Dismissable with dismissible label
+            Dismissible with dismissible label
         </Alert>
         <Alert
             type="info"
@@ -79,10 +79,10 @@ export const Warning = () => (
             Pinned
         </Alert>
         <Alert type="warning" dismissible={true} onDismiss={action('onDismiss-click')}>
-            Dismissable
+            Dismissible
         </Alert>
         <Alert type="warning" dismissible={true} dismissAriaLabel="Quit" onDismiss={action('onDismiss-click')}>
-            Dismissable with dismissible label
+            Dismissible with dismissible label
         </Alert>
         <Alert
             type="warning"
@@ -103,10 +103,10 @@ export const Error = () => (
             Pinned
         </Alert>
         <Alert type="error" dismissible={true} onDismiss={action('onDismiss-click')}>
-            Dismissable
+            Dismissible
         </Alert>
         <Alert type="error" dismissible={true} dismissAriaLabel="Quit" onDismiss={action('onDismiss-click')}>
-            Dismissable with dismissible label
+            Dismissible with dismissible label
         </Alert>
         <Alert
             type="error"
