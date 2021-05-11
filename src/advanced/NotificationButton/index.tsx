@@ -95,7 +95,7 @@ const NotificationButton = ({ notifications = [], onDismissNotification }: Notif
                     borderRadius={false}
                     header={notification.title}
                     type={getNotificationType(notification.severity)}
-                    dismissable={true}
+                    dismissible={true}
                     onDismiss={() => onDismissNotification(notification.id)}
                 >
                     {notification.content}
