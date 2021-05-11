@@ -51,18 +51,18 @@ describe('Alert', () => {
                 });
             });
 
-            describe('and is dismissable', () => {
-                const dismissable = true;
+            describe('and is dismissible', () => {
+                const dismissible = true;
 
                 it('renders the close icon', () => {
-                    const { queryByRole } = render(<Alert type={alertType} dismissable={dismissable} />);
+                    const { queryByRole } = render(<Alert type={alertType} dismissible={dismissible} />);
                     expect(queryByRole('button')).toBeInTheDocument();
                 });
 
                 it('fires dismiss event', () => {
                     const mockDismissEvent = jest.fn();
                     const { getByRole } = render(
-                        <Alert type={alertType} dismissable={dismissable} onDismiss={mockDismissEvent} />
+                        <Alert type={alertType} dismissible={dismissible} onDismiss={mockDismissEvent} />
                     );
                     fireEvent.click(getByRole('button'));
                     expect(mockDismissEvent).toHaveBeenCalledTimes(1);
@@ -72,7 +72,7 @@ describe('Alert', () => {
                     const dismissLabel = 'the label';
                     it('adds the label to the dismiss button', () => {
                         const { queryByLabelText, queryByRole } = render(
-                            <Alert type={alertType} dismissable={dismissable} dissmissLabel={dismissLabel} />
+                            <Alert type={alertType} dismissible={dismissible} dismissAriaLabel={dismissLabel} />
                         );
                         expect(queryByRole('button')).toBeInTheDocument();
                         expect(queryByLabelText(dismissLabel)).toBeInTheDocument();
@@ -83,7 +83,7 @@ describe('Alert', () => {
                     const buttonText = 'the button text';
                     it('renders a custom button with the button text', () => {
                         const { queryByText } = render(
-                            <Alert type={alertType} dismissable={dismissable} buttonText={buttonText} />
+                            <Alert type={alertType} dismissible={dismissible} buttonText={buttonText} />
                         );
                         expect(queryByText(buttonText)).toBeInTheDocument();
                     });
@@ -97,12 +97,12 @@ describe('Alert', () => {
                         expect(mockButtonClickEvent).toHaveBeenCalledTimes(1);
                     });
 
-                    it('fires buttonClick event for dismissable alert', () => {
+                    it('fires buttonClick event for dismissible alert', () => {
                         const mockButtonClickEvent = jest.fn();
                         const { getByText } = render(
                             <Alert
                                 type={alertType}
-                                dismissable={dismissable}
+                                dismissible={dismissible}
                                 buttonText={buttonText}
                                 onButtonClick={mockButtonClickEvent}
                             />

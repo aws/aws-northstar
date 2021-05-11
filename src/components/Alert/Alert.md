@@ -61,26 +61,26 @@ import Stack from 'aws-northstar/layouts/Stack';
 import Container from 'aws-northstar/layouts/Container';
 
 <Stack>
-    <Container headingVariant='h4' title='Dismissable Success Alert'>
-        <Alert type="success" dismissable={true}>
+    <Container headingVariant='h4' title='Dismissible Success Alert'>
+        <Alert type="success" dismissible={true}>
             Content
         </Alert>
     </Container>    
 
-    <Container headingVariant='h4' title='Dismissable Info Alert'>
-        <Alert type="info" dismissable={true}>
+    <Container headingVariant='h4' title='Dismissible Info Alert'>
+        <Alert type="info" dismissible={true}>
             Content
         </Alert>
     </Container>
 
-    <Container headingVariant='h4' title='Dismissable Warning Alert'>
-        <Alert type="warning" dismissable={true}>
+    <Container headingVariant='h4' title='Dismissible Warning Alert'>
+        <Alert type="warning" dismissible={true}>
             Content
         </Alert>
     </Container>
 
-    <Container headingVariant='h4' title='Dismissable Success Alert'>
-        <Alert type="error" dismissable={true}>
+    <Container headingVariant='h4' title='Dismissible Success Alert'>
+        <Alert type="error" dismissible={true}>
             Content
         </Alert>
     </Container>
@@ -97,11 +97,11 @@ import Heading from 'aws-northstar/components/Heading';
 const [count, setCount] = React.useState(0);
 
 
-<Container headingVariant='h4' title='Dismissable Success Alert with Label and Button Click Event'>
+<Container headingVariant='h4' title='Dismissible Success Alert with Label and Button Click Event'>
     <Stack>
         <Alert 
             type="success" 
-            dismissable={true} 
+            dismissible={true} 
             buttonText="Enable counter"
             onButtonClick={() => setCount(count+1)}
         >
