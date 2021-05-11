@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode, FunctionComponent, useCallback, useMemo, useEffect } from 'react';
+import React, { ReactNode, FunctionComponent, useCallback, useMemo } from 'react';
 import MaterialAlert, { AlertProps as MaterialAlertProps } from '@material-ui/lab/Alert';
 import MaterialAlertTitle from '@material-ui/lab/AlertTitle';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
@@ -55,11 +55,11 @@ export interface AlertProps {
     /** Indicates the type of the message to be displayed. Available options 'error' | 'info' | 'success' | 'warning' */
     type?: AlertType;
     /** Determines whether the alert is displayed to the user or not. */
-    visable?: boolean;
+    visible?: boolean;
     /** If true, the component will include a close button in the UI. */
-    dismissable?: boolean;
+    dismissible?: boolean;
     /** Aria-label for the dismiss button */
-    dissmissLabel?: string;
+    dismissAriaLabel?: string;
     /** Heading text */
     header?: string;
     /** Alert content*/
@@ -81,10 +81,10 @@ export interface AlertProps {
     An alert helps the user know when they need to pay attention to a relatively small piece of information or when they need to take a special action.
 **/
 const Alert: FunctionComponent<AlertProps> = ({
-    visable = true,
+    visible = true,
     onDismiss = () => {},
     onButtonClick = () => {},
-    dissmissLabel = 'Close',
+    dismissAriaLabel = 'Close',
     buttonText = '',
     borderRadius = true,
     ...props
@@ -111,7 +111,7 @@ const Alert: FunctionComponent<AlertProps> = ({
                 {actionButton}
                 {show && (
                     <IconButton
-                        aria-label={dissmissLabel}
+                        aria-label={dismissAriaLabel}
                         onClick={() => {
                             setShow(false);
                             onDismiss();
@@ -122,12 +122,12 @@ const Alert: FunctionComponent<AlertProps> = ({
                 )}
             </>
         ),
-        [actionButton, show, onDismiss, setShow]
+        [actionButton, dismissAriaLabel, show, onDismiss, setShow]
     );
 
     const mapProps = useCallback(
-        (alertType: 'dismissable' | 'pinned', { type = 'info' }: AlertProps): MaterialAlertProps => {
-            const dismissableAlertProps: MaterialAlertProps = {
+        (alertType: 'dismissible' | 'pinned', { type = 'info' }: AlertProps): MaterialAlertProps => {
+            const dismissibleAlertProps: MaterialAlertProps = {
                 severity: type,
                 iconMapping,
                 action: closeButton,
@@ -137,7 +137,7 @@ const Alert: FunctionComponent<AlertProps> = ({
                 iconMapping,
                 action: actionButton,
             };
-            return alertType === 'dismissable' ? dismissableAlertProps : pinnedAlertProps;
+            return alertType === 'dismissible' ? dismissibleAlertProps : pinnedAlertProps;
         },
         [closeButton, actionButton]
     );
@@ -164,16 +164,16 @@ const Alert: FunctionComponent<AlertProps> = ({
     );
 
     const renderAlert = useCallback(
-        ({ dismissable, ...props }: AlertProps): ReactNode =>
-            dismissable
-                ? renderAlertBody(props, mapProps('dismissable', props))
+        ({ dismissible, ...props }: AlertProps): ReactNode =>
+            dismissible
+                ? renderAlertBody(props, mapProps('dismissible', props))
                 : renderAlertBody(props, mapProps('pinned', props)),
         [renderAlertBody, mapProps]
     );
 
     return (
         <Box data-testid={props.type} width="100%">
-            {visable && show && renderAlert(props)}
+            {visible && show && renderAlert(props)}
         </Box>
     );
 };

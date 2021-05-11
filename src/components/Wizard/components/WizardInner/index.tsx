@@ -108,7 +108,19 @@ const WizardInner: FunctionComponent<WizardInnerProps> = ({
                 </Button>
             </Inline>
         );
-    }, [activeStepIndex, stepCount, isLoadingNextStep]);
+    }, [
+        activeStepIndex,
+        stepCount,
+        isLoadingNextStep,
+        cancelButtonText,
+        nextButtonText,
+        previousButtonText,
+        submitButtonText,
+        onCancelButtonClick,
+        onNextButtonClick,
+        onPreviousButtonClick,
+        onSubmitButtonClick,
+    ]);
 
     return (
         <Container>

@@ -29,7 +29,7 @@ export interface ColumnsSelectorProps<D extends object> {
     };
 }
 
-export default function ColumnsSelectorProps<D extends object>({
+export default function ColumnsSelector<D extends object>({
     columnDefinitions,
     styles,
     onShowColumnsChange,

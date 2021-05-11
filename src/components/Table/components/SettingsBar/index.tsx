@@ -19,7 +19,7 @@ import { IconButton } from '@material-ui/core';
 import { FirstPage, LastPage, NavigateBefore, NavigateNext, SettingsOutlined } from '@material-ui/icons';
 import SettingsPopover from '../SettingsPopover';
 
-export interface SettingsBarProps<D extends object> {
+export interface SettingsBarProps {
     pageIndex: number;
     pageSize: number;
     pageSizes: number[];
@@ -43,7 +43,7 @@ export interface SettingsBarProps<D extends object> {
     columnsSelectorComponent: ReactNode;
 }
 
-export default function SettingBar<D extends object>({
+export default function SettingBar({
     pageIndex,
     pageSize,
     pageSizes,
@@ -62,7 +62,7 @@ export default function SettingBar<D extends object>({
     columnsSelectorComponent,
     canPreviousPage = false,
     canNextPage = false,
-}: SettingsBarProps<D>) {
+}: SettingsBarProps) {
     const [settingsAnchor, setSettingsAnchor] = React.useState<HTMLButtonElement | null>(null);
     const handleSettingsClick = (event: React.MouseEvent<any, MouseEvent>) => {
         setSettingsAnchor(event.currentTarget);

@@ -24,7 +24,7 @@ describe('MarkdownViewer', () => {
     });
 
     it('should render heading content correctly', () => {
-        const { getByRole, getByText } = render(
+        const { getByText } = render(
             <MarkdownViewer>{` 
 # Heading One 
 ## Heading Two
@@ -43,7 +43,7 @@ describe('MarkdownViewer', () => {
     });
 
     it('should render paragraph text correctly', () => {
-        const { getByRole, getByText } = render(
+        const { getByText } = render(
             <MarkdownViewer>{` 
 # Heading One 
 This is just some text for testing
@@ -54,7 +54,7 @@ This is just some text for testing
     });
 
     it('should render a link correctly', () => {
-        const { getByRole, getByText } = render(
+        const { getByText } = render(
             <MarkdownViewer>{` 
 # Heading One 
 This is just some text for testing

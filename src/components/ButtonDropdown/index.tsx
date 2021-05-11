@@ -151,18 +151,21 @@ const ButtonDropdown: FunctionComponent<ButtonDropdownProps> = ({
         setAnchorEl(null);
     }, [setAnchorEl]);
 
-    const handleMenuItemClick = useCallback((item: ButtonDropdownItem) => {
-        return (e: SyntheticEvent) => {
-            item.onClick && item.onClick(e);
+    const handleMenuItemClick = useCallback(
+        (item: ButtonDropdownItem) => {
+            return (e: SyntheticEvent) => {
+                item.onClick?.(e);
 
-            if (!(e.isDefaultPrevented() || e.isPropagationStopped())) {
-                handleClose();
-            }
-        };
-    }, []);
+                if (!(e.isDefaultPrevented() || e.isPropagationStopped())) {
+                    handleClose();
+                }
+            };
+        },
+        [handleClose]
+    );
 
     useEffect(() => {
-        if (items.length == 0 && anchorEl != null) {
+        if (items.length === 0 && anchorEl != null) {
             handleClose();
         }
     }, [items, anchorEl, handleClose]);
@@ -179,7 +182,7 @@ const ButtonDropdown: FunctionComponent<ButtonDropdownProps> = ({
                 {item.text}
             </MenuItem>
         ),
-        [menuItemClassName, handleMenuItemClick]
+        [menuItemClassName, handleMenuItemClick, classes.menuItem]
     );
 
     const renderMenuItemWithHeading = useCallback(

@@ -44,7 +44,7 @@ const useScrollPosition = (effect: any, element: any, wait: number) => {
 
     const callBack = () => {
         const currPos = getScrollPosition({ element });
-        if (currPos.x != position.current.x || currPos.y !== position.current.y) {
+        if (currPos.x !== position.current.x || currPos.y !== position.current.y) {
             effect(currPos);
             position.current = currPos;
         }

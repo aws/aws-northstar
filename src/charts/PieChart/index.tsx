@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 /**
  * PieChart properties.
  */
-export interface PieChartProps<T extends readonly object[]> {
+export interface PieChartProps {
     /** Title of the chart */
     title?: string;
     /** The width of the chart container in px. */
@@ -47,7 +47,7 @@ export interface PieChartProps<T extends readonly object[]> {
 /**
  * Renders a Pie chart
  */
-function PieChart<T extends readonly object[]>(props: PieChartProps<T>) {
+function PieChart(props: PieChartProps) {
     const classes = useStyles();
     return (
         <Box className={classes.root}>

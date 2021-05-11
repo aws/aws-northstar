@@ -15,15 +15,11 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-import { Line as LineComponent, LineProps as LineComponentProps } from 'recharts';
+import { Line as LineComponent } from 'recharts';
 import getFillColor from '../../../utils/getFillColor';
 import getStrokeColor from '../../../utils/getStrokeColor';
 
 class Line extends LineComponent {
-    constructor(props: LineComponentProps) {
-        super(props);
-    }
-
     render() {
         const overrideFill = getFillColor(this.props.fill);
         const overrideStroke = getStrokeColor(this.props.stroke);

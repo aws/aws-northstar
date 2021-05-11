@@ -80,7 +80,7 @@ describe('Autosuggest', () => {
     });
 
     it('renders an component disabled', () => {
-        const { getByPlaceholderText, queryByText } = render(
+        const { getByPlaceholderText } = render(
             <Autosuggest options={awsServices} disabled={true} placeholder="input-1" onFocus={mockEvent} />
         );
         const input = getByPlaceholderText('input-1');

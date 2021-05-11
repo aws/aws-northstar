@@ -85,7 +85,7 @@ const NotificationButton = ({ notifications = [], onDismissNotification }: Notif
                 {notifications.length > 0 && <Badge color="blue" content={notifications.length} />}
             </Box>
         ),
-        [notifications]
+        [notifications, styles.icon]
     );
 
     const items = useMemo(() => {
@@ -95,14 +95,14 @@ const NotificationButton = ({ notifications = [], onDismissNotification }: Notif
                     borderRadius={false}
                     header={notification.title}
                     type={getNotificationType(notification.severity)}
-                    dismissable={true}
+                    dismissible={true}
                     onDismiss={() => onDismissNotification(notification.id)}
                 >
                     {notification.content}
                 </Alert>
             ),
         }));
-    }, [notifications]);
+    }, [notifications, onDismissNotification]);
 
     return (
         <ButtonDropdown

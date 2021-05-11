@@ -63,7 +63,6 @@ describe('TreeView', () => {
     });
 
     it('should be able to set initial value', () => {
-        const handleSelect = jest.fn();
         const { getByText } = render(<TreeView root={treeItem} defaultExpanded={['1']} defaultSelected={['4']} />);
         expect(getByText('Child 2').closest('li')).toHaveClass('Mui-selected');
     });
@@ -79,7 +78,6 @@ describe('TreeView', () => {
     });
 
     it('should be able to set multiple initial values', () => {
-        const handleSelect = jest.fn();
         const { getByText } = render(<TreeView root={treeItem} defaultExpanded={['1']} defaultSelected={['2', '4']} />);
         expect(getByText('Child 1 (1)').closest('li')).toHaveClass('Mui-selected');
         expect(getByText('Child 2').closest('li')).toHaveClass('Mui-selected');

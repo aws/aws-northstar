@@ -72,7 +72,7 @@ const BreadcrumbGroup = ({ items, rootPath = 'Home', availableRoutes = [] }: Bre
                             {pathnames.map((value: string, index: number) => {
                                 const last = index === pathnames.length - 1;
                                 const segment = pathnames.slice(0, index + 1);
-                                const to = segment.length == 1 ? '/' : `/${segment.slice(1).join('/')}`;
+                                const to = segment.length === 1 ? '/' : `/${segment.slice(1).join('/')}`;
                                 const text = value
                                     .split(' ')
                                     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
@@ -80,15 +80,15 @@ const BreadcrumbGroup = ({ items, rootPath = 'Home', availableRoutes = [] }: Bre
 
                                 return last ? (
                                     <Typography color="inherit" key={to}>
-                                        {pathnames.length == 1 && value === '/' ? rootPath : text}
+                                        {pathnames.length === 1 && value === '/' ? rootPath : text}
                                     </Typography>
                                 ) : matchRoute(to, availableRoutes) ? (
                                     <Link key={to} href={to}>
-                                        {value == '/' ? rootPath : text}
+                                        {value === '/' ? rootPath : text}
                                     </Link>
                                 ) : (
                                     <Typography color="inherit" key={to}>
-                                        {value == '/' ? rootPath : text}
+                                        {value === '/' ? rootPath : text}
                                     </Typography>
                                 );
                             })}

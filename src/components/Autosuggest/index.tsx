@@ -140,7 +140,7 @@ export default function Autosuggest({
         const optionArray: SelectOption[] = [];
         options.forEach((option) => {
             if (option.options) {
-                option.options.map((o) => {
+                option.options.forEach((o) => {
                     optionArray.push({ label: o.label || o.value, value: o.value, group: option.label });
                 });
             } else {
