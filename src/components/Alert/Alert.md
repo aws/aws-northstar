@@ -62,25 +62,25 @@ import Container from 'aws-northstar/layouts/Container';
 
 <Stack>
     <Container headingVariant='h4' title='Dismissable Success Alert'>
-        <Alert type="success" dismissable={true}>
+        <Alert type="success" dismissible={true}>
             Content
         </Alert>
     </Container>    
 
     <Container headingVariant='h4' title='Dismissable Info Alert'>
-        <Alert type="info" dismissable={true}>
+        <Alert type="info" dismissible={true}>
             Content
         </Alert>
     </Container>
 
     <Container headingVariant='h4' title='Dismissable Warning Alert'>
-        <Alert type="warning" dismissable={true}>
+        <Alert type="warning" dismissible={true}>
             Content
         </Alert>
     </Container>
 
     <Container headingVariant='h4' title='Dismissable Success Alert'>
-        <Alert type="error" dismissable={true}>
+        <Alert type="error" dismissible={true}>
             Content
         </Alert>
     </Container>
@@ -101,7 +101,7 @@ const [count, setCount] = React.useState(0);
     <Stack>
         <Alert 
             type="success" 
-            dismissable={true} 
+            dismissible={true} 
             buttonText="Enable counter"
             onButtonClick={() => setCount(count+1)}
         >
