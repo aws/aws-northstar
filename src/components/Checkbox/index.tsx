@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent, ChangeEvent, ReactNode } from 'react';
+import React, { FunctionComponent, ChangeEvent } from 'react';
 import clsx from 'clsx';
 import { makeStyles, Theme, Checkbox as MaterialCheckbox, FormControlLabel, Typography } from '@material-ui/core';
 
@@ -46,8 +46,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface CheckboxProps {
-    /** Label for the input */
-    children?: ReactNode;
     /** Specifies whether the component is checked.*/
     checked?: boolean;
     /** Specifies that the input should be disabled, preventing the user from
@@ -118,7 +116,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
     const muiCheckBox = (
         <MaterialCheckbox
             disableRipple
-            className={clsx(classes.checkbox, description && classes.checkboxWithDesc)}
+            className={clsx(classes.checkbox, { [classes.checkboxWithDesc]: description })}
             id={controlId}
             checked={checked}
             disabled={disabled}
@@ -138,7 +136,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
         <FormControlLabel
             control={muiCheckBox}
             label={label}
-            className={clsx(classes.checkboxLabel, description && classes.checkboxLabelWitDesc)}
+            className={clsx(classes.checkboxLabel, { [classes.checkboxLabelWitDesc]: description })}
         />
     );
 };

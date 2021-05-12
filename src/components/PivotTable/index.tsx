@@ -141,7 +141,7 @@ const PivotTable: FunctionComponent<PivotTableProps> = (props) => {
         <div className={classes.root}>
             <PivotTableUI
                 onChange={(s: any) => setState(s)}
-                renderers={Object.assign({}, TableRenderers, PlotlyRenderers)}
+                renderers={{ ...TableRenderers, ...PlotlyRenderers }}
                 {...state}
             />
         </div>

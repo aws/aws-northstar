@@ -21,8 +21,6 @@ export interface FormSectionProps {
     header: string;
     /**General description about the form section*/
     description?: string;
-    /** Rendered inside the form section.*/
-    children?: ReactNode;
     /**Footer of the form section. This is where additional settings are supposed to be placed. If the expandable property is set to true, the content of this region will be ignored.*/
     footer?: ReactNode;
 }

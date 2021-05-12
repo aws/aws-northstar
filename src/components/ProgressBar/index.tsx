@@ -139,12 +139,12 @@ const CircularProgressWithLabel: React.FunctionComponent<
         <Box position="relative" display="inline-flex">
             <CircularProgress
                 value={100}
-                variant={'static'}
+                variant="static"
                 classes={{ colorPrimary: classes.circularColorBottom }}
                 {...props}
             />
             <CircularProgress
-                variant={'static'}
+                variant="static"
                 value={value}
                 classes={{ colorPrimary: classes.circularColorPrimary }}
                 {...props}

@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode, FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as MaterialLink } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
@@ -24,8 +24,6 @@ import clsx from 'clsx';
 export interface LinkProps {
     /** The link's destination */
     href: string;
-    /** The node to be displayed */
-    children: ReactNode;
     /** Where to open the linked document */
     target?: string;
     /** Indicates whether the text is decorated with an underline when hovered */
@@ -62,7 +60,7 @@ const Link: FunctionComponent<LinkProps> = ({
     href,
     underlineHover = true,
     forceExternal = false,
-    onClick = () => {},
+    onClick,
 }) => {
     const classes = useStyles({});
     const isExternal = useMemo(() => forceExternal || externalPattern.test(href), [forceExternal, href]);

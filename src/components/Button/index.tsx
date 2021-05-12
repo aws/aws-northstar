@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useMemo, ReactNode, MouseEventHandler, FunctionComponent } from 'react';
+import React, { useMemo, MouseEventHandler, FunctionComponent } from 'react';
 import {
     makeStyles,
     Button as MaterialButton,
@@ -35,7 +35,6 @@ const useStyles = makeStyles({
 });
 
 export interface ButtonProps {
-    children?: ReactNode | string;
     /**
      * Determines the general styling of the button.
      * Use primary for primary buttons, normal for secondary buttons, link for tertiary buttons, icon to only display the icon without text.
@@ -66,7 +65,7 @@ export interface ButtonProps {
     iconAlign?: 'left' | 'right';
     /**
      * Renders the button as being in a loading state.
-     * It takes precendence over the disabled if both are set to true. It prevents clicks.
+     * It takes precedence over the disabled if both are set to true. It prevents clicks.
      * */
     loading?: boolean;
     /**
@@ -84,7 +83,7 @@ export interface ButtonProps {
      */
     size?: 'small' | 'medium' | 'large';
 }
-const OffestCircularProgress = () => (
+const OffsetCircularProgress = () => (
     <Box pr={0.6}>
         <CircularProgress size={14} />
     </Box>
@@ -102,7 +101,7 @@ const muiButtonProps = ({
     size = 'medium',
 }: Partial<ButtonProps>): MaterialButtonProps => {
     const muiButtonProps: MaterialButtonProps = {
-        disabled: disabled,
+        disabled,
         onClick,
         type,
         size,
@@ -110,11 +109,11 @@ const muiButtonProps = ({
 
     if (icon) {
         const position = iconAlign === 'right' ? 'endIcon' : 'startIcon';
-        muiButtonProps[position] = <ButtonIcon type={icon!} />;
+        muiButtonProps[position] = <ButtonIcon type={icon} />;
     }
 
     if (loading) {
-        muiButtonProps.startIcon = <OffestCircularProgress />;
+        muiButtonProps.startIcon = <OffsetCircularProgress />;
     }
 
     switch (variant) {
