@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
@@ -27,6 +27,8 @@ import Text from '../Text';
 export interface StatusIndicatorProps {
     /** The state of the resource */
     statusType: 'positive' | 'negative' | 'warning' | 'info';
+    /** Content to show in the status indicator */
+    children?: ReactNode | string;
 }
 
 const getIconByStatusType = (statusType: string, title?: string) => {

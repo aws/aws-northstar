@@ -13,10 +13,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import Typography from '@material-ui/core/Typography';
 
 export interface HeadingProps {
+    /** The heading content */
+    children: ReactNode;
     /** The heading level */
     variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
 }

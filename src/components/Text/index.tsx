@@ -14,10 +14,12 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent } from 'react';
+import React, { ReactNode, FunctionComponent } from 'react';
 import Typography from '@material-ui/core/Typography';
 
 export interface TextProps {
+    /** Text that you want to render */
+    children: ReactNode;
     /** Render as `<span>`, `<p>` or `<small>`*/
     variant?: 'span' | 'p' | 'small';
     /** Font color */

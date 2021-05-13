@@ -65,6 +65,10 @@ export interface ExpandableSectionProps {
      * */
     variant?: Variant;
     /**
+     * Primary content displayed in the expandable section element.
+     * */
+    children?: ReactNode;
+    /**
      * Heading displayed above the content text.
      *  */
     header?: ReactNode;

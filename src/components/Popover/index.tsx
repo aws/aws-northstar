@@ -120,6 +120,11 @@ export interface PopoverProps {
     variant?: 'click' | 'hover';
 
     /**
+     * Element that triggers the popover when selected by the user.
+     */
+    children?: React.ReactNode;
+
+    /**
      * Specifies optional header text for the popover.
      */
     header?: React.ReactNode;

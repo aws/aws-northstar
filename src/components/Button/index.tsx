@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useMemo, MouseEventHandler, FunctionComponent } from 'react';
+import React, { useMemo, ReactNode, MouseEventHandler, FunctionComponent } from 'react';
 import {
     makeStyles,
     Button as MaterialButton,
@@ -35,6 +35,7 @@ const useStyles = makeStyles({
 });
 
 export interface ButtonProps {
+    children?: ReactNode | string;
     /**
      * Determines the general styling of the button.
      * Use primary for primary buttons, normal for secondary buttons, link for tertiary buttons, icon to only display the icon without text.

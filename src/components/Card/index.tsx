@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent, MouseEvent } from 'react';
+import React, { FunctionComponent, ReactNode, MouseEvent } from 'react';
 import MUICard from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -30,6 +30,10 @@ export interface CardProps {
      * Subtitle of the card
      * */
     subtitle?: string;
+    /**
+     * Content of the card
+     * */
+    children?: ReactNode;
     /**
      * Determine whether to highlight the card when mouse pointer is hovered on the card.
      */

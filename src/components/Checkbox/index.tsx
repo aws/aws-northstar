@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent, ChangeEvent } from 'react';
+import React, { FunctionComponent, ChangeEvent, ReactNode } from 'react';
 import clsx from 'clsx';
 import { makeStyles, Theme, Checkbox as MaterialCheckbox, FormControlLabel, Typography } from '@material-ui/core';
 
@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface CheckboxProps {
+    /** Label for the input */
+    children?: ReactNode;
     /** Specifies whether the component is checked.*/
     checked?: boolean;
     /** Specifies that the input should be disabled, preventing the user from
