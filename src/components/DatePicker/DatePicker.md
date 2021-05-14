@@ -20,7 +20,7 @@ import Container from 'aws-northstar/layouts/Container';
 import DatePicker from 'aws-northstar/components/DatePicker';
 import Container from 'aws-northstar/layouts/Container'; 
 <Container headingVariant='h4' title="Read only">
-  <DatePicker readOnly={true} value={new Date().toDateString()} />
+  <DatePicker readOnly={true} value={new Date()} />
 </Container>
 ```
 

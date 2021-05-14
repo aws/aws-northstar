@@ -27,7 +27,7 @@ export const Disabled = () => <DatePicker disabled={true} />;
 
 export const Placeholder = () => <DatePicker placeholder="the custom placeholder" />;
 
-export const ReadOnly = () => <DatePicker readOnly={true} value={new Date().toDateString()} />;
+export const ReadOnly = () => <DatePicker readOnly={true} value={new Date()} />;
 
 export const RussianLocale = () => <DatePicker locale={'ru'} />;
 
