@@ -17,7 +17,7 @@ import React from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import Modal from '.';
 
-describe('Model', () => {
+describe('Modal', () => {
     afterEach(cleanup);
 
     it('should renders title and children', () => {

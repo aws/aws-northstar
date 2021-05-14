@@ -165,9 +165,7 @@ const Alert: FunctionComponent<AlertProps> = ({
 
     const renderAlert = useCallback(
         ({ dismissible, ...props }: AlertProps): ReactNode =>
-            dismissible
-                ? renderAlertBody(props, mapProps('dismissible', props))
-                : renderAlertBody(props, mapProps('pinned', props)),
+            renderAlertBody(props, mapProps(dismissible ? 'dismissible' : 'pinned', props)),
         [renderAlertBody, mapProps]
     );
 

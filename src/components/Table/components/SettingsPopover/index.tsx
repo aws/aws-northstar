@@ -75,7 +75,7 @@ export default ({
                                 return {
                                     text: pageSize,
                                     onClick: (e) => {
-                                        setPageSize(Number(Number(e.target.textContent)));
+                                        setPageSize(Number(e.target.textContent));
                                         gotoPage(0);
                                     },
                                 };

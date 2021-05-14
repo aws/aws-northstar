@@ -118,7 +118,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
     const muiCheckBox = (
         <MaterialCheckbox
             disableRipple
-            className={clsx(classes.checkbox, description && classes.checkboxWithDesc)}
+            className={clsx(classes.checkbox, { [classes.checkboxWithDesc]: description })}
             id={controlId}
             checked={checked}
             disabled={disabled}
@@ -138,7 +138,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
         <FormControlLabel
             control={muiCheckBox}
             label={label}
-            className={clsx(classes.checkboxLabel, description && classes.checkboxLabelWitDesc)}
+            className={clsx(classes.checkboxLabel, { [classes.checkboxLabelWitDesc]: description })}
         />
     );
 };

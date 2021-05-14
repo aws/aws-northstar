@@ -16,7 +16,7 @@
 
 import React, { useState, SyntheticEvent, useMemo, useEffect, useCallback, FunctionComponent } from 'react';
 import TextField from '@material-ui/core/TextField';
-import MaterialUIAutocomplete from '@material-ui/lab/Autocomplete';
+import MaterialUIAutocomplete, { AutocompleteRenderInputParams } from '@material-ui/lab/Autocomplete';
 import Link from '@material-ui/core/Link';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles, InputAdornment, Theme } from '@material-ui/core';
@@ -185,7 +185,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
     );
 
     const renderTextfield = useCallback(
-        (params: any): React.ReactNode => (
+        (params: AutocompleteRenderInputParams): React.ReactNode => (
             <TextField
                 autoCorrect={autoCompleteString}
                 placeholder={placeholder}
@@ -214,7 +214,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
     );
 
     const renderOption = useCallback(
-        (option: SelectOption, { selected }: any): React.ReactNode => {
+        (option: SelectOption): React.ReactNode => {
             if (checkboxes) {
                 return (
                     <>

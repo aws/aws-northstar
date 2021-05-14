@@ -57,13 +57,9 @@ const Token: FunctionComponent<TokenProps> = ({ item, onDismiss }) => {
             className={styles.root}
             label={item.label}
             color="primary"
-            onDelete={
-                onDismiss
-                    ? () => {
-                          onDismiss(item);
-                      }
-                    : undefined
-            }
+            onDelete={() => {
+                onDismiss?.(item);
+            }}
             deleteIcon={<Close />}
         />
     );

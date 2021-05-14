@@ -16,7 +16,7 @@
 
 import React, { useState, SyntheticEvent, useMemo } from 'react';
 import TextField from '@material-ui/core/TextField';
-import MaterialUIAutocomplete from '@material-ui/lab/Autocomplete';
+import MaterialUIAutocomplete, { AutocompleteRenderInputParams } from '@material-ui/lab/Autocomplete';
 import Link from '@material-ui/core/Link';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles, InputAdornment, Theme } from '@material-ui/core';
@@ -181,12 +181,12 @@ export default function Autosuggest({
         </>
     );
 
-    const textfield = (params: any): React.ReactNode => (
+    const textfield = (params: AutocompleteRenderInputParams): React.ReactNode => (
         <TextField
             autoCorrect={autoCompleteString}
             placeholder={placeholder}
             required={ariaRequired}
-            error={statusType === 'error' || invalid ? true : false}
+            error={!!(statusType === 'error' || invalid)}
             {...params}
             variant="outlined"
             size="small"

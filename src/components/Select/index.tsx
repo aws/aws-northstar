@@ -144,7 +144,7 @@ const renderOptions = (
                     key={option.value || option.label}
                     value={option.value}
                     disabled={option.disabled || disabled}
-                    className={clsx(groupItem && classes.groupMenuItem)}
+                    className={clsx({ [classes.groupMenuItem]: groupItem })}
                 >
                     {option.iconName && (
                         <span className={classes.iconMenuItem}>
@@ -228,7 +228,7 @@ const Select: FunctionComponent<SelectProps> = ({
 
     const onRecoveryClickHandler = (event: SyntheticEvent) => {
         event.preventDefault();
-        onRecoveryClick && onRecoveryClick(event);
+        onRecoveryClick?.(event);
         event.stopPropagation();
     };
 

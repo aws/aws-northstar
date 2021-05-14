@@ -98,16 +98,14 @@ const Toggle: FunctionComponent<ToggleProps> = ({ onChange, ...props }) => {
     );
 
     const handleChange = (_: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-        if (onChange) {
-            onChange(checked);
-        }
+        onChange?.(checked);
     };
 
     return (
         <FormControlLabel
             control={<Switch {...mapProps(props)} onChange={handleChange} />}
             label={label}
-            className={clsx(classes.label, props.description && classes.labelWitDesc)}
+            className={clsx(classes.label, { [classes.labelWitDesc]: props.description })}
         />
     );
 };

@@ -215,7 +215,6 @@ type TableInstance<D extends object> = {} & TableBaseInstance<D> &
     Partial<
         UsePaginationInstanceProps<D> &
             UseRowSelectInstanceProps<D> &
-            UsePaginationInstanceProps<D> &
             UseFiltersInstanceProps<D> &
             UseGlobalFiltersInstanceProps<D> &
             UseGroupByInstanceProps<D>
@@ -426,18 +425,24 @@ export default function Table<D extends object>({
         setControlledPageSize(pageSize || DEFAULT_PAGE_SIZE);
     }, [pageSize]);
 
+    const toggleCopy = (target: object, headerId: string) => {
+        const copy = { ...target };
+
+        if (copy[headerId]) {
+            delete copy[headerId];
+        } else {
+            copy[headerId] = true;
+        }
+
+        return copy;
+    };
+
     const handleShowColumnsChange = (headerId: IdType<string> | string | undefined) => {
         if (!headerId) {
             return;
         }
 
-        const showColumnsCopy: any = { ...showColumns };
-
-        if (showColumnsCopy[headerId]) {
-            delete showColumnsCopy[headerId];
-        } else {
-            showColumnsCopy[headerId] = true;
-        }
+        const showColumnsCopy = toggleCopy(showColumns, headerId);
 
         setShowColumns(showColumnsCopy);
     };
@@ -447,13 +452,7 @@ export default function Table<D extends object>({
             return;
         }
 
-        const groupByCopy: any = { ...groupBy };
-
-        if (groupByCopy[headerId]) {
-            delete groupByCopy[headerId];
-        } else {
-            groupByCopy[headerId] = true;
-        }
+        const groupByCopy = toggleCopy(groupBy, headerId);
 
         setGroupBy(groupByCopy);
         toggleGroupBy!(headerId);

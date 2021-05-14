@@ -120,7 +120,7 @@ export default function SettingBar({
                             size={'small'}
                             disabled={!canNextPage || loading}
                             data-testid="next-page"
-                            onClick={() => nextPage()}
+                            onClick={nextPage}
                         >
                             <NavigateNext />
                         </IconButton>

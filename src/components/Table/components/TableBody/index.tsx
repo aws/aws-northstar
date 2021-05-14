@@ -80,17 +80,11 @@ export default function TableBody<D extends object>({
                                                     <KeyboardArrowRight {...row.getToggleRowExpandedProps!()} />
                                                 )}
                                             </div>
-                                        ) : cell.isAggregated ? (
-                                            // If the cell is aggregated, use the Aggregated
-                                            // renderer for cell
-                                            <div className={wrapText ? '' : styles.ellipsizeText}>
-                                                {cell!.render!('Aggregated')}
-                                            </div>
                                         ) : (
-                                            // For cells with repeated values, render null
-                                            // Otherwise, just render the regular cell
+                                            // If the cell is aggregated, use the Aggregated
+                                            // renderer for cell, otherwise, just render the regular cell
                                             <div className={wrapText ? '' : styles.ellipsizeText}>
-                                                {cell!.render!('Cell')}
+                                                {cell!.render!(cell.isAggregated ? 'Aggregated' : 'Cell')}
                                             </div>
                                         )}
                                     </TableCell>

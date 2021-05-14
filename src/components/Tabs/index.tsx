@@ -88,7 +88,7 @@ const Tabs = ({ tabs, activeId = '', variant = 'default', onChange }: TabsProps)
     const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
     const [value, setValue] = React.useState(tabIndex === -1 ? 0 : tabIndex);
     const handleChange = (event: React.ChangeEvent<{}>, index: number) => {
-        onChange && onChange(tabs[index].id);
+        onChange?.(tabs[index].id);
         setValue(index);
     };
 
@@ -99,7 +99,7 @@ const Tabs = ({ tabs, activeId = '', variant = 'default', onChange }: TabsProps)
             TabIndicatorProps={{ color: 'primary' }}
             value={value}
             onChange={handleChange}
-            className={clsx(variant === 'container' && classes.noBorder)}
+            className={clsx({ [classes.noBorder]: variant === 'container' })}
         >
             {tabs.map((tab) => (
                 <Tab key={tab.id} className={classes.tab} label={tab.label} disabled={tab.disabled} />
