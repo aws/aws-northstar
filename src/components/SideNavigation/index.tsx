@@ -141,10 +141,10 @@ export const SideNavigation: FunctionComponent<SideNavigationProps> = ({ header,
     const [expandedSections, setExpandedSections] = React.useState(populateInitialExpandedState(items));
 
     const expandToggle = (itemText: string) => {
-        setExpandedSections({
-            ...expandedSections,
-            [itemText]: !expandedSections[itemText],
-        });
+        setExpandedSections((prevExpandedSections) => ({
+            ...prevExpandedSections,
+            [itemText]: !prevExpandedSections[itemText],
+        }));
     };
 
     const wrapInHref = (children: ReactNode, href?: string) => {

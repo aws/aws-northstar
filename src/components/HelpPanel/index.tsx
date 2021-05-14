@@ -99,8 +99,9 @@ const HelpPanel: FunctionComponent<HelpPanelProps> = ({
 
     return (
         <Box>
-            {loading && <LoadingIndicator />}
-            {!loading && (
+            {loading ? (
+                <LoadingIndicator />
+            ) : (
                 <>
                     {header}
                     <Divider />

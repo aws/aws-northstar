@@ -132,14 +132,14 @@ const ButtonDropdown: FunctionComponent<ButtonDropdownProps> = ({
     disableArrowDropdown = false,
     menuItemClassName,
     darkTheme,
-    onClick = (e) => {},
+    onClick,
 }) => {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
     const handleClick = useCallback(
-        (event: any) => {
-            onClick(event);
+        (event: React.MouseEvent<HTMLElement>) => {
+            onClick?.(event);
             if (items.length > 0) {
                 setAnchorEl(event.currentTarget);
             }

@@ -192,19 +192,25 @@ const Popover: FunctionComponent<PopoverProps> = ({
     const mapPositionToMuiPopoverOrigins = useCallback(() => {
         let anchorOrigin: MaterialPopoverProps['anchorOrigin'],
             transformOrigin: MaterialPopoverProps['transformOrigin'];
-        if (position === 'left') {
-            anchorOrigin = { vertical: 'center', horizontal: 'left' };
-            transformOrigin = { vertical: 'center', horizontal: 'right' };
-        } else if (position === 'right') {
-            anchorOrigin = { vertical: 'center', horizontal: 'right' };
-            transformOrigin = { vertical: 'center', horizontal: 'left' };
-        } else if (position === 'bottom') {
-            anchorOrigin = { vertical: 'bottom', horizontal: 'center' };
-            transformOrigin = { vertical: 'top', horizontal: 'center' };
-        } else {
-            anchorOrigin = { vertical: 'top', horizontal: 'center' };
-            transformOrigin = { vertical: 'bottom', horizontal: 'center' };
+        switch (position) {
+            case 'left':
+                anchorOrigin = { vertical: 'center', horizontal: 'left' };
+                transformOrigin = { vertical: 'center', horizontal: 'right' };
+                break;
+            case 'right':
+                anchorOrigin = { vertical: 'center', horizontal: 'right' };
+                transformOrigin = { vertical: 'center', horizontal: 'left' };
+                break;
+            case 'bottom':
+                anchorOrigin = { vertical: 'bottom', horizontal: 'center' };
+                transformOrigin = { vertical: 'top', horizontal: 'center' };
+                break;
+            default:
+                anchorOrigin = { vertical: 'top', horizontal: 'center' };
+                transformOrigin = { vertical: 'bottom', horizontal: 'center' };
+                break;
         }
+
         return { anchorOrigin, transformOrigin };
     }, [position]);
 
@@ -218,7 +224,7 @@ const Popover: FunctionComponent<PopoverProps> = ({
         className: clsx(classes.trigger, classes[`trigger-type-${triggerType}`]),
     };
 
-    const dismissButton = (showDismissButton ?? null) && (
+    const dismissButton = showDismissButton && (
         <IconButton
             className={classes.dismiss}
             component="button"
@@ -256,11 +262,9 @@ const Popover: FunctionComponent<PopoverProps> = ({
                     >
                         <div className={classes.container}>
                             <div
-                                className={clsx(
-                                    classes.body,
-                                    classes[`body-size-${size}`],
-                                    fixedWidth && 'fixed-width'
-                                )}
+                                className={clsx(classes.body, classes[`body-size-${size}`], {
+                                    'fixed-width': fixedWidth,
+                                })}
                                 role="dialog"
                                 aria-modal={showDismissButton ? true : undefined}
                                 aria-labelledby={showDismissButton && header ? labelledById : undefined}

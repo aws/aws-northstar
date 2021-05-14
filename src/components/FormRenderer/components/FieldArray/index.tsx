@@ -66,7 +66,7 @@ const FieldArrayMapping: FunctionComponent = (props: any) => {
                     return (
                         <Stack spacing="s">
                             {length === 0 && <Text>{noItemsMessage}</Text>}
-                            {map((name: any, index: number) => {
+                            {map((name: string, index: number) => {
                                 return (
                                     <FieldArrayItem
                                         layout={layout}

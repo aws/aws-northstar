@@ -80,12 +80,12 @@ const TreeView: FunctionComponent<TreeViewProps> = ({
 
     const handleToggle = (event: React.ChangeEvent<{}>, nodeIds: string[]) => {
         setExpanded(nodeIds);
-        onNodeToggle && onNodeToggle(event, nodeIds);
+        onNodeToggle?.(event, nodeIds);
     };
 
     const handleSelect = (event: React.ChangeEvent<{}>, nodeIds: string[]) => {
         setSelected(nodeIds);
-        onNodeSelect && onNodeSelect(event, nodeIds);
+        onNodeSelect?.(event, nodeIds);
     };
 
     return (

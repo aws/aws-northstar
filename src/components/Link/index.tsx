@@ -62,7 +62,7 @@ const Link: FunctionComponent<LinkProps> = ({
     href,
     underlineHover = true,
     forceExternal = false,
-    onClick = () => {},
+    onClick,
 }) => {
     const classes = useStyles({});
     const isExternal = useMemo(() => forceExternal || externalPattern.test(href), [forceExternal, href]);

@@ -45,8 +45,8 @@ const MarkdownEditorMapping: FunctionComponent = (props: any) => {
     const controlId = input.name || uuidv4();
     const errorText = ((validateOnMount || submitFailed || showError) && error) || '';
 
-    const updateState = (e: any) => {
-        onChange && onChange(e);
+    const updateState = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        onChange?.(e);
         input.onChange(e);
     };
 
@@ -80,8 +80,8 @@ const MarkdownEditorMapping: FunctionComponent = (props: any) => {
                         height="100%"
                         p={1}
                         style={{ wordWrap: 'break-word' }}
-                        overflow={'hidden'}
-                        width={'100%'}
+                        overflow="hidden"
+                        width="100%"
                     >
                         <MarkdownViewer>{input.value}</MarkdownViewer>
                     </Box>
