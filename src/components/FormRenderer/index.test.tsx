@@ -15,7 +15,8 @@
  ******************************************************************************************************************** */
 import React from 'react';
 import { render, fireEvent, cleanup, act } from '@testing-library/react';
-import FormRenderer, { componentTypes, validatorTypes } from '.';
+import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
+import FormRenderer, { componentTypes } from '.';
 
 describe('FormRenderer', () => {
     afterEach(() => {

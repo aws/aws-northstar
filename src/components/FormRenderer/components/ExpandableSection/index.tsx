@@ -14,12 +14,13 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo, useState, useEffect } from 'react';
-import { useFormApi, useFieldApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import ExpandableSection from '../../../ExpandableSection';
 import Stack from '../../../../layouts/Stack';
 import Box from '../../../../layouts/Box';
 
-const ExpandableSectionMapping: FunctionComponent = (props) => {
+const ExpandableSectionMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
         fields,
         title,

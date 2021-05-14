@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo, useState, useEffect } from 'react';
 import { WizardInner, WizardStepInfo } from '../../../../../Wizard';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 
 export interface WizardStepProps {
     title: string;
@@ -43,12 +43,12 @@ const WizardStep: FunctionComponent<WizardStepProps> = ({
     const [showError, setShowError] = useState(false);
     const formOptions = useFormApi();
     const content = useMemo(() => {
-        const editabledFields = fields.map((item: any) => ({
+        const editabledFields = fields.map((item) => ({
             ...item,
             showError,
         }));
 
-        return formOptions.renderForm(editabledFields, formOptions);
+        return formOptions.renderForm(editabledFields);
     }, [fields, showError, formOptions]);
 
     useEffect(() => {

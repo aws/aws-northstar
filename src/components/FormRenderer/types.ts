@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { componentTypes as basicComponentTypes } from '@data-driven-forms/react-form-renderer';
+import basicComponentTypes from '@data-driven-forms/react-form-renderer/component-types';
 
 export interface Option {
     label: string;

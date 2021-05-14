@@ -40,11 +40,15 @@ export interface TimePickerProps {
      * */
     disabled?: boolean;
     /**
+     * Specifies that the input should be required.
+     * */
+    required?: boolean;
+    /**
      * Specifies that the input should be readonly, preventing the user from modifying the value but including it in a form submission. <br/>
      * A readonly input can receive focus.
      * Do not use readonly inputs outside of a form.
      * */
-    readOnly?: boolean;
+    readonly?: boolean;
     /**
      * Allows you to indicate that the control is to be focused as soon as the load event triggers,
      *  allowing the user to just start typing without having to manually focus the input.
@@ -96,7 +100,8 @@ const TimePicker: FunctionComponent<TimePickerProps> = ({
     twentyFourHourClock,
     name,
     disabled,
-    readOnly,
+    readonly,
+    required,
     autofocus,
     controlId,
     label,
@@ -127,9 +132,10 @@ const TimePicker: FunctionComponent<TimePickerProps> = ({
                 disableToolbar={false}
                 ampm={!twentyFourHourClock}
                 name={name}
-                readOnly={readOnly}
+                readOnly={readonly}
                 value={selectedDate}
                 disabled={disabled}
+                required={required}
                 placeholder={placeholder}
                 autoFocus={autofocus}
                 onChange={handleDateChange}

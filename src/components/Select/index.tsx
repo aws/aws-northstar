@@ -89,9 +89,9 @@ export interface SelectProps extends SelectBaseProps, AriaBaseProps {
     /** Fired whenever the user selects an option. The event detail contains the current selectedId and selectedOption. */
     onChange?: MuiSelectProps['onChange'];
     /** Fired when the select is opened. */
-    onFocus?: MuiSelectProps['onOpen'];
+    onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
     /** Fired when input focus is removed from the UI control. */
-    onBlur?: MuiSelectProps['onClose'];
+    onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
 }
 
 export interface SelectOption {
@@ -176,8 +176,8 @@ const muiSelectProps = ({
         error: invalid,
         id: controlId,
         onChange,
-        onClose: onBlur,
-        onOpen: onFocus,
+        onClose: onBlur as MuiSelectProps['onClose'],
+        onOpen: onFocus as MuiSelectProps['onOpen'],
         value: selectedOption.value,
     };
 

@@ -14,12 +14,12 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';
 import TimePicker from '../../../TimePicker';
 
-const TimePickerMapping: FunctionComponent = (props: any) => {
+const TimePickerMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
         label,
         description,

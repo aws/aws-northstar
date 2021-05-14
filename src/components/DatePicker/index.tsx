@@ -72,11 +72,15 @@ export interface DatePickerProps {
      * */
     disabled?: boolean;
     /**
+     * Specifies that the input should be required
+     * */
+    required?: boolean;
+    /**
      * Specifies that the input should be readonly, preventing the user from modifying the value but including it in a form submission. <br/>
      * A readonly input can receive focus.
      * Do not use readonly inputs outside of a form.
      * */
-    readOnly?: boolean;
+    readonly?: boolean;
     /**
      * Overrides invalidation state. */
     invalid?: boolean;
@@ -140,7 +144,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
     onChange = () => {},
     value,
     name,
-    readOnly,
+    readonly,
     ...props
 }: DatePickerProps) => {
     const [selectedDate, setSelectedDate] = useState(value || null);
@@ -164,7 +168,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
                 inputVariant="outlined"
                 disableToolbar={true}
                 name={name}
-                readOnly={readOnly}
+                readOnly={readonly}
                 value={selectedDate}
                 disabled={disabled}
                 placeholder={placeholder}

@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';
 import MarkdownViewer from '../../../MarkdownViewer';
@@ -22,7 +22,7 @@ import Textarea from '../../../Textarea';
 import Grid from '../../../../layouts/Grid';
 import { Box } from '../../../../layouts';
 
-const MarkdownEditorMapping: FunctionComponent = (props: any) => {
+const MarkdownEditorMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
         label,
         description,

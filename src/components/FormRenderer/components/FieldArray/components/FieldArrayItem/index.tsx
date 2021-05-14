@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import { v4 as uuidv4 } from 'uuid';
 import Box from '../../../../../../layouts/Box';
 import Button from '../../../../../Button';
@@ -46,7 +46,7 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
 }) => {
     const formOptions = useFormApi();
     const editedFields = useMemo(() => {
-        return fields.map((field: any) => {
+        return fields.map((field) => {
             const computedName = field.name ? `${name}.${field.name}` : uuidv4();
             return {
                 ...field,
@@ -67,7 +67,7 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
                         {editedFields.map((field) => (
                             <Grid item key={field.key} xs={field.spacing || 3}>
                                 <Box width="100%" pr={1}>
-                                    {formOptions.renderForm([field], formOptions)}
+                                    {formOptions.renderForm([field])}
                                 </Box>
                             </Grid>
                         ))}
@@ -77,7 +77,7 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
                         {editedFields.map((field) => (
                             <Column key={field.key}>
                                 <Box width="100%" pr={1}>
-                                    {formOptions.renderForm([field], formOptions)}
+                                    {formOptions.renderForm([field])}
                                 </Box>
                             </Column>
                         ))}

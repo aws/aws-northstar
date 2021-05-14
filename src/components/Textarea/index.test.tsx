@@ -79,10 +79,14 @@ describe('Textarea', () => {
             ariaRequired: true,
             ariaDescribedby: 'describedby',
             onChange: mockOnChange,
+            onBlur: mockOnChange,
+            onFocus: mockOnChange,
+            onKeyDown: mockOnChange,
+            onKeyUp: mockOnChange,
+            required: true,
             readonly: false,
             disableBrowserAutocorrect: true,
             autofocus: false,
-            // ariaRequired: true
         };
 
         const expectedMappedProps: TextareaAutosizeProps = {
@@ -94,6 +98,10 @@ describe('Textarea', () => {
             rowsMin: 3,
             value: undefined,
             onChange: mockOnChange,
+            onBlur: mockOnChange,
+            onFocus: mockOnChange,
+            onKeyDown: mockOnChange,
+            onKeyUp: mockOnChange,
             required: true,
             placeholder: 'placeholder',
             readOnly: false,

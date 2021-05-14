@@ -75,11 +75,11 @@ export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
     /**
      * Callback fired when the popup requests to be opened
      * */
-    onFocus?: (event: React.ChangeEvent<{}>) => void;
+    onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
     /**
      * Callback fired when the popup requests to be closed
      * */
-    onBlur?: (event: React.ChangeEvent<{}>) => void;
+    onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -228,11 +228,11 @@ export default function Autosuggest({
                 onInputChange={handleOnInput}
                 onOpen={(e) => {
                     setOpen(true);
-                    onFocus(e);
+                    onFocus(e as React.FocusEvent<HTMLElement>);
                 }}
                 onClose={(e) => {
                     setOpen(false);
-                    onBlur(e);
+                    onBlur(e as React.FocusEvent<HTMLElement>);
                 }}
                 loading={statusType !== 'finished'}
                 getOptionLabel={(option) => option.label || ''}

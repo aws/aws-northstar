@@ -14,12 +14,12 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { memo, useCallback, useMemo } from 'react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { v4 as uuidv4 } from 'uuid';
 import Table from '../../../Table';
 import FormField from '../../../FormField';
 
-const TableMapping = (props: any) => {
+const TableMapping = (props: UseFieldApiConfig) => {
     const {
         label,
         description,
@@ -39,7 +39,7 @@ const TableMapping = (props: any) => {
     const controlId = input.name || uuidv4();
     const errorText = ((validateOnMount || submitFailed || showError) && error) || '';
     const handleSelectionChange = useCallback(
-        (selectedItems: any[]) => {
+        (selectedItems) => {
             input.onChange(selectedItems);
         },
         [input]

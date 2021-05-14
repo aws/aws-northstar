@@ -14,10 +14,11 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
-import { useFormApi, componentTypes } from '@data-driven-forms/react-form-renderer';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import Form from '../../../Form';
 import Button from '../../../Button';
 import Inline from '../../../../layouts/Inline';
+import { componentTypes } from '../../types';
 
 export interface FormTemplateProps {
     formFields: any;
@@ -45,7 +46,7 @@ const FormTemplate: FunctionComponent<FormTemplateProps> = ({
                 loading={isSubmitting}
                 onClick={(event) => {
                     event.preventDefault();
-                    handleSubmit(event);
+                    handleSubmit();
                 }}
             >
                 {submitLabel}
