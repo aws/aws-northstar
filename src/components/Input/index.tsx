@@ -15,8 +15,7 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, ReactElement, useEffect } from 'react';
-import MaterialInput from '@material-ui/core/OutlinedInput';
-import { OutlinedInputProps as MaterialInputProps } from '@material-ui/core/OutlinedInput';
+import MaterialInput, { OutlinedInputProps as MaterialInputProps } from '@material-ui/core/OutlinedInput';
 import { v4 as uuidv4 } from 'uuid';
 import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -104,7 +103,7 @@ const mapProps = ({
         'aria-required': required,
     };
 
-    const mappedInputProps: MaterialInputProps = {
+    return {
         type,
         name: props.name,
         required,
@@ -117,7 +116,6 @@ const mapProps = ({
         autoFocus: props.autofocus,
         inputProps,
     };
-    return mappedInputProps;
 };
 
 /**

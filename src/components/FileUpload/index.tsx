@@ -84,9 +84,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
             const newFiles = selectedFiles.filter((file) => file.name !== dismissedItem.value);
 
             setSelectedFiles(newFiles);
-            if (onChange) {
-                onChange(newFiles);
-            }
+            onChange?.(newFiles);
         },
         [selectedFiles, setSelectedFiles, onChange]
     );
@@ -115,24 +113,15 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
     }, [selectedFiles, multiple, handleFileSelectionDismiss]);
 
     const handleFileSelectionButtonClick = useCallback(() => {
-        if (inputElement.current) {
-            inputElement.current.click();
-        }
+        inputElement.current?.click();
     }, []);
 
     const handleFileSelectionChange = useCallback(
         (event) => {
-            let newFiles = [];
-            if (multiple) {
-                newFiles = [...selectedFiles, ...event.target.files];
-            } else {
-                newFiles = [...event.target.files];
-            }
+            const newFiles = multiple ? [...selectedFiles, ...event.target.files] : [...event.target.files];
 
             setSelectedFiles(newFiles);
-            if (onChange) {
-                onChange(newFiles);
-            }
+            onChange?.(newFiles);
         },
         [selectedFiles, setSelectedFiles, onChange, multiple]
     );
@@ -147,9 +136,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
             errorText={errorText}
         >
             <input
-                ref={(input) => {
-                    inputElement.current = input;
-                }}
+                ref={inputElement}
                 id={controlId}
                 name={name}
                 style={{ display: 'none' }}

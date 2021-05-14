@@ -83,7 +83,7 @@ export interface TimePickerProps {
     /**
      * Fires when the time changes.
      * */
-    onChange?: (e?: Date) => void;
+    onChange?: (e?: Date | null) => void;
 }
 
 /**
@@ -107,7 +107,7 @@ const TimePicker: FunctionComponent<TimePickerProps> = ({
 }) => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(value || null);
 
-    const handleDateChange = (date?: any) => {
+    const handleDateChange = (date?: Date | null) => {
         onChange(date);
         setSelectedDate(date || null);
     };

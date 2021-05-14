@@ -73,7 +73,7 @@ export interface ExpandableSectionProps {
      *  */
     header?: ReactNode;
     /**
-     * The description of the section, displaed below the header.
+     * The description of the section, displayed below the header.
      * */
     description?: ReactNode;
     /**

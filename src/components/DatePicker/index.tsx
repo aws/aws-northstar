@@ -27,7 +27,7 @@ export interface DatePickerProps {
     /**
      * The current input value. This should be provided in YYYY-MM-DD format.
      * */
-    value?: string;
+    value?: Date;
     /**
      * Placeholder text rendered when the value is an empty string.
      * */
@@ -38,7 +38,7 @@ export interface DatePickerProps {
      * We therefore recommend that you also validate these constraints client- and server-side, in the
      * same way as for other form elements.
      * */
-    isDateDisabled?: (date: any) => boolean;
+    isDateDisabled?: (date: Date | null) => boolean;
     /**
      * The locale to be used for rendering month names and defining the starting date of the week. <br/>
      * If not provided, it will be determined from the page and browser locales. <br/>
@@ -118,7 +118,7 @@ export interface DatePickerProps {
     /**
      * Fires when the date changes.
      * */
-    onChange?: (e?: any) => void;
+    onChange?: (e?: Date | null) => void;
 }
 
 const localeMap = {
@@ -137,17 +137,17 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
     locale = 'en',
     disabled = false,
     isDateDisabled = (_) => false,
-    onChange = () => {},
+    onChange,
     value,
     name,
     readOnly,
     ...props
 }: DatePickerProps) => {
-    const [selectedDate, setSelectedDate] = useState(value || null);
+    const [selectedDate, setSelectedDate] = useState<Date | null>(value || null);
 
-    const handleDateChange = (date?: any) => {
+    const handleDateChange = (date: Date | null) => {
         setSelectedDate(date);
-        onChange(date);
+        onChange?.(date);
     };
 
     return (

@@ -51,10 +51,10 @@ export default function TableHead<D extends object>({ headerGroups, styles }: Ta
                                                 IconComponent={ArrowDropDown}
                                                 className={styles.cellAlign}
                                             >
-                                                <span>{column.render && column.render('Header')}</span>
+                                                <span>{column.render?.('Header')}</span>
                                             </TableSortLabel>
                                         ) : (
-                                            <span>{column.render && column.render('Header')}</span>
+                                            <span>{column.render?.('Header')}</span>
                                         )}
                                         <div {...column.getResizerProps!()} className={styles.resizer} />
                                     </div>

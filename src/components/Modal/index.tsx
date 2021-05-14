@@ -78,7 +78,7 @@ const Modal = ({ visible, children, title, subtitle, footer, onClose, width }: M
 
     const handleClose = () => {
         setVisible(false);
-        if (onClose) onClose();
+        onClose?.();
     };
 
     const CloseButton = () => (
@@ -88,7 +88,7 @@ const Modal = ({ visible, children, title, subtitle, footer, onClose, width }: M
     );
 
     return (
-        <section data-testid="modal" className={clsx(isVisible && styles.cycloramaActive, styles.cyclorama)}>
+        <section data-testid="modal" className={clsx(styles.cyclorama, { [styles.cycloramaActive]: isVisible })}>
             <div data-testid="modal-inner" className={clsx(styles.modalPlaceholder)}>
                 <Container title={title} subtitle={subtitle} actionGroup={<CloseButton />} footerContent={footer}>
                     {children}
