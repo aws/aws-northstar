@@ -20,20 +20,20 @@ import { Theme } from '@material-ui/core/styles';
 import Close from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles<Theme, SidebarProps>((theme: Theme) => ({
     hide: {
         display: 'none',
     },
     drawer: {
         height: '100%',
         flexShrink: 0,
-        width: (props: SidebarProps) => props.sidebarWidth,
+        width: (props) => props.sidebarWidth,
     },
     drawerPaper: {
         [theme.breakpoints.up('sm')]: {
             height: '100%',
             position: 'relative',
-            width: (props: SidebarProps) => props.sidebarWidth,
+            width: (props) => props.sidebarWidth,
         },
         [theme.breakpoints.down('xs')]: {
             position: 'absolute',
