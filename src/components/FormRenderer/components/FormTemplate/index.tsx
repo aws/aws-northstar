@@ -14,6 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
+import { Schema, Field } from '@data-driven-forms/react-form-renderer';
+import { FormTemplateRenderProps } from '@data-driven-forms/react-form-renderer/common-types/form-template-render-props';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import Form from '../../../Form';
 import Button from '../../../Button';
@@ -21,16 +23,17 @@ import Inline from '../../../../layouts/Inline';
 import { componentTypes } from '../../types';
 
 export interface FormTemplateProps {
-    formFields: any;
-    schema: any;
+    formFields: Field[];
+    schema: Schema;
     cancelLabel?: string;
     submitLabel?: string;
     isSubmitting?: boolean;
 }
 
-const FormTemplate: FunctionComponent<FormTemplateProps> = ({
+const FormTemplate: FunctionComponent<FormTemplateRenderProps> = ({
     formFields,
-    schema: { cancelLabel = 'Cancel', submitLabel = 'Submit' },
+    cancelLabel,
+    submitLabel,
     schema,
     isSubmitting,
 }) => {
@@ -55,11 +58,11 @@ const FormTemplate: FunctionComponent<FormTemplateProps> = ({
     );
 
     const actionsVisible = useMemo(() => {
-        return !(schema.fields && schema.fields.length > 0 && schema.fields[0].component === componentTypes.WIZARD);
+        return !(schema.fields.length > 0 && schema.fields[0].component === componentTypes.WIZARD);
     }, [schema.fields]);
 
     return (
-        <Form header={schema.header} description={schema.description} actions={actionsVisible ? actions : undefined}>
+        <Form header={schema.title} description={schema.description} actions={actionsVisible ? actions : undefined}>
             {formFields}
         </Form>
     );

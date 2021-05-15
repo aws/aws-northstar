@@ -15,13 +15,14 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent, ComponentType, useMemo } from 'react';
 import { FormRenderer as ReactFormRenderer, Schema } from '@data-driven-forms/react-form-renderer';
-import ValidatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
+import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
+import { FormTemplateRenderProps } from '@data-driven-forms/react-form-renderer/common-types/form-template-render-props';
 import Checkbox from './components/Checkbox';
 import Custom from './components/Custom';
 import Datepicker from './components/Datepicker';
 import ExpandableSection from './components/ExpandableSection';
 import FieldArray from './components/FieldArray';
-import FormTemplate, { FormTemplateProps } from './components/FormTemplate';
+import FormTemplate from './components/FormTemplate';
 import Radio from './components/Radio';
 import Review from './components/Review';
 import Select from './components/Select';
@@ -66,6 +67,10 @@ export interface FormRendererProps {
     onSubmit: (values: object, form: FormApi<object>) => void;
     /** A cancel callback, which receives values as the first argument. */
     onCancel?: () => void;
+    /** Label for cancel button */
+    cancelLabel?: string;
+    /** Label for submit button */
+    submitLabel?: string;
     /** When true, the submit button is disabled with a loading spinner */
     isSubmitting?: boolean;
     /** Custom component wrappers*/
@@ -83,13 +88,17 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
     schema,
     onSubmit,
     onCancel,
+    cancelLabel = 'Cancel',
+    submitLabel = 'Submit',
     isSubmitting,
     initialValues,
     customComponentWrapper,
 }) => {
     const WrappedFormTemplate = useMemo(
-        () => (props: FormTemplateProps) => <FormTemplate {...props} isSubmitting={isSubmitting} />,
-        [isSubmitting]
+        () => (props: FormTemplateRenderProps) => (
+            <FormTemplate cancelLabel={cancelLabel} submitLabel={submitLabel} isSubmitting={isSubmitting} {...props} />
+        ),
+        [isSubmitting, cancelLabel, submitLabel]
     );
 
     return (
@@ -105,4 +114,4 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
 };
 export default FormRenderer;
 
-export { componentTypes, ValidatorTypes as validatorTypes };
+export { componentTypes, validatorTypes };

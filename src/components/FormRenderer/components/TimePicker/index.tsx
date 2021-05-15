@@ -52,7 +52,7 @@ const TimePickerMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
             <TimePicker
                 {...input}
                 value={value}
-                onChange={(date?: Date) => {
+                onChange={(date?: Date | null) => {
                     // Coerce to a string for the formrenderer onChange event. Wrap in try catch in case user inputs invalid
                     // time, eg 99:99.
                     try {

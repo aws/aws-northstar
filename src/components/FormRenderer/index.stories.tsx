@@ -298,7 +298,7 @@ const baseSchema = {
             ],
         },
     ],
-    header: 'Data driven form',
+    title: 'Data driven form',
     description: 'Define your form in json format',
 };
 
@@ -452,7 +452,7 @@ export const SubForms = () => {
                 ],
             },
         ],
-        header: 'Data driven form with subforms',
+        title: 'Data driven form with subforms',
         description: 'Define your form in json format',
     };
 
@@ -657,7 +657,7 @@ export const FieldArray = () => {
                 ],
             },
         ],
-        header: 'Data driven form with field arrays',
+        title: 'Data driven form with field arrays',
         description: 'Define your form in json format',
     };
 
@@ -1006,7 +1006,7 @@ const wizardSchema = {
             ],
         },
     ],
-    header: 'Data driven form with wizard',
+    title: 'Data driven form with wizard',
     description: 'Define your form in json format',
 };
 
@@ -1067,7 +1067,7 @@ export const Custom = () => {
                 CustomComponent: CustomComponentComplex,
             },
         ],
-        header: 'Data driven form with Custom Component',
+        title: 'Data driven form with Custom Component',
         description:
             'Custom Component is an extention of Review Component which allows users to include custom business logic',
     };
@@ -1110,7 +1110,7 @@ export const FileUploader = () => {
                 onChange: action('File selection change'),
             },
         ],
-        header: 'Data driven form using FileUpload',
+        title: 'Data driven form using FileUpload',
         description: 'File upload logic can be implemented outside FormRenderer',
     };
 
@@ -1126,7 +1126,7 @@ export const Submitting = () => {
                 isDisabled: true,
             },
         ],
-        header: 'Spinner while submitting',
+        title: 'Spinner while submitting',
     };
 
     return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} isSubmitting={true} />;
@@ -1134,8 +1134,6 @@ export const Submitting = () => {
 
 export const SimpleMarkdownEditor = () => {
     const schema = {
-        submitLabel: 'Save',
-        cancelLabel: 'Back',
         fields: [
             {
                 component: componentTypes.MARKDOWN_EDITOR,
@@ -1158,13 +1156,19 @@ export const SimpleMarkdownEditor = () => {
                 initialValue: '# I should be read only\n\rAnd you should not be able to edit me',
             },
         ],
-        header: 'Markdown Editor',
+        title: 'Markdown Editor',
         description: 'This component allows a user to enter markdown and renders it in real-time.',
     };
 
     return (
         <Container>
-            <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />
+            <FormRenderer
+                submitLabel="Save"
+                cancelLabel="Back"
+                schema={schema}
+                onSubmit={action('Submit')}
+                onCancel={action('Cancel')}
+            />
         </Container>
     );
 };
