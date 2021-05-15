@@ -130,6 +130,7 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 1,
     },
 }));
+
 export interface TableOptions<D extends object>
     extends UseExpandedOptions<D>,
         UseRowSelectOptions<D>,
@@ -574,3 +575,5 @@ export default function Table<D extends object>({
         </Container>
     );
 }
+
+export type { Column };
