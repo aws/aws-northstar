@@ -48,7 +48,7 @@ const dataGroup: DataType[] = [
     { id: '9', name: 'Item4' },
 ]; // 5 groups by 'name'
 
-const columnDefinitions: Array<Column<DataType>> = [
+const columnDefinitions: Column<DataType>[] = [
     {
         id: 'id',
         Header: 'Id',
