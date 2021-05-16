@@ -48,7 +48,7 @@ export default function TableFooter({ errorText, loading = false, styles, colSpa
                             </>
                         ) : (
                             <div className={styles.cellAlign}>
-                                <CircularProgress color={'secondary'} size={16} variant={'indeterminate'} />
+                                <CircularProgress color="secondary" size={16} variant="indeterminate" />
                                 <span className={styles.leftSpace}>Loading...</span>
                             </div>
                         )}

@@ -75,8 +75,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     recoveryLink: {
         pointerEvents: 'auto',
     },
-    muiAutocompleteOverride: {
-        paddingRight: '30px !important',
+    textfield: {
+        paddingRight: '30px',
     },
 }));
 
@@ -99,9 +99,9 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
     ariaRequired = false,
     ariaDescribedby,
     ariaLabelledby,
-    onChange = () => {},
-    onInputChange = () => {},
-    onRecoveryClick = () => {},
+    onChange,
+    onInputChange,
+    onRecoveryClick,
     onFocus,
     onBlur,
     disableBrowserAutocorrect = false,
@@ -121,7 +121,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
     const onRecoveryClickHandler = useCallback(
         (event: SyntheticEvent) => {
             event.preventDefault();
-            onRecoveryClick(event);
+            onRecoveryClick?.(event);
             event.stopPropagation();
         },
         [onRecoveryClick]
@@ -147,7 +147,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
             const valuesAsOptions: SelectOption[] = (values || []).map((value) =>
                 typeof value === 'string' ? { value, label: value } : value
             );
-            onChange(valuesAsOptions);
+            onChange?.(valuesAsOptions);
             setInputValue(valuesAsOptions);
         },
         [onChange, setInputValue]
@@ -156,7 +156,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
     const handleOnInput = useCallback(
         (event: React.ChangeEvent<{}>, value: string, reason: string): void => {
             if (filteringType === 'manual') {
-                onInputChange(event, value, reason);
+                onInputChange?.(event, value, reason);
             }
         },
         [onInputChange, filteringType]
@@ -184,7 +184,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
         [statusType, loadingText, errorText, recoveryText, onRecoveryClickHandler, classes]
     );
 
-    const renderTextfield = useCallback(
+    const textfield = useCallback(
         (params: AutocompleteRenderInputParams): React.ReactNode => (
             <TextField
                 autoCorrect={autoCompleteString}
@@ -201,6 +201,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
                     'aria-describedby': ariaDescribedby,
                     'aria-labelledby': ariaLabelledby,
                     ...params.InputProps,
+                    className: classes.textfield,
                     type: 'search',
                     startAdornment: (
                         <InputAdornment position="start">
@@ -210,21 +211,29 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
                 }}
             />
         ),
-        [autoCompleteString, placeholder, statusType, name, invalid, ariaRequired, ariaDescribedby, ariaLabelledby]
+        [
+            autoCompleteString,
+            placeholder,
+            statusType,
+            name,
+            invalid,
+            ariaRequired,
+            ariaDescribedby,
+            ariaLabelledby,
+            classes.textfield,
+        ]
     );
 
     const renderOption = useCallback(
         (option: SelectOption): React.ReactNode => {
             if (checkboxes) {
                 return (
-                    <>
-                        <Checkbox
-                            checked={inputValue.map((input) => input.value).includes(option.value)}
-                            value={option.value}
-                        >
-                            {option.label}
-                        </Checkbox>
-                    </>
+                    <Checkbox
+                        checked={inputValue.map((input) => input.value).includes(option.value)}
+                        value={option.value}
+                    >
+                        {option.label}
+                    </Checkbox>
                 );
             }
 
@@ -237,7 +246,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
         (option) => {
             const tempData = inputValue.filter((o) => o.value !== option.value);
             setInputValue(tempData);
-            onChange(tempData);
+            onChange?.(tempData);
         },
         [inputValue, setInputValue, onChange]
     );
@@ -260,14 +269,13 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
                 onChange={handleOnChange}
                 onInputChange={handleOnInput}
                 loading={statusType !== 'finished'}
-                renderInput={renderTextfield}
+                renderInput={textfield}
                 renderOption={renderOption}
                 onBlur={onBlur}
                 onFocus={onFocus}
                 onOpen={() => setOpen(true)}
                 onClose={() => setOpen(false)}
                 getOptionLabel={(option) => option.label || ''}
-                classes={{ inputRoot: classes.muiAutocompleteOverride }}
                 data-testid="multiselect"
             />
             <TokenGroup items={inputValue || []} onDismiss={handleDeleteOption} />

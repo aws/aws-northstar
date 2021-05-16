@@ -90,8 +90,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     recoveryLink: {
         pointerEvents: 'auto',
     },
-    muiAutocompleteOverride: {
-        paddingRight: '30px !important',
+    textfield: {
+        paddingRight: '30px',
     },
 }));
 
@@ -117,11 +117,11 @@ export default function Autosuggest({
     icon = undefined,
     ariaDescribedby,
     ariaLabelledby,
-    onChange = () => {},
-    onInputChange = () => {},
-    onFocus = () => {},
-    onBlur = () => {},
-    onRecoveryClick = () => {},
+    onChange,
+    onInputChange,
+    onFocus,
+    onBlur,
+    onRecoveryClick,
     disableBrowserAutocorrect = false,
     statusType = 'finished',
 }: AutosuggestProps) {
@@ -132,7 +132,7 @@ export default function Autosuggest({
 
     const onRecoveryClickHandler = (event: SyntheticEvent) => {
         event.preventDefault();
-        onRecoveryClick(event);
+        onRecoveryClick?.(event);
         event.stopPropagation();
     };
 
@@ -152,13 +152,13 @@ export default function Autosuggest({
     }, [options]);
 
     const handleOnChange = (event: React.ChangeEvent<{}>, value: string | SelectOption | null): void => {
-        onChange(value);
+        onChange?.(value);
         setInputValue(value);
     };
 
     const handleOnInput = (event: React.ChangeEvent<{}>, value: string, reason: string): void => {
         if (filteringType === 'manual') {
-            onInputChange(event, value, reason);
+            onInputChange?.(event, value, reason);
         }
     };
 
@@ -197,6 +197,7 @@ export default function Autosuggest({
                 'aria-describedby': ariaDescribedby,
                 'aria-labelledby': ariaLabelledby,
                 ...params.InputProps,
+                className: classes.textfield,
                 type: 'search',
                 startAdornment: (
                     <InputAdornment position="start">
@@ -228,16 +229,15 @@ export default function Autosuggest({
                 onInputChange={handleOnInput}
                 onOpen={(e) => {
                     setOpen(true);
-                    onFocus(e);
+                    onFocus?.(e);
                 }}
                 onClose={(e) => {
                     setOpen(false);
-                    onBlur(e);
+                    onBlur?.(e);
                 }}
                 loading={statusType !== 'finished'}
                 getOptionLabel={(option) => option.label || ''}
                 renderInput={textfield}
-                classes={{ inputRoot: classes.muiAutocompleteOverride }}
             />
         </div>
     );

@@ -36,12 +36,12 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginTop: '8px',
     },
     circularColorPrimary: {
-        color: `${theme.palette.info.dark} !important`,
+        color: theme.palette.info.dark,
         position: 'absolute',
         left: 0,
     },
     circularColorBottom: {
-        color: `${theme.palette.grey[theme.palette.type === 'light' ? 200 : 700]} !important`,
+        color: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
     },
     barColorPrimary: {
         backgroundColor: theme.palette.info.dark,

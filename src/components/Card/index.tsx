@@ -60,13 +60,14 @@ export interface CardProps {
     onMouseOut?: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-    root: ({ withHover }: any) =>
-        withHover && {
+const useStyles = makeStyles<Theme, { withHover?: boolean }>((theme: Theme) => ({
+    root: ({ withHover }) => ({
+        ...(withHover && {
             '&:hover': {
                 backgroundColor: theme.palette.info.light,
             },
-        },
+        }),
+    }),
 }));
 
 /**
