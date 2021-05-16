@@ -17,10 +17,10 @@ import React from 'react';
 import { act, fireEvent, render } from '@testing-library/react';
 import Table, { Column } from '.';
 
-type DataType = {
+interface DataType {
     id: string;
     name: string;
-};
+}
 
 const data: DataType[] = [{ id: '123', name: 'Item one' }];
 const data10: DataType[] = [
