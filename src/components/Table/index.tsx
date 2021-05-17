@@ -130,6 +130,7 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 1,
     },
 }));
+
 export interface TableOptions<D extends object>
     extends UseExpandedOptions<D>,
         UseRowSelectOptions<D>,
@@ -152,7 +153,7 @@ export interface TableBaseOptions<D extends object> {
      */
     items?: D[] | null;
     /** Describes the columns to be displayed in the table, and how each item is rendered. */
-    columnDefinitions: Array<Column<D>>;
+    columnDefinitions: Column<D>[];
     /** The default grouping ids */
     defaultGroups?: string[];
     /** Disable pagination */
@@ -574,3 +575,5 @@ export default function Table<D extends object>({
         </Container>
     );
 }
+
+export type { Column };
