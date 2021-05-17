@@ -52,7 +52,7 @@ const TextareaMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
                 placeholder={placeholder}
                 controlId={controlId}
                 disabled={isDisabled}
-                required={isRequired}
+                ariaRequired={isRequired}
                 readonly={isReadOnly}
                 invalid={!!errorText}
             />

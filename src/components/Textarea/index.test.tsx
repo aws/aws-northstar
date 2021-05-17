@@ -79,7 +79,6 @@ describe('Textarea', () => {
             ariaRequired: true,
             ariaDescribedby: 'describedby',
             onChange: mockOnChange,
-            required: true,
             readonly: false,
             disableBrowserAutocorrect: true,
             autofocus: false,

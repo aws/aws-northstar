@@ -61,10 +61,6 @@ export interface TextareaProps {
      * */
     disabled?: boolean;
     /**
-     * Specifies that the textarea should be required
-     * */
-    required?: boolean;
-    /**
      * Specifies that the textarea should be readonly, preventing the user from
      * modifying the value but including it in a form submission. A readonly textarea can receive focus.
      * */
@@ -122,7 +118,7 @@ const mapTextareaProps = ({
     return {
         id,
         rowsMin: rows,
-        required: props.required,
+        required: props.ariaRequired,
         value: props.value,
         placeholder: props.placeholder,
         name: props.name,

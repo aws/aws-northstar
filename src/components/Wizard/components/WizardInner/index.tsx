@@ -35,7 +35,7 @@ export interface WizardInnerProps {
     nextButtonText?: string;
     submitButtonText?: string;
     isLoadingNextStep?: boolean;
-    onCancelButtonClick?: (values: object, ...args: any[]) => void;
+    onCancelButtonClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     onPreviousButtonClick: () => void;
     onNextButtonClick: () => void;
     onSubmitButtonClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;

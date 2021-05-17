@@ -64,8 +64,8 @@ const TimePickerMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
                 placeholder={placeholder}
                 controlId={controlId}
                 disabled={isDisabled}
-                required={isRequired}
-                readonly={isReadOnly}
+                ariaRequired={isRequired}
+                readOnly={isReadOnly}
             />
         </FormField>
     );
