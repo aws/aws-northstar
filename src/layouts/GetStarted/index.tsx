@@ -20,7 +20,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Stack from '../Stack';
 import Text from '../../components/Text';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles<Theme, { sidebarMarginTop: number }>((theme: Theme) => ({
     root: {},
     headerRow: {
         backgroundColor: theme.palette.primary.main,
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         color: theme.palette.grey[900],
         marginBottom: theme.spacing(1),
     },
-    sidebarArea: ({ sidebarMarginTop }: any) => ({
+    sidebarArea: ({ sidebarMarginTop }) => ({
         padding: theme.spacing(1),
         marginTop: `${sidebarMarginTop}px`,
     }),

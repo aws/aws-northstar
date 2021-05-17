@@ -53,19 +53,17 @@ describe('RadioButton', () => {
             });
         });
 
-        //TODO: Figure out correct targeting
-        describe.skip('disabled', () => {
+        describe('disabled', () => {
             it('to have disabled attribute', () => {
                 const { getByRole } = render(<RadioButton disabled={true} />);
-                expect(getByRole('radio')).toHaveClass('Mui-disabled');
+                expect(getByRole('radio')).toBeDisabled();
             });
         });
 
-        //TODO: Figure out correct targeting
-        describe.skip('checked', () => {
+        describe('checked', () => {
             it('to have checked attribute', () => {
                 const { getByRole } = render(<RadioButton checked={true} />);
-                expect(getByRole('radio')).toHaveClass('Mui-checked');
+                expect(getByRole('radio')).toBeChecked();
             });
         });
 

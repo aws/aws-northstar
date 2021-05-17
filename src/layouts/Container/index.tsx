@@ -19,14 +19,14 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles<Theme, Partial<ContainerProps>>((theme: Theme) => ({
     containerRoot: {
         marginBottom: theme.spacing(2),
         boxShadow: '0 1px 1px 0 rgba(0,28,36,.3), 1px 1px 1px 0 rgba(0,28,36,.15), -1px 1px 1px 0 rgba(0,28,36,.15)',
     },
     containerHeader: {
         backgroundColor: theme.palette.grey[100],
-        padding: (props: Partial<ContainerProps>) => (props.headerGutters ? '1rem 1rem 0.5rem 1rem' : 0),
+        padding: (props) => (props.headerGutters ? '1rem 1rem 0.5rem 1rem' : 0),
         borderTop: `1px solid ${theme.palette.grey[200]}`,
         borderBottom: `1px solid ${theme.palette.grey[200]}`,
     },
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     containerContent: {
         backgroundColor: theme.palette.background.paper,
         overflowX: 'auto',
-        padding: (props: Partial<ContainerProps>) => (props.gutters ? '0.9rem 1rem' : 0),
+        padding: (props) => (props.gutters ? '0.9rem 1rem' : 0),
     },
     containerSubtitle: {
         marginTop: '5px',
@@ -97,10 +97,10 @@ const Container: FunctionComponent<ContainerProps> = ({
 }) => {
     const classes = useStyles({ gutters, headerGutters });
     return (
-        <div style={style} className={clsx(classes.containerRoot)}>
+        <div style={style} className={classes.containerRoot}>
             {!title && !subtitle && !actionGroup && !headerContent ? null : (
-                <div className={clsx(classes.containerHeader)}>
-                    <div className={clsx(classes.containerHeaderStripe)}>
+                <div className={classes.containerHeader}>
+                    <div className={classes.containerHeaderStripe}>
                         <div className={clsx(classes.containerHeaderTitle, classes.noLineHeight)}>
                             {title && (
                                 <Typography variant={headingVariant} className={classes.noLineHeight}>
@@ -122,7 +122,7 @@ const Container: FunctionComponent<ContainerProps> = ({
                     {headerContent}
                 </div>
             )}
-            <div className={clsx(classes.containerContent)}>{children}</div>
+            <div className={classes.containerContent}>{children}</div>
             {!footerContent ? '' : <div className={classes.containerFooter}>{footerContent}</div>}
         </div>
     );

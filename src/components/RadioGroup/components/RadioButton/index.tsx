@@ -130,9 +130,9 @@ const RadioButton: FunctionComponent<RadioButtonProps> = ({
                 />
             }
             label={
-                <div className={clsx(classes.container)}>
+                <div className={classes.container}>
                     <span>{children}</span>
-                    <span className={clsx(classes.description)}>{description}</span>
+                    <span className={classes.description}>{description}</span>
                 </div>
             }
         />

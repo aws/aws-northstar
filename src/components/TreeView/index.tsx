@@ -36,7 +36,7 @@ export interface TreeViewProps {
     /** Ids of items to be expanded by default */
     defaultExpanded?: string[];
     /** Selected node ids. (Uncontrolled) When multiSelect is true this takes an array of strings; when false (default) a string. */
-    defaultSelected?: Array<string> | [];
+    defaultSelected?: string[] | [];
     /** Fired when the user clicks any node in the tree. The event detail contains the current value */
     onNodeSelect?: (event: ChangeEvent<{}>, nodeIds: string[]) => void;
     /** Fired when the user expands any node in the tree. The event detail contains the current value */

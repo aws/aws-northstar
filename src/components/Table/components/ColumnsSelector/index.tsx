@@ -19,7 +19,7 @@ import { Column } from 'react-table';
 import Checkbox from '../../../Checkbox';
 
 export interface ColumnsSelectorProps<D extends object> {
-    columnDefinitions: Array<Column<D>>;
+    columnDefinitions: Column<D>[];
     styles: {
         verticalGrid: string;
     };

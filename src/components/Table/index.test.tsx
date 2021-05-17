@@ -15,10 +15,15 @@
  ******************************************************************************************************************** */
 import React from 'react';
 import { act, fireEvent, render } from '@testing-library/react';
-import Table from '.';
+import Table, { Column } from '.';
 
-const data = [{ id: '123', name: 'Item one' }];
-const data10 = [
+interface DataType {
+    id: string;
+    name: string;
+}
+
+const data: DataType[] = [{ id: '123', name: 'Item one' }];
+const data10: DataType[] = [
     { id: '0', name: 'Item0' },
     { id: '1', name: 'Item1' },
     { id: '2', name: 'Item2' },
@@ -30,7 +35,7 @@ const data10 = [
     { id: '8', name: 'Item8' },
     { id: '9', name: 'Item9' },
 ];
-const dataGroup = [
+const dataGroup: DataType[] = [
     { id: '0', name: 'Item0' },
     { id: '1', name: 'Item0' },
     { id: '2', name: 'Item1' },
@@ -43,7 +48,7 @@ const dataGroup = [
     { id: '9', name: 'Item4' },
 ]; // 5 groups by 'name'
 
-const columnDefinitions = [
+const columnDefinitions: Column<DataType>[] = [
     {
         id: 'id',
         Header: 'Id',

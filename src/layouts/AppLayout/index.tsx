@@ -45,7 +45,18 @@ import { HelpPanelProps } from '../../components/HelpPanel';
 
 import { LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, LOCAL_STORAGE_KEY_HELP_PANEL_OPEN } from './constants';
 
-const useStyles = makeStyles((theme: Theme) => ({
+interface StyleProps {
+    hasSideNavigation: boolean;
+    hasHelpPanel: boolean;
+    isSideNavigationOpen: boolean;
+    isHelpPanelOpen: boolean;
+    inProgress: boolean;
+    notificationsBoxHeight: number;
+    mainContentScrollPosition: ScrollPosition;
+    headerHeightInPx: number;
+}
+
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     flashbarContainer: {
         margin: theme.spacing(-4, -4, 2, -4),
     },
@@ -57,9 +68,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     main: {
         display: 'flex',
-        height: ({ headerHeightInPx }: any) => `calc(100vh - ${headerHeightInPx}px)`,
+        height: ({ headerHeightInPx }) => `calc(100vh - ${headerHeightInPx}px)`,
     },
-    content: ({ hasSideNavigration, isSideNavigationOpen, hasHelpPanel, isHelpPanelOpen }: any) => ({
+    content: ({ hasSideNavigation, isSideNavigationOpen, hasHelpPanel, isHelpPanelOpen }) => ({
         marginTop: 0,
         marginBottom: 0,
         height: '100%',
@@ -67,14 +78,13 @@ const useStyles = makeStyles((theme: Theme) => ({
         position: 'relative',
         overflow: 'auto',
         boxSizing: 'border-box',
-        osition: 'relative',
-        marginLeft: hasSideNavigration && !isSideNavigationOpen ? -WIDTH_SIDEBAR : 0,
+        marginLeft: hasSideNavigation && !isSideNavigationOpen ? -WIDTH_SIDEBAR : 0,
         marginRight: hasHelpPanel && !isHelpPanelOpen ? -WIDTH_HELP_PANEL : 0,
     }),
-    notifications: ({ mainContentScrollPosition }: any) => ({
+    notifications: ({ mainContentScrollPosition }) => ({
         position: 'absolute',
-        top: mainContentScrollPosition?.y || 0,
-        left: mainContentScrollPosition?.x || 0,
+        top: mainContentScrollPosition.y || 0,
+        left: mainContentScrollPosition.x || 0,
         right: 0,
         zIndex: theme.zIndex.modal,
         transition: 'all 0.5s linear',
@@ -84,7 +94,7 @@ const useStyles = makeStyles((theme: Theme) => ({
             padding: `${theme.spacing(2)}px ${theme.spacing(4)}px`,
         },
     },
-    mainContent: ({ notificationsBoxHeight }: any) => ({
+    mainContent: ({ notificationsBoxHeight }) => ({
         marginTop: notificationsBoxHeight,
         '&:focus': {
             outline: 'none',
@@ -156,7 +166,7 @@ export interface AppLayoutProps {
      * The notifications are displayed on top of the main content in the scrollable area,
      * it occupies the full width and is not affected by the padding that is added to the content region.*/
     notifications?: Notification[];
-    /**Maxinum number of notifications to be displayed*/
+    /**Maximum number of notifications to be displayed*/
     maxNotifications?: number;
     /**
      * Height Of Header in pixel when custom header is used.
@@ -185,33 +195,30 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     const [helpPanelContent, setHelpPanelContent] = useState<ReactNode>(helpPanel);
     const [isSideNavigationOpen, setIsSideNavigationOpen] = useLocalStorage(LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, 'false');
     const [isHelpPanelOpen, setIsHelpPanelOpen] = useLocalStorage(LOCAL_STORAGE_KEY_HELP_PANEL_OPEN, 'false');
-    const notificationsBoxRef = useRef(null);
+    const notificationsBoxRef = useRef<HTMLDivElement>(null);
     const mainContentRef = useRef(null);
     const [notificationsBoxHeight, setNotificationsBoxHeight] = useState(0);
-    const [mainContentScrollPosition, setMainContentScrollPositon] = useState<ScrollPosition>({
+    const [mainContentScrollPosition, setMainContentScrollPosition] = useState<ScrollPosition>({
         x: 0,
         y: 0,
     });
 
     useLayoutEffect(() => {
-        // @ts-ignore
         if (notificationsBoxRef.current) {
-            // @ts-ignore
-            setNotificationsBoxHeight(notificationsBoxRef.current?.offsetHeight || 0);
+            setNotificationsBoxHeight(notificationsBoxRef.current.offsetHeight || 0);
         }
-        // @ts-ignore
     }, [notificationsBoxRef, notifications]);
 
     const { handleScroll } = useScrollPosition(
         (position: ScrollPosition) => {
-            setMainContentScrollPositon(position);
+            setMainContentScrollPosition(position);
         },
         mainContentRef,
         200
     );
 
     const classes = useStyles({
-        hasSideNavigration: !!navigation,
+        hasSideNavigation: !!navigation,
         hasHelpPanel: !!helpPanel,
         isSideNavigationOpen: isSideNavigationOpen === 'true',
         isHelpPanelOpen: isHelpPanelOpen === 'true',
@@ -262,7 +269,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     );
 
     const openHelpPanel = useCallback(
-        (open: boolean = true) => {
+        (open = true) => {
             setIsHelpPanelOpen(open.toString());
         },
         [setIsHelpPanelOpen]

@@ -59,11 +59,11 @@ export default ({
                         onChange={handleChange}
                         disabled={loading}
                         value={globalFilter}
-                        ariaLabelledby={'table-search-label'}
+                        ariaLabelledby="table-search-label"
                     />
                     {loading ? (
                         <div className={clsx(styles.cellAlign, styles.loadingSearchBarPadding)}>
-                            <CircularProgress color={'secondary'} size={12} variant={'indeterminate'} />
+                            <CircularProgress color="secondary" size={12} variant="indeterminate" />
                         </div>
                     ) : null}
                 </div>
