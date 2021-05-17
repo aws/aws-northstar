@@ -19,7 +19,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { Collapse, makeStyles, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
-import ExpandLess from '@material-ui/icons/ExpandLess';
+import ChevronRight from '@material-ui/icons/ChevronRight';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ListItem from '@material-ui/core/ListItem';
 import { v4 as uuidv4 } from 'uuid';
@@ -184,7 +184,7 @@ export const SideNavigation: FunctionComponent<SideNavigationProps> = ({ header,
             return (
                 <div key={uuidv4()}>
                     <ListItem button={true} onClick={() => expandToggle(itemText)} className={classes.sectionHeader}>
-                        {expandedSections[itemText] ? <ExpandLess /> : <ExpandMore />}
+                        {expandedSections[itemText] ? <ExpandMore /> : <ChevronRight />}
                         <b>{itemLabel}</b>
                     </ListItem>
                     <Collapse
