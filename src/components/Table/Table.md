@@ -21,7 +21,7 @@ const columnDefinitions = [
         id: 'accounts',
         width: 200,
         Header: '# Accounts',
-        accessor: 'accounts.length'
+        accessor: row => row.accounts ? row.accounts.length : 0
     },
     {
         id: 'status',
@@ -149,7 +149,7 @@ const columnDefinitions = [
         id: 'accounts',
         width: 200,
         Header: '# Accounts',
-        accessor: 'accounts.length'
+        accessor: row => row.accounts ? row.accounts.length : 0
     }
 ];
 
@@ -189,7 +189,7 @@ const columnDefinitions = [
         id: 'accounts',
         width: 200,
         Header: '# Accounts',
-        accessor: 'accounts.length'
+        accessor: row => row.accounts ? row.accounts.length : 0
     },
     {
         id: 'status',
@@ -330,7 +330,7 @@ const columnDefinitions = [
         id: 'accounts',
         width: 200,
         Header: '# Accounts',
-        accessor: 'accounts.length'
+        accessor: row => row.accounts ? row.accounts.length : 0
     },
     {
         id: 'status',
@@ -537,7 +537,7 @@ const columnDefinitions = [
         id: 'accounts',
         width: 200,
         Header: '# Accounts',
-        accessor: 'accounts.length'
+        accessor: row => row.accounts ? row.accounts.length : 0
     }
 ];
 
