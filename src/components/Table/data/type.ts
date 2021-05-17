@@ -13,34 +13,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { DataType } from './type';
-import { Column } from '../';
-
-const columnDefinition: Column<DataType>[] = [
-    {
-        id: 'id',
-        width: 200,
-        Header: 'Id',
-        accessor: 'id',
-    },
-    {
-        id: 'name',
-        width: 200,
-        Header: 'Name',
-        accessor: 'name',
-    },
-    {
-        id: 'createdDate',
-        width: 200,
-        Header: 'Created date',
-        accessor: 'createdDate',
-    },
-    {
-        id: 'accounts',
-        width: 200,
-        Header: '# Accounts',
-        accessor: (row) => row.accounts?.length,
-    },
-];
-
-export default columnDefinition;
+export interface DataType {
+    id: string;
+    name: string;
+    createdDate?: string;
+    accounts?: string[];
+}

@@ -55,7 +55,7 @@ const TreeViewMapping: FunctionComponent = (props: any) => {
                 multiSelect={multiSelect}
                 defaultSelected={input.value || []}
                 defaultExpanded={defaultExpanded}
-                onNodeSelect={(_: React.ChangeEvent<{}>, nodeIds: Array<string>) => input.onChange(nodeIds || [])}
+                onNodeSelect={(_: React.ChangeEvent<{}>, nodeIds: string[]) => input.onChange(nodeIds || [])}
                 onNodeToggle={onNodeToggle}
             />
         </FormField>
