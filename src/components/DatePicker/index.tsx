@@ -72,10 +72,6 @@ export interface DatePickerProps {
      * */
     disabled?: boolean;
     /**
-     * Specifies that the input should be required
-     * */
-    required?: boolean;
-    /**
      * Specifies that the input should be readonly, preventing the user from modifying the value but including it in a form submission. <br/>
      * A readonly input can receive focus.
      * Do not use readonly inputs outside of a form.

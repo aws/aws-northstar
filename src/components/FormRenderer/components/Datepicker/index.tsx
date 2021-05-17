@@ -50,7 +50,7 @@ const DatepickerMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
                 placeholder={placeholder}
                 controlId={controlId}
                 disabled={isDisabled}
-                required={isRequired}
+                ariaRequired={isRequired}
                 readOnly={isReadOnly}
                 invalid={!!errorText}
             />
