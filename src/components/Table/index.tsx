@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
         borderTop: 0,
     },
     cellAlign: {
-        display: 'inline-flex !important',
+        display: 'inline-flex',
         alignItems: 'flex-end',
         width: 'inherit',
         height: 'max-content',

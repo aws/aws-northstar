@@ -53,7 +53,7 @@ const RadioGroup: FunctionComponent<RadioGroupProps> = ({ name, value, items = [
     const classes = useStyles();
     return (
         <div className={clsx(classes.root, classes.div)}>
-            <MaterialRadioButtonGroup className={clsx(classes.radio)} value={value} name={name} onChange={onChange}>
+            <MaterialRadioButtonGroup className={classes.radio} value={value} name={name} onChange={onChange}>
                 {items.map((item, index) => (
                     <Fragment key={index}>{item}</Fragment>
                 ))}
