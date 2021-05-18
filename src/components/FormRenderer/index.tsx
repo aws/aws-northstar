@@ -14,7 +14,10 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, ComponentType, useMemo } from 'react';
-import { FormRenderer as ReactFormRenderer } from '@data-driven-forms/react-form-renderer';
+import {
+    FormRenderer as ReactFormRenderer,
+    FormRendererProps as ReactFormRendererProps,
+} from '@data-driven-forms/react-form-renderer';
 import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
 import Checkbox from './components/Checkbox';
 import Custom from './components/Custom';
@@ -35,7 +38,6 @@ import TreeView from './components/TreeView';
 import Wizard from './components/Wizard';
 import MarkdownEditor from './components/MarkdownEditor';
 import { componentTypes, Schema, RenderProps } from './types';
-import { FormApi } from 'final-form';
 
 const componentMapper = {
     [componentTypes.TEXT_FIELD]: TextField,
@@ -63,7 +65,7 @@ export interface FormRendererProps {
     /** An object of fields names as keys and values as their values. */
     initialValues?: object;
     /** A submit callback which receives two arguments: values and formApi. */
-    onSubmit: (values: object, form: FormApi<object>) => void;
+    onSubmit: ReactFormRendererProps['onSubmit'];
     /** A cancel callback, which receives values as the first argument. */
     onCancel?: () => void;
     /** When true, the submit button is disabled with a loading spinner */

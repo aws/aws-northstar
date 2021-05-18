@@ -14,16 +14,13 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
-import { Field } from '@data-driven-forms/react-form-renderer';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import Form from '../../../Form';
 import Button from '../../../Button';
 import Inline from '../../../../layouts/Inline';
-import { componentTypes, Schema, RenderProps } from '../../types';
+import { componentTypes, RenderProps } from '../../types';
 
-export interface FormTemplateProps {
-    formFields: Field[];
-    schema: Schema;
+export interface FormTemplateProps extends RenderProps {
     isSubmitting?: boolean;
 }
 
