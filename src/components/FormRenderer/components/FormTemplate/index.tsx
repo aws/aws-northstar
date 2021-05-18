@@ -14,30 +14,22 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
-import { Schema, Field } from '@data-driven-forms/react-form-renderer';
-import { FormTemplateRenderProps } from '@data-driven-forms/react-form-renderer/common-types/form-template-render-props';
+import { Field } from '@data-driven-forms/react-form-renderer';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import Form from '../../../Form';
 import Button from '../../../Button';
 import Inline from '../../../../layouts/Inline';
-import { componentTypes } from '../../types';
+import { componentTypes, Schema, RenderProps } from '../../types';
 
 export interface FormTemplateProps {
     formFields: Field[];
     schema: Schema;
-    cancelLabel?: string;
-    submitLabel?: string;
     isSubmitting?: boolean;
 }
 
-const FormTemplate: FunctionComponent<FormTemplateRenderProps> = ({
-    formFields,
-    cancelLabel,
-    submitLabel,
-    schema,
-    isSubmitting,
-}) => {
+const FormTemplate: FunctionComponent<RenderProps> = ({ formFields, schema, isSubmitting }) => {
     const { handleSubmit, onCancel } = useFormApi();
+    const { cancelLabel = 'Cancel', submitLabel = 'Submit', fields, header, description } = schema;
 
     const actions = (
         <Inline spacing="s">
@@ -58,11 +50,11 @@ const FormTemplate: FunctionComponent<FormTemplateRenderProps> = ({
     );
 
     const actionsVisible = useMemo(() => {
-        return !(schema.fields.length > 0 && schema.fields[0].component === componentTypes.WIZARD);
-    }, [schema.fields]);
+        return !(fields.length > 0 && fields[0].component === componentTypes.WIZARD);
+    }, [fields]);
 
     return (
-        <Form header={schema.title} description={schema.description} actions={actionsVisible ? actions : undefined}>
+        <Form header={header} description={description} actions={actionsVisible ? actions : undefined}>
             {formFields}
         </Form>
     );

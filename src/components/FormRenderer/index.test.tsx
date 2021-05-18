@@ -28,7 +28,7 @@ describe('FormRenderer', () => {
     const handleSubmit = jest.fn();
 
     const baseSchema = {
-        title: 'header',
+        header: 'header',
         description: 'description',
     };
 
@@ -76,14 +76,13 @@ describe('FormRenderer', () => {
         });
 
         it('should render custom label for cancel and submit button', () => {
+            const customLabelsSchema = {
+                ...schema,
+                submitLabel: 'Custom Submit Label',
+                cancelLabel: 'Custom Cancel Label',
+            };
             const { getByText } = render(
-                <FormRenderer
-                    submitLabel="Custom Submit Label"
-                    cancelLabel="Custom Cancel Label"
-                    schema={schema}
-                    onSubmit={handleSubmit}
-                    onCancel={handleCancel}
-                />
+                <FormRenderer schema={customLabelsSchema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
             expect(getByText('Custom Submit Label')).toBeVisible();
             expect(getByText('Custom Cancel Label')).toBeVisible();
@@ -947,7 +946,7 @@ describe('FormRenderer', () => {
                     initialValue: '# I am a Markdown editor',
                 },
             ],
-            title: 'Markdown Editor',
+            header: 'Markdown Editor',
             description: 'This component allows a user to enter markdown and renders it in real-time.',
         };
 

@@ -14,9 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, ComponentType, useMemo } from 'react';
-import { FormRenderer as ReactFormRenderer, Schema } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer as ReactFormRenderer } from '@data-driven-forms/react-form-renderer';
 import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
-import { FormTemplateRenderProps } from '@data-driven-forms/react-form-renderer/common-types/form-template-render-props';
 import Checkbox from './components/Checkbox';
 import Custom from './components/Custom';
 import Datepicker from './components/Datepicker';
@@ -35,7 +34,7 @@ import TimePicker from './components/TimePicker';
 import TreeView from './components/TreeView';
 import Wizard from './components/Wizard';
 import MarkdownEditor from './components/MarkdownEditor';
-import { componentTypes } from './types';
+import { componentTypes, Schema, RenderProps } from './types';
 import { FormApi } from 'final-form';
 
 const componentMapper = {
@@ -67,10 +66,6 @@ export interface FormRendererProps {
     onSubmit: (values: object, form: FormApi<object>) => void;
     /** A cancel callback, which receives values as the first argument. */
     onCancel?: () => void;
-    /** Label for cancel button */
-    cancelLabel?: string;
-    /** Label for submit button */
-    submitLabel?: string;
     /** When true, the submit button is disabled with a loading spinner */
     isSubmitting?: boolean;
     /** Custom component wrappers*/
@@ -88,17 +83,13 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
     schema,
     onSubmit,
     onCancel,
-    cancelLabel = 'Cancel',
-    submitLabel = 'Submit',
     isSubmitting,
     initialValues,
     customComponentWrapper,
 }) => {
     const WrappedFormTemplate = useMemo(
-        () => (props: FormTemplateRenderProps) => (
-            <FormTemplate cancelLabel={cancelLabel} submitLabel={submitLabel} isSubmitting={isSubmitting} {...props} />
-        ),
-        [isSubmitting, cancelLabel, submitLabel]
+        () => (props: RenderProps) => <FormTemplate isSubmitting={isSubmitting} {...props} />,
+        [isSubmitting]
     );
 
     return (
