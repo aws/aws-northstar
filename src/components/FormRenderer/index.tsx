@@ -14,13 +14,17 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, ComponentType, useMemo } from 'react';
-import FormRender, { validatorTypes } from '@data-driven-forms/react-form-renderer';
+import {
+    FormRenderer as ReactFormRenderer,
+    FormRendererProps as ReactFormRendererProps,
+} from '@data-driven-forms/react-form-renderer';
+import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
 import Checkbox from './components/Checkbox';
 import Custom from './components/Custom';
 import Datepicker from './components/Datepicker';
 import ExpandableSection from './components/ExpandableSection';
 import FieldArray from './components/FieldArray';
-import FormTemplate, { FormTemplateProps } from './components/FormTemplate';
+import FormTemplate from './components/FormTemplate';
 import Radio from './components/Radio';
 import Review from './components/Review';
 import Select from './components/Select';
@@ -33,7 +37,7 @@ import TimePicker from './components/TimePicker';
 import TreeView from './components/TreeView';
 import Wizard from './components/Wizard';
 import MarkdownEditor from './components/MarkdownEditor';
-import { componentTypes } from './types';
+import { componentTypes, Schema, RenderProps } from './types';
 
 const componentMapper = {
     [componentTypes.TEXT_FIELD]: TextField,
@@ -57,11 +61,11 @@ const componentMapper = {
 
 export interface FormRendererProps {
     /** A schema which defines structure of the form. */
-    schema: any;
+    schema: Schema;
     /** An object of fields names as keys and values as their values. */
-    initialValues?: any;
+    initialValues?: object;
     /** A submit callback which receives two arguments: values and formApi. */
-    onSubmit: (values: any) => void;
+    onSubmit: ReactFormRendererProps['onSubmit'];
     /** A cancel callback, which receives values as the first argument. */
     onCancel?: () => void;
     /** When true, the submit button is disabled with a loading spinner */
@@ -86,12 +90,12 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
     customComponentWrapper,
 }) => {
     const WrappedFormTemplate = useMemo(
-        () => (props: FormTemplateProps) => <FormTemplate {...props} isSubmitting={isSubmitting} />,
+        () => (props: RenderProps) => <FormTemplate isSubmitting={isSubmitting} {...props} />,
         [isSubmitting]
     );
 
     return (
-        <FormRender
+        <ReactFormRenderer
             componentMapper={{ ...componentMapper, ...customComponentWrapper }}
             FormTemplate={WrappedFormTemplate}
             schema={schema}

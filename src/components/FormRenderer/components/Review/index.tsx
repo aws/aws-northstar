@@ -14,7 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { useFormApi, useFieldApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 
 /**
  * Render the Template with the data from the data driven form for the purpose of review

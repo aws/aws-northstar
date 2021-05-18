@@ -14,9 +14,10 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, memo } from 'react';
-import { useFieldApi, useFormApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 
-const CustomMapping: FunctionComponent = (props: any) => {
+const CustomMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const { CustomComponent, ...rest } = useFieldApi(props);
     const { getState } = useFormApi();
 

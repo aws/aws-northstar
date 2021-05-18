@@ -116,7 +116,7 @@ const mapTextareaProps = ({
     const autoCompleteString: string = disableBrowserAutocorrect ? 'off' : 'on';
 
     return {
-        id: id,
+        id,
         rowsMin: rows,
         required: props.ariaRequired,
         value: props.value,

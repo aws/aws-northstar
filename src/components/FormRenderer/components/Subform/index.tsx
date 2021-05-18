@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, memo, useMemo } from 'react';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import FormSection from '../../../FormSection';
 import Box from '../../../../layouts/Box';
 import { ExpandableSectionVariant } from '../../../ExpandableSection';

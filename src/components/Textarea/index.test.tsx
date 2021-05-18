@@ -82,7 +82,6 @@ describe('Textarea', () => {
             readonly: false,
             disableBrowserAutocorrect: true,
             autofocus: false,
-            // ariaRequired: true
         };
 
         const expectedMappedProps: TextareaAutosizeProps = {

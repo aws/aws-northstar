@@ -14,12 +14,12 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { v4 as uuidv4 } from 'uuid';
 import Toggle from '../../../Toggle';
 import FormField from '../../../FormField';
 
-const SwitchMapping: FunctionComponent = (props: any) => {
+const SwitchMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const { label, description, isDisabled, initialValue, input, ...rest } = useFieldApi(props);
     const controlId = input.name || uuidv4();
     return (

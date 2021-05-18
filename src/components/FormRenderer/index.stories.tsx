@@ -1069,7 +1069,7 @@ export const Custom = () => {
         ],
         header: 'Data driven form with Custom Component',
         description:
-            'Custom Component is an extention of Review Component which allows users to include custom business logic',
+            'Custom Component is an extension of Review Component which allows users to include custom business logic',
     };
 
     return (

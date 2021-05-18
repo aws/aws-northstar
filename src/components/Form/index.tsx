@@ -37,9 +37,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface FormProps {
     /** Title of the form */
-    header: string;
+    header?: ReactNode | string;
     /** General description of the form */
-    description?: string;
+    description?: ReactNode | string;
     /** Additional form level validation message */
     errorText?: string;
     /** Form action buttons are supposed to be placed here */

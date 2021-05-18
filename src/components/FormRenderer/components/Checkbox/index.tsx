@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { v4 as uuidv4 } from 'uuid';
 import { Option } from '../../types';
 import Checkbox from '../../../Checkbox';
@@ -35,7 +35,7 @@ const CheckboxMapping: FunctionComponent<CheckboxMappingProps> = ({ option, name
     );
 };
 
-const CheckboxGroupMapping: FunctionComponent = (props: any) => {
+const CheckboxGroupMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
         label,
         description,

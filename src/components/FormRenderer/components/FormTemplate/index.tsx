@@ -14,26 +14,19 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
-import { useFormApi, componentTypes } from '@data-driven-forms/react-form-renderer';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import Form from '../../../Form';
 import Button from '../../../Button';
 import Inline from '../../../../layouts/Inline';
+import { componentTypes, RenderProps } from '../../types';
 
-export interface FormTemplateProps {
-    formFields: any;
-    schema: any;
-    cancelLabel?: string;
-    submitLabel?: string;
+export interface FormTemplateProps extends RenderProps {
     isSubmitting?: boolean;
 }
 
-const FormTemplate: FunctionComponent<FormTemplateProps> = ({
-    formFields,
-    schema: { cancelLabel = 'Cancel', submitLabel = 'Submit' },
-    schema,
-    isSubmitting,
-}) => {
+const FormTemplate: FunctionComponent<RenderProps> = ({ formFields, schema, isSubmitting }) => {
     const { handleSubmit, onCancel } = useFormApi();
+    const { cancelLabel = 'Cancel', submitLabel = 'Submit', fields, header, description } = schema;
 
     const actions = (
         <Inline spacing="s">
@@ -45,7 +38,7 @@ const FormTemplate: FunctionComponent<FormTemplateProps> = ({
                 loading={isSubmitting}
                 onClick={(event) => {
                     event.preventDefault();
-                    handleSubmit(event);
+                    handleSubmit();
                 }}
             >
                 {submitLabel}
@@ -54,11 +47,11 @@ const FormTemplate: FunctionComponent<FormTemplateProps> = ({
     );
 
     const actionsVisible = useMemo(() => {
-        return !(schema.fields && schema.fields.length > 0 && schema.fields[0].component === componentTypes.WIZARD);
-    }, [schema.fields]);
+        return !(fields.length > 0 && fields[0].component === componentTypes.WIZARD);
+    }, [fields]);
 
     return (
-        <Form header={schema.header} description={schema.description} actions={actionsVisible ? actions : undefined}>
+        <Form header={header} description={description} actions={actionsVisible ? actions : undefined}>
             {formFields}
         </Form>
     );

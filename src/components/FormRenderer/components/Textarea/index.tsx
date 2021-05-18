@@ -14,12 +14,12 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';
 import Textarea from '../../../Textarea';
 
-const TextareaMapping: FunctionComponent = (props: any) => {
+const TextareaMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
         label,
         description,
@@ -52,7 +52,7 @@ const TextareaMapping: FunctionComponent = (props: any) => {
                 placeholder={placeholder}
                 controlId={controlId}
                 disabled={isDisabled}
-                required={isRequired}
+                ariaRequired={isRequired}
                 readonly={isReadOnly}
                 invalid={!!errorText}
             />

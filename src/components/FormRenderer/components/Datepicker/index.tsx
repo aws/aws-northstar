@@ -14,12 +14,12 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';
 import Datepicker from '../../../DatePicker';
 
-const DatepickerMapping: FunctionComponent = (props: any) => {
+const DatepickerMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
         label,
         description,
@@ -50,8 +50,8 @@ const DatepickerMapping: FunctionComponent = (props: any) => {
                 placeholder={placeholder}
                 controlId={controlId}
                 disabled={isDisabled}
-                required={isRequired}
-                readonly={isReadOnly}
+                ariaRequired={isRequired}
+                readOnly={isReadOnly}
                 invalid={!!errorText}
             />
         </FormField>

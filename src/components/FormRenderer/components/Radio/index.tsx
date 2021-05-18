@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { v4 as uuidv4 } from 'uuid';
 import { Option } from '../../types';
 import FormField from '../../../FormField';
@@ -34,7 +34,7 @@ const RadioButtonMapping: FunctionComponent<RadioButtonMappingProps> = ({ option
     );
 };
 
-const RadioGroupMapping: FunctionComponent = (props: any) => {
+const RadioGroupMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
         label,
         description,

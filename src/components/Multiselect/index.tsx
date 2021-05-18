@@ -62,9 +62,9 @@ export interface MultiselectProps extends SelectBaseProps, AriaBaseProps {
     /** Callback fired when the input value changes. */
     onInputChange?: (e: React.ChangeEvent<{}>, value: string, reason: string) => void;
     /** Callback fired when the popup requests to be opened */
-    onFocus?: (event: React.ChangeEvent<{}>) => void;
+    onFocus?: (event?: React.FocusEvent<HTMLElement>) => void;
     /** Callback fired when the popup requests to be closed */
-    onBlur?: (event: React.ChangeEvent<{}>) => void;
+    onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({

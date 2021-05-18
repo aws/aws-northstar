@@ -130,6 +130,7 @@ const TimePicker: FunctionComponent<TimePickerProps> = ({
                 readOnly={readOnly}
                 value={selectedDate}
                 disabled={disabled}
+                required={ariaRequired}
                 placeholder={placeholder}
                 autoFocus={autofocus}
                 onChange={handleDateChange}

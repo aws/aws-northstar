@@ -13,13 +13,25 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { componentTypes as basicComponentTypes } from '@data-driven-forms/react-form-renderer';
+import basicComponentTypes from '@data-driven-forms/react-form-renderer/component-types';
+import { Schema as FormRendererSchema } from '@data-driven-forms/react-form-renderer/common-types';
+import { FormTemplateRenderProps } from '@data-driven-forms/react-form-renderer/common-types/form-template-render-props';
 
 export interface Option {
     label: string;
     value: string;
     disabled?: boolean;
 }
+
+export type Schema = Omit<FormRendererSchema, 'title'> & {
+    header?: FormRendererSchema['title'];
+    cancelLabel?: string;
+    submitLabel?: string;
+};
+
+export type RenderProps = Omit<FormTemplateRenderProps, 'schema'> & {
+    schema: Schema;
+};
 
 export const componentTypes = {
     ...basicComponentTypes,

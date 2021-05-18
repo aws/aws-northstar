@@ -14,12 +14,12 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';
 import TimePicker from '../../../TimePicker';
 
-const TimePickerMapping: FunctionComponent = (props: any) => {
+const TimePickerMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
         label,
         description,
@@ -52,7 +52,7 @@ const TimePickerMapping: FunctionComponent = (props: any) => {
             <TimePicker
                 {...input}
                 value={value}
-                onChange={(date?: Date) => {
+                onChange={(date?: Date | null) => {
                     // Coerce to a string for the formrenderer onChange event. Wrap in try catch in case user inputs invalid
                     // time, eg 99:99.
                     try {
@@ -64,8 +64,8 @@ const TimePickerMapping: FunctionComponent = (props: any) => {
                 placeholder={placeholder}
                 controlId={controlId}
                 disabled={isDisabled}
-                required={isRequired}
-                readonly={isReadOnly}
+                ariaRequired={isRequired}
+                readOnly={isReadOnly}
             />
         </FormField>
     );

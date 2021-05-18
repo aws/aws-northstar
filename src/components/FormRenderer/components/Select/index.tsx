@@ -14,14 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, memo } from 'react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';
 import Select from '../../../Select';
 import Multiselect from '../../../Multiselect';
 import Autosuggest from '../../../Autosuggest';
 
-const SelectMapping: FunctionComponent = (props: any) => {
+const SelectMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
         label,
         description,

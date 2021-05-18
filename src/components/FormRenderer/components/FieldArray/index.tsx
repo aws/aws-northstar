@@ -14,7 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import { useFieldApi, FieldArray as FieldArrayBase } from '@data-driven-forms/react-form-renderer';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
+import { FieldArray as FieldArrayBase } from '@data-driven-forms/react-form-renderer';
 import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';
 import Text from '../../../Text';
@@ -27,7 +28,7 @@ const DEFAULT_BUTTON_LABELS = {
     remove: 'Remove',
 };
 
-const FieldArrayMapping: FunctionComponent = (props: any) => {
+const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
         arrayValidator,
         label,
@@ -61,7 +62,7 @@ const FieldArrayMapping: FunctionComponent = (props: any) => {
             errorText={errorText}
         >
             <FieldArrayBase key={controlId} name={controlId} validate={arrayValidator}>
-                {({ fields }: any) => {
+                {({ fields }) => {
                     const { length, map, push, remove } = fields;
                     return (
                         <Stack spacing="s">
@@ -84,7 +85,7 @@ const FieldArrayMapping: FunctionComponent = (props: any) => {
                                 );
                             })}
                             {!isReadOnly && (
-                                <Button onClick={() => push(defaultItem)} disabled={length >= maxItems}>
+                                <Button onClick={() => push(defaultItem)} disabled={!!length && length >= maxItems}>
                                     {renderedButtonLabels.add}
                                 </Button>
                             )}

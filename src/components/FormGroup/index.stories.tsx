@@ -20,7 +20,7 @@ import Checkbox from '../Checkbox';
 
 export default {
     component: FormGroup,
-    title: 'FormGrouup',
+    title: 'FormGroup',
 };
 
 export const Default = () => (
