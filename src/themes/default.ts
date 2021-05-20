@@ -392,7 +392,7 @@ export const getTheme = (fontFamily?: string): ThemeOptions => ({
                     outline: '2px dotted transparent',
                     boxShadow: `0 0 0 1px ${COLOR_PALETTE['blue'].color}`,
                 },
-                '&:hover:not(.Mui-error) .MuiOutlinedInput-notchedOutline': {
+                '&:hover:not(.Mui-error):not(.Mui-disabled) .MuiOutlinedInput-notchedOutline': {
                     borderColor: COLOR_PALETTE['blue'].color,
                     borderWidth: '1px',
                 },
