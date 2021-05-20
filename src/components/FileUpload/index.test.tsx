@@ -54,7 +54,7 @@ describe('FileUpload', () => {
             const lastModifiedDate = Date.now();
             const selectedFile = {
                 name: 'fileName1',
-                size: 1000 * 3.05,
+                size: 1024 * 3.05,
                 lastModified: lastModifiedDate,
             };
             const event = {
@@ -81,7 +81,7 @@ describe('FileUpload', () => {
             const files = [
                 {
                     name: 'fileName1',
-                    size: 1010,
+                    size: 1030,
                 },
             ];
 
@@ -117,7 +117,7 @@ describe('FileUpload', () => {
 
             const selectedFile2 = {
                 name: 'fileName2',
-                size: 1000 * 1000 * 3.1,
+                size: 1024 * 1024 * 3.1,
                 lastModified: lastModifiedDate,
             };
             const event2 = {

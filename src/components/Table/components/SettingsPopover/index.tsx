@@ -25,10 +25,10 @@ export interface SettingsPopoverProps {
     settingsId?: string;
     settingsOpen: boolean;
     disableGroupBy: boolean;
-    gotoPage: (page: number) => void;
+    gotoPage?: (page: number) => void;
     settingsAnchor?: Element | ((element: Element) => Element) | null;
     handleSettingsClose: (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => void;
-    setPageSize: (size: number) => void;
+    setPageSize?: (size: number) => void;
     styles: {
         verticalGrid: string;
     };
@@ -64,7 +64,7 @@ export default ({
             horizontal: 'center',
         }}
     >
-        <Container title={'Settings'} style={{ marginBottom: 0 }}>
+        <Container title="Settings" style={{ marginBottom: 0 }}>
             <Grid container spacing={2}>
                 <Grid item>
                     <div className={styles.verticalGrid}>
@@ -75,8 +75,8 @@ export default ({
                                 return {
                                     text: pageSize,
                                     onClick: (e) => {
-                                        setPageSize(Number(e.target.textContent));
-                                        gotoPage(0);
+                                        setPageSize?.(Number(e.target.textContent));
+                                        gotoPage?.(0);
                                     },
                                 };
                             })}
@@ -86,17 +86,15 @@ export default ({
                 {disableGroupBy ? null : (
                     <>
                         <Grid item>
-                            <Divider orientation={'vertical'} />
+                            <Divider orientation="vertical" />
                         </Grid>
                         <Grid item>{columnsGroupingComponent}</Grid>
                     </>
                 )}
-                <>
-                    <Grid item>
-                        <Divider orientation={'vertical'} />
-                    </Grid>
-                    <Grid item>{columnsSelectorComponent}</Grid>
-                </>
+                <Grid item>
+                    <Divider orientation="vertical" />
+                </Grid>
+                <Grid item>{columnsSelectorComponent}</Grid>
             </Grid>
         </Container>
     </Popover>

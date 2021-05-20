@@ -36,7 +36,7 @@ describe('FileTokenLabel', () => {
     it('renders file size in GB', () => {
         const file = {
             name: 'fileName1',
-            size: 1000 * 1000 * 1000 * 3.56,
+            size: 1024 * 1024 * 1024 * 3.56,
         };
 
         const { getByText } = render(<FileTokenLabel {...file} />);
@@ -47,7 +47,7 @@ describe('FileTokenLabel', () => {
     it('renders file size in MB', () => {
         const file = {
             name: 'fileName1',
-            size: 1000 * 1000 * 4.7,
+            size: 1024 * 1024 * 4.7,
         };
 
         const { getByText } = render(<FileTokenLabel {...file} />);
@@ -58,7 +58,7 @@ describe('FileTokenLabel', () => {
     it('renders file size in KB', () => {
         const file = {
             name: 'fileName1',
-            size: 1000 * 3,
+            size: 1024 * 3,
         };
 
         const { getByText } = render(<FileTokenLabel {...file} />);

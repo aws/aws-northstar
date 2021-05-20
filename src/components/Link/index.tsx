@@ -78,7 +78,7 @@ const Link: FunctionComponent<LinkProps> = ({
             href={href}
             to={href}
             variant="body1"
-            rel={isExternal ? 'noreferrer' : ''}
+            rel={isExternal ? 'noreferrer' : undefined}
             onClick={onClick}
         >
             {children}

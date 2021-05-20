@@ -190,7 +190,7 @@ export const RemoteFetch = () => {
     );
     return (
         <Table
-            tableTitle={'Remote Update Table'}
+            tableTitle="Remote Update Table"
             columnDefinitions={columnDefinitions}
             onFetchData={handleFetchData}
             rowCount={rowCount}

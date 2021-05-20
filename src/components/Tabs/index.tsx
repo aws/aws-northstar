@@ -70,9 +70,7 @@ interface TabPanelProps {
     value: number;
 }
 
-function TabPanel(props: TabPanelProps) {
-    const { children, value, index } = props;
-
+function TabPanel({ children, value, index }: TabPanelProps) {
     return (
         <Typography component="div" role="tabpanel" hidden={value !== index} id={`tabpanel-${index}`}>
             <Box py={3}>{children}</Box>
@@ -94,8 +92,8 @@ const Tabs = ({ tabs, activeId = '', variant = 'default', onChange }: TabsProps)
 
     const headerContent = (
         <MuiTabs
-            variant={'scrollable'}
-            indicatorColor={'secondary'}
+            variant="scrollable"
+            indicatorColor="secondary"
             TabIndicatorProps={{ color: 'primary' }}
             value={value}
             onChange={handleChange}

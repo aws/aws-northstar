@@ -127,7 +127,7 @@ const localeMap = {
     ru: ruLocale,
 };
 
-type Locales = 'en' | 'fr' | 'ru';
+type Locales = keyof typeof localeMap;
 
 /**
  * A date picker control provide a simple way to select a date from calendar.
@@ -136,7 +136,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
     placeholder = 'YYYY/MM/DD',
     locale = 'en',
     disabled = false,
-    isDateDisabled = (_) => false,
+    isDateDisabled,
     onChange,
     value,
     name,

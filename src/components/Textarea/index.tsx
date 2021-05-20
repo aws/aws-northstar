@@ -113,7 +113,7 @@ const mapTextareaProps = ({
 }: TextareaProps): TextareaAutosizeProps => {
     const id: string = controlId || uuidv4();
 
-    const autoCompleteString: string = disableBrowserAutocorrect ? 'off' : 'on';
+    const autoCompleteString = disableBrowserAutocorrect ? 'off' : 'on';
 
     return {
         id,

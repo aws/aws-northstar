@@ -171,7 +171,7 @@ const muiSelectProps = ({
     onFocus,
     selectedOption = { value: '' },
 }: SelectProps): MuiSelectProps => {
-    const muiSelectProps: MuiSelectProps = {
+    return {
         disabled,
         error: invalid,
         id: controlId,
@@ -179,25 +179,11 @@ const muiSelectProps = ({
         onClose: onBlur as MuiSelectProps['onClose'],
         onOpen: onFocus as MuiSelectProps['onOpen'],
         value: selectedOption.value,
+        ...(ariaLabelledby && { 'aria-labelledby': ariaLabelledby }),
+        ...(ariaDescribedby && { 'aria-describedby': ariaDescribedby }),
+        ...(label && { 'aria-label': label }),
+        ...(ariaRequired && { 'aria-required': ariaRequired }),
     };
-
-    if (ariaLabelledby) {
-        muiSelectProps['aria-labelledby'] = ariaLabelledby;
-    }
-
-    if (ariaDescribedby) {
-        muiSelectProps['aria-describedby'] = ariaDescribedby;
-    }
-
-    if (label) {
-        muiSelectProps['aria-label'] = label;
-    }
-
-    if (ariaRequired) {
-        muiSelectProps['aria-required'] = ariaRequired;
-    }
-
-    return muiSelectProps;
 };
 
 /**

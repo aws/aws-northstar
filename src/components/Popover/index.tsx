@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     content: {
         contentOverflowVisible: true,
         flex: '1 1 auto',
-        color: theme.palette.grey['700'],
+        color: theme.palette.grey[700],
     },
     dismiss: {
         flex: '0 0 auto',
@@ -169,24 +169,24 @@ const Popover: FunctionComponent<PopoverProps> = ({
     content,
     dismissAriaLabel,
     header,
-    onOpen = () => {},
-    onClose = () => {},
+    onOpen,
+    onClose,
     ...restProps
 }) => {
     const labelledById = useUniqueId('awsui-popover-');
     const classes = useStyles({});
-    const triggerRef = useRef<HTMLElement | null>(null);
+    const triggerRef = useRef<HTMLButtonElement | null>(null);
 
     const [visible, setVisible] = useState(false);
 
     const onTriggerClick = useCallback(() => {
         setVisible(true);
-        onOpen();
+        onOpen?.();
     }, [onOpen]);
 
     const onPopoverClose = useCallback(() => {
         setVisible(false);
-        onClose();
+        onClose?.();
     }, [onClose]);
 
     const mapPositionToMuiPopoverOrigins = useCallback(() => {
@@ -215,9 +215,7 @@ const Popover: FunctionComponent<PopoverProps> = ({
     }, [position]);
 
     const triggerProps = {
-        // https://github.com/microsoft/TypeScript/issues/36659
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ref: triggerRef as any,
+        ref: triggerRef,
         onClick: variant !== 'hover' ? onTriggerClick : undefined,
         onMouseEnter: variant === 'hover' ? onTriggerClick : undefined,
         onMouseLeave: variant === 'hover' ? onPopoverClose : undefined,

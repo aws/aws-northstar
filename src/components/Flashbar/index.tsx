@@ -37,7 +37,7 @@ export interface FlashbarProps {
  * Flashbar is rendered as part of AppLayout.
  **/
 const Flashbar: FunctionComponent<FlashbarProps> = ({ items = [], maxItemsDisplayed = Number.MAX_VALUE }) => {
-    const renderedItems = items.slice(0, maxItemsDisplayed < items.length ? maxItemsDisplayed : items.length);
+    const renderedItems = items.slice(0, Math.min(maxItemsDisplayed, items.length));
     return (
         <Box>
             {renderedItems.map((item, index) => (

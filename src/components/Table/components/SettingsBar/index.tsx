@@ -53,10 +53,10 @@ export default function SettingBar({
     disablePagination,
     disableSettings,
     disableGroupBy = false,
-    gotoPage = () => {},
-    previousPage = () => {},
-    nextPage = () => {},
-    setPageSize = () => {},
+    gotoPage,
+    previousPage,
+    nextPage,
+    setPageSize,
     styles,
     columnsGroupingComponent,
     columnsSelectorComponent,
@@ -97,27 +97,27 @@ export default function SettingBar({
                 {!disablePagination && (
                     <>
                         <IconButton
-                            size={'small'}
+                            size="small"
                             aria-label="first page"
                             disabled={pageIndex === 0 || loading}
                             data-testid="first-page"
-                            onClick={() => gotoPage(0)}
+                            onClick={() => gotoPage?.(0)}
                         >
                             <FirstPage />
                         </IconButton>
                         <IconButton
-                            size={'small'}
+                            size="small"
                             aria-label="previous page"
                             disabled={!canPreviousPage || loading}
                             data-testid="previous-page"
-                            onClick={() => previousPage()}
+                            onClick={previousPage}
                         >
                             <NavigateBefore />
                         </IconButton>
                         <span>{`${pageIndex * pageSize + 1}-${pageIndex * pageSize + pageLength} of ${rowCount}`}</span>
                         <IconButton
                             aria-label="next page"
-                            size={'small'}
+                            size="small"
                             disabled={!canNextPage || loading}
                             data-testid="next-page"
                             onClick={nextPage}
@@ -126,10 +126,10 @@ export default function SettingBar({
                         </IconButton>
                         <IconButton
                             aria-label="last page"
-                            size={'small'}
+                            size="small"
                             data-testid="last-page"
                             disabled={pageIndex! * pageSize + pageLength >= rowCount || loading}
-                            onClick={() => gotoPage(Math.ceil(rowCount / pageSize) - 1)}
+                            onClick={() => gotoPage?.(Math.ceil(rowCount / pageSize) - 1)}
                         >
                             <LastPage />
                         </IconButton>
@@ -138,7 +138,7 @@ export default function SettingBar({
                 {!disableSettings && (
                     <>
                         <IconButton
-                            size={'small'}
+                            size="small"
                             aria-label="settings"
                             className={styles.leftSpace}
                             aria-describedby={settingsId}
@@ -146,7 +146,7 @@ export default function SettingBar({
                             data-testid="settings"
                             onClick={handleSettingsClick}
                         >
-                            <SettingsOutlined fontSize={'small'} />
+                            <SettingsOutlined fontSize="small" />
                         </IconButton>
                         {<SettingsPopover {...settingsPopoverProps} />}
                     </>

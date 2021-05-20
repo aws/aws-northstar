@@ -21,24 +21,15 @@ import { FileMetadata } from '../../types';
 
 const FileTokenLabel: FunctionComponent<FileMetadata> = ({ name, size, lastModified }) => {
     const displaySize = useMemo(() => {
-        if (size) {
-            let displayNumber = size;
-            let displayUnit = 'bytes';
-            if (size >= 1000 * 1000 * 1000) {
-                displayNumber = size / (1000 * 1000 * 1000);
-                displayUnit = 'GB';
-            } else if (size >= 1000 * 1000) {
-                displayNumber = size / (1000 * 1000);
-                displayUnit = 'MB';
-            } else if (size >= 1000) {
-                displayNumber = size / 1000;
-                displayUnit = 'KB';
-            }
+        if (!size) return null;
 
-            return `Size: ${parseFloat(displayNumber.toFixed(2))} ${displayUnit}`;
-        }
+        const k = 1024;
+        const dm = 2;
+        const sizes = ['bytes', 'KB', 'MB', 'GB'];
 
-        return null;
+        const i = Math.floor(Math.log(size) / Math.log(k));
+
+        return `Size: ${parseFloat((size / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
     }, [size]);
 
     const displayLastModified = useMemo(() => {
