@@ -97,15 +97,12 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         childMenuItem: {
             paddingLeft: '24px',
-        },
-        firstChildMenuItem: {
-            borderTop: `1px solid ${theme.palette.grey[200]}`,
-        },
-        lastChildMenuItem: {
-            borderBottom: `1px solid ${theme.palette.grey[200]}`,
-        },
-        divider: {
-            borderBottom: `1px solid ${theme.palette.grey[200]}`,
+            '&:first-of-type': {
+                borderTop: `1px solid ${theme.palette.grey[200]}`,
+            },
+            '&:last-of-type': {
+                borderBottom: `1px solid ${theme.palette.grey[200]}`,
+            },
         },
         darkTheme: {
             '& .MuiButton-root': {
@@ -187,7 +184,6 @@ const ButtonDropdown: FunctionComponent<ButtonDropdownProps> = ({
 
     const renderMenuItemWithHeading = useCallback(
         (item: ButtonDropdownItem) => {
-            const itemSize = item.items?.length || 0;
             return (
                 <Box key={uuidv4()}>
                     <Typography
@@ -197,16 +193,10 @@ const ButtonDropdown: FunctionComponent<ButtonDropdownProps> = ({
                         {item.text}
                     </Typography>
 
-                    {item.items?.map((itemChild: ButtonDropdownItem, idx: number) => (
+                    {item.items?.map((itemChild: ButtonDropdownItem) => (
                         <MenuItem
                             key={uuidv4()}
-                            className={clsx(
-                                menuItemClassName,
-                                classes.menuItem,
-                                classes.childMenuItem,
-                                { [classes.firstChildMenuItem]: idx === 0 },
-                                { [classes.lastChildMenuItem]: idx === itemSize - 1 }
-                            )}
+                            className={clsx(menuItemClassName, classes.menuItem, classes.childMenuItem)}
                             onClick={itemChild.onClick}
                             disabled={item.disabled || itemChild.disabled}
                             dense={true}
