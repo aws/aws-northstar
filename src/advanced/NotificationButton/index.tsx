@@ -66,7 +66,7 @@ const getNotificationType = (severity: NotificationSeverity): 'warning' | 'info'
 const useStyles = makeStyles(() => ({
     menuItem: {
         border: 'none',
-        borderBottom: '1px solid ',
+        borderBottom: '1px solid',
         padding: 0,
         maxWidth: '500px',
     },
