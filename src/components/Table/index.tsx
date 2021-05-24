@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     searchBar: {
         flexGrow: 1,
         display: 'flex',
-        backgroundColor: theme.palette.background.paper,
+        alignItems: 'center',
         marginRight: '10px',
     },
     leftSpace: {
@@ -242,7 +242,7 @@ export default function Table<D extends object>({
     disableRowSelect = false,
     items = [],
     loading = false,
-    onSelectionChange = () => {},
+    onSelectionChange,
     onFetchData = null,
     pageSizes = [10, 25, 50],
     tableDescription,
@@ -463,7 +463,7 @@ export default function Table<D extends object>({
         const selected = selectedFlatRows
             .filter((row: Row<D> & Partial<UseGroupByRowProps<D>>) => !row.isGrouped)
             .map((row: Row<D>) => row.original);
-        onSelectionChange(selected);
+        onSelectionChange?.(selected);
     }, DEFAULT_DEBOUNCE_TIMER);
 
     useEffect(() => {

@@ -136,7 +136,7 @@ const Control: FunctionComponent<Partial<FormFieldProps>> = ({
 }) => {
     const classes = useStyles();
     return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} alignItems="center">
             <Grid item xs={12} sm={stretch ? 12 : 9}>
                 {children}
             </Grid>
@@ -144,20 +144,16 @@ const Control: FunctionComponent<Partial<FormFieldProps>> = ({
                 <Grid item xs={12} sm={stretch ? 12 : 3}>
                     {renderReload || createNewLinkHref ? (
                         <Box className={classes.secondaryControl}>
-                            <>
-                                {renderReload && (
-                                    <Button label="Reload" icon="refresh" onClick={onReloadClick}>
-                                        Reload
-                                    </Button>
-                                )}
-                            </>
-                            <>
-                                {createNewLinkHref && createNewLink && (
-                                    <Link href={createNewLinkHref} forceExternal={true}>
-                                        {createNewLink}
-                                    </Link>
-                                )}
-                            </>
+                            {renderReload && (
+                                <Button label="Reload" icon="refresh" onClick={onReloadClick}>
+                                    Reload
+                                </Button>
+                            )}
+                            {createNewLinkHref && createNewLink && (
+                                <Link href={createNewLinkHref} forceExternal={true}>
+                                    {createNewLink}
+                                </Link>
+                            )}
                         </Box>
                     ) : (
                         <>{secondaryControl}</>

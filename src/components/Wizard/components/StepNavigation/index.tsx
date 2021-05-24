@@ -63,9 +63,7 @@ const StepNavigation: FunctionComponent<StepNavigationProps> = ({
                     <Link
                         href="#"
                         onClick={() => {
-                            if (onStepNavigationClick) {
-                                onStepNavigationClick({ requestedStepIndex: index });
-                            }
+                            onStepNavigationClick?.({ requestedStepIndex: index });
                         }}
                     >
                         {step.title}
