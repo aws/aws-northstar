@@ -23,8 +23,8 @@ import Text from '../Text';
 import { Variant } from './types';
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles({
-    default: {
+const useStyles = makeStyles(() => {
+    const borderless = {
         border: 'none',
         boxShadow: 'none',
         '&:not(:last-child)': {
@@ -34,23 +34,16 @@ const useStyles = makeStyles({
             display: 'none',
         },
         backgroundColor: 'transparent',
-    },
-    borderless: {
-        border: 'none',
-        boxShadow: 'none',
-        '&:not(:last-child)': {
-            borderBottom: 0,
+    };
+    return {
+        default: borderless,
+        borderless,
+        container: {
+            '& .MuiAccordionDetails-root': {
+                padding: '15px 20px',
+            },
         },
-        '&:before': {
-            display: 'none',
-        },
-        backgroundColor: 'transparent',
-    },
-    container: {
-        '& .MuiAccordionDetails-root': {
-            padding: '15px 20px',
-        },
-    },
+    };
 });
 
 export interface ExpandableSectionProps {
@@ -92,7 +85,7 @@ const ExpandableSection: FunctionComponent<ExpandableSectionProps> = ({
     expanded = false,
     children,
     header = null,
-    onChange = () => {},
+    onChange,
     variant = 'default',
     description,
 }) => {
@@ -106,7 +99,7 @@ const ExpandableSection: FunctionComponent<ExpandableSectionProps> = ({
     const handleChange = () => {
         const toBeState = !isExpanded;
         setExpanded(toBeState);
-        onChange(toBeState);
+        onChange?.(toBeState);
     };
 
     return (
