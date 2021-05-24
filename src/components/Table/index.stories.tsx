@@ -70,6 +70,21 @@ export const MultiSelect = () => (
     />
 );
 
+export const MultiSelectWithRowsDisabled = () => {
+    const disabledItemIds = new Set(['id0000015', 'id0000016']);
+    return (
+        <Table
+            tableTitle={'Multi Select Table'}
+            columnDefinitions={columnDefinitions}
+            items={shortData}
+            selectedRowIds={['id0000012', 'id0000013']}
+            isItemDisabled={({ id }) => disabledItemIds.has(id)}
+            onSelectionChange={action('onSelectionChange')}
+            getRowId={(data) => data.id}
+        />
+    );
+};
+
 export const SingleSelect = () => (
     <Table
         tableTitle={'Single Select Table'}
