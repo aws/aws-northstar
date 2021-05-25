@@ -44,7 +44,7 @@ describe('Modal', () => {
         expect(getByText('footer content')).toBeInTheDocument();
     });
 
-    it('should have 600px width by derfault', () => {
+    it('should have 600px width by default', () => {
         const { getByTestId } = render(<Modal title="modal title">model body</Modal>);
         expect(getByTestId('modal-inner')).toHaveStyle({ width: '600px' });
     });

@@ -36,11 +36,7 @@ export interface TokenGroupProps {
 /** A token group can be used to display dismissible tags or properties */
 const TokenGroup: FunctionComponent<TokenGroupProps> = ({ items, onDismiss, inline = true }) => {
     const WrapperComponent = useMemo(() => {
-        if (inline) {
-            return Inline;
-        }
-
-        return Stack;
+        return inline ? Inline : Stack;
     }, [inline]);
     return (
         <WrapperComponent spacing={inline ? 'm' : 's'}>

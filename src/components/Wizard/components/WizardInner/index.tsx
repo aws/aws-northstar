@@ -66,35 +66,28 @@ const WizardInner: FunctionComponent<WizardInnerProps> = ({
     onCancelButtonClick,
 }) => {
     const actions = useMemo(() => {
-        if (activeStepIndex === 0) {
-            return (
-                <Inline>
-                    <Button variant="link" onClick={onCancelButtonClick}>
-                        {cancelButtonText}
-                    </Button>
-                    <Button variant="primary" loading={isLoadingNextStep} onClick={onNextButtonClick}>
-                        {nextButtonText}
-                    </Button>
-                </Inline>
-            );
-        }
-
         return (
             <Inline>
                 <Button variant="link" onClick={onCancelButtonClick}>
                     {cancelButtonText}
                 </Button>
-                <Button variant="normal" onClick={onPreviousButtonClick}>
-                    {previousButtonText}
-                </Button>
-                {activeStepIndex === stepCount - 1 ? (
-                    <Button variant="primary" loading={isLoadingNextStep} onClick={onSubmitButtonClick}>
-                        {submitButtonText}
-                    </Button>
-                ) : (
+                {activeStepIndex === 0 ? (
                     <Button variant="primary" loading={isLoadingNextStep} onClick={onNextButtonClick}>
                         {nextButtonText}
                     </Button>
+                ) : (
+                    <>
+                        <Button variant="normal" onClick={onPreviousButtonClick}>
+                            {previousButtonText}
+                        </Button>
+                        <Button
+                            variant="primary"
+                            loading={isLoadingNextStep}
+                            onClick={activeStepIndex === stepCount - 1 ? onSubmitButtonClick : onNextButtonClick}
+                        >
+                            {activeStepIndex === stepCount - 1 ? submitButtonText : nextButtonText}
+                        </Button>
+                    </>
                 )}
             </Inline>
         );

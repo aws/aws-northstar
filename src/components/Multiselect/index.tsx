@@ -28,6 +28,7 @@ import { AriaBaseProps } from '../../props/common';
 import { SelectBaseProps, SelectOption } from '../Select';
 import Stack from '../../layouts/Stack';
 import TokenGroup from '../TokenGroup';
+import { getFlattenOptions } from '../../getFlattenOptions';
 
 export interface MultiselectProps extends SelectBaseProps, AriaBaseProps {
     /** The selected values */
@@ -128,18 +129,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
     );
 
     const flattenOptions = useMemo((): SelectOption[] => {
-        const optionArray: SelectOption[] = [];
-        options.forEach((option) => {
-            if (option.options) {
-                option.options.forEach((o) => {
-                    optionArray.push({ label: o.label || o.value, value: o.value, group: option.label });
-                });
-            } else {
-                optionArray.push({ label: option.label || option.value, value: option.value });
-            }
-        });
-
-        return optionArray;
+        return getFlattenOptions(options);
     }, [options]);
 
     const handleOnChange = useCallback(

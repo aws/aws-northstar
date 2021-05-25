@@ -13,7 +13,15 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { EventHandler, FunctionComponent, ReactNode, SyntheticEvent, useCallback, useEffect } from 'react';
+import React, {
+    EventHandler,
+    FunctionComponent,
+    MouseEventHandler,
+    ReactNode,
+    SyntheticEvent,
+    useCallback,
+    useEffect,
+} from 'react';
 import { Menu, MenuItem, Typography } from '@material-ui/core';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -77,7 +85,7 @@ export interface ButtonDropdownProps {
     /**
      * Fired when the user clicks on the drop down button.
      * */
-    onClick?: EventHandler<any>;
+    onClick?: MouseEventHandler<HTMLElement>;
 }
 
 const useStyles = makeStyles((theme: Theme) =>

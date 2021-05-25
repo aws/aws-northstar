@@ -61,8 +61,8 @@ const FlashbarItem: FunctionComponent<FlashbarMessage> = ({
     type = 'info',
     dismissible = false,
     loading = false,
-    onDismiss = () => {},
-    onButtonClick = () => {},
+    onDismiss,
+    onButtonClick,
     buttonText,
     header,
     content,
@@ -78,7 +78,7 @@ const FlashbarItem: FunctionComponent<FlashbarMessage> = ({
                     <IconButton
                         aria-label="Close"
                         onClick={() => {
-                            onDismiss();
+                            onDismiss?.();
                             setShow(false);
                         }}
                     >
