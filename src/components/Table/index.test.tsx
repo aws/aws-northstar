@@ -100,10 +100,35 @@ describe('Table', () => {
         );
 
         expect(getByLabelText('Checkbox to select row item')).toBeInTheDocument();
+        expect(getByLabelText('Checkbox to select row item')).toBeEnabled();
+
+        expect(getByLabelText('Checkbox to select all row items')).toBeInTheDocument();
+    });
+
+    it('disables checkboxes for rows where isItemDisabled evaluates to true', () => {
+        const { getByLabelText, queryAllByLabelText } = render(
+            <Table
+                tableTitle={'My Table'}
+                columnDefinitions={columnDefinitions}
+                items={data}
+                disableSortBy={true}
+                disableSettings={true}
+                disablePagination={true}
+                disableFilters={true}
+                isItemDisabled={() => true}
+                disableGroupBy={true}
+            />
+        );
+
+        expect(getByLabelText('Checkbox to select row item')).toBeInTheDocument();
+        expect(getByLabelText('Checkbox to select row item')).toBeDisabled();
+
+        // Should not render the select all box when individual items could be disabled
+        expect(queryAllByLabelText('Checkbox to select all row items')).toHaveLength(0);
     });
 
     it('renders radio buttons', () => {
-        const { getAllByRole } = render(
+        const { getAllByRole, getByRole } = render(
             <Table
                 tableTitle={'My Table'}
                 columnDefinitions={columnDefinitions}
@@ -119,9 +144,30 @@ describe('Table', () => {
         );
 
         expect(getAllByRole('radio')).toHaveLength(1);
+        expect(getByRole('radio')).toBeEnabled();
     });
 
-    it('renders seach input without extra column for search field', () => {
+    it('disables radio buttons for rows where isItemDisabled evaluates to true', () => {
+        const { getAllByRole, getByRole } = render(
+            <Table
+                tableTitle={'My Table'}
+                columnDefinitions={columnDefinitions}
+                items={data}
+                disableSortBy={true}
+                disableSettings={true}
+                disablePagination={true}
+                disableFilters={true}
+                isItemDisabled={() => true}
+                multiSelect={false}
+                disableGroupBy={true}
+            />
+        );
+
+        expect(getAllByRole('radio')).toHaveLength(1);
+        expect(getByRole('radio')).toBeDisabled();
+    });
+
+    it('renders search input without extra column for search field', () => {
         const { getByPlaceholderText, getAllByRole } = render(
             <Table
                 tableTitle={'My Table'}
