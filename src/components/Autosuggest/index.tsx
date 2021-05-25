@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useState, SyntheticEvent, useMemo } from 'react';
+import React, { useState, SyntheticEvent, useMemo, useCallback } from 'react';
 import TextField from '@material-ui/core/TextField';
 import MaterialUIAutocomplete, { AutocompleteRenderInputParams } from '@material-ui/lab/Autocomplete';
 import Link from '@material-ui/core/Link';
@@ -131,72 +131,91 @@ export default function Autosuggest({
     const [open, setOpen] = React.useState(false);
     const autoCompleteString = disableBrowserAutocorrect ? 'off' : 'on';
 
-    const onRecoveryClickHandler = (event: SyntheticEvent) => {
-        event.preventDefault();
-        onRecoveryClick?.(event);
-        event.stopPropagation();
-    };
+    const onRecoveryClickHandler = useCallback(
+        (event: SyntheticEvent) => {
+            event.preventDefault();
+            onRecoveryClick?.(event);
+            event.stopPropagation();
+        },
+        [onRecoveryClick]
+    );
 
     const flattenOptions = useMemo((): SelectOption[] => {
         return getFlattenOptions(options);
     }, [options]);
 
-    const handleOnChange = (event: React.ChangeEvent<{}>, value: string | SelectOption | null): void => {
-        onChange?.(value);
-        setInputValue(value);
-    };
-
-    const handleOnInput = (event: React.ChangeEvent<{}>, value: string, reason: string): void => {
-        if (filteringType === 'manual') {
-            onInputChange?.(event, value, reason);
-        }
-    };
-
-    const loadingAndErrorText = (
-        <>
-            {statusType === 'loading' && <LoadingIndicator label={loadingText} />}
-
-            {statusType === 'error' && (
-                <StatusIndicator statusType="negative">
-                    {errorText}.
-                    {recoveryText && (
-                        <span>
-                            <Link href="#" onClick={onRecoveryClickHandler} className={classes.recoveryLink}>
-                                {recoveryText}
-                            </Link>
-                        </span>
-                    )}
-                </StatusIndicator>
-            )}
-        </>
+    const handleOnChange = useCallback(
+        (_: React.ChangeEvent<{}>, value: string | SelectOption | null): void => {
+            onChange?.(value);
+            setInputValue(value);
+        },
+        [onChange, setInputValue]
     );
 
-    const textfield = (params: AutocompleteRenderInputParams): React.ReactNode => (
-        <TextField
-            autoCorrect={autoCompleteString}
-            placeholder={placeholder}
-            required={ariaRequired}
-            error={!!(statusType === 'error' || invalid)}
-            {...params}
-            variant="outlined"
-            size="small"
-            margin="normal"
-            name={name}
-            InputProps={{
-                'aria-required': ariaRequired,
-                'aria-describedby': ariaDescribedby,
-                'aria-labelledby': ariaLabelledby,
-                ...params.InputProps,
-                className: classes.textfield,
-                type: 'search',
-                startAdornment: (
-                    <InputAdornment position="start">
-                        {icon === undefined && <SearchIcon color="action" />}
-                        {icon && <Icon name={icon} color="action" />}
-                    </InputAdornment>
-                ),
-            }}
-        />
+    const handleOnInput = useCallback(
+        (event: React.ChangeEvent<{}>, value: string, reason: string): void => {
+            if (filteringType === 'manual') {
+                onInputChange?.(event, value, reason);
+            }
+        },
+        [onInputChange, filteringType]
+    );
+
+    const getOptionsSelected = useCallback((option: SelectOption, value: SelectOption) => {
+        return option.value === value.value;
+    }, []);
+
+    const loadingAndErrorText = useMemo(
+        () => (
+            <>
+                {statusType === 'loading' && <LoadingIndicator label={loadingText} />}
+
+                {statusType === 'error' && (
+                    <StatusIndicator statusType="negative">
+                        {errorText}.
+                        {recoveryText && (
+                            <span>
+                                <Link href="#" onClick={onRecoveryClickHandler} className={classes.recoveryLink}>
+                                    {recoveryText}
+                                </Link>
+                            </span>
+                        )}
+                    </StatusIndicator>
+                )}
+            </>
+        ),
+        [statusType, classes.recoveryLink, errorText, recoveryText, loadingText, onRecoveryClickHandler]
+    );
+
+    const textfield = useCallback(
+        (params: AutocompleteRenderInputParams): React.ReactNode => (
+            <TextField
+                autoCorrect={autoCompleteString}
+                placeholder={placeholder}
+                required={ariaRequired}
+                error={!!(statusType === 'error' || invalid)}
+                {...params}
+                variant="outlined"
+                size="small"
+                margin="normal"
+                name={name}
+                InputProps={{
+                    'aria-required': ariaRequired,
+                    'aria-describedby': ariaDescribedby,
+                    'aria-labelledby': ariaLabelledby,
+                    ...params.InputProps,
+                    className: classes.textfield,
+                    type: 'search',
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            {icon === undefined && <SearchIcon color="action" />}
+                            {icon && <Icon name={icon} color="action" />}
+                        </InputAdornment>
+                    ),
+                }}
+            />
+        ),
+        []
     );
 
     return (
@@ -215,6 +234,7 @@ export default function Autosuggest({
                 options={flattenOptions}
                 groupBy={(option) => option.group || ''}
                 loadingText={loadingAndErrorText}
+                getOptionSelected={getOptionsSelected}
                 onChange={handleOnChange}
                 onInputChange={handleOnInput}
                 onOpen={(e) => {
