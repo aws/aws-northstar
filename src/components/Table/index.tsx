@@ -201,6 +201,8 @@ export interface TableBaseOptions<D extends object> {
     getRowId?: (originalRow: D, relativeIndex: number) => string;
     /** The initial columns to sort by */
     sortBy?: SortingRule<string>[];
+    /** Determines whether a given item is disabled. If an item is disabled, the user can't select it. */
+    isItemDisabled?: (item: D) => boolean;
 }
 
 export interface FetchDataOptions {
@@ -251,6 +253,7 @@ export default function Table<D extends object>({
     selectedRowIds = [],
     multiSelect = true,
     getRowId,
+    isItemDisabled,
     sortBy: defaultSortBy = [],
     errorText,
     ...props
@@ -280,7 +283,7 @@ export default function Table<D extends object>({
                 id: '_selection_',
                 width: 50,
                 Header: (props: any) => {
-                    return multiSelect ? (
+                    return multiSelect && !isItemDisabled ? (
                         <Checkbox
                             ariaLabel="Checkbox to select all row items"
                             {...props.getToggleAllRowsSelectedProps()}
@@ -289,17 +292,20 @@ export default function Table<D extends object>({
                 },
                 Cell: (props: any) => {
                     const { row } = props;
+                    const isSelectDisabled = !!isItemDisabled?.(row.original);
                     return (
                         <div>
                             {multiSelect ? (
                                 <Checkbox
                                     ariaLabel="Checkbox to select row item"
                                     {...row.getToggleRowSelectedProps()}
+                                    disabled={isSelectDisabled}
                                 />
                             ) : (
                                 <RadioButton
                                     name="select"
                                     checked={row.isSelected}
+                                    disabled={isSelectDisabled}
                                     onChange={() => {
                                         /** React Table does not support Radio Button natively.
                                          A solution is to toggle all the row off and then toggle the current row on to ensure only current row is selected.

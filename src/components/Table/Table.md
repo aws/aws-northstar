@@ -434,6 +434,150 @@ const tableActions = (
     </Inline>
 );
 
+const disabledItemIds = new Set(['id0000004', 'id0000005', 'id0000007']);
+
+<Table
+    actionGroup={tableActions}
+    tableTitle='Multi Select Table With Selection Disabled for Some Rows'
+    columnDefinitions={columnDefinitions}
+    items={data}
+    onSelectionChange={console.log}
+    isItemDisabled={({ id }) => disabledItemIds.has(id)}
+    getRowId={React.useCallback(data => data.id, [])}
+    sortBy={[{
+        id: 'name',
+        desc: true
+    }]}
+/>
+```
+
+```jsx
+import Table from 'aws-northstar/components/Table';
+import StatusIndicator from 'aws-northstar/components/StatusIndicator';
+import Button from 'aws-northstar/components/Button';
+import Inline from 'aws-northstar/layouts/Inline';
+
+const columnDefinitions = [
+    {
+        id: 'id',
+        width: 200,
+        Header: 'Id',
+        accessor: 'id'
+    },
+    {
+        id: 'name',
+        width: 200,
+        Header: 'Name',
+        accessor: 'name'
+    },
+    {
+        id: 'accounts',
+        width: 200,
+        Header: '# Accounts',
+        accessor: row => row.accounts ? row.accounts.length : 0
+    },
+    {
+        id: 'status',
+        width: 200,
+        Header: 'Status',
+        accessor: 'status',
+        Cell: ({ row  }) => {
+            if (row && row.original) {
+                const status = row.original.status;
+                switch(status) {
+                    case 'active':
+                        return <StatusIndicator  statusType='positive'>Active</StatusIndicator>;
+                    case 'inactive':
+                        return <StatusIndicator  statusType='negative'>Inactive</StatusIndicator>;
+                    default:
+                        return null;
+                }
+            }
+            return null;
+        }
+    }
+];
+
+const data = [
+    {
+        id: 'id0000001',
+        name: 'one',
+        accounts: [],
+        status: 'active'
+    },
+    {
+        id: 'id0000002',
+        name: 'two',
+        accounts: ['acc1', 'acc2'],
+        status: 'active'
+    },
+    {
+        id: 'id0000003',
+        name: 'three',
+        accounts: ['acc1', 'acc2'],
+        status: 'inactive'
+    },
+    {
+        id: 'id0000004',
+        name: 'four',
+        accounts: ['acc1', 'acc2', 'acc3'],
+        status: 'inactive'
+    },
+    {
+        id: 'id0000005',
+        name: 'five',
+        accounts: [],
+        status: 'inactive'
+    },
+    {
+        id: 'id0000006',
+        name: 'six',
+        accounts: [],
+        status: 'active'
+    },
+    {
+        id: 'id0000007',
+        name: 'seven',
+        accounts: [],
+        status: 'active'
+    },
+    {
+        id: 'id0000008',
+        name: 'eight',
+        accounts: [],
+        status: 'active'
+    },
+    {
+        id: 'id0000009',
+        name: 'nine',
+        accounts: [],
+        status: 'active'
+    },
+    {
+        id: 'id0000010',
+        name: 'ten',
+        accounts: [],
+        status: 'active'
+    },
+    {
+        id: 'id0000011',
+        name: 'eleven',
+        accounts: ['acc1', 'acc4', 'acc5', 'acc7'],
+        status: 'active'
+    }
+];
+
+const tableActions = (
+    <Inline>
+        <Button onClick={() => alert('Delete button clicked')}>
+            Delete
+        </Button>
+        <Button variant='primary' onClick={() => alert('Add button clicked')}>
+            Add
+        </Button>
+    </Inline>
+);
+
  <Table
     actionGroup={tableActions}
     tableTitle='Single Select Table'
