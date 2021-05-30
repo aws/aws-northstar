@@ -13,12 +13,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import Box from '../../layouts/Box';
 import { BoxProps } from '@material-ui/core/Box';
 
 /** A placeholder component to be used to occupy a place for demo purpose.*/
-export default (props: BoxProps) => (
+const Placeholder: FunctionComponent = (props: BoxProps) => (
     <Box
         borderColor="primary.main"
         border={2}
@@ -32,3 +32,5 @@ export default (props: BoxProps) => (
         Component
     </Box>
 );
+
+export default Placeholder;

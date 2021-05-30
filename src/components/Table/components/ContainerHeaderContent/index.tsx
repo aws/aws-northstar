@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FunctionComponent } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import Input from '../../../Input';
 import clsx from 'clsx';
@@ -35,14 +35,14 @@ export interface ContainerHeaderContentProps {
     settingsBarComponent: ReactNode;
 }
 
-export default ({
+const ContainerHeaderContent: FunctionComponent<ContainerHeaderContentProps> = ({
     loading,
     setGlobalFilter = () => {},
     styles,
     disableFilters,
     globalFilter,
     settingsBarComponent,
-}: ContainerHeaderContentProps) => {
+}) => {
     const handleChange = useDebouncedCallback((value) => {
         setGlobalFilter(value || undefined);
     }, 500);
@@ -72,3 +72,5 @@ export default ({
         </div>
     );
 };
+
+export default ContainerHeaderContent;

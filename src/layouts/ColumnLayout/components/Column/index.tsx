@@ -14,17 +14,20 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FunctionComponent } from 'react';
 import Grid from '@material-ui/core/Grid';
+import { Column } from 'react-table';
 
 export interface ColumnProps {
     children: Array<ReactNode | null> | ReactNode | null;
 }
 
-export default ({ children }: ColumnProps) => {
+const Column: FunctionComponent = ({ children }) => {
     return (
         <Grid container direction="column" justify="flex-start" alignItems="flex-start" data-testid="column">
             {children}
         </Grid>
     );
 };
+
+export default Column;

@@ -13,12 +13,19 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
-import Table from '../../../src/components/Table';
+import React, { FunctionComponent } from 'react';
+import Table, { Column } from '../../../src/components/Table';
 import { Typography, TypographyVariant } from '@material-ui/core';
 import { defaultTheme } from '../../../src/themes';
 
-const columnDefinitions = [
+interface DataType {
+    tag: TypographyVariant;
+    displayName?: string;
+    display: string;
+    example: string;
+}
+
+const columnDefinitions: Column<DataType>[] = [
     {
         id: 'tag',
         width: 100,
@@ -102,12 +109,7 @@ const columnDefinitions = [
     },
 ];
 
-const data: {
-    tag: TypographyVariant;
-    displayName?: string;
-    display: string;
-    example: string;
-}[] = [
+const data: DataType[] = [
     { tag: 'h1', display: 'Heading 1', example: 'Page title' },
     { tag: 'h2', display: 'Heading 2', example: 'Container title' },
     {
@@ -121,7 +123,7 @@ const data: {
     { tag: 'body2', display: 'Small', example: 'Step labels in multipage create step navigation pane' },
 ];
 
-export default () => (
+const DefaultTypeStyle: FunctionComponent = () => (
     <Table
         columnDefinitions={columnDefinitions}
         items={data}
@@ -133,3 +135,5 @@ export default () => (
         disableRowSelect={true}
     />
 );
+
+export default DefaultTypeStyle;
