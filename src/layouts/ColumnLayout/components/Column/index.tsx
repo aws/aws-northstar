@@ -16,7 +16,6 @@
 
 import React, { ReactNode, FunctionComponent } from 'react';
 import Grid from '@material-ui/core/Grid';
-import { Column } from 'react-table';
 
 export interface ColumnProps {
     children: Array<ReactNode | null> | ReactNode | null;
