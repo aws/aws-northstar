@@ -23,7 +23,7 @@ import Container from '../../layouts/Container';
 
 export interface ModalProps {
     /** Whether the modal should be displayed */
-    visible: boolean;
+    visible?: boolean;
     /** The title to display */
     title: string;
     /** The subtitle to display */
@@ -39,7 +39,7 @@ export interface ModalProps {
 }
 
 /** A modal is a pop-up dialog that can be used to prompt a user for confirmation. */
-const Modal = ({ visible, children, title, subtitle, footer, onClose, width }: ModalProps) => {
+const Modal = ({ visible = false, children, title, subtitle, footer, onClose, width }: ModalProps) => {
     const [isVisible, setVisible] = useState(false);
     const useStyles = makeStyles({
         cyclorama: {
@@ -96,10 +96,6 @@ const Modal = ({ visible, children, title, subtitle, footer, onClose, width }: M
             </div>
         </section>
     );
-};
-
-Modal.defaultProps = {
-    visible: false,
 };
 
 export default Modal;

@@ -103,12 +103,12 @@ const TimePicker: FunctionComponent<TimePickerProps> = ({
     ariaLabelledby,
     ariaDescribedby,
     ariaRequired,
-    onChange = () => {},
+    onChange,
 }) => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(value || null);
 
     const handleDateChange = (date?: Date | null) => {
-        onChange(date);
+        onChange?.(date);
         setSelectedDate(date || null);
     };
 

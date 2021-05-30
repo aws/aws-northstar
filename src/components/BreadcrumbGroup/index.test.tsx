@@ -59,4 +59,20 @@ describe('BreadcrumbGroup', () => {
         expect(getByText('second')).toBeInTheDocument();
         expect(getAllByRole('listitem')).toHaveLength(2);
     });
+
+    it('renders the links', () => {
+        const availableRoutes = [
+            { exact: true, path: '/', strict: true },
+            { exact: true, path: '/first', strict: true },
+            { exact: true, path: '/second', strict: true },
+        ];
+        const { getByText, getAllByRole } = render(
+            <MemoryRouter initialEntries={['/first/second']}>
+                <BreadcrumbGroup availableRoutes={availableRoutes} />
+            </MemoryRouter>
+        );
+        expect(getByText('Home')).toHaveAttribute('href', '/');
+        expect(getByText('First')).toHaveAttribute('href', '/first');
+        expect(getAllByRole('link')).toHaveLength(2);
+    });
 });

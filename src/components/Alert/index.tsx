@@ -82,8 +82,8 @@ export interface AlertProps {
 **/
 const Alert: FunctionComponent<AlertProps> = ({
     visible = true,
-    onDismiss = () => {},
-    onButtonClick = () => {},
+    onDismiss,
+    onButtonClick,
     dismissAriaLabel = 'Close',
     buttonText = '',
     borderRadius = true,
@@ -95,7 +95,7 @@ const Alert: FunctionComponent<AlertProps> = ({
     const handleButtonClick = useCallback(
         (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
             event.preventDefault();
-            onButtonClick();
+            onButtonClick?.();
         },
         [onButtonClick]
     );
@@ -114,7 +114,7 @@ const Alert: FunctionComponent<AlertProps> = ({
                         aria-label={dismissAriaLabel}
                         onClick={() => {
                             setShow(false);
-                            onDismiss();
+                            onDismiss?.();
                         }}
                     >
                         <CloseIcon />
@@ -127,17 +127,11 @@ const Alert: FunctionComponent<AlertProps> = ({
 
     const mapProps = useCallback(
         (alertType: 'dismissible' | 'pinned', { type = 'info' }: AlertProps): MaterialAlertProps => {
-            const dismissibleAlertProps: MaterialAlertProps = {
+            return {
                 severity: type,
                 iconMapping,
-                action: closeButton,
+                action: alertType === 'dismissible' ? closeButton : actionButton,
             };
-            const pinnedAlertProps: MaterialAlertProps = {
-                severity: type,
-                iconMapping,
-                action: actionButton,
-            };
-            return alertType === 'dismissible' ? dismissibleAlertProps : pinnedAlertProps;
         },
         [closeButton, actionButton]
     );

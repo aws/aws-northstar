@@ -53,14 +53,11 @@ export interface NotificationButtonProps {
 }
 
 const getNotificationType = (severity: NotificationSeverity): 'warning' | 'info' | 'error' => {
-    switch (severity) {
-        case 'WARNING':
-            return 'warning';
-        case 'ERROR':
-            return 'error';
-        default:
-            return 'info';
-    }
+    const notifications = {
+        WARNING: 'warning',
+        ERROR: 'error',
+    };
+    return notifications[severity] || 'info';
 };
 
 const useStyles = makeStyles(() => ({

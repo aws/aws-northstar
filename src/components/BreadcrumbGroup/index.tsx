@@ -49,11 +49,7 @@ export interface BreadcrumbGroupProps {
 }
 
 const matchRoute = (path: string, availableRoutes: RouteProps[]) => {
-    if (availableRoutes.length > 0) {
-        return availableRoutes.some((r) => matchPath(path, r));
-    }
-
-    return true;
+    return availableRoutes.length > 0 ? availableRoutes.some((r) => matchPath(path, r)) : true;
 };
 
 /**

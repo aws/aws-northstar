@@ -95,8 +95,8 @@ const mapProps = ({
     disableBrowserAutocorrect = false,
     ...props
 }: InputProps): MaterialInputProps => {
-    const autoCorrectString: string = disableBrowserAutocorrect ? 'off' : 'on';
-    const autoCompleteString: string = autocomplete ? 'on' : 'off';
+    const autoCorrectString = disableBrowserAutocorrect ? 'off' : 'on';
+    const autoCompleteString = autocomplete ? 'on' : 'off';
     const inputProps = {
         'aria-labelledby': props.ariaLabelledby,
         'aria-describedby': props.ariaDescribedby,
@@ -121,7 +121,7 @@ const mapProps = ({
 /**
  * Enables users to input text in a single-line control.
  */
-const Input: FunctionComponent<InputProps> = ({ onChange = () => {}, ...props }): ReactElement => {
+const Input: FunctionComponent<InputProps> = ({ onChange, ...props }): ReactElement => {
     const [showClearInputButton, setShowClearInputButton] = React.useState(false);
     const [inputValue, setInputValue] = React.useState(props.value === undefined ? '' : props.value);
     const id: string = props.controlId || uuidv4();
@@ -131,7 +131,7 @@ const Input: FunctionComponent<InputProps> = ({ onChange = () => {}, ...props })
     }, [props.value]);
 
     const handleChange = (value: string): void => {
-        onChange(value);
+        onChange?.(value);
         setShowClearInputButton(true);
         setInputValue(value);
     };

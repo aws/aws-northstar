@@ -28,24 +28,15 @@ export interface LoadingIndicatorProps {
 
 /** A compact, looped animation giving the user feedback that a process is currently running. */
 const LoadingIndicator: FunctionComponent<LoadingIndicatorProps> = ({ label, size = 'normal' }): React.ReactElement => {
-    let renderedSize = 16;
-    switch (size) {
-        case 'normal':
-            renderedSize = 16;
-            break;
-        case 'big':
-            renderedSize = 32;
-            break;
-        case 'large':
-            renderedSize = 48;
-            break;
-        default:
-            renderedSize = size;
-            break;
-    }
+    const normal = 16;
+    const sizes = {
+        normal,
+        big: 2 * normal,
+        large: 3 * normal,
+    };
     return (
         <Box display="flex" alignItems="center">
-            <CircularProgress size={renderedSize} />
+            <CircularProgress size={sizes[size] || size} />
             {label && (
                 <Box ml={1}>
                     <Text>{label}</Text>

@@ -63,7 +63,7 @@ const useScrollPosition = (effect: any, element: any, wait: number) => {
     };
 
     return {
-        handleScroll: handleScroll,
+        handleScroll,
     };
 };
 

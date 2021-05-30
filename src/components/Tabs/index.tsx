@@ -94,8 +94,8 @@ const Tabs = ({ tabs, activeId = '', variant = 'default', onChange }: TabsProps)
 
     const headerContent = (
         <MuiTabs
-            variant={'scrollable'}
-            indicatorColor={'secondary'}
+            variant="scrollable"
+            indicatorColor="secondary"
             TabIndicatorProps={{ color: 'primary' }}
             value={value}
             onChange={handleChange}

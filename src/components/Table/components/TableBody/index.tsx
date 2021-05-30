@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-
+import clsx from 'clsx';
 import { TableBody as BaseTableBody, TableCell, TableRow } from '@material-ui/core';
 import {
     Cell,
@@ -61,14 +61,14 @@ export default function TableBody<D extends object>({
                         <TableRow
                             selected={row.isSelected}
                             {...row.getRowProps()}
-                            className={row.isGrouped ? styles.aggregated : ''}
+                            className={clsx({ [styles.aggregated]: row.isGrouped })}
                         >
                             {row.cells.map((cell: Partial<Cell<D> & UseGroupByCellProps<D>>) => {
                                 return (
                                     <TableCell {...cell.getCellProps!()}>
                                         {cell.isGrouped ? (
                                             <div className={styles.cellAlign}>
-                                                <span className={!wrapText ? styles.ellipsizeText : ''}>
+                                                <span className={clsx({ [styles.ellipsizeText]: !wrapText })}>
                                                     <b>
                                                         {cell.render!('Cell')} (
                                                         {cell.render!('Aggregated', { count: true })})
@@ -83,7 +83,7 @@ export default function TableBody<D extends object>({
                                         ) : (
                                             // If the cell is aggregated, use the Aggregated
                                             // renderer for cell, otherwise, just render the regular cell
-                                            <div className={wrapText ? '' : styles.ellipsizeText}>
+                                            <div className={clsx({ [styles.ellipsizeText]: !wrapText })}>
                                                 {cell!.render!(cell.isAggregated ? 'Aggregated' : 'Cell')}
                                             </div>
                                         )}

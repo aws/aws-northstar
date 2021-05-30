@@ -26,6 +26,7 @@ import StatusIndicator from '../StatusIndicator';
 import { AriaBaseProps } from '../../props/common';
 import { SelectBaseProps, SelectOption } from '../Select';
 import Icon, { IconName } from '../Icon';
+import { getFlattenOptions } from '../../getFlattenOptions';
 
 export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
     /**
@@ -128,7 +129,7 @@ export default function Autosuggest({
     const classes = useStyles();
     const [inputValue, setInputValue] = useState<string | SelectOption | null>(value || null);
     const [open, setOpen] = React.useState(false);
-    const autoCompleteString: string = disableBrowserAutocorrect ? 'off' : 'on';
+    const autoCompleteString = disableBrowserAutocorrect ? 'off' : 'on';
 
     const onRecoveryClickHandler = (event: SyntheticEvent) => {
         event.preventDefault();
@@ -137,18 +138,7 @@ export default function Autosuggest({
     };
 
     const flattenOptions = useMemo((): SelectOption[] => {
-        const optionArray: SelectOption[] = [];
-        options.forEach((option) => {
-            if (option.options) {
-                option.options.forEach((o) => {
-                    optionArray.push({ label: o.label || o.value, value: o.value, group: option.label });
-                });
-            } else {
-                optionArray.push({ label: option.label || option.value, value: option.value });
-            }
-        });
-
-        return optionArray;
+        return getFlattenOptions(options);
     }, [options]);
 
     const handleOnChange = (event: React.ChangeEvent<{}>, value: string | SelectOption | null): void => {

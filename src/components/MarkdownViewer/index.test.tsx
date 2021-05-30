@@ -65,4 +65,17 @@ https://reactjs.org
         expect(getByText('This is just some text for testing')).toHaveClass('MuiTypography-root MuiTypography-body1');
         expect(getByText('https://reactjs.org')).toHaveClass('MuiLink-root');
     });
+
+    it('should render a code correctly', () => {
+        const { container } = render(
+            <MarkdownViewer>{` 
+\`\`\`js
+    var React = require('react');
+    var Markdown = require('react-markdown');
+    React.render()
+\`\`\`
+        `}</MarkdownViewer>
+        );
+        expect(container.querySelector('code')).toBeInTheDocument();
+    });
 });

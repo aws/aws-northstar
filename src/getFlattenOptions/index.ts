@@ -13,22 +13,21 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
-import Box from '../../layouts/Box';
-import { BoxProps } from '@material-ui/core/Box';
+import { SelectOption } from '../components/Select';
 
-/** A placeholder component to be used to occupy a place for demo purpose.*/
-export default (props: BoxProps) => (
-    <Box
-        borderColor="primary.main"
-        border={2}
-        p={2}
-        textAlign="center"
-        bgcolor="secondary.main"
-        color="secondary.contrastText"
-        data-testid="placeholder"
-        {...props}
-    >
-        Component
-    </Box>
-);
+const getFlattenOptions = (options: SelectOption[]) => {
+    const optionArray: SelectOption[] = [];
+    options.forEach((option) => {
+        if (option.options) {
+            option.options.forEach((o) => {
+                optionArray.push({ label: o.label || o.value, value: o.value, group: option.label });
+            });
+        } else {
+            optionArray.push({ label: option.label || option.value, value: option.value });
+        }
+    });
+
+    return optionArray;
+};
+
+export { getFlattenOptions };

@@ -136,6 +136,28 @@ describe('FormRenderer', () => {
                 },
             ],
         };
+        it('should render default checkbox', () => {
+            const schema = {
+                ...baseSchema,
+                fields: [
+                    {
+                        component: componentTypes.CHECKBOX,
+                        name: 'checkbox',
+                        label: 'Checkbox',
+                        isRequired: true,
+                    },
+                ],
+            };
+            const { getByLabelText, getByText } = render(
+                <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
+            );
+
+            fireEvent.click(getByLabelText('Checkbox'));
+            fireEvent.click(getByText('Submit'));
+
+            expect(handleSubmit).toHaveBeenCalledWith({ checkbox: true }, expect.any(Object), expect.any(Function));
+        });
+
         it('should render checkboxes', () => {
             const { getByLabelText, getByText } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
