@@ -16,9 +16,5 @@
 import getFillColor from '../getFillColor';
 
 export default (color?: string | number): string | number => {
-    if (typeof color === 'number') {
-        return color;
-    }
-
-    return getFillColor(color);
+    return typeof color === 'number' ? color : getFillColor(color);
 };

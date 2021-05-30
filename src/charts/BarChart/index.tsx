@@ -15,12 +15,12 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode } from 'react';
-import { BarChart as Chart } from 'recharts';
+import { BarChart as Chart, Bar as BarComponent } from 'recharts';
 import { makeStyles } from '@material-ui/core';
-import Bar from './components/Bar';
 import Box from '../../layouts/Box';
 import Stack from '../../layouts/Stack';
 import Heading from '../../components/Heading';
+import northstarChart from '../northstarChart';
 
 const useStyles = makeStyles({
     root: {
@@ -58,6 +58,8 @@ function BarChart<T extends readonly object[]>(props: BarChartProps<T>) {
         </Box>
     );
 }
+
+const Bar = northstarChart(BarComponent);
 
 export default BarChart;
 export { Bar };

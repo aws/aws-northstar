@@ -15,12 +15,12 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode } from 'react';
-import { AreaChart as Chart } from 'recharts';
+import { AreaChart as Chart, Area as AreaComponent } from 'recharts';
 import { makeStyles } from '@material-ui/core';
-import Area from './components/Area';
 import Box from '../../layouts/Box';
 import Stack from '../../layouts/Stack';
 import Heading from '../../components/Heading';
+import northstarChart from '../northstarChart';
 
 const useStyles = makeStyles({
     root: {
@@ -60,6 +60,8 @@ function AreaChart<T extends readonly object[]>(props: AreaChartProps<T>) {
         </Box>
     );
 }
+
+const Area = northstarChart(AreaComponent, 'monotone');
 
 export default AreaChart;
 export { Area };

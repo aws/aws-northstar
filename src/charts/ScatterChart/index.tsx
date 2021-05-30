@@ -15,12 +15,12 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode } from 'react';
-import { ScatterChart as Chart } from 'recharts';
+import { ScatterChart as Chart, Scatter as ScatterComponent } from 'recharts';
 import { makeStyles } from '@material-ui/core';
-import Scatter from './components/Scatter';
 import Box from '../../layouts/Box';
 import Stack from '../../layouts/Stack';
 import Heading from '../../components/Heading';
+import northstarChart from '../northstarChart';
 
 const useStyles = makeStyles({
     root: {
@@ -60,6 +60,8 @@ function ScatterChart<T extends readonly object[]>(props: ScatterChartProps<T>) 
         </Box>
     );
 }
+
+const Scatter = northstarChart(ScatterComponent);
 
 export default ScatterChart;
 export { Scatter };

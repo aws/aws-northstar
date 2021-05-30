@@ -13,22 +13,27 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-
 import React from 'react';
-import { Area as AreaComponent } from 'recharts';
-import getFillColor from '../../../utils/getFillColor';
-import getStrokeColor from '../../../utils/getStrokeColor';
+import { LineType, PresentationAttributes } from 'recharts';
+import getFillColor from '../utils/getFillColor';
+import getStrokeColor from '../utils/getStrokeColor';
 
-class Area extends AreaComponent {
-    render() {
-        const overrideFill = getFillColor(this.props.fill);
-        const overrideStroke = getStrokeColor(this.props.stroke);
-        return (
-            <AreaComponent {...this.props} fill={overrideFill} stroke={overrideStroke} type="monotone">
-                {this.props.children}
-            </AreaComponent>
-        );
-    }
+function northstarChart<ChartProps extends Partial<PresentationAttributes>>(
+    ChartComponent: typeof React.Component,
+    type?: LineType
+) {
+    return class extends ChartComponent<ChartProps> {
+        render() {
+            const overrideFill = getFillColor(this.props.fill);
+            const overrideStroke = getStrokeColor(this.props.stroke);
+
+            return (
+                <ChartComponent {...this.props} fill={overrideFill} stroke={overrideStroke} type={type}>
+                    {this.props.children}
+                </ChartComponent>
+            );
+        }
+    };
 }
 
-export default Area;
+export default northstarChart;

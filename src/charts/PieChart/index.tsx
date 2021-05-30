@@ -15,12 +15,12 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode } from 'react';
-import { PieChart as Chart } from 'recharts';
+import { PieChart as Chart, Pie as PieComponent } from 'recharts';
 import { makeStyles } from '@material-ui/core';
-import Pie from './components/Pie';
 import Box from '../../layouts/Box';
 import Stack from '../../layouts/Stack';
 import Heading from '../../components/Heading';
+import northstarChart from '../northstarChart';
 
 const useStyles = makeStyles({
     root: {
@@ -58,6 +58,8 @@ function PieChart(props: PieChartProps) {
         </Box>
     );
 }
+
+const Pie = northstarChart(PieComponent);
 
 export default PieChart;
 export { Pie };

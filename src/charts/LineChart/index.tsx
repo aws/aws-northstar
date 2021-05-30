@@ -15,13 +15,12 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode } from 'react';
-import { LineChart as Chart } from 'recharts';
+import { LineChart as Chart, Line as LineComponent } from 'recharts';
 import { makeStyles } from '@material-ui/core';
 import Heading from '../../components/Heading';
 import Stack from '../../layouts/Stack';
 import Box from '../../layouts/Box';
-
-import Line from './components/Line';
+import northstarChart from '../northstarChart';
 
 const useStyles = makeStyles({
     root: {
@@ -61,6 +60,8 @@ function LineChart<T extends readonly object[]>(props: LineChartProps<T>) {
         </Box>
     );
 }
+
+const Line = northstarChart(LineComponent, 'monotone');
 
 export default LineChart;
 export { Line };
