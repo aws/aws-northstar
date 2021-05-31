@@ -14,13 +14,18 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { LineType, PresentationAttributes } from 'recharts';
+import { CurveProps } from 'recharts';
 import getFillColor from '../utils/getFillColor';
 import getStrokeColor from '../utils/getStrokeColor';
 
-function northstarChart<ChartProps extends Partial<PresentationAttributes>>(
+interface Props {
+    fill?: string;
+    stroke?: string;
+}
+
+function withNorthStarChart<ChartProps extends Props>(
     ChartComponent: typeof React.Component,
-    type?: LineType
+    type?: CurveProps['type']
 ) {
     return class extends ChartComponent<ChartProps> {
         render() {
@@ -36,4 +41,4 @@ function northstarChart<ChartProps extends Partial<PresentationAttributes>>(
     };
 }
 
-export default northstarChart;
+export default withNorthStarChart;

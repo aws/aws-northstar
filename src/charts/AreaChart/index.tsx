@@ -15,12 +15,12 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode } from 'react';
-import { AreaChart as Chart, Area as AreaComponent } from 'recharts';
+import { AreaChart as Chart, Area as AreaComponent, AreaProps } from 'recharts';
 import { makeStyles } from '@material-ui/core';
 import Box from '../../layouts/Box';
 import Stack from '../../layouts/Stack';
 import Heading from '../../components/Heading';
-import northstarChart from '../northstarChart';
+import withNorthStarChart from '../withNorthStarChart';
 
 const useStyles = makeStyles({
     root: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 /**
  * Area Chart properties.
  */
-export interface AreaChartProps<T extends readonly object[]> {
+export interface AreaChartProps {
     /** Title of the chart */
     title?: string;
     /** The width of the chart container in px. */
@@ -41,7 +41,7 @@ export interface AreaChartProps<T extends readonly object[]> {
     /** The height of the chart container in px. */
     height?: number;
     /** The source data, in which each element is an object. [{name: 'a', value: 12, ....}] */
-    data: T;
+    data: any[];
     /** Children to render */
     children: ReactNode;
 }
@@ -49,7 +49,7 @@ export interface AreaChartProps<T extends readonly object[]> {
 /**
  * Renders an Area Chart.
  */
-function AreaChart<T extends readonly object[]>(props: AreaChartProps<T>) {
+function AreaChart(props: AreaChartProps) {
     const classes = useStyles();
     return (
         <Box className={classes.root}>
@@ -61,7 +61,7 @@ function AreaChart<T extends readonly object[]>(props: AreaChartProps<T>) {
     );
 }
 
-const Area = northstarChart(AreaComponent, 'monotone');
+const Area = withNorthStarChart<AreaProps>(AreaComponent, 'monotone');
 
 export default AreaChart;
 export { Area };

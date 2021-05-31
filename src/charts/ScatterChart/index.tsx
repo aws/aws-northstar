@@ -15,12 +15,12 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode } from 'react';
-import { ScatterChart as Chart, Scatter as ScatterComponent } from 'recharts';
+import { ScatterChart as Chart, Scatter as ScatterComponent, ScatterProps } from 'recharts';
 import { makeStyles } from '@material-ui/core';
 import Box from '../../layouts/Box';
 import Stack from '../../layouts/Stack';
 import Heading from '../../components/Heading';
-import northstarChart from '../northstarChart';
+import withNorthStarChart from '../withNorthStarChart';
 
 const useStyles = makeStyles({
     root: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 /**
  * Scatter Chart properties.
  */
-export interface ScatterChartProps<T extends readonly object[]> {
+export interface ScatterChartProps {
     /** Title of the chart */
     title?: string;
     /** The width of the chart container in px. */
@@ -41,7 +41,7 @@ export interface ScatterChartProps<T extends readonly object[]> {
     /** The height of the chart container in px. */
     height?: number;
     /** The source data, in which each element is an object. [{name: 'a', value: 12, ....}] */
-    data: T;
+    data: any[];
     /** The children to render */
     children: ReactNode;
 }
@@ -49,7 +49,7 @@ export interface ScatterChartProps<T extends readonly object[]> {
 /**
  * Renders a Scatter Chart
  */
-function ScatterChart<T extends readonly object[]>(props: ScatterChartProps<T>) {
+function ScatterChart(props: ScatterChartProps) {
     const classes = useStyles();
     return (
         <Box className={classes.root}>
@@ -61,7 +61,7 @@ function ScatterChart<T extends readonly object[]>(props: ScatterChartProps<T>) 
     );
 }
 
-const Scatter = northstarChart(ScatterComponent);
+const Scatter = withNorthStarChart<ScatterProps>(ScatterComponent);
 
 export default ScatterChart;
 export { Scatter };

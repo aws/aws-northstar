@@ -15,12 +15,12 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode } from 'react';
-import { BarChart as Chart, Bar as BarComponent } from 'recharts';
+import { BarChart as Chart, Bar as BarComponent, BarProps } from 'recharts';
 import { makeStyles } from '@material-ui/core';
 import Box from '../../layouts/Box';
 import Stack from '../../layouts/Stack';
 import Heading from '../../components/Heading';
-import northstarChart from '../northstarChart';
+import withNorthStarChart from '../withNorthStarChart';
 
 const useStyles = makeStyles({
     root: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 /**
  * BarChart properties.
  */
-export interface BarChartProps<T extends readonly object[]> {
+export interface BarChartProps {
     /** Title of the chart */
     title?: string;
     /** The width of the chart container in px. */
@@ -40,13 +40,13 @@ export interface BarChartProps<T extends readonly object[]> {
     /** The height of the chart container in px. */
     height?: number;
     /** Data to render in the chart */
-    data: T;
+    data: any[];
     /** Children to render */
     children: ReactNode;
 }
 
 /** Renders a Bar chart */
-function BarChart<T extends readonly object[]>(props: BarChartProps<T>) {
+function BarChart(props: BarChartProps) {
     const classes = useStyles();
 
     return (
@@ -59,7 +59,7 @@ function BarChart<T extends readonly object[]>(props: BarChartProps<T>) {
     );
 }
 
-const Bar = northstarChart(BarComponent);
+const Bar = withNorthStarChart<BarProps>(BarComponent);
 
 export default BarChart;
 export { Bar };

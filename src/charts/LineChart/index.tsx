@@ -15,12 +15,12 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode } from 'react';
-import { LineChart as Chart, Line as LineComponent } from 'recharts';
+import { LineChart as Chart, Line as LineComponent, LineProps } from 'recharts';
 import { makeStyles } from '@material-ui/core';
 import Heading from '../../components/Heading';
 import Stack from '../../layouts/Stack';
 import Box from '../../layouts/Box';
-import northstarChart from '../northstarChart';
+import withNorthStarChart from '../withNorthStarChart';
 
 const useStyles = makeStyles({
     root: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 /**
  * LineChart properties.
  */
-export interface LineChartProps<T extends readonly object[]> {
+export interface LineChartProps {
     /** Title of the chart */
     title?: string;
     /** The width of the chart container in px. */
@@ -41,7 +41,7 @@ export interface LineChartProps<T extends readonly object[]> {
     /** The height of the chart container in px. */
     height?: number;
     /** The source data, in which each element is an object. [{name: 'a', value: 12, ....}] */
-    data: T;
+    data: any[];
     /** Children to render */
     children: ReactNode;
 }
@@ -49,7 +49,7 @@ export interface LineChartProps<T extends readonly object[]> {
 /**
  * Renders a Line chart
  */
-function LineChart<T extends readonly object[]>(props: LineChartProps<T>) {
+function LineChart(props: LineChartProps) {
     const classes = useStyles();
     return (
         <Box className={classes.root}>
@@ -61,7 +61,7 @@ function LineChart<T extends readonly object[]>(props: LineChartProps<T>) {
     );
 }
 
-const Line = northstarChart(LineComponent, 'monotone');
+const Line = withNorthStarChart<LineProps>(LineComponent, 'monotone');
 
 export default LineChart;
 export { Line };
