@@ -20,7 +20,7 @@ export interface HeadingProps {
     /** The heading content */
     children: ReactNode;
     /** The heading level */
-    variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+    variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
 /** A text heading element */
