@@ -16,7 +16,6 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import SettingsPopover from '.';
-import { debug } from 'webpack';
 
 describe('SettingsPopover', () => {
     const pageSize = 10;
