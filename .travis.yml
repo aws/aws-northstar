@@ -6,6 +6,11 @@ install:
   - npm install -g typescript
   - npm install -g yarn
   - npm install -g oss-attribution-generator
+  - if: type = pull_request
+    npm install -g coveralls
+    
 script: 
   - export PATH=/tmp/git-secrets/bin:$PATH
   - ./scripts/build.sh
+  - if: type = pull_request
+    coveralls < coverage/lcov.info
