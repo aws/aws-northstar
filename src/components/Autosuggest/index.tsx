@@ -215,7 +215,18 @@ export default function Autosuggest({
                 }}
             />
         ),
-        []
+        [
+            ariaDescribedby,
+            ariaLabelledby,
+            ariaRequired,
+            autoCompleteString,
+            classes.textfield,
+            icon,
+            invalid,
+            name,
+            placeholder,
+            statusType,
+        ]
     );
 
     return (
