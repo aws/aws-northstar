@@ -13,8 +13,15 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import getFillColor from '../getFillColor';
+import Hidden from '.';
+import React from 'react';
+import { render } from '@testing-library/react';
 
-export default function getStrokeColor(color?: string | number): string | number {
-    return typeof color === 'number' ? color : getFillColor(color);
-}
+describe('Hidden', () => {
+    it('should hide the component', () => {
+        const component = <div data-testid="componentId">Component</div>;
+        const { queryAllByTestId } = render(<Hidden>{component}</Hidden>);
+
+        expect(queryAllByTestId('componentId')).toHaveLength(0);
+    });
+});

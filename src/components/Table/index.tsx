@@ -328,7 +328,7 @@ export default function Table<D extends object>({
         }
 
         return columnsFiltered;
-    }, [columnDefinitions, showColumns, disableRowSelect, multiSelect]);
+    }, [columnDefinitions, showColumns, disableRowSelect, multiSelect, isItemDisabled]);
 
     const rowCount = useMemo(() => {
         if (typeof props.rowCount === 'undefined') {

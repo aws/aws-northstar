@@ -15,6 +15,6 @@
  ******************************************************************************************************************** */
 import { NORTHSTAR_COLORS } from '../../../config/color';
 
-export default (color?: string): string => {
+export default function getFillColor(color?: string): string {
     return color || NORTHSTAR_COLORS.ORANGE;
-};
+}

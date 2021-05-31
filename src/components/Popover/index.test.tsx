@@ -35,7 +35,7 @@ describe('Popover', () => {
     });
     it('renders custom trigger correctly', () => {
         const { queryByRole, getByText } = render(
-            <Popover triggerType="custom">
+            <Popover triggerType="custom" position="left">
                 <span>Trigger</span>
             </Popover>
         );
@@ -45,7 +45,7 @@ describe('Popover', () => {
 
     it('renders the popover header correctly', () => {
         const { getByText, queryByText } = render(
-            <Popover header="header text">
+            <Popover header="header text" position="bottom">
                 <span>Trigger</span>
             </Popover>
         );
@@ -66,7 +66,7 @@ describe('Popover', () => {
 
     it('renders and hides the popover on hover when variant is hover', async () => {
         const { getByText, queryByText } = render(
-            <Popover header="header text" variant="hover">
+            <Popover header="header text" variant="hover" position="top">
                 <span>Trigger</span>
             </Popover>
         );

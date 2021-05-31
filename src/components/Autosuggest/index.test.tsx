@@ -81,11 +81,23 @@ describe('Autosuggest', () => {
 
     it('renders an component disabled', () => {
         const { getByPlaceholderText } = render(
-            <Autosuggest options={awsServices} disabled={true} placeholder="input-1" onFocus={mockEvent} />
+            <Autosuggest options={awsServices} disabled={true} placeholder="input-1" />
         );
         const input = getByPlaceholderText('input-1');
 
         expect(input).toBeDisabled();
+    });
+
+    it('renders selected value', () => {
+        const preSelectedValue = {
+            value: 'Lambda',
+            label: 'Lambda - Amazon Lambda',
+        };
+        const { getByPlaceholderText } = render(
+            <Autosuggest value={preSelectedValue} options={awsServices} placeholder="input-1" />
+        );
+
+        expect(getByPlaceholderText('input-1')).toHaveValue(preSelectedValue.label);
     });
 
     describe('events', () => {
