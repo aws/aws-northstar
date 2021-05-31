@@ -6,10 +6,11 @@ install:
   - npm install -g typescript
   - npm install -g yarn
   - npm install -g oss-attribution-generator
+  - npm install -g coveralls
 script: 
   - export PATH=/tmp/git-secrets/bin:$PATH
   - ./scripts/build.sh
   - |
-    if [ $TRAVIS_PULL_REQUEST != "false" ]; then
-      npm install -g coveralls & coveralls < coverage/lcov.info 
+    if [ "$TRAVIS_BRANCH" == "main" && "$TRAVIS_PULL_REQUEST" != "false" ]; then
+      coveralls < coverage/lcov.info 
     fi
