@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import AddIcon from '@material-ui/icons/Add';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
@@ -29,8 +29,8 @@ export interface ButtonIconProps {
     type?: ButtonIconType;
 }
 
-export default (props: ButtonIconProps) => {
-    switch (props.type) {
+const ButtonIcon: FunctionComponent<ButtonIconProps> = ({ type }) => {
+    switch (type) {
         case 'add_plus':
             return <AddIcon fontSize="small" role="add" />;
         case 'copy':
@@ -42,10 +42,12 @@ export default (props: ButtonIconProps) => {
         case 'refresh':
             return <RefreshOutlinedIcon fontSize="small" />;
         default:
-            if (Object.keys(icons).includes(props.type as string)) {
-                return <Icon name={props.type as IconName} fontSize="small" />;
+            if (Object.keys(icons).includes(type as string)) {
+                return <Icon name={type as IconName} fontSize="small" />;
             }
 
             return <SettingsOutlinedIcon fontSize="small" />;
     }
 };
+
+export default ButtonIcon;

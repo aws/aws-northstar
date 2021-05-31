@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FunctionComponent } from 'react';
 import { Typography, makeStyles, Theme } from '@material-ui/core';
 import Container from '../../../src/layouts/Container';
 import Box from '../../../src/layouts/Box';
@@ -61,7 +61,7 @@ const renderGuidelines = (guidelines: ReactNode[], positive: boolean, styles: an
     );
 };
 
-export default ({ dos, donts }: GeneralGuidelinesProps) => {
+const GeneralGuidelines: FunctionComponent<GeneralGuidelinesProps> = ({ dos, donts }) => {
     const styles = useStyles();
     return (
         <Container title="General guidelines" headingVariant="h3">
@@ -72,3 +72,5 @@ export default ({ dos, donts }: GeneralGuidelinesProps) => {
         </Container>
     );
 };
+
+export default GeneralGuidelines;

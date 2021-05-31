@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 // @ts-ignore
 import ReactColorSquare from 'react-color-square';
 import Box from '../../../src/layouts/Box';
@@ -93,7 +93,7 @@ const generateDataFromTheme = (theme: any) => {
 
 const data: any = generateDataFromTheme(defaultTheme);
 
-export default () => (
+const ColorTable: FunctionComponent = () => (
     <Table
         columnDefinitions={columnDefinitions}
         items={data}
@@ -105,3 +105,5 @@ export default () => (
         disableRowSelect={true}
     />
 );
+
+export default ColorTable;
