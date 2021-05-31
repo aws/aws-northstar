@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FunctionComponent } from 'react';
 import { Divider, Grid, Popover } from '@material-ui/core';
 import Container from '../../../../layouts/Container';
 import ButtonDropdown from '../../../ButtonDropdown';
@@ -36,7 +36,7 @@ export interface SettingsPopoverProps {
     columnsSelectorComponent: ReactNode;
 }
 
-export default ({
+const SettingsPopover: FunctionComponent<SettingsPopoverProps> = ({
     pageSize,
     pageSizes,
     settingsId,
@@ -49,7 +49,7 @@ export default ({
     styles,
     columnsGroupingComponent,
     columnsSelectorComponent,
-}: SettingsPopoverProps) => (
+}) => (
     <Popover
         id={settingsId}
         open={settingsOpen}
@@ -99,3 +99,5 @@ export default ({
         </Container>
     </Popover>
 );
+
+export default SettingsPopover;

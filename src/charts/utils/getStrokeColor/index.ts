@@ -15,10 +15,10 @@
  ******************************************************************************************************************** */
 import getFillColor from '../getFillColor';
 
-export default (color?: string | number): string | number => {
+export default function getStrokeColor(color?: string | number): string | number {
     if (typeof color === 'number') {
         return color;
     }
 
     return getFillColor(color);
-};
+}

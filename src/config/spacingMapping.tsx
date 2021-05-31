@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export default {
+const spacingMapping = {
     none: 0,
     xs: 0.5,
     s: 1,
@@ -21,3 +21,5 @@ export default {
     l: 4,
     xl: 8,
 };
+
+export default spacingMapping;

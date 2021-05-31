@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-export default [
+const data = [
     {
         id: 'id0000011',
         name: 'Order 11',
@@ -61,3 +61,5 @@ export default [
         createdDate: '2020-01-04',
     },
 ];
+
+export default data;

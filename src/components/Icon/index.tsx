@@ -14,8 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
+import React, { FunctionComponent } from 'react';
 import * as icons from '@material-ui/icons';
-import React from 'react';
 
 export type IconVariant = 'Filled' | 'Outlined' | 'Rounded' | 'TwoTone' | 'Sharp';
 export type IconName = keyof typeof icons;
@@ -67,8 +67,7 @@ export interface IconProps {
     viewBox?: string;
 }
 
-export default (props: IconProps) => {
-    const { name, variant, ...rest } = props;
+const Icon: FunctionComponent<IconProps> = ({ name, variant, ...rest }) => {
     // filled is the default icon variant
     const variantTheme = variant === 'Filled' || !variant ? '' : variant;
     const iconName = `${name}${variantTheme}`;
@@ -81,3 +80,5 @@ export default (props: IconProps) => {
 
     return <IconComponent {...rest} />;
 };
+
+export default Icon;

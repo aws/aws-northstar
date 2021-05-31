@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FunctionComponent } from 'react';
 import Container from '../../../src/layouts/Container';
 import Box from '../../../src/layouts/Box';
 import Stack from '../../../src/layouts/Stack';
@@ -43,7 +43,10 @@ const renderGuidelines = (guidelines: WritingGuidelines) => {
     );
 };
 
-export default ({ title = 'Writing guidelines', guidelines }: WritingGuidelinesProps) => {
+const WritingGuidelinesComponent: FunctionComponent<WritingGuidelinesProps> = ({
+    title = 'Writing guidelines',
+    guidelines,
+}) => {
     return (
         <Container title={title} headingVariant="h3">
             <Stack>
@@ -53,3 +56,5 @@ export default ({ title = 'Writing guidelines', guidelines }: WritingGuidelinesP
         </Container>
     );
 };
+
+export default WritingGuidelinesComponent;
