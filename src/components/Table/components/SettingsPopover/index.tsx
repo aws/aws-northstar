@@ -27,7 +27,7 @@ export interface SettingsPopoverProps {
     disableGroupBy: boolean;
     gotoPage?: (page: number) => void;
     settingsAnchor?: Element | ((element: Element) => Element) | null;
-    handleSettingsClose: (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => void;
+    handleSettingsClose?: (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => void;
     setPageSize?: (size: number) => void;
     styles: {
         verticalGrid: string;
