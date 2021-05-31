@@ -14,48 +14,19 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { PieChart as Chart, Pie as PieComponent, PieProps } from 'recharts';
-import { makeStyles } from '@material-ui/core';
-import Box from '../../layouts/Box';
-import Stack from '../../layouts/Stack';
-import Heading from '../../components/Heading';
+import BaseChart, { BaseChartProps } from '../BaseChart';
 import withNorthStarChart from '../withNorthStarChart';
-
-const useStyles = makeStyles({
-    root: {
-        textAlign: 'center',
-        width: 'fit-content',
-        padding: '10px',
-    },
-});
-
-/**
- * PieChart properties.
- */
-export interface PieChartProps {
-    /** Title of the chart */
-    title?: string;
-    /** The width of the chart container in px. */
-    width: number;
-    /** The height of the chart container in px. */
-    height?: number;
-    /** Children to render */
-    children: ReactNode;
-}
 
 /**
  * Renders a Pie chart
  */
-function PieChart(props: PieChartProps) {
-    const classes = useStyles();
+function PieChart(props: BaseChartProps) {
     return (
-        <Box className={classes.root}>
-            <Stack>
-                {props.title && <Heading variant="h3">{props.title}</Heading>}
-                <Chart {...props}>{props.children}</Chart>
-            </Stack>
-        </Box>
+        <BaseChart {...props}>
+            <Chart {...props}>{props.children}</Chart>
+        </BaseChart>
     );
 }
 
