@@ -11,6 +11,6 @@ script:
   - export PATH=/tmp/git-secrets/bin:$PATH
   - ./scripts/build.sh
   - |
-    if [ "$TRAVIS_BRANCH" == "main" && "$TRAVIS_PULL_REQUEST" != "false" ]; then
-      coveralls < coverage/lcov.info 
+    if [ $TRAVIS_PULL_REQUEST != "false" ]; then
+      coveralls < coverage/lcov.info
     fi
