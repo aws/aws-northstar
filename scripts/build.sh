@@ -5,7 +5,7 @@
 set -ev
 
 yarn install
-yarn test:all
+yarn test:ci
 yarn styleguide:build
 yarn storybook:build
 
