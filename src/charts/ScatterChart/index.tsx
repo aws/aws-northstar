@@ -14,18 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React from 'react';
 import { ScatterChart as Chart, Scatter as ScatterComponent, ScatterProps } from 'recharts';
-import northStarChartWrapper, { BaseChartProps } from '../BaseChart';
+import withNorthStarBaseChart, { BaseChartPropsWithData } from '../withNorthStarBaseChart';
 import withNorthStarChart from '../withNorthStarChart';
 
 /**
  * Renders a Scatter Chart
  */
-const ScatterChart = (props: BaseChartProps) => {
-    const NorthStarScatterChart = northStarChartWrapper(Chart);
-    return <NorthStarScatterChart {...props} />;
-};
+const ScatterChart = withNorthStarBaseChart<BaseChartPropsWithData>(Chart);
 
 const Scatter = withNorthStarChart<ScatterProps>(ScatterComponent);
 

@@ -14,16 +14,12 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React from 'react';
 import { BarChart as Chart, Bar as BarComponent, BarProps } from 'recharts';
-import northStarChartWrapper, { BaseChartProps } from '../BaseChart';
+import withNorthStarBaseChart, { BaseChartPropsWithData } from '../withNorthStarBaseChart';
 import withNorthStarChart from '../withNorthStarChart';
 
 /** Renders a Bar chart */
-const BarChart = (props: BaseChartProps) => {
-    const NorthStarBarChart = northStarChartWrapper(Chart);
-    return <NorthStarBarChart {...props} />;
-};
+const BarChart = withNorthStarBaseChart<BaseChartPropsWithData>(Chart);
 
 const Bar = withNorthStarChart<BarProps>(BarComponent);
 

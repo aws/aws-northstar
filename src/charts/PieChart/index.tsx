@@ -14,18 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React from 'react';
 import { PieChart as Chart, Pie as PieComponent, PieProps } from 'recharts';
-import northStarChartWrapper, { BaseChartProps } from '../BaseChart';
+import withNorthStarBaseChart, { BaseChartProps } from '../withNorthStarBaseChart';
 import withNorthStarChart from '../withNorthStarChart';
 
 /**
  * Renders a Pie chart
  */
-const PieChart = (props: BaseChartProps) => {
-    const NorthStarPieChart = northStarChartWrapper(Chart);
-    return <NorthStarPieChart {...props} />;
-};
+const PieChart = withNorthStarBaseChart<BaseChartProps>(Chart);
 
 const Pie = withNorthStarChart<PieProps>(PieComponent);
 

@@ -14,18 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React from 'react';
 import { AreaChart as Chart, Area as AreaComponent, AreaProps } from 'recharts';
-import northStarChartWrapper, { BaseChartProps } from '../BaseChart';
+import withNorthStarBaseChart, { BaseChartPropsWithData } from '../withNorthStarBaseChart';
 import withNorthStarChart from '../withNorthStarChart';
 
 /**
  * Renders an Area Chart.
  */
-const AreaChart = (props: BaseChartProps) => {
-    const NorthStarAreaChart = northStarChartWrapper(Chart);
-    return <NorthStarAreaChart {...props} />;
-};
+const AreaChart = withNorthStarBaseChart<BaseChartPropsWithData>(Chart);
 
 const Area = withNorthStarChart<AreaProps>(AreaComponent, 'monotone');
 

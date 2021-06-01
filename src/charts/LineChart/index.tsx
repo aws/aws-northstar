@@ -14,18 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React from 'react';
 import { LineChart as Chart, Line as LineComponent, LineProps } from 'recharts';
-import northStarChartWrapper, { BaseChartProps } from '../BaseChart';
+import withNorthStarBaseChart from '../withNorthStarBaseChart';
 import withNorthStarChart from '../withNorthStarChart';
 
 /**
  * Renders a Line chart
  */
-const LineChart = (props: BaseChartProps) => {
-    const NorthStarLineChart = northStarChartWrapper(Chart);
-    return <NorthStarLineChart {...props} />;
-};
+const LineChart = withNorthStarBaseChart(Chart);
 
 const Line = withNorthStarChart<LineProps>(LineComponent, 'monotone');
 

@@ -38,13 +38,19 @@ export interface BaseChartProps {
     width: number;
     /** The height of the chart container in px. */
     height?: number;
-    /** The source data, in which each element is an object. [{name: 'a', value: 12, ....}] */
-    data?: any[];
     /** Children to render */
     children: ReactNode;
 }
 
-const northStarChartWrapper = (ChartComponent: typeof React.Component) => (props: BaseChartProps) => {
+/**
+ * Base Chart properties with data.
+ */
+export interface BaseChartPropsWithData extends BaseChartProps {
+    /** The source data, in which each element is an object. [{name: 'a', value: 12, ....}] */
+    data?: any[];
+}
+
+const withNorthStarBaseChart = <T extends BaseChartProps>(ChartComponent: typeof React.Component) => (props: T) => {
     const classes = useStyles();
     return (
         <Box className={classes.root}>
@@ -56,4 +62,4 @@ const northStarChartWrapper = (ChartComponent: typeof React.Component) => (props
     );
 };
 
-export default northStarChartWrapper;
+export default withNorthStarBaseChart;
