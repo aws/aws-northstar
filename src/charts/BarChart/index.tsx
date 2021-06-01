@@ -16,17 +16,14 @@
 
 import React from 'react';
 import { BarChart as Chart, Bar as BarComponent, BarProps } from 'recharts';
-import BaseChart, { BaseChartProps } from '../BaseChart';
+import northStarChartWrapper, { BaseChartProps } from '../BaseChart';
 import withNorthStarChart from '../withNorthStarChart';
 
 /** Renders a Bar chart */
-function BarChart(props: BaseChartProps) {
-    return (
-        <BaseChart {...props}>
-            <Chart {...props}>{props.children}</Chart>
-        </BaseChart>
-    );
-}
+const BarChart = (props: BaseChartProps) => {
+    const NorthStarBarChart = northStarChartWrapper(Chart);
+    return <NorthStarBarChart {...props} />;
+};
 
 const Bar = withNorthStarChart<BarProps>(BarComponent);
 

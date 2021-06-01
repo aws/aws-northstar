@@ -16,19 +16,16 @@
 
 import React from 'react';
 import { PieChart as Chart, Pie as PieComponent, PieProps } from 'recharts';
-import BaseChart, { BaseChartProps } from '../BaseChart';
+import northStarChartWrapper, { BaseChartProps } from '../BaseChart';
 import withNorthStarChart from '../withNorthStarChart';
 
 /**
  * Renders a Pie chart
  */
-function PieChart(props: BaseChartProps) {
-    return (
-        <BaseChart {...props}>
-            <Chart {...props}>{props.children}</Chart>
-        </BaseChart>
-    );
-}
+const PieChart = (props: BaseChartProps) => {
+    const NorthStarPieChart = northStarChartWrapper(Chart);
+    return <NorthStarPieChart {...props} />;
+};
 
 const Pie = withNorthStarChart<PieProps>(PieComponent);
 

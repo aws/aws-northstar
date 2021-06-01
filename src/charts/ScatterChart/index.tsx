@@ -16,19 +16,16 @@
 
 import React from 'react';
 import { ScatterChart as Chart, Scatter as ScatterComponent, ScatterProps } from 'recharts';
-import BaseChart, { BaseChartProps } from '../BaseChart';
+import northStarChartWrapper, { BaseChartProps } from '../BaseChart';
 import withNorthStarChart from '../withNorthStarChart';
 
 /**
  * Renders a Scatter Chart
  */
-function ScatterChart(props: BaseChartProps) {
-    return (
-        <BaseChart {...props}>
-            <Chart {...props}>{props.children}</Chart>
-        </BaseChart>
-    );
-}
+const ScatterChart = (props: BaseChartProps) => {
+    const NorthStarScatterChart = northStarChartWrapper(Chart);
+    return <NorthStarScatterChart {...props} />;
+};
 
 const Scatter = withNorthStarChart<ScatterProps>(ScatterComponent);
 

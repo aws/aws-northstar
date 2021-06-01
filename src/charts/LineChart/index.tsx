@@ -16,19 +16,16 @@
 
 import React from 'react';
 import { LineChart as Chart, Line as LineComponent, LineProps } from 'recharts';
-import BaseChart, { BaseChartProps } from '../BaseChart';
+import northStarChartWrapper, { BaseChartProps } from '../BaseChart';
 import withNorthStarChart from '../withNorthStarChart';
 
 /**
  * Renders a Line chart
  */
-function LineChart(props: BaseChartProps) {
-    return (
-        <BaseChart {...props}>
-            <Chart {...props}>{props.children}</Chart>
-        </BaseChart>
-    );
-}
+const LineChart = (props: BaseChartProps) => {
+    const NorthStarLineChart = northStarChartWrapper(Chart);
+    return <NorthStarLineChart {...props} />;
+};
 
 const Line = withNorthStarChart<LineProps>(LineComponent, 'monotone');
 

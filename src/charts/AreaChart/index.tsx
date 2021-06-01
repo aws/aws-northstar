@@ -16,19 +16,16 @@
 
 import React from 'react';
 import { AreaChart as Chart, Area as AreaComponent, AreaProps } from 'recharts';
-import BaseChart, { BaseChartProps } from '../BaseChart';
+import northStarChartWrapper, { BaseChartProps } from '../BaseChart';
 import withNorthStarChart from '../withNorthStarChart';
 
 /**
  * Renders an Area Chart.
  */
-function AreaChart(props: BaseChartProps) {
-    return (
-        <BaseChart {...props}>
-            <Chart {...props}>{props.children}</Chart>
-        </BaseChart>
-    );
-}
+const AreaChart = (props: BaseChartProps) => {
+    const NorthStarAreaChart = northStarChartWrapper(Chart);
+    return <NorthStarAreaChart {...props} />;
+};
 
 const Area = withNorthStarChart<AreaProps>(AreaComponent, 'monotone');
 
