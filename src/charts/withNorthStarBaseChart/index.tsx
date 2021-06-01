@@ -47,7 +47,7 @@ export interface BaseChartProps {
  */
 export interface BaseChartPropsWithData extends BaseChartProps {
     /** The source data, in which each element is an object. [{name: 'a', value: 12, ....}] */
-    data?: any[];
+    data: any[];
 }
 
 const withNorthStarBaseChart = <T extends BaseChartProps>(ChartComponent: typeof React.Component) => (props: T) => {
