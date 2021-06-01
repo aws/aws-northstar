@@ -18,7 +18,7 @@ import Box from '../Box';
 import spacingMapping from '../../config/spacingMapping';
 
 export interface StackProps {
-    /**A list of compoents*/
+    /**A list of components*/
     children: ReactNode;
     /**Vertical spacing between two components. <br/>
      * By default, m will be used.*/
