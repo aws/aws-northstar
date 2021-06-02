@@ -14,53 +14,16 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode } from 'react';
-import { LineChart as Chart } from 'recharts';
-import { makeStyles } from '@material-ui/core';
-import Heading from '../../components/Heading';
-import Stack from '../../layouts/Stack';
-import Box from '../../layouts/Box';
-
-import Line from './components/Line';
-
-const useStyles = makeStyles({
-    root: {
-        textAlign: 'center',
-        width: 'fit-content',
-        padding: '10px',
-    },
-});
-
-/**
- * LineChart properties.
- */
-export interface LineChartProps<T extends readonly object[]> {
-    /** Title of the chart */
-    title?: string;
-    /** The width of the chart container in px. */
-    width: number;
-    /** The height of the chart container in px. */
-    height?: number;
-    /** The source data, in which each element is an object. [{name: 'a', value: 12, ....}] */
-    data: T;
-    /** Children to render */
-    children: ReactNode;
-}
+import { LineChart as Chart, Line as LineComponent, LineProps } from 'recharts';
+import withNorthStarBaseChart from '../withNorthStarBaseChart';
+import withNorthStarChart from '../withNorthStarChart';
 
 /**
  * Renders a Line chart
  */
-function LineChart<T extends readonly object[]>(props: LineChartProps<T>) {
-    const classes = useStyles();
-    return (
-        <Box className={classes.root}>
-            <Stack>
-                {props.title && <Heading variant="h3">{props.title}</Heading>}
-                <Chart {...props}>{props.children}</Chart>
-            </Stack>
-        </Box>
-    );
-}
+const LineChart = withNorthStarBaseChart(Chart);
+
+const Line = withNorthStarChart<LineProps>(LineComponent, 'monotone');
 
 export default LineChart;
 export { Line };
