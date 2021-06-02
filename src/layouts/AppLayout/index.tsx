@@ -204,9 +204,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     });
 
     useLayoutEffect(() => {
-        if (notificationsBoxRef.current) {
-            setNotificationsBoxHeight(notificationsBoxRef.current.offsetHeight || 0);
-        }
+        setNotificationsBoxHeight(notificationsBoxRef.current?.offsetHeight || 0);
     }, [notificationsBoxRef, notifications]);
 
     const { handleScroll } = useScrollPosition(

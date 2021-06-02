@@ -14,50 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode } from 'react';
-import { BarChart as Chart } from 'recharts';
-import { makeStyles } from '@material-ui/core';
-import Bar from './components/Bar';
-import Box from '../../layouts/Box';
-import Stack from '../../layouts/Stack';
-import Heading from '../../components/Heading';
-
-const useStyles = makeStyles({
-    root: {
-        textAlign: 'center',
-        width: 'fit-content',
-    },
-});
-
-/**
- * BarChart properties.
- */
-export interface BarChartProps<T extends readonly object[]> {
-    /** Title of the chart */
-    title?: string;
-    /** The width of the chart container in px. */
-    width: number;
-    /** The height of the chart container in px. */
-    height?: number;
-    /** Data to render in the chart */
-    data: T;
-    /** Children to render */
-    children: ReactNode;
-}
+import { BarChart as Chart, Bar as BarComponent, BarProps } from 'recharts';
+import withNorthStarBaseChart, { BaseChartPropsWithData } from '../withNorthStarBaseChart';
+import withNorthStarChart from '../withNorthStarChart';
 
 /** Renders a Bar chart */
-function BarChart<T extends readonly object[]>(props: BarChartProps<T>) {
-    const classes = useStyles();
+const BarChart = withNorthStarBaseChart<BaseChartPropsWithData>(Chart);
 
-    return (
-        <Box className={classes.root}>
-            <Stack>
-                {props.title && <Heading variant="h3">{props.title}</Heading>}
-                <Chart {...props}>{props.children}</Chart>
-            </Stack>
-        </Box>
-    );
-}
+const Bar = withNorthStarChart<BarProps>(BarComponent);
 
 export default BarChart;
 export { Bar };
