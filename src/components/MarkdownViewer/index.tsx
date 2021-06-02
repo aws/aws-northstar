@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import gfm from 'remark-gfm';
 import frontmatter from 'remark-frontmatter';
 import ReactMarkdown, { ReactMarkdownOptions } from 'react-markdown';
@@ -22,6 +22,11 @@ import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import Heading from '../Heading';
 import Text from '../Text';
 import Link from '../Link';
+
+export interface MarkdownViewerProps {
+    /** The markdown content to be displayed */
+    children: string;
+}
 
 const components: ReactMarkdownOptions['components'] = {
     code: ({ node, inline, className, children, ...props }) => {
@@ -42,10 +47,8 @@ const components: ReactMarkdownOptions['components'] = {
     a: (props) => <Link href={props.href as string}>{props.children}</Link>,
 };
 
-const MarkdownViewer: FunctionComponent<ReactMarkdownOptions> = (props) => {
-    const { children } = { ...props };
-
-    return <ReactMarkdown children={children} plugins={[gfm, frontmatter]} components={components} />;
+const MarkdownViewer = ({ children }: MarkdownViewerProps) => {
+    return <ReactMarkdown plugins={[gfm, frontmatter]} components={components} children={children} />;
 };
 
 export default MarkdownViewer;
