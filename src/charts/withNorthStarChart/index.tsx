@@ -13,22 +13,32 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-
 import React from 'react';
-import { Area as AreaComponent } from 'recharts';
-import getFillColor from '../../../utils/getFillColor';
-import getStrokeColor from '../../../utils/getStrokeColor';
+import { CurveProps } from 'recharts';
+import getFillColor from '../utils/getFillColor';
+import getStrokeColor from '../utils/getStrokeColor';
 
-class Area extends AreaComponent {
-    render() {
-        const overrideFill = getFillColor(this.props.fill);
-        const overrideStroke = getStrokeColor(this.props.stroke);
-        return (
-            <AreaComponent {...this.props} fill={overrideFill} stroke={overrideStroke} type="monotone">
-                {this.props.children}
-            </AreaComponent>
-        );
-    }
+interface Props {
+    fill?: string;
+    stroke?: string;
 }
 
-export default Area;
+function withNorthStarChart<ChartProps extends Props>(
+    ChartComponent: typeof React.Component,
+    type?: CurveProps['type']
+) {
+    return class extends ChartComponent<ChartProps> {
+        render() {
+            const overrideFill = getFillColor(this.props.fill);
+            const overrideStroke = getStrokeColor(this.props.stroke);
+
+            return (
+                <ChartComponent {...this.props} fill={overrideFill} stroke={overrideStroke} type={type}>
+                    {this.props.children}
+                </ChartComponent>
+            );
+        }
+    };
+}
+
+export default withNorthStarChart;

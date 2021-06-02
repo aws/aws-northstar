@@ -123,7 +123,7 @@ const Container: FunctionComponent<ContainerProps> = ({
                 </div>
             )}
             <div className={classes.containerContent}>{children}</div>
-            {!footerContent ? '' : <div className={classes.containerFooter}>{footerContent}</div>}
+            {footerContent && <div className={classes.containerFooter}>{footerContent}</div>}
         </div>
     );
 };

@@ -52,24 +52,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const covertBreakpoint = (breakpoint: BreakPoint) => {
-    switch (breakpoint) {
-        case 'lg':
-            return 3;
-        case 'md':
-            return 2;
-        case 'sm':
-            return 1;
-        default:
-            return 0;
-    }
+    const breakpoints = {
+        lg: 3,
+        md: 2,
+        sm: 1,
+    };
+    return breakpoints[breakpoint] || 0;
 };
 
 const getBreakpointValue = (collapseBelow: BreakPoint, breakpoint: BreakPoint): 12 | true => {
-    if (covertBreakpoint(collapseBelow) - covertBreakpoint(breakpoint) >= 0) {
-        return 12;
-    }
-
-    return true;
+    return covertBreakpoint(collapseBelow) - covertBreakpoint(breakpoint) >= 0 ? 12 : true;
 };
 
 /**
