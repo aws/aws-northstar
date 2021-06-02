@@ -26,15 +26,11 @@ import Link from '../Link';
 const components: ReactMarkdownOptions['components'] = {
     code: ({ node, inline, className, children, ...props }) => {
         const match = /language-(\w+)/.exec(className || '');
+        const value = String(children).replace(/\n$/, '');
         return !inline && match ? (
-            <SyntaxHighlighter
-                style={tomorrow}
-                language={match[1]}
-                children={String(children).replace(/\n$/, '')}
-                {...props}
-            />
+            <SyntaxHighlighter style={tomorrow} language={match[1]} children={value} {...props} />
         ) : (
-            <code className={className} {...props} />
+            <>{value}</>
         );
     },
     h1: (props) => <Heading variant="h1">{props.children}</Heading>,
@@ -42,7 +38,6 @@ const components: ReactMarkdownOptions['components'] = {
     h3: (props) => <Heading variant="h3">{props.children}</Heading>,
     h4: (props) => <Heading variant="h4">{props.children}</Heading>,
     h5: (props) => <Heading variant="h5">{props.children}</Heading>,
-    h6: (props) => <Heading variant="h6">{props.children}</Heading>,
     p: (props) => <Text variant="p">{props.children}</Text>,
     a: (props) => <Link href={props.href as string}>{props.children}</Link>,
 };
