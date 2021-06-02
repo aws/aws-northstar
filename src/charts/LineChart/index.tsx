@@ -15,13 +15,13 @@
  ******************************************************************************************************************** */
 
 import { LineChart as Chart, Line as LineComponent, LineProps } from 'recharts';
-import withNorthStarBaseChart from '../withNorthStarBaseChart';
+import withNorthStarBaseChart, { BaseChartPropsWithData } from '../withNorthStarBaseChart';
 import withNorthStarChart from '../withNorthStarChart';
 
 /**
  * Renders a Line chart
  */
-const LineChart = withNorthStarBaseChart(Chart);
+const LineChart = withNorthStarBaseChart<BaseChartPropsWithData>(Chart);
 
 const Line = withNorthStarChart<LineProps>(LineComponent, 'monotone');
 
