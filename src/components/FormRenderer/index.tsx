@@ -18,6 +18,7 @@ import {
     FormRenderer as ReactFormRenderer,
     FormRendererProps as ReactFormRendererProps,
 } from '@data-driven-forms/react-form-renderer';
+import { FormSubscription as ReactFormSubscription } from 'final-form';
 import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
 import Checkbox from './components/Checkbox';
 import Custom from './components/Custom';
@@ -70,6 +71,8 @@ export interface FormRendererProps {
     onCancel?: () => void;
     /** When true, the submit button is disabled with a loading spinner */
     isSubmitting?: boolean;
+    /** The subscription for the formstate change so the form is rerendered each time the subscription value changed*/
+    subscription?: ReactFormSubscription;
     /** Custom component wrappers*/
     customComponentWrapper?: {
         [componentType: string]: ComponentType;
@@ -87,6 +90,7 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
     onCancel,
     isSubmitting,
     initialValues,
+    subscription,
     customComponentWrapper,
 }) => {
     const WrappedFormTemplate = useMemo(
@@ -101,6 +105,7 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
             schema={schema}
             onSubmit={onSubmit}
             onCancel={onCancel}
+            subscription={subscription}
             initialValues={initialValues}
         />
     );
