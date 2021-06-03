@@ -13,8 +13,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
+
+declare module 'react-pivottable';
 declare module 'react-pivottable/PivotTableUI';
 declare module 'react-pivottable/TableRenderers';
 declare module 'react-pivottable/PlotlyRenderers';
-
-declare module 'react-plotly.js';
