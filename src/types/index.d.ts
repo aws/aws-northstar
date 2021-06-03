@@ -13,15 +13,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
-import DefaultSectionsRenderer from 'react-styleguidist/lib/client/rsg-components/Sections/SectionsRenderer';
+declare module 'react-pivottable/PivotTableUI';
+declare module 'react-pivottable/TableRenderers';
+declare module 'react-pivottable/PlotlyRenderers';
 
-const SectionsRenderer: React.FC = ({ children }) => {
-    return (
-        <div>
-            <DefaultSectionsRenderer>{children}</DefaultSectionsRenderer>
-        </div>
-    );
-};
-
-export default SectionsRenderer;
+declare module 'react-plotly.js';

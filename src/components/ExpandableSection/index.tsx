@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => {
         '&:not(:last-child)': {
             borderBottom: 0,
         },
-        '&:before': {
+        '&::before': {
             display: 'none',
         },
         backgroundColor: 'transparent',

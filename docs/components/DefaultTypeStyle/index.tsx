@@ -61,7 +61,6 @@ const columnDefinitions: Column<DataType>[] = [
             if (row && row.original && defaultTheme.typography) {
                 return (
                     <Typography variant="body1" component="span">
-                        {/* @ts-ignore */}
                         {defaultTheme.typography[row.original.tag as TypographyVariant].fontWeight}
                     </Typography>
                 );
@@ -77,7 +76,6 @@ const columnDefinitions: Column<DataType>[] = [
             if (row && row.original && defaultTheme.typography) {
                 return (
                     <Typography variant="body1" component="span">
-                        {/* @ts-ignore */}
                         {defaultTheme.typography[row.original.tag as TypographyVariant].fontSize}
                     </Typography>
                 );
@@ -93,7 +91,6 @@ const columnDefinitions: Column<DataType>[] = [
             if (row && row.original && defaultTheme.typography) {
                 return (
                     <Typography variant="body1" component="span">
-                        {/* @ts-ignore */}
                         {defaultTheme.typography[row.original.tag].lineHeight}
                     </Typography>
                 );

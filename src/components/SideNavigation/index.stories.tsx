@@ -14,7 +14,6 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-// @ts-ignore
 import StoryRouter from 'storybook-react-router';
 import { addDecorator } from '@storybook/react';
 import Badge from '../Badge';

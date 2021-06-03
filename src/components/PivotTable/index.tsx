@@ -14,15 +14,10 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { useState, FunctionComponent } from 'react';
-
-// @ts-ignore
 import PivotTableUI from 'react-pivottable/PivotTableUI';
-// @ts-ignore
 import TableRenderers from 'react-pivottable/TableRenderers';
 import 'react-pivottable/pivottable.css';
-// @ts-ignore
 import Plot from 'react-plotly.js';
-// @ts-ignore
 import createPlotlyRenderers from 'react-pivottable/PlotlyRenderers';
 
 import { makeStyles, Theme } from '@material-ui/core';
