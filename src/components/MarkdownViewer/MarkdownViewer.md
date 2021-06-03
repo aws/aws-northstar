@@ -2,24 +2,6 @@
 
 ```jsx
 import MarkdownViewer from '.';
-import Container from 'aws-northstar/layouts/Container';
-
-<MarkdownViewer># This is a test </MarkdownViewer>
-```
-
-
-```jsx
-import MarkdownViewer from '.';
-import Container from 'aws-northstar/layouts/Container';
-
-<MarkdownViewer title="MarkdownViewer" subtitle="With a nice container"> # This is a test </MarkdownViewer>
-```
-
-```jsx
-import MarkdownViewer from '.';
-import Container from 'aws-northstar/layouts/Container';
-
-
 
 <MarkdownViewer>
 {`
@@ -52,25 +34,12 @@ We can celebrate with emoticons 🍸🌟🍺
 
 ```jsx
 import MarkdownViewer from '.';
-import Container from '../../layouts/Container';
-import Inline from '../../layouts/Inline';
-import Button from '../Button';
 
-const actionGroup = ()=>  (
-    <Inline spacing={'s'}>
-        <Button variant="primary" label="refresh">Refresh</Button>
-        <Button variant="default" label="clear"> Clear </Button>
-    </Inline>
-);
-
-
-<MarkdownViewer title="MarkdownViewer" subtitle="With a nice container" actionGroup={actionGroup()}> 
-{`### Action groups can also be used
-
-Make your containers more featureful by using action groups.
+<MarkdownViewer> 
+{`### Code Examples
 
 \`\`\`jsx
- <Inline spacing={'s'}>
+<Inline spacing={'s'}>
     <Button variant="primary" label="refresh"> Refresh </Button>
     <Button variant="primary" label="clear"> Clear </Button>
 </Inline>
