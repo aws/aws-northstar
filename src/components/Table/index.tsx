@@ -232,6 +232,9 @@ type TableInstance<D extends object> = {} & TableBaseInstance<D> &
 
 type BooleanObject = { [key: string]: boolean };
 
+const convertArrayToBooleanObject = (arr: string[]): BooleanObject =>
+    arr.reduce((map, id) => ({ ...map, [id]: true }), {});
+
 /** A table presents data in a two-dimensional format, arranged in columns and rows in a rectangular form. */
 export default function Table<D extends object>({
     actionGroup = null,
@@ -262,8 +265,6 @@ export default function Table<D extends object>({
     ...props
 }: TableBaseOptions<D>) {
     const styles = useStyles({});
-    const convertArrayToBooleanObject = (arr: string[]): BooleanObject =>
-        arr.reduce((map, id) => ({ ...map, [id]: true }), {});
     const [groupBy, setGroupBy] = useState(convertArrayToBooleanObject(defaultGroups));
     const [showColumns, setShowColumns] = useState(
         convertArrayToBooleanObject(columnDefinitions.map((column: Column<D>) => column.id || ''))

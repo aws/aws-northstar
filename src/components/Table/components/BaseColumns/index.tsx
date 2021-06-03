@@ -27,6 +27,7 @@ export interface BaseColumnsProps<D extends object> {
     columns: {
         [columnId: string]: boolean;
     };
+    title: string;
 }
 
 export default function BaseColumns<D extends object>({
@@ -34,10 +35,11 @@ export default function BaseColumns<D extends object>({
     styles,
     onColumnChange,
     columns,
+    title,
 }: BaseColumnsProps<D>) {
     return (
         <div className={styles.verticalGrid}>
-            <b>Group by</b>
+            <b>{title}</b>
             {columnDefinitions
                 .filter((c) => typeof c.id != 'undefined')
                 .map((c: Column<D>) => (

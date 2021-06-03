@@ -18,7 +18,7 @@ import React from 'react';
 import BaseColumns, { BaseColumnsProps } from '../BaseColumns';
 
 export interface ColumnsSelectorProps<D extends object>
-    extends Omit<BaseColumnsProps<D>, 'columns' | 'onColumnChange'> {
+    extends Omit<BaseColumnsProps<D>, 'title' | 'columns' | 'onColumnChange'> {
     onShowColumnsChange: BaseColumnsProps<D>['onColumnChange'];
     showColumns: BaseColumnsProps<D>['columns'];
 }
@@ -31,6 +31,7 @@ export default function ColumnsSelector<D extends object>({
 }: ColumnsSelectorProps<D>) {
     return (
         <BaseColumns
+            title="Show columns"
             columnDefinitions={columnDefinitions}
             styles={styles}
             onColumnChange={onShowColumnsChange}

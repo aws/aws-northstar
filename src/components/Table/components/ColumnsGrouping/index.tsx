@@ -18,7 +18,7 @@ import React from 'react';
 import BaseColumns, { BaseColumnsProps } from '../BaseColumns';
 
 export interface ColumnsGroupingProps<D extends object>
-    extends Omit<BaseColumnsProps<D>, 'columns' | 'onColumnChange'> {
+    extends Omit<BaseColumnsProps<D>, 'title' | 'columns' | 'onColumnChange'> {
     onGroupChange: BaseColumnsProps<D>['onColumnChange'];
     groupBy: BaseColumnsProps<D>['columns'];
 }
@@ -31,6 +31,7 @@ export default function ColumnsGrouping<D extends object>({
 }: ColumnsGroupingProps<D>) {
     return (
         <BaseColumns
+            title="Group by"
             columnDefinitions={columnDefinitions}
             styles={styles}
             onColumnChange={onGroupChange}
