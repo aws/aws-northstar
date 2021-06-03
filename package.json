@@ -154,7 +154,6 @@
   "resolutions": {
     "**/webpack/**/terser-webpack-plugin": "3.1.0",
     "trim": "0.0.3",
-    "dns-packet": "5.2.2",
     "browserslist": "4.16.5"
   },
   "browserslist": {
