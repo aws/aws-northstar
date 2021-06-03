@@ -65,6 +65,7 @@ import { RadioButton } from '../RadioGroup';
 import { useDebouncedCallback } from 'use-debounce';
 
 const DEFAULT_PAGE_SIZE = 10;
+const DEFAULT_PAGE_SIZES = [10, 25, 50];
 const DEFAULT_DEBOUNCE_TIMER = 250;
 
 const useStyles = makeStyles((theme) => ({
@@ -229,6 +230,11 @@ type TableInstance<D extends object> = {} & TableBaseInstance<D> &
     }> &
     Partial<{ selectedFlatRows: Row<D>[] }>;
 
+type BooleanObject = { [key: string]: boolean };
+
+const convertArrayToBooleanObject = (arr: string[]): BooleanObject =>
+    arr.reduce((map, id) => ({ ...map, [id]: true }), {});
+
 /** A table presents data in a two-dimensional format, arranged in columns and rows in a rectangular form. */
 export default function Table<D extends object>({
     actionGroup = null,
@@ -246,7 +252,7 @@ export default function Table<D extends object>({
     loading = false,
     onSelectionChange,
     onFetchData = null,
-    pageSizes = [10, 25, 50],
+    pageSizes = DEFAULT_PAGE_SIZES,
     tableDescription,
     tableTitle = '',
     wrapText = true,
@@ -259,19 +265,9 @@ export default function Table<D extends object>({
     ...props
 }: TableBaseOptions<D>) {
     const styles = useStyles({});
-    const [groupBy, setGroupBy] = useState(
-        defaultGroups.reduce((map: { [key: string]: boolean }, id: string) => {
-            map[id] = true;
-            return map;
-        }, {})
-    );
-    const [showColumns, setShowColumns] = useState<{ [key: string]: boolean }>(
-        columnDefinitions
-            .map((column: Column<D>) => column.id || '')
-            .reduce((map: { [key: string]: boolean }, id: string) => {
-                map[id] = true;
-                return map;
-            }, {})
+    const [groupBy, setGroupBy] = useState(convertArrayToBooleanObject(defaultGroups));
+    const [showColumns, setShowColumns] = useState(
+        convertArrayToBooleanObject(columnDefinitions.map((column: Column<D>) => column.id || ''))
     );
 
     const [controlledPageSize, setControlledPageSize] = useState(defaultPageSize);
@@ -339,11 +335,7 @@ export default function Table<D extends object>({
     }, [items, props.rowCount]);
 
     const selectedRowIdMap = useMemo(() => {
-        const map: any = {};
-        selectedRowIds.forEach((id) => {
-            map[id] = true;
-        });
-        return map;
+        return convertArrayToBooleanObject(selectedRowIds);
     }, [selectedRowIds]);
 
     const pageCount = useMemo(() => {
@@ -444,7 +436,7 @@ export default function Table<D extends object>({
         return copy;
     };
 
-    const handleShowColumnsChange = (headerId: IdType<string> | string | undefined) => {
+    const handleShowColumnsChange = (headerId?: IdType<string> | string) => {
         if (!headerId) {
             return;
         }
@@ -454,7 +446,7 @@ export default function Table<D extends object>({
         setShowColumns(showColumnsCopy);
     };
 
-    const onGroupChange = (headerId: IdType<string> | string | undefined) => {
+    const onGroupChange = (headerId?: IdType<string> | string) => {
         if (!headerId) {
             return;
         }
@@ -509,8 +501,8 @@ export default function Table<D extends object>({
 
     const settingsBarProps = {
         pageIndex: pageIndex || 0,
-        pageSize: pageSize || 10,
-        pageSizes: pageSizes || [10, 25, 50],
+        pageSize: pageSize || DEFAULT_PAGE_SIZE,
+        pageSizes: pageSizes || DEFAULT_PAGE_SIZES,
         pageLength: (page || []).length,
         rowCount,
         loading,
