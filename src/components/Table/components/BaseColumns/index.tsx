@@ -44,7 +44,7 @@ export default function BaseColumns<D extends object>({
                 .filter((c) => typeof c.id != 'undefined')
                 .map((c: Column<D>) => (
                     <div key={c.id}>
-                        <Checkbox onChange={() => onColumnChange(c.id)} checked={columns[c.id!]}>
+                        <Checkbox onChange={() => onColumnChange(c.id)} checked={!!columns[c.id!]}>
                             {c.Header}
                         </Checkbox>
                     </div>
