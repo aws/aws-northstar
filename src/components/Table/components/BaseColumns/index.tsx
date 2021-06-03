@@ -15,27 +15,40 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-import BaseColumns, { BaseColumnsProps } from '../BaseColumns';
+import { Column } from 'react-table';
+import Checkbox from '../../../Checkbox';
 
-export interface ColumnsGroupingProps<D extends object>
-    extends Omit<BaseColumnsProps<D>, 'title' | 'columns' | 'onColumnChange'> {
-    onGroupChange: BaseColumnsProps<D>['onColumnChange'];
-    groupBy: BaseColumnsProps<D>['columns'];
+export interface BaseColumnsProps<D extends object> {
+    columnDefinitions: Column<D>[];
+    styles: {
+        verticalGrid: string;
+    };
+    onColumnChange: (columnId?: string) => void;
+    columns: {
+        [columnId: string]: boolean;
+    };
+    title: string;
 }
 
-export default function ColumnsGrouping<D extends object>({
+export default function BaseColumns<D extends object>({
     columnDefinitions,
     styles,
-    onGroupChange,
-    groupBy,
-}: ColumnsGroupingProps<D>) {
+    onColumnChange,
+    columns,
+    title,
+}: BaseColumnsProps<D>) {
     return (
-        <BaseColumns
-            title="Group by"
-            columnDefinitions={columnDefinitions}
-            styles={styles}
-            onColumnChange={onGroupChange}
-            columns={groupBy}
-        />
+        <div className={styles.verticalGrid}>
+            <b>{title}</b>
+            {columnDefinitions
+                .filter((c) => typeof c.id != 'undefined')
+                .map((c: Column<D>) => (
+                    <div key={c.id}>
+                        <Checkbox onChange={() => onColumnChange(c.id)} checked={!!columns[c.id!]}>
+                            {c.Header}
+                        </Checkbox>
+                    </div>
+                ))}
+        </div>
     );
 }

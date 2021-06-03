@@ -15,18 +15,12 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-import { Column } from 'react-table';
-import Checkbox from '../../../Checkbox';
+import BaseColumns, { BaseColumnsProps } from '../BaseColumns';
 
-export interface ColumnsSelectorProps<D extends object> {
-    columnDefinitions: Column<D>[];
-    styles: {
-        verticalGrid: string;
-    };
-    onShowColumnsChange: (columnId?: string) => void;
-    showColumns: {
-        [columnId: string]: boolean;
-    };
+export interface ColumnsSelectorProps<D extends object>
+    extends Omit<BaseColumnsProps<D>, 'title' | 'columns' | 'onColumnChange'> {
+    onShowColumnsChange: BaseColumnsProps<D>['onColumnChange'];
+    showColumns: BaseColumnsProps<D>['columns'];
 }
 
 export default function ColumnsSelector<D extends object>({
@@ -36,17 +30,12 @@ export default function ColumnsSelector<D extends object>({
     showColumns,
 }: ColumnsSelectorProps<D>) {
     return (
-        <div className={styles.verticalGrid}>
-            <b>Show columns</b>
-            {columnDefinitions
-                .filter((c) => typeof c.id != 'undefined')
-                .map((c: Column<D>) => (
-                    <div key={c.id}>
-                        <Checkbox onChange={() => onShowColumnsChange(c.id)} checked={showColumns[c.id!] === true}>
-                            {c.Header}
-                        </Checkbox>
-                    </div>
-                ))}
-        </div>
+        <BaseColumns
+            title="Show columns"
+            columnDefinitions={columnDefinitions}
+            styles={styles}
+            onColumnChange={onShowColumnsChange}
+            columns={showColumns}
+        />
     );
 }
