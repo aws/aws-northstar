@@ -31,7 +31,6 @@ describe('MarkdownViewer', () => {
 ### Heading Three
 #### Heading Four
 ##### Heading Five
-###### Heading Six
         `}</MarkdownViewer>
         );
         expect(getByText('Heading One')).toHaveClass('MuiTypography-root MuiTypography-h1');
@@ -39,7 +38,6 @@ describe('MarkdownViewer', () => {
         expect(getByText('Heading Three')).toHaveClass('MuiTypography-root MuiTypography-h3');
         expect(getByText('Heading Four')).toHaveClass('MuiTypography-root MuiTypography-h4');
         expect(getByText('Heading Five')).toHaveClass('MuiTypography-root MuiTypography-h5');
-        expect(getByText('Heading Six')).toHaveClass('MuiTypography-root MuiTypography-h6');
     });
 
     it('should render paragraph text correctly', () => {

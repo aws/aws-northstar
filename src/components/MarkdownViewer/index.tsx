@@ -13,45 +13,42 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import gfm from 'remark-gfm';
 import frontmatter from 'remark-frontmatter';
-import ReactMarkdown, { ReactMarkdownPropsBase } from 'react-markdown';
+import ReactMarkdown, { ReactMarkdownOptions } from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import Heading from '../Heading';
 import Text from '../Text';
 import Link from '../Link';
 
-interface RenderProps {
-    language: string;
-    value: string;
-}
-export interface MarkdownViewerProps extends ReactMarkdownPropsBase {
-    children?: any;
+export interface MarkdownViewerProps {
+    /** The markdown content to be displayed */
+    children: string;
 }
 
-const renderers = {
-    code: ({ language, value }: RenderProps) => {
-        if (language && value) return <SyntaxHighlighter style={tomorrow} language={language} children={value} />;
-        else return <>{value}</>;
+const components: ReactMarkdownOptions['components'] = {
+    code: ({ node, inline, className, children, ...props }) => {
+        const match = /language-(\w+)/.exec(className || '');
+        const value = String(children).replace(/\n$/, '');
+        return !inline && match ? (
+            <SyntaxHighlighter style={tomorrow} language={match[1]} children={value} {...props} />
+        ) : (
+            <>{value}</>
+        );
     },
-    heading: (props: any) => {
-        const variant = `h${props.level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
-        return <Heading variant={variant}>{props.children}</Heading>;
-    },
-    paragraph: (props: any) => {
-        return <Text variant="p">{props.children}</Text>;
-    },
-    link: (props: any) => {
-        return <Link href={props.href}>{props.children}</Link>;
-    },
+    h1: (props) => <Heading variant="h1">{props.children}</Heading>,
+    h2: (props) => <Heading variant="h2">{props.children}</Heading>,
+    h3: (props) => <Heading variant="h3">{props.children}</Heading>,
+    h4: (props) => <Heading variant="h4">{props.children}</Heading>,
+    h5: (props) => <Heading variant="h5">{props.children}</Heading>,
+    p: (props) => <Text variant="p">{props.children}</Text>,
+    a: (props) => <Link href={props.href as string}>{props.children}</Link>,
 };
 
-const MarkdownViewer: FunctionComponent<MarkdownViewerProps> = (props: MarkdownViewerProps) => {
-    const { children } = { ...props };
-
-    return <ReactMarkdown escapeHtml={true} children={children} plugins={[gfm, frontmatter]} renderers={renderers} />;
+const MarkdownViewer = ({ children }: MarkdownViewerProps) => {
+    return <ReactMarkdown plugins={[gfm, frontmatter]} components={components} children={children} />;
 };
 
 export default MarkdownViewer;
