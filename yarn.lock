@@ -12773,9 +12773,9 @@ please-upgrade-node@^3.2.0:
   dependencies:
     semver-compare "^1.0.0"
 
-plotly.js@^1.54.7:
+plotly.js@^1.58.4:
   version "1.58.4"
-  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-1.58.4.tgz"
+  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-1.58.4.tgz#9aa9cab814b8ae4fef11fac995157b3bb94dfdd6"
   integrity sha512-hdt/aEvkPjS1HJ7tJKcPqsqi9ErEZPhUFs4d2ANTLeBim+AmVcHzS1rtwr7ZrVCINgliW/+92u81omJoy+lbUw==
   dependencies:
     "@plotly/d3-sankey" "0.7.2"
@@ -13651,10 +13651,10 @@ react-markdown@^6.0.2:
     unist-util-visit "^2.0.0"
     vfile "^4.0.0"
 
-react-pivottable@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/react-pivottable/-/react-pivottable-0.9.0.tgz"
-  integrity sha512-fs1pGV5z4BvOXL4iLu79kKCLgR5XINW2ZredJHoPqXEMbJaIv50Eoec1XowWf3i3Dvdb8EYgvNqlF2ggC4GJOw==
+react-pivottable@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/react-pivottable/-/react-pivottable-0.11.0.tgz#2ac9a28db6bdcefdb7bdeeb1ed067df229bb9dd8"
+  integrity sha512-hFU10XYL28NWVRnm+RRyHrzsAn/xIJzPgwPebUE2Hx5JZQl/Zxty3WUL/5cAcdK4AmTb9FQBRopLKLwuiI6VlA==
   dependencies:
     immutability-helper "^2.3.1"
     prop-types "^15.5.10"

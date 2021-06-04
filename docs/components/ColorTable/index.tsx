@@ -14,7 +14,6 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-// @ts-ignore
 import ReactColorSquare from 'react-color-square';
 import Box from '../../../src/layouts/Box';
 import Table from '../../../src/components/Table';
