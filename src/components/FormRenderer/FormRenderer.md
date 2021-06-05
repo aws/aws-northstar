@@ -1417,6 +1417,7 @@ const schema = {
 
 ```jsx
 import FormRenderer, { componentTypes, validatorTypes } from 'aws-northstar/components/FormRenderer';
+import Container from 'aws-northstar/layouts/Container';
 
 const controlInteractionSchema = {
     fields: [
@@ -1450,7 +1451,7 @@ const controlInteractionSchema = {
             component: componentTypes.SELECT,
             name: 'select2',
             label: 'Select 2',
-            helperText: 'Enabled only when the value of Select 1 is 2',
+            helperText: 'Enabled only when the value of Select 1 is 2 and default value changes with the value of select1',
             placeholder: 'Choose an option',
             options: [
                 {
@@ -1495,12 +1496,6 @@ const controlInteractionSchema = {
             label: 'Select 3',
             helperText: 'Options changes with the value of Select 1 and only visible when Select 1 is set',
             placeholder: 'Choose an option',
-            isRequired: true,
-            validate: [
-                {
-                    type: validatorTypes.REQUIRED,
-                },
-            ],
             resolveProps: (_props, _field, formOptions) => {
                 const values = formOptions.getState().values;
                 return {
@@ -1526,16 +1521,16 @@ const controlInteractionSchema = {
             },
         },
     ],
-    header: 'Data driven form',
-    description: 'Define your form in json format',
+    header: 'Control Interaction'
 };
 
-
-<FormRenderer
-    schema={controlInteractionSchema}
-    onSubmit={console.log}
-    onCancel={console.log}
-    subscription={{ values: true }}
-/>
+<Container>
+    <FormRenderer
+        schema={controlInteractionSchema}
+        onSubmit={console.log}
+        onCancel={console.log}
+        subscription={{ values: true }}
+    />
+</Container>
 
 ```

@@ -1,26 +1,41 @@
-import React, { FunctionComponent, useState }from 'react';
+/** *******************************************************************************************************************
+  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+  
+  Licensed under the Apache License, Version 2.0 (the "License").
+  You may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+      http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.                                                                              *
+ ******************************************************************************************************************** */
+import React, { FunctionComponent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Box from 'aws-northstar/layouts/Box';
 import Button from 'aws-northstar/components/Button';
 import Checkbox from 'aws-northstar/components/Checkbox';
 import Inline from 'aws-northstar/layouts/Inline';
 import StatusIndicator from 'aws-northstar/components/StatusIndicator';
-import Table from 'aws-northstar/components/Table';
+import Table, { Column } from 'aws-northstar/components/Table';
 
-import data from '../../../../data';
+import data, { Order } from '../../../../data';
 
-const columnDefinitions = [
+const columnDefinitions: Column<Order>[] = [
     {
         id: 'customer',
         width: 150,
         Header: 'Customer name',
-        accessor: 'customer'
+        accessor: 'customer',
     },
     {
         id: 'item',
         width: 150,
         Header: 'Item',
-        accessor: 'item'
+        accessor: 'item',
     },
     {
         id: 'amount',
@@ -29,11 +44,11 @@ const columnDefinitions = [
         accessor: 'amount',
         Cell: ({ row }: any) => {
             if (row && row.original) {
-                return <Box textAlign='right'>${row.original.amount}</Box>;
+                return <Box textAlign="right">${row.original.amount}</Box>;
             }
 
             return row.id;
-        }
+        },
     },
     {
         id: 'discounted',
@@ -42,11 +57,15 @@ const columnDefinitions = [
         Cell: ({ row }: any) => {
             if (row && row.original) {
                 const discounted = row.original.discounted;
-                return <Box textAlign='center'><Checkbox checked={discounted} disabled/></Box>
+                return (
+                    <Box textAlign="center">
+                        <Checkbox checked={discounted} disabled />
+                    </Box>
+                );
             }
 
             return row.id;
-        }
+        },
     },
     {
         id: 'discountAmount',
@@ -55,17 +74,19 @@ const columnDefinitions = [
         accessor: 'discountAmount',
         Cell: ({ row }: any) => {
             if (row && row.original) {
-                return <Box textAlign='right'>{row.original.discountAmount ? `$${row.original.discountAmount}` : '-'}</Box>;
+                return (
+                    <Box textAlign="right">{row.original.discountAmount ? `$${row.original.discountAmount}` : '-'}</Box>
+                );
             }
 
             return row.id;
-        }
+        },
     },
     {
         id: 'date',
         width: 150,
         Header: 'Purchase date',
-        accessor: 'date'
+        accessor: 'date',
     },
     {
         id: 'status',
@@ -75,32 +96,32 @@ const columnDefinitions = [
         Cell: ({ row }: any) => {
             if (row && row.original) {
                 const status = row.original.status;
-                switch(status) {
+                switch (status) {
                     case 'Delivered':
-                        return <StatusIndicator  statusType='positive'>Delivered</StatusIndicator>;
+                        return <StatusIndicator statusType="positive">Delivered</StatusIndicator>;
                     case 'Canceled':
-                        return <StatusIndicator  statusType='negative'>Canceled</StatusIndicator>;
+                        return <StatusIndicator statusType="negative">Canceled</StatusIndicator>;
                     case 'Returned':
-                        return <StatusIndicator  statusType='negative'>Returned</StatusIndicator>;
+                        return <StatusIndicator statusType="negative">Returned</StatusIndicator>;
                     case 'Processing':
-                        return <StatusIndicator statusType='info'>Processing</StatusIndicator>;
+                        return <StatusIndicator statusType="info">Processing</StatusIndicator>;
                     default:
                         return null;
                 }
             }
 
             return row.id;
-        }
-    }
+        },
+    },
 ];
 
 const OrdersTable: FunctionComponent = () => {
     const [selectedItems, setSelectedItems] = useState<object[]>([]);
     const history = useHistory();
-    
+
     const onCreateClick = () => {
         history.push('/createOrder');
-    }
+    };
 
     const handleSelectionChange = (items: object[]) => {
         if (!(selectedItems.length === 0 && items.length === 0)) {
@@ -110,7 +131,7 @@ const OrdersTable: FunctionComponent = () => {
 
     const tableActions = (
         <Inline>
-            <Button disabled={selectedItems.length !== 1} onClick={()=>{}}>
+            <Button disabled={selectedItems.length !== 1} onClick={() => {}}>
                 Delete
             </Button>
             <Button onClick={onCreateClick} variant="primary">
@@ -119,14 +140,16 @@ const OrdersTable: FunctionComponent = () => {
         </Inline>
     );
 
-    return <Table
-        onSelectionChange={handleSelectionChange}
-        tableTitle={'Sales orders'}
-        columnDefinitions={columnDefinitions}
-        items={data}
-        actionGroup={tableActions}
-        multiSelect={false}
-    />
-}
+    return (
+        <Table
+            onSelectionChange={handleSelectionChange}
+            tableTitle={'Sales orders'}
+            columnDefinitions={columnDefinitions}
+            items={data}
+            actionGroup={tableActions}
+            multiSelect={false}
+        />
+    );
+};
 
 export default OrdersTable;

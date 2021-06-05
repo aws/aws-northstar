@@ -5,6 +5,7 @@ storybook.out/
 styleguide.out/
 coverage/
 oss-attribution/
+temp/
 
 .cache/
 .vscode/
