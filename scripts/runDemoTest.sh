@@ -12,14 +12,10 @@ if [ -d $TEST_FOLDER ]; then rm -rf $TEST_FOLDER; fi
 
 mkdir $TEST_FOLDER
 
-cp -r $DEMO_FOLDER $TEST_FOLDER
+cp -r $DEMO_FOLDER/ $TEST_FOLDER/
 
-pushd $TEST_FOLDER
+cd $TEST_FOLDER && yarn add $BUILD_FOLDER && yarn && yarn tsc
 
-yarn add $BUILD_FOLDER
-yarn
-yarn tsc
-
-popd
+cd -
 
 rm -rf $TEST_FOLDER
