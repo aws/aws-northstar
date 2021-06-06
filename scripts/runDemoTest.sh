@@ -4,9 +4,9 @@
 
 set -ev
 
-TEST_FOLDER=$(PWD)/temp
-DEMO_FOLDER=$(PWD)/examples/create-react-app
-BUILD_FOLDER=$(PWD)/build
+TEST_FOLDER=$PWD/temp
+DEMO_FOLDER=$PWD/examples/create-react-app
+BUILD_FOLDER=$PWD/build
 
 if [ -d $TEST_FOLDER ]; then rm -rf $TEST_FOLDER; fi 
 
