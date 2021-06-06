@@ -42,45 +42,27 @@ const columnDefinitions: Column<Order>[] = [
         width: 150,
         Header: 'Total',
         accessor: 'amount',
-        Cell: ({ row }: any) => {
-            if (row && row.original) {
-                return <Box textAlign="right">${row.original.amount}</Box>;
-            }
-
-            return row.id;
-        },
+        Cell: ({ row }) => <Box textAlign="right">${row.original.amount}</Box>,
     },
     {
         id: 'discounted',
         width: 120,
         Header: 'Discounted?',
-        Cell: ({ row }: any) => {
-            if (row && row.original) {
-                const discounted = row.original.discounted;
-                return (
-                    <Box textAlign="center">
-                        <Checkbox checked={discounted} disabled />
-                    </Box>
-                );
-            }
-
-            return row.id;
-        },
+        accessor: 'discounted',
+        Cell: ({ row }) => (
+            <Box textAlign="center">
+                <Checkbox checked={row.original.discounted} disabled />
+            </Box>
+        ),
     },
     {
         id: 'discountAmount',
         width: 100,
         Header: 'Discount',
         accessor: 'discountAmount',
-        Cell: ({ row }: any) => {
-            if (row && row.original) {
-                return (
-                    <Box textAlign="right">{row.original.discountAmount ? `$${row.original.discountAmount}` : '-'}</Box>
-                );
-            }
-
-            return row.id;
-        },
+        Cell: ({ row }) => (
+            <Box textAlign="right">{row.original.discountAmount ? `$${row.original.discountAmount}` : '-'}</Box>
+        ),
     },
     {
         id: 'date',
@@ -93,24 +75,20 @@ const columnDefinitions: Column<Order>[] = [
         width: 150,
         Header: 'Status',
         accessor: 'status',
-        Cell: ({ row }: any) => {
-            if (row && row.original) {
-                const status = row.original.status;
-                switch (status) {
-                    case 'Delivered':
-                        return <StatusIndicator statusType="positive">Delivered</StatusIndicator>;
-                    case 'Canceled':
-                        return <StatusIndicator statusType="negative">Canceled</StatusIndicator>;
-                    case 'Returned':
-                        return <StatusIndicator statusType="negative">Returned</StatusIndicator>;
-                    case 'Processing':
-                        return <StatusIndicator statusType="info">Processing</StatusIndicator>;
-                    default:
-                        return null;
-                }
+        Cell: ({ row }) => {
+            const status = row.original.status;
+            switch (status) {
+                case 'Delivered':
+                    return <StatusIndicator statusType="positive">Delivered</StatusIndicator>;
+                case 'Canceled':
+                    return <StatusIndicator statusType="negative">Canceled</StatusIndicator>;
+                case 'Returned':
+                    return <StatusIndicator statusType="negative">Returned</StatusIndicator>;
+                case 'Processing':
+                    return <StatusIndicator statusType="info">Processing</StatusIndicator>;
+                default:
+                    return null;
             }
-
-            return row.id;
         },
     },
 ];
@@ -143,7 +121,7 @@ const OrdersTable: FunctionComponent = () => {
     return (
         <Table
             onSelectionChange={handleSelectionChange}
-            tableTitle={'Sales orders'}
+            tableTitle="Sales orders"
             columnDefinitions={columnDefinitions}
             items={data}
             actionGroup={tableActions}

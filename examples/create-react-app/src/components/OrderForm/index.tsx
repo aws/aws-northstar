@@ -18,40 +18,10 @@ import { useHistory } from 'react-router-dom';
 import Container from 'aws-northstar/layouts/Container';
 import FormRenderer, { componentTypes, validatorTypes } from 'aws-northstar/components/FormRenderer';
 
-export const items = [
-    {
-        value: 'Item 1',
-        label: 'Item 1',
-    },
-    {
-        value: 'Item 2',
-        label: 'Item 2',
-    },
-    {
-        value: 'Item 3',
-        label: 'Item 3',
-    },
-    {
-        value: 'Item 4',
-        label: 'Item 4',
-    },
-    {
-        value: 'Item 5',
-        label: 'Item 5',
-    },
-    {
-        value: 'Item 6',
-        label: 'Item 6',
-    },
-    {
-        value: 'Item 7',
-        label: 'Item 7',
-    },
-    {
-        value: 'Item 8',
-        label: 'Item 8',
-    },
-];
+export const items = Array.from(Array(8).keys()).map((i) => ({
+    label: `Item ${i + 1}`,
+    value: `Item ${i + 1}`,
+}));
 
 const formSchema = {
     header: 'Sales order form',

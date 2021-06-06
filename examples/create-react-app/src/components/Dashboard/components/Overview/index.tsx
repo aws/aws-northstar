@@ -50,19 +50,19 @@ const Overview: FunctionComponent = () => {
         <Container title="High level overview">
             <ColumnLayout>
                 <Column key="column1">
-                    <KeyValuePair label="Total number of order" value={totalOrder}></KeyValuePair>
+                    <KeyValuePair label="Total number of order" value={totalOrder} />
                     <KeyValuePair
                         label="Number of transactions with discount"
                         value={transactionsWithDiscount}
                     ></KeyValuePair>
                 </Column>
                 <Column key="column2">
-                    <KeyValuePair label="Total revenue" value={`$${totalAmount}`}></KeyValuePair>
-                    <KeyValuePair label="Total discount" value={`$${totalDiscount}`}></KeyValuePair>
+                    <KeyValuePair label="Total revenue" value={`$${totalAmount}`} />
+                    <KeyValuePair label="Total discount" value={`$${totalDiscount}`} />
                 </Column>
                 <Column key="column3">
-                    <KeyValuePair label="Most sold item" value={mostSoldItem}></KeyValuePair>
-                    <KeyValuePair label="Number of pending orders" value={pendingOrder}></KeyValuePair>
+                    <KeyValuePair label="Most sold item" value={mostSoldItem} />
+                    <KeyValuePair label="Number of pending orders" value={pendingOrder} />
                 </Column>
             </ColumnLayout>
         </Container>

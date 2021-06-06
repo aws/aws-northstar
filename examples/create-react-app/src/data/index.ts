@@ -178,7 +178,7 @@ const sumByItem: Account[] = data.reduce((acc: Account[], order: Order) => {
     return acc;
 }, []);
 
-sumByItem.sort((a, b) => (a.amount > b.amount ? 1 : -1));
+sumByItem.sort((a, b) => a.amount - b.amount);
 
 interface DateData {
     date: string;

@@ -25,4 +25,4 @@ if [ ! -d "./styleguide.out/examples" ]; then mkdir -p styleguide.out/examples ;
 cd examples && tar -czvf ../styleguide.out/examples/create-react-app.tar.gz ./create-react-app && cd -
 
 # Test the example app
-./scripts/runDemotest.sh
+./scripts/runDemoTest.sh
