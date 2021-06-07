@@ -1,4 +1,19 @@
-type Order = {
+/** *******************************************************************************************************************
+  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+  
+  Licensed under the Apache License, Version 2.0 (the "License").
+  You may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+      http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.                                                                              *
+ ******************************************************************************************************************** */
+export type Order = {
     customer: string;
     amount: number;
     discountAmount: number;
@@ -6,7 +21,7 @@ type Order = {
     date: string;
     discounted: boolean;
     status: string;
-}
+};
 
 const data: Order[] = [
     {
@@ -16,7 +31,7 @@ const data: Order[] = [
         item: 'Item 1',
         date: '2020/01/02',
         discounted: true,
-        status: 'Delivered'
+        status: 'Delivered',
     },
     {
         customer: 'John',
@@ -25,7 +40,7 @@ const data: Order[] = [
         item: 'Item 1',
         date: '2020/04/01',
         discounted: false,
-        status: 'Delivered'
+        status: 'Delivered',
     },
     {
         customer: 'John',
@@ -34,7 +49,7 @@ const data: Order[] = [
         item: 'Item 2',
         date: '2020/05/06',
         discounted: true,
-        status: 'Delivered'
+        status: 'Delivered',
     },
     {
         customer: 'Jim',
@@ -43,7 +58,7 @@ const data: Order[] = [
         item: 'Item 1',
         date: '2020/03/02',
         discounted: false,
-        status: 'Canceled'
+        status: 'Canceled',
     },
     {
         customer: 'Sarah',
@@ -52,7 +67,7 @@ const data: Order[] = [
         item: 'Item 1',
         date: '2019/12/04',
         discounted: false,
-        status: 'Returned'
+        status: 'Returned',
     },
     {
         customer: 'Kim',
@@ -61,7 +76,7 @@ const data: Order[] = [
         item: 'Item 2',
         date: '2020/05/06',
         discounted: true,
-        status: 'Delivered'
+        status: 'Delivered',
     },
     {
         customer: 'Sarah',
@@ -70,7 +85,7 @@ const data: Order[] = [
         item: 'Item 1',
         date: '2019/12/04',
         discounted: false,
-        status: 'Processing'
+        status: 'Processing',
     },
     {
         customer: 'Kim',
@@ -79,7 +94,7 @@ const data: Order[] = [
         item: 'Item 3',
         date: '2019/11/10',
         discounted: false,
-        status: 'Delivered'
+        status: 'Delivered',
     },
     {
         customer: 'Kim',
@@ -88,7 +103,7 @@ const data: Order[] = [
         item: 'Item 4',
         date: '2019/11/08',
         discounted: false,
-        status: 'Delivered'
+        status: 'Delivered',
     },
     {
         customer: 'Liam',
@@ -97,7 +112,7 @@ const data: Order[] = [
         item: 'Item 2',
         date: '2020/03/08',
         discounted: false,
-        status: 'Delivered'
+        status: 'Delivered',
     },
     {
         customer: 'Liam',
@@ -106,7 +121,7 @@ const data: Order[] = [
         item: 'Item 1',
         date: '2020/03/10',
         discounted: false,
-        status: 'Delivered'
+        status: 'Delivered',
     },
     {
         customer: 'Liam',
@@ -115,7 +130,7 @@ const data: Order[] = [
         item: 'Item 3',
         date: '2020/04/10',
         discounted: true,
-        status: 'Delivered'
+        status: 'Delivered',
     },
     {
         customer: 'Liam',
@@ -124,7 +139,7 @@ const data: Order[] = [
         item: 'Item 4',
         date: '2020/05/10',
         discounted: true,
-        status: 'Processing'
+        status: 'Processing',
     },
     {
         customer: 'Liam',
@@ -133,7 +148,7 @@ const data: Order[] = [
         item: 'Item 2',
         date: '2020/03/08',
         discounted: false,
-        status: 'Delivered'
+        status: 'Delivered',
     },
     {
         customer: 'Liam',
@@ -142,7 +157,7 @@ const data: Order[] = [
         item: 'Item 1',
         date: '2020/03/20',
         discounted: false,
-        status: 'Delivered'
+        status: 'Delivered',
     },
 ];
 
@@ -150,12 +165,12 @@ type Account = {
     item: string;
     amount: number;
     discount: number;
-}
+};
 
 const sumByItem: Account[] = data.reduce((acc: Account[], order: Order) => {
-    const item = acc.find(i => i.item === order.item);
+    const item = acc.find((i) => i.item === order.item);
     if (!item) {
-        acc.push({amount: order.amount, item: order.item, discount: order.discountAmount});
+        acc.push({ amount: order.amount, item: order.item, discount: order.discountAmount });
     } else {
         item.amount += order.amount;
         item.discount += order.discountAmount;
@@ -163,7 +178,7 @@ const sumByItem: Account[] = data.reduce((acc: Account[], order: Order) => {
     return acc;
 }, []);
 
-sumByItem.sort((a, b) => (a.amount > b.amount) ? 1 : -1);
+sumByItem.sort((a, b) => a.amount - b.amount);
 
 interface DateData {
     date: string;
@@ -172,9 +187,9 @@ interface DateData {
 }
 
 const sumByDate: DateData[] = data.reduce((acc: DateData[], order) => {
-    const date = acc.find(i => i.date === order.date);
+    const date = acc.find((i) => i.date === order.date);
     if (!date) {
-        acc.push({amount: order.amount, date: order.date, discount: order.discountAmount});
+        acc.push({ amount: order.amount, date: order.date, discount: order.discountAmount });
     } else {
         date.amount += order.amount;
         date.discount += order.discountAmount;
@@ -183,10 +198,7 @@ const sumByDate: DateData[] = data.reduce((acc: DateData[], order) => {
     return acc;
 }, []);
 
-sumByDate.sort((a, b) => (a.date > b.date) ? 1 : -1);
+sumByDate.sort((a, b) => (a.date > b.date ? 1 : -1));
 
 export default data;
-export {
-    sumByItem,
-    sumByDate
-};
+export { sumByItem, sumByDate };

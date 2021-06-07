@@ -1,27 +1,26 @@
 {
-  "name": "aws-northstar-example-create-react-app",
-  "version": "1.0.0",
+  "name": "aws-northstar-demo",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-router": "^5.1.8",
-    "@types/react-router-dom": "^5.1.5",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.7",
     "aws-northstar": "latest",
-    "plotly.js": "^1.54.7",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-pivottable": "^0.10.0",
-    "react-plotly.js": "^2.4.0",
-    "react-router": "^5.2.0",
+    "plotly.js": "^1.58.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-pivottable": "^0.11.0",
+    "react-plotly.js": "^2.5.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.0",
-    "typescript": "~3.7.2"
+    "react-scripts": "4.0.3",
+    "typescript": "^4.1.2",
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,8 +28,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!@react-use-localstorage)/"
+    ]
   },
   "browserslist": {
     "production": [

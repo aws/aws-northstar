@@ -1,42 +1,27 @@
+/** *******************************************************************************************************************
+  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+  
+  Licensed under the Apache License, Version 2.0 (the "License").
+  You may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+      http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.                                                                              *
+ ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
 import { useHistory } from 'react-router-dom';
 import Container from 'aws-northstar/layouts/Container';
 import FormRenderer, { componentTypes, validatorTypes } from 'aws-northstar/components/FormRenderer';
 
-export const items = [
-    {
-        value: 'Item 1',
-        label: 'Item 1'
-    },
-    {
-        value: 'Item 2',
-        label: 'Item 2'
-    },
-    {
-        value: 'Item 3',
-        label: 'Item 3'
-    },
-    {
-        value: 'Item 4',
-        label: 'Item 4'
-    },
-    {
-        value: 'Item 5',
-        label: 'Item 5'
-    },
-    {
-        value: 'Item 6',
-        label: 'Item 6'
-    },
-    {
-        value: 'Item 7',
-        label: 'Item 7'
-    },
-    {
-        value: 'Item 8',
-        label: 'Item 8'
-    }
-];
+export const items = Array.from(Array(8).keys()).map((i) => ({
+    label: `Item ${i + 1}`,
+    value: `Item ${i + 1}`,
+}));
 
 const formSchema = {
     header: 'Sales order form',
@@ -46,7 +31,7 @@ const formSchema = {
             component: componentTypes.TEXT_FIELD,
             name: 'customer',
             label: 'Customer name',
-            description: 'Name of the customer', 
+            description: 'Name of the customer',
             helperText: 'Maxiumn 50 characters',
             isRequired: true,
             validate: [
@@ -110,7 +95,7 @@ const formSchema = {
             options: [
                 { label: 'Processing', value: '1' },
                 { label: 'Canceled', value: '2' },
-                { label: 'Delivered', value: '3' }
+                { label: 'Delivered', value: '3' },
             ],
             isRequired: true,
             validate: [
@@ -131,7 +116,7 @@ const formSchema = {
             description: 'Discount amount of an order',
             type: 'number',
             condition: {
-                when: 'discounted', 
+                when: 'discounted',
                 is: true,
             },
             validate: [
@@ -147,14 +132,20 @@ const formSchema = {
                 },
             ],
         },
-    ]
+    ],
 };
 
 const OrderForm: FunctionComponent = () => {
     const history = useHistory();
-    return  <Container>
-            <FormRenderer schema={formSchema} onSubmit={(data: any) => alert(`Data Submitted: ${JSON.stringify(data)}`)} onCancel={() => history.goBack()} />
+    return (
+        <Container>
+            <FormRenderer
+                schema={formSchema}
+                onSubmit={(data: any) => alert(`Data Submitted: ${JSON.stringify(data)}`)}
+                onCancel={() => history.goBack()}
+            />
         </Container>
-}
+    );
+};
 
 export default OrderForm;
