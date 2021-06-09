@@ -10,12 +10,20 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 
+**Versions**
+Which version of aws-northstar npm package is installed?
+
 **To Reproduce**
 Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
+
+**Code**
+
+If it's possible, please provide the code which reproduces the issue.
+You can use this [CodeSandbox Template](https://codesandbox.io/s/northstar-template-u468i) to create a demo sandbox.
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
