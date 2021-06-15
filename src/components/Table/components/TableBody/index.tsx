@@ -70,8 +70,7 @@ export default function TableBody<D extends object>({
                                             <div className={styles.cellAlign}>
                                                 <span className={clsx({ [styles.ellipsizeText]: !wrapText })}>
                                                     <b>
-                                                        {cell.render!('Cell')} (
-                                                        {cell.render!('Aggregated', { count: true })})
+                                                        {cell.render!('Cell')} ({row.subRows.length})
                                                     </b>
                                                 </span>
                                                 {row.isExpanded ? (
