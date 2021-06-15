@@ -3,6 +3,6 @@ This example demonstrates how you can setup NorthStar in a React application cre
 To run the example, just install it and run:
 
 ```
-npm install
-npm start
+yarn
+yarn start
 ```

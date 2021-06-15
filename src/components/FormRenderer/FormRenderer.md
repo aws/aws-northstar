@@ -1380,37 +1380,157 @@ import Container from 'aws-northstar/layouts/Container';
 import FormRenderer, { componentTypes, validatorTypes } from 'aws-northstar/components/FormRenderer';
 
 
-    const schema = {
-        submitLabel: 'Save',
-        cancelLabel: 'Back',
-        fields: [
-            {
-                component: componentTypes.MARKDOWN_EDITOR,
-                name: 'markdownOne',
-                label: 'This is a markdown editor',
-                helperText: 'Helper text provides users some guidance.',
-                initialValue: '# I am a Markdown editor.\n\rHave a play.',
-                onChange: console.log,
-                validate: [
-                    {
-                        type: validatorTypes.REQUIRED,
-                    },
-                ],
-            },
-            {
-                component: componentTypes.MARKDOWN_EDITOR,
-                name: 'markdownTwo',
-                label: 'This is a read only markdown editor',
-                isReadOnly: true,
-                initialValue: '# I should be read only\n\rAnd you should not be able to edit me',
-            },
-        ],
-        header: 'Markdown Editor',
-        description: 'This component allows a user to enter markdown and renders it in real-time.',
-    };
+const schema = {
+    submitLabel: 'Save',
+    cancelLabel: 'Back',
+    fields: [
+        {
+            component: componentTypes.MARKDOWN_EDITOR,
+            name: 'markdownOne',
+            label: 'This is a markdown editor',
+            helperText: 'Helper text provides users some guidance.',
+            initialValue: '# I am a Markdown editor.\n\rHave a play.',
+            onChange: console.log,
+            validate: [
+                {
+                    type: validatorTypes.REQUIRED,
+                },
+            ],
+        },
+        {
+            component: componentTypes.MARKDOWN_EDITOR,
+            name: 'markdownTwo',
+            label: 'This is a read only markdown editor',
+            isReadOnly: true,
+            initialValue: '# I should be read only\n\rAnd you should not be able to edit me',
+        },
+    ],
+    header: 'Markdown Editor',
+    description: 'This component allows a user to enter markdown and renders it in real-time.',
+};
 
-    <Container>
-        <FormRenderer schema={schema} onSubmit={console.log} onCancel={console.log} />
-    </Container>
+<Container>
+    <FormRenderer schema={schema} onSubmit={console.log} onCancel={console.log} />
+</Container>
     
+```
+
+```jsx
+import FormRenderer, { componentTypes, validatorTypes } from 'aws-northstar/components/FormRenderer';
+import Container from 'aws-northstar/layouts/Container';
+
+const controlInteractionSchema = {
+    fields: [
+        {
+            component: componentTypes.SELECT,
+            name: 'select1',
+            label: 'Select 1',
+            placeholder: 'Choose an option',
+            options: [
+                {
+                    label: 'Option 1',
+                    value: '1',
+                },
+                {
+                    label: 'Option 2',
+                    value: '2',
+                },
+                {
+                    label: 'Option 3',
+                    value: '3',
+                },
+            ],
+            isRequired: true,
+            validate: [
+                {
+                    type: validatorTypes.REQUIRED,
+                },
+            ],
+        },
+        {
+            component: componentTypes.SELECT,
+            name: 'select2',
+            label: 'Select 2',
+            helperText: 'Enabled only when the value of Select 1 is 2 and default value changes with the value of select1',
+            placeholder: 'Choose an option',
+            options: [
+                {
+                    label: 'Option 21',
+                    value: '21',
+                },
+                {
+                    label: 'Option 22',
+                    value: '22',
+                },
+                {
+                    label: 'Option 23',
+                    value: '23',
+                },
+            ],
+            isRequired: true,
+            validate: [
+                {
+                    type: validatorTypes.REQUIRED,
+                },
+            ],
+            resolveProps: (_props, _field, formOptions) => {
+                const values = formOptions.getState().values;
+                return values.select1 === '2'
+                    ? {
+                          isDisabled: false,
+                      }
+                    : {
+                          isDisabled: true,
+                      };
+            },
+            condition: {
+                when: 'select1',
+                is: '2',
+                then: { visible: true, set: { select2: '22' } },
+                else: { visible: true, set: { select2: '21' } },
+            },
+        },
+        {
+            component: componentTypes.SELECT,
+            name: 'select3',
+            label: 'Select 3',
+            helperText: 'Options changes with the value of Select 1 and only visible when Select 1 is set',
+            placeholder: 'Choose an option',
+            resolveProps: (_props, _field, formOptions) => {
+                const values = formOptions.getState().values;
+                return {
+                    options: [
+                        {
+                            label: `Option 3${values.select1}1`,
+                            value: `3${values.select1}1`,
+                        },
+                        {
+                            label: `Option 3${values.select1}2`,
+                            value: `3${values.select1}2`,
+                        },
+                        {
+                            label: `Option 3${values.select1}3`,
+                            value: `3${values.select1}3`,
+                        },
+                    ],
+                };
+            },
+            condition: {
+                when: 'select1',
+                isNotEmpty: true,
+            },
+        },
+    ],
+    header: 'Control Interaction'
+};
+
+<Container>
+    <FormRenderer
+        schema={controlInteractionSchema}
+        onSubmit={console.log}
+        onCancel={console.log}
+        subscription={{ values: true }}
+    />
+</Container>
+
 ```

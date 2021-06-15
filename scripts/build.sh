@@ -10,7 +10,7 @@ yarn styleguide:build
 yarn storybook:build
 
 echo 'Remove build folder to make sure the npm package only includes clean built components'
-if [ -d "./build" ]; then rm -rf ./build; fi # 
+if [ -d "./build" ]; then rm -rf ./build; fi 
 yarn build
 yarn build:esm
 yarn generate:attribution
@@ -23,3 +23,6 @@ cp ./LICENSE-THIRD-PARTY ./build/
 echo 'Copy the examples to published examples folder'
 if [ ! -d "./styleguide.out/examples" ]; then mkdir -p styleguide.out/examples ; fi
 cd examples && tar -czvf ../styleguide.out/examples/create-react-app.tar.gz ./create-react-app && cd -
+
+# Test the example app
+./scripts/runDemoTest.sh

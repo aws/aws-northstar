@@ -88,6 +88,10 @@ npm install
 npm start
 ```
 
+### CodeSandbox
+
+You can use this [CodeSandbox template](https://codesandbox.io/s/northstar-template-u468i) to create a sandbox to play around with NorthStar components.
+
 ## Support
 
 We use [GitHub Issues](https://github.com/aws/aws-northstar/issues) as a bug tracker. If you think you have found a bug, please follow the **Submitting bugs** section in the [Contribution Guide](https://northstar.aws-prototyping.cloud/#/Contribution%20Guide) and open an issue with detailed information about the issue.

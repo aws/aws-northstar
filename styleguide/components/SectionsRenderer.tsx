@@ -14,7 +14,6 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-// @ts-ignore
 import DefaultSectionsRenderer from 'react-styleguidist/lib/client/rsg-components/Sections/SectionsRenderer';
 
 const SectionsRenderer: React.FC = ({ children }) => {

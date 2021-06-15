@@ -14,31 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import { LineChart as Chart, Line as LineComponent, LineProps } from 'recharts';
-import withNorthStarBaseChart, { BaseChartPropsWithData } from '../withNorthStarBaseChart';
-import withNorthStarChart from '../withNorthStarChart';
-
-/**
- * Renders a Line chart
- */
-const LineChart = withNorthStarBaseChart<BaseChartPropsWithData>(Chart);
-
-const Line = withNorthStarChart<LineProps>(LineComponent, 'monotone');
-
-export default LineChart;
-export { Line };
-export { NORTHSTAR_COLORS } from '../../themes';
-export {
-    Tooltip,
-    Legend,
-    ReferenceArea,
-    ReferenceDot,
-    Customized,
-    Brush,
-    Cell,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Label,
-    LabelList,
-} from 'recharts';
+declare module 'react-pivottable';
+declare module 'react-pivottable/PivotTableUI';
+declare module 'react-pivottable/TableRenderers';
+declare module 'react-pivottable/PlotlyRenderers';

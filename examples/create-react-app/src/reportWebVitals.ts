@@ -13,32 +13,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
+import { ReportHandler } from 'web-vitals';
 
-import { LineChart as Chart, Line as LineComponent, LineProps } from 'recharts';
-import withNorthStarBaseChart, { BaseChartPropsWithData } from '../withNorthStarBaseChart';
-import withNorthStarChart from '../withNorthStarChart';
+const reportWebVitals = (onPerfEntry?: ReportHandler) => {
+    if (onPerfEntry && onPerfEntry instanceof Function) {
+        import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+            getCLS(onPerfEntry);
+            getFID(onPerfEntry);
+            getFCP(onPerfEntry);
+            getLCP(onPerfEntry);
+            getTTFB(onPerfEntry);
+        });
+    }
+};
 
-/**
- * Renders a Line chart
- */
-const LineChart = withNorthStarBaseChart<BaseChartPropsWithData>(Chart);
-
-const Line = withNorthStarChart<LineProps>(LineComponent, 'monotone');
-
-export default LineChart;
-export { Line };
-export { NORTHSTAR_COLORS } from '../../themes';
-export {
-    Tooltip,
-    Legend,
-    ReferenceArea,
-    ReferenceDot,
-    Customized,
-    Brush,
-    Cell,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Label,
-    LabelList,
-} from 'recharts';
+export default reportWebVitals;

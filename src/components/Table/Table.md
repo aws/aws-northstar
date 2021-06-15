@@ -1,3 +1,32 @@
+### Notes
+
+From release [v1.1.2](https://github.com/aws/aws-northstar/releases/tag/v1.1.2), there may be typescript warning on the columnDefinitions prop. The type can be added to the columnDefinition to suppress the warning. 
+
+```jsx static
+import Table, { Column } from 'aws-northstar/components/Table';
+
+...
+
+interface DataType {
+    id: string;
+    name: string;
+    ...
+}
+
+...
+
+const columnDefinition: Column<DataType>[] = [
+    {
+        id: 'id',
+        width: 200,
+        Header: 'Id',
+        accessor: 'id',
+    },
+    ...
+]
+
+```
+
 ### Examples
 
 ```jsx
