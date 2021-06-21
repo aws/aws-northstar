@@ -25,6 +25,7 @@ export interface SettingsBarProps {
     pageSizes: number[];
     pageLength: number;
     rowCount: number;
+    totalCount: number;
     disablePagination?: boolean;
     disableSettings?: boolean;
     disableGroupBy?: boolean;
@@ -50,6 +51,7 @@ export default function SettingBar({
     pageLength,
     loading,
     rowCount,
+    totalCount,
     disablePagination,
     disableSettings,
     disableGroupBy = false,
@@ -76,7 +78,7 @@ export default function SettingBar({
     const settingsId = settingsOpen ? 'settings-popover' : undefined;
 
     const settingsPopoverProps = {
-        pageSize: pageSize || 10,
+        pageSize,
         pageSizes,
         settingsId,
         loading,
@@ -114,7 +116,9 @@ export default function SettingBar({
                         >
                             <NavigateBefore />
                         </IconButton>
-                        <span>{`${pageIndex * pageSize + 1}-${pageIndex * pageSize + pageLength} of ${rowCount}`}</span>
+                        <span>{`${pageIndex * pageSize + 1}-${
+                            pageIndex * pageSize + pageLength
+                        } of ${totalCount}`}</span>
                         <IconButton
                             aria-label="next page"
                             size="small"
