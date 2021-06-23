@@ -23,30 +23,14 @@ interface DataType {
 }
 
 const data: DataType[] = [{ id: '123', name: 'Item one' }];
-const data10: DataType[] = [
-    { id: '0', name: 'Item0' },
-    { id: '1', name: 'Item1' },
-    { id: '2', name: 'Item2' },
-    { id: '3', name: 'Item3' },
-    { id: '4', name: 'Item4' },
-    { id: '5', name: 'Item5' },
-    { id: '6', name: 'Item6' },
-    { id: '7', name: 'Item7' },
-    { id: '8', name: 'Item8' },
-    { id: '9', name: 'Item9' },
-];
-const dataGroup: DataType[] = [
-    { id: '0', name: 'Item0' },
-    { id: '1', name: 'Item0' },
-    { id: '2', name: 'Item1' },
-    { id: '3', name: 'Item1' },
-    { id: '4', name: 'Item2' },
-    { id: '5', name: 'Item2' },
-    { id: '6', name: 'Item3' },
-    { id: '7', name: 'Item3' },
-    { id: '8', name: 'Item4' },
-    { id: '9', name: 'Item4' },
-]; // 5 groups by 'name'
+const data10: DataType[] = [...Array(10).keys()].map((i) => ({
+    id: `${i}`,
+    name: `Item${i}`,
+}));
+const dataGroup: DataType[] = [...Array(10).keys()].map((i) => ({
+    id: `${i}`,
+    name: `Item${Math.floor(i / 2)}`,
+})); // 5 groups by 'name'
 
 const columnDefinitions: Column<DataType>[] = [
     {

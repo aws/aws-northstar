@@ -22,6 +22,14 @@ const styles = {
     verticalGrid: 'verticalGrid',
 };
 
+const commonProps = {
+    styles,
+    columnsGroupingComponent: <div data-testid="columnsGroupingComponent" />,
+    columnsSelectorComponent: <div data-testid="columnsSelectorComponent" />,
+    rowCount: 120,
+    totalCount: 120,
+};
+
 describe('SettingsBar', () => {
     beforeEach(() => jest.clearAllMocks());
 
@@ -32,12 +40,9 @@ describe('SettingsBar', () => {
                 pageSize={10}
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
-                rowCount={120}
                 canNextPage={true}
                 canPreviousPage={true}
-                styles={styles}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
+                {...commonProps}
             />
         );
 
@@ -56,12 +61,9 @@ describe('SettingsBar', () => {
                 pageSize={25}
                 pageSizes={[10, 25, 100]}
                 pageLength={20}
-                rowCount={120}
                 canNextPage={false}
                 canPreviousPage={true}
-                styles={styles}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
+                {...commonProps}
             />
         );
 
@@ -78,16 +80,14 @@ describe('SettingsBar', () => {
                 pageSize={100}
                 pageSizes={[10, 25, 100]}
                 pageLength={100}
-                rowCount={120}
                 canNextPage={true}
                 canPreviousPage={false}
-                styles={styles}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
+                {...commonProps}
+                totalCount={130}
             />
         );
 
-        expect(getByText('1-100 of 120')).toBeVisible();
+        expect(getByText('1-100 of 130')).toBeVisible();
 
         expect(getByTestId('first-page')).toHaveAttribute('disabled');
         expect(getByTestId('previous-page')).toHaveAttribute('disabled');
@@ -100,14 +100,11 @@ describe('SettingsBar', () => {
                 pageSize={100}
                 pageSizes={[10, 25, 100]}
                 pageLength={100}
-                rowCount={120}
                 canNextPage={true}
                 canPreviousPage={true}
-                styles={styles}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
                 disablePagination={true}
                 disableSettings={true}
+                {...commonProps}
             />
         );
 
@@ -121,13 +118,10 @@ describe('SettingsBar', () => {
                 pageSize={100}
                 pageSizes={[10, 25, 100]}
                 pageLength={100}
-                rowCount={120}
                 canNextPage={true}
                 canPreviousPage={true}
-                styles={styles}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
                 disableSettings={true}
+                {...commonProps}
             />
         );
 
@@ -145,13 +139,10 @@ describe('SettingsBar', () => {
                 pageSize={100}
                 pageSizes={[10, 25, 100]}
                 pageLength={100}
-                rowCount={120}
                 canNextPage={true}
                 canPreviousPage={true}
-                styles={styles}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
                 disablePagination={true}
+                {...commonProps}
             />
         );
 
@@ -170,13 +161,10 @@ describe('SettingsBar', () => {
                 pageSize={10}
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
-                rowCount={120}
                 canNextPage={true}
                 canPreviousPage={true}
-                styles={styles}
                 gotoPage={handleGoToPage}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
+                {...commonProps}
             />
         );
 
@@ -195,13 +183,10 @@ describe('SettingsBar', () => {
                 pageSize={10}
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
-                rowCount={120}
                 canNextPage={true}
                 canPreviousPage={true}
-                styles={styles}
                 gotoPage={handleGoToPage}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
+                {...commonProps}
             />
         );
 
@@ -220,13 +205,10 @@ describe('SettingsBar', () => {
                 pageSize={11}
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
-                rowCount={120}
                 canNextPage={true}
                 canPreviousPage={true}
-                styles={styles}
                 gotoPage={handleGoToPage}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
+                {...commonProps}
             />
         );
 
@@ -245,13 +227,10 @@ describe('SettingsBar', () => {
                 pageSize={10}
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
-                rowCount={120}
                 canNextPage={true}
                 canPreviousPage={true}
-                styles={styles}
                 nextPage={handleNextPage}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
+                {...commonProps}
             />
         );
 
@@ -269,12 +248,9 @@ describe('SettingsBar', () => {
                 pageSize={10}
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
-                rowCount={120}
                 canNextPage={false}
                 canPreviousPage={true}
-                styles={styles}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
+                {...commonProps}
             />
         );
         expect(getByTestId('next-page')).toHaveAttribute('disabled');
@@ -288,13 +264,10 @@ describe('SettingsBar', () => {
                 pageSize={10}
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
-                rowCount={120}
                 canNextPage={true}
                 canPreviousPage={true}
-                styles={styles}
                 previousPage={handlePreviousPage}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
+                {...commonProps}
             />
         );
 
@@ -312,12 +285,9 @@ describe('SettingsBar', () => {
                 pageSize={10}
                 pageSizes={[10, 25, 100]}
                 pageLength={10}
-                rowCount={120}
                 canNextPage={true}
                 canPreviousPage={false}
-                styles={styles}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
+                {...commonProps}
             />
         );
         expect(getByTestId('previous-page')).toHaveAttribute('disabled');
@@ -325,16 +295,7 @@ describe('SettingsBar', () => {
 
     it('should render SettingsPopover when settings icon is clicked', () => {
         const { getByTestId, getByText, queryByText } = render(
-            <SettingsBar
-                pageIndex={1}
-                pageSize={10}
-                pageSizes={[10, 25, 100]}
-                pageLength={10}
-                rowCount={120}
-                styles={styles}
-                columnsGroupingComponent={<div data-testid="columnsGroupingComponent" />}
-                columnsSelectorComponent={<div data-testid="columnsSelectorComponent" />}
-            />
+            <SettingsBar pageIndex={1} pageSize={10} pageSizes={[10, 25, 100]} pageLength={10} {...commonProps} />
         );
 
         expect(queryByText('Settings')).toBeNull();
