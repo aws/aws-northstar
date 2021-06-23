@@ -15,6 +15,7 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode, useMemo, useEffect, useState } from 'react';
+import clsx from 'clsx';
 import {
     Column,
     IdType,
@@ -358,7 +359,7 @@ export default function Table<D extends object>({
                 sortBy: defaultSortBy,
                 groupBy: defaultGroups,
             },
-            pageCount,
+            ...(onFetchData != null && { pageCount }),
             getRowId,
             disableSortBy,
             disableGroupBy,
@@ -397,6 +398,7 @@ export default function Table<D extends object>({
         headerGroups,
         prepareRow,
         page,
+        rows,
         gotoPage,
         nextPage,
         canNextPage,
@@ -499,12 +501,17 @@ export default function Table<D extends object>({
         styles,
     };
 
+    const groupCount = useMemo(() => {
+        return rows.filter((row: Row<D> & Partial<UseGroupByRowProps<D>>) => row.isGrouped).length;
+    }, [rows]);
+
     const settingsBarProps = {
         pageIndex: pageIndex || 0,
         pageSize: pageSize || DEFAULT_PAGE_SIZE,
         pageSizes: pageSizes || DEFAULT_PAGE_SIZES,
         pageLength: (page || []).length,
-        rowCount,
+        rowCount: rows.length,
+        totalCount: rowCount + groupCount,
         loading,
         disablePagination,
         disableSettings,
@@ -564,7 +571,7 @@ export default function Table<D extends object>({
     return (
         <Container {...containerProps}>
             <div className={styles.tableWrapper}>
-                <BaseTable {...getTableProps()} size="small" className={loading ? styles.loadingTableBlur : ''}>
+                <BaseTable {...getTableProps()} size="small" className={clsx({ [styles.loadingTableBlur]: loading })}>
                     <TableHead {...tableHeadProps} />
                     <TableBody {...tableBodyProps} />
                     <TableFooter {...tableFooterProps} />

@@ -22,6 +22,7 @@ import Text from '../Text';
 import Input from '../Input';
 import FileUpload from '../FileUpload';
 import Container from '../../layouts/Container';
+import { ValidatorMapper } from '@data-driven-forms/react-form-renderer/validator-mapper';
 
 export default {
     component: FormRenderer,
@@ -1289,5 +1290,43 @@ export const ControlInteraction = () => {
             onCancel={action('Cancel')}
             subscription={{ values: true }}
         />
+    );
+};
+
+export const CustomValidator = () => {
+    const validatorMapping: ValidatorMapper = {
+        custom: ({ threshold }: any) => (value: number) =>
+            !value ? 'this is a required field' : value > threshold ? `${value} must be <= ${threshold}` : undefined,
+    };
+    const schema = {
+        submitLabel: 'Save',
+        cancelLabel: 'Back',
+        fields: [
+            {
+                component: componentTypes.TEXT_FIELD,
+                name: 'number',
+                label: 'Number',
+                type: 'number',
+                validate: [
+                    {
+                        type: 'custom',
+                        threshold: 6,
+                    },
+                ],
+            },
+        ],
+        header: 'Custom Validator',
+        description: 'This component allows a user to provide a custom validator.',
+    };
+
+    return (
+        <Container>
+            <FormRenderer
+                schema={schema}
+                validatorMapper={validatorMapping}
+                onSubmit={action('Submit')}
+                onCancel={action('Cancel')}
+            />
+        </Container>
     );
 };
