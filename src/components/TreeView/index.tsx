@@ -53,7 +53,9 @@ const useStyles = makeStyles({
 
 const renderTree = (node: TreeItemNode) => {
     const TreeItemLink = node.url ? (
-        <Link href={node.url} target="_blank">{`${node.label}`}</Link>
+        <Link href={node.url} target="_blank">
+            {node.label}
+        </Link>
     ) : (
         `${node.label} ${node.children?.length ? `(${node.children.length})` : ''}`
     );

@@ -67,12 +67,9 @@ const Link: FunctionComponent<LinkProps> = ({
     const classes = useStyles({});
     const isExternal = useMemo(() => forceExternal || externalPattern.test(href), [forceExternal, href]);
 
-    const renderExternalIcon = (isExternal: boolean) =>
-        isExternal ? <Launch className={classes.launchIcon} titleAccess="launch" /> : null;
-
     return (
         <MaterialLink
-            component={!isExternal ? RouterLink : 'a'}
+            component={isExternal ? 'a' : RouterLink}
             className={clsx(classes.link, { [classes.noneDecorationHover]: !underlineHover })}
             target={target}
             href={href}
@@ -82,7 +79,7 @@ const Link: FunctionComponent<LinkProps> = ({
             onClick={onClick}
         >
             {children}
-            {renderExternalIcon(isExternal)}
+            {isExternal && <Launch className={classes.launchIcon} titleAccess="launch" />}
         </MaterialLink>
     );
 };

@@ -14,6 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo, useState, useEffect } from 'react';
+import { Field } from '@data-driven-forms/react-form-renderer';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import ExpandableSection from '../../../ExpandableSection';
@@ -34,7 +35,7 @@ const ExpandableSectionMapping: FunctionComponent<UseFieldApiConfig> = (props) =
     } = useFieldApi(props);
     const { renderForm } = useFormApi();
     const editedFields = useMemo(() => {
-        return fields.map((field: any) => ({
+        return fields.map((field: Field) => ({
             ...field,
             showError,
             name: `${input.name}.${field.name}`,

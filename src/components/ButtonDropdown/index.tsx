@@ -228,7 +228,7 @@ const ButtonDropdown: FunctionComponent<ButtonDropdownProps> = ({
                 aria-haspopup="true"
                 aria-controls="simple-menu"
             >
-                {content} {!disableArrowDropdown ? <ArrowDropDown fontSize={'small'} /> : null}
+                {content} {!disableArrowDropdown && <ArrowDropDown fontSize="small" />}
             </Button>
 
             <Menu

@@ -94,7 +94,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
     const [maxStepIndex, setMaxStepIndex] = useState(props.activeStepIndex || 0);
     const [activeStepIndex, setActiveStepIndex] = useState(props.activeStepIndex || 0);
 
-    const handleStepNativationClick = (stepClickDetail: StepClickDetail) => {
+    const handleStepNavigationClick = (stepClickDetail: StepClickDetail) => {
         setActiveStepIndex(stepClickDetail.requestedStepIndex);
         onStepNavigationClick(stepClickDetail);
     };
@@ -137,7 +137,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
         disableStepNavigation,
         onNextButtonClick: handleNextButtonClick,
         onPreviousButtonClick: handlePreviousButtonClick,
-        onStepNavigationClick: handleStepNativationClick,
+        onStepNavigationClick: handleStepNavigationClick,
         onSubmitButtonClick: onSubmitButtonClick,
         onCancelButtonClick: onCancelButtonClick,
     };

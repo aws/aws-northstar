@@ -94,7 +94,7 @@ const FlashbarItem: FunctionComponent<FlashbarMessage> = ({
             severity: loading ? 'info' : type,
             iconMapping,
             action: actions,
-            icon: loading ? <CircularProgress className={styles.loading} size="16px" /> : undefined,
+            ...(loading && { icon: <CircularProgress className={styles.loading} size="16px" /> }),
         };
 
         return (

@@ -16,12 +16,13 @@
 import React, { FunctionComponent } from 'react';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { FieldArray as FieldArrayBase } from '@data-driven-forms/react-form-renderer';
-import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';
 import Text from '../../../Text';
 import Button from '../../../Button';
 import Stack from '../../../../layouts/Stack';
 import FieldArrayItem from './components/FieldArrayItem';
+import { getErrorText } from '../../getErrorText';
+import { getControlId } from '../../getContolId';
 
 const DEFAULT_BUTTON_LABELS = {
     add: 'Add new item',
@@ -48,9 +49,8 @@ const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         isReadOnly = false,
     } = useFieldApi(props);
 
-    const errorText =
-        (validateOnMount || submitFailed || showError) && error && typeof error === 'string' ? error : undefined;
-    const controlId = input.name ? input.name : uuidv4();
+    const controlId = getControlId(input.name);
+    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     const renderedButtonLabels = { ...DEFAULT_BUTTON_LABELS, ...buttonLabels };
 
     return (

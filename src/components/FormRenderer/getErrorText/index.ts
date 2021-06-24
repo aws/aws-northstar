@@ -13,29 +13,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent } from 'react';
-import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import Toggle from '../../../Toggle';
-import FormField from '../../../FormField';
-import { getControlId } from '../../getContolId';
-
-const SwitchMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
-    const { label, description, isDisabled, initialValue, input, ...rest } = useFieldApi(props);
-    const controlId = getControlId(input.name);
-    return (
-        <FormField controlId={controlId}>
-            <Toggle
-                {...input}
-                {...rest}
-                label={label}
-                checked={!!input.value}
-                description={description}
-                controlId={input.name}
-                disabled={isDisabled}
-                name={input.name}
-            />
-        </FormField>
-    );
+const getErrorText = (validateOnMount: any, submitFailed: boolean | undefined, showError: any, error: any) => {
+    return (validateOnMount || submitFailed || showError) && error && typeof error === 'string' ? error : undefined;
 };
 
-export default SwitchMapping;
+export { getErrorText };

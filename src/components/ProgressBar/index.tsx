@@ -149,7 +149,7 @@ const CircularProgressWithLabel: React.FunctionComponent<
                 classes={{ colorPrimary: classes.circularColorPrimary }}
                 {...props}
             />
-            {displayValue ? (
+            {displayValue && (
                 <Box
                     display="flex"
                     top={0}
@@ -164,8 +164,6 @@ const CircularProgressWithLabel: React.FunctionComponent<
                         value
                     )}%`}</Typography>
                 </Box>
-            ) : (
-                <></>
             )}
         </Box>
     );
@@ -219,7 +217,7 @@ const ProgressBar: FunctionComponent<
 
     return (
         <>
-            {label && <Heading variant="h3">{label || ''}</Heading>}
+            {label && <Heading variant="h3">{label}</Heading>}
             {description && (
                 <Typography className={classes.description} variant="body1">
                     {description}

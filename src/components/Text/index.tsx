@@ -31,24 +31,13 @@ export interface TextProps {
  * style applied.
  */
 const Text: FunctionComponent<TextProps> = ({ children, variant = 'span', color }) => {
-    if (variant === 'span') {
-        return (
-            <Typography variant="body1" component="span" color={color}>
-                {children}
-            </Typography>
-        );
-    }
-
-    if (variant === 'small') {
-        return (
-            <Typography variant="body2" component="small" color={color}>
-                {children}
-            </Typography>
-        );
-    }
+    const textProps = {
+        span: { variant: 'body1', component: 'span' },
+        small: { variant: 'body2', component: 'small' },
+    };
 
     return (
-        <Typography variant="body1" color={color}>
+        <Typography {...(textProps[variant] ?? { variant: 'body1' })} color={color}>
             {children}
         </Typography>
     );

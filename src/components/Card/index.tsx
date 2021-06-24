@@ -17,7 +17,7 @@
 import React, { FunctionComponent, ReactNode, MouseEvent } from 'react';
 import MUICard from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
+import CardHeader, { CardHeaderProps } from '@material-ui/core/CardHeader';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Text from '../Text';
 
@@ -41,7 +41,7 @@ export interface CardProps {
     /**
      * These props will be forwarded to the title
      */
-    titleTypographyProps?: any;
+    titleTypographyProps?: CardHeaderProps['titleTypographyProps'];
     /**
      * Fired when the user clicks on the card.
      */
@@ -76,7 +76,7 @@ const useStyles = makeStyles<Theme, { withHover?: boolean }>((theme: Theme) => (
 const Card: FunctionComponent<CardProps> = ({
     title = '',
     subtitle = '',
-    titleTypographyProps = {},
+    titleTypographyProps,
     children,
     onClick,
     onMouseEnter,
@@ -86,9 +86,7 @@ const Card: FunctionComponent<CardProps> = ({
 }) => {
     const styles = useStyles({ withHover });
     const content = (
-        <CardContent>
-            {typeof children === 'string' ? <Text variant="p">{children}</Text> : <>{children}</>}
-        </CardContent>
+        <CardContent>{typeof children === 'string' ? <Text variant="p">{children}</Text> : children}</CardContent>
     );
     return (
         <MUICard

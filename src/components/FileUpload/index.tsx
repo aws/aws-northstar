@@ -68,15 +68,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
     const [selectedFiles, setSelectedFiles] = useState<(File | FileMetadata)[]>(files);
     const inputElement = useRef<HTMLInputElement | null>(null);
     const displayedButtonText = useMemo(() => {
-        if (buttonText) {
-            return buttonText;
-        }
-
-        if (multiple) {
-            return 'Choose files';
-        }
-
-        return 'Choose file';
+        return buttonText || `Choose ${multiple ? 'files' : 'file'}`;
     }, [buttonText, multiple]);
 
     const handleFileSelectionDismiss = useCallback(

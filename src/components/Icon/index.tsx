@@ -72,13 +72,9 @@ const Icon: FunctionComponent<IconProps> = ({ name, variant, ...rest }) => {
     const variantTheme = variant === 'Filled' || !variant ? '' : variant;
     const iconName = `${name}${variantTheme}`;
     // support both standard full name or short name with variant
-    let IconComponent = icons[iconName] || icons[name];
+    const IconComponent = icons[iconName] || icons[name];
 
-    if (!IconComponent) {
-        return null;
-    }
-
-    return <IconComponent {...rest} />;
+    return IconComponent ? <IconComponent {...rest} /> : null;
 };
 
 export default Icon;

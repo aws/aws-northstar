@@ -14,13 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, memo, useMemo } from 'react';
+import { Field } from '@data-driven-forms/react-form-renderer';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import FormSection from '../../../FormSection';
 import Box from '../../../../layouts/Box';
 import { ExpandableSectionVariant } from '../../../ExpandableSection';
 
 export interface SubformProps {
-    fields: any;
+    fields: Field[];
     title: string;
     description?: string;
     expandable?: boolean;
@@ -33,7 +34,7 @@ const Subform: FunctionComponent<SubformProps> = ({ title, description, ...props
     const { renderForm } = useFormApi();
 
     const fields = useMemo(() => {
-        return props.fields.map((field: any) => ({
+        return props.fields.map((field) => ({
             ...field,
             showError: props.showError,
         }));

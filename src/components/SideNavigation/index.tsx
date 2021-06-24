@@ -148,16 +148,14 @@ export const SideNavigation: FunctionComponent<SideNavigationProps> = ({ header,
     };
 
     const wrapInHref = (children: ReactNode, href?: string) => {
-        if (!href) {
-            return children;
-        }
-
-        return (
+        return href ? (
             <div style={{ width: '100%' }}>
                 <Link href={href} underlineHover={false}>
                     {children}
                 </Link>
             </div>
+        ) : (
+            children
         );
     };
 

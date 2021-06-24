@@ -53,13 +53,12 @@ export interface ToggleProps {
 /**
  * A toggle represents a switch that allows the user to turn things on or off.
  * */
-const mapProps = ({ controlId, ...props }: ToggleProps): SwitchProps => {
-    const id: string = controlId || uuidv4();
+const mapProps = ({ controlId = uuidv4(), ...props }: ToggleProps): SwitchProps => {
     return {
         checked: props.checked,
         disabled: props.disabled,
         name: props.name,
-        id,
+        id: controlId,
         'aria-labelledby': props.ariaLabelledby,
         'aria-describedby': props.ariaDescribedby,
         'aria-label': props.ariaLabel,

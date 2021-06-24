@@ -24,7 +24,7 @@ import { InputAdornment } from '@material-ui/core';
 
 export interface InputProps {
     /** Text entered into the form element. */
-    value?: any;
+    value?: MaterialInputProps['value'];
     /** Type of control to render */
     type?: 'text' | 'password' | 'search' | 'number' | 'email';
     /** The name of the control used in HTML forms. */
@@ -124,7 +124,7 @@ const mapProps = ({
 const Input: FunctionComponent<InputProps> = ({ onChange, ...props }): ReactElement => {
     const [showClearInputButton, setShowClearInputButton] = React.useState(false);
     const [inputValue, setInputValue] = React.useState(props.value === undefined ? '' : props.value);
-    const id: string = props.controlId || uuidv4();
+    const id = props.controlId || uuidv4();
 
     useEffect(() => {
         setInputValue(props.value === undefined ? '' : props.value);

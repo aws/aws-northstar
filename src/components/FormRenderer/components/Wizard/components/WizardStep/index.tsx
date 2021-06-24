@@ -15,12 +15,13 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo, useState, useEffect } from 'react';
 import { WizardInner, WizardStepInfo } from '../../../../../Wizard';
+import { Field } from '@data-driven-forms/react-form-renderer';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 
 export interface WizardStepProps {
     title: string;
     description?: string;
-    fields: any[];
+    fields: Field[];
     stepsInfo: WizardStepInfo[];
     activeStepIndex: number;
     maxStepIndex: number;
@@ -63,10 +64,6 @@ const WizardStep: FunctionComponent<WizardStepProps> = ({
         }
     };
 
-    const handlePreviousButtonClick = () => {
-        onPreviousButtonClick();
-    };
-
     return (
         <WizardInner
             step={{
@@ -80,7 +77,7 @@ const WizardStep: FunctionComponent<WizardStepProps> = ({
             stepCount={stepsInfo.length}
             submitButtonText={submitButtonText}
             onNextButtonClick={handleNextButtonClick}
-            onPreviousButtonClick={handlePreviousButtonClick}
+            onPreviousButtonClick={onPreviousButtonClick}
             onCancelButtonClick={formOptions.onCancel}
             onSubmitButtonClick={(event) => {
                 event.preventDefault();
