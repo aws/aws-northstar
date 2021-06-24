@@ -39,6 +39,7 @@ import TreeView from './components/TreeView';
 import Wizard from './components/Wizard';
 import MarkdownEditor from './components/MarkdownEditor';
 import { componentTypes, Schema, RenderProps } from './types';
+import { ValidatorMapper } from '@data-driven-forms/react-form-renderer/validator-mapper';
 
 const componentMapper = {
     [componentTypes.TEXT_FIELD]: TextField,
@@ -77,6 +78,8 @@ export interface FormRendererProps {
     customComponentWrapper?: {
         [componentType: string]: ComponentType;
     };
+    /** Custom validator mapper */
+    validatorMapper?: ValidatorMapper;
 }
 
 /**
@@ -86,6 +89,7 @@ export interface FormRendererProps {
  */
 const FormRenderer: FunctionComponent<FormRendererProps> = ({
     schema,
+    validatorMapper,
     onSubmit,
     onCancel,
     isSubmitting,
@@ -102,6 +106,7 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
         <ReactFormRenderer
             componentMapper={{ ...componentMapper, ...customComponentWrapper }}
             FormTemplate={WrappedFormTemplate}
+            validatorMapper={validatorMapper}
             schema={schema}
             onSubmit={onSubmit}
             onCancel={onCancel}
