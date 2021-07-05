@@ -17,8 +17,8 @@ import React, { memo, useCallback, useMemo } from 'react';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import Table from '../../../Table';
 import FormField from '../../../FormField';
-import { getControlId } from '../../getContolId';
-import { getErrorText } from '../../getErrorText';
+import useUniqueId from '../../../../hooks/useUniqueId';
+import { getErrorText } from '../../utils/getErrorText';
 
 const TableMapping = (props: UseFieldApiConfig) => {
     const {
@@ -37,7 +37,7 @@ const TableMapping = (props: UseFieldApiConfig) => {
         meta: { error, submitFailed },
         ...rest
     } = useFieldApi(props);
-    const controlId = getControlId(input.name);
+    const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     const handleSelectionChange = useCallback(
         (selectedItems) => {

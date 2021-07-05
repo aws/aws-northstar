@@ -21,8 +21,8 @@ import Text from '../../../Text';
 import Button from '../../../Button';
 import Stack from '../../../../layouts/Stack';
 import FieldArrayItem from './components/FieldArrayItem';
-import { getErrorText } from '../../getErrorText';
-import { getControlId } from '../../getContolId';
+import { getErrorText } from '../../utils/getErrorText';
+import useUniqueId from '../../../../hooks/useUniqueId';
 
 const DEFAULT_BUTTON_LABELS = {
     add: 'Add new item',
@@ -49,7 +49,7 @@ const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         isReadOnly = false,
     } = useFieldApi(props);
 
-    const controlId = getControlId(input.name);
+    const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     const renderedButtonLabels = { ...DEFAULT_BUTTON_LABELS, ...buttonLabels };
 

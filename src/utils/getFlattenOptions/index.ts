@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { SelectOption } from '../components/Select';
+import { SelectOption } from '../../components/Select';
 
 const getFlattenOptions = (options: SelectOption[]) => {
     const optionArray: SelectOption[] = [];

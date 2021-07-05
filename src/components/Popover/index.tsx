@@ -20,7 +20,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import { Popover as MaterialPopover, PopoverProps as MaterialPopoverProps } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
-import { useUniqueId } from '../../hooks/useUniqueId';
+import useUniqueId from '../../hooks/useUniqueId';
 
 const useStyles = makeStyles((theme: Theme) => ({
     body: {
@@ -173,7 +173,7 @@ const Popover: FunctionComponent<PopoverProps> = ({
     onClose,
     ...restProps
 }) => {
-    const labelledById = useUniqueId('awsui-popover-');
+    const labelledById = useUniqueId();
     const classes = useStyles({});
     const triggerRef = useRef<HTMLButtonElement | null>(null);
 

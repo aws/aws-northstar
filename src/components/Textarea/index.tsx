@@ -147,6 +147,5 @@ const Textarea: FunctionComponent<TextareaProps> = ({ invalid, ...props }) => {
     );
 };
 
-export { mapTextareaProps };
-
 export default Textarea;
+export { mapTextareaProps };

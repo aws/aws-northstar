@@ -26,7 +26,7 @@ import StatusIndicator from '../StatusIndicator';
 import { AriaBaseProps } from '../../props/common';
 import { SelectBaseProps, SelectOption } from '../Select';
 import Icon, { IconName } from '../Icon';
-import { getFlattenOptions } from '../../getFlattenOptions';
+import { getFlattenOptions } from '../../utils/getFlattenOptions';
 
 export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
     /**

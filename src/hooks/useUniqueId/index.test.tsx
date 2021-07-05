@@ -13,20 +13,38 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { useUniqueId } from '.';
+import useUniqueId from '.';
 import { renderHook } from '@testing-library/react-hooks';
 
+jest.mock('uuid', () => ({
+    v4: jest.fn(),
+}));
+
+const { v4 } = require('uuid');
+
 describe('useUniqueId', () => {
-    it('should generate a unique id with a prefix', () => {
-        const { result } = renderHook(() => useUniqueId('prefix'));
-        expect(result.current.startsWith('prefix')).toBeTruthy();
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
+    it('should return the defaultId if defaultId is specified', () => {
+        const { result } = renderHook(() => useUniqueId('defaultId'));
+        expect(result.current).toBe('defaultId');
+    });
+
+    it('should return an unique id if defaultId is not specified', () => {
+        v4.mockReturnValue('random_uuid');
+        const { result } = renderHook(() => useUniqueId());
+        expect(result.current).toBe('random_uuid');
     });
 
     it('should not change unique id value after rerender', () => {
-        const { result, rerender } = renderHook(() => useUniqueId('prefix'));
+        v4.mockReturnValueOnce('random_uuid1').mockReturnValueOnce('random_uuid2');
+        const { result, rerender } = renderHook(() => useUniqueId());
         const initialValue = result.current;
+        expect(initialValue).toBe('random_uuid1');
         rerender();
         const postRerenderValue = result.current;
-        expect(initialValue === postRerenderValue).toBeTruthy();
+        expect(postRerenderValue).toBe('random_uuid1');
     });
 });

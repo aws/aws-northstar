@@ -14,13 +14,11 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-let counter = 0;
-export function generateUniqueId(prefix?: string) {
-    return `${prefix || ''}${counter++}-${Date.now()}-${Math.round(Math.random() * 10000)}`;
-}
-
-export function useUniqueId(prefix?: string) {
-    const { current: uniqueId } = useRef(generateUniqueId(prefix));
+const useUniqueId = (defaultId?: string): string => {
+    const { current: uniqueId } = useRef(defaultId ?? uuidv4());
     return uniqueId;
-}
+};
+
+export default useUniqueId;

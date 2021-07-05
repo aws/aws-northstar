@@ -20,8 +20,8 @@ import MarkdownViewer from '../../../MarkdownViewer';
 import Textarea from '../../../Textarea';
 import Grid from '../../../../layouts/Grid';
 import { Box } from '../../../../layouts';
-import { getControlId } from '../../getContolId';
-import { getErrorText } from '../../getErrorText';
+import useUniqueId from '../../../../hooks/useUniqueId';
+import { getErrorText } from '../../utils/getErrorText';
 
 const MarkdownEditorMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
@@ -43,7 +43,7 @@ const MarkdownEditorMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
 
     const INITIAL_ROWS = 10;
 
-    const controlId = getControlId(input.name);
+    const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
 
     const updateState = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

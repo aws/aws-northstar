@@ -17,11 +17,11 @@ import React, { FunctionComponent } from 'react';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import Toggle from '../../../Toggle';
 import FormField from '../../../FormField';
-import { getControlId } from '../../getContolId';
+import useUniqueId from '../../../../hooks/useUniqueId';
 
 const SwitchMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const { label, description, isDisabled, initialValue, input, ...rest } = useFieldApi(props);
-    const controlId = getControlId(input.name);
+    const controlId = useUniqueId(input.name);
     return (
         <FormField controlId={controlId}>
             <Toggle

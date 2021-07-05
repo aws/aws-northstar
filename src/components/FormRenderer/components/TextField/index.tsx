@@ -17,8 +17,8 @@ import React, { FunctionComponent, memo } from 'react';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import Input, { InputProps } from '../../../Input';
 import FormField from '../../../FormField';
-import { getControlId } from '../../getContolId';
-import { getErrorText } from '../../getErrorText';
+import useUniqueId from '../../../../hooks/useUniqueId';
+import { getErrorText } from '../../utils/getErrorText';
 
 const TextFieldMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
@@ -37,7 +37,7 @@ const TextFieldMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         meta: { error, submitFailed },
         ...rest
     } = useFieldApi(props);
-    const controlId = getControlId(input.name);
+    const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
 
     return (

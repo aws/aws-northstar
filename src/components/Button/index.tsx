@@ -175,6 +175,7 @@ const Button: FunctionComponent<ButtonProps> = ({
     }
 };
 
+export default Button;
+
 export type ButtonIconType = _ButtonIconType;
 export { ButtonIcon };
-export default Button;

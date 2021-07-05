@@ -19,8 +19,8 @@ import FormField from '../../../FormField';
 import Select from '../../../Select';
 import Multiselect from '../../../Multiselect';
 import Autosuggest from '../../../Autosuggest';
-import { getControlId } from '../../getContolId';
-import { getErrorText } from '../../getErrorText';
+import useUniqueId from '../../../../hooks/useUniqueId';
+import { getErrorText } from '../../utils/getErrorText';
 
 const SelectMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
@@ -47,7 +47,7 @@ const SelectMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         meta: { error, submitFailed },
         ...rest
     } = useFieldApi(props);
-    const controlId = getControlId(input.name);
+    const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
 
     const commonProps = {

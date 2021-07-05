@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { getFlattenOptions } from './index';
-import { SelectOption } from '../components/Select';
+import { SelectOption } from '../../components/Select';
 
 describe('getFlattenOptions', () => {
     it('return right result for simple options', () => {
