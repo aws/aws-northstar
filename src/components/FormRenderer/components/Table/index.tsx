@@ -15,9 +15,10 @@
  ******************************************************************************************************************** */
 import React, { memo, useCallback, useMemo } from 'react';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import { v4 as uuidv4 } from 'uuid';
 import Table from '../../../Table';
 import FormField from '../../../FormField';
+import { getControlId } from '../../getContolId';
+import { getErrorText } from '../../getErrorText';
 
 const TableMapping = (props: UseFieldApiConfig) => {
     const {
@@ -36,8 +37,8 @@ const TableMapping = (props: UseFieldApiConfig) => {
         meta: { error, submitFailed },
         ...rest
     } = useFieldApi(props);
-    const controlId = input.name || uuidv4();
-    const errorText = ((validateOnMount || submitFailed || showError) && error) || '';
+    const controlId = getControlId(input.name);
+    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     const handleSelectionChange = useCallback(
         (selectedItems) => {
             input.onChange(selectedItems);
@@ -45,10 +46,7 @@ const TableMapping = (props: UseFieldApiConfig) => {
         [input]
     );
     const selectedRowIds = useMemo(() => {
-        if (getRowId && input.value) {
-            return input.value.map(getRowId);
-        }
-        return [];
+        return getRowId && input.value ? input.value.map(getRowId) : [];
     }, [input.value, getRowId]);
     return (
         <FormField controlId={controlId} errorText={errorText} stretch={stretch}>

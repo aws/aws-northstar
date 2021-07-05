@@ -88,7 +88,7 @@ const StepNavigation: FunctionComponent<StepNavigationProps> = ({
                         <Box color="grey.500">
                             <Text variant="small">
                                 {getStepNumberLabel(index + 1)}
-                                {step.isOptional ? <i> - {optionalText}</i> : ''}
+                                {step.isOptional && <i> - {optionalText}</i>}
                             </Text>
                         </Box>
                         {renderTitle(step, index)}

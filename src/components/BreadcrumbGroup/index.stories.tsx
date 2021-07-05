@@ -38,7 +38,7 @@ export const BreadcrumbsWithNoItems = () => {
     );
 };
 
-export const BreadcrymbsWithItems = () => (
+export const BreadcrumbsWithItems = () => (
     <BreadcrumbGroup
         items={[
             {

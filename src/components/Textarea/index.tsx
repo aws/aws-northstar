@@ -106,17 +106,15 @@ export interface TextareaProps {
 
 const mapTextareaProps = ({
     rows = 3,
-    controlId,
+    controlId = uuidv4(),
     invalid = false,
     disableBrowserAutocorrect = false,
     ...props
 }: TextareaProps): TextareaAutosizeProps => {
-    const id = controlId || uuidv4();
-
     const autoCompleteString = disableBrowserAutocorrect ? 'off' : 'on';
 
     return {
-        id,
+        id: controlId,
         rowsMin: rows,
         required: props.ariaRequired,
         value: props.value,
@@ -127,7 +125,7 @@ const mapTextareaProps = ({
         autoComplete: autoCompleteString,
         autoCapitalize: autoCompleteString,
         autoFocus: props.autofocus,
-        'aria-label': props.value || props.placeholder || id,
+        'aria-label': props.value || props.placeholder || controlId,
         'aria-describedby': props.ariaDescribedby,
         'aria-required': props.ariaRequired,
         onChange: props.onChange,

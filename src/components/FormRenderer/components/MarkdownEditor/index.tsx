@@ -15,12 +15,13 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';
 import MarkdownViewer from '../../../MarkdownViewer';
 import Textarea from '../../../Textarea';
 import Grid from '../../../../layouts/Grid';
 import { Box } from '../../../../layouts';
+import { getControlId } from '../../getContolId';
+import { getErrorText } from '../../getErrorText';
 
 const MarkdownEditorMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
@@ -42,8 +43,8 @@ const MarkdownEditorMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
 
     const INITIAL_ROWS = 10;
 
-    const controlId = input.name || uuidv4();
-    const errorText = ((validateOnMount || submitFailed || showError) && error) || '';
+    const controlId = getControlId(input.name);
+    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
 
     const updateState = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         onChange?.(e);

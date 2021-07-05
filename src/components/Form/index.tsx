@@ -80,11 +80,11 @@ const Form: FunctionComponent<FormProps> = ({
         </>
     );
 
-    if (FormComponent) {
-        return <FormComponent {...formProps}>{content}</FormComponent>;
-    }
-
-    return <form {...formProps}>{content}</form>;
+    return FormComponent ? (
+        <FormComponent {...formProps}>{content}</FormComponent>
+    ) : (
+        <form {...formProps}>{content}</form>
+    );
 };
 
 export default Form;

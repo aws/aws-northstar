@@ -14,6 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
+import { Field } from '@data-driven-forms/react-form-renderer';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import { v4 as uuidv4 } from 'uuid';
 import Box from '../../../../../../layouts/Box';
@@ -22,7 +23,7 @@ import ColumnLayout, { Column } from '../../../../../../layouts/ColumnLayout';
 import { Grid } from '../../../../../../layouts';
 
 export interface FieldArrayItemProps {
-    fields?: any[];
+    fields?: Field[];
     fieldIndex: number;
     name?: string;
     onRemove: (index: number) => void;
@@ -59,27 +60,27 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
         });
     }, [fields, name, fieldIndex, showError]);
 
+    const getBox = (field: Field) => (
+        <Box width="100%" pr={1}>
+            {formOptions.renderForm([field])}
+        </Box>
+    );
+
     return (
         <Box display="flex">
             <Box flexGrow={1}>
                 {layout === 'grid' ? (
                     <Grid container>
                         {editedFields.map((field) => (
-                            <Grid item key={field.key} xs={field.spacing || 3}>
-                                <Box width="100%" pr={1}>
-                                    {formOptions.renderForm([field])}
-                                </Box>
+                            <Grid item key={field.key} xs={3}>
+                                {getBox(field)}
                             </Grid>
                         ))}
                     </Grid>
                 ) : (
                     <ColumnLayout renderDivider={false}>
                         {editedFields.map((field) => (
-                            <Column key={field.key}>
-                                <Box width="100%" pr={1}>
-                                    {formOptions.renderForm([field])}
-                                </Box>
-                            </Column>
+                            <Column key={field.key}>{getBox(field)}</Column>
                         ))}
                     </ColumnLayout>
                 )}

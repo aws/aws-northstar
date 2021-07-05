@@ -105,7 +105,7 @@ const ExpandableSection: FunctionComponent<ExpandableSectionProps> = ({
     return (
         <Accordion className={styles[variant]} square expanded={isExpanded} onChange={handleChange}>
             <ExpansionPanelSummary variant={variant} header={header} description={description} expanded={isExpanded} />
-            {variant !== 'borderless' ? <Divider /> : null}
+            {variant !== 'borderless' && <Divider />}
             <AccordionDetails>{typeof children === 'string' ? <Text>{children}</Text> : children}</AccordionDetails>
         </Accordion>
     );

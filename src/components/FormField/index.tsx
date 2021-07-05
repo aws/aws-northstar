@@ -156,7 +156,7 @@ const Control: FunctionComponent<Partial<FormFieldProps>> = ({
                             )}
                         </Box>
                     ) : (
-                        <>{secondaryControl}</>
+                        secondaryControl
                     )}
                 </Grid>
             )}
@@ -188,7 +188,6 @@ const FormField: FunctionComponent<FormFieldProps> = ({
     const content = useMemo(() => {
         return (
             <Box className={clsx({ [classes.expandable]: expandable })}>
-                {' '}
                 {description && (
                     <Typography variant="subtitle1" component="div">
                         {description}

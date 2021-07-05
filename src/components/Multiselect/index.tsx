@@ -216,18 +216,13 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
 
     const renderOption = useCallback(
         (option: SelectOption): React.ReactNode => {
-            if (checkboxes) {
-                return (
-                    <Checkbox
-                        checked={inputValue.map((input) => input.value).includes(option.value)}
-                        value={option.value}
-                    >
-                        {option.label}
-                    </Checkbox>
-                );
-            }
-
-            return option.label;
+            return checkboxes ? (
+                <Checkbox checked={inputValue.map((input) => input.value).includes(option.value)} value={option.value}>
+                    {option.label}
+                </Checkbox>
+            ) : (
+                option.label
+            );
         },
         [checkboxes, inputValue]
     );
@@ -252,7 +247,7 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
                 freeSolo={freeSolo}
                 noOptionsText={empty}
                 value={inputValue}
-                getOptionSelected={(opt: any, v: any) => opt.value === v.value}
+                getOptionSelected={(opt: SelectOption, v: SelectOption) => opt.value === v.value}
                 open={statusType === 'error' || statusType === 'loading' ? true : open}
                 options={flattenOptions}
                 loadingText={loadingAndErrorText}

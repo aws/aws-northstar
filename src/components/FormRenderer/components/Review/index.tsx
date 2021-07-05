@@ -14,13 +14,13 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
+import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 
 /**
  * Render the Template with the data from the data driven form for the purpose of review
  * */
-const Review = (props: any) => {
+const Review = (props: UseFieldApiConfig) => {
     const { Template } = useFieldApi(props);
     const { getState } = useFormApi();
 

@@ -14,11 +14,12 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo, useState } from 'react';
+import { Field } from '@data-driven-forms/react-form-renderer';
 import { WizardStepInfo } from '../../../Wizard';
 import WizardStep from './components/WizardStep';
 
 export interface WizardMappingProps {
-    fields: any[];
+    fields: Field[];
     submitButtonText?: string;
 }
 
@@ -48,7 +49,7 @@ const WizardMapping: FunctionComponent<WizardMappingProps> = (props) => {
         }));
     }, [props.fields]);
 
-    const field: any = useMemo(() => {
+    const field = useMemo(() => {
         return props.fields[activeStepIndex];
     }, [props.fields, activeStepIndex]);
 

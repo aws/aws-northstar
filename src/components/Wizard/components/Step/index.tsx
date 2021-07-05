@@ -29,7 +29,7 @@ const Step: FunctionComponent<StepProps> = ({ step }) => {
         <Stack>
             <Heading variant="h1">
                 {step.title}
-                {step.isOptional ? <i> - Optional</i> : ''}
+                {step.isOptional && <i> - Optional</i>}
             </Heading>
             {step.description && <Text variant="p">{step.description}</Text>}
             <Box>{step.content}</Box>

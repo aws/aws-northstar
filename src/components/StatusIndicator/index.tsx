@@ -32,16 +32,13 @@ export interface StatusIndicatorProps {
 }
 
 const getIconByStatusType = (statusType: string, title?: string) => {
-    switch (statusType) {
-        case 'positive':
-            return <CheckCircleOutlineOutlinedIcon fontSize="small" titleAccess={title} />;
-        case 'negative':
-            return <CancelOutlinedIcon fontSize="small" titleAccess={title} />;
-        case 'warning':
-            return <ReportProblemOutlinedIcon fontSize="small" titleAccess={title} />;
-        default:
-            return <InfoOutlinedIcon fontSize="small" titleAccess={title} />;
-    }
+    const icons = {
+        positive: CheckCircleOutlineOutlinedIcon,
+        negative: CancelOutlinedIcon,
+        warning: ReportProblemOutlinedIcon,
+    };
+    const IconComponent = icons[statusType] ?? InfoOutlinedIcon;
+    return <IconComponent fontSize="small" titleAccess={title} />;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({

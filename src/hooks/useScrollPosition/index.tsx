@@ -40,7 +40,7 @@ const getScrollPosition = ({ element }: any): ScrollPosition => {
 const useScrollPosition = (effect: any, element: any, wait: number) => {
     const position = useRef(getScrollPosition({}));
 
-    let throttleTimeout: any = null;
+    let throttleTimeout: ReturnType<typeof setTimeout> | null = null;
 
     const callBack = () => {
         const currPos = getScrollPosition({ element });

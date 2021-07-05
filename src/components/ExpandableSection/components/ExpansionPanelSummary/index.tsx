@@ -56,11 +56,12 @@ const ExpansionPanelSummary: FunctionComponent<ExpansionPanelSummaryProps> = ({
     description,
 }) => {
     const styles = useStyles();
+    const isContainer = variant === 'container';
     return (
         <AccordionSummary
             className={clsx({
-                [styles.rootContainer]: variant === 'container',
-                [styles.root]: variant !== 'container',
+                [styles.rootContainer]: isContainer,
+                [styles.root]: !isContainer,
             })}
         >
             <Box width="100%">
@@ -69,8 +70,8 @@ const ExpansionPanelSummary: FunctionComponent<ExpansionPanelSummaryProps> = ({
                     {typeof header === 'string' ? (
                         <Typography
                             className={clsx(
-                                { [styles.header]: variant !== 'container' },
-                                { [styles.headerContainer]: variant === 'container' }
+                                { [styles.header]: !isContainer },
+                                { [styles.headerContainer]: isContainer }
                             )}
                             variant="h3"
                         >

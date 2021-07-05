@@ -15,11 +15,12 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import { v4 as uuidv4 } from 'uuid';
 import { Option } from '../../types';
 import Checkbox from '../../../Checkbox';
 import FormField from '../../../FormField';
 import Stack from '../../../../layouts/Stack';
+import { getControlId } from '../../getContolId';
+import { getErrorText } from '../../getErrorText';
 
 interface CheckboxMappingProps {
     option: Option;
@@ -48,9 +49,9 @@ const CheckboxGroupMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         showError,
         meta: { error, submitFailed },
     } = useFieldApi(props);
-    const controlId = input.name || uuidv4();
-    const errorText = ((validateOnMount || submitFailed || showError) && error) || '';
-    if (options && options.length > 0) {
+    const controlId = getControlId(input.name);
+    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
+    if (options?.length > 0) {
         return (
             <FormField
                 controlId={controlId}

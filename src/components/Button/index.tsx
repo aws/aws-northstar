@@ -101,36 +101,27 @@ const muiButtonProps = ({
     type = 'button',
     size = 'medium',
 }: Partial<ButtonProps>): MaterialButtonProps => {
-    const muiButtonProps: MaterialButtonProps = {
+    const getVariantProps = () => {
+        switch (variant) {
+            case 'link':
+                return { href };
+            case 'primary':
+                return { variant: 'contained' as const, color: 'primary' as const };
+            case 'normal':
+                return { variant: 'text' as const };
+        }
+        return {};
+    };
+
+    return {
         disabled,
         onClick,
         type,
         size,
+        ...(icon && { [iconAlign === 'right' ? 'endIcon' : 'startIcon']: <ButtonIcon type={icon} /> }),
+        ...(loading && { startIcon: <OffsetCircularProgress /> }),
+        ...getVariantProps(),
     };
-
-    if (icon) {
-        const position = iconAlign === 'right' ? 'endIcon' : 'startIcon';
-        muiButtonProps[position] = <ButtonIcon type={icon} />;
-    }
-
-    if (loading) {
-        muiButtonProps.startIcon = <OffsetCircularProgress />;
-    }
-
-    switch (variant) {
-        case 'link':
-            muiButtonProps.href = href;
-            break;
-        case 'primary':
-            muiButtonProps.variant = 'contained';
-            muiButtonProps.color = 'primary';
-            break;
-        case 'normal':
-            muiButtonProps.variant = 'text';
-            break;
-    }
-
-    return muiButtonProps;
 };
 
 /**

@@ -15,11 +15,12 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent, memo } from 'react';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import { v4 as uuidv4 } from 'uuid';
 import FormField from '../../../FormField';
 import Select from '../../../Select';
 import Multiselect from '../../../Multiselect';
 import Autosuggest from '../../../Autosuggest';
+import { getControlId } from '../../getContolId';
+import { getErrorText } from '../../getErrorText';
 
 const SelectMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
@@ -46,8 +47,18 @@ const SelectMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         meta: { error, submitFailed },
         ...rest
     } = useFieldApi(props);
-    const controlId = input.name || uuidv4();
-    const errorText = ((validateOnMount || submitFailed || showError) && error) || '';
+    const controlId = getControlId(input.name);
+    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
+
+    const commonProps = {
+        invalid: !!errorText,
+        controlId,
+        disabled: isDisabled || isReadOnly,
+        options,
+        placeholder,
+        loadingText: loadingMessage,
+        ariaRequired: isRequired,
+    };
     return (
         <FormField
             controlId={controlId}
@@ -63,40 +74,14 @@ const SelectMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
             createNewLinkHref={createNewLinkHref}
         >
             {isSearchable ? (
-                <Autosuggest
-                    {...input}
-                    {...rest}
-                    invalid={!!errorText}
-                    controlId={controlId}
-                    disabled={isDisabled || isReadOnly}
-                    options={options}
-                    placeholder={placeholder}
-                    loadingText={loadingMessage}
-                    ariaRequired={isRequired}
-                />
+                <Autosuggest {...input} {...rest} {...commonProps} />
             ) : multiSelect ? (
-                <Multiselect
-                    {...input}
-                    {...rest}
-                    invalid={!!errorText}
-                    controlId={controlId}
-                    disabled={isDisabled || isReadOnly}
-                    options={options}
-                    placeholder={placeholder}
-                    loadingText={loadingMessage}
-                    ariaRequired={isRequired}
-                />
+                <Multiselect {...input} {...rest} {...commonProps} />
             ) : (
                 <Select
                     {...input}
                     {...rest}
-                    invalid={!!errorText}
-                    controlId={controlId}
-                    disabled={isDisabled || isReadOnly}
-                    options={options}
-                    placeholder={placeholder}
-                    loadingText={loadingMessage}
-                    ariaRequired={isRequired}
+                    {...commonProps}
                     selectedOption={{
                         value: input.value,
                     }}

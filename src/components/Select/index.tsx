@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent, SyntheticEvent } from 'react';
+import React, { FunctionComponent, SyntheticEvent, ReactNode } from 'react';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -131,7 +131,7 @@ const renderOptions = (
     classes: { [key: string]: string },
     disabled = false,
     groupItem = false
-): any => {
+): ReactNode[] => {
     return options.map((option: SelectOption) => {
         if (option.options) {
             return [
