@@ -145,5 +145,6 @@ const Wizard: FunctionComponent<WizardProps> = ({
     return <WizardInner {...wizardProps} />;
 };
 
-export { WizardInner };
 export default Wizard;
+
+export { WizardInner };

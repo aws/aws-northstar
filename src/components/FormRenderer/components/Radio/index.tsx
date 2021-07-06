@@ -18,8 +18,8 @@ import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-re
 import { Option } from '../../types';
 import FormField from '../../../FormField';
 import RadioGroup, { RadioButton } from '../../../RadioGroup';
-import { getControlId } from '../../getContolId';
-import { getErrorText } from '../../getErrorText';
+import useUniqueId from '../../../../hooks/useUniqueId';
+import { getErrorText } from '../../utils/getErrorText';
 
 interface RadioButtonMappingProps {
     option: Option;
@@ -47,7 +47,7 @@ const RadioGroupMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         showError,
         meta: { error, submitFailed },
     } = useFieldApi(props);
-    const controlId = getControlId(input.name);
+    const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     return (
         <FormField

@@ -28,7 +28,7 @@ import { AriaBaseProps } from '../../props/common';
 import { SelectBaseProps, SelectOption } from '../Select';
 import Stack from '../../layouts/Stack';
 import TokenGroup from '../TokenGroup';
-import { getFlattenOptions } from '../../getFlattenOptions';
+import { getFlattenOptions } from '../../utils/getFlattenOptions';
 
 export interface MultiselectProps extends SelectBaseProps, AriaBaseProps {
     /** The selected values */

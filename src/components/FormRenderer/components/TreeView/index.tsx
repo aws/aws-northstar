@@ -17,8 +17,8 @@ import React, { FunctionComponent } from 'react';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import TreeView from '../../../TreeView';
 import FormField from '../../../FormField';
-import { getControlId } from '../../getContolId';
-import { getErrorText } from '../../getErrorText';
+import useUniqueId from '../../../../hooks/useUniqueId';
+import { getErrorText } from '../../utils/getErrorText';
 
 const TreeViewMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
@@ -35,10 +35,9 @@ const TreeViewMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         treeItems, // from TreeView
         onNodeToggle, // from TreeView
         defaultExpanded, // from TreeView
-        name, // from TreeView
     } = useFieldApi(props);
 
-    const controlId = getControlId(name);
+    const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     input.readOnly = isReadOnly;
 

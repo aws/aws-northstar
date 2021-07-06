@@ -17,8 +17,8 @@ import React, { FunctionComponent } from 'react';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import FormField from '../../../FormField';
 import TimePicker from '../../../TimePicker';
-import { getControlId } from '../../getContolId';
-import { getErrorText } from '../../getErrorText';
+import useUniqueId from '../../../../hooks/useUniqueId';
+import { getErrorText } from '../../utils/getErrorText';
 
 const TimePickerMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
@@ -36,7 +36,7 @@ const TimePickerMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         meta: { error, submitFailed },
     } = useFieldApi(props);
 
-    const controlId = getControlId(input.name);
+    const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     // Coerce value (ISO 8601 string) to Date. Handle invalid dates by setting to undefined
     const dateValue = new Date(input.value);
