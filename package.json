@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@semantic-release/exec": "^5.0.0",
-    "@semantic-release/github": "^7.1.1",
+    "@semantic-release/github": "^7.2.3",
     "@storybook/addon-a11y": "^6.3.2",
     "@storybook/addon-actions": "^6.3.2",
     "@storybook/addon-console": "^1.2.3",
