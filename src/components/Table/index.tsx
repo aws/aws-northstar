@@ -297,24 +297,17 @@ export default function Table<D extends object>({
                                     ariaLabel="Checkbox to select row item"
                                     {...row.getToggleRowSelectedProps()}
                                     disabled={isSelectDisabled}
+                                    controlId={row.id}
                                 />
                             ) : (
                                 <RadioButton
                                     name="select"
                                     checked={row.isSelected}
+                                    controlId={row.id}
                                     disabled={isSelectDisabled}
                                     onChange={() => {
-                                        /** React Table does not support Radio Button natively.
-                                         A solution is to toggle all the row off and then toggle the current row on to ensure only current row is selected.
-                                         However, due the desynchronization of the toggleAllRowsSelected,
-                                         if we do not wait a certian time, the solution does not work.
-                                         The issue should be related to this Github issue https://github.com/tannerlinsley/react-table/issues/2170
-                                         Once it is address we can remove the setTimeout */
                                         props.toggleAllRowsSelected(false);
-
-                                        setTimeout(() => {
-                                            row.toggleRowSelected(true);
-                                        }, 100);
+                                        row.toggleRowSelected(true);
                                     }}
                                 />
                             )}
