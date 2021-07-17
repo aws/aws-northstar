@@ -64,6 +64,7 @@ import ColumnsSelector from './components/ColumnsSelector';
 import ColumnsGrouping from './components/ColumnsGrouping';
 import { RadioButton } from '../RadioGroup';
 import { useDebouncedCallback } from 'use-debounce';
+import DefaultColumnFilter from './components/DefaultColumnFilter';
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_SIZES = [10, 25, 50];
@@ -156,6 +157,8 @@ export interface TableBaseOptions<D extends object> {
     items?: D[] | null;
     /** Describes the columns to be displayed in the table, and how each item is rendered. */
     columnDefinitions: Column<D>[];
+    /** The default column filter component */
+    defaultColumnFilter?: ReactNode;
     /** The default grouping ids */
     defaultGroups?: string[];
     /** Disable pagination */
@@ -241,6 +244,7 @@ export default function Table<D extends object>({
     actionGroup = null,
     columnDefinitions = [],
     defaultGroups = [],
+    defaultColumnFilter = DefaultColumnFilter,
     defaultPageIndex = 0,
     defaultPageSize = DEFAULT_PAGE_SIZE,
     disableGroupBy = true,
@@ -344,6 +348,7 @@ export default function Table<D extends object>({
                 minWidth: 50,
                 width: 120,
                 maxWidth: 800,
+                Filter: defaultColumnFilter,
             },
             initialState: {
                 pageIndex: defaultPageIndex,
@@ -373,6 +378,7 @@ export default function Table<D extends object>({
             columns,
             pageCount,
             controlledPageSize,
+            defaultColumnFilter,
             defaultGroups,
             defaultPageIndex,
             defaultSortBy,
