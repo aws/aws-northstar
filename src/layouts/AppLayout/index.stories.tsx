@@ -27,7 +27,8 @@ import Link from '../../components/Link';
 import SideNavigation, { SideNavigationItemType } from '../../components/SideNavigation';
 import Stack from '../Stack';
 import Text from '../../components/Text';
-
+import { Simple as SimpleTable } from '../../components/Table/index.stories';
+import { Default as GeneralInfo } from '../../components/KeyValuePair/index.stories';
 export default {
     component: AppLayout,
     title: 'AppLayout',
@@ -124,12 +125,6 @@ const defaultNotifications: Notification[] = [
     },
 ];
 
-const mainContent = (
-    <Box bgcolor="grey.300" width="100%" height="1000px">
-        Main Content
-    </Box>
-);
-
 export const Default = () => {
     const [notifications, setNotifications] = useState(defaultNotifications);
 
@@ -145,7 +140,10 @@ export const Default = () => {
             breadcrumbs={breadcrumbGroup}
             notifications={notifications.map((n) => ({ ...n, onDismiss: () => handleDismiss(n.id) }))}
         >
-            {mainContent}
+            <Stack>
+                <GeneralInfo />
+                <SimpleTable />
+            </Stack>
         </AppLayout>
     );
 };
@@ -163,7 +161,12 @@ const DynamicHelpPanelSubComponent: React.FunctionComponent<any> = ({ children }
 export const DynamicHelpPanel = () => {
     return (
         <AppLayout header={header} navigation={navigation}>
-            <DynamicHelpPanelSubComponent>{mainContent}</DynamicHelpPanelSubComponent>
+            <DynamicHelpPanelSubComponent>
+                <Stack>
+                    <GeneralInfo />
+                    <SimpleTable />
+                </Stack>
+            </DynamicHelpPanelSubComponent>
         </AppLayout>
     );
 };
@@ -171,19 +174,32 @@ export const DynamicHelpPanel = () => {
 export const WithoutNotifications = () => {
     return (
         <AppLayout header={header} navigation={navigation} helpPanel={helpPanel} breadcrumbs={breadcrumbGroup}>
-            {mainContent}
+            <Stack>
+                <GeneralInfo />
+                <SimpleTable />
+            </Stack>
         </AppLayout>
     );
 };
 
 export const WithoutSidebars = () => {
-    return <AppLayout header={header}>{mainContent}</AppLayout>;
+    return (
+        <AppLayout header={header}>
+            <Stack>
+                <GeneralInfo />
+                <SimpleTable />
+            </Stack>
+        </AppLayout>
+    );
 };
 
 export const WithOnlyHelpPanel = () => {
     return (
         <AppLayout header={header} helpPanel={helpPanel}>
-            {mainContent}
+            <Stack>
+                <GeneralInfo />
+                <SimpleTable />
+            </Stack>
         </AppLayout>
     );
 };
@@ -191,7 +207,10 @@ export const WithOnlyHelpPanel = () => {
 export const WithoutContentPadding = () => {
     return (
         <AppLayout header={header} paddingContentArea={false}>
-            {mainContent}
+            <Stack>
+                <GeneralInfo />
+                <SimpleTable />
+            </Stack>
         </AppLayout>
     );
 };
@@ -235,7 +254,10 @@ export const CustomHeader = () => {
     );
     return (
         <AppLayout header={customHeader} navigation={navigation} helpPanel={helpPanel} headerHeightInPx={100}>
-            {mainContent}
+            <Stack>
+                <GeneralInfo />
+                <SimpleTable />
+            </Stack>
         </AppLayout>
     );
 };
@@ -252,7 +274,10 @@ export const WithInprogressOverlay = () => {
     }, []);
     return (
         <AppLayout header={header} navigation={navigation} breadcrumbs={breadcrumbGroup} inProgress={inProgress}>
-            {mainContent}
+            <Stack>
+                <GeneralInfo />
+                <SimpleTable />
+            </Stack>
         </AppLayout>
     );
 };

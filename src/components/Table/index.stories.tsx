@@ -44,6 +44,7 @@ export const Loading = () => (
 
 export const Simple = () => (
     <Table
+        tableTitle="Table Example"
         columnDefinitions={columnDefinitions}
         items={shortData}
         disableRowSelect={true}
