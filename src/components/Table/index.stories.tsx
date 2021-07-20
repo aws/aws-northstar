@@ -22,6 +22,7 @@ import shortData from './data/short';
 import groupByData from './data/groupBy';
 import columnDefinitions from './data/columnDefinitions';
 import orderBy from 'lodash.orderby';
+import filterColumnDefinition from './data/filterColumnDefinitions';
 
 export default {
     component: Table,
@@ -106,6 +107,15 @@ export const GroupBy = () => (
         disableGroupBy={false}
         disableRowSelect={true}
         defaultGroups={['name']}
+    />
+);
+
+export const Filter = () => (
+    <Table
+        tableTitle={'Filter Table'}
+        columnDefinitions={filterColumnDefinition}
+        items={groupByData}
+        disableRowSelect={true}
     />
 );
 
