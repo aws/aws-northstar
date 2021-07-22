@@ -14,12 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import { action } from '@storybook/addon-actions';
 import Table, { FetchDataOptions } from '.';
+import Button from '../Button';
 import longData from './data/long';
 import shortData from './data/short';
 import groupByData from './data/groupBy';
+import { DataType } from './data/type';
 import columnDefinitions from './data/columnDefinitions';
 import orderBy from 'lodash.orderby';
 
@@ -123,29 +125,29 @@ export const Complex = () => (
     />
 );
 
-export const UseState = () => {
-    const [selected, setSelected] = useState();
+export const WithActionGroup = () => {
+    const [selected, setSelected] = useState<DataType[]>();
 
-    const handleSelectChange = useCallback(
-        (value) => {
-            if (value && value.length === 1) {
-                if (selected !== value[0]) {
-                    setSelected(value[0]);
-                }
-            } else {
-                setSelected(undefined);
-            }
-        },
-        [selected, setSelected]
-    );
+    const actionGroup = useMemo(() => {
+        return <Button disabled={!selected || selected.length === 0}>Remove</Button>;
+    }, [selected]);
+
+    const selectedRowIds = useMemo(() => {
+        return selected?.map((s) => s.id) || [];
+    }, [selected]);
+
+    useEffect(() => {
+        console.log('selected', selected);
+    }, [selected]);
 
     return (
         <Table
-            onSelectionChange={handleSelectChange}
-            tableTitle={'Complex Table'}
+            onSelectionChange={setSelected}
+            tableTitle={'With Action Group'}
+            actionGroup={actionGroup}
             columnDefinitions={columnDefinitions}
             multiSelect={false}
-            selectedRowIds={selected && [selected]}
+            selectedRowIds={selectedRowIds}
             getRowId={(data) => data.id}
             items={longData}
         />
