@@ -199,7 +199,7 @@ export interface TableBaseOptions<D extends object> {
      * If the handler is not provided, data is processed automatically.
      * */
     onFetchData?: ((options: FetchDataOptions) => void) | null;
-    /** Returns the id of each row if it is not 'id' */
+    /** Instruct how Table constructs each row's underlying <i>id</i> property. Must be <b>memoized</b>. */
     getRowId?: (originalRow: D, relativeIndex: number) => string;
     /** The initial columns to sort by */
     sortBy?: SortingRule<string>[];
@@ -456,6 +456,7 @@ export default function Table<D extends object>({
         const selected = selectedFlatRows
             .filter((row: Row<D> & Partial<UseGroupByRowProps<D>>) => !row.isGrouped)
             .map((row: Row<D>) => row.original);
+
         onSelectionChange?.(selected);
     }, DEFAULT_DEBOUNCE_TIMER);
 

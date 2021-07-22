@@ -1,6 +1,6 @@
 ### Notes
 
-From release [v1.1.2](https://github.com/aws/aws-northstar/releases/tag/v1.1.2), there may be typescript warning on the columnDefinitions prop. The type can be added to the columnDefinition to suppress the warning. 
+From release [v1.1.2](https://github.com/aws/aws-northstar/releases/tag/v1.1.2), there may be typescript warning on the columnDefinitions prop. The data type can be added to the columnDefinition to suppress the warning. 
 
 ```jsx static
 import Table, { Column } from 'aws-northstar/components/Table';
@@ -28,6 +28,9 @@ const columnDefinition: Column<DataType>[] = [
 ```
 
 ### Examples
+
+More examples are available on [NorthStar storybook](https://storybook.northstar.aws-prototyping.cloud/Table?path=/story/table--simple).
+
 
 ```jsx
 import Table from 'aws-northstar/components/Table';
@@ -322,13 +325,15 @@ const tableActions = (
     </Inline>
 );
 
+const getRowId = React.useCallback(data => data.id, []);
+
 <Table
     actionGroup={tableActions}
     tableTitle='Multi Select Table'
     columnDefinitions={columnDefinitions}
     items={data}
     onSelectionChange={console.log}
-    getRowId={React.useCallback(data => data.id, [])}
+    getRowId={getRowId}
     sortBy={[{
         id: 'name',
         desc: true
@@ -465,6 +470,8 @@ const tableActions = (
 
 const disabledItemIds = new Set(['id0000004', 'id0000005', 'id0000007']);
 
+const getRowId = React.useCallback(data => data.id, []);
+
 <Table
     actionGroup={tableActions}
     tableTitle='Multi Select Table With Selection Disabled for Some Rows'
@@ -472,7 +479,7 @@ const disabledItemIds = new Set(['id0000004', 'id0000005', 'id0000007']);
     items={data}
     onSelectionChange={console.log}
     isItemDisabled={({ id }) => disabledItemIds.has(id)}
-    getRowId={React.useCallback(data => data.id, [])}
+    getRowId={getRowId}
     sortBy={[{
         id: 'name',
         desc: true
@@ -607,14 +614,16 @@ const tableActions = (
     </Inline>
 );
 
- <Table
+const getRowId = React.useCallback(data => data.id, []);
+
+<Table
     actionGroup={tableActions}
     tableTitle='Single Select Table'
     multiSelect={false}
     columnDefinitions={columnDefinitions}
     items={data}
     onSelectionChange={console.log}
-    getRowId={React.useCallback(data => data.id, [])}
+    getRowId={getRowId}
 />
 ```
 

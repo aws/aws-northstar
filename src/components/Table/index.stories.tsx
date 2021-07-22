@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useCallback, useMemo, useState, useEffect } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import Table, { FetchDataOptions } from '.';
 import Button from '../Button';
@@ -61,19 +61,23 @@ export const Default = () => (
     <Table tableTitle={'Default Table'} columnDefinitions={columnDefinitions} items={shortData} />
 );
 
-export const MultiSelect = () => (
-    <Table
-        tableTitle={'Multi Select Table'}
-        columnDefinitions={columnDefinitions}
-        items={shortData}
-        selectedRowIds={['id0000012', 'id0000013']}
-        onSelectionChange={action('onSelectionChange')}
-        getRowId={(data) => data.id}
-    />
-);
+export const MultiSelect = () => {
+    const getRowId = useCallback((data) => data.id, []);
+    return (
+        <Table
+            tableTitle={'Multi Select Table'}
+            columnDefinitions={columnDefinitions}
+            items={shortData}
+            selectedRowIds={['id0000012', 'id0000013']}
+            onSelectionChange={action('onSelectionChange')}
+            getRowId={getRowId}
+        />
+    );
+};
 
 export const MultiSelectWithRowsDisabled = () => {
     const disabledItemIds = new Set(['id0000015', 'id0000016']);
+    const getRowId = useCallback((data) => data.id, []);
     return (
         <Table
             tableTitle={'Multi Select Table'}
@@ -82,22 +86,25 @@ export const MultiSelectWithRowsDisabled = () => {
             selectedRowIds={['id0000012', 'id0000013']}
             isItemDisabled={({ id }) => disabledItemIds.has(id)}
             onSelectionChange={action('onSelectionChange')}
-            getRowId={(data) => data.id}
+            getRowId={getRowId}
         />
     );
 };
 
-export const SingleSelect = () => (
-    <Table
-        tableTitle={'Single Select Table'}
-        columnDefinitions={columnDefinitions}
-        items={shortData}
-        multiSelect={false}
-        selectedRowIds={['id0000012']}
-        onSelectionChange={action('onSelectionChange')}
-        getRowId={(data) => data.id}
-    />
-);
+export const SingleSelect = () => {
+    const getRowId = useCallback((data) => data.id, []);
+    return (
+        <Table
+            tableTitle={'Single Select Table'}
+            columnDefinitions={columnDefinitions}
+            items={shortData}
+            multiSelect={false}
+            selectedRowIds={['id0000012']}
+            onSelectionChange={action('onSelectionChange')}
+            getRowId={getRowId}
+        />
+    );
+};
 
 export const GroupBy = () => (
     <Table
@@ -136,19 +143,17 @@ export const WithActionGroup = () => {
         return selected?.map((s) => s.id) || [];
     }, [selected]);
 
-    useEffect(() => {
-        console.log('selected', selected);
-    }, [selected]);
+    const getRowId = useCallback((data) => data.id, []);
 
     return (
         <Table
             onSelectionChange={setSelected}
-            tableTitle={'With Action Group'}
+            tableTitle="With Action Group"
             actionGroup={actionGroup}
             columnDefinitions={columnDefinitions}
             multiSelect={false}
             selectedRowIds={selectedRowIds}
-            getRowId={(data) => data.id}
+            getRowId={getRowId}
             items={longData}
         />
     );
