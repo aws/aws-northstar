@@ -38,12 +38,14 @@ describe('DeleteConfirmationDialog', () => {
 
     it('should be visible when visible is true', () => {
         const { getByText, getByPlaceholderText } = render(
-            <DeleteConfirmationDialog title="dialog title" visible>
+            <DeleteConfirmationDialog title="dialog title" label="custom label" hintText="custom hint text" visible>
                 information
             </DeleteConfirmationDialog>
         );
         expect(getByText('dialog title')).toBeVisible();
         expect(getByText('information')).toBeVisible();
+        expect(getByText('custom label')).toBeVisible();
+        expect(getByText('custom hint text')).toBeVisible();
         expect(getByPlaceholderText('delete')).toBeInTheDocument();
     });
 
@@ -123,6 +125,21 @@ describe('DeleteConfirmationDialog', () => {
         expect(getByText('Delete').parentNode).toBeEnabled();
         fireEvent.click(getByText('Delete'));
         expect(handleDelete).toHaveBeenCalled();
+    });
+
+    it('should render loading state when loading is true', () => {
+        const { getByText, getByRole, getByPlaceholderText } = render(
+            <DeleteConfirmationDialog title="dialog title" visible loading>
+                information
+            </DeleteConfirmationDialog>
+        );
+        fireEvent.change(getByPlaceholderText('delete'), {
+            target: {
+                value: 'delete',
+            },
+        });
+        expect(getByText('Delete').parentNode).toBeDisabled();
+        expect(getByRole('progressbar')).toBeVisible();
     });
 
     it('should render custom Delete button text', () => {
