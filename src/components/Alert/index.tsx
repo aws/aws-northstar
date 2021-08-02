@@ -45,10 +45,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const iconMapping = {
-    success: <CheckCircleOutlineIcon fontSize="inherit" titleAccess="success" />,
-    warning: <ReportProblemOutlinedIcon fontSize="inherit" titleAccess="warning" />,
-    error: <CancelOutlinedIcon fontSize="inherit" titleAccess="error" />,
-    info: <InfoOutlinedIcon fontSize="inherit" titleAccess="info" />,
+    success: <CheckCircleOutlineIcon fontSize="inherit" titleAccess="success" aria-label="success" />,
+    warning: <ReportProblemOutlinedIcon fontSize="inherit" titleAccess="warning" aria-label="warning" />,
+    error: <CancelOutlinedIcon fontSize="inherit" titleAccess="error" aria-label="error" />,
+    info: <InfoOutlinedIcon fontSize="inherit" titleAccess="info" aria-label="info" />,
 };
 
 export interface AlertProps {

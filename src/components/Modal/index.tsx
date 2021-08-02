@@ -82,7 +82,7 @@ const Modal = ({ visible = false, children, title, subtitle, footer, onClose, wi
     };
 
     const CloseButton = () => (
-        <IconButton className={styles.closeButton} onClick={handleClose}>
+        <IconButton className={styles.closeButton} onClick={handleClose} aria-label="close">
             <Close />
         </IconButton>
     );

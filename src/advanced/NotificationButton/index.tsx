@@ -63,16 +63,20 @@ const getNotificationType = (severity: NotificationSeverity): 'warning' | 'info'
 const useStyles = makeStyles(() => ({
     menuItem: {
         border: 'none',
-        borderBottom: '1px solid',
         padding: 0,
         maxWidth: '500px',
+        '&:hover': {
+            border: 'none',
+        },
     },
     icon: {
         verticalAlign: 'middle',
     },
 }));
 
-/** A button which succinctly indicates the number of notifications as a badge, with each notification shown when the button is clicked */
+/**
+ * A button which succinctly indicates the number of notifications as a badge, with each notification shown when the button is clicked
+ * */
 const NotificationButton = ({ notifications = [], onDismissNotification }: NotificationButtonProps) => {
     const styles = useStyles();
     const content = useMemo(
