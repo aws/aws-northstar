@@ -100,10 +100,10 @@ const Alert: FunctionComponent<AlertProps> = ({
         [onButtonClick]
     );
 
-    const actionButton = useMemo(() => <>{buttonText && <Button onClick={handleButtonClick}>{buttonText}</Button>}</>, [
-        buttonText,
-        handleButtonClick,
-    ]);
+    const actionButton = useMemo(
+        () => <>{buttonText && <Button onClick={handleButtonClick}>{buttonText}</Button>}</>,
+        [buttonText, handleButtonClick]
+    );
 
     const closeButton = useMemo(
         () => (
