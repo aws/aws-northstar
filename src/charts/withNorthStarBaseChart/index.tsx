@@ -50,16 +50,18 @@ export interface BaseChartPropsWithData extends BaseChartProps {
     data: any[];
 }
 
-const withNorthStarBaseChart = <T extends BaseChartProps>(ChartComponent: typeof React.Component) => (props: T) => {
-    const classes = useStyles();
-    return (
-        <Box className={classes.root}>
-            <Stack>
-                {props.title && <Heading variant="h3">{props.title}</Heading>}
-                <ChartComponent {...props} />
-            </Stack>
-        </Box>
-    );
-};
+const withNorthStarBaseChart =
+    <T extends BaseChartProps>(ChartComponent: typeof React.Component) =>
+    (props: T) => {
+        const classes = useStyles();
+        return (
+            <Box className={classes.root}>
+                <Stack>
+                    {props.title && <Heading variant="h3">{props.title}</Heading>}
+                    <ChartComponent {...props} />
+                </Stack>
+            </Box>
+        );
+    };
 
 export default withNorthStarBaseChart;

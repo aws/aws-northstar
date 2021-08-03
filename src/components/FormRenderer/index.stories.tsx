@@ -1295,8 +1295,14 @@ export const ControlInteraction = () => {
 
 export const CustomValidator = () => {
     const validatorMapping: ValidatorMapper = {
-        custom: ({ threshold }: any) => (value: number) =>
-            !value ? 'this is a required field' : value > threshold ? `${value} must be <= ${threshold}` : undefined,
+        custom:
+            ({ threshold }: any) =>
+            (value: number) =>
+                !value
+                    ? 'this is a required field'
+                    : value > threshold
+                    ? `${value} must be <= ${threshold}`
+                    : undefined,
     };
     const schema = {
         submitLabel: 'Save',

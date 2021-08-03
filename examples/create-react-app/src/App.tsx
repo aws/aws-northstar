@@ -21,11 +21,14 @@ import Analytics from './components/Analytics';
 import Dashboard from './components/Dashboard';
 import OrderForm from './components/OrderForm';
 
-const withLayout = (Component: ComponentType): FunctionComponent => (props) => (
-    <AppLayout>
-        <Component {...props} />
-    </AppLayout>
-);
+const withLayout =
+    (Component: ComponentType): FunctionComponent =>
+    (props) =>
+        (
+            <AppLayout>
+                <Component {...props} />
+            </AppLayout>
+        );
 
 const App = () => {
     return (
