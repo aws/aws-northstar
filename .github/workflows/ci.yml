@@ -1,4 +1,4 @@
-name: github-actions
+name: CI check
 on: [push]
 jobs:
   ci-check:
@@ -12,5 +12,4 @@ jobs:
       - run: npm install -g typescript
       - run: npm install -g yarn
       - run: npm install -g oss-attribution-generator
-      - run: npm install -g coveralls
       - run: PATH=/tmp/git-secrets/bin:$PATH bash ./scripts/build.sh
