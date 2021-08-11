@@ -670,7 +670,7 @@ const handleFetchData = useCallback(options => {
             // You could fetch your data from server.
             const filterData = data.filter(d => {
                 if (options.filterText) {
-                    return d.name.indexOf(options.filterText) > 0;
+                    return d.name.indexOf(options.filterText) >= 0;
                 }
 
                 return true;

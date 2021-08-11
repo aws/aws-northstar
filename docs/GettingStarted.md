@@ -44,7 +44,7 @@ export default () => (
 
 The default font family at NorthStar is `"Roboto", "Helvetica Neue", "HelveticaNeue", "Helvetica", "Arial", sans-serif`. The Roboto font will **not** be automatically loaded by NorthStar. `Roboto` is used if it has been installed in users' browsers. Otherwise, the next fallback font `Helvetica Neue` is used. If you want to ensure `Roboto` font is in place, you can add:
 
-```
+```html static
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 ```
 
