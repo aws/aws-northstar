@@ -57,6 +57,10 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+    root: {
+        margin: '0',
+        overflow: 'hidden',
+    },
     flashbarContainer: {
         margin: theme.spacing(-4, -4, 2, -4),
     },
@@ -217,7 +221,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
 
     const classes = useStyles({
         hasSideNavigation: !!navigation,
-        hasHelpPanel: !!helpPanel,
+        hasHelpPanel: !!helpPanelContent,
         isSideNavigationOpen: isSideNavigationOpen === 'true',
         isHelpPanelOpen: isHelpPanelOpen === 'true',
         inProgress,
@@ -274,71 +278,73 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     );
 
     return (
-        <AppLayoutContext.Provider
-            value={{
-                openHelpPanel,
-                setHelpPanelContent,
-            }}
-        >
-            {header}
-            {(navigation || helpPanelContent) && (
-                <Box className={classes.menuBar}>
-                    {navigation && (
-                        <Box className={classes.menuBarNavIcon}>{renderNavigationIcon(classes.menuBarIcon)}</Box>
-                    )}
-                    <Box width="100%" />
-                    {helpPanelContent && (
-                        <Box className={classes.menuBarInfoIcon}>{renderInfoIcon(classes.menuBarIcon)}</Box>
-                    )}
-                </Box>
-            )}
-            <Box className={classes.main}>
-                {navigation && (
-                    <Sidebar
-                        sidebarWidth={WIDTH_SIDEBAR}
-                        isSidebarOpen={isSideNavigationOpen}
-                        setIsSidebarOpen={setIsSideNavigationOpen}
-                        type={SidebarType.SIDE_NAVIGATION}
-                        renderIcon={renderNavigationIcon}
-                    >
-                        {navigation}
-                    </Sidebar>
-                )}
-                <div ref={mainContentRef} className={classes.content} onScroll={handleScroll}>
-                    {notifications && notifications.length > 0 && (
-                        <div ref={notificationsBoxRef} className={classes.notifications}>
-                            <Flashbar items={notifications} maxItemsDisplayed={maxNotifications} />
-                        </div>
-                    )}
-                    <Box
-                        tabIndex={0}
-                        position="relative"
-                        className={clsx(classes.mainContent, { [classes.contentPadding]: !!paddingContentArea })}
-                    >
-                        <Stack spacing="s">
-                            {breadcrumbs && <Box className={classes.breadcrumbsContainer}>{breadcrumbs}</Box>}
-                            <main>{children}</main>
-                        </Stack>
-                        {inProgress && (
-                            <Overlay>
-                                <LoadingIndicator size="large" />
-                            </Overlay>
+        <Box className={classes.root}>
+            <AppLayoutContext.Provider
+                value={{
+                    openHelpPanel,
+                    setHelpPanelContent,
+                }}
+            >
+                {header}
+                {(navigation || helpPanelContent) && (
+                    <Box className={classes.menuBar}>
+                        {navigation && (
+                            <Box className={classes.menuBarNavIcon}>{renderNavigationIcon(classes.menuBarIcon)}</Box>
+                        )}
+                        <Box width="100%" />
+                        {helpPanelContent && (
+                            <Box className={classes.menuBarInfoIcon}>{renderInfoIcon(classes.menuBarIcon)}</Box>
                         )}
                     </Box>
-                </div>
-                {helpPanelContent && (
-                    <Sidebar
-                        sidebarWidth={WIDTH_HELP_PANEL}
-                        isSidebarOpen={isHelpPanelOpen}
-                        setIsSidebarOpen={setIsHelpPanelOpen}
-                        type={SidebarType.HELP_PANEL}
-                        renderIcon={renderInfoIcon}
-                    >
-                        {helpPanelContent}
-                    </Sidebar>
                 )}
-            </Box>
-        </AppLayoutContext.Provider>
+                <Box className={classes.main}>
+                    {navigation && (
+                        <Sidebar
+                            sidebarWidth={WIDTH_SIDEBAR}
+                            isSidebarOpen={isSideNavigationOpen}
+                            setIsSidebarOpen={setIsSideNavigationOpen}
+                            type={SidebarType.SIDE_NAVIGATION}
+                            renderIcon={renderNavigationIcon}
+                        >
+                            {navigation}
+                        </Sidebar>
+                    )}
+                    <div ref={mainContentRef} className={classes.content} onScroll={handleScroll}>
+                        {notifications && notifications.length > 0 && (
+                            <div ref={notificationsBoxRef} className={classes.notifications}>
+                                <Flashbar items={notifications} maxItemsDisplayed={maxNotifications} />
+                            </div>
+                        )}
+                        <Box
+                            tabIndex={0}
+                            position="relative"
+                            className={clsx(classes.mainContent, { [classes.contentPadding]: !!paddingContentArea })}
+                        >
+                            <Stack spacing="s">
+                                {breadcrumbs && <Box className={classes.breadcrumbsContainer}>{breadcrumbs}</Box>}
+                                <main>{children}</main>
+                            </Stack>
+                            {inProgress && (
+                                <Overlay>
+                                    <LoadingIndicator size="large" />
+                                </Overlay>
+                            )}
+                        </Box>
+                    </div>
+                    {helpPanelContent && (
+                        <Sidebar
+                            sidebarWidth={WIDTH_HELP_PANEL}
+                            isSidebarOpen={isHelpPanelOpen}
+                            setIsSidebarOpen={setIsHelpPanelOpen}
+                            type={SidebarType.HELP_PANEL}
+                            renderIcon={renderInfoIcon}
+                        >
+                            {helpPanelContent}
+                        </Sidebar>
+                    )}
+                </Box>
+            </AppLayoutContext.Provider>
+        </Box>
     );
 };
 

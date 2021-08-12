@@ -111,9 +111,10 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
     const classes = useStyles();
     const [inputValue, setInputValue] = useState<SelectOption[]>([]);
     const [open, setOpen] = React.useState(false);
-    const autoCompleteString: string = useMemo(() => (disableBrowserAutocorrect ? 'off' : 'on'), [
-        disableBrowserAutocorrect,
-    ]);
+    const autoCompleteString: string = useMemo(
+        () => (disableBrowserAutocorrect ? 'off' : 'on'),
+        [disableBrowserAutocorrect]
+    );
 
     useEffect(() => {
         setInputValue(value || []);

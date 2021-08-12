@@ -16,7 +16,7 @@
 
 import React, { useState, useCallback } from 'react';
 import { action } from '@storybook/addon-actions';
-import NotificationButton from '.';
+import NotificationButton, { NotificationMessage } from '.';
 import Box from '../../layouts/Box';
 
 export default {
@@ -24,7 +24,7 @@ export default {
     title: 'NotificationButton',
 };
 
-const defaultNotifications = [
+const defaultNotifications: NotificationMessage[] = [
     {
         id: '1',
         severity: 'INFO',

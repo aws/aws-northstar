@@ -69,7 +69,7 @@ export interface BaseFormFieldProps {
     /**
      * Label of the form field.
      * */
-    label?: string;
+    label?: ReactNode;
     /**
      * Secondary control can be used for custom actions and content.
      * */

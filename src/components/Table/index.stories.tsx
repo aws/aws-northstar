@@ -17,9 +17,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import Table, { FetchDataOptions } from '.';
+import Button from '../Button';
 import longData from './data/long';
 import shortData from './data/short';
 import groupByData from './data/groupBy';
+import { DataType } from './data/type';
 import columnDefinitions from './data/columnDefinitions';
 import orderBy from 'lodash.orderby';
 import filterColumnDefinition from './data/filterColumnDefinitions';
@@ -45,6 +47,7 @@ export const Loading = () => (
 
 export const Simple = () => (
     <Table
+        tableTitle="Table Example"
         columnDefinitions={columnDefinitions}
         items={shortData}
         disableRowSelect={true}
@@ -60,19 +63,23 @@ export const Default = () => (
     <Table tableTitle={'Default Table'} columnDefinitions={columnDefinitions} items={shortData} />
 );
 
-export const MultiSelect = () => (
-    <Table
-        tableTitle={'Multi Select Table'}
-        columnDefinitions={columnDefinitions}
-        items={shortData}
-        selectedRowIds={['id0000012', 'id0000013']}
-        onSelectionChange={action('onSelectionChange')}
-        getRowId={(data) => data.id}
-    />
-);
+export const MultiSelect = () => {
+    const getRowId = useCallback((data) => data.id, []);
+    return (
+        <Table
+            tableTitle={'Multi Select Table'}
+            columnDefinitions={columnDefinitions}
+            items={shortData}
+            selectedRowIds={['id0000012', 'id0000013']}
+            onSelectionChange={action('onSelectionChange')}
+            getRowId={getRowId}
+        />
+    );
+};
 
 export const MultiSelectWithRowsDisabled = () => {
     const disabledItemIds = new Set(['id0000015', 'id0000016']);
+    const getRowId = useCallback((data) => data.id, []);
     return (
         <Table
             tableTitle={'Multi Select Table'}
@@ -81,22 +88,25 @@ export const MultiSelectWithRowsDisabled = () => {
             selectedRowIds={['id0000012', 'id0000013']}
             isItemDisabled={({ id }) => disabledItemIds.has(id)}
             onSelectionChange={action('onSelectionChange')}
-            getRowId={(data) => data.id}
+            getRowId={getRowId}
         />
     );
 };
 
-export const SingleSelect = () => (
-    <Table
-        tableTitle={'Single Select Table'}
-        columnDefinitions={columnDefinitions}
-        items={shortData}
-        multiSelect={false}
-        selectedRowIds={['id0000012']}
-        onSelectionChange={action('onSelectionChange')}
-        getRowId={(data) => data.id}
-    />
-);
+export const SingleSelect = () => {
+    const getRowId = useCallback((data) => data.id, []);
+    return (
+        <Table
+            tableTitle={'Single Select Table'}
+            columnDefinitions={columnDefinitions}
+            items={shortData}
+            multiSelect={false}
+            selectedRowIds={['id0000012']}
+            onSelectionChange={action('onSelectionChange')}
+            getRowId={getRowId}
+        />
+    );
+};
 
 export const GroupBy = () => (
     <Table
@@ -133,30 +143,28 @@ export const Complex = () => (
     />
 );
 
-export const UseState = () => {
-    const [selected, setSelected] = useState();
+export const WithActionGroup = () => {
+    const [selected, setSelected] = useState<DataType[]>();
 
-    const handleSelectChange = useCallback(
-        (value) => {
-            if (value && value.length === 1) {
-                if (selected !== value[0]) {
-                    setSelected(value[0]);
-                }
-            } else {
-                setSelected(undefined);
-            }
-        },
-        [selected, setSelected]
-    );
+    const actionGroup = useMemo(() => {
+        return <Button disabled={!selected || selected.length === 0}>Remove</Button>;
+    }, [selected]);
+
+    const selectedRowIds = useMemo(() => {
+        return selected?.map((s) => s.id) || [];
+    }, [selected]);
+
+    const getRowId = useCallback((data) => data.id, []);
 
     return (
         <Table
-            onSelectionChange={handleSelectChange}
-            tableTitle={'Complex Table'}
+            onSelectionChange={setSelected}
+            tableTitle="With Action Group"
+            actionGroup={actionGroup}
             columnDefinitions={columnDefinitions}
             multiSelect={false}
-            selectedRowIds={selected && [selected]}
-            getRowId={(data) => data.id}
+            selectedRowIds={selectedRowIds}
+            getRowId={getRowId}
             items={longData}
         />
     );
