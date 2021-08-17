@@ -15,7 +15,8 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent, ReactNode, memo } from 'react';
 import { AccordionSummary, makeStyles, Theme, Typography } from '@material-ui/core';
-import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import { Variant } from '../../types';
 import Box from '../../../../layouts/Box';

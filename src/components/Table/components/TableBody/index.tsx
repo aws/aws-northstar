@@ -26,7 +26,8 @@ import {
     UseGroupByRowProps,
     UseGroupByCellProps,
 } from 'react-table';
-import { KeyboardArrowDown, KeyboardArrowRight } from '@material-ui/icons';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
 export interface TableBodyProps<D extends object> {
     reactTableBodyProps: ReactTableBodyProps;

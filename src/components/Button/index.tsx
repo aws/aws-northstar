@@ -23,7 +23,6 @@ import {
 } from '@material-ui/core';
 import ButtonIcon, { ButtonIconType as _ButtonIconType } from './components/ButtonIcon';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import Box from '../../layouts/Box';
 
 const useStyles = makeStyles({
@@ -64,7 +63,7 @@ export interface ButtonProps {
      * Please <b>NOTE</b> that using the name of Material UI Icon Component will result in the code for every icon being included in your project,
      * so is not recommended unless you configure tree-shaking. It may also impact Hot Module Reload performance.
      * */
-    icon?: ButtonIconType | React.ElementType<SvgIconProps>;
+    icon?: ButtonIconType | React.ElementType;
     /**
      * Defines where icon should be
      * */

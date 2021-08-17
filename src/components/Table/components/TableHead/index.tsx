@@ -18,7 +18,7 @@ import React from 'react';
 
 import { TableHead as BaseTableHead, TableCell, TableRow, TableSortLabel } from '@material-ui/core';
 import { Column, ColumnInstance, HeaderGroup, UseSortByColumnProps, UseResizeColumnsColumnProps } from 'react-table';
-import { ArrowDropDown } from '@material-ui/icons';
+import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 
 export interface TableHeadProps<D extends object> {
     headerGroups: HeaderGroup<D>[];

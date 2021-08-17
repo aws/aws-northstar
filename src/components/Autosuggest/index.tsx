@@ -25,7 +25,6 @@ import LoadingIndicator from '../LoadingIndicator';
 import StatusIndicator from '../StatusIndicator';
 import { AriaBaseProps } from '../../props/common';
 import { SelectBaseProps, SelectOption } from '../Select';
-import Icon, { IconName } from '../Icon';
 import { getFlattenOptions } from '../../utils/getFlattenOptions';
 
 export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
@@ -61,10 +60,6 @@ export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
      * If `true`, the input can't be cleared.
      */
     disableClearable?: boolean;
-    /**
-     * Define the Icon to be used for the text input
-     */
-    icon?: false | IconName;
     /**
      * Callback fired when the value changes.
      * */
@@ -115,7 +110,6 @@ export default function Autosuggest({
     ariaRequired = false,
     freeSolo = false,
     disableClearable = false,
-    icon = undefined,
     ariaDescribedby,
     ariaLabelledby,
     onChange,
@@ -208,8 +202,7 @@ export default function Autosuggest({
                     type: 'search',
                     startAdornment: (
                         <InputAdornment position="start">
-                            {icon === undefined && <SearchIcon color="action" />}
-                            {icon && <Icon name={icon} color="action" />}
+                            <SearchIcon color="action" />
                         </InputAdornment>
                     ),
                 }}
@@ -221,7 +214,6 @@ export default function Autosuggest({
             ariaRequired,
             autoCompleteString,
             classes.textfield,
-            icon,
             invalid,
             name,
             placeholder,
