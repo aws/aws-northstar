@@ -71,24 +71,18 @@ const WizardInner: FunctionComponent<WizardInnerProps> = ({
                 <Button variant="link" onClick={onCancelButtonClick}>
                     {cancelButtonText}
                 </Button>
-                {activeStepIndex === 0 ? (
-                    <Button variant="primary" loading={isLoadingNextStep} onClick={onNextButtonClick}>
-                        {nextButtonText}
+                {activeStepIndex !== 0 && (
+                    <Button variant="normal" onClick={onPreviousButtonClick}>
+                        {previousButtonText}
                     </Button>
-                ) : (
-                    <>
-                        <Button variant="normal" onClick={onPreviousButtonClick}>
-                            {previousButtonText}
-                        </Button>
-                        <Button
-                            variant="primary"
-                            loading={isLoadingNextStep}
-                            onClick={activeStepIndex === stepCount - 1 ? onSubmitButtonClick : onNextButtonClick}
-                        >
-                            {activeStepIndex === stepCount - 1 ? submitButtonText : nextButtonText}
-                        </Button>
-                    </>
                 )}
+                <Button
+                    variant="primary"
+                    loading={isLoadingNextStep}
+                    onClick={activeStepIndex === stepCount - 1 ? onSubmitButtonClick : onNextButtonClick}
+                >
+                    {activeStepIndex === stepCount - 1 ? submitButtonText : nextButtonText}
+                </Button>
             </Inline>
         );
     }, [

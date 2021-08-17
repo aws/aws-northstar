@@ -25,14 +25,30 @@ export interface FormTemplateProps extends RenderProps {
 }
 
 const FormTemplate: FunctionComponent<RenderProps> = ({ formFields, schema, isSubmitting }) => {
-    const { handleSubmit, onCancel } = useFormApi();
-    const { cancelLabel = 'Cancel', submitLabel = 'Submit', fields, header, description } = schema;
+    const { handleSubmit, onCancel, onReset } = useFormApi();
+    const {
+        cancelLabel = 'Cancel',
+        canCancel = true,
+        submitLabel = 'Submit',
+        resetLabel = 'Reset',
+        canReset = false,
+        fields,
+        header,
+        description,
+    } = schema;
 
     const actions = (
         <Inline spacing="s">
-            <Button variant="link" onClick={onCancel} disabled={isSubmitting}>
-                {cancelLabel}
-            </Button>
+            {canCancel && (
+                <Button variant="link" onClick={onCancel} disabled={isSubmitting}>
+                    {cancelLabel}
+                </Button>
+            )}
+            {canReset && (
+                <Button variant="normal" onClick={onReset} disabled={isSubmitting}>
+                    {resetLabel}
+                </Button>
+            )}
             <Button
                 variant="primary"
                 loading={isSubmitting}

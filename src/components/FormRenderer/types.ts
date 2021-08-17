@@ -26,6 +26,10 @@ export interface Option {
 export type Schema = Omit<FormRendererSchema, 'title'> & {
     header?: FormRendererSchema['title'];
     cancelLabel?: string;
+    canCancel?: boolean;
+    resetLabel?: string;
+    canReset?: boolean;
+    showResetButton?: boolean;
     submitLabel?: string;
 };
 
