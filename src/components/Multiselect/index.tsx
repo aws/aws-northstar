@@ -185,7 +185,6 @@ const Multiselect: FunctionComponent<MultiselectProps> = ({
                 {...params}
                 variant="outlined"
                 size="small"
-                margin="normal"
                 name={name}
                 InputProps={{
                     'aria-required': ariaRequired,

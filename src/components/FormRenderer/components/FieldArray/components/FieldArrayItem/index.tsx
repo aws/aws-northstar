@@ -13,14 +13,15 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useMemo, useCallback } from 'react';
 import { Field } from '@data-driven-forms/react-form-renderer';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
-import { v4 as uuidv4 } from 'uuid';
 import Box from '../../../../../../layouts/Box';
 import Button from '../../../../../Button';
 import ColumnLayout, { Column } from '../../../../../../layouts/ColumnLayout';
-import { Grid } from '../../../../../../layouts';
+import Grid from '../../../../../../layouts/Grid';
+import Typography from '@material-ui/core/Typography';
+import InputLabel from '@material-ui/core/InputLabel';
 
 export interface FieldArrayItemProps {
     fields?: Field[];
@@ -33,6 +34,7 @@ export interface FieldArrayItemProps {
     showError?: boolean;
     isReadOnly: boolean;
     layout?: 'grid' | 'column';
+    collapse: boolean;
 }
 
 const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
@@ -44,59 +46,108 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
     showError,
     isReadOnly,
     layout,
+    collapse,
 }) => {
     const formOptions = useFormApi();
+
+    const getFieldKey = useCallback((fieldName: string) => `${name}.${fieldName}`, [name]);
+
     const editedFields = useMemo(() => {
         return fields.map((field) => {
-            const computedName = field.name ? `${name}.${field.name}` : uuidv4();
             return {
                 ...field,
                 showError,
-                name: computedName,
-                key: computedName,
+                name: getFieldKey(field.name),
+                key: getFieldKey(field.name),
                 stretch: true,
-                label: fieldIndex === 0 ? field.label : null,
+                label: collapse && field.label,
+                description: collapse && field.description,
             };
         });
-    }, [fields, name, fieldIndex, showError]);
+    }, [fields, showError, collapse, getFieldKey]);
 
-    const getBox = (field: Field) => (
-        <Box width="100%" pr={1}>
-            {formOptions.renderForm([field])}
-        </Box>
+    const getBox = useCallback(
+        (field: Field) => (
+            <Box width="100%" pr={1}>
+                {formOptions.renderForm([field])}
+            </Box>
+        ),
+        [formOptions]
+    );
+
+    const getHeader = useCallback(
+        (field: Field) => (
+            <Box>
+                {field.label && <InputLabel htmlFor={getFieldKey(field.name)}>{field.label}</InputLabel>}
+                {field.description && (
+                    <Typography variant="subtitle1" component="div">
+                        {field.description}
+                    </Typography>
+                )}
+            </Box>
+        ),
+        [getFieldKey]
     );
 
     return (
-        <Box display="flex">
-            <Box flexGrow={1}>
-                {layout === 'grid' ? (
-                    <Grid container>
-                        {editedFields.map((field) => (
-                            <Grid item key={field.key} xs={3}>
-                                {getBox(field)}
+        <>
+            {fieldIndex === 0 && (
+                <Box display="flex">
+                    <Box flexGrow={1}>
+                        {layout === 'grid' ? (
+                            <Grid container>
+                                {fields.map((field) => (
+                                    <Grid item key={field.key} xs={3}>
+                                        {getHeader(field)}
+                                    </Grid>
+                                ))}
                             </Grid>
-                        ))}
-                    </Grid>
-                ) : (
-                    <ColumnLayout renderDivider={false}>
-                        {editedFields.map((field) => (
-                            <Column key={field.key}>{getBox(field)}</Column>
-                        ))}
-                    </ColumnLayout>
-                )}
-            </Box>
-            {!isReadOnly && (
-                <Box display="flex" alignItems="flex-start" pt={fieldIndex === 0 ? 2.5 : 0.5}>
-                    <Button
-                        onClick={() => {
-                            onRemove(fieldIndex);
-                        }}
-                    >
-                        {removeLabel}
-                    </Button>
+                        ) : (
+                            <ColumnLayout renderDivider={false}>
+                                {fields.map((field) => (
+                                    <Column key={field.key}>{getHeader(field)}</Column>
+                                ))}
+                            </ColumnLayout>
+                        )}
+                    </Box>
+                    {!isReadOnly && (
+                        <Box visibility="hidden" height="1px">
+                            <Button>{removeLabel}</Button>
+                        </Box>
+                    )}
                 </Box>
             )}
-        </Box>
+            <Box display="flex">
+                <Box flexGrow={1}>
+                    {layout === 'grid' ? (
+                        <Grid container>
+                            {editedFields.map((field) => (
+                                <Grid item key={field.key} xs={3}>
+                                    {getBox(field)}
+                                </Grid>
+                            ))}
+                        </Grid>
+                    ) : (
+                        <ColumnLayout renderDivider={false}>
+                            {editedFields.map((field) => (
+                                <Column key={field.key}>{getBox(field)}</Column>
+                            ))}
+                        </ColumnLayout>
+                    )}
+                </Box>
+                {!isReadOnly && (
+                    <Box display="flex" alignItems={collapse ? 'center' : 'flex-start'} pt={!collapse && 0.3}>
+                        <Button
+                            onClick={() => {
+                                onRemove(fieldIndex);
+                            }}
+                        >
+                            {removeLabel}
+                        </Button>
+                    </Box>
+                )}
+            </Box>
+        </>
     );
 };
 

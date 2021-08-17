@@ -408,6 +408,10 @@ export const getTheme = (fontFamily?: string): ThemeOptions => ({
             adornedEnd: {
                 paddingRight: '0px',
             },
+            inputMarginDense: {
+                paddingTop: '3px',
+                paddingBottom: '4px',
+            },
         },
         MuiInputBase: {
             root: {
