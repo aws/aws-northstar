@@ -14,6 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useTheme from '@material-ui/core/styles/useTheme';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { FieldArray as FieldArrayBase } from '@data-driven-forms/react-form-renderer';
 import FormField from '../../../FormField';
@@ -48,10 +50,11 @@ const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         input,
         isReadOnly = false,
     } = useFieldApi(props);
-
     const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     const renderedButtonLabels = { ...DEFAULT_BUTTON_LABELS, ...buttonLabels };
+    const theme = useTheme();
+    const matched = useMediaQuery(theme.breakpoints.down('xs'));
 
     return (
         <FormField
@@ -81,6 +84,7 @@ const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
                                         minItems={minItems}
                                         removeLabel={renderedButtonLabels.remove}
                                         isReadOnly={isReadOnly}
+                                        collapse={matched}
                                     />
                                 );
                             })}
