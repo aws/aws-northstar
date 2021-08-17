@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent, useMemo, useCallback } from 'react';
+import React, { FunctionComponent, useMemo, useCallback, ReactNode } from 'react';
 import { Field } from '@data-driven-forms/react-form-renderer';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import Box from '../../../../../../layouts/Box';
@@ -89,64 +89,63 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
         [getFieldKey]
     );
 
-    return (
-        <>
-            {fieldIndex === 0 && (
+    const renderRow = useCallback(
+        (list: Field[], getContent: (field: Field) => ReactNode, isHeaderRow = false) => {
+            const buttonBoxProps = isHeaderRow
+                ? {
+                      visibility: 'hidden',
+                      height: '1px',
+                  }
+                : collapse
+                ? {
+                      display: 'flex',
+                      alignItems: 'center',
+                  }
+                : {
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      pt: 0.3,
+                  };
+            return (
                 <Box display="flex">
                     <Box flexGrow={1}>
                         {layout === 'grid' ? (
                             <Grid container>
-                                {fields.map((field) => (
-                                    <Grid item key={field.key} xs={3}>
-                                        {getHeader(field)}
+                                {list.map((field) => (
+                                    <Grid item key={`${field.key}${isHeaderRow && '-'}`} xs={3}>
+                                        {getContent(field)}
                                     </Grid>
                                 ))}
                             </Grid>
                         ) : (
-                            <ColumnLayout renderDivider={false}>
-                                {fields.map((field) => (
-                                    <Column key={field.key}>{getHeader(field)}</Column>
+                            <ColumnLayout renderDivider={collapse}>
+                                {list.map((field) => (
+                                    <Column key={`${field.key}${isHeaderRow && '-'}`}>{getContent(field)}</Column>
                                 ))}
                             </ColumnLayout>
                         )}
                     </Box>
                     {!isReadOnly && (
-                        <Box visibility="hidden" height="1px">
-                            <Button>{removeLabel}</Button>
+                        <Box {...buttonBoxProps}>
+                            <Button
+                                onClick={() => {
+                                    onRemove(fieldIndex);
+                                }}
+                            >
+                                {removeLabel}
+                            </Button>
                         </Box>
                     )}
                 </Box>
-            )}
-            <Box display="flex">
-                <Box flexGrow={1}>
-                    {layout === 'grid' ? (
-                        <Grid container>
-                            {editedFields.map((field) => (
-                                <Grid item key={field.key} xs={3}>
-                                    {getBox(field)}
-                                </Grid>
-                            ))}
-                        </Grid>
-                    ) : (
-                        <ColumnLayout renderDivider={false}>
-                            {editedFields.map((field) => (
-                                <Column key={field.key}>{getBox(field)}</Column>
-                            ))}
-                        </ColumnLayout>
-                    )}
-                </Box>
-                {!isReadOnly && (
-                    <Box display="flex" alignItems={collapse ? 'center' : 'flex-start'} pt={!collapse && 0.3}>
-                        <Button
-                            onClick={() => {
-                                onRemove(fieldIndex);
-                            }}
-                        >
-                            {removeLabel}
-                        </Button>
-                    </Box>
-                )}
-            </Box>
+            );
+        },
+        [isReadOnly, removeLabel, onRemove, layout, collapse, fieldIndex]
+    );
+
+    return (
+        <>
+            {fieldIndex === 0 && !collapse && renderRow(fields, getHeader, true)}
+            {renderRow(editedFields, getBox)}
         </>
     );
 };
