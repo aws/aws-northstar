@@ -15,39 +15,45 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent } from 'react';
-import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import AddIcon from '@material-ui/icons/Add';
+import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import LaunchOutlinedIcon from '@material-ui/icons/LaunchOutlined';
 import RefreshOutlinedIcon from '@material-ui/icons/RefreshOutlined';
-import * as icons from '@material-ui/icons';
+import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import Icon, { IconName } from '../../../Icon';
 
 export type ButtonIconType = 'add_plus' | 'copy' | 'external' | 'folder' | 'refresh' | 'settings' | IconName;
 
 export interface ButtonIconProps {
-    type?: ButtonIconType;
+    type?: React.ElementType<SvgIconProps> | ButtonIconType;
 }
 
 const ButtonIcon: FunctionComponent<ButtonIconProps> = ({ type }) => {
-    switch (type) {
-        case 'add_plus':
-            return <AddIcon fontSize="small" role="add" />;
-        case 'copy':
-            return <FileCopyOutlinedIcon fontSize="small" />;
-        case 'external':
-            return <LaunchOutlinedIcon fontSize="small" />;
-        case 'folder':
-            return <FileCopyOutlinedIcon fontSize="small" />;
-        case 'refresh':
-            return <RefreshOutlinedIcon fontSize="small" />;
-        default:
-            if (Object.keys(icons).includes(type as string)) {
-                return <Icon name={type as IconName} fontSize="small" />;
-            }
-
-            return <SettingsOutlinedIcon fontSize="small" />;
+    if (!type) {
+        return <SettingsOutlinedIcon fontSize="small" />;
     }
+
+    if (typeof type === 'string') {
+        switch (type) {
+            case 'add_plus':
+                return <AddIcon fontSize="small" role="add" />;
+            case 'copy':
+                return <FileCopyOutlinedIcon fontSize="small" />;
+            case 'external':
+                return <LaunchOutlinedIcon fontSize="small" />;
+            case 'folder':
+                return <FileCopyOutlinedIcon fontSize="small" />;
+            case 'refresh':
+                return <RefreshOutlinedIcon fontSize="small" />;
+            default:
+                return <Icon name={type as IconName} fontSize="small" />;
+        }
+    }
+
+    const IconComponent = type;
+
+    return <IconComponent fontSize="small" />;
 };
 
 export default ButtonIcon;
