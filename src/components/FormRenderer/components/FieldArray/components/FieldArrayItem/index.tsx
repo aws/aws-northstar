@@ -106,21 +106,22 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
                       alignItems: 'flex-start',
                       pt: 0.3,
                   };
+            const getKey = (field: Field) => (isHeaderRow ? `${field.name}-header` : field.key);
             return (
                 <Box display="flex">
                     <Box flexGrow={1}>
                         {layout === 'grid' ? (
                             <Grid container>
                                 {list.map((field) => (
-                                    <Grid item key={`${field.key}${isHeaderRow && '-'}`} xs={3}>
+                                    <Grid item key={getKey(field)} xs={3}>
                                         {getContent(field)}
                                     </Grid>
                                 ))}
                             </Grid>
                         ) : (
-                            <ColumnLayout renderDivider={collapse}>
+                            <ColumnLayout renderDivider={false}>
                                 {list.map((field) => (
-                                    <Column key={`${field.key}${isHeaderRow && '-'}`}>{getContent(field)}</Column>
+                                    <Column key={getKey(field)}>{getContent(field)}</Column>
                                 ))}
                             </ColumnLayout>
                         )}

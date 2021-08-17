@@ -551,7 +551,10 @@ export const FieldArray = () => {
                         defaultItem: {
                             key: 'key',
                             value: 'value',
-                            type: 'type1',
+                            type: {
+                                label: 'Type 1',
+                                value: 'type1',
+                            },
                         },
                         validate: [
                             {
