@@ -29,7 +29,6 @@ export type Schema = Omit<FormRendererSchema, 'title'> & {
     canCancel?: boolean;
     resetLabel?: string;
     canReset?: boolean;
-    showResetButton?: boolean;
     submitLabel?: string;
 };
 
