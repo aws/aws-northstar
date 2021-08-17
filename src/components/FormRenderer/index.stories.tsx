@@ -347,6 +347,51 @@ export const WithInitialValues = () => {
     );
 };
 
+export const ResetButton = () => {
+    const initialValues = {
+        email: 'test@test.com',
+        password: 'password',
+        number: 10,
+        textarea: 'textarea',
+        checkbox: ['1', '2'],
+        switch: true,
+        radio: '3',
+        select: '2',
+        autosugguest: {
+            value: 'Lambda',
+            label: 'Lambda - Amazon Lambda',
+        },
+        multiselect: [
+            {
+                value: 'Lambda',
+                label: 'Lambda - Amazon Lambda',
+            },
+            {
+                value: 'EC2',
+                label: 'EC2 - Amazon Elastic Compute Cloud',
+            },
+        ],
+        confirm: true,
+        datePicker: new Date(2020, 1, 1),
+        timePicker: '2020-01-01T00:00:00Z',
+        tree: ['3', '5'],
+    };
+
+    const resetableSchema = {
+        ...baseSchema,
+        canReset: true,
+    };
+
+    return (
+        <FormRenderer
+            schema={resetableSchema}
+            onSubmit={action('Submit')}
+            onCancel={action('Cancel')}
+            initialValues={initialValues}
+        />
+    );
+};
+
 export const SubForms = () => {
     const schema = {
         fields: [
