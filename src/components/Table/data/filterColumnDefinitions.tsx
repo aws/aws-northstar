@@ -19,6 +19,7 @@ import { Column } from '../';
 import Select from '../../Select';
 import { UseFiltersColumnOptions } from 'react-table';
 import { Button } from '../../index';
+import { Inline } from '../../../layouts';
 
 function SelectColumnFilter({ column: { filterValue, setFilter } }: any) {
     const options = [
@@ -37,7 +38,7 @@ function SelectColumnFilter({ column: { filterValue, setFilter } }: any) {
     ];
 
     return (
-        <div style={{ display: 'flex' }}>
+        <Inline spacing="xs">
             <Select
                 options={options}
                 selectedOption={options.find(({ value }) => value === filterValue)}
@@ -45,8 +46,10 @@ function SelectColumnFilter({ column: { filterValue, setFilter } }: any) {
                     setFilter(e.target.value || undefined);
                 }}
             />
-            <Button onClick={() => setFilter(undefined)}>Clear</Button>
-        </div>
+            <Button onClick={() => setFilter(undefined)} size="small">
+                Clear
+            </Button>
+        </Inline>
     );
 }
 
