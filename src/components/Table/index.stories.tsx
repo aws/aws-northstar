@@ -125,6 +125,7 @@ export const Filter = () => (
         columnDefinitions={filterColumnDefinition}
         items={groupByData}
         disableRowSelect={true}
+        disableFilters={false}
     />
 );
 
