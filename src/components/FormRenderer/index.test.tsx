@@ -103,6 +103,31 @@ describe('FormRenderer', () => {
 
             expect(queryByRole('progressbar')).not.toBeInTheDocument();
         });
+
+        it('should trigger reset to reset form to initialValues', () => {
+            const { getByLabelText, getByText, getByDisplayValue } = render(
+                <FormRenderer
+                    schema={{ ...schema, canReset: true }}
+                    onSubmit={handleSubmit}
+                    onCancel={handleCancel}
+                    initialValues={{
+                        name: 'My name',
+                    }}
+                />
+            );
+
+            act(() => {
+                fireEvent.change(getByLabelText('Name'), { target: { value: 'My new name' } });
+            });
+
+            expect(getByDisplayValue('My new name')).toBeVisible();
+
+            act(() => {
+                fireEvent.click(getByText('Reset'));
+            });
+
+            expect(getByDisplayValue('My name')).toBeVisible();
+        });
     });
 
     describe('Checkbox', () => {
@@ -955,26 +980,30 @@ describe('FormRenderer', () => {
         });
     });
 
-    it('should render a markdown editor', () => {
-        const schema = {
-            submitLabel: 'Save',
-            cancelLabel: 'Back',
-            fields: [
-                {
-                    component: componentTypes.MARKDOWN_EDITOR,
-                    name: 'markdownOne',
-                    label: 'This is a markdown editor',
-                    helperText: 'Helper text provides users some guidance.',
-                    initialValue: '# I am a Markdown editor',
-                },
-            ],
-            header: 'Markdown Editor',
-            description: 'This component allows a user to enter markdown and renders it in real-time.',
-        };
+    describe('Markdown Editor', () => {
+        it('should render a markdown editor', () => {
+            const schema = {
+                submitLabel: 'Save',
+                cancelLabel: 'Back',
+                fields: [
+                    {
+                        component: componentTypes.MARKDOWN_EDITOR,
+                        name: 'markdownOne',
+                        label: 'This is a markdown editor',
+                        helperText: 'Helper text provides users some guidance.',
+                        initialValue: '# I am a Markdown editor',
+                    },
+                ],
+                header: 'Markdown Editor',
+                description: 'This component allows a user to enter markdown and renders it in real-time.',
+            };
 
-        const { getByText } = render(<FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />);
+            const { getByText } = render(
+                <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
+            );
 
-        expect(getByText('Markdown Editor')).toBeVisible();
-        expect(getByText('I am a Markdown editor')).toBeInTheDocument();
+            expect(getByText('Markdown Editor')).toBeVisible();
+            expect(getByText('I am a Markdown editor')).toBeInTheDocument();
+        });
     });
 });
