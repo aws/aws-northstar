@@ -251,7 +251,7 @@ export default function Table<D extends object>({
     disablePagination = false,
     disableSettings = false,
     disableSortBy = false,
-    disableFilters = false,
+    disableFilters = true,
     disableRowSelect = false,
     items = [],
     loading = false,
@@ -278,11 +278,12 @@ export default function Table<D extends object>({
     const [controlledPageSize, setControlledPageSize] = useState(defaultPageSize);
 
     const columns = useMemo(() => {
-        const columnsFiltered = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
+        const columnsFiltered: any = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
         if (!disableRowSelect) {
             columnsFiltered.unshift({
                 id: '_selection_',
                 width: 50,
+                defaultCanFilter: false,
                 Header: (props: any) => {
                     return multiSelect && !isItemDisabled ? (
                         <Checkbox
@@ -362,7 +363,6 @@ export default function Table<D extends object>({
             disableSortBy,
             disableGroupBy,
             disableFilters,
-            defaultCanFilter: true,
             manualFilters: onFetchData != null,
             manualPagination: onFetchData != null,
             manualSorting: onFetchData != null,
