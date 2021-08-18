@@ -290,4 +290,18 @@ describe('Table', () => {
 
         expect(getAllByRole('rowgroup')[1].childNodes).toHaveLength(5);
     });
+  
+    it('should render filter', () => {
+        const { getAllByPlaceholderText } = render(
+            <Table
+                tableTitle={'My Table'}
+                columnDefinitions={columnDefinitions}
+                items={dataGroup}
+                disableRowSelect={true}
+                disableFilters={false}
+            />
+        );
+
+        expect(getAllByPlaceholderText('Search 10 records...')).toHaveLength(2);
+    });
 });
