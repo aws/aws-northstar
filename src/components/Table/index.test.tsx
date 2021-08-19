@@ -290,7 +290,7 @@ describe('Table', () => {
 
         expect(getAllByRole('rowgroup')[1].childNodes).toHaveLength(5);
     });
-  
+
     it('should render filter', () => {
         const { getAllByPlaceholderText } = render(
             <Table
