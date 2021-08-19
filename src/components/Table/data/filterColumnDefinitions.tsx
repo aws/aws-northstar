@@ -59,6 +59,7 @@ const filterColumnDefinition: (Column<DataType> & UseFiltersColumnOptions<DataTy
         width: 200,
         Header: 'Id',
         accessor: 'id',
+        disableFilters: true,
     },
     {
         id: 'name',
