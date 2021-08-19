@@ -26,6 +26,7 @@ import {
     UseFiltersColumnProps,
 } from 'react-table';
 import { ArrowDropDown } from '@material-ui/icons';
+import { Stack } from '../../../../layouts';
 
 export interface TableHeadProps<D extends object> {
     headerGroups: HeaderGroup<D>[];
@@ -53,7 +54,7 @@ export default function TableHead<D extends object>({ headerGroups, styles }: Ta
                         ) =>
                             column.id !== '_all_' && (
                                 <TableCell {...column.getHeaderProps!()}>
-                                    <div>
+                                    <Stack spacing="xs">
                                         {column.canSort ? (
                                             <TableSortLabel
                                                 {...column.getSortByToggleProps!()}
@@ -69,7 +70,7 @@ export default function TableHead<D extends object>({ headerGroups, styles }: Ta
                                         )}
                                         <div>{column.canFilter ? column.render?.('Filter') : null}</div>
                                         <div {...column.getResizerProps!()} className={styles.resizer} />
-                                    </div>
+                                    </Stack>
                                 </TableCell>
                             )
                     )}
