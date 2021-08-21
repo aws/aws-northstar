@@ -644,6 +644,33 @@ describe('FormRenderer', () => {
             fireEvent.click(getByText('Submit'));
             expect(getByText('Required')).toBeVisible();
         });
+
+        it('should handle initial value', () => {
+            const date = new Date(2020, 0, 1, 1, 1, 1, 1);
+
+            const { getByText, getByLabelText } = render(
+                <FormRenderer
+                    schema={schema}
+                    initialValues={{ datePicker: date }}
+                    onSubmit={handleSubmit}
+                    onCancel={handleCancel}
+                />
+            );
+
+            fireEvent.click(getByText('Submit'));
+            expect(handleSubmit).toHaveBeenCalledWith({ datePicker: date }, expect.any(Object), expect.any(Function));
+
+            act(() => {
+                fireEvent.change(getByLabelText('Date picker'), { target: { value: '2021/02/02' } });
+            });
+
+            fireEvent.click(getByText('Submit'));
+            expect(handleSubmit).toHaveBeenLastCalledWith(
+                { datePicker: new Date(2021, 1, 2) },
+                expect.any(Object),
+                expect.any(Function)
+            );
+        });
     });
 
     describe('TimePicker', () => {
