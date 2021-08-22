@@ -21,8 +21,7 @@ import Divider from '@material-ui/core/Divider';
 import ExpansionPanelSummary from './components/ExpansionPanelSummary';
 import Text from '../Text';
 import { Variant } from './types';
-import { makeStyles } from '@material-ui/core';
-
+import makeStyles from '@material-ui/styles/makeStyles';
 const useStyles = makeStyles(() => {
     const borderless = {
         border: 'none',

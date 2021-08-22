@@ -19,8 +19,8 @@ import TextField from '@material-ui/core/TextField';
 import MaterialUIAutocomplete, { AutocompleteRenderInputParams } from '@material-ui/lab/Autocomplete';
 import Link from '@material-ui/core/Link';
 import SearchIcon from '@material-ui/icons/Search';
-import { makeStyles, InputAdornment, Theme } from '@material-ui/core';
-
+import InputAdornment from '@material-ui/core/InputAdornment';
+import makeStyles from '@material-ui/styles/makeStyles';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import { v4 as uuidv4 } from 'uuid';
 import LoadingIndicator from '../LoadingIndicator';
@@ -61,7 +61,7 @@ export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
     /**
      * Define the Icon to be used for the text input. <br/>
      * By default, Search icon will be displayed. <br/>
-     * If false, no icon will be displayed.
+     * If false, no icon will be displayed. <br/>
      * Or <a href='https://material-ui.com/components/material-icons/' target='_blank'>Material UI Icon Component Type</a> can be provided.<br/>.
      */
     icon?: false | ComponentType<SvgIconProps>;
@@ -87,7 +87,7 @@ export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
     onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles({
     input: {
         display: 'inline-block',
         marginRight: '20px',
@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textfield: {
         paddingRight: '30px',
     },
-}));
+});
 
 /**
  * An autosuggest control is a normal text input enhanced by a panel of suggested options.

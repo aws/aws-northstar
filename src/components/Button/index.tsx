@@ -55,9 +55,7 @@ export interface ButtonProps {
     /**
      * Displays an icon next to the text. Check the iconAlign property for positioning. <br/>
      * Available options are 'add_plus' | 'copy' | 'external' | 'folder' | 'refresh' | 'settings' <br/>
-     * or <a href='https://material-ui.com/components/material-icons/' target='_blank'>Material UI Icon Component Type</a> can be provided. <br/>
-     * Please <b>NOTE</b> that using the name of Material UI Icon Component will result in the code for every icon being included in your project,
-     * so is not recommended unless you configure tree-shaking. It may also impact Hot Module Reload performance.
+     * or <a href='https://material-ui.com/components/material-icons/' target='_blank'>Material UI Icon Component Type</a> can be provided.
      * */
     icon?: _ButtonIconType;
     /**
