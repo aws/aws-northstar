@@ -21,6 +21,7 @@ import Inline from '../../layouts/Inline';
 import Cloud from '@material-ui/icons/Cloud';
 import AccountCircleTwoTone from '@material-ui/icons/AccountCircleTwoTone';
 import Remove from '@material-ui/icons/Remove';
+import Dns from '@material-ui/icons/Dns';
 
 export default {
     component: Button,
@@ -82,21 +83,6 @@ export const IconButtonsWithText = () => (
     </Inline>
 );
 
-export const IconButtonsMaterialUIIconNames = () => (
-    <Inline>
-        <Button variant={'primary'} icon={'Cloud'} onClick={action('clicked')}>
-            Cloud
-        </Button>
-        <Button variant={'primary'} icon={'AccountCircleTwoTone'} onClick={action('clicked')}>
-            Account
-        </Button>
-        <Button icon={'Remove'} iconAlign="right" onClick={action('clicked')}>
-            Remove
-        </Button>
-        <Button variant={'icon'} label="Dns" icon={'Dns'} onClick={action('clicked')}></Button>
-    </Inline>
-);
-
 export const IconButtonsMaterialUIIcon = () => (
     <Inline>
         <Button variant={'primary'} icon={Cloud} onClick={action('clicked')}>
@@ -108,6 +94,7 @@ export const IconButtonsMaterialUIIcon = () => (
         <Button icon={Remove} iconAlign="right" onClick={action('clicked')}>
             Remove
         </Button>
+        <Button variant={'icon'} label="Dns" icon={Dns} onClick={action('clicked')}></Button>
     </Inline>
 );
 

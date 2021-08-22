@@ -14,12 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useState, SyntheticEvent, useMemo, useCallback } from 'react';
+import React, { useState, SyntheticEvent, useMemo, useCallback, ComponentType } from 'react';
 import TextField from '@material-ui/core/TextField';
 import MaterialUIAutocomplete, { AutocompleteRenderInputParams } from '@material-ui/lab/Autocomplete';
 import Link from '@material-ui/core/Link';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles, InputAdornment, Theme } from '@material-ui/core';
+
+import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import { v4 as uuidv4 } from 'uuid';
 import LoadingIndicator from '../LoadingIndicator';
 import StatusIndicator from '../StatusIndicator';
@@ -56,6 +58,12 @@ export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
      * If `true`, the Autocomplete is free solo, meaning that the user input is not bound to provided options.
      */
     freeSolo?: boolean;
+    /**
+     * Define the Icon to be used for the text input. <br/>
+     * By default, Search icon will be displayed. <br/>
+     * If false, no icon will be displayed.
+     */
+    icon?: false | ComponentType<SvgIconProps>;
     /**
      * If `true`, the input can't be cleared.
      */
@@ -107,6 +115,7 @@ export default function Autosuggest({
     disabled,
     placeholder,
     invalid,
+    icon,
     ariaRequired = false,
     freeSolo = false,
     disableClearable = false,
@@ -181,6 +190,19 @@ export default function Autosuggest({
         [statusType, classes.recoveryLink, errorText, recoveryText, loadingText, onRecoveryClickHandler]
     );
 
+    const iconComponent = useMemo(() => {
+        if (icon) {
+            const IconComponent = icon as ComponentType<SvgIconProps>;
+            return <IconComponent color="action" />;
+        }
+
+        if (icon === false) {
+            return null;
+        }
+
+        return <SearchIcon color="action" />;
+    }, [icon]);
+
     const textfield = useCallback(
         (params: AutocompleteRenderInputParams): React.ReactNode => (
             <TextField
@@ -200,11 +222,7 @@ export default function Autosuggest({
                     ...params.InputProps,
                     className: classes.textfield,
                     type: 'search',
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <SearchIcon color="action" />
-                        </InputAdornment>
-                    ),
+                    startAdornment: <InputAdornment position="start">{iconComponent}</InputAdornment>,
                 }}
             />
         ),

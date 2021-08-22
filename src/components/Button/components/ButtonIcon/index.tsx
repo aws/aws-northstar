@@ -14,17 +14,18 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent, ElementType } from 'react';
+import React, { FunctionComponent, ComponentType } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import LaunchOutlinedIcon from '@material-ui/icons/LaunchOutlined';
 import RefreshOutlinedIcon from '@material-ui/icons/RefreshOutlined';
+import { SvgIconProps } from '@material-ui/core/SvgIcon';
 
 export type ButtonIconType = 'add_plus' | 'copy' | 'external' | 'folder' | 'refresh' | 'settings';
 
 export interface ButtonIconProps {
-    type?: ElementType | ButtonIconType;
+    type?: ComponentType<SvgIconProps> | ButtonIconType;
 }
 
 const ButtonIcon: FunctionComponent<ButtonIconProps> = ({ type }) => {
@@ -44,7 +45,7 @@ const ButtonIcon: FunctionComponent<ButtonIconProps> = ({ type }) => {
         case 'refresh':
             return <RefreshOutlinedIcon fontSize="small" />;
         default: {
-            const IconComponent = type as ElementType;
+            const IconComponent = type as ComponentType<SvgIconProps>;
             return <IconComponent fontSize="small" />;
         }
     }

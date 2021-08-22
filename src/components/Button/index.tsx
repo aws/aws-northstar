@@ -14,15 +14,13 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useMemo, ReactNode, MouseEventHandler, FunctionComponent } from 'react';
-import {
-    makeStyles,
-    Button as MaterialButton,
-    IconButton,
-    ButtonProps as MaterialButtonProps,
-} from '@material-ui/core';
-import ButtonIcon, { ButtonIconType as _ButtonIconType } from './components/ButtonIcon';
+import React, { useMemo, ReactNode, MouseEventHandler, FunctionComponent, ComponentType } from 'react';
+import MaterialButton, { ButtonProps as MaterialButtonProps } from '@material-ui/core/Button';
+import makeStyles from '@material-ui/styles/makeStyles';
+import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ButtonIcon, { ButtonIconType as _ButtonIconType } from './components/ButtonIcon';
+import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import Box from '../../layouts/Box';
 
 const useStyles = makeStyles({
@@ -63,7 +61,7 @@ export interface ButtonProps {
      * Please <b>NOTE</b> that using the name of Material UI Icon Component will result in the code for every icon being included in your project,
      * so is not recommended unless you configure tree-shaking. It may also impact Hot Module Reload performance.
      * */
-    icon?: ButtonIconType | React.ElementType;
+    icon?: ButtonIconType | ComponentType<SvgIconProps>;
     /**
      * Defines where icon should be
      * */
