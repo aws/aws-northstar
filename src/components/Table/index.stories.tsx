@@ -121,11 +121,11 @@ export const GroupBy = () => (
 
 export const Filter = () => (
     <Table
-        tableTitle={'Filter Table'}
+        tableTitle={'Column Filter Table'}
         columnDefinitions={filterColumnDefinition}
         items={groupByData}
         disableRowSelect={true}
-        disableFilters={false}
+        disableColumnFilters={false}
     />
 );
 
