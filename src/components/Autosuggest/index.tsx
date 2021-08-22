@@ -197,10 +197,6 @@ export default function Autosuggest({
             return <IconComponent color="action" />;
         }
 
-        if (icon === false) {
-            return null;
-        }
-
         return <SearchIcon color="action" />;
     }, [icon]);
 
@@ -223,7 +219,7 @@ export default function Autosuggest({
                     ...params.InputProps,
                     className: classes.textfield,
                     type: 'search',
-                    startAdornment: <InputAdornment position="start">{iconComponent}</InputAdornment>,
+                    startAdornment: icon !== false && <InputAdornment position="start">{iconComponent}</InputAdornment>,
                 }}
             />
         ),
@@ -237,6 +233,7 @@ export default function Autosuggest({
             name,
             placeholder,
             statusType,
+            icon,
             iconComponent,
         ]
     );
