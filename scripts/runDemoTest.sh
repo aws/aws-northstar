@@ -15,8 +15,11 @@ mkdir -p $TEST_FOLDER
 
 cp -r $DEMO_FOLDER/ $TEST_FOLDER/
 
-cd $TEST_FOLDER && yarn add $BUILD_FOLDER \
-    && yarn && yarn build
+cd $TEST_FOLDER 
+
+yarn add $BUILD_FOLDER
+yarn
+yarn build
 
 npx source-map-explorer build/static/js/*.js --json result.json
 
