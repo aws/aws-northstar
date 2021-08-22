@@ -250,7 +250,7 @@ export default function Table<D extends object>({
     defaultPageIndex = 0,
     defaultPageSize = DEFAULT_PAGE_SIZE,
     disableGroupBy = true,
-    disableColumnFilters = true,  
+    disableColumnFilters = true,
     disablePagination = false,
     disableSettings = false,
     disableSortBy = false,
