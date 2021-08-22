@@ -169,6 +169,8 @@ export interface TableBaseOptions<D extends object> {
     disableSortBy?: boolean;
     /** Disable filters */
     disableFilters?: boolean;
+    /** Disable column filters */
+    disableColumnFilters?: boolean;
     /** Disable groupBy */
     disableGroupBy?: boolean;
     /** Disable row select */
@@ -248,10 +250,11 @@ export default function Table<D extends object>({
     defaultPageIndex = 0,
     defaultPageSize = DEFAULT_PAGE_SIZE,
     disableGroupBy = true,
+    disableColumnFilters = true,  
     disablePagination = false,
     disableSettings = false,
     disableSortBy = false,
-    disableFilters = true,
+    disableFilters = false,
     disableRowSelect = false,
     items = [],
     loading = false,
@@ -362,7 +365,7 @@ export default function Table<D extends object>({
             getRowId,
             disableSortBy,
             disableGroupBy,
-            disableFilters,
+            disableFilters: disableColumnFilters,
             manualFilters: onFetchData != null,
             manualPagination: onFetchData != null,
             manualSorting: onFetchData != null,
@@ -382,7 +385,7 @@ export default function Table<D extends object>({
             defaultGroups,
             defaultPageIndex,
             defaultSortBy,
-            disableFilters,
+            disableColumnFilters,
             disableGroupBy,
             disableSortBy,
             getRowId,
