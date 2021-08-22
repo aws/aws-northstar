@@ -57,7 +57,7 @@ export interface ButtonProps {
      * Available options are 'add_plus' | 'copy' | 'external' | 'folder' | 'refresh' | 'settings' <br/>
      * or <a href='https://material-ui.com/components/material-icons/' target='_blank'>Material UI Icon Component Type</a> can be provided.
      * */
-    icon?: _ButtonIconType;
+    icon?: ButtonIconType;
     /**
      * Defines where icon should be
      * */
