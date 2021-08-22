@@ -25,10 +25,10 @@ FAILED_FILE_COUNT=$(cat result.json | jq ".results[] | select(.totalBytes>${BUND
 cd -
 
 if [ ${FAILED_FILE_COUNT} -gt 0 ] ; then
-    echo "One or more file bundle size exceeds threshold ${BUNDLE_SIZE_THRESHOLD}"
-    exit -1
+    echo "FAILED: One or more file bundle size exceeds threshold ${BUNDLE_SIZE_THRESHOLD}"
+    exit 1
 else
-    echo "All file bundle size are below threshold ${BUNDLE_SIZE_THRESHOLD}"
+    echo "PASS: All file bundle size are below threshold ${BUNDLE_SIZE_THRESHOLD}"
 fi
 
 rm -rf $TEST_FOLDER
