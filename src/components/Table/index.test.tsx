@@ -298,7 +298,7 @@ describe('Table', () => {
                 columnDefinitions={columnDefinitions}
                 items={dataGroup}
                 disableRowSelect={true}
-                disableFilters={false}
+                disableColumnFilters={false}
             />
         );
 
