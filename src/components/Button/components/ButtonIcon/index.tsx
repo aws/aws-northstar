@@ -22,17 +22,20 @@ import LaunchOutlinedIcon from '@material-ui/icons/LaunchOutlined';
 import RefreshOutlinedIcon from '@material-ui/icons/RefreshOutlined';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 
-export type ButtonIconType = 'add_plus' | 'copy' | 'external' | 'folder' | 'refresh' | 'settings';
+export type ButtonIconType =
+    | 'add_plus'
+    | 'copy'
+    | 'external'
+    | 'folder'
+    | 'refresh'
+    | 'settings'
+    | ComponentType<SvgIconProps>;
 
 export interface ButtonIconProps {
-    type?: ComponentType<SvgIconProps> | ButtonIconType;
+    type: ButtonIconType;
 }
 
 const ButtonIcon: FunctionComponent<ButtonIconProps> = ({ type }) => {
-    if (!type) {
-        return <SettingsOutlinedIcon fontSize="small" />;
-    }
-
     switch (type) {
         case 'add_plus':
             return <AddIcon fontSize="small" role="add" />;
@@ -44,6 +47,8 @@ const ButtonIcon: FunctionComponent<ButtonIconProps> = ({ type }) => {
             return <FileCopyOutlinedIcon fontSize="small" />;
         case 'refresh':
             return <RefreshOutlinedIcon fontSize="small" />;
+        case 'settings':
+            return <SettingsOutlinedIcon fontSize="small" />;
         default: {
             const IconComponent = type as ComponentType<SvgIconProps>;
             return <IconComponent fontSize="small" />;

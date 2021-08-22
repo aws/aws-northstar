@@ -14,13 +14,12 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useMemo, ReactNode, MouseEventHandler, FunctionComponent, ComponentType } from 'react';
+import React, { useMemo, ReactNode, MouseEventHandler, FunctionComponent } from 'react';
 import MaterialButton, { ButtonProps as MaterialButtonProps } from '@material-ui/core/Button';
 import makeStyles from '@material-ui/styles/makeStyles';
 import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ButtonIcon, { ButtonIconType as _ButtonIconType } from './components/ButtonIcon';
-import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import Box from '../../layouts/Box';
 
 const useStyles = makeStyles({
@@ -56,12 +55,11 @@ export interface ButtonProps {
     /**
      * Displays an icon next to the text. Check the iconAlign property for positioning. <br/>
      * Available options are 'add_plus' | 'copy' | 'external' | 'folder' | 'refresh' | 'settings' <br/>
-     * or the name of <a href='https://material-ui.com/components/material-icons/' target='_blank'>Material UI Icon Component</a> <br/>
-     * or a Material UI Icon Component Type. <br/>
+     * or <a href='https://material-ui.com/components/material-icons/' target='_blank'>Material UI Icon Component Type</a> can be provided. <br/>
      * Please <b>NOTE</b> that using the name of Material UI Icon Component will result in the code for every icon being included in your project,
      * so is not recommended unless you configure tree-shaking. It may also impact Hot Module Reload performance.
      * */
-    icon?: ButtonIconType | ComponentType<SvgIconProps>;
+    icon?: _ButtonIconType;
     /**
      * Defines where icon should be
      * */
