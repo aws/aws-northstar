@@ -22,7 +22,9 @@ cp ./LICENSE-THIRD-PARTY ./build/
 
 echo 'Copy the examples to published examples folder'
 if [ ! -d "./styleguide.out/examples" ]; then mkdir -p styleguide.out/examples ; fi
-cd examples && tar -czvf ../styleguide.out/examples/create-react-app.tar.gz ./create-react-app && cd -
+pushd examples
+tar -czvf ../styleguide.out/examples/create-react-app.tar.gz ./create-react-app 
+popd
 
 # Test the example app
 ./scripts/runDemoTest.sh
