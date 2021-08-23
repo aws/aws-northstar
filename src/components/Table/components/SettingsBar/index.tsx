@@ -16,7 +16,11 @@
 
 import React, { ReactNode } from 'react';
 import { IconButton } from '@material-ui/core';
-import { FirstPage, LastPage, NavigateBefore, NavigateNext, SettingsOutlined } from '@material-ui/icons';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import NavigateBefore from '@material-ui/icons/NavigateBefore';
+import NavigateNext from '@material-ui/icons/NavigateNext';
+import SettingsOutlined from '@material-ui/icons/SettingsOutlined';
 import SettingsPopover from '../SettingsPopover';
 
 export interface SettingsBarProps {

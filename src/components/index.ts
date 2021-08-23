@@ -57,4 +57,3 @@ export { default as Toggle } from './Toggle';
 export { default as TokenGroup } from './TokenGroup';
 export { default as TreeView } from './TreeView';
 export { default as Wizard } from './Wizard';
-export { default as Icon } from './Icon';

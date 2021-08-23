@@ -14,9 +14,11 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
+import { action } from '@storybook/addon-actions';
+import DnsOutlined from '@material-ui/icons/DnsOutlined';
+import Computer from '@material-ui/icons/Computer';
 import Autosuggest from '.';
 import FormField from '../FormField';
-import { action } from '@storybook/addon-actions';
 import { awsServices, groupedAwsServices } from './data/data';
 import { SelectOption, StatusType } from '../Select';
 
@@ -166,7 +168,7 @@ export const WithoutIcon = () => (
 export const WithCustomIcon = () => (
     <FormField label="Form field label" controlId="formFieldId1">
         <Autosuggest
-            icon={'DnsOutlined'}
+            icon={DnsOutlined}
             options={awsServices}
             controlId="formFieldId1"
             ariaDescribedby="This is a description"
@@ -178,7 +180,7 @@ export const WithCustomIcon = () => (
 export const WithFreeSolo = () => (
     <FormField label="Form field label" controlId="formFieldId1">
         <Autosuggest
-            icon={'Computer'}
+            icon={Computer}
             filteringType="manual"
             freeSolo={true}
             disableClearable={true}

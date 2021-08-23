@@ -19,8 +19,7 @@ import MaterialInput, { OutlinedInputProps as MaterialInputProps } from '@materi
 import { v4 as uuidv4 } from 'uuid';
 import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
-
-import { InputAdornment } from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 export interface InputProps {
     /** Text entered into the form element. */

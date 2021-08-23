@@ -14,18 +14,19 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useState, SyntheticEvent, useMemo, useCallback } from 'react';
+import React, { useState, SyntheticEvent, useMemo, useCallback, ComponentType } from 'react';
 import TextField from '@material-ui/core/TextField';
 import MaterialUIAutocomplete, { AutocompleteRenderInputParams } from '@material-ui/lab/Autocomplete';
 import Link from '@material-ui/core/Link';
 import SearchIcon from '@material-ui/icons/Search';
-import { makeStyles, InputAdornment, Theme } from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import makeStyles from '@material-ui/styles/makeStyles';
+import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import { v4 as uuidv4 } from 'uuid';
 import LoadingIndicator from '../LoadingIndicator';
 import StatusIndicator from '../StatusIndicator';
 import { AriaBaseProps } from '../../props/common';
 import { SelectBaseProps, SelectOption } from '../Select';
-import Icon, { IconName } from '../Icon';
 import { getFlattenOptions } from '../../utils/getFlattenOptions';
 
 export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
@@ -58,13 +59,16 @@ export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
      */
     freeSolo?: boolean;
     /**
+     * Define the Icon to be used for the text input. <br/>
+     * By default, Search icon will be displayed. <br/>
+     * If false, no icon will be displayed. <br/>
+     * Or <a href='https://material-ui.com/components/material-icons/' target='_blank'>Material UI Icon Component Type</a> can be provided.
+     */
+    icon?: false | ComponentType<SvgIconProps>;
+    /**
      * If `true`, the input can't be cleared.
      */
     disableClearable?: boolean;
-    /**
-     * Define the Icon to be used for the text input
-     */
-    icon?: false | IconName;
     /**
      * Callback fired when the value changes.
      * */
@@ -83,7 +87,7 @@ export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
     onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles({
     input: {
         display: 'inline-block',
         marginRight: '20px',
@@ -94,7 +98,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textfield: {
         paddingRight: '30px',
     },
-}));
+});
 
 /**
  * An autosuggest control is a normal text input enhanced by a panel of suggested options.
@@ -112,10 +116,10 @@ export default function Autosuggest({
     disabled,
     placeholder,
     invalid,
+    icon,
     ariaRequired = false,
     freeSolo = false,
     disableClearable = false,
-    icon = undefined,
     ariaDescribedby,
     ariaLabelledby,
     onChange,
@@ -187,6 +191,15 @@ export default function Autosuggest({
         [statusType, classes.recoveryLink, errorText, recoveryText, loadingText, onRecoveryClickHandler]
     );
 
+    const iconComponent = useMemo(() => {
+        if (icon) {
+            const IconComponent = icon as ComponentType<SvgIconProps>;
+            return <IconComponent color="action" />;
+        }
+
+        return <SearchIcon color="action" />;
+    }, [icon]);
+
     const textfield = useCallback(
         (params: AutocompleteRenderInputParams): React.ReactNode => (
             <TextField
@@ -206,12 +219,7 @@ export default function Autosuggest({
                     ...params.InputProps,
                     className: classes.textfield,
                     type: 'search',
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            {icon === undefined && <SearchIcon color="action" />}
-                            {icon && <Icon name={icon} color="action" />}
-                        </InputAdornment>
-                    ),
+                    startAdornment: icon !== false && <InputAdornment position="start">{iconComponent}</InputAdornment>,
                 }}
             />
         ),
@@ -221,11 +229,12 @@ export default function Autosuggest({
             ariaRequired,
             autoCompleteString,
             classes.textfield,
-            icon,
             invalid,
             name,
             placeholder,
             statusType,
+            icon,
+            iconComponent,
         ]
     );
 

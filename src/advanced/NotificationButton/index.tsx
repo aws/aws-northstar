@@ -16,7 +16,7 @@
 import React, { useMemo } from 'react';
 import clsx from 'clsx';
 import Box from '../../layouts/Box';
-import { NotificationsIcon } from '../../icons';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import Alert from '../../components/Alert';
 import Badge from '../../components/Badge';
 import ButtonDropdown from '../../components/ButtonDropdown';

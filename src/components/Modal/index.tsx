@@ -16,7 +16,7 @@
 
 import React, { useState, useEffect, ReactNode } from 'react';
 import { makeStyles, IconButton } from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+import Close from '@material-ui/icons/Close';
 import clsx from 'clsx';
 
 import Container from '../../layouts/Container';

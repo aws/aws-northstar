@@ -15,14 +15,11 @@
  ******************************************************************************************************************** */
 
 import React, { useMemo, ReactNode, MouseEventHandler, FunctionComponent } from 'react';
-import {
-    makeStyles,
-    Button as MaterialButton,
-    IconButton,
-    ButtonProps as MaterialButtonProps,
-} from '@material-ui/core';
-import ButtonIcon, { ButtonIconType as _ButtonIconType } from './components/ButtonIcon';
+import MaterialButton, { ButtonProps as MaterialButtonProps } from '@material-ui/core/Button';
+import makeStyles from '@material-ui/styles/makeStyles';
+import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ButtonIcon, { ButtonIconType as _ButtonIconType } from './components/ButtonIcon';
 import Box from '../../layouts/Box';
 
 const useStyles = makeStyles({
@@ -57,7 +54,8 @@ export interface ButtonProps {
     disabled?: boolean;
     /**
      * Displays an icon next to the text. Check the iconAlign property for positioning. <br/>
-     * Available options are 'add_plus' | 'copy' | 'external' | 'folder' | 'refresh' | 'settings'.
+     * Available options are 'add_plus' | 'copy' | 'external' | 'folder' | 'refresh' | 'settings' <br/>
+     * or <a href='https://material-ui.com/components/material-icons/' target='_blank'>Material UI Icon Component Type</a> can be provided.
      * */
     icon?: ButtonIconType;
     /**

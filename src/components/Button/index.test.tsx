@@ -20,6 +20,37 @@ import { axe } from 'jest-axe';
 import Button, { ButtonIconType } from '.';
 
 describe('Button', () => {
+    describe('Button', () => {
+        const variant = 'primary' as const;
+
+        it('renders the children', () => {
+            const { queryByRole } = render(<Button>test</Button>);
+            expect(queryByRole('button')).toHaveTextContent('test');
+        });
+
+        it('renders an icon from props', () => {
+            const props = { variant, icon: 'add_plus' as ButtonIconType };
+            const { queryByRole } = render(<Button {...props}>test</Button>);
+            expect(queryByRole('progressbar')).not.toBeInTheDocument();
+        });
+
+        describe('when loading', () => {
+            it('disables button and renders a loader without icon from props ', () => {
+                const props = { loading: true, variant, icon: 'add_plus' as ButtonIconType };
+                const { queryByRole } = render(<Button {...props}>test</Button>);
+                expect(queryByRole('button')).toHaveAttribute('disabled');
+                expect(queryByRole('progressbar')).toBeInTheDocument();
+            });
+
+            it('renders an loader and icon from props when iconAlign is right', () => {
+                const iconAlign = 'right' as const;
+                const props = { loading: true, iconAlign, variant, icon: 'add_plus' as ButtonIconType };
+                const { queryByRole } = render(<Button {...props}>test</Button>);
+                expect(queryByRole('progressbar')).toBeInTheDocument();
+            });
+        });
+    });
+
     describe('icon', () => {
         const props = { variant: 'icon' as const, icon: 'add_plus' as ButtonIconType, label: 'add button' };
 
@@ -40,36 +71,6 @@ describe('Button', () => {
                 const props = { loading: true, variant: 'icon' as const, icon: 'add_plus' as ButtonIconType };
                 const { queryByRole } = render(<Button {...props}>test</Button>);
                 expect(queryByRole('button')).toHaveAttribute('disabled');
-                expect(queryByRole('progressbar')).toBeInTheDocument();
-            });
-        });
-    });
-
-    describe('MaterialButton', () => {
-        const variant = 'primary' as const;
-
-        it('renders the children', () => {
-            const { queryByRole } = render(<Button>test</Button>);
-            expect(queryByRole('button')).toHaveTextContent('test');
-        });
-        it('renders an icon from props', () => {
-            const props = { variant, icon: 'add_plus' as ButtonIconType };
-            const { queryByRole } = render(<Button {...props}>test</Button>);
-            expect(queryByRole('progressbar')).not.toBeInTheDocument();
-        });
-
-        describe('when loading', () => {
-            it('disables button and renders a loader without icon from props ', () => {
-                const props = { loading: true, variant, icon: 'add_plus' as ButtonIconType };
-                const { queryByRole } = render(<Button {...props}>test</Button>);
-                expect(queryByRole('button')).toHaveAttribute('disabled');
-                expect(queryByRole('progressbar')).toBeInTheDocument();
-            });
-
-            it('renders an loader and icon from props when iconAlign is right', () => {
-                const iconAlign = 'right' as const;
-                const props = { loading: true, iconAlign, variant, icon: 'add_plus' as ButtonIconType };
-                const { queryByRole } = render(<Button {...props}>test</Button>);
                 expect(queryByRole('progressbar')).toBeInTheDocument();
             });
         });

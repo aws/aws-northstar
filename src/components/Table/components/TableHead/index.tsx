@@ -25,7 +25,7 @@ import {
     UseResizeColumnsColumnProps,
     UseFiltersColumnProps,
 } from 'react-table';
-import { ArrowDropDown } from '@material-ui/icons';
+import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { Stack } from '../../../../layouts';
 
 export interface TableHeadProps<D extends object> {
