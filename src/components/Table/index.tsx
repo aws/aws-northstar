@@ -167,7 +167,7 @@ export interface TableBaseOptions<D extends object> {
     disableSettings?: boolean;
     /** Disable sortBy */
     disableSortBy?: boolean;
-    /** Disable filters */
+    /** Disable search filters */
     disableFilters?: boolean;
     /** Disable column filters */
     disableColumnFilters?: boolean;

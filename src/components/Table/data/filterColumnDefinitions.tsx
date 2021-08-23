@@ -59,7 +59,6 @@ const filterColumnDefinition: (Column<DataType> & UseFiltersColumnOptions<DataTy
         width: 200,
         Header: 'Id',
         accessor: 'id',
-        disableFilters: true,
     },
     {
         id: 'name',
@@ -78,6 +77,7 @@ const filterColumnDefinition: (Column<DataType> & UseFiltersColumnOptions<DataTy
         id: 'accounts',
         width: 200,
         Header: '# Accounts',
+        disableFilters: true,
         accessor: (row) => row.accounts?.length,
     },
 ];

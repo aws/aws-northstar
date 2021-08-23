@@ -119,7 +119,7 @@ export const GroupBy = () => (
     />
 );
 
-export const Filter = () => (
+export const ColumnFilters = () => (
     <Table
         tableTitle={'Column Filter Table'}
         columnDefinitions={filterColumnDefinition}
