@@ -32,6 +32,9 @@ import Container from 'aws-northstar/layouts/Container';
 import Button from 'aws-northstar/components/Button';
 import Container from 'aws-northstar/layouts/Container';
 import Inline from 'aws-northstar/layouts/Inline';
+import Cloud from '@material-ui/icons/Cloud';
+import AccountCircleTwoTone from '@material-ui/icons/AccountCircleTwoTone';
+import Remove from '@material-ui/icons/Remove';
 
 <Container headingVariant='h4' title="Buttons with icons">
   <Inline>
@@ -40,9 +43,9 @@ import Inline from 'aws-northstar/layouts/Inline';
     <Button variant="primary" iconAlign="right" icon="add_plus">Add</Button>
     <Button icon="external">Launch</Button>
     <Button icon="folder" iconAlign="right">Folder</Button>
-    <Button icon="Cloud" iconAlign="right">Cloud</Button>
-    <Button icon="AccountCircleTwoTone" iconAlign="right">Account</Button>
-    <Button icon="Remove" iconAlign="right">Remove</Button>
+    <Button icon={Cloud} iconAlign="right">Cloud</Button>
+    <Button icon={AccountCircleTwoTone} iconAlign="right">Account</Button>
+    <Button icon={Remove} iconAlign="right">Remove</Button>
   </Inline>
 </Container>
 ```

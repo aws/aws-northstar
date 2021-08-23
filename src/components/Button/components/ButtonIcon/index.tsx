@@ -14,19 +14,25 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent } from 'react';
-import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
+import React, { FunctionComponent, ComponentType } from 'react';
 import AddIcon from '@material-ui/icons/Add';
+import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import LaunchOutlinedIcon from '@material-ui/icons/LaunchOutlined';
 import RefreshOutlinedIcon from '@material-ui/icons/RefreshOutlined';
-import * as icons from '@material-ui/icons';
-import Icon, { IconName } from '../../../Icon';
+import { SvgIconProps } from '@material-ui/core/SvgIcon';
 
-export type ButtonIconType = 'add_plus' | 'copy' | 'external' | 'folder' | 'refresh' | 'settings' | IconName;
+export type ButtonIconType =
+    | 'add_plus'
+    | 'copy'
+    | 'external'
+    | 'folder'
+    | 'refresh'
+    | 'settings'
+    | ComponentType<SvgIconProps>;
 
 export interface ButtonIconProps {
-    type?: ButtonIconType;
+    type: ButtonIconType;
 }
 
 const ButtonIcon: FunctionComponent<ButtonIconProps> = ({ type }) => {
@@ -41,12 +47,12 @@ const ButtonIcon: FunctionComponent<ButtonIconProps> = ({ type }) => {
             return <FileCopyOutlinedIcon fontSize="small" />;
         case 'refresh':
             return <RefreshOutlinedIcon fontSize="small" />;
-        default:
-            if (Object.keys(icons).includes(type as string)) {
-                return <Icon name={type as IconName} fontSize="small" />;
-            }
-
+        case 'settings':
             return <SettingsOutlinedIcon fontSize="small" />;
+        default: {
+            const IconComponent = type as ComponentType<SvgIconProps>;
+            return <IconComponent fontSize="small" />;
+        }
     }
 };
 

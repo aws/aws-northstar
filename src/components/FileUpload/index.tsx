@@ -14,6 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useCallback, useMemo, useRef, useState } from 'react';
+import CloudUpload from '@material-ui/icons/CloudUpload';
 import Button from '../Button';
 import FileTokenLabel from './components/FileTokenLabel';
 import FormField, { BaseFormFieldProps } from '../FormField';
@@ -138,7 +139,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
                 onChange={handleFileSelectionChange}
                 data-testid="input-file"
             />
-            <Button icon="CloudUpload" onClick={handleFileSelectionButtonClick}>
+            <Button icon={CloudUpload} onClick={handleFileSelectionButtonClick}>
                 {displayedButtonText}
             </Button>
         </FormField>

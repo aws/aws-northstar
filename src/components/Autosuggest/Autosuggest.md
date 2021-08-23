@@ -140,26 +140,28 @@ import { awsServices } from './data/data';
 ```jsx
 import Autosuggest from 'aws-northstar/components/Autosuggest'
 import Container from 'aws-northstar/layouts/Container';
-import FormField from 'aws-northstar/components/FormField'
+import FormField from 'aws-northstar/components/FormField';
+import DnsOutlined from '@material-ui/icons/DnsOutlined';
 import { awsServices } from './data/data';
 
 <Container headingVariant='h4' title='Using a custom Icon'>
     <FormField label="Form field label" controlId="formFieldId1">
-        <Autosuggest options={awsServices} controlId="formFieldId1" ariaDescribedby="This is a description" icon={'DnsOutlined'} />
+        <Autosuggest options={awsServices} controlId="formFieldId1" ariaDescribedby="This is a description" icon={DnsOutlined} />
     </FormField>
 </Container>
 ```
 
 ```jsx
+import Computer from "@material-ui/icons/Computer"; 
 import Autosuggest from 'aws-northstar/components/Autosuggest'
 import Container from 'aws-northstar/layouts/Container';
-import FormField from 'aws-northstar/components/FormField'
+import FormField from 'aws-northstar/components/FormField';
 import { awsServices } from './data/data';
 
 <Container headingVariant='h4' title='With free solo (allowing to enter custom text)'>
     <FormField label="Form field label" controlId="formFieldId1">
         <Autosuggest
-            icon={'Computer'}
+            icon={Computer}
             filteringType="manual"
             freeSolo={true}
             disableClearable={true}

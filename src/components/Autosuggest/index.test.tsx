@@ -15,6 +15,7 @@
  ******************************************************************************************************************** */
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import Dns from '@material-ui/icons/Dns';
 import { awsServices, groupedAwsServices } from './data/data';
 import Autosuggest from '.';
 import { axe } from 'jest-axe';
@@ -207,7 +208,7 @@ describe('Autosuggest', () => {
         });
 
         it('should render the component with custom icon', () => {
-            const { container } = render(<Autosuggest options={awsServices} placeholder="input-1" icon="Dns" />);
+            const { container } = render(<Autosuggest options={awsServices} placeholder="input-1" icon={Dns} />);
             const svg = container.querySelector('.MuiSvgIcon-colorAction');
 
             expect(svg).toBeInTheDocument();

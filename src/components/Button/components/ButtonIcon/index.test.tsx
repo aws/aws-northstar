@@ -15,18 +15,19 @@
  ******************************************************************************************************************** */
 import React from 'react';
 import { render } from '@testing-library/react';
+import Cloud from '@material-ui/icons/Cloud';
 import ButtonIcon from '.';
 
 describe('ButtonIcon', () => {
     beforeEach(() => jest.clearAllMocks());
 
     it('renders svg icon', () => {
-        const { container } = render(<ButtonIcon />);
+        const { container } = render(<ButtonIcon type="settings" />);
         expect(container.querySelector('svg')).toBeInTheDocument();
     });
 
     it('should render and svg icon when Material UI icon is used', () => {
-        const { container } = render(<ButtonIcon type="Cloud" />);
+        const { container } = render(<ButtonIcon type={Cloud} />);
         expect(container.querySelector('svg')).toBeInTheDocument();
     });
 });

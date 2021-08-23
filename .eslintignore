@@ -1,6 +1,7 @@
 !/.storybook
 
 build/ 
+temp/
 cdk.out/ 
 coverage/
 node_modules/ 
