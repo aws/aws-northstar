@@ -32,6 +32,7 @@ export default function DefaultColumnFilter<D extends object>({
             onChange={(e) => {
                 setFilter(e || undefined);
             }}
+            type="search"
             placeholder={`Search ${count} records...`}
         />
     );
