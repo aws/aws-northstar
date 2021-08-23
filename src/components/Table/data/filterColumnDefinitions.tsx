@@ -17,7 +17,6 @@ import React from 'react';
 import { DataType } from './type';
 import { Column } from '../';
 import Select from '../../Select';
-import { UseFiltersColumnOptions } from 'react-table';
 import { Button } from '../../index';
 import { Inline } from '../../../layouts';
 
@@ -53,7 +52,7 @@ function SelectColumnFilter({ column: { filterValue, setFilter } }: any) {
     );
 }
 
-const filterColumnDefinition: (Column<DataType> & UseFiltersColumnOptions<DataType>)[] = [
+const filterColumnDefinition: Column<DataType>[] = [
     {
         id: 'id',
         width: 200,
@@ -78,6 +77,7 @@ const filterColumnDefinition: (Column<DataType> & UseFiltersColumnOptions<DataTy
         width: 200,
         Header: '# Accounts',
         disableFilters: true,
+        disableGlobalFilter: true,
         accessor: (row) => row.accounts?.length,
     },
 ];

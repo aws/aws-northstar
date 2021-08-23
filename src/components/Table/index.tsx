@@ -17,7 +17,7 @@
 import React, { ReactNode, useMemo, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import {
-    Column,
+    Column as ReactTableColumn,
     IdType,
     Row,
     SortingRule,
@@ -29,10 +29,12 @@ import {
     useFilters,
     UseFiltersInstanceProps,
     UseFiltersOptions,
+    UseFiltersColumnOptions,
     useGlobalFilter,
     UseGlobalFiltersState,
     UseGlobalFiltersInstanceProps,
     UseGlobalFiltersOptions,
+    UseGlobalFiltersColumnOptions,
     useGroupBy,
     UseGroupByInstanceProps,
     UseGroupByOptions,
@@ -144,6 +146,9 @@ export interface TableOptions<D extends object>
         UseFiltersOptions<D>,
         UsePaginationOptions<D>,
         Record<string, any> {}
+
+export type Column<D extends object> = {} & ReactTableColumn<D> &
+    Partial<UseFiltersColumnOptions<D> & UseGlobalFiltersColumnOptions<D>>;
 
 export interface TableBaseOptions<D extends object> {
     /**
@@ -287,6 +292,8 @@ export default function Table<D extends object>({
                 id: '_selection_',
                 width: 50,
                 defaultCanFilter: false,
+                disableFilters: true,
+                disableGlobalFilter: true,
                 Header: (props: any) => {
                     return multiSelect && !isItemDisabled ? (
                         <Checkbox
@@ -352,7 +359,7 @@ export default function Table<D extends object>({
                 minWidth: 50,
                 width: 120,
                 maxWidth: 800,
-                Filter: defaultColumnFilter,
+                Filter: !disableColumnFilters && defaultColumnFilter,
             },
             initialState: {
                 pageIndex: defaultPageIndex,
@@ -374,6 +381,7 @@ export default function Table<D extends object>({
             autoResetSortBy: onFetchData === null,
             autoResetPage: onFetchData === null,
             autoResetSelectedRows: onFetchData === null,
+            autoResetFilters: onFetchData === null,
             autoResetGlobalFilter: onFetchData === null,
         }),
         [
@@ -583,5 +591,3 @@ export default function Table<D extends object>({
         </Container>
     );
 }
-
-export type { Column };
