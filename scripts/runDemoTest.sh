@@ -14,14 +14,9 @@ if [ -d $TEST_FOLDER ]; then rm -rf $TEST_FOLDER; fi
 echo "TEST_FOLDER=${TEST_FOLDER}"
 mkdir -p $TEST_FOLDER
 
-cp -r $DEMO_FOLDER/ $TEST_FOLDER/
+cp -r $DEMO_FOLDER/. $TEST_FOLDER/.
 
 pushd $TEST_FOLDER 
-
-echo "Listing all the files"
-
-ls -al 
-cat package.json
 
 echo "Building the project"
 yarn add $BUILD_FOLDER
