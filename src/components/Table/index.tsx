@@ -17,7 +17,7 @@
 import React, { ReactNode, useMemo, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import {
-    Column,
+    Column as ReactTableColumn,
     IdType,
     Row,
     SortingRule,
@@ -29,10 +29,12 @@ import {
     useFilters,
     UseFiltersInstanceProps,
     UseFiltersOptions,
+    UseFiltersColumnOptions,
     useGlobalFilter,
     UseGlobalFiltersState,
     UseGlobalFiltersInstanceProps,
     UseGlobalFiltersOptions,
+    UseGlobalFiltersColumnOptions,
     useGroupBy,
     UseGroupByInstanceProps,
     UseGroupByOptions,
@@ -64,6 +66,7 @@ import ColumnsSelector from './components/ColumnsSelector';
 import ColumnsGrouping from './components/ColumnsGrouping';
 import { RadioButton } from '../RadioGroup';
 import { useDebouncedCallback } from 'use-debounce';
+import DefaultColumnFilter from './components/DefaultColumnFilter';
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_SIZES = [10, 25, 50];
@@ -144,6 +147,9 @@ export interface TableOptions<D extends object>
         UsePaginationOptions<D>,
         Record<string, any> {}
 
+export type Column<D extends object> = {} & ReactTableColumn<D> &
+    Partial<UseFiltersColumnOptions<D> & UseGlobalFiltersColumnOptions<D>>;
+
 export interface TableBaseOptions<D extends object> {
     /**
      * The actions displayed on the top right corner.
@@ -156,6 +162,8 @@ export interface TableBaseOptions<D extends object> {
     items?: D[] | null;
     /** Describes the columns to be displayed in the table, and how each item is rendered. */
     columnDefinitions: Column<D>[];
+    /** The default column filter component */
+    defaultColumnFilter?: ReactNode;
     /** The default grouping ids */
     defaultGroups?: string[];
     /** Disable pagination */
@@ -164,8 +172,10 @@ export interface TableBaseOptions<D extends object> {
     disableSettings?: boolean;
     /** Disable sortBy */
     disableSortBy?: boolean;
-    /** Disable filters */
+    /** Disable search filters */
     disableFilters?: boolean;
+    /** Disable column filters */
+    disableColumnFilters?: boolean;
     /** Disable groupBy */
     disableGroupBy?: boolean;
     /** Disable row select */
@@ -241,9 +251,11 @@ export default function Table<D extends object>({
     actionGroup = null,
     columnDefinitions = [],
     defaultGroups = [],
+    defaultColumnFilter = DefaultColumnFilter,
     defaultPageIndex = 0,
     defaultPageSize = DEFAULT_PAGE_SIZE,
     disableGroupBy = true,
+    disableColumnFilters = true,
     disablePagination = false,
     disableSettings = false,
     disableSortBy = false,
@@ -274,11 +286,14 @@ export default function Table<D extends object>({
     const [controlledPageSize, setControlledPageSize] = useState(defaultPageSize);
 
     const columns = useMemo(() => {
-        const columnsFiltered = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
+        const columnsFiltered: any = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
         if (!disableRowSelect) {
             columnsFiltered.unshift({
                 id: '_selection_',
                 width: 50,
+                defaultCanFilter: false,
+                disableFilters: true,
+                disableGlobalFilter: true,
                 Header: (props: any) => {
                     return multiSelect && !isItemDisabled ? (
                         <Checkbox
@@ -344,6 +359,7 @@ export default function Table<D extends object>({
                 minWidth: 50,
                 width: 120,
                 maxWidth: 800,
+                Filter: !disableColumnFilters && defaultColumnFilter,
             },
             initialState: {
                 pageIndex: defaultPageIndex,
@@ -356,8 +372,7 @@ export default function Table<D extends object>({
             getRowId,
             disableSortBy,
             disableGroupBy,
-            disableFilters,
-            defaultCanFilter: true,
+            disableFilters: disableColumnFilters,
             manualFilters: onFetchData != null,
             manualPagination: onFetchData != null,
             manualSorting: onFetchData != null,
@@ -366,6 +381,7 @@ export default function Table<D extends object>({
             autoResetSortBy: onFetchData === null,
             autoResetPage: onFetchData === null,
             autoResetSelectedRows: onFetchData === null,
+            autoResetFilters: onFetchData === null,
             autoResetGlobalFilter: onFetchData === null,
         }),
         [
@@ -373,10 +389,11 @@ export default function Table<D extends object>({
             columns,
             pageCount,
             controlledPageSize,
+            defaultColumnFilter,
             defaultGroups,
             defaultPageIndex,
             defaultSortBy,
-            disableFilters,
+            disableColumnFilters,
             disableGroupBy,
             disableSortBy,
             getRowId,
@@ -574,5 +591,3 @@ export default function Table<D extends object>({
         </Container>
     );
 }
-
-export type { Column };
