@@ -64,6 +64,7 @@ import ColumnsSelector from './components/ColumnsSelector';
 import ColumnsGrouping from './components/ColumnsGrouping';
 import { RadioButton } from '../RadioGroup';
 import { useDebouncedCallback } from 'use-debounce';
+import DefaultColumnFilter from './components/DefaultColumnFilter';
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_SIZES = [10, 25, 50];
@@ -156,6 +157,8 @@ export interface TableBaseOptions<D extends object> {
     items?: D[] | null;
     /** Describes the columns to be displayed in the table, and how each item is rendered. */
     columnDefinitions: Column<D>[];
+    /** The default column filter component */
+    defaultColumnFilter?: ReactNode;
     /** The default grouping ids */
     defaultGroups?: string[];
     /** Disable pagination */
@@ -166,6 +169,8 @@ export interface TableBaseOptions<D extends object> {
     disableSortBy?: boolean;
     /** Disable filters */
     disableFilters?: boolean;
+    /** Disable column filters */
+    disableColumnFilters?: boolean;
     /** Disable groupBy */
     disableGroupBy?: boolean;
     /** Disable row select */
@@ -241,9 +246,11 @@ export default function Table<D extends object>({
     actionGroup = null,
     columnDefinitions = [],
     defaultGroups = [],
+    defaultColumnFilter = DefaultColumnFilter,
     defaultPageIndex = 0,
     defaultPageSize = DEFAULT_PAGE_SIZE,
     disableGroupBy = true,
+    disableColumnFilters = true,
     disablePagination = false,
     disableSettings = false,
     disableSortBy = false,
@@ -274,11 +281,12 @@ export default function Table<D extends object>({
     const [controlledPageSize, setControlledPageSize] = useState(defaultPageSize);
 
     const columns = useMemo(() => {
-        const columnsFiltered = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
+        const columnsFiltered: any = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
         if (!disableRowSelect) {
             columnsFiltered.unshift({
                 id: '_selection_',
                 width: 50,
+                defaultCanFilter: false,
                 Header: (props: any) => {
                     return multiSelect && !isItemDisabled ? (
                         <Checkbox
@@ -344,6 +352,7 @@ export default function Table<D extends object>({
                 minWidth: 50,
                 width: 120,
                 maxWidth: 800,
+                Filter: defaultColumnFilter,
             },
             initialState: {
                 pageIndex: defaultPageIndex,
@@ -356,8 +365,7 @@ export default function Table<D extends object>({
             getRowId,
             disableSortBy,
             disableGroupBy,
-            disableFilters,
-            defaultCanFilter: true,
+            disableFilters: disableColumnFilters,
             manualFilters: onFetchData != null,
             manualPagination: onFetchData != null,
             manualSorting: onFetchData != null,
@@ -373,10 +381,11 @@ export default function Table<D extends object>({
             columns,
             pageCount,
             controlledPageSize,
+            defaultColumnFilter,
             defaultGroups,
             defaultPageIndex,
             defaultSortBy,
-            disableFilters,
+            disableColumnFilters,
             disableGroupBy,
             disableSortBy,
             getRowId,
