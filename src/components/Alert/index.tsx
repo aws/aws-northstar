@@ -23,7 +23,7 @@ import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
-import { makeStyles, Theme } from '@material-ui/core';
+import { Theme, makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Button from '../Button';
 import Box from '../../layouts/Box';

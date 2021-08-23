@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
 import { ThemeOptions } from '@material-ui/core';
-import { createMuiTheme } from '@material-ui/core/styles/';
+import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { getTheme } from '../../themes/default';
@@ -33,7 +33,7 @@ const NorthStarThemeProvider: FunctionComponent<NorthStarThemeProviderProps> = (
         return theme || getTheme(fontFamily);
     }, [theme, fontFamily]);
     return (
-        <ThemeProvider theme={createMuiTheme(muiTheme)}>
+        <ThemeProvider theme={createTheme(muiTheme)}>
             <CssBaseline />
             {children}
         </ThemeProvider>

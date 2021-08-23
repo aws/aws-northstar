@@ -115,7 +115,7 @@ const mapTextareaProps = ({
 
     return {
         id: controlId,
-        rowsMin: rows,
+        minRows: rows,
         required: props.ariaRequired,
         value: props.value,
         placeholder: props.placeholder,
