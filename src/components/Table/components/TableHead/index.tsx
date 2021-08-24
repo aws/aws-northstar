@@ -17,8 +17,16 @@
 import React from 'react';
 
 import { TableHead as BaseTableHead, TableCell, TableRow, TableSortLabel } from '@material-ui/core';
-import { Column, ColumnInstance, HeaderGroup, UseSortByColumnProps, UseResizeColumnsColumnProps } from 'react-table';
+import {
+    Column,
+    ColumnInstance,
+    HeaderGroup,
+    UseSortByColumnProps,
+    UseResizeColumnsColumnProps,
+    UseFiltersColumnProps,
+} from 'react-table';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
+import { Stack } from '../../../../layouts';
 
 export interface TableHeadProps<D extends object> {
     headerGroups: HeaderGroup<D>[];
@@ -37,12 +45,16 @@ export default function TableHead<D extends object>({ headerGroups, styles }: Ta
                     {headerGroup.headers.map(
                         (
                             column: Partial<
-                                ColumnInstance<D> & Column<D> & UseSortByColumnProps<D> & UseResizeColumnsColumnProps<D>
+                                ColumnInstance<D> &
+                                    Column<D> &
+                                    UseSortByColumnProps<D> &
+                                    UseResizeColumnsColumnProps<D> &
+                                    UseFiltersColumnProps<D>
                             >
                         ) =>
                             column.id !== '_all_' && (
                                 <TableCell {...column.getHeaderProps!()}>
-                                    <div>
+                                    <Stack spacing="xs">
                                         {column.canSort ? (
                                             <TableSortLabel
                                                 {...column.getSortByToggleProps!()}
@@ -56,8 +68,9 @@ export default function TableHead<D extends object>({ headerGroups, styles }: Ta
                                         ) : (
                                             <span>{column.render?.('Header')}</span>
                                         )}
+                                        <div>{column.canFilter ? column.render?.('Filter') : null}</div>
                                         <div {...column.getResizerProps!()} className={styles.resizer} />
-                                    </div>
+                                    </Stack>
                                 </TableCell>
                             )
                     )}

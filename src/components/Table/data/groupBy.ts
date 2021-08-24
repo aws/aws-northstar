@@ -13,8 +13,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
+import { DataType } from './type';
 
-const data = [
+const data: DataType[] = [
     {
         id: 'id0000011',
         name: 'Order 11',

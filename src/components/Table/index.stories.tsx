@@ -24,6 +24,7 @@ import groupByData from './data/groupBy';
 import { DataType } from './data/type';
 import columnDefinitions from './data/columnDefinitions';
 import orderBy from 'lodash.orderby';
+import filterColumnDefinition from './data/filterColumnDefinitions';
 
 export default {
     component: Table,
@@ -118,6 +119,16 @@ export const GroupBy = () => (
     />
 );
 
+export const ColumnFilters = () => (
+    <Table
+        tableTitle={'Column Filter Table'}
+        columnDefinitions={filterColumnDefinition}
+        items={groupByData}
+        disableRowSelect={false}
+        disableColumnFilters={false}
+    />
+);
+
 export const Complex = () => (
     <Table
         onSelectionChange={action('onSelectionChange')}
@@ -160,17 +171,13 @@ export const WithActionGroup = () => {
     );
 };
 
-interface Data {
-    id: string;
-    name: string;
-}
-
 export const RemoteFetch = () => {
-    const [items, setItems] = useState<Data[]>([]);
+    const [items, setItems] = useState<DataType[]>([]);
     const [rowCount, setRowCount] = useState(0);
     const [loading, setLoading] = useState(false);
     const fetchIdRef = React.useRef(0);
-    const data = useMemo<Data[]>(() => {
+    const getRowId = useCallback((data) => data.id, []);
+    const data = useMemo<DataType[]>(() => {
         const data = [];
         for (let i = 0; i < 1000; i++) {
             data.push({
@@ -219,6 +226,7 @@ export const RemoteFetch = () => {
             rowCount={rowCount}
             items={items}
             loading={loading}
+            getRowId={getRowId}
             onSelectionChange={action('onSelectionChange')}
         />
     );
