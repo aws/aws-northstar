@@ -185,8 +185,9 @@ export const WithoutNotifications = () => {
 };
 
 const DynamicNotificationAddMainComponent: FunctionComponent = () => {
-    const { addNotification } = useAppLayoutContext();
-    const handleClick = useCallback(() => {
+    const { addNotification, dismissNotifications } = useAppLayoutContext();
+    const [notificationId, setNotificationId] = useState<string>();
+    const handleAddClick = useCallback(() => {
         const id = uuidv4();
         addNotification({
             id,
@@ -194,14 +195,27 @@ const DynamicNotificationAddMainComponent: FunctionComponent = () => {
             header: `Your request ${id} is being processed`,
             dismissible: true,
         });
+        setNotificationId(id);
     }, [addNotification]);
+    const handleRemoveLastClick = useCallback(() => {
+        notificationId && dismissNotifications(notificationId);
+    }, [dismissNotifications, notificationId]);
+    const handleRemoveAll = useCallback(() => {
+        dismissNotifications();
+    }, [dismissNotifications]);
 
-    return <Button onClick={handleClick}>Add New Notification</Button>;
+    return (
+        <Stack>
+            <Button onClick={handleAddClick}>Add New Notification</Button>
+            <Button onClick={handleRemoveLastClick}>Remove Last Notification</Button>
+            <Button onClick={handleRemoveAll}>Remove All notifications</Button>
+        </Stack>
+    );
 };
 
 export const DynamicNotificationAdd = () => (
     <AppLayout header={header} navigation={navigation} breadcrumbs={breadcrumbGroup} maxNotifications={5}>
-        <DynamicNotificationAddMainComponent />;
+        <DynamicNotificationAddMainComponent />
     </AppLayout>
 );
 

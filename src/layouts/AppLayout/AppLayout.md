@@ -49,8 +49,9 @@ export const DynamicHelpPanel = () => {
 More examples are available on [NorthStar storybook](https://storybook.northstar.aws-prototyping.cloud/?path=/story/applayout--default).
 
 ```jsx
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import AppLayout, { Notification, useAppLayoutContext } from 'aws-northstar/layouts/AppLayout';
 import Box from 'aws-northstar/layouts/Box';
 import Header from 'aws-northstar/components/Header';
@@ -156,12 +157,39 @@ const defaultNotifications = [
 ]; 
 
 const MainContent = () => {
-    const { openHelpPanel } = useAppLayoutContext();
+    const { openHelpPanel, 
+        addNotification, 
+        dismissNotifications  } = useAppLayoutContext();
+    
+    const [ notificationId, setNotificationId ] = useState();
+    
+    const handleAddClick = useCallback(() => {
+        const id = uuidv4();
+        addNotification({
+            id,
+            type: 'success',
+            header: `Your request ${id} is being processed`,
+            dismissible: true,
+        });
+        setNotificationId(id);
+    }, [addNotification]);
+
+    const handleRemoveLastClick = useCallback(() => {
+        notificationId && dismissNotifications(notificationId);
+    }, [dismissNotifications, notificationId]);
+
+    const handleRemoveAll = useCallback(() => {
+        dismissNotifications();
+    }, [dismissNotifications]);
+
     return (<Box bgcolor="grey.300" width="100%" height="1000px">
             <Stack>
                 Main Content
                 <Button onClick={() => openHelpPanel()}>Open Help Panel</Button>
                 <Button onClick={() => openHelpPanel(false)}>Close Help Panel</Button>
+                <Button onClick={handleAddClick}>Add New Notification</Button>
+                <Button onClick={handleRemoveLastClick}>Remove Last Added Notification</Button>
+                <Button onClick={handleRemoveAll}>Remove All notifications</Button>
             </Stack>
         </Box>
     )

@@ -213,5 +213,69 @@ describe('AppLayout', () => {
 
             expect(queryByText('Your request 1 is being processed')).toBeNull();
         });
+
+        it('can dismiss notifications', () => {
+            const ContentNode = () => {
+                const { addNotification, dismissNotifications } = useAppLayoutContext();
+                return (
+                    <div>
+                        <button
+                            data-testid="trigger-add-notifications"
+                            onClick={() => {
+                                addNotification({
+                                    id: '1',
+                                    type: 'success',
+                                    header: 'Your request 1 is being processed',
+                                    dismissible: true,
+                                });
+                                addNotification({
+                                    id: '2',
+                                    type: 'success',
+                                    header: 'Your request 2 is being processed',
+                                    dismissible: true,
+                                });
+                                addNotification({
+                                    id: '3',
+                                    type: 'success',
+                                    header: 'Your request 3 is being processed',
+                                    dismissible: true,
+                                });
+                            }}
+                        />
+                        <button data-testid="trigger-remove-notification" onClick={() => dismissNotifications('3')} />
+                        <button data-testid="trigger-remove-all-notifications" onClick={() => dismissNotifications()} />
+                    </div>
+                );
+            };
+            const { getByTestId, getByText, queryByText } = render(
+                <AppLayout header={header} navigation={navigation} maxNotifications={3}>
+                    <ContentNode />
+                </AppLayout>
+            );
+
+            act(() => {
+                fireEvent.click(getByTestId('trigger-add-notifications'));
+            });
+
+            expect(getByText('Your request 1 is being processed')).toBeVisible();
+            expect(getByText('Your request 2 is being processed')).toBeVisible();
+            expect(getByText('Your request 3 is being processed')).toBeVisible();
+
+            act(() => {
+                fireEvent.click(getByTestId('trigger-remove-notification'));
+            });
+
+            expect(getByText('Your request 1 is being processed')).toBeVisible();
+            expect(getByText('Your request 2 is being processed')).toBeVisible();
+            expect(queryByText('Your request 3 is being processed')).toBeNull();
+
+            act(() => {
+                fireEvent.click(getByTestId('trigger-remove-all-notifications'));
+            });
+
+            expect(queryByText('Your request 1 is being processed')).toBeNull();
+            expect(queryByText('Your request 2 is being processed')).toBeNull();
+            expect(queryByText('Your request 3 is being processed')).toBeNull();
+        });
     });
 });

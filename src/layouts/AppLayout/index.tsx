@@ -143,15 +143,30 @@ export interface Notification extends FlashbarMessage {
 }
 
 export interface AppLayoutContextApi {
+    /**
+     * Open/close the help panel.
+     */
     openHelpPanel: (open?: boolean) => void;
+    /**
+     * Set the content of the help panel.
+     */
     setHelpPanelContent: (content: ReactNode) => void;
+    /**
+     * Add a notification to the notification panel.
+     */
     addNotification: (notification: Notification) => void;
+    /**
+     * Dismiss the specified notification
+     * or all the notifications if notification id is not provided.
+     */
+    dismissNotifications: (id?: string) => void;
 }
 
 const initialState: AppLayoutContextApi = {
     openHelpPanel: () => {},
     setHelpPanelContent: () => {},
     addNotification: () => {},
+    dismissNotifications: () => {},
 };
 
 const AppLayoutContext = createContext<AppLayoutContextApi>(initialState);
@@ -229,26 +244,32 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     }, [notificationsProp]);
 
     const handleDismissNotification = useCallback(
-        (id: string) => {
-            setNotifications((prevNotifications) => prevNotifications.filter((n) => n.id !== id));
+        (id?: string) => {
+            if (id) {
+                setNotifications((prevNotifications) => prevNotifications.filter((n) => n.id !== id));
+            } else {
+                setNotifications([]);
+            }
         },
         [setNotifications]
     );
 
     const handleAddNotification = useCallback(
         (newNotification: Notification) => {
-            setNotifications((prevNotificsations) => [
-                {
-                    ...newNotification,
-                    onDismiss: () => {
-                        newNotification.onDismiss?.();
-                        handleDismissNotification(newNotification.id);
+            setNotifications((prevNotificsations) =>
+                [
+                    {
+                        ...newNotification,
+                        onDismiss: () => {
+                            newNotification.onDismiss?.();
+                            handleDismissNotification(newNotification.id);
+                        },
                     },
-                },
-                ...prevNotificsations,
-            ]);
+                    ...prevNotificsations,
+                ].slice(0, maxNotifications)
+            );
         },
-        [handleDismissNotification, setNotifications]
+        [handleDismissNotification, setNotifications, maxNotifications]
     );
 
     const { handleScroll } = useScrollPosition(
@@ -324,6 +345,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                     openHelpPanel,
                     setHelpPanelContent,
                     addNotification: handleAddNotification,
+                    dismissNotifications: handleDismissNotification,
                 }}
             >
                 {header}
