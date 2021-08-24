@@ -46,6 +46,8 @@ export const DynamicHelpPanel = () => {
 
 ### Examples
 
+More examples are available on [NorthStar storybook](https://storybook.northstar.aws-prototyping.cloud/?path=/story/applayout--default).
+
 ```jsx
 import { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';

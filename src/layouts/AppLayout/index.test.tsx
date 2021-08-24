@@ -17,7 +17,6 @@ import React from 'react';
 import { render, cleanup, fireEvent, act } from '@testing-library/react';
 import Header from '../../components/Header';
 import AppLayout, { useAppLayoutContext, Notification } from '.';
-import * as styles from '@material-ui/core/styles';
 
 const mockSetLocalStorage = jest.fn();
 

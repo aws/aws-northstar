@@ -162,7 +162,7 @@ const DynamicHelpPanelSubComponent: React.FunctionComponent<any> = ({ children }
 
 export const DynamicHelpPanel = () => {
     return (
-        <AppLayout header={header} navigation={navigation}>
+        <AppLayout header={header} breadcrumbs={breadcrumbGroup} navigation={navigation}>
             <DynamicHelpPanelSubComponent>
                 <Stack>
                     <GeneralInfo />
@@ -200,7 +200,7 @@ const DynamicNotificationAddMainComponent: FunctionComponent = () => {
 };
 
 export const DynamicNotificationAdd = () => (
-    <AppLayout header={header} navigation={navigation} maxNotifications={5}>
+    <AppLayout header={header} navigation={navigation} breadcrumbs={breadcrumbGroup} maxNotifications={5}>
         <DynamicNotificationAddMainComponent />;
     </AppLayout>
 );
@@ -218,7 +218,7 @@ export const WithoutSidebars = () => {
 
 export const WithOnlyHelpPanel = () => {
     return (
-        <AppLayout header={header} helpPanel={helpPanel}>
+        <AppLayout header={header} breadcrumbs={breadcrumbGroup} helpPanel={helpPanel}>
             <Stack>
                 <GeneralInfo />
                 <SimpleTable />
@@ -253,7 +253,7 @@ const ContentUsingContext = () => {
 
 export const OpenHelpPanel = () => {
     return (
-        <AppLayout header={header} navigation={navigation} helpPanel={helpPanel}>
+        <AppLayout header={header} breadcrumbs={breadcrumbGroup} navigation={navigation} helpPanel={helpPanel}>
             <ContentUsingContext />
         </AppLayout>
     );
@@ -276,7 +276,13 @@ export const CustomHeader = () => {
         </Box>
     );
     return (
-        <AppLayout header={customHeader} navigation={navigation} helpPanel={helpPanel} headerHeightInPx={100}>
+        <AppLayout
+            header={customHeader}
+            breadcrumbs={breadcrumbGroup}
+            navigation={navigation}
+            helpPanel={helpPanel}
+            headerHeightInPx={100}
+        >
             <Stack>
                 <GeneralInfo />
                 <SimpleTable />

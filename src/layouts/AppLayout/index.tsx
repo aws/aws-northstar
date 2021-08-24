@@ -161,7 +161,9 @@ export interface AppLayoutProps {
     header: ReactNode;
     /**SideNavigation drawer.*/
     navigation?: ReactElement<SideNavigationProps>;
-    /**Help Panel drawer*/
+    /**Help Panel drawer <br/>
+     * Alternatively, the helpPanel can be added dynamically via <b>setHelpPanelContent</b> callback in the AppLayoutContext. See <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/applayout--dynamic-help-panel" target="_blank">example</a>.
+     */
     helpPanel?: ReactElement<HelpPanelProps>;
     /**Whether to render padding within the content area*/
     paddingContentArea?: boolean;
@@ -171,7 +173,9 @@ export interface AppLayoutProps {
     inProgress?: boolean;
     /**A list of notifications. <br/>
      * The notifications are displayed on top of the main content in the scrollable area,
-     * it occupies the full width and is not affected by the padding that is added to the content region.*/
+     * it occupies the full width and is not affected by the padding that is added to the content region. <br/>
+     * Alternatively, the notification can be pushed dynamically via <b>addNotification</b> callback in the AppLayoutContext. See <a href='http://https://storybook.northstar.aws-prototyping.cloud/?path=/story/applayout--dynamic-notification-add' target="_blank">example</a>.
+     * */
     notifications?: Notification[];
     /**Maximum number of notifications to be displayed*/
     maxNotifications?: number;
