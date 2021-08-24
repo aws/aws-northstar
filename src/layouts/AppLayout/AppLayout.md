@@ -43,6 +43,7 @@ export const DynamicHelpPanel = () => {
     );
 };
 ```
+
 ### Examples
 
 ```jsx

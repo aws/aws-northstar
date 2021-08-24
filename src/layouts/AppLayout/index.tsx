@@ -24,6 +24,7 @@ import React, {
     useLayoutEffect,
     useRef,
     useCallback,
+    useEffect,
 } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
@@ -144,11 +145,13 @@ export interface Notification extends FlashbarMessage {
 export interface AppLayoutContextApi {
     openHelpPanel: (open?: boolean) => void;
     setHelpPanelContent: (content: ReactNode) => void;
+    addNotification: (notification: Notification) => void;
 }
 
 const initialState: AppLayoutContextApi = {
     openHelpPanel: () => {},
-    setHelpPanelContent: (content) => {},
+    setHelpPanelContent: () => {},
+    addNotification: () => {},
 };
 
 const AppLayoutContext = createContext<AppLayoutContextApi>(initialState);
@@ -193,10 +196,11 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     paddingContentArea = true,
     maxNotifications = 2,
     inProgress = false,
-    notifications,
+    notifications: notificationsProp,
     headerHeightInPx = 65,
 }) => {
     const [helpPanelContent, setHelpPanelContent] = useState<ReactNode>(helpPanel);
+    const [notifications, setNotifications] = useState<Notification[]>([]);
     const [isSideNavigationOpen, setIsSideNavigationOpen] = useLocalStorage(LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, 'false');
     const [isHelpPanelOpen, setIsHelpPanelOpen] = useLocalStorage(LOCAL_STORAGE_KEY_HELP_PANEL_OPEN, 'false');
     const notificationsBoxRef = useRef<HTMLDivElement>(null);
@@ -210,6 +214,38 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     useLayoutEffect(() => {
         setNotificationsBoxHeight(notificationsBoxRef.current?.offsetHeight || 0);
     }, [notificationsBoxRef, notifications]);
+
+    useEffect(() => {
+        if (notificationsProp) {
+            setNotifications((prevNotifications) => [
+                ...prevNotifications,
+                ...notificationsProp.filter((np) => !prevNotifications.find((pn) => pn.id === np.id)),
+            ]);
+        }
+    }, [notificationsProp]);
+
+    const handleDismissNotification = useCallback(
+        (id: string) => {
+            setNotifications((prevNotifications) => prevNotifications.filter((n) => n.id !== id));
+        },
+        [setNotifications]
+    );
+
+    const handleAddNotification = useCallback(
+        (newNotification: Notification) => {
+            setNotifications((prevNotificsations) => [
+                {
+                    ...newNotification,
+                    onDismiss: () => {
+                        newNotification.onDismiss?.();
+                        handleDismissNotification(newNotification.id);
+                    },
+                },
+                ...prevNotificsations,
+            ]);
+        },
+        [handleDismissNotification, setNotifications]
+    );
 
     const { handleScroll } = useScrollPosition(
         (position: ScrollPosition) => {
@@ -283,6 +319,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                 value={{
                     openHelpPanel,
                     setHelpPanelContent,
+                    addNotification: handleAddNotification,
                 }}
             >
                 {header}

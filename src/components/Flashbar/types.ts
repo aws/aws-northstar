@@ -16,6 +16,8 @@
 export type MessageType = 'error' | 'info' | 'success' | 'warning';
 
 export interface FlashbarMessage {
+    /**Message id */
+    id?: string;
     /**Heading text. */
     header: string;
     /**Primary text displayed in the element.*/

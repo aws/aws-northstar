@@ -13,8 +13,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
+import { v4 as uuidv4 } from 'uuid';
 import AppLayout, { Notification, useAppLayoutContext } from '.';
 import Badge from '../../components/Badge';
 import Box from '../Box';
@@ -29,6 +30,7 @@ import Stack from '../Stack';
 import Text from '../../components/Text';
 import { Simple as SimpleTable } from '../../components/Table/index.stories';
 import { Default as GeneralInfo } from '../../components/KeyValuePair/index.stories';
+
 export default {
     component: AppLayout,
     title: 'AppLayout',
@@ -181,6 +183,27 @@ export const WithoutNotifications = () => {
         </AppLayout>
     );
 };
+
+const DynamicNotificationAddMainComponent: FunctionComponent = () => {
+    const { addNotification } = useAppLayoutContext();
+    const handleClick = useCallback(() => {
+        const id = uuidv4();
+        addNotification({
+            id,
+            type: 'success',
+            header: `Your request ${id} is being processed`,
+            dismissible: true,
+        });
+    }, [addNotification]);
+
+    return <Button onClick={handleClick}>Add New Notification</Button>;
+};
+
+export const DynamicNotificationAdd = () => (
+    <AppLayout header={header} navigation={navigation} maxNotifications={5}>
+        <DynamicNotificationAddMainComponent />;
+    </AppLayout>
+);
 
 export const WithoutSidebars = () => {
     return (

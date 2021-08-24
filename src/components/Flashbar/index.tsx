@@ -18,6 +18,7 @@ import React, { FunctionComponent } from 'react';
 import Box from '../../layouts/Box';
 import { FlashbarMessage as _FlashbarMessage } from './types';
 import FlashbarItem from './component/FlashbarItem';
+import { v4 as uuidv4 } from 'uuid';
 
 export type FlashbarMessage = _FlashbarMessage;
 
@@ -40,8 +41,8 @@ const Flashbar: FunctionComponent<FlashbarProps> = ({ items = [], maxItemsDispla
     const renderedItems = items.slice(0, Math.min(maxItemsDisplayed, items.length));
     return (
         <Box>
-            {renderedItems.map((item, index) => (
-                <FlashbarItem {...item} key={index} />
+            {renderedItems.map((item) => (
+                <FlashbarItem {...item} key={item.id || uuidv4()} />
             ))}
         </Box>
     );
