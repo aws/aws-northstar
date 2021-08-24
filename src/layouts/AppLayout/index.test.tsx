@@ -17,12 +17,18 @@ import React from 'react';
 import { render, cleanup, fireEvent, act } from '@testing-library/react';
 import Header from '../../components/Header';
 import AppLayout, { useAppLayoutContext, Notification } from '.';
+import * as styles from '@material-ui/core/styles';
 
 const mockSetLocalStorage = jest.fn();
 
 jest.mock('react-use-localstorage', () => ({
     __esModule: true,
     default: () => ['false', mockSetLocalStorage],
+}));
+
+jest.mock('@material-ui/core/styles/makeStyles', () => ({
+    __esModule: true,
+    default: jest.fn().mockImplementation(() => () => ({})),
 }));
 
 const header = <Header title="App Title" />;

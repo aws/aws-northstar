@@ -26,7 +26,7 @@ import React, {
     useCallback,
     useEffect,
 } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import useLocalStorage from 'react-use-localstorage';
 import MenuIcon from '@material-ui/icons/Menu';
