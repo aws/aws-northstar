@@ -171,5 +171,42 @@ describe('AppLayout', () => {
 
             expect(getByText('Failed to update 1 order')).toBeVisible();
         });
+
+        it('renders dynamically added notifications', () => {
+            const ContentNode = () => {
+                const { addNotification } = useAppLayoutContext();
+                return (
+                    <div>
+                        <button
+                            data-testid="trigger-add-notification"
+                            onClick={() =>
+                                addNotification({
+                                    id: '1',
+                                    type: 'success',
+                                    header: 'Your request 1 is being processed',
+                                    dismissible: true,
+                                })
+                            }
+                        />
+                    </div>
+                );
+            };
+            const { getByTestId, getByText, getByLabelText, queryByText } = render(
+                <AppLayout header={header} navigation={navigation}>
+                    <ContentNode />
+                </AppLayout>
+            );
+            act(() => {
+                fireEvent.click(getByTestId('trigger-add-notification'));
+            });
+
+            expect(getByText('Your request 1 is being processed')).toBeVisible();
+
+            act(() => {
+                fireEvent.click(getByLabelText('Close'));
+            });
+
+            expect(queryByText('Your request 1 is being processed')).toBeNull();
+        });
     });
 });
