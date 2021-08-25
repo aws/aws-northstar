@@ -13,8 +13,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
+import { v4 as uuidv4 } from 'uuid';
 import AppLayout, { Notification, useAppLayoutContext } from '.';
 import Badge from '../../components/Badge';
 import Box from '../Box';
@@ -29,6 +30,7 @@ import Stack from '../Stack';
 import Text from '../../components/Text';
 import { Simple as SimpleTable } from '../../components/Table/index.stories';
 import { Default as GeneralInfo } from '../../components/KeyValuePair/index.stories';
+
 export default {
     component: AppLayout,
     title: 'AppLayout',
@@ -160,7 +162,7 @@ const DynamicHelpPanelSubComponent: React.FunctionComponent<any> = ({ children }
 
 export const DynamicHelpPanel = () => {
     return (
-        <AppLayout header={header} navigation={navigation}>
+        <AppLayout header={header} breadcrumbs={breadcrumbGroup} navigation={navigation}>
             <DynamicHelpPanelSubComponent>
                 <Stack>
                     <GeneralInfo />
@@ -182,6 +184,41 @@ export const WithoutNotifications = () => {
     );
 };
 
+const DynamicNotificationAddMainComponent: FunctionComponent = () => {
+    const { addNotification, dismissNotifications } = useAppLayoutContext();
+    const [notificationId, setNotificationId] = useState<string>();
+    const handleAddClick = useCallback(() => {
+        const id = uuidv4();
+        addNotification({
+            id,
+            type: 'success',
+            header: `Your request ${id} is being processed`,
+            dismissible: true,
+        });
+        setNotificationId(id);
+    }, [addNotification]);
+    const handleRemoveLastClick = useCallback(() => {
+        notificationId && dismissNotifications(notificationId);
+    }, [dismissNotifications, notificationId]);
+    const handleRemoveAll = useCallback(() => {
+        dismissNotifications();
+    }, [dismissNotifications]);
+
+    return (
+        <Stack>
+            <Button onClick={handleAddClick}>Add New Notification</Button>
+            <Button onClick={handleRemoveLastClick}>Remove Last Notification</Button>
+            <Button onClick={handleRemoveAll}>Remove All notifications</Button>
+        </Stack>
+    );
+};
+
+export const DynamicNotificationAdd = () => (
+    <AppLayout header={header} navigation={navigation} breadcrumbs={breadcrumbGroup} maxNotifications={5}>
+        <DynamicNotificationAddMainComponent />
+    </AppLayout>
+);
+
 export const WithoutSidebars = () => {
     return (
         <AppLayout header={header}>
@@ -195,7 +232,7 @@ export const WithoutSidebars = () => {
 
 export const WithOnlyHelpPanel = () => {
     return (
-        <AppLayout header={header} helpPanel={helpPanel}>
+        <AppLayout header={header} breadcrumbs={breadcrumbGroup} helpPanel={helpPanel}>
             <Stack>
                 <GeneralInfo />
                 <SimpleTable />
@@ -230,7 +267,7 @@ const ContentUsingContext = () => {
 
 export const OpenHelpPanel = () => {
     return (
-        <AppLayout header={header} navigation={navigation} helpPanel={helpPanel}>
+        <AppLayout header={header} breadcrumbs={breadcrumbGroup} navigation={navigation} helpPanel={helpPanel}>
             <ContentUsingContext />
         </AppLayout>
     );
@@ -253,7 +290,13 @@ export const CustomHeader = () => {
         </Box>
     );
     return (
-        <AppLayout header={customHeader} navigation={navigation} helpPanel={helpPanel} headerHeightInPx={100}>
+        <AppLayout
+            header={customHeader}
+            breadcrumbs={breadcrumbGroup}
+            navigation={navigation}
+            helpPanel={helpPanel}
+            headerHeightInPx={100}
+        >
             <Stack>
                 <GeneralInfo />
                 <SimpleTable />

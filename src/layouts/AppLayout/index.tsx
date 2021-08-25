@@ -24,8 +24,9 @@ import React, {
     useLayoutEffect,
     useRef,
     useCallback,
+    useEffect,
 } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import useLocalStorage from 'react-use-localstorage';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -142,23 +143,46 @@ export interface Notification extends FlashbarMessage {
 }
 
 export interface AppLayoutContextApi {
+    /**
+     * Open/close the help panel.
+     */
     openHelpPanel: (open?: boolean) => void;
+    /**
+     * Set the content of the help panel.
+     */
     setHelpPanelContent: (content: ReactNode) => void;
+    /**
+     * Add a notification to the notification panel.
+     */
+    addNotification: (notification: Notification) => void;
+    /**
+     * Dismiss the specified notification
+     * or all the notifications if notification id is not provided.
+     */
+    dismissNotifications: (id?: string) => void;
 }
 
 const initialState: AppLayoutContextApi = {
     openHelpPanel: () => {},
-    setHelpPanelContent: (content) => {},
+    setHelpPanelContent: () => {},
+    addNotification: () => {},
+    dismissNotifications: () => {},
 };
 
 const AppLayoutContext = createContext<AppLayoutContextApi>(initialState);
+
+interface NotificationExtended extends Notification {
+    originalOnDismiss?: Notification['onDismiss'];
+}
 
 export interface AppLayoutProps {
     /**The header */
     header: ReactNode;
     /**SideNavigation drawer.*/
     navigation?: ReactElement<SideNavigationProps>;
-    /**Help Panel drawer*/
+    /**Help Panel drawer <br/>
+     * Alternatively, the helpPanel can be added dynamically via <b>setHelpPanelContent</b> callback in the AppLayoutContext. See <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/applayout--dynamic-help-panel" target="_blank">example</a>.
+     */
     helpPanel?: ReactElement<HelpPanelProps>;
     /**Whether to render padding within the content area*/
     paddingContentArea?: boolean;
@@ -168,7 +192,9 @@ export interface AppLayoutProps {
     inProgress?: boolean;
     /**A list of notifications. <br/>
      * The notifications are displayed on top of the main content in the scrollable area,
-     * it occupies the full width and is not affected by the padding that is added to the content region.*/
+     * it occupies the full width and is not affected by the padding that is added to the content region. <br/>
+     * Alternatively, the notification can be pushed dynamically via <b>addNotification</b> callback in the AppLayoutContext. See <a href='http://https://storybook.northstar.aws-prototyping.cloud/?path=/story/applayout--dynamic-notification-add' target="_blank">example</a>.
+     * */
     notifications?: Notification[];
     /**Maximum number of notifications to be displayed*/
     maxNotifications?: number;
@@ -193,10 +219,11 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     paddingContentArea = true,
     maxNotifications = 2,
     inProgress = false,
-    notifications,
+    notifications: notificationsProp,
     headerHeightInPx = 65,
 }) => {
     const [helpPanelContent, setHelpPanelContent] = useState<ReactNode>(helpPanel);
+    const [notifications, setNotifications] = useState<NotificationExtended[]>([]);
     const [isSideNavigationOpen, setIsSideNavigationOpen] = useLocalStorage(LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, 'false');
     const [isHelpPanelOpen, setIsHelpPanelOpen] = useLocalStorage(LOCAL_STORAGE_KEY_HELP_PANEL_OPEN, 'false');
     const notificationsBoxRef = useRef<HTMLDivElement>(null);
@@ -210,6 +237,55 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     useLayoutEffect(() => {
         setNotificationsBoxHeight(notificationsBoxRef.current?.offsetHeight || 0);
     }, [notificationsBoxRef, notifications]);
+
+    useEffect(() => {
+        if (notificationsProp) {
+            setNotifications((prevNotifications) => [
+                ...prevNotifications,
+                ...notificationsProp.filter((np) => !prevNotifications.find((pn) => pn.id === np.id)),
+            ]);
+        }
+    }, [notificationsProp]);
+
+    const handleDismissNotification = useCallback(
+        (id?: string) => {
+            if (id) {
+                setNotifications((prevNotifications) => {
+                    const notification = prevNotifications.find((n) => n.id === id);
+                    notification?.originalOnDismiss?.();
+                    return prevNotifications.filter((n) => n.id !== id);
+                });
+            } else {
+                setNotifications((prevNotifications) => {
+                    prevNotifications.forEach((n) => n.originalOnDismiss?.());
+                    return [];
+                });
+            }
+        },
+        [setNotifications]
+    );
+
+    const handleAddNotification = useCallback(
+        (newNotification: Notification) => {
+            setNotifications((prevNotifications) => {
+                const allNotifications = [
+                    {
+                        ...newNotification,
+                        originalOnDismiss: newNotification.onDismiss,
+                        onDismiss: () => handleDismissNotification(newNotification.id),
+                    },
+                    ...prevNotifications,
+                ];
+
+                if (allNotifications.length > maxNotifications) {
+                    allNotifications.slice(maxNotifications).forEach((n) => n.originalOnDismiss?.());
+                }
+
+                return allNotifications.slice(0, maxNotifications);
+            });
+        },
+        [handleDismissNotification, setNotifications, maxNotifications]
+    );
 
     const { handleScroll } = useScrollPosition(
         (position: ScrollPosition) => {
@@ -283,6 +359,8 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                 value={{
                     openHelpPanel,
                     setHelpPanelContent,
+                    addNotification: handleAddNotification,
+                    dismissNotifications: handleDismissNotification,
                 }}
             >
                 {header}
