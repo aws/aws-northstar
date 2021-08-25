@@ -171,6 +171,10 @@ const initialState: AppLayoutContextApi = {
 
 const AppLayoutContext = createContext<AppLayoutContextApi>(initialState);
 
+interface NotificationExtended extends Notification {
+    originalOnDismiss?: Notification['onDismiss'];
+}
+
 export interface AppLayoutProps {
     /**The header */
     header: ReactNode;
@@ -219,7 +223,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     headerHeightInPx = 65,
 }) => {
     const [helpPanelContent, setHelpPanelContent] = useState<ReactNode>(helpPanel);
-    const [notifications, setNotifications] = useState<Notification[]>([]);
+    const [notifications, setNotifications] = useState<NotificationExtended[]>([]);
     const [isSideNavigationOpen, setIsSideNavigationOpen] = useLocalStorage(LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, 'false');
     const [isHelpPanelOpen, setIsHelpPanelOpen] = useLocalStorage(LOCAL_STORAGE_KEY_HELP_PANEL_OPEN, 'false');
     const notificationsBoxRef = useRef<HTMLDivElement>(null);
@@ -246,9 +250,16 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     const handleDismissNotification = useCallback(
         (id?: string) => {
             if (id) {
-                setNotifications((prevNotifications) => prevNotifications.filter((n) => n.id !== id));
+                setNotifications((prevNotifications) => {
+                    const notification = prevNotifications.find((n) => n.id === id);
+                    notification?.originalOnDismiss?.();
+                    return prevNotifications.filter((n) => n.id !== id);
+                });
             } else {
-                setNotifications([]);
+                setNotifications((prevNotifications) => {
+                    prevNotifications.forEach((n) => n.originalOnDismiss?.());
+                    return [];
+                });
             }
         },
         [setNotifications]
@@ -256,18 +267,22 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
 
     const handleAddNotification = useCallback(
         (newNotification: Notification) => {
-            setNotifications((prevNotificsations) =>
-                [
+            setNotifications((prevNotifications) => {
+                const allNotifications = [
                     {
                         ...newNotification,
-                        onDismiss: () => {
-                            newNotification.onDismiss?.();
-                            handleDismissNotification(newNotification.id);
-                        },
+                        originalOnDismiss: newNotification.onDismiss,
+                        onDismiss: () => handleDismissNotification(newNotification.id),
                     },
-                    ...prevNotificsations,
-                ].slice(0, maxNotifications)
-            );
+                    ...prevNotifications,
+                ];
+
+                if (allNotifications.length > maxNotifications) {
+                    allNotifications.slice(maxNotifications).forEach((n) => n.originalOnDismiss?.());
+                }
+
+                return allNotifications.slice(0, maxNotifications);
+            });
         },
         [handleDismissNotification, setNotifications, maxNotifications]
     );
