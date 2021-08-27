@@ -67,6 +67,8 @@ import ColumnsGrouping from './components/ColumnsGrouping';
 import { RadioButton } from '../RadioGroup';
 import { useDebouncedCallback } from 'use-debounce';
 import DefaultColumnFilter from './components/DefaultColumnFilter';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_SIZES = [10, 25, 50];
@@ -176,6 +178,8 @@ export interface TableBaseOptions<D extends object> {
     disableFilters?: boolean;
     /** Disable column filters */
     disableColumnFilters?: boolean;
+    /** Disable expand */
+    disableExpand?: boolean;
     /** Disable groupBy */
     disableGroupBy?: boolean;
     /** Disable row select */
@@ -255,6 +259,7 @@ export default function Table<D extends object>({
     defaultPageIndex = 0,
     defaultPageSize = DEFAULT_PAGE_SIZE,
     disableGroupBy = true,
+    disableExpand = true,
     disableColumnFilters = true,
     disablePagination = false,
     disableSettings = false,
@@ -287,6 +292,22 @@ export default function Table<D extends object>({
 
     const columns = useMemo(() => {
         const columnsFiltered: any = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
+        if (!disableExpand) {
+            columnsFiltered.unshift({
+                id: 'expander',
+                Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }: any) => (
+                    <span {...getToggleAllRowsExpandedProps()}>
+                        {isAllRowsExpanded ? <ExpandMoreIcon /> : <ChevronRightIcon />}
+                    </span>
+                ),
+                Cell: ({ row }: any) =>
+                    row.canExpand ? (
+                        <span {...row.getToggleRowExpandedProps()}>
+                            {row.isExpanded ? <ExpandMoreIcon /> : <ChevronRightIcon />}
+                        </span>
+                    ) : null,
+            });
+        }
         if (!disableRowSelect) {
             columnsFiltered.unshift({
                 id: '_selection_',
@@ -302,8 +323,7 @@ export default function Table<D extends object>({
                         />
                     ) : null;
                 },
-                Cell: (props: any) => {
-                    const { row } = props;
+                Cell: ({ row, toggleAllRowsSelected }: any) => {
                     const isSelectDisabled = !!isItemDisabled?.(row.original);
                     return (
                         <div>
@@ -321,7 +341,7 @@ export default function Table<D extends object>({
                                     controlId={row.id}
                                     disabled={isSelectDisabled}
                                     onChange={() => {
-                                        props.toggleAllRowsSelected(false);
+                                        toggleAllRowsSelected(false);
                                         row.toggleRowSelected(true);
                                     }}
                                 />

@@ -129,6 +129,15 @@ export const ColumnFilters = () => (
     />
 );
 
+export const ExpandedTable = () => (
+    <Table
+        tableTitle={'Expanded Table'}
+        columnDefinitions={columnDefinitions}
+        items={groupByData}
+        disableExpand={false}
+    />
+);
+
 export const Complex = () => (
     <Table
         onSelectionChange={action('onSelectionChange')}
