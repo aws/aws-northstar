@@ -26,7 +26,7 @@ import Typography from '@material-ui/core/Typography';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 import Box from '../../layouts/Box';
@@ -90,42 +90,40 @@ export interface ButtonDropdownProps {
     onClick?: MouseEventHandler<HTMLElement>;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        menuItem: {
-            padding: '5px 20px',
+const useStyles = makeStyles((theme) => ({
+    menuItem: {
+        padding: '5px 20px',
+    },
+    subHeading: {
+        padding: '5px 20px',
+        fontSize: '14px',
+        fontWeight: 700,
+        color: theme.palette.grey[600],
+    },
+    disabledSubHeading: {
+        opacity: '0.5',
+        cursor: 'default',
+    },
+    childMenuItem: {
+        paddingLeft: '24px',
+        '&:first-of-type': {
+            borderTop: `1px solid ${theme.palette.grey[200]}`,
         },
-        subHeading: {
-            padding: '5px 20px',
-            fontSize: '14px',
-            fontWeight: 700,
-            color: theme.palette.grey[600],
+        '&:last-of-type': {
+            borderBottom: `1px solid ${theme.palette.grey[200]}`,
         },
-        disabledSubHeading: {
-            opacity: '0.5',
-            cursor: 'default',
-        },
-        childMenuItem: {
-            paddingLeft: '24px',
-            '&:first-of-type': {
-                borderTop: `1px solid ${theme.palette.grey[200]}`,
-            },
-            '&:last-of-type': {
-                borderBottom: `1px solid ${theme.palette.grey[200]}`,
-            },
-        },
-        darkTheme: {
-            '& .MuiButton-root': {
-                border: 'none',
-                padding: '4px 5px',
+    },
+    darkTheme: {
+        '& .MuiButton-root': {
+            border: 'none',
+            padding: '4px 5px',
+            color: 'currentColor',
+            '&:hover': {
                 color: 'currentColor',
-                '&:hover': {
-                    color: 'currentColor',
-                },
             },
         },
-    })
-);
+    },
+}));
 
 /**
  * A button dropdown is used to group a set of actions under one button.

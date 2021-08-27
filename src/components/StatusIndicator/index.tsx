@@ -19,7 +19,7 @@ import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlin
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Box from '../../layouts/Box';
 import Text from '../Text';
@@ -41,7 +41,7 @@ const getIconByStatusType = (statusType: string, title?: string) => {
     return <IconComponent fontSize="small" titleAccess={title} />;
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         '& span': {

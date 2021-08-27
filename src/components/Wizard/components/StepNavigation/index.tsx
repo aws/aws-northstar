@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useCallback } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Box from '../../../../layouts/Box';
 import Link from '../../../Link';
 import Text from '../../../Text';
@@ -30,7 +30,7 @@ export interface StepNavigationProps {
     disableStepNavigation: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     step: {
         paddingTop: theme.spacing(1.5),
         paddingBottom: theme.spacing(1.5),

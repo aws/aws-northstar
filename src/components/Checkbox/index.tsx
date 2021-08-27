@@ -18,10 +18,10 @@ import React, { FunctionComponent, ChangeEvent, ReactNode } from 'react';
 import Typography from '@material-ui/core/Typography';
 import MaterialCheckbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     checkbox: {
         marginRight: theme.spacing(0.4),
         '&:hover': {

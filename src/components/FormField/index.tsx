@@ -16,7 +16,7 @@
 
 import React, { ReactNode, FunctionComponent, useMemo } from 'react';
 import clsx from 'clsx';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
@@ -28,7 +28,7 @@ import Box from '../../layouts/Box';
 import ExpandableSection from '../ExpandableSection';
 import Link from '../Link';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     formFieldRoot: {
         '&:not(:last-child)': {
             marginBottom: '20px',

@@ -15,10 +15,10 @@
  ******************************************************************************************************************** */
 import React, { ReactNode, FunctionComponent } from 'react';
 import Chip from '@material-ui/core/Chip';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Close from '@material-ui/icons/Close';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         fontSize: '14px',
         backgroundColor: theme.palette.info.light,

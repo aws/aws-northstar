@@ -38,7 +38,7 @@ export interface LinkProps {
 
 const externalPattern = /^((https?):\/\/)/;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
     link: {
         display: 'inline-flex',
         alignItems: 'center',
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
             textDecoration: 'none',
         },
     },
-}));
+});
 
 /** A link is an anchor tag that defines a hyperlink, which a user can click to find out more information about a concept, task, or field. */
 const Link: FunctionComponent<LinkProps> = ({

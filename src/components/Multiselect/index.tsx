@@ -19,7 +19,7 @@ import TextField from '@material-ui/core/TextField';
 import MaterialUIAutocomplete, { AutocompleteRenderInputParams } from '@material-ui/lab/Autocomplete';
 import Link from '@material-ui/core/Link';
 import SearchIcon from '@material-ui/icons/Search';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { v4 as uuidv4 } from 'uuid';
 import Checkbox from '../Checkbox';
@@ -69,7 +69,7 @@ export interface MultiselectProps extends SelectBaseProps, AriaBaseProps {
     onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles({
     input: {
         display: 'inline-block',
         marginRight: '20px',
@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textfield: {
         paddingRight: '30px',
     },
-}));
+});
 
 /** The multiselect is a normal text input enhanced by a panel of suggested options. */
 const Multiselect: FunctionComponent<MultiselectProps> = ({

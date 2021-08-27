@@ -22,6 +22,7 @@ import ExpansionPanelSummary from './components/ExpansionPanelSummary';
 import Text from '../Text';
 import { Variant } from './types';
 import makeStyles from '@material-ui/styles/makeStyles';
+
 const useStyles = makeStyles(() => {
     const borderless = {
         border: 'none',

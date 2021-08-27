@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, useMemo } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress, { CircularProgressProps } from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
@@ -26,7 +26,7 @@ import Button from '../Button';
 import Heading from '../Heading';
 import Text from '../Text';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     colorPrimary: {
         marginTop: '8px',
     },

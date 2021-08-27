@@ -18,7 +18,7 @@ import React, { FunctionComponent } from 'react';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx';
 
@@ -68,7 +68,7 @@ const mapProps = ({ controlId = uuidv4(), ...props }: ToggleProps): SwitchProps 
     };
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles({
     label: {
         marginLeft: 0,
         '& > .MuiFormControlLabel-label': {
@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme: Theme) => ({
             paddingTop: '2px',
         },
     },
-}));
+});
 
 /**
  * A toggle represents a switch that allows the user to turn things on or off.

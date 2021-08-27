@@ -20,7 +20,7 @@ import MaterialRadioButtonGroup from '@material-ui/core/RadioGroup';
 import clsx from 'clsx';
 import RadioButton from './components/RadioButton';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
     root: {},
     div: {
         extend: 'root',
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     radio: {
         transform: 'scale(1)',
     },
-}));
+});
 
 export interface RadioGroupProps {
     /** The value of the selected RadioButton */

@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 
 import React, { Fragment, FunctionComponent, ReactElement, useMemo } from 'react';
-import makeStyles from '@material-ui/styles/makeStyles';
+import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import LaunchOutlined from '@material-ui/icons/LaunchOutlined';
 import Typography from '@material-ui/core/Typography';

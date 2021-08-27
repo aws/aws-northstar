@@ -16,11 +16,11 @@
 
 import React, { FunctionComponent } from 'react';
 import TextareaAutosize, { TextareaAutosizeProps } from '@material-ui/core/TextareaAutosize';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     textarea: {
         fontSize: theme.typography.fontSize,
         borderRadius: '2px',

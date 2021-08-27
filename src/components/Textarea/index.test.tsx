@@ -89,7 +89,7 @@ describe('Textarea', () => {
             disabled: false,
             id: 'textarea-48',
             name: 'textarea',
-            rowsMin: 3,
+            minRows: 3,
             value: undefined,
             onChange: mockOnChange,
             required: true,
