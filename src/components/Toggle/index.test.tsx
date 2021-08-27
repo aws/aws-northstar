@@ -15,9 +15,8 @@
  ******************************************************************************************************************** */
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-
+import { SwitchProps } from '@material-ui/core/Switch';
 import Toggle, { mapProps, ToggleProps } from '.';
-import { SwitchProps } from '@material-ui/core';
 
 describe('Toggle', () => {
     const mockOnChange = jest.fn();

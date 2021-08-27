@@ -14,7 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { ReactNode, FunctionComponent } from 'react';
-import { Typography, makeStyles, Theme } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Container from '../../../src/layouts/Container';
 import Box from '../../../src/layouts/Box';
 import Stack from '../../../src/layouts/Stack';

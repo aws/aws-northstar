@@ -15,8 +15,9 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, ReactNode, ElementType } from 'react';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Alert from '../Alert';
-import { makeStyles, Theme, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
     headerContainer: {

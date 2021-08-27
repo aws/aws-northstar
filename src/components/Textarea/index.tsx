@@ -15,7 +15,8 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent } from 'react';
-import { makeStyles, TextareaAutosize, Theme, TextareaAutosizeProps } from '@material-ui/core';
+import TextareaAutosize, { TextareaAutosizeProps } from '@material-ui/core/TextareaAutosize';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 

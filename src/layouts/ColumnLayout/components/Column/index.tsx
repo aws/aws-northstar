@@ -23,7 +23,7 @@ export interface ColumnProps {
 
 const Column: FunctionComponent = ({ children }) => {
     return (
-        <Grid container direction="column" justify="flex-start" alignItems="flex-start" data-testid="column">
+        <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start" data-testid="column">
             {children}
         </Grid>
     );

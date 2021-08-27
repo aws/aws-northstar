@@ -16,9 +16,12 @@
 
 import React, { ReactElement, ReactNode } from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, Tab, Tabs as MuiTabs, Typography, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Tab from '@material-ui/core/Tab';
+import MuiTabs from '@material-ui/core/Tabs';
 import Container from '../../layouts/Container';
+import Box from '../../layouts/Box';
 
 const useStyles = makeStyles((theme: Theme) => ({
     tab: {

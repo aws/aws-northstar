@@ -45,6 +45,7 @@ import { SideNavigationProps } from '../../components/SideNavigation';
 import { HelpPanelProps } from '../../components/HelpPanel';
 
 import { LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, LOCAL_STORAGE_KEY_HELP_PANEL_OPEN } from './constants';
+import { useMemo } from 'react';
 
 interface StyleProps {
     hasSideNavigation: boolean;
@@ -287,6 +288,10 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
         [handleDismissNotification, setNotifications, maxNotifications]
     );
 
+    const watchScroll = useMemo(() => {
+        return notifications.length > 0;
+    }, [notifications]);
+
     const { handleScroll } = useScrollPosition(
         (position: ScrollPosition) => {
             setMainContentScrollPosition(position);
@@ -387,7 +392,11 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                             {navigation}
                         </Sidebar>
                     )}
-                    <div ref={mainContentRef} className={classes.content} onScroll={handleScroll}>
+                    <div
+                        ref={mainContentRef}
+                        className={classes.content}
+                        onScroll={(watchScroll && handleScroll) || undefined}
+                    >
                         {notifications && notifications.length > 0 && (
                             <div ref={notificationsBoxRef} className={classes.notifications}>
                                 <Flashbar items={notifications} maxItemsDisplayed={maxNotifications} />

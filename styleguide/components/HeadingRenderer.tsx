@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {

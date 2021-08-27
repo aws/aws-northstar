@@ -20,7 +20,7 @@ import 'react-pivottable/pivottable.css';
 import Plot from 'react-plotly.js';
 import createPlotlyRenderers from 'react-pivottable/PlotlyRenderers';
 
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
 const PlotlyRenderers = createPlotlyRenderers(Plot);
 

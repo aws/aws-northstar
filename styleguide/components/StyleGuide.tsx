@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { ReactNode, useCallback } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Box from '../../src/layouts/Box';
 import NorthStarThemeProvider from '../../src/components/NorthStarThemeProvider';
 import AppLayout from '../../src/layouts/AppLayout';

@@ -15,7 +15,11 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-import { CircularProgress, TableCell, TableFooter as BaseTableFooter, TableRow } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import TableCell from '@material-ui/core/TableCell';
+import BaseTableFooter from '@material-ui/core/TableFooter';
+import TableRow from '@material-ui/core/TableRow';
+
 import Text from '../../../Text';
 
 export interface TableFooterProps {

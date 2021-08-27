@@ -15,7 +15,9 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, ChangeEvent } from 'react';
-import { makeStyles, Radio as MaterialRadioButton, FormControlLabel } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import MaterialRadioButton from '@material-ui/core/Radio';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 export interface RadioButtonProps {

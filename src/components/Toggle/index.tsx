@@ -15,7 +15,10 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent } from 'react';
-import { makeStyles, Switch, Theme, SwitchProps, FormControlLabel, Typography } from '@material-ui/core';
+import Switch, { SwitchProps } from '@material-ui/core/Switch';
+import Typography from '@material-ui/core/Typography';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx';
 

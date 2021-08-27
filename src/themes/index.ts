@@ -14,11 +14,10 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { Theme as _Theme, ThemeOptions as _ThemeOptions } from '@material-ui/core/styles';
+export { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+export { default as useMediaQuery } from '@material-ui/core/useMediaQuery';
 export { NORTHSTAR_COLORS } from '../config/color';
 export { theme as defaultTheme, authTheme } from './default';
-export { default as makeStyles } from '@material-ui/styles/makeStyles';
-export { default as ThemeProvider } from '@material-ui/styles/ThemeProvider';
-export { default as useMediaQuery } from '@material-ui/core/useMediaQuery';
 
 export type Theme = _Theme;
 export type ThemeOptions = _ThemeOptions;

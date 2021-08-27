@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
 import Divider from '@material-ui/core/Divider';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Box from '../../../../layouts/Box';
 import Link from '../../../Link';
 

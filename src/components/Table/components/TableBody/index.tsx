@@ -16,7 +16,9 @@
 
 import React from 'react';
 import clsx from 'clsx';
-import { TableBody as BaseTableBody, TableCell, TableRow } from '@material-ui/core';
+import BaseTableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 import {
     Cell,
     Row,

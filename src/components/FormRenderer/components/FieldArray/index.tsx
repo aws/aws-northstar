@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import useTheme from '@material-ui/core/styles/useTheme';
+import useTheme from '@material-ui/styles/useTheme';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { FieldArray as FieldArrayBase } from '@data-driven-forms/react-form-renderer';
 import FormField from '../../../FormField';

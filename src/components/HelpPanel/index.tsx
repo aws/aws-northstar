@@ -15,15 +15,15 @@
  ******************************************************************************************************************** */
 
 import React, { Fragment, FunctionComponent, ReactElement, useMemo } from 'react';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Divider from '@material-ui/core/Divider';
 import LaunchOutlined from '@material-ui/icons/LaunchOutlined';
+import Typography from '@material-ui/core/Typography';
 import Stack from '../../layouts/Stack';
 import Link from '../Link';
 import Box from '../../layouts/Box';
 import LoadingIndicator from '../LoadingIndicator';
 import Heading from '../Heading';
-import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     header: {

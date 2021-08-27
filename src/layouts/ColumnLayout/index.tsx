@@ -79,7 +79,7 @@ const ColumnLayout: FunctionComponent<ColumnLayoutProps> = ({
     const columns = Children.toArray(children);
 
     return (
-        <Grid container justify="flex-start" alignItems="flex-start" className={classes.root}>
+        <Grid container justifyContent="flex-start" alignItems="flex-start" className={classes.root}>
             {columns.map((column, index) => (
                 <Fragment key={`column${index}`}>
                     <Grid

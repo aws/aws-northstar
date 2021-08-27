@@ -22,7 +22,9 @@ import React, {
     useCallback,
     useEffect,
 } from 'react';
-import { Menu, MenuItem, Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
