@@ -106,7 +106,7 @@ const GetStarted: FunctionComponent<GetStartedProps> = ({
     return (
         <Grid container className={styles.root}>
             <Grid item xs={12} className={styles.headerRow}>
-                <Grid container justifyContent="center" ref={headerRef}>
+                <Grid container justify="center" ref={headerRef}>
                     <Grid item xs={10} lg={8} className={styles.header}>
                         <Text>{category}</Text>
                     </Grid>
@@ -125,7 +125,7 @@ const GetStarted: FunctionComponent<GetStartedProps> = ({
                 </Grid>
             </Grid>
             <Grid item>
-                <Grid container justifyContent="center">
+                <Grid container justify="center">
                     <Grid item xs={10} sm={6} lg={5} xl={6} className={styles.contentArea}>
                         {children}
                     </Grid>

@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
-import { createTheme, ThemeOptions, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeOptions, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { getTheme } from '../../themes/default';
 
@@ -31,7 +31,7 @@ const NorthStarThemeProvider: FunctionComponent<NorthStarThemeProviderProps> = (
         return theme || getTheme(fontFamily);
     }, [theme, fontFamily]);
     return (
-        <ThemeProvider theme={createTheme(muiTheme)}>
+        <ThemeProvider theme={createMuiTheme(muiTheme)}>
             <CssBaseline />
             {children}
         </ThemeProvider>

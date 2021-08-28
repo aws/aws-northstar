@@ -6,7 +6,6 @@
         "no-restricted-imports": [
           2,
           {
-
             "paths": ["@material-ui/core"],
             "patterns": [
               "@material-ui/*/*/*", 
