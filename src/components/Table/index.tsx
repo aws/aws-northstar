@@ -294,7 +294,7 @@ export default function Table<D extends object>({
         const columnsFiltered: any = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
         if (!disableExpand) {
             columnsFiltered.unshift({
-                id: 'expander',
+                id: '_expander_',
                 Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }: any) => (
                     <span {...getToggleAllRowsExpandedProps()}>
                         {isAllRowsExpanded ? <ExpandMoreIcon /> : <ChevronRightIcon />}
