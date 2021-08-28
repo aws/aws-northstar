@@ -16,13 +16,13 @@
 
 import React, { useState, useCallback, useRef, FunctionComponent } from 'react';
 import clsx from 'clsx';
-import { makeStyles, Theme } from '@material-ui/core';
-import { Popover as MaterialPopover, PopoverProps as MaterialPopoverProps } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import MaterialPopover, { PopoverProps as MaterialPopoverProps } from '@material-ui/core/Popover';
 import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
 import useUniqueId from '../../hooks/useUniqueId';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     body: {
         padding: '0.8rem 1rem',
     },

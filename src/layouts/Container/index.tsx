@@ -15,11 +15,11 @@
  ******************************************************************************************************************** */
 
 import React, { CSSProperties, ReactNode, FunctionComponent } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 
-const useStyles = makeStyles<Theme, Partial<ContainerProps>>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, Partial<ContainerProps>>((theme) => ({
     containerRoot: {
         marginBottom: theme.spacing(2),
         boxShadow: '0 1px 1px 0 rgba(0,28,36,.3), 1px 1px 1px 0 rgba(0,28,36,.15), -1px 1px 1px 0 rgba(0,28,36,.15)',

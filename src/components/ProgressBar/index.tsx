@@ -15,23 +15,18 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, useMemo } from 'react';
-import {
-    Box,
-    CircularProgress,
-    CircularProgressProps,
-    Grid,
-    LinearProgressProps,
-    makeStyles,
-    Theme,
-    Typography,
-} from '@material-ui/core';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress, { CircularProgressProps } from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
+import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
+import Box from '../../layouts/Box';
+import Grid from '../../layouts/Grid';
 import StatusIndicator from '../StatusIndicator';
 import Button from '../Button';
 import Heading from '../Heading';
 import Text from '../Text';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     colorPrimary: {
         marginTop: '8px',
     },

@@ -15,7 +15,9 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
 import Table, { Column } from '../../../src/components/Table';
-import { Typography, TypographyVariant } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import { TypographyVariant } from '@material-ui/core/styles';
+
 import { defaultTheme } from '../../../src/themes';
 
 interface DataType {

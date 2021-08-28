@@ -2,7 +2,17 @@
     "extends": ["react-app", "plugin:prettier/recommended"],
     "plugins": ["header"],
     "rules": {
-        "header/header": [2, "header.js"]
+        "header/header": [2, "header.js"],
+        "no-restricted-imports": [
+          2,
+          {
+            "paths": ["@material-ui/core"],
+            "patterns": [
+              "@material-ui/*/*/*", 
+              "!@material-ui/core/test-utils/*"
+            ]
+          }
+        ]
     },
     "overrides": [
         {

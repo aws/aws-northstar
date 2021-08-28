@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { ReactNode, useCallback } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import Box from '../../src/layouts/Box';
 import NorthStarThemeProvider from '../../src/components/NorthStarThemeProvider';
 import AppLayout from '../../src/layouts/AppLayout';
@@ -23,7 +23,7 @@ import Landing from './Landing';
 import ButtonDropdown from '../../src/components/ButtonDropdown';
 import SideNavigationTemplate from '../../src/components/SideNavigation/components/SideNavigationTemplate';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     container: {
         padding: theme.spacing(4),
         paddingBottom: 0,

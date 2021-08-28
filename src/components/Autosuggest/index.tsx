@@ -20,7 +20,7 @@ import MaterialUIAutocomplete, { AutocompleteRenderInputParams } from '@material
 import Link from '@material-ui/core/Link';
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import makeStyles from '@material-ui/styles/makeStyles';
+import { makeStyles } from '@material-ui/core/styles';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import { v4 as uuidv4 } from 'uuid';
 import LoadingIndicator from '../LoadingIndicator';

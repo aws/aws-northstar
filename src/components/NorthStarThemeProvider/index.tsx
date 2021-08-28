@@ -14,9 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
-import { ThemeOptions } from '@material-ui/core';
-import { createMuiTheme } from '@material-ui/core/styles/';
-import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme, ThemeOptions, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { getTheme } from '../../themes/default';
 

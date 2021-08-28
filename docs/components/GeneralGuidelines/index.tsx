@@ -14,13 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { ReactNode, FunctionComponent } from 'react';
-import { Typography, makeStyles, Theme } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '../../../src/layouts/Container';
 import Box from '../../../src/layouts/Box';
 import Stack from '../../../src/layouts/Stack';
 import Text from '../../../src/components/Text';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     positiveGuideline: {
         borderLeft: `2px solid ${theme.palette.success.dark}`,
         paddingLeft: theme.spacing(2),

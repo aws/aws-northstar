@@ -20,6 +20,7 @@ import {
 } from '@data-driven-forms/react-form-renderer';
 import { FormSubscription as ReactFormSubscription } from 'final-form';
 import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
+import { ValidatorMapper } from '@data-driven-forms/react-form-renderer/validator-mapper';
 import Checkbox from './components/Checkbox';
 import Custom from './components/Custom';
 import Datepicker from './components/Datepicker';
@@ -39,7 +40,6 @@ import TreeView from './components/TreeView';
 import Wizard from './components/Wizard';
 import MarkdownEditor from './components/MarkdownEditor';
 import { componentTypes, Schema, RenderProps } from './types';
-import { ValidatorMapper } from '@data-driven-forms/react-form-renderer/validator-mapper';
 
 const componentMapper = {
     [componentTypes.TEXT_FIELD]: TextField,

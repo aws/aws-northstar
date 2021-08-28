@@ -14,8 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import Box from '../../layouts/Box';
-import { BoxProps } from '@material-ui/core/Box';
+import Box, { BoxProps } from '../../layouts/Box';
 
 /** A placeholder component to be used to occupy a place for demo purpose.*/
 const Placeholder: FunctionComponent = (props: BoxProps) => (

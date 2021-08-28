@@ -17,15 +17,11 @@
 import React, { FunctionComponent, SyntheticEvent, ReactNode } from 'react';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
-import {
-    makeStyles,
-    Link as MuiLink,
-    Select as MuiSelect,
-    SelectProps as MuiSelectProps,
-    MenuItem,
-    ListSubheader,
-    Theme,
-} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import MuiLink from '@material-ui/core/Link';
+import MuiSelect, { SelectProps as MuiSelectProps } from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import LoadingIndicator from '../LoadingIndicator';
 import StatusIndicator from '../StatusIndicator';
 import { ButtonIcon, ButtonIconType } from '../Button';
@@ -103,7 +99,7 @@ export interface SelectOption {
     options?: SelectOption[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     iconMenuItem: {
         marginRight: theme.spacing(0.4),
     },

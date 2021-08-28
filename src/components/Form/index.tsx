@@ -15,10 +15,11 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, ReactNode, ElementType } from 'react';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 import Alert from '../Alert';
-import { makeStyles, Theme, Typography } from '@material-ui/core';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     headerContainer: {
         marginBottom: theme.spacing(2),
     },

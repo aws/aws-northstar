@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import MaterialBox, { BoxProps } from '@material-ui/core/Box';
+import MaterialBox, { BoxProps as _BoxProps } from '@material-ui/core/Box';
 
 /**The Box component serves as a wrapper component (`<div>` by default) for most of the CSS utility needs.
  * Box component is port from Material UI Box component.
@@ -24,3 +24,4 @@ const Box: FunctionComponent<BoxProps> = (props) => {
 };
 
 export default Box;
+export type BoxProps = _BoxProps;

@@ -25,6 +25,7 @@ import React, {
     useRef,
     useCallback,
     useEffect,
+    useMemo,
 } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -43,7 +44,6 @@ import useScrollPosition, { ScrollPosition } from '../../hooks/useScrollPosition
 import LoadingIndicator from '../../components/LoadingIndicator';
 import { SideNavigationProps } from '../../components/SideNavigation';
 import { HelpPanelProps } from '../../components/HelpPanel';
-
 import { LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, LOCAL_STORAGE_KEY_HELP_PANEL_OPEN } from './constants';
 
 interface StyleProps {
@@ -57,7 +57,7 @@ interface StyleProps {
     headerHeightInPx: number;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     root: {
         margin: '0',
         overflow: 'hidden',
@@ -287,6 +287,10 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
         [handleDismissNotification, setNotifications, maxNotifications]
     );
 
+    const watchScroll = useMemo(() => {
+        return notifications.length > 0;
+    }, [notifications]);
+
     const { handleScroll } = useScrollPosition(
         (position: ScrollPosition) => {
             setMainContentScrollPosition(position);
@@ -387,7 +391,11 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                             {navigation}
                         </Sidebar>
                     )}
-                    <div ref={mainContentRef} className={classes.content} onScroll={handleScroll}>
+                    <div
+                        ref={mainContentRef}
+                        className={classes.content}
+                        onScroll={(watchScroll && handleScroll) || undefined}
+                    >
                         {notifications && notifications.length > 0 && (
                             <div ref={notificationsBoxRef} className={classes.notifications}>
                                 <Flashbar items={notifications} maxItemsDisplayed={maxNotifications} />

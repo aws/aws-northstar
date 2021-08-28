@@ -15,12 +15,11 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo, ReactNode } from 'react';
 import Drawer from '@material-ui/core/Drawer';
-import makeStyles from '@material-ui/core/styles/makeStyles';
-import { Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Close from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 
-const useStyles = makeStyles<Theme, SidebarProps>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, SidebarProps>((theme) => ({
     hide: {
         display: 'none',
     },

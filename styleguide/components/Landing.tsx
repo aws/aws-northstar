@@ -14,7 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { makeStyles, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import Box from '../../src/layouts/Box';
 
 const useStyles = makeStyles({

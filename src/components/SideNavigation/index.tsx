@@ -16,7 +16,9 @@
 
 import React, { ReactNode, FunctionComponent } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { Collapse, makeStyles, Typography } from '@material-ui/core';
+import Collapse from '@material-ui/core/Collapse';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ChevronRight from '@material-ui/icons/ChevronRight';

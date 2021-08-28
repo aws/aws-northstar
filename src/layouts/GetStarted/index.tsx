@@ -14,13 +14,13 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, ReactNode, useRef, useEffect, useState } from 'react';
-import Grid from '@material-ui/core/Grid';
+import Grid from '../Grid';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Stack from '../Stack';
 import Text from '../../components/Text';
 
-const useStyles = makeStyles<Theme, { sidebarMarginTop: number }>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, { sidebarMarginTop: number }>((theme) => ({
     root: {},
     headerRow: {
         backgroundColor: theme.palette.primary.main,

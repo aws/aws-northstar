@@ -15,8 +15,10 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-
-import { TableHead as BaseTableHead, TableCell, TableRow, TableSortLabel } from '@material-ui/core';
+import BaseTableHead from '@material-ui/core/TableHead';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import {
     Column,
     ColumnInstance,
