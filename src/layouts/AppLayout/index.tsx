@@ -25,6 +25,7 @@ import React, {
     useRef,
     useCallback,
     useEffect,
+    useMemo,
 } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -43,9 +44,7 @@ import useScrollPosition, { ScrollPosition } from '../../hooks/useScrollPosition
 import LoadingIndicator from '../../components/LoadingIndicator';
 import { SideNavigationProps } from '../../components/SideNavigation';
 import { HelpPanelProps } from '../../components/HelpPanel';
-
 import { LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, LOCAL_STORAGE_KEY_HELP_PANEL_OPEN } from './constants';
-import { useMemo } from 'react';
 
 interface StyleProps {
     hasSideNavigation: boolean;
@@ -58,7 +57,7 @@ interface StyleProps {
     headerHeightInPx: number;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     root: {
         margin: '0',
         overflow: 'hidden',

@@ -18,13 +18,13 @@ import React, { ReactNode, FunctionComponent, useMemo } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
 import Button from '../Button';
 import Box from '../../layouts/Box';
+import Grid from '../../layouts/Grid';
 import ExpandableSection from '../ExpandableSection';
 import Link from '../Link';
 

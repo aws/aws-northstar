@@ -19,7 +19,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import Close from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 
-const useStyles = makeStyles<Theme, SidebarProps>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, SidebarProps>((theme) => ({
     hide: {
         display: 'none',
     },
