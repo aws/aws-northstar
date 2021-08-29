@@ -1,5 +1,7 @@
 ### Examples
 
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/timepicker" target="_blank">NorthStar Storybook</a>.
+
 ```jsx
 import TimePicker from 'aws-northstar/components/TimePicker';
 import Container from 'aws-northstar/layouts/Container'; 

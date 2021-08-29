@@ -18,7 +18,7 @@ import React, { ReactElement, FunctionComponent, ChangeEvent, Fragment } from 'r
 import { makeStyles } from '@material-ui/core/styles';
 import MaterialRadioButtonGroup from '@material-ui/core/RadioGroup';
 import clsx from 'clsx';
-import RadioButton from './components/RadioButton';
+import RadioButton from '../RadioButton';
 
 const useStyles = makeStyles({
     root: {},

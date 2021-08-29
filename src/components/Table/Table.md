@@ -29,8 +29,7 @@ const columnDefinition: Column<DataType>[] = [
 
 ### Examples
 
-More examples are available on [NorthStar storybook](https://storybook.northstar.aws-prototyping.cloud/Table?path=/story/table--simple).
-
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/Table?path=/story/table--default" target="_blank">NorthStar Storybook</a>.
 
 ```jsx
 import Table from 'aws-northstar/components/Table';

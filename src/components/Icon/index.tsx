@@ -67,6 +67,9 @@ export interface IconProps {
     viewBox?: string;
 }
 
+/**
+ * Renders a <a href='https://material-ui.com/components/material-icons/' target='_blank'>Matertial Icon</a>.
+ */
 const Icon: FunctionComponent<IconProps> = ({ name, variant, ...rest }) => {
     // filled is the default icon variant
     const variantTheme = variant === 'Filled' || !variant ? '' : variant;

@@ -1,5 +1,7 @@
 ### Examples
 
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/deleteconfirmationdialog" target="_blank">NorthStar Storybook</a>.
+
 ```jsx
 import React, { useState, useCallback } from 'react';
 import DeleteConfirmationDialog from 'aws-northstar/advanced/DeleteConfirmationDialog';

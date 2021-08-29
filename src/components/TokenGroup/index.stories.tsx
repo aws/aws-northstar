@@ -14,12 +14,13 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { useState } from 'react';
-import TokenGroup from '.';
 import { action } from '@storybook/addon-actions';
-import Input from '../Input';
-import { Inline } from '../../layouts';
-import Button from '../Button';
+import TokenGroup from '.';
 import { Item } from './components/Token';
+import Input from '../Input';
+import Inline from '../../layouts/Inline';
+import Stack from '../../layouts/Stack';
+import Button from '../Button';
 
 export default {
     component: TokenGroup,
@@ -47,7 +48,7 @@ export const WithManagedState = () => {
     ]);
 
     return (
-        <>
+        <Stack>
             <Inline>
                 <Input value={inputValue} onChange={setInputValue} placeholder="Add a token..." />
                 <Button
@@ -64,6 +65,6 @@ export const WithManagedState = () => {
                     setItems([...items.slice(0, index), ...items.slice(index + 1)]);
                 }}
             />
-        </>
+        </Stack>
     );
 };

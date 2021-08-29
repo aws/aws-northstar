@@ -57,7 +57,7 @@ enum MAP_STYLE {
 }
 
 /**
- * Map renders interactive maps from vector tiles and Mapbox styles using WebGL.
+ * Map renders interactive maps from vector tiles and NorthStar styles using WebGL.
  */
 const Map: FunctionComponent<MapProps> = ({
     token,

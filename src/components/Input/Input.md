@@ -1,5 +1,7 @@
 ### Examples
 
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/input" target="_blank">NorthStar Storybook</a>.
+
 ```jsx
 import Input from 'aws-northstar/components/Input';
 import Stack from 'aws-northstar/layouts/Stack';

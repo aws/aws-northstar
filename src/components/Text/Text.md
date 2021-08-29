@@ -1,5 +1,6 @@
-
 ### Examples
+
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/text" target="_blank">NorthStar Storybook</a>.
 
 ```jsx
 import Text from 'aws-northstar/components/Text';
