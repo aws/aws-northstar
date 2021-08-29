@@ -47,6 +47,9 @@ const components: ReactMarkdownOptions['components'] = {
     a: (props) => <Link href={props.href as string}>{props.children}</Link>,
 };
 
+/**
+ * MarkdownViewer renders content with Markdown format.
+ */
 const MarkdownViewer = ({ children }: MarkdownViewerProps) => {
     return <ReactMarkdown plugins={[gfm, frontmatter]} components={components} children={children} />;
 };

@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import React from 'react';
 import RadioGroup from '.';
-import RadioButton from './components/RadioButton';
+import RadioButton from '../RadioButton';
 
 export default {
     component: RadioGroup,

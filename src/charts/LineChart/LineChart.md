@@ -1,5 +1,7 @@
 ### Examples
 
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/linechart" target="_blank">NorthStar Storybook</a>.
+
 ```jsx
 import LineChart, { Line, NORTHSTAR_COLORS, YAxis, XAxis, Tooltip, Legend, CartesianGrid } from 'aws-northstar/charts/LineChart';
 import Container from 'aws-northstar/layouts/Container';

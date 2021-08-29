@@ -1,4 +1,8 @@
-### Installing additional dependencies
+### Usage
+
+To use NorthStar Map Component, you will need a <a href="https://docs.mapbox.com/help/getting-started/access-tokens/" target="_blank">MapBox access token</a>.
+
+## Installing additional dependencies
 
 `Map`'s dependencies are listed as peer dependencies so you will need to install them mannually by running the following command.
 ```bash

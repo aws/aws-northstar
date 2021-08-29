@@ -17,7 +17,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 
 import RadioGroup from '.';
-import RadioButton from './components/RadioButton';
+import RadioButton from '../RadioButton';
 
 describe('RadioButtonGroup', () => {
     beforeEach(() => jest.clearAllMocks());

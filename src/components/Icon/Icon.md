@@ -1,5 +1,7 @@
 ### Examples
 
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/icon" target="_blank">NorthStar Storybook</a>.
+
 ```jsx
 import Icon from 'aws-northstar/components/Icon';
 import Inline from 'aws-northstar/layouts/Inline';

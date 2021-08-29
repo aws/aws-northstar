@@ -1,5 +1,7 @@
 ### Examples
 
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/badge" target="_blank">NorthStar Storybook</a>.
+
 ```jsx
 import Badge from 'aws-northstar/components/Badge';
 import Container from 'aws-northstar/layouts/Container';

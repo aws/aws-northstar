@@ -102,5 +102,6 @@ const ColumnLayout: FunctionComponent<ColumnLayoutProps> = ({
     );
 };
 
-export { Column };
 export default ColumnLayout;
+
+export { Column };

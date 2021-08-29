@@ -8,6 +8,9 @@ npm install react-pivottable@^0.11.0 react-plotly.js@^2.5.1 plotly.js@^2.0.0
 ### Usage
 `PivotTable` is only made available through secondary level import so you need to import it as `import PivotTable from 'aws-northstar/components/PivotTable';`.
 
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/pivottable" target="_blank">NorthStar Storybook</a>.
+
+
 ```jsx
 import Container from 'aws-northstar/layouts/Container';
 import PivotTable from 'aws-northstar/components/PivotTable';
