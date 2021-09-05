@@ -13,12 +13,25 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent } from 'react';
-import PivotTable from 'aws-northstar/components/PivotTable';
+import React, { FunctionComponent, Suspense } from 'react';
+import Box from 'aws-northstar/layouts/Box';
+import LoadingIndicator from 'aws-northstar/components/LoadingIndicator';
 import data from '../../data';
 
+const PivotTable = React.lazy(() => import('aws-northstar/components/PivotTable'));
+
 const Analytics: FunctionComponent = () => {
-    return <PivotTable data={data} />;
+    return (
+        <Suspense
+            fallback={
+                <Box width="100%" minHeight="100px" display="flex" justifyContent="center" pt={10}>
+                    <LoadingIndicator size="large"></LoadingIndicator>
+                </Box>
+            }
+        >
+            <PivotTable data={data} />
+        </Suspense>
+    );
 };
 
 export default Analytics;
