@@ -74,6 +74,26 @@ describe('DeleteConfirmationDialog', () => {
     it('should trigger onDeleteClicked when clicking the Delete button', () => {
         const handleClose = jest.fn();
         const handleDelete = jest.fn();
+        const { getByText } = render(
+            <DeleteConfirmationDialog
+                title="dialog title"
+                visible
+                onCancelClicked={handleClose}
+                onDeleteClicked={handleDelete}
+                variant="confirmation"
+            >
+                information
+            </DeleteConfirmationDialog>
+        );
+
+        expect(getByText('Delete').parentNode).toBeEnabled();
+        fireEvent.click(getByText('Delete'));
+        expect(handleDelete).toHaveBeenCalled();
+    });
+
+    it('should enable the Delete button when the confirmation text is typed', () => {
+        const handleClose = jest.fn();
+        const handleDelete = jest.fn();
         const { getByText, getByPlaceholderText } = render(
             <DeleteConfirmationDialog
                 title="dialog title"
@@ -149,5 +169,23 @@ describe('DeleteConfirmationDialog', () => {
             </DeleteConfirmationDialog>
         );
         expect(getByText('Confirm')).toBeInTheDocument();
+    });
+
+    it('should render Delete button disabled when enabled is false', () => {
+        const handleClose = jest.fn();
+        const handleDelete = jest.fn();
+        const { getByText } = render(
+            <DeleteConfirmationDialog
+                title="dialog title"
+                visible
+                onCancelClicked={handleClose}
+                onDeleteClicked={handleDelete}
+                variant="confirmation"
+                enabled={false}
+            >
+                information
+            </DeleteConfirmationDialog>
+        );
+        expect(getByText('Delete').parentNode).toBeDisabled();
     });
 });

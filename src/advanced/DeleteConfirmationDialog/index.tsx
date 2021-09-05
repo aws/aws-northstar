@@ -23,7 +23,33 @@ import FormField from '../../components/FormField';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-export interface DeleteConfirmationDialogProps {
+export interface DeleteConfirmationWithFrictionProps {
+    variant?: 'friction';
+    /**
+     * The label of the input field.
+     */
+    label?: ReactNode;
+    /**
+     * The placeholder text of the input field.
+     */
+    placeholderText?: string;
+    /**
+     * The hint text of the input field.
+     */
+    hintText?: string;
+    /**
+     * The confirmation text that is expected from users to type in the input field.
+     */
+    confirmationText?: string;
+}
+
+export interface DeleteConfirmationWithConfirmationProps {
+    variant: 'confirmation';
+}
+
+export interface DeleteConfirmationBaseProps {
+    /**The variant of the Delete Confirmation Dialog*/
+    variant?: 'confirmation' | 'friction';
     /**
      * Determines whether the Delete Confirmation Dialog is displayed on the screen. <br/>
      * The Delete Confirmation Dialog is hidden by default. Set this property to true to show it.
@@ -42,53 +68,44 @@ export interface DeleteConfirmationDialogProps {
      */
     loading?: boolean;
     /**
+     * Determines whether the button is enabled. For Delete With Friction Confirmation Dialog, this flag takes effect after the confirmation text is matched.
+     * */
+    enabled?: boolean;
+    /**
      * The title of the Delete Confirmation Dialog.
      */
     title: string;
     /**
-     * The label of the input field.
-     */
-    label?: ReactNode;
-    /**
      * Content displayed below the title and above the input field.
      */
     children?: ReactNode;
-    /**
-     * The placeholder text of the input field.
-     */
-    placeholderText?: string;
-    /**
-     * The hint text of the input field.
-     */
-    hintText?: string;
-    /**
-     * The confirmation text that is expected from users to type in the input field.
-     */
-    confirmationText?: string;
     /**
      * Override the Delete button label.
      */
     deleteButtonText?: string;
 }
 
+export type DeleteConfirmationDialogProps = DeleteConfirmationBaseProps &
+    (DeleteConfirmationWithConfirmationProps | DeleteConfirmationWithFrictionProps);
+
 /**
- * A model dialog used to verify users truly intend to perform deletion or some kind of destructive action.
+ * A model dialog used to verify users truly intend to perform deletion or some kind of destructive action. <br/>
+ * When deleting resources, you can choose between different levels of friction: <b>friction</b> or <b>confirmation</b>.
  * */
 const DeleteConfirmationDialog: FunctionComponent<DeleteConfirmationDialogProps> = ({
     visible,
     onDeleteClicked,
     onCancelClicked,
-    loading,
+    loading = false,
+    enabled = true,
     title,
-    label,
-    placeholderText,
-    hintText,
-    confirmationText = 'delete',
     children,
     deleteButtonText,
+    ...props
 }) => {
     const [confirmation, setConfirmation] = useState('');
-    const [isMatched, setIsMatched] = useState(false);
+    const [isMatched, setIsMatched] = useState(props.variant === 'confirmation');
+    const confirmationText = (props.variant !== 'confirmation' && props.confirmationText) || 'delete';
 
     const handleDelete = useCallback(() => {
         setConfirmation('');
@@ -110,7 +127,7 @@ const DeleteConfirmationDialog: FunctionComponent<DeleteConfirmationDialogProps>
                     <Button
                         label="delete"
                         variant="primary"
-                        disabled={!isMatched || loading}
+                        disabled={!enabled || !isMatched || loading}
                         loading={loading}
                         onClick={handleDelete}
                     >
@@ -119,35 +136,37 @@ const DeleteConfirmationDialog: FunctionComponent<DeleteConfirmationDialogProps>
                 </Inline>
             </Box>
         ),
-        [deleteButtonText, handleCancel, handleDelete, loading, isMatched]
+        [deleteButtonText, handleCancel, handleDelete, loading, isMatched, enabled]
     );
 
     useEffect(() => {
-        setIsMatched(confirmationText === confirmation);
-    }, [setIsMatched, confirmation, confirmationText]);
+        setIsMatched(props.variant === 'confirmation' || confirmationText === confirmation);
+    }, [setIsMatched, confirmation, confirmationText, props.variant]);
 
     return (
         <Modal visible={visible} title={title} footer={actions} onClose={handleCancel}>
             <Stack>
                 {children}
-                <FormField
-                    label={
-                        label || (
-                            <>
-                                To confirm deletion, type <i>delete</i> below
-                            </>
-                        )
-                    }
-                    controlId="confirmation"
-                    hintText={hintText}
-                >
-                    <Input
-                        type="text"
-                        placeholder={placeholderText || confirmationText}
-                        value={confirmation}
-                        onChange={setConfirmation}
-                    />
-                </FormField>
+                {(props.variant === 'friction' || !props.variant) && (
+                    <FormField
+                        label={
+                            props.label || (
+                                <>
+                                    To confirm deletion, type <i>delete</i> below
+                                </>
+                            )
+                        }
+                        controlId="confirmation"
+                        hintText={props.hintText}
+                    >
+                        <Input
+                            type="text"
+                            placeholder={props.placeholderText || confirmationText}
+                            value={confirmation}
+                            onChange={setConfirmation}
+                        />
+                    </FormField>
+                )}
             </Stack>
         </Modal>
     );
