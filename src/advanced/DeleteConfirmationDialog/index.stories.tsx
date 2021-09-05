@@ -78,7 +78,9 @@ export const DeleteWithConfirmation = () => {
                 onDeleteClicked={handleDelete}
                 loading={isDeleteProcessing}
             >
-                Delete sales order #001 permenantly? This action cannot be undone.
+                <Text>
+                    Delete <b>sales order #001</b> permenantly? This action cannot be undone.
+                </Text>
             </DeleteConfirmationDialog>
         </>
     );

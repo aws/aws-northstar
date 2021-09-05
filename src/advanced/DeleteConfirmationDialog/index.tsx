@@ -147,7 +147,7 @@ const DeleteConfirmationDialog: FunctionComponent<DeleteConfirmationDialogProps>
         <Modal visible={visible} title={title} footer={actions} onClose={handleCancel}>
             <Stack>
                 {children}
-                {(props.variant === 'friction' || !props.variant) && (
+                {props.variant !== 'confirmation' && (
                     <FormField
                         label={
                             props.label || (
