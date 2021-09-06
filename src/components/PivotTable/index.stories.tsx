@@ -13,8 +13,10 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
-import PivotTable from '.';
+import React, { Suspense } from 'react';
+import Box from '../../layouts/Box';
+import LoadingIndicator from '../LoadingIndicator';
+const PivotTable = React.lazy(() => import('.'));
 
 export default {
     component: PivotTable,
@@ -159,4 +161,14 @@ const data = [
     },
 ];
 
-export const Default = () => <PivotTable data={data} />;
+export const Default = () => (
+    <Suspense
+        fallback={
+            <Box width="100%" minHeight="100px" display="flex" justifyContent="center" pt={10}>
+                <LoadingIndicator size="large"></LoadingIndicator>
+            </Box>
+        }
+    >
+        <PivotTable data={data} />
+    </Suspense>
+);
