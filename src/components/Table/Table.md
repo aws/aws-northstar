@@ -59,7 +59,7 @@ const columnDefinitions = [
         width: 200,
         Header: 'Status',
         accessor: 'status',
-        Cell: ({ row  }) => {
+        Cell: ({ row }) => {
             if (row && row.original) {
                 const status = row.original.status;
                 switch(status) {

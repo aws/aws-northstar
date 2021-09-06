@@ -592,3 +592,5 @@ export default function Table<D extends object>({
         </Container>
     );
 }
+
+export type { CellProps } from 'react-table';

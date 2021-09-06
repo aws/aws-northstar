@@ -13,13 +13,15 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export { default as AppLayout } from './AppLayout';
-export { default as Box } from './Box';
-export { default as ColumnLayout, Column } from './ColumnLayout';
-export { default as Container } from './Container';
-export { default as GetStarted } from './GetStarted';
-export { default as Grid } from './Grid';
-export { default as Hidden } from './Hidden';
-export { default as Inline } from './Inline';
-export { default as Paper } from './Paper';
-export { default as Stack } from './Stack';
+import React, { FunctionComponent } from 'react';
+import MaterialPaper, { PaperProps } from '@material-ui/core/Paper';
+
+/**
+ * Paper component is ported from Material UI Paper component.
+ * Refer to <a href="https://material-ui.com/components/paper/" target="_blank">https://material-ui.com/components/paper/</a> for more details.
+ * */
+const Paper: FunctionComponent<PaperProps> = (props) => {
+    return <MaterialPaper {...props} />;
+};
+
+export default Paper;
