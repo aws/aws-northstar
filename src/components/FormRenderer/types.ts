@@ -40,8 +40,6 @@ export const componentTypes = {
     ...basicComponentTypes,
     TREE_VIEW: 'TREE_VIEW',
     EXPANDABLE_SECTION: 'EXPANDABLE_SECTION',
-    TABLE: 'TABLE',
     REVIEW: 'REVIEW',
-    MARKDOWN_EDITOR: 'MARKDOWN_EDITOR',
     CUSTOM: 'CUSTOM',
 };

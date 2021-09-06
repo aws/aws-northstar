@@ -23,6 +23,8 @@ import Input from '../Input';
 import FileUpload from '../FileUpload';
 import Container from '../../layouts/Container';
 import { ValidatorMapper } from '@data-driven-forms/react-form-renderer/validator-mapper';
+import FormRendererMarkdownEditor from '../FormRendererMarkdownEditor';
+import FormRendererTable from '../FormRendererTable';
 
 export default {
     component: FormRenderer,
@@ -991,7 +993,7 @@ const wizardSchema = {
                     title: 'Step 4',
                     fields: [
                         {
-                            component: componentTypes.TABLE,
+                            component: 'TABLE',
                             name: 'table',
                             label: 'Table',
                             description: 'This is a table',
@@ -1060,10 +1062,24 @@ const wizardSchema = {
 };
 
 export const Wizard = () => {
-    return <FormRenderer schema={wizardSchema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+    const customComponentMapping = {
+        TABLE: FormRendererTable,
+    };
+    return (
+        <FormRenderer
+            schema={wizardSchema}
+            customComponentWrapper={customComponentMapping}
+            onSubmit={action('Submit')}
+            onCancel={action('Cancel')}
+        />
+    );
 };
 
 export const WizardWithInitialValues = () => {
+    const customComponentMapping = {
+        TABLE: FormRendererTable,
+    };
+
     const initialValues = {
         textarea: 'textarea',
         type: 'type1',
@@ -1090,6 +1106,7 @@ export const WizardWithInitialValues = () => {
     return (
         <FormRenderer
             schema={wizardSchema}
+            customComponentWrapper={customComponentMapping}
             initialValues={initialValues}
             onSubmit={action('Submit')}
             onCancel={action('Cancel')}
@@ -1182,12 +1199,16 @@ export const Submitting = () => {
 };
 
 export const SimpleMarkdownEditor = () => {
+    const customComponentMapping = {
+        MARKDOWN_EDITOR: FormRendererMarkdownEditor,
+    };
+
     const schema = {
         submitLabel: 'Save',
         cancelLabel: 'Back',
         fields: [
             {
-                component: componentTypes.MARKDOWN_EDITOR,
+                component: 'MARKDOWN_EDITOR',
                 name: 'markdownOne',
                 label: 'This is a markdown editor',
                 helperText: 'Helper text provides users some guidance.',
@@ -1200,7 +1221,7 @@ export const SimpleMarkdownEditor = () => {
                 ],
             },
             {
-                component: componentTypes.MARKDOWN_EDITOR,
+                component: 'MARKDOWN_EDITOR',
                 name: 'markdownTwo',
                 label: 'This is a read only markdown editor',
                 isReadOnly: true,
@@ -1213,7 +1234,12 @@ export const SimpleMarkdownEditor = () => {
 
     return (
         <Container>
-            <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />
+            <FormRenderer
+                customComponentWrapper={customComponentMapping}
+                schema={schema}
+                onSubmit={action('Submit')}
+                onCancel={action('Cancel')}
+            />
         </Container>
     );
 };
