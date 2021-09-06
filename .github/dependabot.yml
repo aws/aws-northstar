@@ -19,5 +19,11 @@ updates:
       - dependency-name: "@types/react-router"
       - dependency-name: "react-router-dom"
       - dependency-name: "@types/react-router-dom"
-      - dependency-name: "husky"
+      - dependency-name: "webpack"
         versions: ["5.x"]
+      - dependency-name: "react-markdown"
+        versions: ["7.x"]
+      - dependency-name: "react-frontmatter"
+        versions: ["4.x"]
+      - dependency-name: "remark-gfm"
+        versions: ["2.x"]
