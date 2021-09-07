@@ -947,5 +947,9 @@ describe('FormRenderer', () => {
         it('should render FieldArray with grid', () => {
             fieldArrayTest({ ...schema, layout: 'grid' });
         });
+
+        it('should render FieldArray with stack', () => {
+            fieldArrayTest({ ...schema, layout: 'stack' });
+        });
     });
 });

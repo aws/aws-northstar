@@ -511,197 +511,181 @@ export const FieldArray = () => {
     const schema = {
         fields: [
             {
-                component: componentTypes.SUB_FORM,
-                title: 'Subform 1',
-                description: 'This is a subform',
-                name: 'subform1',
+                component: componentTypes.FIELD_ARRAY,
+                label: 'Attribute Editor - layout=default',
+                description: 'This is a form array',
+                name: 'fieldArray1',
+                helperText: 'You can add up to 6 more items.',
+                minItems: 4,
+                maxItems: 6,
+                noItemsMessage: 'Please add new item',
+                defaultItem: {
+                    key: 'key',
+                    value: 'value',
+                    type: 'type1',
+                },
+                validate: [
+                    {
+                        type: validatorTypes.MIN_ITEMS,
+                        threshold: 4,
+                    },
+                    {
+                        type: validatorTypes.REQUIRED,
+                    },
+                ],
                 fields: [
                     {
-                        component: componentTypes.FIELD_ARRAY,
-                        label: 'Attribute Editor',
-                        description: 'This is a form array',
-                        name: 'fieldArray',
-                        helperText: 'You can add up to 6 more items.',
-                        minItems: 4,
-                        maxItems: 6,
-                        noItemsMessage: 'Please add new item',
-                        defaultItem: {
-                            key: 'key',
-                            value: 'value',
-                            type: 'type1',
-                        },
+                        component: componentTypes.TEXT_FIELD,
+                        name: 'key',
+                        label: 'Key',
                         validate: [
-                            {
-                                type: validatorTypes.MIN_ITEMS,
-                                threshold: 4,
-                            },
                             {
                                 type: validatorTypes.REQUIRED,
                             },
                         ],
-                        fields: [
-                            {
-                                component: componentTypes.TEXT_FIELD,
-                                name: 'key',
-                                label: 'Key',
-                                validate: [
-                                    {
-                                        type: validatorTypes.REQUIRED,
-                                    },
-                                ],
-                            },
-                            {
-                                component: componentTypes.TEXT_FIELD,
-                                name: 'value',
-                                label: 'Value',
-                                validate: [
-                                    {
-                                        type: validatorTypes.REQUIRED,
-                                    },
-                                ],
-                            },
-                            {
-                                component: componentTypes.SELECT,
-                                name: 'type',
-                                label: 'Type',
-                                placeholder: 'Choose the type',
-                                options: [
-                                    { label: 'Type 1', value: 'type1' },
-                                    { label: 'Type 2', value: 'type2' },
-                                    { label: 'Type 3', value: 'type3' },
-                                ],
-                                validate: [
-                                    {
-                                        type: validatorTypes.REQUIRED,
-                                    },
-                                ],
-                            },
-                        ],
                     },
-                ],
-            },
-            {
-                component: componentTypes.SUB_FORM,
-                title: 'Subform 2',
-                description: 'This is a subform',
-                name: 'subform2',
-                fields: [
                     {
-                        component: componentTypes.FIELD_ARRAY,
-                        label: 'Attribute Editor',
-                        description: 'This is a form array',
-                        name: 'fieldArray1',
-                        helperText: 'You can add up to 6 more items.',
-                        minItems: 3,
-                        maxItems: 6,
-                        noItemsMessage: 'Please add new item',
-                        defaultItem: {
-                            key: 'key',
-                            value: 'value',
-                            type: {
-                                label: 'Type 1',
-                                value: 'type1',
-                            },
-                        },
+                        component: componentTypes.TEXT_FIELD,
+                        name: 'value',
+                        label: 'Value',
                         validate: [
                             {
-                                type: validatorTypes.MIN_ITEMS,
-                                threshold: 3,
+                                type: validatorTypes.REQUIRED,
                             },
                         ],
-                        fields: [
+                    },
+                    {
+                        component: componentTypes.SELECT,
+                        name: 'type',
+                        label: 'Type',
+                        placeholder: 'Choose the type',
+                        options: [
+                            { label: 'Type 1', value: 'type1' },
+                            { label: 'Type 2', value: 'type2' },
+                            { label: 'Type 3', value: 'type3' },
+                        ],
+                        validate: [
                             {
-                                component: componentTypes.TEXT_FIELD,
-                                name: 'key',
-                                label: 'Key',
-                                validate: [
-                                    {
-                                        type: validatorTypes.REQUIRED,
-                                    },
-                                ],
-                            },
-                            {
-                                component: componentTypes.TEXT_FIELD,
-                                name: 'value',
-                                label: 'Value',
-                                validate: [
-                                    {
-                                        type: validatorTypes.REQUIRED,
-                                    },
-                                ],
-                            },
-                            {
-                                component: componentTypes.SELECT,
-                                name: 'type',
-                                label: 'Type',
-                                placeholder: 'Choose the type',
-                                isSearchable: true,
-                                options: [
-                                    { label: 'Type 1', value: 'type1' },
-                                    { label: 'Type 2', value: 'type2' },
-                                    { label: 'Type 3', value: 'type3' },
-                                ],
-                                validate: [
-                                    {
-                                        type: validatorTypes.REQUIRED,
-                                    },
-                                ],
+                                type: validatorTypes.REQUIRED,
                             },
                         ],
                     },
                 ],
             },
             {
-                component: componentTypes.SUB_FORM,
-                title: 'Subform 3',
-                description: 'This is a subform',
-                name: 'subform3',
+                component: componentTypes.FIELD_ARRAY,
+                label: 'Attribute Editor',
+                description: 'This is a form array - layout=stack',
+                name: 'fieldArray2',
+                helperText: 'You can add up to 6 more items.',
+                minItems: 3,
+                maxItems: 6,
+                layout: 'stack',
+                noItemsMessage: 'Please add new item',
+                defaultItem: {
+                    key: 'key',
+                    value: 'value',
+                    type: {
+                        label: 'Type 1',
+                        value: 'type1',
+                    },
+                },
+                validate: [
+                    {
+                        type: validatorTypes.MIN_ITEMS,
+                        threshold: 3,
+                    },
+                    {
+                        type: validatorTypes.REQUIRED,
+                    },
+                ],
                 fields: [
                     {
-                        component: componentTypes.FIELD_ARRAY,
-                        label: 'Attribute Editor',
-                        description: 'This is a readonly form array',
-                        name: 'readonlyFieldArray',
+                        component: componentTypes.TEXT_FIELD,
+                        name: 'key',
+                        label: 'Key',
+                        validate: [
+                            {
+                                type: validatorTypes.REQUIRED,
+                            },
+                        ],
+                    },
+                    {
+                        component: componentTypes.TEXT_FIELD,
+                        name: 'value',
+                        label: 'Value',
+                        validate: [
+                            {
+                                type: validatorTypes.REQUIRED,
+                            },
+                        ],
+                    },
+                    {
+                        component: componentTypes.SELECT,
+                        name: 'type',
+                        label: 'Type',
+                        placeholder: 'Choose the type',
+                        isSearchable: true,
+                        options: [
+                            { label: 'Type 1', value: 'type1' },
+                            { label: 'Type 2', value: 'type2' },
+                            { label: 'Type 3', value: 'type3' },
+                        ],
+                        validate: [
+                            {
+                                type: validatorTypes.REQUIRED,
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                component: componentTypes.FIELD_ARRAY,
+                label: 'Attribute Editor - readonly - layout=grid',
+                description: 'This is a readonly form array',
+                name: 'readonlyFieldArray',
+                layout: 'grid',
+                isReadOnly: true,
+                fields: [
+                    {
+                        component: componentTypes.TEXT_FIELD,
+                        name: 'key',
+                        label: 'Key',
                         isReadOnly: true,
-                        fields: [
+                        column: 3,
+                        validate: [
                             {
-                                component: componentTypes.TEXT_FIELD,
-                                name: 'key',
-                                label: 'Key',
-                                isReadOnly: true,
-                                validate: [
-                                    {
-                                        type: validatorTypes.REQUIRED,
-                                    },
-                                ],
+                                type: validatorTypes.REQUIRED,
                             },
+                        ],
+                    },
+                    {
+                        component: componentTypes.TEXT_FIELD,
+                        name: 'value',
+                        label: 'Value',
+                        isReadOnly: true,
+                        column: 4,
+                        validate: [
                             {
-                                component: componentTypes.TEXT_FIELD,
-                                name: 'value',
-                                label: 'Value',
-                                isReadOnly: true,
-                                validate: [
-                                    {
-                                        type: validatorTypes.REQUIRED,
-                                    },
-                                ],
+                                type: validatorTypes.REQUIRED,
                             },
+                        ],
+                    },
+                    {
+                        component: componentTypes.SELECT,
+                        name: 'type',
+                        label: 'Type',
+                        placeholder: 'Choose the type',
+                        isReadOnly: true,
+                        column: 5,
+                        options: [
+                            { label: 'Type 1', value: 'type1' },
+                            { label: 'Type 2', value: 'type2' },
+                            { label: 'Type 3', value: 'type3' },
+                        ],
+                        validate: [
                             {
-                                component: componentTypes.SELECT,
-                                name: 'type',
-                                label: 'Type',
-                                placeholder: 'Choose the type',
-                                isReadOnly: true,
-                                options: [
-                                    { label: 'Type 1', value: 'type1' },
-                                    { label: 'Type 2', value: 'type2' },
-                                    { label: 'Type 3', value: 'type3' },
-                                ],
-                                validate: [
-                                    {
-                                        type: validatorTypes.REQUIRED,
-                                    },
-                                ],
+                                type: validatorTypes.REQUIRED,
                             },
                         ],
                     },
@@ -713,7 +697,7 @@ export const FieldArray = () => {
     };
 
     const initialValues = {
-        fieldArray: [
+        fieldArray1: [
             { key: 'key1', value: 'value1', type: 'type1' },
             { key: 'key2', value: 'value2', type: 'type2' },
             { key: 'key3', value: 'value3', type: 'type3' },
@@ -723,6 +707,141 @@ export const FieldArray = () => {
             { key: 'key2', value: 'value2', type: 'type2' },
             { key: 'key3', value: 'value3', type: 'type3' },
             { key: 'key4', value: 'value4', type: 'type1' },
+        ],
+    };
+
+    return (
+        <FormRenderer
+            schema={schema}
+            onSubmit={action('Submit')}
+            onCancel={action('Cancel')}
+            initialValues={initialValues}
+        />
+    );
+};
+
+export const ComplexFieldArray = () => {
+    const schema = {
+        fields: [
+            {
+                component: componentTypes.FIELD_ARRAY,
+                label: 'Sales Order',
+                description: 'Enter sales order detail',
+                name: 'salesOrder',
+                displayLablePerItem: true,
+                renderContainer: true,
+                layout: 'grid',
+                noItemsMessage: 'Please add new sales order',
+                buttonLabels: {
+                    add: 'Add a new sales order',
+                },
+                fields: [
+                    {
+                        component: componentTypes.TEXT_FIELD,
+                        name: 'id',
+                        label: 'Id',
+                        column: 5,
+                        validate: [
+                            {
+                                type: validatorTypes.REQUIRED,
+                            },
+                        ],
+                    },
+                    {
+                        component: componentTypes.TEXT_FIELD,
+                        name: 'description',
+                        label: 'Description',
+                        column: 5,
+                        validate: [
+                            {
+                                type: validatorTypes.REQUIRED,
+                            },
+                        ],
+                    },
+                    {
+                        component: componentTypes.FIELD_ARRAY,
+                        label: 'Sales Order Items',
+                        description: 'Enter sales order items',
+                        name: 'items',
+                        helperText: 'You can add up to 6 more items.',
+                        column: 10,
+                        minItems: 1,
+                        maxItems: 6,
+                        buttonLabels: {
+                            add: 'Add a new sales order item',
+                        },
+                        noItemsMessage: 'Please add new sales order item',
+                        defaultItem: {
+                            id: 'item1',
+                            count: '1',
+                            status: 'Ready',
+                        },
+                        validate: [
+                            {
+                                type: validatorTypes.MIN_ITEMS,
+                                threshold: 1,
+                            },
+                            {
+                                type: validatorTypes.REQUIRED,
+                            },
+                        ],
+                        fields: [
+                            {
+                                component: componentTypes.TEXT_FIELD,
+                                name: 'id',
+                                label: 'Id',
+                                validate: [
+                                    {
+                                        type: validatorTypes.REQUIRED,
+                                    },
+                                ],
+                            },
+                            {
+                                component: componentTypes.TEXT_FIELD,
+                                name: 'count',
+                                label: 'Count',
+
+                                validate: [
+                                    {
+                                        type: validatorTypes.REQUIRED,
+                                    },
+                                ],
+                            },
+                            {
+                                component: componentTypes.SELECT,
+                                name: 'status',
+                                label: 'Status',
+                                placeholder: 'Choose the type',
+                                options: [
+                                    { label: 'Picking', value: 'Picking' },
+                                    { label: 'Packing', value: 'Packing' },
+                                    { label: 'Ready', value: 'Ready' },
+                                ],
+                                validate: [
+                                    {
+                                        type: validatorTypes.REQUIRED,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+        header: 'Sales Order Form',
+        description: 'Enter sales orders',
+    };
+
+    const initialValues = {
+        salesOrder: [
+            {
+                id: 'orderId',
+                description: 'value1',
+                items: [
+                    { id: 'item1', count: '1', status: 'Picking' },
+                    { id: 'item2', count: '2', status: 'Packing' },
+                ],
+            },
         ],
     };
 

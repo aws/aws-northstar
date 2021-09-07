@@ -20,8 +20,10 @@ import Box from '../../../../../../layouts/Box';
 import Button from '../../../../../Button';
 import ColumnLayout, { Column } from '../../../../../../layouts/ColumnLayout';
 import Grid from '../../../../../../layouts/Grid';
+import Stack from '../../../../../../layouts/Stack';
 import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
+import Divider from '@material-ui/core/Divider';
 
 export interface FieldArrayItemProps {
     fields?: Field[];
@@ -33,8 +35,10 @@ export interface FieldArrayItemProps {
     removeLabel: string;
     showError?: boolean;
     isReadOnly: boolean;
+    displayLablePerItem: boolean;
     layout?: 'grid' | 'column';
     collapse: boolean;
+    gridStyle: string;
 }
 
 const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
@@ -46,7 +50,9 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
     showError,
     isReadOnly,
     layout,
+    displayLablePerItem,
     collapse,
+    gridStyle,
 }) => {
     const formOptions = useFormApi();
 
@@ -60,11 +66,11 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
                 name: getFieldKey(field.name),
                 key: getFieldKey(field.name),
                 stretch: true,
-                label: collapse && field.label,
-                description: collapse && field.description,
+                label: (collapse || displayLablePerItem) && field.label,
+                description: (collapse || displayLablePerItem) && field.description,
             };
         });
-    }, [fields, showError, collapse, getFieldKey]);
+    }, [fields, showError, collapse, getFieldKey, displayLablePerItem]);
 
     const getBox = useCallback(
         (field: Field) => (
@@ -108,44 +114,53 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
                   };
             const getKey = (field: Field) => (isHeaderRow ? `${field.name}-header` : field.key);
             return (
-                <Box display="flex">
-                    <Box flexGrow={1}>
-                        {layout === 'grid' ? (
-                            <Grid container>
-                                {list.map((field) => (
-                                    <Grid item key={getKey(field)} xs={3}>
-                                        {getContent(field)}
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        ) : (
-                            <ColumnLayout renderDivider={false}>
-                                {list.map((field) => (
-                                    <Column key={getKey(field)}>{getContent(field)}</Column>
-                                ))}
-                            </ColumnLayout>
+                <Box>
+                    {fieldIndex !== 0 && collapse && <Divider orientation="horizontal" />}
+                    <Box display="flex">
+                        <Box flexGrow={1}>
+                            {collapse ? (
+                                <Stack spacing="xs">
+                                    {list.map((field) => (
+                                        <Box key={getKey(field)}>{getContent(field)}</Box>
+                                    ))}
+                                </Stack>
+                            ) : layout === 'grid' ? (
+                                <Grid container className={gridStyle}>
+                                    {list.map((field) => (
+                                        <Grid item key={getKey(field)} xs={field.column}>
+                                            {getContent(field)}
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            ) : (
+                                <ColumnLayout renderDivider={false}>
+                                    {list.map((field) => (
+                                        <Column key={getKey(field)}>{getContent(field)}</Column>
+                                    ))}
+                                </ColumnLayout>
+                            )}
+                        </Box>
+                        {!isReadOnly && (
+                            <Box {...buttonBoxProps}>
+                                <Button
+                                    onClick={() => {
+                                        onRemove(fieldIndex);
+                                    }}
+                                >
+                                    {removeLabel}
+                                </Button>
+                            </Box>
                         )}
                     </Box>
-                    {!isReadOnly && (
-                        <Box {...buttonBoxProps}>
-                            <Button
-                                onClick={() => {
-                                    onRemove(fieldIndex);
-                                }}
-                            >
-                                {removeLabel}
-                            </Button>
-                        </Box>
-                    )}
                 </Box>
             );
         },
-        [isReadOnly, removeLabel, onRemove, layout, collapse, fieldIndex]
+        [isReadOnly, removeLabel, onRemove, layout, collapse, fieldIndex, gridStyle]
     );
 
     return (
         <>
-            {fieldIndex === 0 && !collapse && renderRow(fields, getHeader, true)}
+            {fieldIndex === 0 && !collapse && !displayLablePerItem && renderRow(fields, getHeader, true)}
             {renderRow(editedFields, getBox)}
         </>
     );
