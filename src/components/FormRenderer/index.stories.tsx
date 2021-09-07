@@ -595,6 +595,9 @@ export const FieldArray = () => {
                         type: validatorTypes.MIN_ITEMS,
                         threshold: 3,
                     },
+                    {
+                        type: validatorTypes.REQUIRED,
+                    },
                 ],
                 fields: [
                     {
@@ -777,6 +780,9 @@ export const ComplexFieldArray = () => {
                             {
                                 type: validatorTypes.MIN_ITEMS,
                                 threshold: 1,
+                            },
+                            {
+                                type: validatorTypes.REQUIRED,
                             },
                         ],
                         fields: [
