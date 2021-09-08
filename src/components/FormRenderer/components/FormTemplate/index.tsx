@@ -19,12 +19,9 @@ import Form from '../../../Form';
 import Button from '../../../Button';
 import Inline from '../../../../layouts/Inline';
 import { componentTypes, RenderProps } from '../../types';
+import { useFormRendererContext } from '../../index';
 
-export interface FormTemplateProps extends RenderProps {
-    isSubmitting?: boolean;
-}
-
-const FormTemplate: FunctionComponent<RenderProps> = ({ formFields, schema, isSubmitting }) => {
+const FormTemplate: FunctionComponent<RenderProps> = ({ formFields, schema }) => {
     const { handleSubmit, onCancel, onReset } = useFormApi();
     const {
         cancelLabel = 'Cancel',
@@ -36,6 +33,7 @@ const FormTemplate: FunctionComponent<RenderProps> = ({ formFields, schema, isSu
         header,
         description,
     } = schema;
+    const { isSubmitting } = useFormRendererContext();
 
     const actions = (
         <Inline spacing="s">

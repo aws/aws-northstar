@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent, ElementType, useMemo } from 'react';
+import React, { FunctionComponent, ElementType, useContext } from 'react';
 import {
     FormRenderer as ReactFormRenderer,
     FormRendererProps as ReactFormRendererProps,
@@ -22,7 +22,7 @@ import { FormSubscription as ReactFormSubscription } from 'final-form';
 import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
 import { ValidatorMapper } from '@data-driven-forms/react-form-renderer/validator-mapper';
 import FormTemplate from './components/FormTemplate';
-import { componentTypes, Schema, RenderProps } from './types';
+import { componentTypes, Schema } from './types';
 import basicComponentMapper from './basicComponenntMapper';
 
 export interface FormRendererProps {
@@ -46,6 +46,12 @@ export interface FormRendererProps {
     validatorMapper?: ValidatorMapper;
 }
 
+export interface FormRendererContextProps {
+    isSubmitting?: boolean;
+}
+const FormRendererContext = React.createContext<FormRendererContextProps>({});
+export const useFormRendererContext = () => useContext(FormRendererContext);
+
 /**
  * FormRenderer converts JSON form definitions into fully functional React forms.
  *
@@ -61,22 +67,19 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
     subscription,
     customComponentWrapper,
 }) => {
-    const WrappedFormTemplate = useMemo(
-        () => (props: RenderProps) => <FormTemplate isSubmitting={isSubmitting} {...props} />,
-        [isSubmitting]
-    );
-
     return (
-        <ReactFormRenderer
-            componentMapper={{ ...basicComponentMapper, ...customComponentWrapper }}
-            FormTemplate={WrappedFormTemplate}
-            validatorMapper={validatorMapper}
-            schema={schema}
-            onSubmit={onSubmit}
-            onCancel={onCancel}
-            subscription={subscription}
-            initialValues={initialValues}
-        />
+        <FormRendererContext.Provider value={{ isSubmitting }}>
+            <ReactFormRenderer
+                componentMapper={{ ...basicComponentMapper, ...customComponentWrapper }}
+                FormTemplate={FormTemplate}
+                validatorMapper={validatorMapper}
+                schema={schema}
+                onSubmit={onSubmit}
+                onCancel={onCancel}
+                subscription={subscription}
+                initialValues={initialValues}
+            />
+        </FormRendererContext.Provider>
     );
 };
 export default FormRenderer;
