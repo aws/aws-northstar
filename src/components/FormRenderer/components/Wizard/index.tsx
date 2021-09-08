@@ -17,6 +17,7 @@ import React, { FunctionComponent, useMemo, useState } from 'react';
 import { Field } from '@data-driven-forms/react-form-renderer';
 import { WizardStepInfo } from '../../../Wizard';
 import WizardStep from './components/WizardStep';
+import { useFormRendererContext } from '../../index';
 
 export interface WizardMappingProps {
     fields: Field[];
@@ -26,6 +27,7 @@ export interface WizardMappingProps {
 const WizardMapping: FunctionComponent<WizardMappingProps> = (props) => {
     const [maxStepIndex, setMaxStepIndex] = useState(0);
     const [activeStepIndex, setActiveStepIndex] = useState(0);
+    const { isSubmitting } = useFormRendererContext();
 
     const handleNextButtonClick = () => {
         const target = activeStepIndex + 1;
@@ -64,6 +66,7 @@ const WizardMapping: FunctionComponent<WizardMappingProps> = (props) => {
             submitButtonText={props.submitButtonText}
             onNextButtonClick={handleNextButtonClick}
             onPreviousButtonClick={handlePreviousButtonClick}
+            isSubmitting={isSubmitting}
         />
     );
 };

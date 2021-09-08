@@ -96,6 +96,33 @@ describe('FormRenderer', () => {
             expect(queryByRole('progressbar')).toBeInTheDocument();
         });
 
+        it('should show a loading spinner while submitting a wizard', () => {
+            const { queryByRole } = render(
+                <FormRenderer
+                    schema={{
+                        ...baseSchema,
+                        fields: [
+                            {
+                                component: componentTypes.WIZARD,
+                                name: 'wizard',
+                                fields: [
+                                    {
+                                        name: 'step-1',
+                                        fields: schema.fields,
+                                    },
+                                ],
+                            },
+                        ],
+                    }}
+                    onSubmit={handleSubmit}
+                    onCancel={handleCancel}
+                    isSubmitting={true}
+                />
+            );
+
+            expect(queryByRole('progressbar')).toBeInTheDocument();
+        });
+
         it('should not show a loading spinner by default', () => {
             const { queryByRole } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
