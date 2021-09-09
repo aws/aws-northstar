@@ -215,6 +215,8 @@ export interface TableBaseOptions<D extends object> {
     onFetchData?: ((options: FetchDataOptions) => void) | null;
     /** Instruct how Table constructs each row's underlying <i>id</i> property. Must be <b>memoized</b>. */
     getRowId?: (originalRow: D, relativeIndex: number) => string;
+    /** Instruct how Table detects subrows. Must be <b>memoized</b>. */
+    getSubRows?: (originalRow: D, relativeIndex: number) => D[];
     /** The initial columns to sort by */
     sortBy?: SortingRule<string>[];
     /** Determines whether a given item is disabled. If an item is disabled, the user can't select it. */
@@ -277,6 +279,7 @@ export default function Table<D extends object>({
     selectedRowIds = [],
     multiSelect = true,
     getRowId,
+    getSubRows,
     isItemDisabled,
     sortBy: defaultSortBy = [],
     errorText,
@@ -390,6 +393,7 @@ export default function Table<D extends object>({
             },
             ...(onFetchData != null && { pageCount }),
             getRowId,
+            getSubRows,
             disableSortBy,
             disableGroupBy,
             disableFilters: disableColumnFilters,
@@ -417,6 +421,7 @@ export default function Table<D extends object>({
             disableGroupBy,
             disableSortBy,
             getRowId,
+            getSubRows,
             onFetchData,
             selectedRowIdMap,
         ]
