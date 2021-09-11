@@ -80,11 +80,11 @@ export interface InputProps {
     /**
      * Mimics the native focus event on inputs
      */
-    onFocus?: () => void;
+    onFocus?: React.FocusEventHandler<HTMLTextAreaElement | HTMLInputElement>;
     /**
      * Mimics the native blur event on inputs
      */
-    onBlur?: () => void;
+    onBlur?: React.FocusEventHandler<HTMLTextAreaElement | HTMLInputElement>;
 }
 
 const mapProps = ({

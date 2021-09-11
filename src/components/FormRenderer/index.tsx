@@ -85,3 +85,5 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
 export default FormRenderer;
 
 export { componentTypes, validatorTypes };
+export type { ValidatorMapper };
+export type { Field } from '@data-driven-forms/react-form-renderer/common-types';
