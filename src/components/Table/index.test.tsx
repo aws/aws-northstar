@@ -20,6 +20,7 @@ import Table, { Column } from '.';
 interface DataType {
     id: string;
     name: string;
+    subRows?: DataType[];
 }
 
 const data: DataType[] = [{ id: '123', name: 'Item one' }];
@@ -31,6 +32,11 @@ const dataGroup: DataType[] = [...Array(10).keys()].map((i) => ({
     id: `${i}`,
     name: `Item${Math.floor(i / 2)}`,
 })); // 5 groups by 'name'
+const dataExpanded: DataType[] = [
+    { id: '1', name: 'Item one' },
+    { id: '2', name: 'Item two', subRows: [{ id: '23', name: 'Item 23' }] },
+    { id: '3', name: 'Item three', subRows: [{ id: '33', name: 'Item 33' }] },
+];
 
 const columnDefinitions: Column<DataType>[] = [
     {
@@ -303,5 +309,19 @@ describe('Table', () => {
         );
 
         expect(getAllByPlaceholderText('Search 10 records...')).toHaveLength(2);
+    });
+
+    it('should render expanded table', () => {
+        const { getAllByTitle, getByTitle } = render(
+            <Table
+                tableTitle={'My Table'}
+                columnDefinitions={columnDefinitions}
+                items={dataExpanded}
+                disableExpand={false}
+            />
+        );
+
+        expect(getByTitle('Toggle All Rows Expanded')).toBeInTheDocument();
+        expect(getAllByTitle('Toggle Row Expanded')).toHaveLength(2);
     });
 });

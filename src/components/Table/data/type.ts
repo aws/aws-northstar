@@ -18,4 +18,5 @@ export interface DataType {
     name: string;
     createdDate?: string;
     accounts?: string[];
+    subRows?: DataType[];
 }
