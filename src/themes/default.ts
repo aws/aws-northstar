@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
+import { ThemeOptions } from '@material-ui/core/styles';
 import { AlertClassKey } from '@material-ui/lab/Alert';
 import { AutocompleteClassKey } from '@material-ui/lab/Autocomplete';
 import { COLOR_PALETTE } from '../config/color';

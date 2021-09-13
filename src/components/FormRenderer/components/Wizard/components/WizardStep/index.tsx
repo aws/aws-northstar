@@ -28,6 +28,7 @@ export interface WizardStepProps {
     onNextButtonClick: () => void;
     onPreviousButtonClick: () => void;
     submitButtonText?: string;
+    isSubmitting?: boolean;
 }
 
 const WizardStep: FunctionComponent<WizardStepProps> = ({
@@ -40,6 +41,7 @@ const WizardStep: FunctionComponent<WizardStepProps> = ({
     onNextButtonClick,
     onPreviousButtonClick,
     submitButtonText,
+    isSubmitting,
 }) => {
     const [showError, setShowError] = useState(false);
     const formOptions = useFormApi();
@@ -84,6 +86,7 @@ const WizardStep: FunctionComponent<WizardStepProps> = ({
                 formOptions.handleSubmit();
             }}
             disableStepNavigation={true}
+            isLoadingNextStep={isSubmitting}
         />
     );
 };

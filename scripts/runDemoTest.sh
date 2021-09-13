@@ -7,7 +7,8 @@ set -e
 TEST_FOLDER=/tmp/$(date +%s)
 DEMO_FOLDER=$PWD/examples/create-react-app
 BUILD_FOLDER=$PWD/build
-BUNDLE_SIZE_THRESHOLD=7200000
+BUNDLE_SIZE_THRESHOLD=4000000
+MAIN_BUNDLE_SIZE_THRESHOLD=1600000
 
 if [ -d $TEST_FOLDER ]; then rm -rf $TEST_FOLDER; fi 
 
@@ -31,6 +32,8 @@ cat result.json | jq ".results[] | .bundleName,.totalBytes"
 
 FAILED_FILE_COUNT=$(cat result.json | jq ".results[] | select(.totalBytes>${BUNDLE_SIZE_THRESHOLD}) | .bundleName" -r | wc -l | awk '{$1=$1;print}')
 
+FAILED_MAIN_FILE_COUNT=$(cat result.json | jq ".results[0] | select(.totalBytes>${MAIN_BUNDLE_SIZE_THRESHOLD}) | .bundleName" -r | wc -l | awk '{$1=$1;print}')
+
 popd
 
 echo "FAILED_FILE_COUNT=${FAILED_FILE_COUNT}"
@@ -40,6 +43,15 @@ if [ ${FAILED_FILE_COUNT} -gt 0 ] ; then
     exit 1
 else
     echo "PASS: All file bundle size are below threshold ${BUNDLE_SIZE_THRESHOLD}"
+fi
+
+echo "FAILED_MAIN_FILE_COUNT=${FAILED_MAIN_FILE_COUNT}"
+
+if [ ${FAILED_MAIN_FILE_COUNT} -gt 0 ] ; then
+    echo "FAILED: The main file bundle size exceeds threshold ${MAIN_BUNDLE_SIZE_THRESHOLD}"
+    exit 1
+else
+    echo "PASS: The main file bundle size is below threshold ${MAIN_BUNDLE_SIZE_THRESHOLD}"
 fi
 
 rm -rf $TEST_FOLDER

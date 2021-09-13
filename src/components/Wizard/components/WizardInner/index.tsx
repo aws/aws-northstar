@@ -68,11 +68,11 @@ const WizardInner: FunctionComponent<WizardInnerProps> = ({
     const actions = useMemo(() => {
         return (
             <Inline>
-                <Button variant="link" onClick={onCancelButtonClick}>
+                <Button variant="link" onClick={onCancelButtonClick} disabled={isLoadingNextStep}>
                     {cancelButtonText}
                 </Button>
                 {activeStepIndex !== 0 && (
-                    <Button variant="normal" onClick={onPreviousButtonClick}>
+                    <Button variant="normal" onClick={onPreviousButtonClick} disabled={isLoadingNextStep}>
                         {previousButtonText}
                     </Button>
                 )}

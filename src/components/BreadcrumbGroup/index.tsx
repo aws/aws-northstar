@@ -14,9 +14,10 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
+import React from 'react';
 import { Route, RouteProps } from 'react-router';
-import { Breadcrumbs as MaterialBreadcrumbs, Typography } from '@material-ui/core';
-import * as React from 'react';
+import Typography from '@material-ui/core/Typography';
+import MaterialBreadcrumbs from '@material-ui/core/Breadcrumbs';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { matchPath } from 'react-router';
 import Link from '../Link';

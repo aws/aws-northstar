@@ -15,10 +15,10 @@
  ******************************************************************************************************************** */
 import React, { memo, useCallback, useMemo } from 'react';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import Table from '../../../Table';
-import FormField from '../../../FormField';
-import useUniqueId from '../../../../hooks/useUniqueId';
-import { getErrorText } from '../../utils/getErrorText';
+import Table from '../Table';
+import FormField from '../FormField';
+import useUniqueId from '../../hooks/useUniqueId';
+import { getErrorText } from '../FormRenderer/utils/getErrorText';
 
 const TableMapping = (props: UseFieldApiConfig) => {
     const {

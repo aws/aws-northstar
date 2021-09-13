@@ -15,9 +15,10 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import useTheme from '@material-ui/core/styles/useTheme';
+import { useTheme } from '@material-ui/core/styles';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { FieldArray as FieldArrayBase } from '@data-driven-forms/react-form-renderer';
+import { makeStyles } from '@material-ui/core/styles';
 import FormField from '../../../FormField';
 import Text from '../../../Text';
 import Button from '../../../Button';
@@ -25,11 +26,21 @@ import Stack from '../../../../layouts/Stack';
 import FieldArrayItem from './components/FieldArrayItem';
 import { getErrorText } from '../../utils/getErrorText';
 import useUniqueId from '../../../../hooks/useUniqueId';
+import Container from '../../../../layouts/Container';
 
 const DEFAULT_BUTTON_LABELS = {
     add: 'Add new item',
     remove: 'Remove',
 };
+
+const useStyles = makeStyles({
+    grid: {
+        marginTop: '-10px',
+        '&>*': {
+            marginTop: '10px',
+        },
+    },
+});
 
 const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {
@@ -42,9 +53,11 @@ const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         showError,
         meta: { submitFailed, error },
         layout,
+        displayLablePerItem = false,
         minItems = 0,
         maxItems = Number.MAX_SAFE_INTEGER,
         buttonLabels,
+        renderContainer = false,
         noItemsMessage,
         validateOnMount,
         input,
@@ -55,6 +68,7 @@ const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const renderedButtonLabels = { ...DEFAULT_BUTTON_LABELS, ...buttonLabels };
     const theme = useTheme();
     const matched = useMediaQuery(theme.breakpoints.down('xs'));
+    const styles = useStyles();
 
     return (
         <FormField
@@ -71,22 +85,26 @@ const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
                         <Stack spacing="s">
                             {length === 0 && <Text>{noItemsMessage}</Text>}
                             {map((name: string, index: number) => {
-                                return (
+                                const item = (
                                     <FieldArrayItem
+                                        gridStyle={styles.grid}
                                         layout={layout}
-                                        key={name}
+                                        key={`Item-${name}`}
                                         fields={formFields}
                                         name={name}
                                         fieldIndex={index}
                                         showError={showError}
+                                        displayLablePerItem={displayLablePerItem}
                                         onRemove={remove}
                                         length={length}
                                         minItems={minItems}
                                         removeLabel={renderedButtonLabels.remove}
                                         isReadOnly={isReadOnly}
-                                        collapse={matched}
+                                        collapse={layout === 'stack' || matched}
                                     />
                                 );
+
+                                return renderContainer ? <Container key={`Container-${name}`}>{item}</Container> : item;
                             })}
                             {!isReadOnly && (
                                 <Button onClick={() => push(defaultItem)} disabled={!!length && length >= maxItems}>

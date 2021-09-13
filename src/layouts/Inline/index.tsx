@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { Children, FunctionComponent, ReactNode } from 'react';
-import makeStyles from '@material-ui/styles/makeStyles';
+import { makeStyles } from '@material-ui/core/styles';
 import Box from '../Box';
 import spacingMapping from '../../config/spacingMapping';
 

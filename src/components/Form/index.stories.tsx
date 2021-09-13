@@ -14,11 +14,11 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Form from '.';
 import Button from '../Button';
-import { makeStyles, Theme } from '@material-ui/core';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         padding: theme.spacing(4),
         backgroundColor: theme.palette.background.paper,

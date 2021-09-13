@@ -17,9 +17,9 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import MapGL, { Marker, NavigationControl, MarkerProps, ViewportProps } from 'react-map-gl';
 import RoomIcon from '@material-ui/icons/Room';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     navStyle: {
         position: 'absolute',
         top: 10,
@@ -57,7 +57,7 @@ enum MAP_STYLE {
 }
 
 /**
- * Map renders interactive maps from vector tiles and Mapbox styles using WebGL.
+ * Map renders interactive maps from vector tiles and NorthStar styles using WebGL.
  */
 const Map: FunctionComponent<MapProps> = ({
     token,

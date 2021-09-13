@@ -1,4 +1,30 @@
+### Notes
+
+From release [v1.3.0](https://github.com/aws/aws-northstar/releases/tag/v1.3.0), the implementation of FormRenderer MarkdownEditor and FormRenderer Table has been extracted out as seperate pluggable components to reduce the build bundle size of the consumer applications.
+
+If your application uses MarkdownEditor in the FormRenderer, you will need to import it explictly via customCopmonentMapping prop:
+ 
+```jsx static
+import React from 'react';
+...
+import FormRendererMarkdownEditor from '../FormRendererMarkdownEditor';
+...
+
+const customComponentMapping = {
+    "MARKDOWN_EDITOR": FormRendererMarkdownEditor
+}
+
+return (
+    <FormRenderer 
+        schema={schema} 
+        customComponentWrapper={customComponentMapping}
+        onSubmit={...} 
+        onCancel={...} />);
+```
+
 ### Examples
+
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/formrenderer" target="_blank">NorthStar Storybook</a>.
 
 ```jsx
 import FormRenderer, { componentTypes, validatorTypes } from 'aws-northstar/components/FormRenderer';
@@ -927,10 +953,15 @@ const initialValues = {
 import FormRenderer, { componentTypes, validatorTypes } from 'aws-northstar/components/FormRenderer';
 import Container from 'aws-northstar/layouts/Container';
 import Box from 'aws-northstar/layouts/Box';
+import FormRendererTable from 'aws-northstar/components/FormRendererTable';
 
 const ReviewTemplate = (data) => {
     return <Box>{JSON.stringify(data)}</Box>;
 };
+
+const customComponentMapping = {
+    'TABLE': FormRendererTable
+}
 
 const schema = {
     fields: [
@@ -1170,7 +1201,7 @@ const schema = {
                     title: 'Step 4',
                     fields: [
                         {
-                            component: componentTypes.TABLE,
+                            component: 'TABLE',
                             name: 'table',
                             label: 'Table',
                             description: 'This is a table',
@@ -1263,9 +1294,10 @@ const initialValues = {
 
 <FormRenderer
     schema={schema}
+    customComponentWrapper={customComponentMapping}
     initialValues={initialValues}
-    onSubmit={console.log('Submit')}
-    onCancel={console.log('Cancel')}
+    onSubmit={console.log}
+    onCancel={console.log}
 />
 ```
 
@@ -1378,14 +1410,18 @@ const schema = {
 ```jsx
 import Container from 'aws-northstar/layouts/Container';
 import FormRenderer, { componentTypes, validatorTypes } from 'aws-northstar/components/FormRenderer';
+import FormRendererMarkdownEditor from 'aws-northstar/components/FormRendererMarkdownEditor';
 
+const customComponentMapping = {
+    "MARKDOWN_EDITOR": FormRendererMarkdownEditor
+}
 
 const schema = {
     submitLabel: 'Save',
     cancelLabel: 'Back',
     fields: [
         {
-            component: componentTypes.MARKDOWN_EDITOR,
+            component: 'MARKDOWN_EDITOR',
             name: 'markdownOne',
             label: 'This is a markdown editor',
             helperText: 'Helper text provides users some guidance.',
@@ -1398,7 +1434,7 @@ const schema = {
             ],
         },
         {
-            component: componentTypes.MARKDOWN_EDITOR,
+            component: 'MARKDOWN_EDITOR',
             name: 'markdownTwo',
             label: 'This is a read only markdown editor',
             isReadOnly: true,
@@ -1410,7 +1446,11 @@ const schema = {
 };
 
 <Container>
-    <FormRenderer schema={schema} onSubmit={console.log} onCancel={console.log} />
+    <FormRenderer 
+        schema={schema} 
+        customComponentWrapper={customComponentMapping}
+        onSubmit={console.log} 
+        onCancel={console.log} />
 </Container>
     
 ```

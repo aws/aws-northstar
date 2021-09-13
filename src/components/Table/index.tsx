@@ -54,7 +54,8 @@ import {
     useTable,
     UseTableOptions,
 } from 'react-table';
-import { makeStyles, Table as BaseTable } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import BaseTable from '@material-ui/core/Table';
 import Container from '../../layouts/Container';
 import Checkbox from '../Checkbox';
 import ContainerHeaderContent, { ContainerHeaderContentProps } from './components/ContainerHeaderContent';
@@ -616,3 +617,5 @@ export default function Table<D extends object>({
         </Container>
     );
 }
+
+export type { CellProps } from 'react-table';

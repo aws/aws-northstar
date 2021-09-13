@@ -16,17 +16,17 @@
 import React from 'react';
 import Textarea from '.';
 import { action } from '@storybook/addon-actions';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
     customBackground: {
         backgroundColor: 'lightgreen',
     },
     customWidth: {
         width: '50%',
     },
-}));
+});
 
 export default {
     component: Textarea,

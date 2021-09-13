@@ -15,13 +15,13 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import FormField from '../../../FormField';
-import MarkdownViewer from '../../../MarkdownViewer';
-import Textarea from '../../../Textarea';
-import Grid from '../../../../layouts/Grid';
-import { Box } from '../../../../layouts';
-import useUniqueId from '../../../../hooks/useUniqueId';
-import { getErrorText } from '../../utils/getErrorText';
+import FormField from '../FormField';
+import MarkdownViewer from '../MarkdownViewer';
+import Textarea from '../Textarea';
+import Grid from '../../layouts/Grid';
+import { Box } from '../../layouts';
+import useUniqueId from '../../hooks/useUniqueId';
+import { getErrorText } from '../FormRenderer/utils/getErrorText';
 
 const MarkdownEditorMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const {

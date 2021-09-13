@@ -14,3 +14,4 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 export { default as NotificationButton } from './NotificationButton';
+export { default as DeleteConfirmationDialog } from './DeleteConfirmationDialog';

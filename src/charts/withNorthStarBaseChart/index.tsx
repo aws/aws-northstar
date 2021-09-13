@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode } from 'react';
-import makeStyles from '@material-ui/styles/makeStyles';
+import { makeStyles } from '@material-ui/core/styles';
 import Box from '../../layouts/Box';
 import Stack from '../../layouts/Stack';
 import Heading from '../../components/Heading';

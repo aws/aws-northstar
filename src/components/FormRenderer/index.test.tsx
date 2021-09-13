@@ -96,6 +96,33 @@ describe('FormRenderer', () => {
             expect(queryByRole('progressbar')).toBeInTheDocument();
         });
 
+        it('should show a loading spinner while submitting a wizard', () => {
+            const { queryByRole } = render(
+                <FormRenderer
+                    schema={{
+                        ...baseSchema,
+                        fields: [
+                            {
+                                component: componentTypes.WIZARD,
+                                name: 'wizard',
+                                fields: [
+                                    {
+                                        name: 'step-1',
+                                        fields: schema.fields,
+                                    },
+                                ],
+                            },
+                        ],
+                    }}
+                    onSubmit={handleSubmit}
+                    onCancel={handleCancel}
+                    isSubmitting={true}
+                />
+            );
+
+            expect(queryByRole('progressbar')).toBeInTheDocument();
+        });
+
         it('should not show a loading spinner by default', () => {
             const { queryByRole } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
@@ -947,90 +974,9 @@ describe('FormRenderer', () => {
         it('should render FieldArray with grid', () => {
             fieldArrayTest({ ...schema, layout: 'grid' });
         });
-    });
 
-    describe('Table', () => {
-        const schema = {
-            ...baseSchema,
-            fields: [
-                {
-                    component: componentTypes.TABLE,
-                    name: 'table',
-                    label: 'Table',
-                    description: 'This is a table',
-                    getRowId: (data: any) => data.id,
-                    items: [
-                        {
-                            id: 'id0000011',
-                            name: 'Order 11',
-                            createdDate: '2019-10-12',
-                        },
-                        {
-                            id: 'id0000012',
-                            name: 'Order 12',
-                            createdDate: '2019-11-12',
-                        },
-                    ],
-                    columnDefinitions: [
-                        {
-                            id: 'id',
-                            width: 200,
-                            Header: 'Id',
-                            accessor: 'id',
-                        },
-                        {
-                            id: 'name',
-                            width: 200,
-                            Header: 'Name',
-                            accessor: 'name',
-                        },
-                        {
-                            id: 'createdDate',
-                            width: 200,
-                            Header: 'Created date',
-                            accessor: 'createdDate',
-                        },
-                    ],
-                },
-            ],
-        };
-
-        it('should render Table', () => {
-            act(() => {
-                const { getByText } = render(
-                    <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
-                );
-
-                expect(getByText('Order 11')).toBeVisible();
-                expect(getByText('Order 12')).toBeVisible();
-            });
-        });
-    });
-
-    describe('Markdown Editor', () => {
-        it('should render a markdown editor', () => {
-            const schema = {
-                submitLabel: 'Save',
-                cancelLabel: 'Back',
-                fields: [
-                    {
-                        component: componentTypes.MARKDOWN_EDITOR,
-                        name: 'markdownOne',
-                        label: 'This is a markdown editor',
-                        helperText: 'Helper text provides users some guidance.',
-                        initialValue: '# I am a Markdown editor',
-                    },
-                ],
-                header: 'Markdown Editor',
-                description: 'This component allows a user to enter markdown and renders it in real-time.',
-            };
-
-            const { getByText } = render(
-                <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
-            );
-
-            expect(getByText('Markdown Editor')).toBeVisible();
-            expect(getByText('I am a Markdown editor')).toBeInTheDocument();
+        it('should render FieldArray with stack', () => {
+            fieldArrayTest({ ...schema, layout: 'stack' });
         });
     });
 });

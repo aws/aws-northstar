@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import React, { useState } from 'react';
 import Input from '.';
-import Grid from '@material-ui/core/Grid';
+import Grid from '../../layouts/Grid';
 import { action } from '@storybook/addon-actions';
 
 export default {

@@ -1,4 +1,7 @@
 ### Examples
+
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/checkbox" target="_blank">NorthStar Storybook</a>.
+
 ```jsx
 import Checkbox from 'aws-northstar/components/Checkbox';
 import Container from 'aws-northstar/layouts/Container';

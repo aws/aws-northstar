@@ -14,14 +14,16 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, ReactNode, memo } from 'react';
-import { AccordionSummary, makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Typography from '@material-ui/core/Typography';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import { Variant } from '../../types';
 import Box from '../../../../layouts/Box';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         '&:hover': {
             color: theme.palette.grey[900],

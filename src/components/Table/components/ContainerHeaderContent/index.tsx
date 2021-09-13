@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode, FunctionComponent } from 'react';
-import { CircularProgress } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Input from '../../../Input';
 import clsx from 'clsx';
 import { useDebouncedCallback } from 'use-debounce';

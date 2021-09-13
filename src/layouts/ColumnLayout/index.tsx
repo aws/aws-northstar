@@ -14,10 +14,10 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { Children, ReactElement, Fragment, FunctionComponent } from 'react';
-import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Grid from '../../layouts/Grid';
 import Column, { ColumnProps as _ColumnProps } from './components/Column';
 
 export type ColumnProps = _ColumnProps;
@@ -102,5 +102,6 @@ const ColumnLayout: FunctionComponent<ColumnLayoutProps> = ({
     );
 };
 
-export { Column };
 export default ColumnLayout;
+
+export { Column };

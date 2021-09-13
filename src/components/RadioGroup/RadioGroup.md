@@ -1,7 +1,10 @@
 ### Examples
 
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/radiogroup" target="_blank">NorthStar Storybook</a>.
+
 ```jsx
-import RadioGroup, { RadioButton } from 'aws-northstar/components/RadioGroup';
+import RadioButton from 'aws-northstar/components/RadioButton';
+import RadioGroup from 'aws-northstar/components/RadioGroup';
 import Container from 'aws-northstar/layouts/Container';
 
 <Container headingVariant='h4' title='Radio group'>

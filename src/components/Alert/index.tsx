@@ -23,14 +23,14 @@ import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Button from '../Button';
 import Box from '../../layouts/Box';
 
 export type AlertType = 'error' | 'info' | 'success' | 'warning';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles({
     muiAlertMessageOverride: {
         justifyContent: 'flex-start',
         whiteSpace: 'pre-wrap',
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     noBorderRadius: {
         borderRadius: 0,
     },
-}));
+});
 
 const iconMapping = {
     success: <CheckCircleOutlineIcon fontSize="inherit" titleAccess="success" aria-label="success" />,

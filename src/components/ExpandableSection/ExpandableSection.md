@@ -1,5 +1,7 @@
 ### Examples
 
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/expandablesection" target="_blank">NorthStar Storybook</a>.
+
 ```jsx
 import ExpandableSection from 'aws-northstar/components/ExpandableSection';
 import Container from 'aws-northstar/layouts/Container';

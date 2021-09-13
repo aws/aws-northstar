@@ -16,14 +16,19 @@
 
 import React, { ReactNode, FunctionComponent, useMemo } from 'react';
 import clsx from 'clsx';
-import { makeStyles, Grid, Theme, Typography, FormControl, InputLabel, FormHelperText } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Typography from '@material-ui/core/Typography';
+import InputLabel from '@material-ui/core/InputLabel';
 import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
 import Button from '../Button';
 import Box from '../../layouts/Box';
+import Grid from '../../layouts/Grid';
 import ExpandableSection from '../ExpandableSection';
 import Link from '../Link';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     formFieldRoot: {
         '&:not(:last-child)': {
             marginBottom: '20px',

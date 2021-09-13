@@ -13,53 +13,17 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent, ComponentType, useMemo } from 'react';
+import React, { FunctionComponent, ElementType, useContext } from 'react';
 import {
     FormRenderer as ReactFormRenderer,
     FormRendererProps as ReactFormRendererProps,
 } from '@data-driven-forms/react-form-renderer';
 import { FormSubscription as ReactFormSubscription } from 'final-form';
 import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
-import Checkbox from './components/Checkbox';
-import Custom from './components/Custom';
-import Datepicker from './components/Datepicker';
-import ExpandableSection from './components/ExpandableSection';
-import FieldArray from './components/FieldArray';
-import FormTemplate from './components/FormTemplate';
-import Radio from './components/Radio';
-import Review from './components/Review';
-import Select from './components/Select';
-import Subform from './components/Subform';
-import Switch from './components/Switch';
-import Table from './components/Table';
-import Textarea from './components/Textarea';
-import TextField from './components/TextField';
-import TimePicker from './components/TimePicker';
-import TreeView from './components/TreeView';
-import Wizard from './components/Wizard';
-import MarkdownEditor from './components/MarkdownEditor';
-import { componentTypes, Schema, RenderProps } from './types';
 import { ValidatorMapper } from '@data-driven-forms/react-form-renderer/validator-mapper';
-
-const componentMapper = {
-    [componentTypes.TEXT_FIELD]: TextField,
-    [componentTypes.CHECKBOX]: Checkbox,
-    [componentTypes.SUB_FORM]: Subform,
-    [componentTypes.RADIO]: Radio,
-    [componentTypes.DATE_PICKER]: Datepicker,
-    [componentTypes.TIME_PICKER]: TimePicker,
-    [componentTypes.SWITCH]: Switch,
-    [componentTypes.TEXTAREA]: Textarea,
-    [componentTypes.SELECT]: Select,
-    [componentTypes.WIZARD]: Wizard,
-    [componentTypes.FIELD_ARRAY]: FieldArray,
-    [componentTypes.TREE_VIEW]: TreeView,
-    [componentTypes.EXPANDABLE_SECTION]: ExpandableSection,
-    [componentTypes.TABLE]: Table,
-    [componentTypes.REVIEW]: Review,
-    [componentTypes.CUSTOM]: Custom,
-    [componentTypes.MARKDOWN_EDITOR]: MarkdownEditor,
-};
+import FormTemplate from './components/FormTemplate';
+import { componentTypes, Schema } from './types';
+import basicComponentMapper from './basicComponenntMapper';
 
 export interface FormRendererProps {
     /** A schema which defines structure of the form. */
@@ -76,11 +40,17 @@ export interface FormRendererProps {
     subscription?: ReactFormSubscription;
     /** Custom component wrappers*/
     customComponentWrapper?: {
-        [componentType: string]: ComponentType;
+        [componentType: string]: ElementType;
     };
     /** Custom validator mapper */
     validatorMapper?: ValidatorMapper;
 }
+
+export interface FormRendererContextProps {
+    isSubmitting?: boolean;
+}
+const FormRendererContext = React.createContext<FormRendererContextProps>({});
+export const useFormRendererContext = () => useContext(FormRendererContext);
 
 /**
  * FormRenderer converts JSON form definitions into fully functional React forms.
@@ -97,22 +67,19 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
     subscription,
     customComponentWrapper,
 }) => {
-    const WrappedFormTemplate = useMemo(
-        () => (props: RenderProps) => <FormTemplate isSubmitting={isSubmitting} {...props} />,
-        [isSubmitting]
-    );
-
     return (
-        <ReactFormRenderer
-            componentMapper={{ ...componentMapper, ...customComponentWrapper }}
-            FormTemplate={WrappedFormTemplate}
-            validatorMapper={validatorMapper}
-            schema={schema}
-            onSubmit={onSubmit}
-            onCancel={onCancel}
-            subscription={subscription}
-            initialValues={initialValues}
-        />
+        <FormRendererContext.Provider value={{ isSubmitting }}>
+            <ReactFormRenderer
+                componentMapper={{ ...basicComponentMapper, ...customComponentWrapper }}
+                FormTemplate={FormTemplate}
+                validatorMapper={validatorMapper}
+                schema={schema}
+                onSubmit={onSubmit}
+                onCancel={onCancel}
+                subscription={subscription}
+                initialValues={initialValues}
+            />
+        </FormRendererContext.Provider>
     );
 };
 export default FormRenderer;

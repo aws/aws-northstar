@@ -205,7 +205,7 @@ export const RemoteFetch = () => {
             setTimeout(() => {
                 if (fetchId === fetchIdRef.current) {
                     // You could fetch your data from server.
-                    const filterData = data.filter((d: Data) => {
+                    const filterData = data.filter((d: DataType) => {
                         if (options.filterText) {
                             return d.name.indexOf(options.filterText) >= 0 || d.id.indexOf(options.filterText) >= 0;
                         }

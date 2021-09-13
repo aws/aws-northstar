@@ -1,5 +1,7 @@
 ### Examples
 
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/tabs" target="_blank">NorthStar Storybook</a>.
+
 #### Default Tabs
 
 ```jsx

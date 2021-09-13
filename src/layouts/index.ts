@@ -21,4 +21,5 @@ export { default as GetStarted } from './GetStarted';
 export { default as Grid } from './Grid';
 export { default as Hidden } from './Hidden';
 export { default as Inline } from './Inline';
+export { default as Paper } from './Paper';
 export { default as Stack } from './Stack';

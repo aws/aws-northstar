@@ -1,5 +1,7 @@
 ### Examples
 
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/flashbar" target="_blank">NorthStar Storybook</a>.
+
 Default
 ```jsx
 import Flashbar from 'aws-northstar/components/Flashbar';

@@ -60,7 +60,7 @@ const getNotificationType = (severity: NotificationSeverity): 'warning' | 'info'
     return notifications[severity] || 'info';
 };
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
     menuItem: {
         border: 'none',
         padding: 0,
@@ -72,7 +72,7 @@ const useStyles = makeStyles(() => ({
     icon: {
         verticalAlign: 'middle',
     },
-}));
+});
 
 /**
  * A button which succinctly indicates the number of notifications as a badge, with each notification shown when the button is clicked
