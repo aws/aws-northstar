@@ -23,7 +23,9 @@ updates:
         versions: ["5.x"]
       - dependency-name: "react-markdown"
         versions: ["7.x"]
-      - dependency-name: "react-frontmatter"
+      - dependency-name: "remark-frontmatter"
         versions: ["4.x"]
       - dependency-name: "remark-gfm"
         versions: ["2.x"]
+      - dependency-name: "typescript"
+        versions: ["4.4.x"]
