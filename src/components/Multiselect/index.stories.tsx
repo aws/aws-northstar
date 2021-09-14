@@ -13,12 +13,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { action } from '@storybook/addon-actions';
-import Multiselect from '.';
+import Multiselect, { SelectOption, StatusType, FilterOptionsState } from '.';
 import FormField from '../FormField';
+import Box from '../../layouts/Box';
 import { awsServices } from '../Autosuggest/data/data';
-import { SelectOption, StatusType } from '../Select';
 
 export default {
     component: Multiselect,
@@ -125,3 +125,80 @@ export const FreeSolo = () => (
         />
     </FormField>
 );
+
+const customOptions = [
+    {
+        id: 1,
+        name: 'Name 1',
+        description: 'Description 1',
+    },
+    {
+        id: 2,
+        name: 'Name 2',
+        description: 'Description 2',
+    },
+    {
+        id: 3,
+        name: 'Name 3',
+        description: 'Description 3',
+    },
+    {
+        id: 4,
+        name: 'Name 4',
+        description: 'Description 4',
+    },
+];
+
+interface CustomOptionType extends SelectOption {
+    id: number;
+    name: string;
+    description: string;
+}
+
+export const RenderCustomLabel = () => {
+    const options: CustomOptionType[] = useMemo(() => {
+        return customOptions.map((o) => ({
+            ...o,
+            label: `${o.id}-${o.name}`,
+            value: o.id.toString(),
+        }));
+    }, []);
+
+    const renderOption = useCallback((o) => {
+        return (
+            <Box>
+                <Box>
+                    <b>
+                        {o.id}-{o.name}
+                    </b>
+                </Box>
+                <Box>{o.description}</Box>
+            </Box>
+        );
+    }, []);
+
+    const filterOptions = useCallback((options: SelectOption[], state: FilterOptionsState) => {
+        if (state?.inputValue) {
+            return (options as CustomOptionType[]).filter(
+                (o) =>
+                    o.label.toLowerCase().indexOf(state.inputValue.toLowerCase()) >= 0 ||
+                    o.name.toLowerCase().indexOf(state.inputValue.toLowerCase()) >= 0 ||
+                    o.description.toLowerCase().indexOf(state.inputValue.toLowerCase()) >= 0
+            );
+        }
+
+        return options;
+    }, []);
+
+    return (
+        <Box>
+            <Multiselect
+                options={options}
+                checkboxes
+                value={[...options.slice(2)]}
+                renderOption={renderOption}
+                filterOptions={filterOptions}
+            />
+        </Box>
+    );
+};

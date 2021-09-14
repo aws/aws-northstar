@@ -20,10 +20,10 @@ const getFlattenOptions = (options: SelectOption[]) => {
     options.forEach((option) => {
         if (option.options) {
             option.options.forEach((o) => {
-                optionArray.push({ label: o.label || o.value, value: o.value, group: option.label });
+                optionArray.push({ ...o, label: o.label || o.value, value: o.value, group: option.label });
             });
         } else {
-            optionArray.push({ label: option.label || option.value, value: option.value });
+            optionArray.push({ ...option, label: option.label || option.value, value: option.value });
         }
     });
 
