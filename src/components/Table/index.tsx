@@ -68,6 +68,8 @@ import ColumnsGrouping from './components/ColumnsGrouping';
 import { RadioButton } from '../RadioGroup';
 import { useDebouncedCallback } from 'use-debounce';
 import DefaultColumnFilter from './components/DefaultColumnFilter';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_SIZES = [10, 25, 50];
@@ -177,6 +179,8 @@ export interface TableBaseOptions<D extends object> {
     disableFilters?: boolean;
     /** Disable column filters */
     disableColumnFilters?: boolean;
+    /** Disable expand */
+    disableExpand?: boolean;
     /** Disable groupBy */
     disableGroupBy?: boolean;
     /** Disable row select */
@@ -212,6 +216,8 @@ export interface TableBaseOptions<D extends object> {
     onFetchData?: ((options: FetchDataOptions) => void) | null;
     /** Instruct how Table constructs each row's underlying <i>id</i> property. Must be <b>memoized</b>. */
     getRowId?: (originalRow: D, relativeIndex: number) => string;
+    /** Instruct how Table detects subrows. Must be <b>memoized</b>. */
+    getSubRows?: (originalRow: D, relativeIndex: number) => D[];
     /** The initial columns to sort by */
     sortBy?: SortingRule<string>[];
     /** Determines whether a given item is disabled. If an item is disabled, the user can't select it. */
@@ -256,6 +262,7 @@ export default function Table<D extends object>({
     defaultPageIndex = 0,
     defaultPageSize = DEFAULT_PAGE_SIZE,
     disableGroupBy = true,
+    disableExpand = true,
     disableColumnFilters = true,
     disablePagination = false,
     disableSettings = false,
@@ -273,6 +280,7 @@ export default function Table<D extends object>({
     selectedRowIds = [],
     multiSelect = true,
     getRowId,
+    getSubRows,
     isItemDisabled,
     sortBy: defaultSortBy = [],
     errorText,
@@ -288,6 +296,22 @@ export default function Table<D extends object>({
 
     const columns = useMemo(() => {
         const columnsFiltered: any = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
+        if (!disableExpand) {
+            columnsFiltered.unshift({
+                id: '_expander_',
+                Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }: any) => (
+                    <span {...getToggleAllRowsExpandedProps()}>
+                        {isAllRowsExpanded ? <ExpandMoreIcon /> : <ChevronRightIcon />}
+                    </span>
+                ),
+                Cell: ({ row }: any) =>
+                    row.canExpand ? (
+                        <span {...row.getToggleRowExpandedProps()}>
+                            {row.isExpanded ? <ExpandMoreIcon /> : <ChevronRightIcon />}
+                        </span>
+                    ) : null,
+            });
+        }
         if (!disableRowSelect) {
             columnsFiltered.unshift({
                 id: '_selection_',
@@ -303,8 +327,7 @@ export default function Table<D extends object>({
                         />
                     ) : null;
                 },
-                Cell: (props: any) => {
-                    const { row } = props;
+                Cell: ({ row, toggleAllRowsSelected }: any) => {
                     const isSelectDisabled = !!isItemDisabled?.(row.original);
                     return (
                         <div>
@@ -322,7 +345,7 @@ export default function Table<D extends object>({
                                     controlId={row.id}
                                     disabled={isSelectDisabled}
                                     onChange={() => {
-                                        props.toggleAllRowsSelected(false);
+                                        toggleAllRowsSelected(false);
                                         row.toggleRowSelected(true);
                                     }}
                                 />
@@ -334,7 +357,7 @@ export default function Table<D extends object>({
         }
 
         return columnsFiltered;
-    }, [columnDefinitions, showColumns, disableRowSelect, multiSelect, isItemDisabled]);
+    }, [columnDefinitions, showColumns, disableRowSelect, disableExpand, multiSelect, isItemDisabled]);
 
     const rowCount = useMemo(() => {
         if (typeof props.rowCount === 'undefined') {
@@ -371,6 +394,7 @@ export default function Table<D extends object>({
             },
             ...(onFetchData != null && { pageCount }),
             getRowId,
+            getSubRows,
             disableSortBy,
             disableGroupBy,
             disableFilters: disableColumnFilters,
@@ -398,6 +422,7 @@ export default function Table<D extends object>({
             disableGroupBy,
             disableSortBy,
             getRowId,
+            getSubRows,
             onFetchData,
             selectedRowIdMap,
         ]
