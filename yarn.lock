@@ -8056,10 +8056,10 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-git-conventional-commits@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/git-conventional-commits/-/git-conventional-commits-1.0.8.tgz#f842589b7a8a2508013f2d094723b7ba1cc9ad3a"
-  integrity sha512-C1fGZPKo/Z4FKbCt9XDxQ7xkKOtr82S1BicPAIDirPxreJfcp1v53gNSh4yoUssyT+kI2Hs+o59Ew4J7ET5Ugg==
+git-conventional-commits@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/git-conventional-commits/-/git-conventional-commits-1.1.0.tgz#fa344da62eb585e7e6af3ff6feacba7128d247d5"
+  integrity sha512-QFlbxQyXc9njQ13c4PsAI90zjn1/7KrkKVrN4B5TYhXAI1y4dEqx4uRQcVOb9yQUAWI4QRg02e+jN/mnuW2vbQ==
   dependencies:
     execa "^5.0.0"
     yargs "^16.1.1"
