@@ -101,6 +101,82 @@ describe('Autosuggest', () => {
         expect(getByPlaceholderText('input-1')).toHaveValue(preSelectedValue.label);
     });
 
+    describe('Custom Label', () => {
+        const customOptions = [
+            {
+                id: 1,
+                name: 'Name 1',
+                description: 'Description 1',
+                value: '1',
+            },
+            {
+                id: 2,
+                name: 'Name 2',
+                description: 'Description 2',
+                value: '2',
+            },
+            {
+                id: 3,
+                name: 'Name 3',
+                description: 'Description 3',
+                value: '3',
+            },
+            {
+                id: 4,
+                name: 'Name 4',
+                description: 'Description 4',
+                value: '4',
+            },
+        ];
+
+        const renderOption = ({ id, name, description }: any) => (
+            <div data-testid={id}>
+                <div>{name}</div>
+                <div>{description}</div>
+            </div>
+        );
+
+        it('render options as renderOption', () => {
+            const options = customOptions.map((o) => ({
+                ...o,
+                label: `${o.id}-${o.name}`,
+                value: o.id.toString(),
+            }));
+
+            const filterOptionsMock = jest.fn().mockReturnValue([
+                {
+                    id: 4,
+                    name: 'Name 4',
+                    description: 'Description 4',
+                    value: '4',
+                },
+            ]);
+
+            const { getByPlaceholderText, getByText, getByTestId, queryByTestId } = render(
+                <Autosuggest
+                    options={options}
+                    renderOption={renderOption}
+                    filterOptions={filterOptionsMock}
+                    placeholder="input-1"
+                />
+            );
+
+            const input = getByPlaceholderText('input-1');
+
+            fireEvent.change(input, { target: { value: 'Name' } });
+
+            expect(filterOptionsMock).toBeCalledWith(options, {
+                getOptionLabel: expect.anything(),
+                inputValue: 'Name',
+            });
+
+            expect(queryByTestId(customOptions[0].id)).toBeNull();
+            expect(getByTestId(customOptions[3].id)).toBeVisible();
+            expect(getByText(customOptions[3].description)).toBeVisible();
+            expect(getByText(customOptions[3].name)).toBeVisible();
+        });
+    });
+
     describe('events', () => {
         it('fires onChange event', () => {
             const { getByPlaceholderText } = render(
@@ -175,6 +251,29 @@ describe('Autosuggest', () => {
         });
     });
 
+    describe('icons', () => {
+        it('should render the component with default icon', () => {
+            const { container } = render(<Autosuggest options={awsServices} placeholder="input-1" />);
+            const svg = container.querySelector('.MuiSvgIcon-colorAction');
+
+            expect(svg).toBeInTheDocument();
+        });
+
+        it('should render the component with custom icon', () => {
+            const { container } = render(<Autosuggest options={awsServices} placeholder="input-1" icon={Dns} />);
+            const svg = container.querySelector('.MuiSvgIcon-colorAction');
+
+            expect(svg).toBeInTheDocument();
+        });
+
+        it('should render the component without an icon', () => {
+            const { container } = render(<Autosuggest options={awsServices} placeholder="input-1" icon={false} />);
+            const svg = container.querySelector('.MuiSvgIcon-colorAction');
+
+            expect(svg).not.toBeInTheDocument();
+        });
+    });
+
     it('renders accessible component', async () => {
         const { container } = render(
             <>
@@ -197,28 +296,5 @@ describe('Autosuggest', () => {
         const results = await axe(container);
 
         expect(results).toHaveNoViolations();
-    });
-
-    describe('icons', () => {
-        it('should render the component with default icon', () => {
-            const { container } = render(<Autosuggest options={awsServices} placeholder="input-1" />);
-            const svg = container.querySelector('.MuiSvgIcon-colorAction');
-
-            expect(svg).toBeInTheDocument();
-        });
-
-        it('should render the component with custom icon', () => {
-            const { container } = render(<Autosuggest options={awsServices} placeholder="input-1" icon={Dns} />);
-            const svg = container.querySelector('.MuiSvgIcon-colorAction');
-
-            expect(svg).toBeInTheDocument();
-        });
-
-        it('should render the component without an icon', () => {
-            const { container } = render(<Autosuggest options={awsServices} placeholder="input-1" icon={false} />);
-            const svg = container.querySelector('.MuiSvgIcon-colorAction');
-
-            expect(svg).not.toBeInTheDocument();
-        });
     });
 });
