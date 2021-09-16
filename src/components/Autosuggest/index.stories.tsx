@@ -40,6 +40,8 @@ export const Default = () => (
             controlId="formFieldId1"
             ariaDescribedby="This is a description"
             onChange={action('onChange')}
+            onFocus={action('onFocus')}
+            onBlur={action('onBlur')}
         />
     </FormField>
 );
@@ -105,11 +107,12 @@ export const AsyncLoading = () => {
             <Autosuggest
                 controlId="formFieldId1"
                 loadingText="Loading services"
-                onFocus={() => {
+                onFocus={(e) => {
                     setOptions([]);
                     setLoadingStatus(true);
-                    action('onFocus');
+                    action('onFocus')(e);
                 }}
+                onBlur={action('onBlur')}
                 statusType={status}
                 options={options}
                 empty="No matching service found"
@@ -259,7 +262,6 @@ export const WithFreeSolo = () => (
             icon={Computer}
             freeSolo={true}
             filteringType="manual"
-            disableClearable={true}
             options={awsServices}
             controlId="formFieldId1"
             ariaDescribedby="This is a description"
