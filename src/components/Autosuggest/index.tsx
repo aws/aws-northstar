@@ -148,6 +148,39 @@ const useStyles = makeStyles({
 
 type AutosuggestBaseProps = AutosuggestPropsInternal | MultiselectPropsInternal;
 
+const covertStringValue = (value: string | SelectOption): SelectOption => {
+    if (typeof value === 'string') {
+        return {
+            value,
+            label: value,
+        };
+    }
+
+    return value;
+};
+
+type ValueType =
+    | {
+          multiple: true;
+          value?: (SelectOption | string)[];
+      }
+    | {
+          multiple: false;
+          value?: SelectOption | null | string;
+      };
+
+const getValue = (value: ValueType): (SelectOption | null) | SelectOption[] => {
+    if (!value.value) {
+        return value.multiple ? [] : null;
+    }
+
+    if (value.multiple) {
+        return value.value.map(covertStringValue);
+    }
+
+    return covertStringValue(value.value);
+};
+
 /**
  * An autosuggest control is a normal text input enhanced by a panel of suggested options.
  * */
@@ -178,17 +211,24 @@ const AutosuggestBase: FunctionComponent<AutosuggestBaseProps> = ({
     value,
     ...props
 }) => {
-    console.log('Autosuggest render');
     const classes = useStyles();
     const [inputValue, setInputValue] = useState<SelectOption | null | SelectOption[]>(
-        props.multiple ? value || [] : value || null
+        getValue({
+            multiple: props.multiple,
+            value,
+        } as ValueType)
     );
     const [open, setOpen] = React.useState(false);
     const controlId = useUniqueId(props.controlId);
     const autoCompleteString = disableBrowserAutocorrect ? 'off' : 'on';
 
     useEffect(() => {
-        setInputValue(props.multiple ? value || [] : value || null);
+        setInputValue(
+            getValue({
+                multiple: props.multiple,
+                value,
+            } as ValueType)
+        );
     }, [props.multiple, value, setInputValue]);
 
     const onRecoveryClickHandler = useCallback(
@@ -206,15 +246,12 @@ const AutosuggestBase: FunctionComponent<AutosuggestBaseProps> = ({
 
     const handleOnChange = useCallback(
         (_: React.ChangeEvent<{}>, value?: SelectOption | string | null | (SelectOption | string)[]): void => {
-            if (props.multiple) {
-                const newValue = value ? (value as SelectOption[]) : [];
-                props.onChange?.(newValue);
-                setInputValue(newValue);
-            } else {
-                const newValue = value ? (value as SelectOption) : null;
-                props.onChange?.(newValue);
-                setInputValue(newValue);
-            }
+            const newValue = getValue({
+                multiple: props.multiple,
+                value,
+            } as ValueType);
+            setInputValue(newValue);
+            props.onChange?.(newValue as SelectOption & SelectOption[]);
         },
         [props, setInputValue]
     );
