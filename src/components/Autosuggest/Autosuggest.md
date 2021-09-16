@@ -66,10 +66,9 @@ React.useEffect(() => {
         <Autosuggest
             controlId="formFieldId1"
             loadingText="Loading services"
-            onFocus={() => {
+            onFocus={(e) => {
                 setOptions([]);
                 setLoadingStatus(true);
-                action('onFocus');
             }}
             statusType={status}
             options={options}
@@ -166,7 +165,6 @@ import { awsServices } from './data/data';
             icon={Computer}
             filteringType="manual"
             freeSolo={true}
-            disableClearable={true}
             options={awsServices}
             controlId="formFieldId1"
             ariaDescribedby="This is a description"

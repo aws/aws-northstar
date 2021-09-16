@@ -370,7 +370,6 @@ const AutosuggestBase: FunctionComponent<AutosuggestBaseProps> = ({
     return (
         <Stack>
             <MaterialUIAutocomplete
-                debug
                 multiple={props.multiple}
                 data-testid={props.multiple ? 'multiselect' : 'autosuggest'}
                 disabled={disabled}
@@ -389,13 +388,12 @@ const AutosuggestBase: FunctionComponent<AutosuggestBaseProps> = ({
                 onChange={handleOnChange}
                 onInputChange={handleOnInput}
                 onFocus={onFocus}
-                onOpen={(e) => {
+                onBlur={onBlur}
+                onOpen={() => {
                     setOpen(true);
-                    onFocus?.(e as React.FocusEvent<HTMLElement>);
                 }}
-                onClose={(e) => {
+                onClose={() => {
                     setOpen(false);
-                    onBlur?.(e as React.FocusEvent<HTMLElement>);
                 }}
                 loading={statusType !== 'finished'}
                 renderOption={renderOption}

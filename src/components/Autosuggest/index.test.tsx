@@ -197,7 +197,7 @@ describe('Autosuggest', () => {
             const input = getByPlaceholderText('input-1');
 
             expect(mockEvent).toHaveBeenCalledTimes(0);
-            fireEvent.change(input, { target: { value: 'Amazon Pay' } });
+            fireEvent.click(input);
             expect(mockEvent).toHaveBeenCalledTimes(1);
         });
 
@@ -208,8 +208,9 @@ describe('Autosuggest', () => {
             const input = getByPlaceholderText('input-1');
 
             expect(mockEvent).toHaveBeenCalledTimes(0);
+            fireEvent.click(input);
             fireEvent.change(input, { target: { value: 'Amazon Pay' } });
-            fireEvent.keyDown(input, { key: 'Escape', code: '27' });
+            fireEvent.blur(input);
             expect(mockEvent).toHaveBeenCalledTimes(1);
         });
 
