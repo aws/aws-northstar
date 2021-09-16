@@ -14,10 +14,11 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { actions } from '@storybook/addon-actions';
 import Box from '../../layouts/Box';
 import Select, { SelectOption } from '.';
+import { useCallback } from 'react';
 
 export default {
     component: Select,
@@ -230,6 +231,67 @@ export const FetchOptionsFromAPI = () => {
                 statusType={loading ? 'loading' : 'finished'}
                 loadingText="Loading instances"
             />
+        </Box>
+    );
+};
+
+const customOptions = [
+    {
+        id: 1,
+        name: 'Name 1',
+        description: 'Description 1',
+        value: '1',
+    },
+    {
+        id: 2,
+        name: 'Name 2',
+        description: 'Description 2',
+        value: '2',
+    },
+    {
+        id: 3,
+        name: 'Name 3',
+        description: 'Description 3',
+        value: '3',
+    },
+    {
+        id: 4,
+        name: 'Name 4',
+        description: 'Description 4',
+        value: '4',
+    },
+];
+
+export const RenderCustomLabel = () => {
+    const [selectedOption, setSelectedOption] = useState({ value: '1' });
+    const onChange = (event: React.ChangeEvent<{ value: any }>) => {
+        setSelectedOption({ value: String(event.target.value) });
+    };
+
+    const options = useMemo(() => {
+        return customOptions.map((o) => ({
+            ...o,
+            label: `${o.id}-${o.name}`,
+            value: o.id.toString(),
+        }));
+    }, []);
+
+    const renderOption = useCallback((o) => {
+        return (
+            <Box>
+                <Box>
+                    <b>
+                        {o.id}-{o.name}
+                    </b>
+                </Box>
+                <Box>{o.description}</Box>
+            </Box>
+        );
+    }, []);
+
+    return (
+        <Box>
+            <Select options={options} selectedOption={selectedOption} onChange={onChange} renderOption={renderOption} />
         </Box>
     );
 };

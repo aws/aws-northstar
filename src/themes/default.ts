@@ -103,6 +103,11 @@ export const getTheme = (fontFamily?: string): ThemeOptions => ({
             },
         },
         MuiAutocomplete: {
+            groupLabel: {
+                lineHeight: DEFAULT_LINE_HEIGHT,
+                paddingTop: '6px',
+                paddingBottom: '6px',
+            },
             inputRoot: {
                 "&[class*='MuiOutlinedInput-root'][class*='MuiOutlinedInput-marginDense']": {
                     paddingTop: 0,

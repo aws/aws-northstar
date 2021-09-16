@@ -14,7 +14,16 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useState, SyntheticEvent, useMemo, useCallback, ComponentType } from 'react';
+import React, {
+    FunctionComponent,
+    ReactNode,
+    useEffect,
+    useState,
+    SyntheticEvent,
+    useMemo,
+    useCallback,
+    ComponentType,
+} from 'react';
 import TextField from '@material-ui/core/TextField';
 import MaterialUIAutocomplete, { AutocompleteRenderInputParams } from '@material-ui/lab/Autocomplete';
 import Link from '@material-ui/core/Link';
@@ -22,18 +31,25 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { makeStyles } from '@material-ui/core/styles';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
-import { v4 as uuidv4 } from 'uuid';
+import TokenGroup from '../TokenGroup';
+import Checkbox from '../Checkbox';
+import Stack from '../../layouts/Stack';
 import LoadingIndicator from '../LoadingIndicator';
 import StatusIndicator from '../StatusIndicator';
 import { AriaBaseProps } from '../../props/common';
-import { SelectBaseProps, SelectOption } from '../Select';
+import { SelectBaseProps, SelectOption, StatusType } from '../Select';
 import { getFlattenOptions } from '../../utils/getFlattenOptions';
+import useUniqueId from '../../hooks/useUniqueId';
 
-export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
+export interface FilterOptionsState {
+    inputValue?: string;
+}
+
+interface AutosuggestPropsBase extends SelectBaseProps, AriaBaseProps {
     /**
-     * Text entered into the form element
+     * Determine whether it is MultiSelect or not.
      * */
-    value?: SelectOption;
+    multiple: boolean;
     /**
      * Determines how filtering is applied to the list of options
      * */
@@ -70,10 +86,6 @@ export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
      */
     disableClearable?: boolean;
     /**
-     * Callback fired when the value changes.
-     * */
-    onChange?: (value: string | SelectOption | null) => void;
-    /**
      * Callback fired when the input value changes.
      * */
     onInputChange?: (e: React.ChangeEvent<{}>, value: string, reason: string) => void;
@@ -85,6 +97,40 @@ export interface AutosuggestProps extends SelectBaseProps, AriaBaseProps {
      * Callback fired when the popup requests to be closed
      * */
     onBlur?: (event?: React.FocusEvent<HTMLElement>) => void;
+    /**
+     * A filter function that determines the options that are eligible.
+     */
+    filterOptions?: (options: SelectOption[], state: FilterOptionsState) => SelectOption[];
+}
+
+interface AutosuggestPropsInternal extends AutosuggestPropsBase {
+    multiple: false;
+    checkboxes: false;
+    /**
+     * Text entered into the form element
+     * */
+    value?: SelectOption;
+    /**
+     * Callback fired when the value changes.
+     * */
+    onChange?: (value: SelectOption | null) => void;
+}
+
+interface MultiselectPropsInternal extends AutosuggestPropsBase {
+    multiple: true;
+    /**
+     * The selected values
+     * */
+    value?: SelectOption[];
+    /**
+     * Whether to display checkboxes in dropdown options.
+     * The default value is false, but we highly recommend to set this to true.
+     */
+    checkboxes?: boolean;
+    /**
+     * Callback fired when the value changes.
+     * */
+    onChange?: (value: SelectOption[]) => void;
 }
 
 const useStyles = makeStyles({
@@ -100,18 +146,51 @@ const useStyles = makeStyles({
     },
 });
 
+type AutosuggestBaseProps = AutosuggestPropsInternal | MultiselectPropsInternal;
+
+const covertStringValue = (value: string | SelectOption): SelectOption => {
+    if (typeof value === 'string') {
+        return {
+            value,
+            label: value,
+        };
+    }
+
+    return value;
+};
+
+type ValueType =
+    | {
+          multiple: true;
+          value?: (SelectOption | string)[];
+      }
+    | {
+          multiple: false;
+          value?: SelectOption | null | string;
+      };
+
+const getValue = (value: ValueType): (SelectOption | null) | SelectOption[] => {
+    if (!value.value) {
+        return value.multiple ? [] : null;
+    }
+
+    if (value.multiple) {
+        return value.value.map(covertStringValue);
+    }
+
+    return covertStringValue(value.value);
+};
+
 /**
  * An autosuggest control is a normal text input enhanced by a panel of suggested options.
  * */
-export default function Autosuggest({
+const AutosuggestBase: FunctionComponent<AutosuggestBaseProps> = ({
     options = [],
-    value,
     filteringType = 'auto',
     loadingText = 'Loading ...',
     errorText = 'Error fetching',
     recoveryText,
     name,
-    controlId = uuidv4(),
     empty,
     disabled,
     placeholder,
@@ -122,18 +201,35 @@ export default function Autosuggest({
     disableClearable = false,
     ariaDescribedby,
     ariaLabelledby,
-    onChange,
     onInputChange,
     onFocus,
     onBlur,
     onRecoveryClick,
     disableBrowserAutocorrect = false,
     statusType = 'finished',
-}: AutosuggestProps) {
+    filterOptions,
+    value,
+    ...props
+}) => {
     const classes = useStyles();
-    const [inputValue, setInputValue] = useState<string | SelectOption | null>(value || null);
+    const [inputValue, setInputValue] = useState<SelectOption | null | SelectOption[]>(
+        getValue({
+            multiple: props.multiple,
+            value,
+        } as ValueType)
+    );
     const [open, setOpen] = React.useState(false);
+    const controlId = useUniqueId(props.controlId);
     const autoCompleteString = disableBrowserAutocorrect ? 'off' : 'on';
+
+    useEffect(() => {
+        setInputValue(
+            getValue({
+                multiple: props.multiple,
+                value,
+            } as ValueType)
+        );
+    }, [props.multiple, value, setInputValue]);
 
     const onRecoveryClickHandler = useCallback(
         (event: SyntheticEvent) => {
@@ -149,11 +245,15 @@ export default function Autosuggest({
     }, [options]);
 
     const handleOnChange = useCallback(
-        (_: React.ChangeEvent<{}>, value: string | SelectOption | null): void => {
-            onChange?.(value);
-            setInputValue(value);
+        (_: React.ChangeEvent<{}>, value?: SelectOption | string | null | (SelectOption | string)[]): void => {
+            const newValue = getValue({
+                multiple: props.multiple,
+                value,
+            } as ValueType);
+            setInputValue(newValue);
+            props.onChange?.(newValue as SelectOption & SelectOption[]);
         },
-        [onChange, setInputValue]
+        [props, setInputValue]
     );
 
     const handleOnInput = useCallback(
@@ -238,10 +338,41 @@ export default function Autosuggest({
         ]
     );
 
+    const renderOption = useCallback(
+        (option: SelectOption): ReactNode => {
+            if (props.multiple && props.checkboxes) {
+                return (
+                    <Checkbox
+                        checked={(inputValue as SelectOption[]).map((input) => input.value).includes(option.value)}
+                        value={option.value}
+                    >
+                        {props.renderOption?.(option) || option.label}
+                    </Checkbox>
+                );
+            }
+
+            return props.renderOption?.(option) || option.label;
+        },
+        [props, inputValue]
+    );
+
+    const handleDeleteOption = useCallback(
+        (option) => {
+            if (props.multiple) {
+                const tempData = (inputValue as SelectOption[]).filter((o) => o.value !== option.value);
+                setInputValue(tempData);
+                props.onChange?.(tempData);
+            }
+        },
+        [inputValue, setInputValue, props]
+    );
+
     return (
-        <div>
+        <Stack>
             <MaterialUIAutocomplete
-                data-testid="autosuggest"
+                debug
+                multiple={props.multiple}
+                data-testid={props.multiple ? 'multiselect' : 'autosuggest'}
                 disabled={disabled}
                 autoHighlight
                 popupIcon={null}
@@ -257,6 +388,7 @@ export default function Autosuggest({
                 getOptionSelected={getOptionsSelected}
                 onChange={handleOnChange}
                 onInputChange={handleOnInput}
+                onFocus={onFocus}
                 onOpen={(e) => {
                     setOpen(true);
                     onFocus?.(e as React.FocusEvent<HTMLElement>);
@@ -266,9 +398,28 @@ export default function Autosuggest({
                     onBlur?.(e as React.FocusEvent<HTMLElement>);
                 }}
                 loading={statusType !== 'finished'}
+                renderOption={renderOption}
+                filterOptions={filterOptions}
                 getOptionLabel={(option) => option.label || ''}
                 renderInput={textfield}
             />
-        </div>
+            {props.multiple && (
+                <TokenGroup items={(inputValue || []) as SelectOption[]} onDismiss={handleDeleteOption} />
+            )}
+        </Stack>
     );
-}
+};
+
+export interface AutosuggestProps extends Omit<AutosuggestPropsInternal, 'multiple' | 'checkboxes'> {}
+
+const Autosuggest: FunctionComponent<AutosuggestProps> = (props) => {
+    return <AutosuggestBase multiple={false} checkboxes={false} {...props} />;
+};
+
+export interface MultiselectProps extends Omit<MultiselectPropsInternal, 'multiple'> {}
+
+export default Autosuggest;
+
+export { AutosuggestBase };
+
+export type { SelectOption, StatusType };
