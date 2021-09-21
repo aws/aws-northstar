@@ -59,6 +59,11 @@ describe('Tabs', () => {
         expect(getByText(tabs[0].content)).toBeVisible();
     });
 
+    it('renders with container variant and without padding in the content area', () => {
+        const { getByText } = render(<Tabs tabs={tabs} variant="container" paddingContentArea={false} />);
+        expect(getByText(tabs[0].content)).toBeVisible();
+    });
+
     it('disables a tab', () => {
         const props = {
             tabs: [

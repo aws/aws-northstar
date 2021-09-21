@@ -63,7 +63,12 @@ export interface TabsProps {
      * - container: version with borders, designed to be used along with other containers
      */
     variant?: 'default' | 'container';
-    /** Fired whenever the user selects a different tab. The event detail contains the current activeTabId. */
+    /**
+     * Whether to render padding within the content area
+     * */
+    paddingContentArea?: boolean;
+    /**
+     * Fired whenever the user selects a different tab. The event detail contains the current activeTabId. */
     onChange?: (activeTabId: string) => void;
 }
 
@@ -71,14 +76,13 @@ interface TabPanelProps {
     children?: React.ReactNode;
     index: number;
     value: number;
+    paddingContentArea: boolean;
 }
 
-function TabPanel(props: TabPanelProps) {
-    const { children, value, index } = props;
-
+function TabPanel({ children, value, index, paddingContentArea }: TabPanelProps) {
     return (
         <Typography component="div" role="tabpanel" hidden={value !== index} id={`tabpanel-${index}`}>
-            <Box py={3}>{children}</Box>
+            <Box py={paddingContentArea ? 3 : undefined}>{children}</Box>
         </Typography>
     );
 }
@@ -86,11 +90,17 @@ function TabPanel(props: TabPanelProps) {
 /**
  * Use tabs for organizing discrete blocks of information.
  */
-const Tabs = ({ tabs, activeId = '', variant = 'default', onChange }: TabsProps): ReactElement => {
+const Tabs = ({
+    tabs,
+    activeId = '',
+    variant = 'default',
+    paddingContentArea = true,
+    onChange,
+}: TabsProps): ReactElement => {
     const classes = useStyles({});
     const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
     const [value, setValue] = React.useState(tabIndex === -1 ? 0 : tabIndex);
-    const handleChange = (event: React.ChangeEvent<{}>, index: number) => {
+    const handleChange = (_event: React.ChangeEvent<{}>, index: number) => {
         onChange?.(tabs[index].id);
         setValue(index);
     };
@@ -111,13 +121,13 @@ const Tabs = ({ tabs, activeId = '', variant = 'default', onChange }: TabsProps)
     );
 
     const tabContent = tabs.map((tab, idx) => (
-        <TabPanel key={tab.id} value={value} index={idx}>
+        <TabPanel key={tab.id} value={value} index={idx} paddingContentArea={paddingContentArea}>
             {tab.content}
         </TabPanel>
     ));
 
     return variant === 'container' ? (
-        <Container headerContent={headerContent} headerGutters={false}>
+        <Container headerContent={headerContent} headerGutters={false} gutters={paddingContentArea}>
             {tabContent}
         </Container>
     ) : (
