@@ -24,7 +24,7 @@ import { getErrorText } from '../../utils/getErrorText';
 interface RadioButtonMappingProps {
     option: Option;
     name: string;
-    description: string;
+    description?: string;
 }
 
 const RadioButtonMapping: FunctionComponent<RadioButtonMappingProps> = ({ option, name, description }) => {
