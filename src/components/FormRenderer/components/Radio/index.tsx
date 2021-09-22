@@ -24,12 +24,13 @@ import { getErrorText } from '../../utils/getErrorText';
 interface RadioButtonMappingProps {
     option: Option;
     name: string;
+    description: string;
 }
 
-const RadioButtonMapping: FunctionComponent<RadioButtonMappingProps> = ({ option, name }) => {
-    const { input } = useFieldApi({ name, type: 'radio', value: option.value });
+const RadioButtonMapping: FunctionComponent<RadioButtonMappingProps> = ({ option, name, description }) => {
+    const { input } = useFieldApi({ description, name, type: 'radio', value: option.value });
     return (
-        <RadioButton {...input} value={option.value} name={name}>
+        <RadioButton {...input} value={option.value} name={name} description={description}>
             {option.label}
         </RadioButton>
     );
@@ -61,7 +62,12 @@ const RadioGroupMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
             <RadioGroup
                 {...input}
                 items={options.map((option: Option) => (
-                    <RadioButtonMapping option={option} name={input.name} key={option.value} />
+                    <RadioButtonMapping
+                        option={option}
+                        name={input.name}
+                        description={option.description}
+                        key={option.value}
+                    />
                 ))}
             />
         </FormField>

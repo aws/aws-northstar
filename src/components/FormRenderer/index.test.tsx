@@ -756,6 +756,7 @@ describe('FormRenderer', () => {
                     options: [
                         {
                             label: 'Option 1',
+                            description: 'Description 1',
                             value: '1',
                         },
                         {
@@ -783,6 +784,7 @@ describe('FormRenderer', () => {
 
             expect(getByText('Radio')).toBeVisible();
             expect(getAllByRole('radio')).toHaveLength(3);
+            expect(getByText('Description 1')).toBeVisible();
 
             fireEvent.click(getByLabelText('Option 3'));
             fireEvent.click(getByText('Submit'));
