@@ -147,6 +147,7 @@ const baseSchema = {
             options: [
                 {
                     label: 'Option 1',
+                    description: 'Description 1',
                     value: '1',
                 },
                 {
