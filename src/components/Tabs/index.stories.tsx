@@ -15,6 +15,7 @@
  ******************************************************************************************************************** */
 import React from 'react';
 import Tabs from '.';
+import Box from '../../layouts/Box';
 import { action } from '@storybook/addon-actions';
 
 export default {
@@ -44,3 +45,28 @@ const tabs = [
 export const Default = () => <Tabs tabs={tabs} onChange={action('onChange')} />;
 
 export const Container = () => <Tabs tabs={tabs} onChange={action('onChange')} activeId="second" variant="container" />;
+
+export const NoPaddingContainer = () => {
+    const tabs = [
+        {
+            label: 'First tab label',
+            id: 'first',
+            content: <Box width="100%" height="300px" bgcolor="primary.main" />,
+        },
+        {
+            label: 'Second tab label',
+            id: 'second',
+            content: <Box width="100%" height="300px" bgcolor="secondary.main" />,
+        },
+    ];
+
+    return (
+        <Tabs
+            tabs={tabs}
+            onChange={action('onChange')}
+            paddingContentArea={false}
+            activeId="second"
+            variant="container"
+        />
+    );
+};
