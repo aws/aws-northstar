@@ -20,6 +20,7 @@ import { FormTemplateRenderProps } from '@data-driven-forms/react-form-renderer/
 export interface Option {
     label: string;
     value: string;
+    description: string;
     disabled?: boolean;
 }
 
