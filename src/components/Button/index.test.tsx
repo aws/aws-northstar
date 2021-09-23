@@ -34,6 +34,12 @@ describe('Button', () => {
             expect(queryByRole('progressbar')).not.toBeInTheDocument();
         });
 
+        it('renders with an aria-label', () => {
+            const props = { variant, label: 'some label' };
+            const { getByRole } = render(<Button {...props}>test</Button>);
+            expect(getByRole('button')).toHaveAttribute('aria-label', props.label);
+        });
+
         describe('when loading', () => {
             it('disables button and renders a loader without icon from props ', () => {
                 const props = { loading: true, variant, icon: 'add_plus' as ButtonIconType };

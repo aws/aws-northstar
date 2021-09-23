@@ -96,6 +96,7 @@ const muiButtonProps = ({
     href,
     icon,
     iconAlign,
+    label,
     type = 'button',
     size = 'medium',
 }: Partial<ButtonProps>): MaterialButtonProps => {
@@ -116,6 +117,7 @@ const muiButtonProps = ({
         onClick,
         type,
         size,
+        'aria-label': label,
         ...(icon && { [iconAlign === 'right' ? 'endIcon' : 'startIcon']: <ButtonIcon type={icon} /> }),
         ...(loading && { startIcon: <OffsetCircularProgress /> }),
         ...getVariantProps(),
@@ -163,6 +165,7 @@ const Button: FunctionComponent<ButtonProps> = ({
                         loading,
                         icon,
                         iconAlign,
+                        label,
                         type,
                         size,
                     })}
