@@ -240,6 +240,33 @@ describe('AppLayout', () => {
 
             expect(getByText('SplitPanel')).toBeVisible();
         });
+
+        it('should close split panel when users call openSplitPanel with false', () => {
+            const ContentNode = () => {
+                const { openSplitPanel } = useAppLayoutContext();
+                return (
+                    <div>
+                        <button
+                            data-testid="trigger-close"
+                            onClick={() => {
+                                openSplitPanel(false);
+                            }}
+                        />
+                    </div>
+                );
+            };
+            const { getByTestId, queryByText } = render(
+                <AppLayout header={header} splitPanel={splitPanel}>
+                    <ContentNode />
+                </AppLayout>
+            );
+
+            act(() => {
+                fireEvent.click(getByTestId('trigger-close'));
+            });
+
+            expect(queryByText('SplitPanel')).toBeNull();
+        });
     });
 
     describe('Notifications', () => {

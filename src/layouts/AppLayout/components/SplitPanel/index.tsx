@@ -153,7 +153,11 @@ const SplitPanel: FunctionComponent<SplitPanelProps> = ({
                 {fullMode && (
                     <Box display="flex" justifyContent="center" width="100%">
                         {!minimized && (
-                            <IconButton onMouseDown={handleMouseDown} className={styles.dragHandle}>
+                            <IconButton
+                                data-testid="resize-split-panel"
+                                onMouseDown={handleMouseDown}
+                                className={styles.dragHandle}
+                            >
                                 <DragHandle />
                             </IconButton>
                         )}
@@ -161,17 +165,17 @@ const SplitPanel: FunctionComponent<SplitPanelProps> = ({
                 )}
                 <Box className={styles.control}>
                     {fullMode && (
-                        <IconButton onClick={handleToggleResize}>
+                        <IconButton data-testid="toggle-expand-split-panel" onClick={handleToggleResize}>
                             {minimized ? <Fullscreen /> : <FullscreenExit />}
                         </IconButton>
                     )}
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton data-testid="close-split-panel" onClick={handleDrawerClose}>
                         <Close />
                     </IconButton>
                 </Box>
             </Box>
             {!minimized && (
-                <Box p={1} overflow="auto" className={styles.content}>
+                <Box p={1} overflow="auto" className={styles.content} data-testid="content">
                     {children}
                 </Box>
             )}
