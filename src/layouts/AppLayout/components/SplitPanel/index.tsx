@@ -92,8 +92,8 @@ const SplitPanel: FunctionComponent<SplitPanelProps> = ({
     fullMode,
 }) => {
     const [height, setHeight] = useState(defaultSplitPanelHeight);
-    const mouseMoveListener = useRef<any | null>();
-    const mouseUpListener = useRef<any>();
+    const mouseMoveListener = useRef<((args: any) => void) | null>();
+    const mouseUpListener = useRef<(() => void) | null>();
     const styles = useStyles({
         height,
     });
