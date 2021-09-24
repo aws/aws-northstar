@@ -17,6 +17,8 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from 'reac
 import { action } from '@storybook/addon-actions';
 import { v4 as uuidv4 } from 'uuid';
 import AppLayout, { Notification, useAppLayoutContext } from '.';
+import ColumnLayout, { Column } from '../ColumnLayout';
+import KeyValuePair from '../../components/KeyValuePair';
 import Badge from '../../components/Badge';
 import Box from '../Box';
 import BreadcrumbGroup from '../../components/BreadcrumbGroup';
@@ -79,6 +81,7 @@ const helpPanel = (
         <Heading variant="h5">h5 section header</Heading>
     </HelpPanel>
 );
+
 const breadcrumbGroup = (
     <BreadcrumbGroup
         items={[
@@ -101,6 +104,31 @@ const breadcrumbGroup = (
         ]}
     />
 );
+
+const splitPanel = (
+    <ColumnLayout>
+        <Column key="column1">
+            <Stack>
+                <KeyValuePair label="Distribution Id" value="SLCCSMWOHOFUY0"></KeyValuePair>
+                <KeyValuePair label="Domain name" value="bbb.cloudfront.net"></KeyValuePair>
+            </Stack>
+        </Column>
+        <Column key="column2">
+            <Stack>
+                <KeyValuePair label="Price class" value="Use only US, Canada, Europe, and Asia"></KeyValuePair>
+                <KeyValuePair label="CNAMEs"></KeyValuePair>
+            </Stack>
+        </Column>
+        <Column key="column3">
+            <Stack>
+                <KeyValuePair label="SSL certificate" value="Default CloudFront SSL certificate"></KeyValuePair>
+                <KeyValuePair label="Custom SSL client support"></KeyValuePair>
+                <KeyValuePair label="Logging" value="Off"></KeyValuePair>
+            </Stack>
+        </Column>
+    </ColumnLayout>
+);
+
 const defaultNotifications: Notification[] = [
     {
         id: '1',
@@ -140,12 +168,31 @@ export const Default = () => {
             navigation={navigation}
             helpPanel={helpPanel}
             breadcrumbs={breadcrumbGroup}
+            splitPanel={splitPanel}
             notifications={notifications.map((n) => ({ ...n, onDismiss: () => handleDismiss(n.id) }))}
         >
             <Stack>
-                <GeneralInfo />
                 <SimpleTable />
             </Stack>
+        </AppLayout>
+    );
+};
+
+const DynamicSplitPanelSubComponent: React.FunctionComponent<any> = ({ children }) => {
+    const { setSplitPanelContent, openSplitPanel } = useAppLayoutContext();
+
+    const handleButtonClick = useCallback(() => {
+        setSplitPanelContent(splitPanel);
+        openSplitPanel(true);
+    }, [openSplitPanel, setSplitPanelContent]);
+
+    return <Button onClick={handleButtonClick}>Show Details</Button>;
+};
+
+export const DynamicSplitPanel = () => {
+    return (
+        <AppLayout header={header} breadcrumbs={breadcrumbGroup}>
+            <DynamicSplitPanelSubComponent />
         </AppLayout>
     );
 };
