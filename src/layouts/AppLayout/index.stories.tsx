@@ -178,7 +178,7 @@ export const Default = () => {
     );
 };
 
-const DynamicSplitPanelSubComponent: React.FunctionComponent<any> = ({ children }) => {
+const DynamicSplitPanelSubComponent: React.FunctionComponent<any> = () => {
     const { setSplitPanelContent, openSplitPanel } = useAppLayoutContext();
 
     const handleButtonClick = useCallback(() => {

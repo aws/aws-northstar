@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { render, cleanup, fireEvent, act, waitFor } from '@testing-library/react';
+import { render, cleanup, fireEvent, act } from '@testing-library/react';
 import Header from '../../components/Header';
 import AppLayout, { useAppLayoutContext, Notification } from '.';
 import useLocalStorage from 'react-use-localstorage';
@@ -249,7 +249,7 @@ describe('AppLayout', () => {
             expect(getByText('Failed to update 1 order')).toBeVisible();
         });
 
-        it('renders dynamically added notifications', async () => {
+        it('renders dynamically added notifications', () => {
             const notification: Notification = {
                 id: '1',
                 type: 'success',
@@ -274,9 +274,7 @@ describe('AppLayout', () => {
                 fireEvent.click(getByTestId('trigger-add-notification'));
             });
 
-            waitFor(() => {
-                expect(getByText('Your request 1 is being processed')).toBeVisible();
-            });
+            expect(getByText('Your request 1 is being processed')).toBeVisible();
 
             act(() => {
                 fireEvent.click(getByLabelText('Close'));
