@@ -112,11 +112,12 @@ const SplitPanel: FunctionComponent<SplitPanelProps> = ({
 
     const handleMouseDown = useCallback(() => {
         const handleMouseMove = (e: MouseEvent) => {
-            const offsetBottom = document.body.offsetHeight - (e.clientY - document.body.offsetTop);
-            let minHeight = 50;
-            let maxHeight = document.body.offsetHeight * 0.5;
+            const { offsetHeight, offsetTop } = document.body;
+            const offsetBottom = offsetHeight - (e.clientY - offsetTop);
+            const minHeight = 50;
+            let maxHeight = offsetHeight * 0.5;
             if (offsetBottom > minHeight && offsetBottom < maxHeight) {
-                setHeight(offsetBottom - 50);
+                setHeight(offsetBottom - minHeight);
             }
         };
 
