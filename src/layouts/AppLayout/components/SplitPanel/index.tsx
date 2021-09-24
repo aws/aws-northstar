@@ -115,7 +115,7 @@ const SplitPanel: FunctionComponent<SplitPanelProps> = ({
             const { offsetHeight, offsetTop } = document.body;
             const offsetBottom = offsetHeight - (e.clientY - offsetTop);
             const minHeight = 50;
-            let maxHeight = offsetHeight * 0.5;
+            const maxHeight = offsetHeight * 0.5;
             if (offsetBottom > minHeight && offsetBottom < maxHeight) {
                 setHeight(offsetBottom - minHeight);
             }
