@@ -1,3 +1,4 @@
+
 ### Open/Close Help Panel
 
 You can invoke the openHelpPanel method available from the AppLayoutContext from your component (must be descendants of AppLayout component) to trigger open of the help panel programmatically. 
@@ -56,6 +57,8 @@ import AppLayout, { Notification, useAppLayoutContext } from 'aws-northstar/layo
 import Box from 'aws-northstar/layouts/Box';
 import Header from 'aws-northstar/components/Header';
 import SideNavigation, { SideNavigationItemType } from 'aws-northstar/components/SideNavigation';
+import ColumnLayout, { Column } from 'aws-northstar/layouts/ColumnLayout';
+import KeyValuePair from 'aws-northstar/components/KeyValuePair';
 import Badge from 'aws-northstar/components/Badge';
 import BreadcrumbGroup from 'aws-northstar/components/BreadcrumbGroup';
 import HelpPanel from 'aws-northstar/components/HelpPanel';
@@ -108,6 +111,28 @@ const helpPanel = (
         <Heading variant="h5">h5 section header</Heading>
     </HelpPanel>
 );
+const splitPanel = (<ColumnLayout>
+    <Column key="column1">
+        <Stack>
+            <KeyValuePair label="Distribution Id" value="SLCCSMWOHOFUY0"></KeyValuePair>
+            <KeyValuePair label="Domain name" value="bbb.cloudfront.net"></KeyValuePair>
+        </Stack>
+    </Column>
+    <Column key="column2">
+        <Stack>
+            <KeyValuePair label="Price class" value="Use only US, Canada, Europe, and Asia"></KeyValuePair>
+            <KeyValuePair label="CNAMEs"></KeyValuePair>
+        </Stack>
+    </Column>
+    <Column key="column3">
+        <Stack>
+            <KeyValuePair label="SSL certificate" value="Default CloudFront SSL certificate"></KeyValuePair>
+            <KeyValuePair label="Custom SSL client support"></KeyValuePair>
+            <KeyValuePair label="Logging" value="Off"></KeyValuePair>
+        </Stack>
+    </Column>
+</ColumnLayout>);
+
 const breadcrumbGroup = (
     <BreadcrumbGroup
         items={[
@@ -158,8 +183,9 @@ const defaultNotifications = [
 
 const MainContent = () => {
     const { openHelpPanel, 
+        openSplitPanel,
         addNotification, 
-        dismissNotifications  } = useAppLayoutContext();
+        dismissNotifications } = useAppLayoutContext();
     
     const [ notificationId, setNotificationId ] = useState();
     
@@ -182,11 +208,15 @@ const MainContent = () => {
         dismissNotifications();
     }, [dismissNotifications]);
 
-    return (<Box bgcolor="grey.300" width="100%" height="1000px">
+    return (<Box bgcolor="grey.300" width="100%" height="800px">
             <Stack>
                 Main Content
                 <Button onClick={() => openHelpPanel()}>Open Help Panel</Button>
                 <Button onClick={() => openHelpPanel(false)}>Close Help Panel</Button>
+                 <Button onClick={() => {
+                     openSplitPanel();
+                }}>Open Split Panel</Button>
+                <Button onClick={() => openSplitPanel(false)}>Close Split Panel</Button>
                 <Button onClick={handleAddClick}>Add New Notification</Button>
                 <Button onClick={handleRemoveLastClick}>Remove Last Added Notification</Button>
                 <Button onClick={handleRemoveAll}>Remove All notifications</Button>
@@ -205,6 +235,7 @@ const handleDismiss = (id) => {
         header={header}
         navigation={navigation}
         helpPanel={helpPanel}
+        splitPanel={splitPanel}
         breadcrumbs={breadcrumbGroup}
         notifications={notifications.map(n => ({ ...n, onDismiss: () => handleDismiss(n.id) }))}
     >

@@ -27,7 +27,8 @@ import React, {
     useEffect,
     useMemo,
 } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 import useLocalStorage from 'react-use-localstorage';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -36,6 +37,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 import Box from '../../layouts/Box';
 import Sidebar, { SidebarType } from './components/Sidebar';
+import SplitPanel from './components/SplitPanel';
 import Stack from '../../layouts/Stack';
 import Overlay from '../../components/Overlay';
 import Flashbar from '../../components/Flashbar';
@@ -75,17 +77,21 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
         display: 'flex',
         height: ({ headerHeightInPx }) => `calc(100vh - ${headerHeightInPx}px)`,
     },
-    content: ({ hasSideNavigation, isSideNavigationOpen, hasHelpPanel, isHelpPanelOpen }) => ({
+    contentArea: ({ hasSideNavigation, isSideNavigationOpen, hasHelpPanel, isHelpPanelOpen }) => ({
         marginTop: 0,
         marginBottom: 0,
         height: '100%',
-        flexGrow: 1,
         position: 'relative',
-        overflow: 'auto',
+        flexGrow: 1,
         boxSizing: 'border-box',
+        overflow: 'auto',
         marginLeft: hasSideNavigation && !isSideNavigationOpen ? -WIDTH_SIDEBAR : 0,
         marginRight: hasHelpPanel && !isHelpPanelOpen ? -WIDTH_HELP_PANEL : 0,
     }),
+    content: {
+        flexGrow: 1,
+        overflow: 'auto',
+    },
     notifications: ({ mainContentScrollPosition }) => ({
         position: 'absolute',
         top: mainContentScrollPosition.y || 0,
@@ -118,9 +124,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     menuBar: {
         display: 'flex',
         boxShadow: '0 2px 1px -1px rgba(0,28,36,.3)',
-        [theme.breakpoints.up('sm')]: {
-            display: 'none',
-        },
     },
     menuBarIcon: {
         padding: theme.spacing(2),
@@ -152,6 +155,18 @@ export interface AppLayoutContextApi {
      */
     setHelpPanelContent: (content: ReactNode) => void;
     /**
+     * Open/close the split panel.
+     */
+    openSplitPanel: (open?: boolean) => void;
+    /**
+     * Set the content of the split panel.
+     */
+    setSplitPanelContent: (content: ReactNode) => void;
+    /**
+     * Set the default height of the split panel.
+     */
+    setDefaultSplitPanelHeight: (height?: number) => void;
+    /**
      * Add a notification to the notification panel.
      */
     addNotification: (notification: Notification) => void;
@@ -165,6 +180,9 @@ export interface AppLayoutContextApi {
 const initialState: AppLayoutContextApi = {
     openHelpPanel: () => {},
     setHelpPanelContent: () => {},
+    openSplitPanel: () => {},
+    setSplitPanelContent: () => {},
+    setDefaultSplitPanelHeight: (height?: number) => {},
     addNotification: () => {},
     dismissNotifications: () => {},
 };
@@ -184,6 +202,11 @@ export interface AppLayoutProps {
      * Alternatively, the helpPanel can be added dynamically via <b>setHelpPanelContent</b> callback in the AppLayoutContext. See <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/applayout--dynamic-help-panel" target="_blank">example</a>.
      */
     helpPanel?: ReactElement<HelpPanelProps>;
+    /**
+     * Split Panel drawer <br/>
+     * Alternatively, the splitPanel can be added dynamically via <b>setSplitPanelContent</b> callback in the AppLayoutContext. See <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/applayout--dynamic-split-panel" target="_blank">example</a>.
+     */
+    splitPanel?: ReactNode;
     /**Whether to render padding within the content area*/
     paddingContentArea?: boolean;
     /**Breadcrumbs should be defined whithin this region in order to benefit from the responsive breadcrumb pattern.*/
@@ -213,9 +236,10 @@ export interface AppLayoutProps {
 const AppLayout: FunctionComponent<AppLayoutProps> = ({
     children,
     header,
-    navigation = null,
-    helpPanel = null,
-    breadcrumbs = null,
+    navigation,
+    helpPanel,
+    splitPanel,
+    breadcrumbs,
     paddingContentArea = true,
     maxNotifications = 2,
     inProgress = false,
@@ -223,12 +247,17 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
     headerHeightInPx = 65,
 }) => {
     const [helpPanelContent, setHelpPanelContent] = useState<ReactNode>(helpPanel);
+    const [splitPanelContent, setSplitPanelContent] = useState<ReactNode>(splitPanel);
     const [notifications, setNotifications] = useState<NotificationExtended[]>([]);
     const [isSideNavigationOpen, setIsSideNavigationOpen] = useLocalStorage(LOCAL_STORAGE_KEY_SIDE_NAV_OPEN, 'false');
     const [isHelpPanelOpen, setIsHelpPanelOpen] = useLocalStorage(LOCAL_STORAGE_KEY_HELP_PANEL_OPEN, 'false');
+    const [isSplitPanelOpen, setIsSplitPanelOpen] = useState(!!splitPanel);
+    const [defaultSplitPanelHeight, setDefaultSplitPanelHeight] = useState<number | undefined>();
     const notificationsBoxRef = useRef<HTMLDivElement>(null);
     const mainContentRef = useRef(null);
     const [notificationsBoxHeight, setNotificationsBoxHeight] = useState(0);
+    const theme = useTheme();
+    const fullMode = useMediaQuery(theme.breakpoints.up('sm'));
     const [mainContentScrollPosition, setMainContentScrollPosition] = useState<ScrollPosition>({
         x: 0,
         y: 0,
@@ -315,7 +344,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
             return (
                 <IconButton
                     color="inherit"
-                    aria-label="open drawer"
+                    aria-label="open navigation drawer"
                     data-testid="open-nav-drawer"
                     onClick={() => setIsSideNavigationOpen('true')}
                     classes={{
@@ -335,7 +364,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
             return (
                 <IconButton
                     color="inherit"
-                    aria-label="open drawer"
+                    aria-label="open help panel drawer"
                     data-testid="open-helppanel-drawer"
                     onClick={() => setIsHelpPanelOpen('true')}
                     classes={{
@@ -357,18 +386,28 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
         [setIsHelpPanelOpen]
     );
 
+    const openSplitPanel = useCallback(
+        (open = true) => {
+            setIsSplitPanelOpen(open);
+        },
+        [setIsSplitPanelOpen]
+    );
+
     return (
         <Box className={classes.root}>
             <AppLayoutContext.Provider
                 value={{
                     openHelpPanel,
                     setHelpPanelContent,
+                    openSplitPanel,
+                    setSplitPanelContent,
+                    setDefaultSplitPanelHeight,
                     addNotification: handleAddNotification,
                     dismissNotifications: handleDismissNotification,
                 }}
             >
                 {header}
-                {(navigation || helpPanelContent) && (
+                {!fullMode && (navigation || helpPanelContent) && (
                     <Box className={classes.menuBar}>
                         {navigation && (
                             <Box className={classes.menuBarNavIcon}>{renderNavigationIcon(classes.menuBarIcon)}</Box>
@@ -379,6 +418,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                         )}
                     </Box>
                 )}
+
                 <Box className={classes.main}>
                     {navigation && (
                         <Sidebar
@@ -386,43 +426,57 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                             isSidebarOpen={isSideNavigationOpen}
                             setIsSidebarOpen={setIsSideNavigationOpen}
                             type={SidebarType.SIDE_NAVIGATION}
+                            displayIcon={fullMode}
                             renderIcon={renderNavigationIcon}
                         >
                             {navigation}
                         </Sidebar>
                     )}
-                    <div
-                        ref={mainContentRef}
-                        className={classes.content}
-                        onScroll={(watchScroll && handleScroll) || undefined}
-                    >
-                        {notifications && notifications.length > 0 && (
-                            <div ref={notificationsBoxRef} className={classes.notifications}>
-                                <Flashbar items={notifications} maxItemsDisplayed={maxNotifications} />
-                            </div>
-                        )}
-                        <Box
-                            tabIndex={0}
-                            position="relative"
-                            className={clsx(classes.mainContent, { [classes.contentPadding]: !!paddingContentArea })}
+                    <Box display="flex" flexDirection="column" className={classes.contentArea}>
+                        <div
+                            ref={mainContentRef}
+                            className={classes.content}
+                            onScroll={(watchScroll && handleScroll) || undefined}
                         >
-                            <Stack spacing="s">
-                                {breadcrumbs && <Box className={classes.breadcrumbsContainer}>{breadcrumbs}</Box>}
-                                <main>{children}</main>
-                            </Stack>
-                            {inProgress && (
-                                <Overlay>
-                                    <LoadingIndicator size="large" />
-                                </Overlay>
+                            {notifications && notifications.length > 0 && (
+                                <div ref={notificationsBoxRef} className={classes.notifications}>
+                                    <Flashbar items={notifications} maxItemsDisplayed={maxNotifications} />
+                                </div>
                             )}
-                        </Box>
-                    </div>
+                            <Box
+                                tabIndex={0}
+                                position="relative"
+                                className={clsx(classes.mainContent, {
+                                    [classes.contentPadding]: !!paddingContentArea,
+                                })}
+                            >
+                                <Stack spacing="s">
+                                    {breadcrumbs && <Box className={classes.breadcrumbsContainer}>{breadcrumbs}</Box>}
+                                    <main>{children}</main>
+                                </Stack>
+                                {inProgress && (
+                                    <Overlay>
+                                        <LoadingIndicator size="large" />
+                                    </Overlay>
+                                )}
+                            </Box>
+                        </div>
+                        <SplitPanel
+                            isSplitPanelOpen={isSplitPanelOpen}
+                            setIsSplitPanelOpen={setIsSplitPanelOpen}
+                            defaultSplitPanelHeight={defaultSplitPanelHeight}
+                            fullMode={fullMode}
+                        >
+                            {splitPanelContent}
+                        </SplitPanel>
+                    </Box>
                     {helpPanelContent && (
                         <Sidebar
                             sidebarWidth={WIDTH_HELP_PANEL}
                             isSidebarOpen={isHelpPanelOpen}
                             setIsSidebarOpen={setIsHelpPanelOpen}
                             type={SidebarType.HELP_PANEL}
+                            displayIcon={fullMode}
                             renderIcon={renderInfoIcon}
                         >
                             {helpPanelContent}

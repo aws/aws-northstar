@@ -20,9 +20,6 @@ import Close from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles<Theme, SidebarProps>((theme) => ({
-    hide: {
-        display: 'none',
-    },
     drawer: {
         height: '100%',
         flexShrink: 0,
@@ -59,14 +56,11 @@ const useStyles = makeStyles<Theme, SidebarProps>((theme) => ({
         },
     },
     sidebar: {
-        display: 'none',
-        [theme.breakpoints.up('sm')]: {
-            display: 'flex',
-            borderRadius: 0,
-            backgroundColor: theme.palette.background.paper,
-            borderRight: `1px solid ${theme.palette.grey['200']}`,
-            minWidth: '50px',
-        },
+        display: 'flex',
+        borderRadius: 0,
+        backgroundColor: theme.palette.background.paper,
+        borderRight: `1px solid ${theme.palette.grey['200']}`,
+        minWidth: '50px',
     },
 }));
 
@@ -78,6 +72,7 @@ export enum SidebarType {
 export interface SidebarProps {
     sidebarWidth: number;
     isSidebarOpen: string;
+    displayIcon: boolean;
     setIsSidebarOpen: (open: string) => void;
     type: SidebarType;
     renderIcon: (rootClasses: string) => ReactNode;
@@ -96,7 +91,10 @@ const Sidebar: FunctionComponent<SidebarProps> = (props) => {
 
     return (
         <>
-            {props.type === SidebarType.SIDE_NAVIGATION && !isOpen && props.renderIcon(classes.sidebar)}
+            {props.displayIcon &&
+                props.type === SidebarType.SIDE_NAVIGATION &&
+                !isOpen &&
+                props.renderIcon(classes.sidebar)}
             <Drawer
                 className={classes.drawer}
                 variant="persistent"
@@ -116,7 +114,7 @@ const Sidebar: FunctionComponent<SidebarProps> = (props) => {
                 </div>
                 {props.children}
             </Drawer>
-            {props.type === SidebarType.HELP_PANEL && !isOpen && props.renderIcon(classes.sidebar)}
+            {props.displayIcon && props.type === SidebarType.HELP_PANEL && !isOpen && props.renderIcon(classes.sidebar)}
         </>
     );
 };
