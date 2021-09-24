@@ -17,12 +17,13 @@ import React from 'react';
 import { render, cleanup, fireEvent, act } from '@testing-library/react';
 import Header from '../../components/Header';
 import AppLayout, { useAppLayoutContext, Notification } from '.';
+import useLocalStorage from 'react-use-localstorage';
 
 const mockSetLocalStorage = jest.fn();
 
 jest.mock('react-use-localstorage', () => ({
     __esModule: true,
-    default: () => ['false', mockSetLocalStorage],
+    default: jest.fn(),
 }));
 
 jest.mock('@material-ui/core/styles/makeStyles', () => ({
@@ -34,7 +35,9 @@ const header = <Header title="App Title" />;
 
 const navigation = <div>App Name</div>;
 
-const helpPanel = <div>Help</div>;
+const helpPanel = <div>HelpPanel</div>;
+
+const splitPanel = <div>SplitPanel</div>;
 
 const breadcrumbsNode = <div>MockBreadcrumbs</div>;
 
@@ -52,6 +55,11 @@ const notifications: Notification[] = [
 ];
 
 describe('AppLayout', () => {
+    beforeEach(() => {
+        jest.resetAllMocks();
+        (useLocalStorage as jest.Mock).mockReturnValue(['false', mockSetLocalStorage]);
+    });
+
     afterEach(cleanup);
 
     it('renders the headers', () => {
@@ -67,20 +75,31 @@ describe('AppLayout', () => {
     });
 
     describe('NavSideBar', () => {
-        it('renders the nav sidebar node hide', () => {
+        it('renders the nav sidebar node but no visible', () => {
             const { getByText } = render(<AppLayout header={header} navigation={navigation} />);
 
             expect(getByText('App Name')).toBeInTheDocument();
             expect(getByText('App Name')).not.toBeVisible();
         });
 
-        it('should open the nav sidebar drawer when users click the button', () => {
-            const { getAllByTestId } = render(<AppLayout header={header} navigation={navigation} />);
+        it('should set the local storage value true when users click the open nav drawer button', () => {
+            const { getByTestId } = render(<AppLayout header={header} navigation={navigation} />);
             act(() => {
-                fireEvent.click(getAllByTestId('open-nav-drawer')[1]);
+                fireEvent.click(getByTestId('open-nav-drawer'));
             });
 
             expect(mockSetLocalStorage).toBeCalledWith('true');
+        });
+
+        it('should render the nav sidebar drawer visible when local storage returns true', () => {
+            (useLocalStorage as jest.Mock).mockReturnValue(['true', mockSetLocalStorage]);
+
+            const { getByTestId, getByText } = render(<AppLayout header={header} navigation={navigation} />);
+            act(() => {
+                fireEvent.click(getByTestId('open-nav-drawer'));
+            });
+
+            expect(getByText('App Name')).toBeVisible();
         });
     });
 
@@ -88,17 +107,29 @@ describe('AppLayout', () => {
         it('renders the help panel node', () => {
             const { getByText } = render(<AppLayout header={header} helpPanel={helpPanel} />);
 
-            expect(getByText('Help')).toBeInTheDocument();
-            expect(getByText('Help')).not.toBeVisible();
+            expect(getByText('HelpPanel')).toBeInTheDocument();
+            expect(getByText('HelpPanel')).not.toBeVisible();
         });
 
-        it('should open the help panel drawer when users click the button', () => {
-            const { getAllByTestId } = render(<AppLayout header={header} navigation={navigation} />);
+        it('should set the local storage value true when users click the button', () => {
+            const { getByTestId } = render(<AppLayout header={header} helpPanel={helpPanel} />);
+
             act(() => {
-                fireEvent.click(getAllByTestId('open-nav-drawer')[1]);
+                fireEvent.click(getByTestId('open-helppanel-drawer'));
             });
 
             expect(mockSetLocalStorage).toBeCalledWith('true');
+        });
+
+        it('should render the help panel drawer visible when local storage returns true', () => {
+            (useLocalStorage as jest.Mock).mockReturnValue(['true', mockSetLocalStorage]);
+
+            const { getByTestId, getByText } = render(<AppLayout header={header} helpPanel={helpPanel} />);
+            act(() => {
+                fireEvent.click(getByTestId('open-helppanel-drawer'));
+            });
+
+            expect(getByText('HelpPanel')).toBeVisible();
         });
 
         it('should trigger open help panel when users call openHelpPanel helper method', () => {
@@ -111,10 +142,11 @@ describe('AppLayout', () => {
                 );
             };
             const { getByTestId } = render(
-                <AppLayout header={header} navigation={navigation}>
+                <AppLayout header={header} helpPanel={helpPanel}>
                     <ContentNode />
                 </AppLayout>
             );
+
             act(() => {
                 fireEvent.click(getByTestId('trigger-open'));
             });
@@ -132,10 +164,11 @@ describe('AppLayout', () => {
                 );
             };
             const { getByTestId } = render(
-                <AppLayout header={header} navigation={navigation}>
+                <AppLayout header={header} helpPanel={helpPanel}>
                     <ContentNode />
                 </AppLayout>
             );
+
             act(() => {
                 fireEvent.click(getByTestId('trigger-close'));
             });
@@ -158,15 +191,81 @@ describe('AppLayout', () => {
                 );
             };
             const { getByTestId, getByText } = render(
-                <AppLayout header={header} navigation={navigation}>
+                <AppLayout header={header} helpPanel={helpPanel}>
                     <ContentNode />
                 </AppLayout>
             );
+
             act(() => {
                 fireEvent.click(getByTestId('trigger-update'));
             });
 
             expect(getByText(dynamicContent)).toBeInTheDocument();
+        });
+    });
+
+    describe('SplitPanel', () => {
+        it('renders the Split Panel node', () => {
+            const { getByText } = render(<AppLayout header={header} splitPanel={splitPanel} />);
+
+            expect(getByText('SplitPanel')).toBeVisible();
+        });
+
+        it('should trigger open split panel when users call openSplitPanel helper method', () => {
+            const ContentNode = () => {
+                const { openSplitPanel, setSplitPanelContent } = useAppLayoutContext();
+                return (
+                    <div>
+                        <button
+                            data-testid="trigger-open"
+                            onClick={() => {
+                                setSplitPanelContent(splitPanel);
+                                openSplitPanel();
+                            }}
+                        />
+                    </div>
+                );
+            };
+            const { getByTestId, queryByText, getByText } = render(
+                <AppLayout header={header}>
+                    <ContentNode />
+                </AppLayout>
+            );
+
+            expect(queryByText('SplitPanel')).toBeNull();
+
+            act(() => {
+                fireEvent.click(getByTestId('trigger-open'));
+            });
+
+            expect(getByText('SplitPanel')).toBeVisible();
+        });
+
+        it('should close split panel when users call openSplitPanel with false', () => {
+            const ContentNode = () => {
+                const { openSplitPanel } = useAppLayoutContext();
+                return (
+                    <div>
+                        <button
+                            data-testid="trigger-close"
+                            onClick={() => {
+                                openSplitPanel(false);
+                            }}
+                        />
+                    </div>
+                );
+            };
+            const { getByTestId, queryByText } = render(
+                <AppLayout header={header} splitPanel={splitPanel}>
+                    <ContentNode />
+                </AppLayout>
+            );
+
+            act(() => {
+                fireEvent.click(getByTestId('trigger-close'));
+            });
+
+            expect(queryByText('SplitPanel')).toBeNull();
         });
     });
 

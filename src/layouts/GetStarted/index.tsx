@@ -106,23 +106,25 @@ const GetStarted: FunctionComponent<GetStartedProps> = ({
     return (
         <Grid container className={styles.root}>
             <Grid item xs={12} className={styles.headerRow}>
-                <Grid container justify="center" ref={headerRef}>
-                    <Grid item xs={10} lg={8} className={styles.header}>
-                        <Text>{category}</Text>
+                <div ref={headerRef}>
+                    <Grid container justify="center">
+                        <Grid item xs={10} lg={8} className={styles.header}>
+                            <Text>{category}</Text>
+                        </Grid>
+                        <Grid item xs={10} sm={6} lg={5} xl={6} className={styles.header}>
+                            <Stack>
+                                <Typography variant="h1" className={styles.title}>
+                                    {title}
+                                </Typography>
+                                <Typography className={styles.subTitle}>{subTitle}</Typography>
+                                <Text>{description}</Text>
+                            </Stack>
+                        </Grid>
+                        <Grid item xs={10} sm={4} lg={3} xl={2} className={styles.action}>
+                            <div ref={actionRef}>{action}</div>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={10} sm={6} lg={5} xl={6} className={styles.header}>
-                        <Stack>
-                            <Typography variant="h1" className={styles.title}>
-                                {title}
-                            </Typography>
-                            <Typography className={styles.subTitle}>{subTitle}</Typography>
-                            <Text>{description}</Text>
-                        </Stack>
-                    </Grid>
-                    <Grid item xs={10} sm={4} lg={3} xl={2} className={styles.action}>
-                        <div ref={actionRef}>{action}</div>
-                    </Grid>
-                </Grid>
+                </div>
             </Grid>
             <Grid item>
                 <Grid container justify="center">
