@@ -15,10 +15,10 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-import BaseTableHead from '@material-ui/core/TableHead';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
+import BaseTableHead from '@mui/material/TableHead';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import TableSortLabel from '@mui/material/TableSortLabel';
 import {
     Column,
     ColumnInstance,
@@ -27,7 +27,7 @@ import {
     UseResizeColumnsColumnProps,
     UseFiltersColumnProps,
 } from 'react-table';
-import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
+import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import { Stack } from '../../../../layouts';
 
 export interface TableHeadProps<D extends object> {

@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useCallback, useMemo, useRef, useState } from 'react';
-import CloudUpload from '@material-ui/icons/CloudUpload';
+import CloudUpload from '@mui/icons-material/CloudUpload';
 import Button from '../Button';
 import FileTokenLabel from './components/FileTokenLabel';
 import FormField, { BaseFormFieldProps } from '../FormField';

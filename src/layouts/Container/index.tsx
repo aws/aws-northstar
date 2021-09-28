@@ -15,8 +15,9 @@
  ******************************************************************************************************************** */
 
 import React, { CSSProperties, ReactNode, FunctionComponent } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { Theme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 
 const useStyles = makeStyles<Theme, Partial<ContainerProps>>((theme) => ({

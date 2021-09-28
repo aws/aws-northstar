@@ -15,8 +15,8 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
+import makeStyles from '@mui/styles/makeStyles';
+import Chip from '@mui/material/Chip';
 
 const useStyles = makeStyles((theme) => ({
     blue: {

@@ -54,8 +54,8 @@ import {
     useTable,
     UseTableOptions,
 } from 'react-table';
-import { makeStyles } from '@material-ui/core/styles';
-import BaseTable from '@material-ui/core/Table';
+import makeStyles from '@mui/styles/makeStyles';
+import BaseTable from '@mui/material/Table';
 import Container from '../../layouts/Container';
 import Checkbox from '../Checkbox';
 import ContainerHeaderContent, { ContainerHeaderContentProps } from './components/ContainerHeaderContent';
@@ -68,8 +68,8 @@ import ColumnsGrouping from './components/ColumnsGrouping';
 import { RadioButton } from '../RadioGroup';
 import { useDebouncedCallback } from 'use-debounce';
 import DefaultColumnFilter from './components/DefaultColumnFilter';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_SIZES = [10, 25, 50];

@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode, FunctionComponent } from 'react';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 export interface TextProps {
     /** Text that you want to render */

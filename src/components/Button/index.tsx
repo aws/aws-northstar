@@ -15,10 +15,10 @@
  ******************************************************************************************************************** */
 
 import React, { useMemo, ReactNode, MouseEventHandler, FunctionComponent } from 'react';
-import MaterialButton, { ButtonProps as MaterialButtonProps } from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import MaterialButton, { ButtonProps as MaterialButtonProps } from '@mui/material/Button';
+import makeStyles from '@mui/styles/makeStyles';
+import IconButton from '@mui/material/IconButton';
+import CircularProgress from '@mui/material/CircularProgress';
 import ButtonIcon, { ButtonIconType as _ButtonIconType } from './components/ButtonIcon';
 import Box from '../../layouts/Box';
 
@@ -100,16 +100,10 @@ const muiButtonProps = ({
     type = 'button',
     size = 'medium',
 }: Partial<ButtonProps>): MaterialButtonProps => {
-    const getVariantProps = () => {
-        switch (variant) {
-            case 'link':
-                return { href };
-            case 'primary':
-                return { variant: 'contained' as const, color: 'primary' as const };
-            case 'normal':
-                return { variant: 'text' as const };
-        }
-        return {};
+    const VARIANT_PROPS = {
+        link: { href },
+        primary: { variant: 'contained', color: 'primary' },
+        normal: { variant: 'text' },
     };
 
     return {
@@ -120,7 +114,7 @@ const muiButtonProps = ({
         'aria-label': label,
         ...(icon && { [iconAlign === 'right' ? 'endIcon' : 'startIcon']: <ButtonIcon type={icon} /> }),
         ...(loading && { startIcon: <OffsetCircularProgress /> }),
-        ...getVariantProps(),
+        ...(variant && VARIANT_PROPS[variant] ? VARIANT_PROPS[variant] : {}),
     };
 };
 
@@ -146,7 +140,13 @@ const Button: FunctionComponent<ButtonProps> = ({
     switch (variant) {
         case 'icon':
             return (
-                <IconButton aria-label={label} disabled={isDisabled} onClick={onClick} className={styles.iconButton}>
+                <IconButton
+                    aria-label={label}
+                    disabled={isDisabled}
+                    onClick={onClick}
+                    className={styles.iconButton}
+                    size="large"
+                >
                     {loading ? (
                         <CircularProgress size={14} className={styles.loadingIcon} />
                     ) : (

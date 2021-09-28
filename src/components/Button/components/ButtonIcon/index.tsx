@@ -15,12 +15,12 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, ComponentType } from 'react';
-import AddIcon from '@material-ui/icons/Add';
-import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
-import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
-import LaunchOutlinedIcon from '@material-ui/icons/LaunchOutlined';
-import RefreshOutlinedIcon from '@material-ui/icons/RefreshOutlined';
-import { SvgIconProps } from '@material-ui/core/SvgIcon';
+import AddIcon from '@mui/icons-material/Add';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined';
+import LaunchOutlinedIcon from '@mui/icons-material/LaunchOutlined';
+import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
+import { SvgIconProps } from '@mui/material/SvgIcon';
 
 export type ButtonIconType =
     | 'add_plus'

@@ -16,9 +16,9 @@
 
 import React from 'react';
 import clsx from 'clsx';
-import BaseTableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
+import BaseTableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
 import {
     Cell,
     Row,
@@ -28,8 +28,8 @@ import {
     UseGroupByRowProps,
     UseGroupByCellProps,
 } from 'react-table';
-import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 
 export interface TableBodyProps<D extends object> {
     reactTableBodyProps: ReactTableBodyProps;

@@ -13,11 +13,11 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { Theme as _Theme, ThemeOptions as _ThemeOptions } from '@material-ui/core/styles';
-export { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-export { default as useMediaQuery } from '@material-ui/core/useMediaQuery';
+import { Theme as _Theme, DeprecatedThemeOptions as _ThemeOptions } from '@mui/material/styles';
+export { default as makeStyles, ThemeProvider } from '@mui/material/styles';
+export { default as useMediaQuery } from '@mui/material/useMediaQuery';
 export { NORTHSTAR_COLORS } from '../config/color';
 export { theme as defaultTheme, authTheme } from './default';
 
 export type Theme = _Theme;
-export type ThemeOptions = _ThemeOptions;
+export type DeprecatedThemeOptions = _ThemeOptions;

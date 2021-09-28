@@ -16,10 +16,10 @@
 
 import React, { useState, useCallback, useRef, FunctionComponent } from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import MaterialPopover, { PopoverProps as MaterialPopoverProps } from '@material-ui/core/Popover';
-import IconButton from '@material-ui/core/IconButton';
-import Close from '@material-ui/icons/Close';
+import makeStyles from '@mui/styles/makeStyles';
+import MaterialPopover, { PopoverProps as MaterialPopoverProps } from '@mui/material/Popover';
+import IconButton from '@mui/material/IconButton';
+import Close from '@mui/icons-material/Close';
 import useUniqueId from '../../hooks/useUniqueId';
 
 const useStyles = makeStyles((theme) => ({
@@ -229,6 +229,7 @@ const Popover: FunctionComponent<PopoverProps> = ({
             aria-label={dismissAriaLabel}
             onClick={onPopoverClose}
             data-testid="dismiss-button"
+            size="large"
         >
             <Close fontSize="inherit" />
         </IconButton>

@@ -15,10 +15,10 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent } from 'react';
-import Switch, { SwitchProps } from '@material-ui/core/Switch';
-import Typography from '@material-ui/core/Typography';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { makeStyles } from '@material-ui/core/styles';
+import Switch, { SwitchProps } from '@mui/material/Switch';
+import Typography from '@mui/material/Typography';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import makeStyles from '@mui/styles/makeStyles';
 import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx';
 

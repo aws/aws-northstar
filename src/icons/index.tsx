@@ -14,5 +14,5 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-export { default as NotificationsIcon } from '@material-ui/icons/Notifications';
-export { default as FeedbackIcon } from '@material-ui/icons/Feedback';
+export { default as NotificationsIcon } from '@mui/icons-material/Notifications';
+export { default as FeedbackIcon } from '@mui/icons-material/Feedback';

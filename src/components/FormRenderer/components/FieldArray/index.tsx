@@ -14,11 +14,11 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { FieldArray as FieldArrayBase } from '@data-driven-forms/react-form-renderer';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import FormField from '../../../FormField';
 import Text from '../../../Text';
 import Button from '../../../Button';
@@ -67,7 +67,7 @@ const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     const renderedButtonLabels = { ...DEFAULT_BUTTON_LABELS, ...buttonLabels };
     const theme = useTheme();
-    const matched = useMediaQuery(theme.breakpoints.down('xs'));
+    const matched = useMediaQuery(theme.breakpoints.down('sm'));
     const styles = useStyles();
 
     return (

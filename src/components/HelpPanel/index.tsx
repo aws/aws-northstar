@@ -15,10 +15,10 @@
  ******************************************************************************************************************** */
 
 import React, { Fragment, FunctionComponent, ReactElement, useMemo } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import LaunchOutlined from '@material-ui/icons/LaunchOutlined';
-import Typography from '@material-ui/core/Typography';
+import makeStyles from '@mui/styles/makeStyles';
+import Divider from '@mui/material/Divider';
+import LaunchOutlined from '@mui/icons-material/LaunchOutlined';
+import Typography from '@mui/material/Typography';
 import Stack from '../../layouts/Stack';
 import Link from '../Link';
 import Box from '../../layouts/Box';

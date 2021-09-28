@@ -26,7 +26,7 @@ jest.mock('react-use-localstorage', () => ({
     default: jest.fn(),
 }));
 
-jest.mock('@material-ui/core/styles/makeStyles', () => ({
+jest.mock('@mui/material/styles/makeStyles', () => ({
     __esModule: true,
     default: jest.fn().mockImplementation(() => () => ({})),
 }));

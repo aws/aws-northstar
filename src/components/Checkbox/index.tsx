@@ -15,10 +15,10 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, ChangeEvent, ReactNode } from 'react';
-import Typography from '@material-ui/core/Typography';
-import MaterialCheckbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
+import MaterialCheckbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({

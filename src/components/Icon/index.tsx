@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent } from 'react';
-import * as icons from '@material-ui/icons';
+import * as icons from '@mui/icons-material';
 
 export type IconVariant = 'Filled' | 'Outlined' | 'Rounded' | 'TwoTone' | 'Sharp';
 export type IconName = keyof typeof icons;

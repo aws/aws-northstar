@@ -15,10 +15,10 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, useMemo } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress, { CircularProgressProps } from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
-import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
+import makeStyles from '@mui/styles/makeStyles';
+import CircularProgress, { CircularProgressProps } from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
+import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
 import Box from '../../layouts/Box';
 import Grid from '../../layouts/Grid';
 import StatusIndicator from '../StatusIndicator';
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
         left: 0,
     },
     circularColorBottom: {
-        color: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
+        color: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 700],
     },
     barColorPrimary: {
         backgroundColor: theme.palette.info.dark,

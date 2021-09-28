@@ -15,8 +15,8 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode, FunctionComponent } from 'react';
-import Popover from '@material-ui/core/Popover';
-import Divider from '@material-ui/core/Divider';
+import Popover from '@mui/material/Popover';
+import Divider from '@mui/material/Divider';
 import Grid from '../../../../layouts/Grid';
 import Container from '../../../../layouts/Container';
 import ButtonDropdown from '../../../ButtonDropdown';

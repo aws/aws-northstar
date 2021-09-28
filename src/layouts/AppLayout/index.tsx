@@ -27,13 +27,14 @@ import React, {
     useEffect,
     useMemo,
 } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Theme, useTheme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import clsx from 'clsx';
 import useLocalStorage from 'react-use-localstorage';
-import MenuIcon from '@material-ui/icons/Menu';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import IconButton from '@mui/material/IconButton';
 
 import Box from '../../layouts/Box';
 import Sidebar, { SidebarType } from './components/Sidebar';
@@ -102,7 +103,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     }),
     contentPadding: {
         [theme.breakpoints.up('sm')]: {
-            padding: `${theme.spacing(2)}px ${theme.spacing(4)}px`,
+            padding: `${theme.spacing(2)} ${theme.spacing(4)}`,
         },
     },
     mainContent: ({ notificationsBoxHeight }) => ({
@@ -112,7 +113,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
         },
     }),
     menu: {
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             position: 'absolute',
         },
         [theme.breakpoints.up('sm')]: {
@@ -349,14 +350,14 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                     onClick={() => setIsSideNavigationOpen('true')}
                     classes={{
                         root: rootClassname,
-                        label: classes.menu,
                     }}
+                    size="large"
                 >
                     <MenuIcon />
                 </IconButton>
             );
         },
-        [classes, setIsSideNavigationOpen]
+        [setIsSideNavigationOpen]
     );
 
     const renderInfoIcon = useCallback(
@@ -369,14 +370,14 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({
                     onClick={() => setIsHelpPanelOpen('true')}
                     classes={{
                         root: rootClassname,
-                        label: classes.menu,
                     }}
+                    size="large"
                 >
                     <InfoOutlinedIcon />
                 </IconButton>
             );
         },
-        [classes, setIsHelpPanelOpen]
+        [setIsHelpPanelOpen]
     );
 
     const openHelpPanel = useCallback(

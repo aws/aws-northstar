@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import Dns from '@material-ui/icons/Dns';
+import Dns from '@mui/icons-material/Dns';
 import { awsServices, groupedAwsServices } from './data/data';
 import Autosuggest from '.';
 import { axe } from 'jest-axe';

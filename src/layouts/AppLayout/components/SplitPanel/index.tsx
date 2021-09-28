@@ -14,13 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { MouseEvent, FunctionComponent, useState, useCallback, useRef, useEffect } from 'react';
-import Drawer from '@material-ui/core/Drawer';
-import Close from '@material-ui/icons/Close';
-import FullscreenExit from '@material-ui/icons/FullscreenExit';
-import Fullscreen from '@material-ui/icons/Fullscreen';
-import DragHandle from '@material-ui/icons/DragHandle';
-import IconButton from '@material-ui/core/IconButton';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import Drawer from '@mui/material/Drawer';
+import Close from '@mui/icons-material/Close';
+import FullscreenExit from '@mui/icons-material/FullscreenExit';
+import Fullscreen from '@mui/icons-material/Fullscreen';
+import DragHandle from '@mui/icons-material/DragHandle';
+import IconButton from '@mui/material/IconButton';
+import { Theme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import Box from '../../../Box';
 
 const useStyles = makeStyles<
@@ -34,7 +35,7 @@ const useStyles = makeStyles<
             position: 'relative',
             width: '100%',
         },
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             position: 'absolute',
             top: 0,
             left: 0,
@@ -158,6 +159,7 @@ const SplitPanel: FunctionComponent<SplitPanelProps> = ({
                                 data-testid="resize-split-panel"
                                 onMouseDown={handleMouseDown}
                                 className={styles.dragHandle}
+                                size="large"
                             >
                                 <DragHandle />
                             </IconButton>
@@ -166,11 +168,11 @@ const SplitPanel: FunctionComponent<SplitPanelProps> = ({
                 )}
                 <Box className={styles.control}>
                     {fullMode && (
-                        <IconButton data-testid="toggle-expand-split-panel" onClick={handleToggleResize}>
+                        <IconButton data-testid="toggle-expand-split-panel" onClick={handleToggleResize} size="large">
                             {minimized ? <Fullscreen /> : <FullscreenExit />}
                         </IconButton>
                     )}
-                    <IconButton data-testid="close-split-panel" onClick={handleDrawerClose}>
+                    <IconButton data-testid="close-split-panel" onClick={handleDrawerClose} size="large">
                         <Close />
                     </IconButton>
                 </Box>

@@ -15,10 +15,11 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, ReactNode, MouseEvent } from 'react';
-import MUICard from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader, { CardHeaderProps } from '@material-ui/core/CardHeader';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import MUICard from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader, { CardHeaderProps } from '@mui/material/CardHeader';
+import { Theme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import Text from '../Text';
 
 export interface CardProps {

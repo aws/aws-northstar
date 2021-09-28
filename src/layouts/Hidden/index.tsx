@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import MaterialHidden, { HiddenProps } from '@material-ui/core/Hidden';
+import MaterialHidden, { HiddenProps } from '@mui/material/Hidden';
 
 /** Toggle the visibility value of components and more with the hidden utilities.
  * Hidden component is ported from Material UI Hidden component.

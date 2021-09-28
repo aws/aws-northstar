@@ -15,8 +15,9 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent, ReactNode, useRef, useEffect, useState } from 'react';
 import Grid from '../Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
+import { Theme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import Stack from '../Stack';
 import Text from '../../components/Text';
 
@@ -107,7 +108,7 @@ const GetStarted: FunctionComponent<GetStartedProps> = ({
         <Grid container className={styles.root}>
             <Grid item xs={12} className={styles.headerRow}>
                 <div ref={headerRef}>
-                    <Grid container justify="center">
+                    <Grid container justifyContent="center">
                         <Grid item xs={10} lg={8} className={styles.header}>
                             <Text>{category}</Text>
                         </Grid>
@@ -127,7 +128,7 @@ const GetStarted: FunctionComponent<GetStartedProps> = ({
                 </div>
             </Grid>
             <Grid item>
-                <Grid container justify="center">
+                <Grid container justifyContent="center">
                     <Grid item xs={10} sm={6} lg={5} xl={6} className={styles.contentArea}>
                         {children}
                     </Grid>

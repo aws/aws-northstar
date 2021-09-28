@@ -16,10 +16,10 @@
 
 import React, { ReactElement, ReactNode } from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Tab from '@material-ui/core/Tab';
-import MuiTabs from '@material-ui/core/Tabs';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
+import Tab from '@mui/material/Tab';
+import MuiTabs from '@mui/material/Tabs';
 import Container from '../../layouts/Container';
 import Box from '../../layouts/Box';
 

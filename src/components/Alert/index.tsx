@@ -15,15 +15,15 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode, FunctionComponent, useCallback, useMemo } from 'react';
-import MaterialAlert, { AlertProps as MaterialAlertProps } from '@material-ui/lab/Alert';
-import MaterialAlertTitle from '@material-ui/lab/AlertTitle';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
-import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import CloseIcon from '@material-ui/icons/Close';
-import IconButton from '@material-ui/core/IconButton';
-import { makeStyles } from '@material-ui/core/styles';
+import MaterialAlert, { AlertProps as MaterialAlertProps } from '@mui/material/Alert';
+import MaterialAlertTitle from '@mui/material/AlertTitle';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import Button from '../Button';
 import Box from '../../layouts/Box';
@@ -116,6 +116,7 @@ const Alert: FunctionComponent<AlertProps> = ({
                             setShow(false);
                             onDismiss?.();
                         }}
+                        size="large"
                     >
                         <CloseIcon />
                     </IconButton>

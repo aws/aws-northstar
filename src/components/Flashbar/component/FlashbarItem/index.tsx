@@ -15,17 +15,17 @@
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
 import { FlashbarMessage } from '../../types';
-import MaterialAlert from '@material-ui/lab/Alert';
-import MaterialAlertTitle from '@material-ui/lab/AlertTitle';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
-import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import CloseIcon from '@material-ui/icons/Close';
-import IconButton from '@material-ui/core/IconButton';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
+import MaterialAlert from '@mui/material/Alert';
+import MaterialAlertTitle from '@mui/material/AlertTitle';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import CircularProgress from '@mui/material/CircularProgress';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import Paper from '@mui/material/Paper';
+import makeStyles from '@mui/styles/makeStyles';
 import Button from '../../../Button';
 import Box from '../../../../layouts/Box';
 
@@ -81,6 +81,7 @@ const FlashbarItem: FunctionComponent<FlashbarMessage> = ({
                             onDismiss?.();
                             setShow(false);
                         }}
+                        size="large"
                     >
                         <CloseIcon />
                     </IconButton>

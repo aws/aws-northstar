@@ -14,10 +14,11 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo, ReactNode } from 'react';
-import Drawer from '@material-ui/core/Drawer';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Close from '@material-ui/icons/Close';
-import IconButton from '@material-ui/core/IconButton';
+import Drawer from '@mui/material/Drawer';
+import { Theme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import Close from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 
 const useStyles = makeStyles<Theme, SidebarProps>((theme) => ({
     drawer: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles<Theme, SidebarProps>((theme) => ({
             position: 'relative',
             width: (props) => props.sidebarWidth,
         },
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             position: 'absolute',
             top: 0,
             left: 0,
@@ -108,7 +109,7 @@ const Sidebar: FunctionComponent<SidebarProps> = (props) => {
                 }}
             >
                 <div className={classes.closeDrawer}>
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton onClick={handleDrawerClose} size="large">
                         <Close />
                     </IconButton>
                 </div>

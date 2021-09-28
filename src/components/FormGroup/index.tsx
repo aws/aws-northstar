@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import MaterialUIFormGroup, { FormGroupProps } from '@material-ui/core/FormGroup';
+import MaterialUIFormGroup, { FormGroupProps } from '@mui/material/FormGroup';
 
 /** FormGroup wraps controls such as Checkbox and Switch.
  * It provides compact row layout. */

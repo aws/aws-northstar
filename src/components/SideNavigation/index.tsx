@@ -16,14 +16,14 @@
 
 import React, { ReactNode, FunctionComponent } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
-import Collapse from '@material-ui/core/Collapse';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import ListItem from '@material-ui/core/ListItem';
+import Collapse from '@mui/material/Collapse';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
+import Divider from '@mui/material/Divider';
+import List from '@mui/material/List';
+import ChevronRight from '@mui/icons-material/ChevronRight';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import ListItem from '@mui/material/ListItem';
 import { v4 as uuidv4 } from 'uuid';
 import Box from '../../layouts/Box';
 import Inline from '../../layouts/Inline';

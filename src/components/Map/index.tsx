@@ -16,8 +16,8 @@
 
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import MapGL, { Marker, NavigationControl, MarkerProps, ViewportProps } from 'react-map-gl';
-import RoomIcon from '@material-ui/icons/Room';
-import { makeStyles } from '@material-ui/core/styles';
+import RoomIcon from '@mui/icons-material/Room';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
     navStyle: {

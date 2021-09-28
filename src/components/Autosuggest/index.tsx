@@ -13,7 +13,6 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-
 import React, {
     FunctionComponent,
     ReactNode,
@@ -24,13 +23,13 @@ import React, {
     useCallback,
     ComponentType,
 } from 'react';
-import TextField from '@material-ui/core/TextField';
-import MaterialUIAutocomplete, { AutocompleteRenderInputParams } from '@material-ui/lab/Autocomplete';
-import Link from '@material-ui/core/Link';
-import SearchIcon from '@material-ui/icons/Search';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { makeStyles } from '@material-ui/core/styles';
-import { SvgIconProps } from '@material-ui/core/SvgIcon';
+import TextField from '@mui/material/TextField';
+import MaterialUIAutocomplete, { AutocompleteRenderInputParams } from '@mui/material/Autocomplete';
+import Link from '@mui/material/Link';
+import SearchIcon from '@mui/icons-material/Search';
+import InputAdornment from '@mui/material/InputAdornment';
+import makeStyles from '@mui/styles/makeStyles';
+import { SvgIconProps } from '@mui/material/SvgIcon';
 import TokenGroup from '../TokenGroup';
 import Checkbox from '../Checkbox';
 import Stack from '../../layouts/Stack';
@@ -308,7 +307,6 @@ const AutosuggestBase: FunctionComponent<AutosuggestBaseProps> = ({
                 required={ariaRequired}
                 error={!!(statusType === 'error' || invalid)}
                 {...params}
-                variant="outlined"
                 size="small"
                 margin="normal"
                 name={name}
@@ -339,21 +337,23 @@ const AutosuggestBase: FunctionComponent<AutosuggestBaseProps> = ({
     );
 
     const renderOption = useCallback(
-        (option: SelectOption): ReactNode => {
+        (props, option: SelectOption): ReactNode => {
             if (props.multiple && props.checkboxes) {
                 return (
-                    <Checkbox
-                        checked={(inputValue as SelectOption[]).map((input) => input.value).includes(option.value)}
-                        value={option.value}
-                    >
-                        {props.renderOption?.(option) || option.label}
-                    </Checkbox>
+                    <li {...props}>
+                        <Checkbox
+                            checked={(inputValue as SelectOption[]).map((input) => input.value).includes(option.value)}
+                            value={option.value}
+                        >
+                            {props.renderOption?.(option) || option.label}
+                        </Checkbox>
+                    </li>
                 );
             }
 
             return props.renderOption?.(option) || option.label;
         },
-        [props, inputValue]
+        [inputValue]
     );
 
     const handleDeleteOption = useCallback(
@@ -384,7 +384,7 @@ const AutosuggestBase: FunctionComponent<AutosuggestBaseProps> = ({
                 options={flattenOptions}
                 groupBy={(option) => option.group || ''}
                 loadingText={loadingAndErrorText}
-                getOptionSelected={getOptionsSelected}
+                isOptionEqualToValue={getOptionsSelected}
                 onChange={handleOnChange}
                 onInputChange={handleOnInput}
                 onFocus={onFocus}

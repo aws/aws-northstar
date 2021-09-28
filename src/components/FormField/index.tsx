@@ -16,12 +16,12 @@
 
 import React, { ReactNode, FunctionComponent, useMemo } from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Typography from '@material-ui/core/Typography';
-import InputLabel from '@material-ui/core/InputLabel';
-import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
+import makeStyles from '@mui/styles/makeStyles';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Typography from '@mui/material/Typography';
+import InputLabel from '@mui/material/InputLabel';
+import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
 import Button from '../Button';
 import Box from '../../layouts/Box';
 import Grid from '../../layouts/Grid';

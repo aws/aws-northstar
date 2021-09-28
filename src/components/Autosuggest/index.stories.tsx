@@ -15,8 +15,8 @@
  ******************************************************************************************************************** */
 import React, { useMemo, useCallback } from 'react';
 import { action } from '@storybook/addon-actions';
-import DnsOutlined from '@material-ui/icons/DnsOutlined';
-import Computer from '@material-ui/icons/Computer';
+import DnsOutlined from '@mui/icons-material/DnsOutlined';
+import Computer from '@mui/icons-material/Computer';
 import Box from '../../layouts/Box';
 import Autosuggest, { SelectOption, StatusType, FilterOptionsState } from '.';
 import FormField from '../FormField';
@@ -235,9 +235,9 @@ export const RenderCustomLabel = () => {
         if (state?.inputValue) {
             return (options as CustomOptionType[]).filter(
                 (o) =>
-                    o.label.toLowerCase().indexOf(state.inputValue.toLowerCase()) >= 0 ||
-                    o.name.toLowerCase().indexOf(state.inputValue.toLowerCase()) >= 0 ||
-                    o.description.toLowerCase().indexOf(state.inputValue.toLowerCase()) >= 0
+                    (o.label as string).toLowerCase().indexOf((state.inputValue as string).toLowerCase()) >= 0 ||
+                    o.name.toLowerCase().indexOf((state.inputValue as string).toLowerCase()) >= 0 ||
+                    o.description.toLowerCase().indexOf((state.inputValue as string).toLowerCase()) >= 0
             );
         }
 

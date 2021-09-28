@@ -22,11 +22,11 @@ import React, {
     useCallback,
     useEffect,
 } from 'react';
-import Typography from '@material-ui/core/Typography';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 import Box from '../../layouts/Box';
@@ -235,7 +235,6 @@ const ButtonDropdown: FunctionComponent<ButtonDropdownProps> = ({
                 id="account-menu"
                 anchorEl={anchorEl}
                 keepMounted
-                getContentAnchorEl={null}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'left',

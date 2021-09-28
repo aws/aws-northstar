@@ -18,7 +18,7 @@ import { render } from '@testing-library/react';
 import Placeholder from '../../components/Placeholder';
 import ColumnLayout, { Column } from '.';
 
-jest.mock('@material-ui/core/useMediaQuery', () => jest.fn(() => true));
+jest.mock('@mui/material/useMediaQuery', () => jest.fn(() => true));
 
 describe('ColumnLayout', () => {
     it('renders 1 column', () => {

@@ -19,7 +19,7 @@ import TableRenderers from 'react-pivottable/TableRenderers';
 import 'react-pivottable/pivottable.css';
 import Plot from 'react-plotly.js';
 import createPlotlyRenderers from 'react-pivottable/PlotlyRenderers';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const PlotlyRenderers = createPlotlyRenderers(Plot);
 

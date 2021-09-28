@@ -15,8 +15,8 @@
  ******************************************************************************************************************** */
 
 import React, { ReactElement, FunctionComponent, ChangeEvent, Fragment } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import MaterialRadioButtonGroup from '@material-ui/core/RadioGroup';
+import makeStyles from '@mui/styles/makeStyles';
+import MaterialRadioButtonGroup from '@mui/material/RadioGroup';
 import clsx from 'clsx';
 import RadioButton from '../RadioButton';
 

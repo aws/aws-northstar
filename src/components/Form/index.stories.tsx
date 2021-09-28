@@ -14,16 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Form from '.';
 import Button from '../Button';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        padding: theme.spacing(4),
-        backgroundColor: theme.palette.background.paper,
-    },
-}));
 
 export default {
     component: Form,
@@ -38,9 +30,8 @@ const Actions = () => (
 );
 
 export const Default = () => {
-    const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <div>
             <Form header="Form header" actions={<Actions />}>
                 <p>Form sections come here</p>
             </Form>
@@ -49,9 +40,8 @@ export const Default = () => {
 };
 
 export const WithAllProps = () => {
-    const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <div>
             <Form
                 header="Form header"
                 actions={<Actions />}

@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent } from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 import Box from '../../layouts/Box';
 import Text from '../Text';
 

@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import MaterialGrid, { GridProps } from '@material-ui/core/Grid';
+import MaterialGrid, { GridProps } from '@mui/material/Grid';
 
 /** Renders complicated layout grid for flexibility across different designs.
  * Grid component is ported from Material UI Grid component.

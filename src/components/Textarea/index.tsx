@@ -15,8 +15,8 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent } from 'react';
-import TextareaAutosize, { TextareaAutosizeProps } from '@material-ui/core/TextareaAutosize';
-import { makeStyles } from '@material-ui/core/styles';
+import TextareaAutosize, { TextareaAutosizeProps } from '@mui/material/TextareaAutosize';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -116,7 +116,7 @@ const mapTextareaProps = ({
 
     return {
         id: controlId,
-        rowsMin: rows,
+        minRows: rows,
         required: props.ariaRequired,
         value: props.value,
         placeholder: props.placeholder,

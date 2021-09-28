@@ -16,9 +16,9 @@
 
 import React from 'react';
 import { Route, RouteProps } from 'react-router';
-import Typography from '@material-ui/core/Typography';
-import MaterialBreadcrumbs from '@material-ui/core/Breadcrumbs';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import Typography from '@mui/material/Typography';
+import MaterialBreadcrumbs from '@mui/material/Breadcrumbs';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { matchPath } from 'react-router';
 import Link from '../Link';
 

@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import MaterialPaper, { PaperProps } from '@material-ui/core/Paper';
+import MaterialPaper, { PaperProps } from '@mui/material/Paper';
 
 /**
  * Paper component is ported from Material UI Paper component.

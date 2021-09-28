@@ -14,9 +14,9 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { ReactNode, FunctionComponent } from 'react';
-import Chip from '@material-ui/core/Chip';
-import { makeStyles } from '@material-ui/core/styles';
-import Close from '@material-ui/icons/Close';
+import Chip from '@mui/material/Chip';
+import makeStyles from '@mui/styles/makeStyles';
+import Close from '@mui/icons-material/Close';
 
 const useStyles = makeStyles((theme) => ({
     root: {

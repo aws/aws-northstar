@@ -15,10 +15,10 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import TableCell from '@material-ui/core/TableCell';
-import BaseTableFooter from '@material-ui/core/TableFooter';
-import TableRow from '@material-ui/core/TableRow';
+import CircularProgress from '@mui/material/CircularProgress';
+import TableCell from '@mui/material/TableCell';
+import BaseTableFooter from '@mui/material/TableFooter';
+import TableRow from '@mui/material/TableRow';
 
 import Text from '../../../Text';
 

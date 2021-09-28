@@ -28,7 +28,7 @@ export interface HeadingStripeProps {
 const HeadingStripe: FunctionComponent<HeadingStripeProps> = ({ title, actionButtons }) => {
     return (
         <Box width="100%" display="flex">
-            <Box flexGrow="1">
+            <Box sx={{ flexGrow: 1 }}>
                 <Heading variant="h1">{title}</Heading>
             </Box>
             {actionButtons && <Box>{actionButtons}</Box>}

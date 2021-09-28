@@ -15,11 +15,11 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, ReactNode } from 'react';
-import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
-import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
-import { makeStyles } from '@material-ui/core/styles';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import Box from '../../layouts/Box';
 import Text from '../Text';

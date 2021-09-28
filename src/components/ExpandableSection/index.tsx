@@ -15,13 +15,13 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode, FunctionComponent, useState, useEffect } from 'react';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Accordion from '@material-ui/core/Accordion';
-import Divider from '@material-ui/core/Divider';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Accordion from '@mui/material/Accordion';
+import Divider from '@mui/material/Divider';
 import ExpansionPanelSummary from './components/ExpansionPanelSummary';
 import Text from '../Text';
 import { Variant } from './types';
-import makeStyles from '@material-ui/styles/makeStyles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles(() => {
     const borderless = {

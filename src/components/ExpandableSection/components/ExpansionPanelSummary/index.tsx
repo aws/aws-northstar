@@ -14,11 +14,11 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, ReactNode, memo } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Typography from '@material-ui/core/Typography';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import makeStyles from '@mui/styles/makeStyles';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import clsx from 'clsx';
 import { Variant } from '../../types';
 import Box from '../../../../layouts/Box';

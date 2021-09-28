@@ -21,9 +21,9 @@ import Button from '../../../../../Button';
 import ColumnLayout, { Column } from '../../../../../../layouts/ColumnLayout';
 import Grid from '../../../../../../layouts/Grid';
 import Stack from '../../../../../../layouts/Stack';
-import Typography from '@material-ui/core/Typography';
-import InputLabel from '@material-ui/core/InputLabel';
-import Divider from '@material-ui/core/Divider';
+import Typography from '@mui/material/Typography';
+import InputLabel from '@mui/material/InputLabel';
+import Divider from '@mui/material/Divider';
 
 export interface FieldArrayItemProps {
     fields?: Field[];
@@ -99,7 +99,7 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
         (list: Field[], getContent: (field: Field) => ReactNode, isHeaderRow = false) => {
             const buttonBoxProps = isHeaderRow
                 ? {
-                      visibility: 'hidden',
+                      visibility: 'hidden' as const,
                       height: '1px',
                   }
                 : collapse

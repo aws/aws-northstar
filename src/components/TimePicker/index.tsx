@@ -14,8 +14,9 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useState } from 'react';
-import { KeyboardTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { LocalizationProvider, TimePicker as MaterialTimePicker } from '@mui/lab';
+import { TextField } from '@mui/material';
 
 export interface TimePickerProps {
     /**
@@ -113,36 +114,47 @@ const TimePicker: FunctionComponent<TimePickerProps> = ({
     };
 
     return (
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardTimePicker
-                id={controlId}
-                PopoverProps={{
-                    anchorOrigin: {
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    },
-                }}
-                variant="inline"
-                inputVariant="outlined"
-                disableToolbar={false}
-                ampm={!twentyFourHourClock}
-                name={name}
-                readOnly={readOnly}
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <MaterialTimePicker
+                label={label}
                 value={selectedDate}
-                disabled={disabled}
-                required={ariaRequired}
-                placeholder={placeholder}
-                autoFocus={autofocus}
                 onChange={handleDateChange}
-                inputProps={{
-                    'aria-label': label,
-                    'aria-labelledby': ariaLabelledby,
-                    'aria-describedby': ariaDescribedby,
-                    'aria-required': ariaRequired,
-                }}
+                renderInput={(params) => <TextField {...params} />}
             />
-        </MuiPickersUtilsProvider>
+        </LocalizationProvider>
     );
+
+    // return (
+    //     <LocalizationProvider dateAdapter={AdapterDateFns}>
+    //         <KeyboardTimePicker
+    //             id={controlId}
+    //             PopoverProps={{
+    //                 anchorOrigin: {
+    //                     vertical: 'bottom',
+    //                     horizontal: 'left',
+    //                 },
+    //             }}
+    //             variant="inline"
+    //             inputVariant="outlined"
+    //             disableToolbar={false}
+    //             ampm={!twentyFourHourClock}
+    //             name={name}
+    //             readOnly={readOnly}
+    //             value={selectedDate}
+    //             disabled={disabled}
+    //             required={ariaRequired}
+    //             placeholder={placeholder}
+    //             autoFocus={autofocus}
+    //             onChange={handleDateChange}
+    //             inputProps={{
+    //                 'aria-label': label,
+    //                 'aria-labelledby': ariaLabelledby,
+    //                 'aria-describedby': ariaDescribedby,
+    //                 'aria-required': ariaRequired,
+    //             }}
+    //         />
+    //     </LocalizationProvider>
+    // );
 };
 
 export default TimePicker;

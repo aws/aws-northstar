@@ -15,9 +15,9 @@
  ******************************************************************************************************************** */
 
 import React, { useState, useEffect, ReactNode } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import Close from '@material-ui/icons/Close';
+import makeStyles from '@mui/styles/makeStyles';
+import IconButton from '@mui/material/IconButton';
+import Close from '@mui/icons-material/Close';
 import clsx from 'clsx';
 
 import Container from '../../layouts/Container';
@@ -83,7 +83,7 @@ const Modal = ({ visible = false, children, title, subtitle, footer, onClose, wi
     };
 
     const CloseButton = () => (
-        <IconButton className={styles.closeButton} onClick={handleClose} aria-label="close">
+        <IconButton className={styles.closeButton} onClick={handleClose} aria-label="close" size="large">
             <Close />
         </IconButton>
     );

@@ -16,11 +16,11 @@
 import React, { useMemo } from 'react';
 import clsx from 'clsx';
 import Box from '../../layouts/Box';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import Alert from '../../components/Alert';
 import Badge from '../../components/Badge';
 import ButtonDropdown from '../../components/ButtonDropdown';
-import { makeStyles } from '../../themes';
+import makeStyles from '@mui/styles/makeStyles';
 
 /**
  * Severity of a notification.

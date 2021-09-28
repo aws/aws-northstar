@@ -15,12 +15,12 @@
  ******************************************************************************************************************** */
 
 import React, { ReactNode } from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import FirstPage from '@material-ui/icons/FirstPage';
-import LastPage from '@material-ui/icons/LastPage';
-import NavigateBefore from '@material-ui/icons/NavigateBefore';
-import NavigateNext from '@material-ui/icons/NavigateNext';
-import SettingsOutlined from '@material-ui/icons/SettingsOutlined';
+import IconButton from '@mui/material/IconButton';
+import FirstPage from '@mui/icons-material/FirstPage';
+import LastPage from '@mui/icons-material/LastPage';
+import NavigateBefore from '@mui/icons-material/NavigateBefore';
+import NavigateNext from '@mui/icons-material/NavigateNext';
+import SettingsOutlined from '@mui/icons-material/SettingsOutlined';
 import SettingsPopover from '../SettingsPopover';
 
 export interface SettingsBarProps {

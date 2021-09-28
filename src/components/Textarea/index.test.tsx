@@ -16,7 +16,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import Textarea, { mapTextareaProps, TextareaProps } from '.';
-import { TextareaAutosizeProps } from '@material-ui/core/TextareaAutosize';
+import { TextareaAutosizeProps } from '@mui/material/TextareaAutosize';
 import clsx from 'clsx';
 
 describe('Textarea', () => {
@@ -89,7 +89,7 @@ describe('Textarea', () => {
             disabled: false,
             id: 'textarea-48',
             name: 'textarea',
-            rowsMin: 3,
+            minRows: 3,
             value: undefined,
             onChange: mockOnChange,
             required: true,

@@ -14,8 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent, useMemo } from 'react';
-import Divider from '@material-ui/core/Divider';
-import { makeStyles } from '@material-ui/core/styles';
+import Divider from '@mui/material/Divider';
+import makeStyles from '@mui/styles/makeStyles';
 import Box from '../../../../layouts/Box';
 import Link from '../../../Link';
 

@@ -17,11 +17,11 @@
 import React, { FunctionComponent, SyntheticEvent, ReactNode } from 'react';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
-import { makeStyles } from '@material-ui/core/styles';
-import MuiLink from '@material-ui/core/Link';
-import MuiSelect, { SelectProps as MuiSelectProps } from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListSubheader from '@material-ui/core/ListSubheader';
+import makeStyles from '@mui/styles/makeStyles';
+import MuiLink from '@mui/material/Link';
+import MuiSelect, { SelectProps as MuiSelectProps } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import ListSubheader from '@mui/material/ListSubheader';
 import LoadingIndicator from '../LoadingIndicator';
 import StatusIndicator from '../StatusIndicator';
 import { ButtonIcon } from '../Button';
@@ -186,7 +186,6 @@ const Select: FunctionComponent<SelectProps> = ({
                     horizontal: 'left',
                 },
                 transitionDuration: 0,
-                getContentAnchorEl: null,
             }}
             data-testid="select"
         >

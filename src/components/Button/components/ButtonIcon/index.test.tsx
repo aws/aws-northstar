@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import React from 'react';
 import { render } from '@testing-library/react';
-import Cloud from '@material-ui/icons/Cloud';
+import Cloud from '@mui/icons-material/Cloud';
 import ButtonIcon from '.';
 
 describe('ButtonIcon', () => {

@@ -14,9 +14,10 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { Children, ReactElement, Fragment, FunctionComponent } from 'react';
-import Divider from '@material-ui/core/Divider';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Divider from '@mui/material/Divider';
+import { useTheme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '../../layouts/Grid';
 import Column, { ColumnProps as _ColumnProps } from './components/Column';
 
@@ -79,7 +80,7 @@ const ColumnLayout: FunctionComponent<ColumnLayoutProps> = ({
     const columns = Children.toArray(children);
 
     return (
-        <Grid container justify="flex-start" alignItems="flex-start" className={classes.root}>
+        <Grid container justifyContent="flex-start" alignItems="flex-start" className={classes.root}>
             {columns.map((column, index) => (
                 <Fragment key={`column${index}`}>
                     <Grid

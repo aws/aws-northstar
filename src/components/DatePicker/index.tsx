@@ -15,13 +15,13 @@
  ******************************************************************************************************************** */
 
 import React from 'react';
-import 'date-fns';
 import { FunctionComponent, useState } from 'react';
-import { MuiPickersUtilsProvider, KeyboardDatePicker as MaterialKeyboardDatePicker } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { LocalizationProvider, DatePicker as MaterialDatePicker } from '@mui/lab';
 import frLocale from 'date-fns/locale/fr';
 import ruLocale from 'date-fns/locale/ru';
 import enLocale from 'date-fns/locale/en-US';
+import { TextField } from '@mui/material';
 
 export interface DatePickerProps {
     /**
@@ -38,7 +38,7 @@ export interface DatePickerProps {
      * We therefore recommend that you also validate these constraints client- and server-side, in the
      * same way as for other form elements.
      * */
-    isDateDisabled?: (date: Date | null) => boolean;
+    isDateDisabled?: (date: any) => boolean;
     /**
      * The locale to be used for rendering month names and defining the starting date of the week. <br/>
      * If not provided, it will be determined from the page and browser locales. <br/>
@@ -142,7 +142,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
     name,
     readOnly,
     ...props
-}: DatePickerProps) => {
+}) => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(value || null);
 
     const handleDateChange = (date: Date | null) => {
@@ -151,35 +151,46 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
     };
 
     return (
-        <MuiPickersUtilsProvider utils={DateFnsUtils} locale={localeMap[locale]}>
-            <MaterialKeyboardDatePicker
-                id={props.controlId}
-                PopoverProps={{
-                    anchorOrigin: {
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    },
-                }}
-                variant="inline"
-                inputVariant="outlined"
-                disableToolbar={true}
-                name={name}
-                readOnly={readOnly}
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <MaterialDatePicker
+                label="Basic example"
                 value={selectedDate}
-                disabled={disabled}
-                placeholder={placeholder}
-                onChange={(date) => handleDateChange(date)}
-                format="yyyy/MM/dd"
-                shouldDisableDate={isDateDisabled}
-                inputProps={{
-                    'aria-label': props.label,
-                    'aria-labelledby': props.ariaLabelledby,
-                    'aria-describedby': props.ariaDescribedby,
-                    'aria-required': props.ariaRequired,
-                }}
+                onChange={handleDateChange}
+                renderInput={(params) => <TextField {...params} />}
             />
-        </MuiPickersUtilsProvider>
+        </LocalizationProvider>
     );
+
+    // return (
+    //     <LocalizationProvider dateAdapter={AdapterDateFns}>
+    //         <MaterialDatePicker
+    //             id={props.controlId}
+    //             PopoverProps={{
+    //                 anchorOrigin: {
+    //                     vertical: 'bottom',
+    //                     horizontal: 'left',
+    //                 },
+    //             }}
+    //             variant="inline"
+    //             inputVariant="outlined"
+    //             disableToolbar={true}
+    //             name={name}
+    //             readOnly={readOnly}
+    //             value={selectedDate}
+    //             disabled={disabled}
+    //             placeholder={placeholder}
+    //             onChange={(date) => handleDateChange(date as any)}
+    //             format="yyyy/MM/dd"
+    //             shouldDisableDate={isDateDisabled}
+    //             inputProps={{
+    //                 'aria-label': props.label,
+    //                 'aria-labelledby': props.ariaLabelledby,
+    //                 'aria-describedby': props.ariaDescribedby,
+    //                 'aria-required': props.ariaRequired,
+    //             }}
+    //         />
+    //     </LocalizationProvider>
+    // );
 };
 
 export default DatePicker;

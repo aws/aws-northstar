@@ -15,11 +15,11 @@
  ******************************************************************************************************************** */
 
 import React, { FunctionComponent, ReactElement, useEffect } from 'react';
-import MaterialInput, { OutlinedInputProps as MaterialInputProps } from '@material-ui/core/OutlinedInput';
+import MaterialInput, { OutlinedInputProps as MaterialInputProps } from '@mui/material/OutlinedInput';
 import { v4 as uuidv4 } from 'uuid';
-import SearchIcon from '@material-ui/icons/Search';
-import ClearIcon from '@material-ui/icons/Clear';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
+import InputAdornment from '@mui/material/InputAdornment';
 
 export interface InputProps {
     /** Text entered into the form element. */

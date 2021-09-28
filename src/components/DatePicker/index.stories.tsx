@@ -32,5 +32,5 @@ export const ReadOnly = () => <DatePicker readOnly={true} value={new Date()} />;
 export const RussianLocale = () => <DatePicker locale={'ru'} />;
 
 export const DisabledWeekends = () => (
-    <DatePicker isDateDisabled={(date: Date) => date.getDay() === 0 || date.getDay() === 6} />
+    <DatePicker isDateDisabled={(date: Date | null) => date?.getDay() === 0 || date?.getDay() === 6} />
 );
