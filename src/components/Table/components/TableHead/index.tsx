@@ -29,6 +29,7 @@ import {
 } from 'react-table';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { Stack } from '../../../../layouts';
+import { SELECTION_COLUMN_NAME } from '../../constants';
 
 export interface TableHeadProps<D extends object> {
     headerGroups: HeaderGroup<D>[];
@@ -57,7 +58,7 @@ export default function TableHead<D extends object>({ headerGroups, styles }: Ta
                             column.id !== '_all_' && (
                                 <TableCell {...column.getHeaderProps!()}>
                                     <Stack spacing="xs">
-                                        {column.canSort ? (
+                                        {column.canSort && column.id !== SELECTION_COLUMN_NAME ? (
                                             <TableSortLabel
                                                 {...column.getSortByToggleProps!()}
                                                 active={column.isSorted}

@@ -14,9 +14,10 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import FormRenderer from '../FormRenderer';
 import FormRendererTable from '.';
+import { act } from 'react-dom/test-utils';
 
 describe('FormRendererTable', () => {
     afterEach(() => {
@@ -36,6 +37,18 @@ describe('FormRendererTable', () => {
         const customComponentMapping = {
             TABLE: FormRendererTable,
         };
+        const items = [
+            {
+                id: 'id1',
+                name: 'Order 1',
+                createdDate: '2019-10-12',
+            },
+            {
+                id: 'id2',
+                name: 'Order 2',
+                createdDate: '2019-11-12',
+            },
+        ];
         const schema = {
             ...baseSchema,
             fields: [
@@ -45,18 +58,7 @@ describe('FormRendererTable', () => {
                     label: 'Table',
                     description: 'This is a table',
                     getRowId: (data: any) => data.id,
-                    items: [
-                        {
-                            id: 'id0000011',
-                            name: 'Order 11',
-                            createdDate: '2019-10-12',
-                        },
-                        {
-                            id: 'id0000012',
-                            name: 'Order 12',
-                            createdDate: '2019-11-12',
-                        },
-                    ],
+                    items,
                     columnDefinitions: [
                         {
                             id: 'id',
@@ -82,7 +84,7 @@ describe('FormRendererTable', () => {
         };
 
         it('should render Table', () => {
-            const { getByText } = render(
+            const { getByText, getAllByRole } = render(
                 <FormRenderer
                     customComponentWrapper={customComponentMapping}
                     schema={schema}
@@ -91,8 +93,136 @@ describe('FormRendererTable', () => {
                 />
             );
 
-            expect(getByText('Order 11')).toBeVisible();
-            expect(getByText('Order 12')).toBeVisible();
+            expect(getByText('Order 1')).toBeVisible();
+            expect(getByText('Order 2')).toBeVisible();
+            expect(getAllByRole('checkbox')).toHaveLength(3);
+        });
+
+        it('should render all the items in orginal data order by default', () => {
+            const { getAllByRole } = render(
+                <FormRenderer
+                    customComponentWrapper={customComponentMapping}
+                    schema={schema}
+                    onSubmit={handleSubmit}
+                    onCancel={handleCancel}
+                />
+            );
+
+            const ids = getAllByRole('checkbox')
+                .map((cb) => cb.id)
+                .slice(1);
+
+            expect(ids).toEqual(items.map((i) => i.id));
+        });
+
+        it('should render selected items first', () => {
+            const { getAllByRole } = render(
+                <FormRenderer
+                    customComponentWrapper={customComponentMapping}
+                    schema={schema}
+                    onSubmit={handleSubmit}
+                    onCancel={handleCancel}
+                    initialValues={{
+                        table: [
+                            {
+                                id: 'id2',
+                                name: 'Order 2',
+                                createdDate: '2019-11-12',
+                            },
+                        ],
+                    }}
+                />
+            );
+
+            const ids = getAllByRole('checkbox')
+                .map((cb) => cb.id)
+                .slice(1);
+
+            expect(ids[0]).toBe('id2');
+            expect(ids[1]).toBe('id1');
+        });
+
+        it('should allow selection', () => {
+            const { getAllByRole, getByText } = render(
+                <FormRenderer
+                    customComponentWrapper={customComponentMapping}
+                    schema={schema}
+                    onSubmit={handleSubmit}
+                    onCancel={handleCancel}
+                />
+            );
+
+            const id2 = getAllByRole('checkbox').filter((cb) => cb.id === 'id2')[0];
+
+            act(() => {
+                fireEvent.click(id2);
+            });
+
+            expect(id2).toBeChecked();
+
+            fireEvent.click(getByText('Submit'));
+
+            expect(handleSubmit).toHaveBeenCalledWith(
+                {
+                    table: [
+                        {
+                            id: 'id2',
+                            name: 'Order 2',
+                            createdDate: '2019-11-12',
+                        },
+                    ],
+                },
+                expect.anything(),
+                expect.anything()
+            );
+        });
+
+        it('should keep the selection when filtering', async () => {
+            const { getByPlaceholderText, getAllByRole, getByText, queryByText } = render(
+                <FormRenderer
+                    customComponentWrapper={customComponentMapping}
+                    schema={schema}
+                    onSubmit={handleSubmit}
+                    onCancel={handleCancel}
+                />
+            );
+
+            const id2 = getAllByRole('checkbox').filter((cb) => cb.id === 'id2')[0];
+
+            act(() => {
+                fireEvent.click(id2);
+            });
+
+            expect(id2).toBeChecked();
+
+            expect(getByText('Order 1')).toBeVisible();
+            expect(getByText('Order 2')).toBeVisible();
+
+            act(() => {
+                fireEvent.change(getByPlaceholderText('Search'), { target: { value: 'Order 1' } });
+            });
+
+            expect(getByText('Order 1')).toBeVisible();
+
+            await waitFor(() => {
+                expect(queryByText('Order 2')).toBeNull();
+            });
+
+            fireEvent.click(getByText('Submit'));
+
+            expect(handleSubmit).toHaveBeenCalledWith(
+                {
+                    table: [
+                        {
+                            id: 'id2',
+                            name: 'Order 2',
+                            createdDate: '2019-11-12',
+                        },
+                    ],
+                },
+                expect.anything(),
+                expect.anything()
+            );
         });
     });
 });

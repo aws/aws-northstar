@@ -35,19 +35,41 @@ const TableMapping = (props: UseFieldApiConfig) => {
         getRowId,
         stretch,
         meta: { error, submitFailed },
+        sortBy: defaultSortBy,
         ...rest
     } = useFieldApi(props);
     const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
-    const handleSelectionChange = useCallback(
-        (selectedItems) => {
+    const handleSelectedRowIdsChange = useCallback(
+        (selectedIds) => {
+            const selectedItems = items.filter((i: any[]) => {
+                const id = getRowId?.(i) || i['id'];
+                return id && selectedIds.includes(id);
+            });
             input.onChange(selectedItems);
         },
         [input]
     );
     const selectedRowIds = useMemo(() => {
-        return getRowId && input.value ? input.value.map(getRowId) : [];
+        return (input.value && getRowId && input.value.map(getRowId)) || [];
     }, [input.value, getRowId]);
+
+    const sortBy = useMemo(() => {
+        if (selectedRowIds?.length > 0) {
+            return [
+                ...(defaultSortBy || []),
+                ...[
+                    {
+                        id: '_selection_',
+                        desc: true,
+                    },
+                ],
+            ];
+        }
+
+        return undefined;
+    }, [defaultSortBy, selectedRowIds]);
+
     return (
         <FormField controlId={controlId} errorText={errorText} stretch={stretch}>
             <Table
@@ -56,8 +78,9 @@ const TableMapping = (props: UseFieldApiConfig) => {
                 items={items}
                 selectedRowIds={selectedRowIds}
                 columnDefinitions={columnDefinitions}
-                onSelectionChange={handleSelectionChange}
+                onSelectedRowIdsChange={handleSelectedRowIdsChange}
                 getRowId={getRowId}
+                sortBy={sortBy}
                 {...rest}
             />
         </FormField>

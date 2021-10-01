@@ -13,15 +13,5 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { StrictMode } from 'react';
-import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
 
-const Decorator = (storyFn) => {
-    return (
-        <StrictMode>
-            <NorthStarThemeProvider>{storyFn()}</NorthStarThemeProvider>
-        </StrictMode>
-    );
-};
-
-export default Decorator;
+export const SELECTION_COLUMN_NAME = '_selection_';

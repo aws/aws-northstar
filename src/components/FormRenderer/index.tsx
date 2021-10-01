@@ -22,7 +22,7 @@ import { FormSubscription as ReactFormSubscription } from 'final-form';
 import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
 import { ValidatorMapper } from '@data-driven-forms/react-form-renderer/validator-mapper';
 import FormTemplate from './components/FormTemplate';
-import { componentTypes, Schema } from './types';
+import { componentTypes, Schema, Option } from './types';
 import basicComponentMapper from './basicComponenntMapper';
 
 export interface FormRendererProps {
@@ -85,5 +85,5 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
 export default FormRenderer;
 
 export { componentTypes, validatorTypes };
-export type { ValidatorMapper };
+export type { ValidatorMapper, Schema, Option };
 export type { Field } from '@data-driven-forms/react-form-renderer/common-types';

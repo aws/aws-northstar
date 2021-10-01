@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode, useMemo, useEffect, useState } from 'react';
+import React, { ReactNode, useMemo, useEffect, useState, useCallback } from 'react';
 import clsx from 'clsx';
 import {
     Column as ReactTableColumn,
@@ -56,8 +56,13 @@ import {
 } from 'react-table';
 import { makeStyles } from '@material-ui/core/styles';
 import BaseTable from '@material-ui/core/Table';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useDebouncedCallback } from 'use-debounce';
+
 import Container from '../../layouts/Container';
 import Checkbox from '../Checkbox';
+import { RadioButton } from '../RadioGroup';
 import ContainerHeaderContent, { ContainerHeaderContentProps } from './components/ContainerHeaderContent';
 import TableHead from './components/TableHead';
 import TableBody from './components/TableBody';
@@ -65,11 +70,8 @@ import TableFooter from './components/TableFooter';
 import SettingsBar from './components/SettingsBar';
 import ColumnsSelector from './components/ColumnsSelector';
 import ColumnsGrouping from './components/ColumnsGrouping';
-import { RadioButton } from '../RadioGroup';
-import { useDebouncedCallback } from 'use-debounce';
 import DefaultColumnFilter from './components/DefaultColumnFilter';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { SELECTION_COLUMN_NAME } from './constants';
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_SIZES = [10, 25, 50];
@@ -195,7 +197,10 @@ export interface TableBaseOptions<D extends object> {
     loading?: boolean;
     /** Text to be displayed in case of a data fetching error.*/
     errorText?: string;
-    /** Triggers when an row/rows are selected */
+    /** Triggers when an row/rows are selected or the filters are changed. <br/>
+     * The callback argument only includes the rows after taking filters (global filter or column filters) result into account. <br/>
+     * See also <i>onSelectedRowIdsChange</i>.
+     * */
     onSelectionChange?: (selectedItems: D[]) => void;
     /** The list of available page sizes */
     pageSizes?: number[];
@@ -207,8 +212,17 @@ export interface TableBaseOptions<D extends object> {
     tableDescription?: string;
     /** Whether the text in the table cell is wrapped */
     wrapText?: boolean;
-    /** The list of ids of the row(s) selected. To support this, you need to have the getRowId set. Otherwise, the index will be used. */
+    /**
+     * The list of ids of the row(s) selected. To support this, you need to have the getRowId set. Otherwise, the index will be used.
+     * */
     selectedRowIds?: string[];
+    /**
+     * Triggers when an row/rows are selected. <br/>
+     * Use <b>getRowId</b> to specify how Table constructs each row's underlying <i>id</i> property. <br/>
+     * This callback argument includes the rows the users select no matter whether the filters filter out the selections. <br/>
+     * See also <i>onSelectionChange</i>.
+     **/
+    onSelectedRowIdsChange?: (selectedRowIds: string[]) => void;
     /**
      * Handler for updating data when table options (pageSize, pageIndex, filterText) change. <br/>
      * If the handler is not provided, data is processed automatically.
@@ -253,6 +267,12 @@ type BooleanObject = { [key: string]: boolean };
 const convertArrayToBooleanObject = (arr: string[]): BooleanObject =>
     arr.reduce((map, id) => ({ ...map, [id]: true }), {});
 
+const convertBooleanObjectToArray = (selectedRowIdsMap: BooleanObject): string[] =>
+    Object.keys(selectedRowIdsMap).reduce(
+        (arr: string[], key: string) => [...arr, ...(selectedRowIdsMap[key] ? [key] : [])],
+        []
+    );
+
 /** A table presents data in a two-dimensional format, arranged in columns and rows in a rectangular form. */
 export default function Table<D extends object>({
     actionGroup = null,
@@ -277,13 +297,14 @@ export default function Table<D extends object>({
     tableDescription,
     tableTitle = '',
     wrapText = true,
-    selectedRowIds = [],
+    selectedRowIds: initialSelectedRowIds = [],
     multiSelect = true,
     getRowId,
     getSubRows,
     isItemDisabled,
     sortBy: defaultSortBy = [],
     errorText,
+    onSelectedRowIdsChange,
     ...props
 }: TableBaseOptions<D>) {
     const styles = useStyles({});
@@ -292,7 +313,19 @@ export default function Table<D extends object>({
         convertArrayToBooleanObject(columnDefinitions.map((column: Column<D>) => column.id || ''))
     );
 
+    const selectedRowIdMap = useMemo(() => {
+        return convertArrayToBooleanObject(initialSelectedRowIds);
+    }, [initialSelectedRowIds]);
+
     const [controlledPageSize, setControlledPageSize] = useState(defaultPageSize);
+
+    const selectionColumnAccessor = useCallback(
+        (data: D, index: number) => {
+            const rowId = getRowId?.(data, index);
+            return rowId && selectedRowIdMap?.[rowId] && 1;
+        },
+        [selectedRowIdMap, getRowId]
+    );
 
     const columns = useMemo(() => {
         const columnsFiltered: any = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
@@ -314,14 +347,16 @@ export default function Table<D extends object>({
         }
         if (!disableRowSelect) {
             columnsFiltered.unshift({
-                id: '_selection_',
+                id: SELECTION_COLUMN_NAME,
                 width: 50,
                 defaultCanFilter: false,
                 disableFilters: true,
                 disableGlobalFilter: true,
+                accessor: selectionColumnAccessor,
                 Header: (props: any) => {
                     return multiSelect && !isItemDisabled ? (
                         <Checkbox
+                            controlId={`${SELECTION_COLUMN_NAME}_all`}
                             ariaLabel="Checkbox to select all row items"
                             {...props.getToggleAllRowsSelectedProps()}
                         />
@@ -343,6 +378,7 @@ export default function Table<D extends object>({
                                     name="select"
                                     checked={row.isSelected}
                                     controlId={row.id}
+                                    data-testid={row.id}
                                     disabled={isSelectDisabled}
                                     onChange={() => {
                                         toggleAllRowsSelected(false);
@@ -366,10 +402,6 @@ export default function Table<D extends object>({
 
         return props.rowCount;
     }, [items, props.rowCount]);
-
-    const selectedRowIdMap = useMemo(() => {
-        return convertArrayToBooleanObject(selectedRowIds);
-    }, [selectedRowIds]);
 
     const pageCount = useMemo(() => {
         return Math.ceil(rowCount / controlledPageSize);
@@ -444,7 +476,7 @@ export default function Table<D extends object>({
         selectedFlatRows,
         setGlobalFilter,
         toggleGroupBy,
-        state: { pageIndex, pageSize, sortBy, globalFilter },
+        state: { pageIndex, pageSize, sortBy, globalFilter, selectedRowIds },
     }: TableInstance<D> = useTable(
         tableOpts,
         useBlockLayout,
@@ -508,6 +540,10 @@ export default function Table<D extends object>({
             handleSelectionChangeDebounce(selectedFlatRows);
         }
     }, [selectedFlatRows, handleSelectionChangeDebounce]);
+
+    useEffect(() => {
+        selectedRowIds && onSelectedRowIdsChange?.(convertBooleanObjectToArray(selectedRowIds) || []);
+    }, [selectedRowIds]);
 
     useEffect(() => {
         if (onFetchData) {
