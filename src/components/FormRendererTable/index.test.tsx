@@ -98,50 +98,6 @@ describe('FormRendererTable', () => {
             expect(getAllByRole('checkbox')).toHaveLength(3);
         });
 
-        it('should render all the items in orginal data order by default', () => {
-            const { getAllByRole } = render(
-                <FormRenderer
-                    customComponentWrapper={customComponentMapping}
-                    schema={schema}
-                    onSubmit={handleSubmit}
-                    onCancel={handleCancel}
-                />
-            );
-
-            const ids = getAllByRole('checkbox')
-                .map((cb) => cb.id)
-                .slice(1);
-
-            expect(ids).toEqual(items.map((i) => i.id));
-        });
-
-        it('should render selected items first', () => {
-            const { getAllByRole } = render(
-                <FormRenderer
-                    customComponentWrapper={customComponentMapping}
-                    schema={schema}
-                    onSubmit={handleSubmit}
-                    onCancel={handleCancel}
-                    initialValues={{
-                        table: [
-                            {
-                                id: 'id2',
-                                name: 'Order 2',
-                                createdDate: '2019-11-12',
-                            },
-                        ],
-                    }}
-                />
-            );
-
-            const ids = getAllByRole('checkbox')
-                .map((cb) => cb.id)
-                .slice(1);
-
-            expect(ids[0]).toBe('id2');
-            expect(ids[1]).toBe('id1');
-        });
-
         it('should allow selection', () => {
             const { getAllByRole, getByText } = render(
                 <FormRenderer

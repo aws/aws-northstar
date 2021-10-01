@@ -29,9 +29,6 @@ export interface useTableColumnFilterProps<D extends object> {
     multiSelect?: boolean;
     isItemDisabled?: (item: D) => boolean;
     showColumns: BooleanObject;
-    getRowId?: (originalRow: D, relativeIndex: number) => string;
-    selectedRowIdMap?: BooleanObject;
-    sortBySelectionColumn?: boolean;
 }
 
 const useTableColumnFilter = <D extends object>({

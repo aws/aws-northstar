@@ -202,10 +202,6 @@ export interface TableBaseOptions<D extends object> {
      * Determines whether a given item is disabled. If an item is disabled, the user can't select it.
      * */
     isItemDisabled?: (item: D) => boolean;
-    /**
-     * Indicate whether sort by the selection column with selected first initially.
-     */
-    sortBySelectionColumn?: boolean;
 }
 
 export type TableInstance<D extends object> = {} & TableBaseInstance<D> &

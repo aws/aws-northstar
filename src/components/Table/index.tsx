@@ -49,7 +49,6 @@ import useTableColumnFilter from './hooks/useTableColumnFilter';
 import { Column, BooleanObject, TableOptions, TableBaseOptions, TableInstance } from './types';
 
 import { convertBooleanObjectToArray, convertArrayToBooleanObject } from './utils/converter';
-import { SELECTION_COLUMN_NAME } from './constants';
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_SIZES = [10, 25, 50];
@@ -152,7 +151,7 @@ export default function Table<D extends object>({
     isItemDisabled,
     errorText,
     onSelectedRowIdsChange,
-    sortBySelectionColumn = false,
+    sortBy: defaultSortBy = [],
     ...props
 }: TableBaseOptions<D>) {
     const styles = useStyles({});
@@ -165,20 +164,6 @@ export default function Table<D extends object>({
 
     const [controlledPageSize, setControlledPageSize] = useState(defaultPageSize);
 
-    const defaultSortBy = useMemo(() => {
-        return [
-            ...(props.sortBy || []),
-            ...(initialSelectedRowIds?.length > 0 && sortBySelectionColumn
-                ? [
-                      {
-                          id: SELECTION_COLUMN_NAME,
-                          desc: true,
-                      },
-                  ]
-                : []),
-        ];
-    }, [props.sortBy, sortBySelectionColumn, initialSelectedRowIds]);
-
     const columns = useTableColumnFilter({
         columnDefinitions,
         showColumns,
@@ -186,9 +171,6 @@ export default function Table<D extends object>({
         disableExpand,
         multiSelect,
         isItemDisabled,
-        sortBySelectionColumn,
-        getRowId,
-        selectedRowIdMap,
     });
 
     const rowCount = useMemo(() => {

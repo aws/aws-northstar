@@ -69,7 +69,6 @@ const TableMapping = (props: UseFieldApiConfig) => {
                 columnDefinitions={columnDefinitions}
                 onSelectedRowIdsChange={handleSelectedRowIdsChange}
                 getRowId={getRowId}
-                sortBySelectionColumn={true}
                 {...rest}
             />
         </FormField>
