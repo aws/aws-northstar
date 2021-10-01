@@ -19,17 +19,10 @@ import clsx from 'clsx';
 import BaseTableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import {
-    Cell,
-    Row,
-    TableBodyProps as ReactTableBodyProps,
-    UseExpandedRowProps,
-    UseRowSelectRowProps,
-    UseGroupByRowProps,
-    UseGroupByCellProps,
-} from 'react-table';
+import { Cell, TableBodyProps as ReactTableBodyProps, UseGroupByCellProps } from 'react-table';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import { Row } from '../../types';
 
 export interface TableBodyProps<D extends object> {
     reactTableBodyProps: ReactTableBodyProps;
@@ -57,44 +50,40 @@ export default function TableBody<D extends object>({
                     prepareRow(row);
                     return row;
                 })
-                .map(
-                    (
-                        row: Row<D> & Partial<UseExpandedRowProps<D> & UseRowSelectRowProps<D> & UseGroupByRowProps<D>>
-                    ) => (
-                        <TableRow
-                            selected={row.isSelected}
-                            {...row.getRowProps()}
-                            className={clsx({ [styles.aggregated]: row.isGrouped })}
-                        >
-                            {row.cells.map((cell: Partial<Cell<D> & UseGroupByCellProps<D>>) => {
-                                return (
-                                    <TableCell {...cell.getCellProps!()}>
-                                        {cell.isGrouped ? (
-                                            <div className={styles.cellAlign}>
-                                                <span className={clsx({ [styles.ellipsizeText]: !wrapText })}>
-                                                    <b>
-                                                        {cell.render!('Cell')} ({row.subRows.length})
-                                                    </b>
-                                                </span>
-                                                {row.isExpanded ? (
-                                                    <KeyboardArrowDown {...row.getToggleRowExpandedProps!()} />
-                                                ) : (
-                                                    <KeyboardArrowRight {...row.getToggleRowExpandedProps!()} />
-                                                )}
-                                            </div>
-                                        ) : (
-                                            // If the cell is aggregated, use the Aggregated
-                                            // renderer for cell, otherwise, just render the regular cell
-                                            <div className={clsx({ [styles.ellipsizeText]: !wrapText })}>
-                                                {cell!.render!(cell.isAggregated ? 'Aggregated' : 'Cell')}
-                                            </div>
-                                        )}
-                                    </TableCell>
-                                );
-                            })}
-                        </TableRow>
-                    )
-                )}
+                .map((row: Row<D>) => (
+                    <TableRow
+                        selected={row.isSelected}
+                        {...row.getRowProps()}
+                        className={clsx({ [styles.aggregated]: row.isGrouped })}
+                    >
+                        {row.cells.map((cell: Partial<Cell<D> & UseGroupByCellProps<D>>) => {
+                            return (
+                                <TableCell {...cell.getCellProps!()}>
+                                    {cell.isGrouped ? (
+                                        <div className={styles.cellAlign}>
+                                            <span className={clsx({ [styles.ellipsizeText]: !wrapText })}>
+                                                <b>
+                                                    {cell.render!('Cell')} ({row.subRows.length})
+                                                </b>
+                                            </span>
+                                            {row.isExpanded ? (
+                                                <KeyboardArrowDown {...row.getToggleRowExpandedProps!()} />
+                                            ) : (
+                                                <KeyboardArrowRight {...row.getToggleRowExpandedProps!()} />
+                                            )}
+                                        </div>
+                                    ) : (
+                                        // If the cell is aggregated, use the Aggregated
+                                        // renderer for cell, otherwise, just render the regular cell
+                                        <div className={clsx({ [styles.ellipsizeText]: !wrapText })}>
+                                            {cell!.render!(cell.isAggregated ? 'Aggregated' : 'Cell')}
+                                        </div>
+                                    )}
+                                </TableCell>
+                            );
+                        })}
+                    </TableRow>
+                ))}
         </BaseTableBody>
     );
 }

@@ -72,13 +72,8 @@ export const MultiSelect = () => {
             items={shortData}
             selectedRowIds={['id0000012', 'id0000013']}
             onSelectionChange={action('onSelectionChange')}
+            onSelectedRowIdsChange={action('onSelectedRowIdsChange')}
             getRowId={getRowId}
-            sortBy={[
-                {
-                    id: '_selection_',
-                    desc: true,
-                },
-            ]}
         />
     );
 };
@@ -109,6 +104,7 @@ export const SingleSelect = () => {
             multiSelect={false}
             selectedRowIds={['id0000012']}
             onSelectionChange={action('onSelectionChange')}
+            onSelectedRowIdsChange={action('onSelectedRowIdsChange')}
             getRowId={getRowId}
         />
     );

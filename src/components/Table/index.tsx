@@ -14,55 +14,29 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactNode, useMemo, useEffect, useState, useCallback } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import {
-    Column as ReactTableColumn,
     IdType,
     Row,
-    SortingRule,
-    TableInstance as TableBaseInstance,
-    TableState,
     useBlockLayout,
     useExpanded,
-    UseExpandedOptions,
     useFilters,
-    UseFiltersInstanceProps,
-    UseFiltersOptions,
-    UseFiltersColumnOptions,
     useGlobalFilter,
-    UseGlobalFiltersState,
-    UseGlobalFiltersInstanceProps,
-    UseGlobalFiltersOptions,
-    UseGlobalFiltersColumnOptions,
     useGroupBy,
-    UseGroupByInstanceProps,
-    UseGroupByOptions,
     UseGroupByRowProps,
     usePagination,
-    UsePaginationInstanceProps,
-    UsePaginationOptions,
-    UsePaginationState,
     useResizeColumns,
     useRowSelect,
-    UseRowSelectInstanceProps,
-    UseRowSelectOptions,
-    UseRowSelectState,
     useSortBy,
-    UseSortByOptions,
-    UseSortByState,
     useTable,
     UseTableOptions,
 } from 'react-table';
 import { makeStyles } from '@material-ui/core/styles';
 import BaseTable from '@material-ui/core/Table';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useDebouncedCallback } from 'use-debounce';
 
 import Container from '../../layouts/Container';
-import Checkbox from '../Checkbox';
-import { RadioButton } from '../RadioGroup';
 import ContainerHeaderContent, { ContainerHeaderContentProps } from './components/ContainerHeaderContent';
 import TableHead from './components/TableHead';
 import TableBody from './components/TableBody';
@@ -71,6 +45,10 @@ import SettingsBar from './components/SettingsBar';
 import ColumnsSelector from './components/ColumnsSelector';
 import ColumnsGrouping from './components/ColumnsGrouping';
 import DefaultColumnFilter from './components/DefaultColumnFilter';
+import useTableColumnFilter from './hooks/useTableColumnFilter';
+import { Column, BooleanObject, TableOptions, TableBaseOptions, TableInstance } from './types';
+
+import { convertBooleanObjectToArray, convertArrayToBooleanObject } from './utils/converter';
 import { SELECTION_COLUMN_NAME } from './constants';
 
 const DEFAULT_PAGE_SIZE = 10;
@@ -141,139 +119,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export interface TableOptions<D extends object>
-    extends UseExpandedOptions<D>,
-        UseRowSelectOptions<D>,
-        UseFiltersOptions<D>,
-        UseGlobalFiltersOptions<D>,
-        UseGroupByOptions<D>,
-        UseSortByOptions<D>,
-        UseFiltersOptions<D>,
-        UsePaginationOptions<D>,
-        Record<string, any> {}
-
-export type Column<D extends object> = {} & ReactTableColumn<D> &
-    Partial<UseFiltersColumnOptions<D> & UseGlobalFiltersColumnOptions<D>>;
-
-export interface TableBaseOptions<D extends object> {
-    /**
-     * The actions displayed on the top right corner.
-     */
-    actionGroup?: ReactNode;
-    /**
-     * The items serve as data source for table rows. The display of a row is handled by the column definition in the columnDefinitions property. <br/>
-     * Remark: if you want to change the set of items make sure you provide a new array. Any modification to the same array will not be reflected in the view.
-     */
-    items?: D[] | null;
-    /** Describes the columns to be displayed in the table, and how each item is rendered. */
-    columnDefinitions: Column<D>[];
-    /** The default column filter component */
-    defaultColumnFilter?: ReactNode;
-    /** The default grouping ids */
-    defaultGroups?: string[];
-    /** Disable pagination */
-    disablePagination?: boolean;
-    /** Disable setting toolbar */
-    disableSettings?: boolean;
-    /** Disable sortBy */
-    disableSortBy?: boolean;
-    /** Disable search filters */
-    disableFilters?: boolean;
-    /** Disable column filters */
-    disableColumnFilters?: boolean;
-    /** Disable expand */
-    disableExpand?: boolean;
-    /** Disable groupBy */
-    disableGroupBy?: boolean;
-    /** Disable row select */
-    disableRowSelect?: boolean;
-    /** The default index of the page that should be displayed */
-    defaultPageIndex?: number;
-    /** The default number of rows on any given page */
-    defaultPageSize?: number;
-    /** Indicates the row select is multiselect or not, when disableRowSelect is false */
-    multiSelect?: boolean;
-    /** Renders the table as being in a loading state. */
-    loading?: boolean;
-    /** Text to be displayed in case of a data fetching error.*/
-    errorText?: string;
-    /** Triggers when an row/rows are selected or the filters are changed. <br/>
-     * The callback argument only includes the rows after taking filters (global filter or column filters) result into account. <br/>
-     * See also <i>onSelectedRowIdsChange</i>.
-     * */
-    onSelectionChange?: (selectedItems: D[]) => void;
-    /** The list of available page sizes */
-    pageSizes?: number[];
-    /** The total number of rows */
-    rowCount?: number;
-    /** The title of the table */
-    tableTitle?: string;
-    /** The description of the table */
-    tableDescription?: string;
-    /** Whether the text in the table cell is wrapped */
-    wrapText?: boolean;
-    /**
-     * The list of ids of the row(s) selected. To support this, you need to have the getRowId set. Otherwise, the index will be used.
-     * */
-    selectedRowIds?: string[];
-    /**
-     * Triggers when an row/rows are selected. <br/>
-     * Use <b>getRowId</b> to specify how Table constructs each row's underlying <i>id</i> property. <br/>
-     * This callback argument includes the rows the users select no matter whether the filters filter out the selections. <br/>
-     * See also <i>onSelectionChange</i>.
-     **/
-    onSelectedRowIdsChange?: (selectedRowIds: string[]) => void;
-    /**
-     * Handler for updating data when table options (pageSize, pageIndex, filterText) change. <br/>
-     * If the handler is not provided, data is processed automatically.
-     * */
-    onFetchData?: ((options: FetchDataOptions) => void) | null;
-    /** Instruct how Table constructs each row's underlying <i>id</i> property. Must be <b>memoized</b>. */
-    getRowId?: (originalRow: D, relativeIndex: number) => string;
-    /** Instruct how Table detects subrows. Must be <b>memoized</b>. */
-    getSubRows?: (originalRow: D, relativeIndex: number) => D[];
-    /** The initial columns to sort by */
-    sortBy?: SortingRule<string>[];
-    /** Determines whether a given item is disabled. If an item is disabled, the user can't select it. */
-    isItemDisabled?: (item: D) => boolean;
-}
-
-export interface FetchDataOptions {
-    pageSize?: number;
-    pageIndex?: number;
-    groupBy?: string[];
-    showColumns?: string[];
-    sortBy?: SortingRule<string>[];
-    filterText?: string;
-}
-
-type TableInstance<D extends object> = {} & TableBaseInstance<D> &
-    Partial<
-        UsePaginationInstanceProps<D> &
-            UseRowSelectInstanceProps<D> &
-            UseFiltersInstanceProps<D> &
-            UseGlobalFiltersInstanceProps<D> &
-            UseGroupByInstanceProps<D>
-    > &
-    Partial<{
-        state: Partial<
-            TableState & UsePaginationState<D> & UseSortByState<D> & UseRowSelectState<D> & UseGlobalFiltersState<D>
-        >;
-    }> &
-    Partial<{ selectedFlatRows: Row<D>[] }>;
-
-type BooleanObject = { [key: string]: boolean };
-
-const convertArrayToBooleanObject = (arr: string[]): BooleanObject =>
-    arr.reduce((map, id) => ({ ...map, [id]: true }), {});
-
-const convertBooleanObjectToArray = (selectedRowIdsMap: BooleanObject): string[] =>
-    Object.keys(selectedRowIdsMap).reduce(
-        (arr: string[], key: string) => [...arr, ...(selectedRowIdsMap[key] ? [key] : [])],
-        []
-    );
-
-/** A table presents data in a two-dimensional format, arranged in columns and rows in a rectangular form. */
+/**
+ * A table presents data in a two-dimensional format, arranged in columns and rows in a rectangular form.
+ * */
 export default function Table<D extends object>({
     actionGroup = null,
     columnDefinitions = [],
@@ -302,98 +150,46 @@ export default function Table<D extends object>({
     getRowId,
     getSubRows,
     isItemDisabled,
-    sortBy: defaultSortBy = [],
     errorText,
     onSelectedRowIdsChange,
+    sortBySelectionColumn = false,
     ...props
 }: TableBaseOptions<D>) {
     const styles = useStyles({});
     const [groupBy, setGroupBy] = useState(convertArrayToBooleanObject(defaultGroups));
-    const [showColumns, setShowColumns] = useState(
+    const [showColumns, setShowColumns] = useState<BooleanObject>(
         convertArrayToBooleanObject(columnDefinitions.map((column: Column<D>) => column.id || ''))
     );
 
-    const selectedRowIdMap = useMemo(() => {
-        return convertArrayToBooleanObject(initialSelectedRowIds);
-    }, [initialSelectedRowIds]);
+    const selectedRowIdMap = useMemo(() => convertArrayToBooleanObject(initialSelectedRowIds), [initialSelectedRowIds]);
 
     const [controlledPageSize, setControlledPageSize] = useState(defaultPageSize);
 
-    const selectionColumnAccessor = useCallback(
-        (data: D, index: number) => {
-            const rowId = getRowId?.(data, index);
-            return rowId && selectedRowIdMap?.[rowId] && 1;
-        },
-        [selectedRowIdMap, getRowId]
-    );
+    const defaultSortBy = useMemo(() => {
+        return [
+            ...(props.sortBy || []),
+            ...(initialSelectedRowIds?.length > 0 && sortBySelectionColumn
+                ? [
+                      {
+                          id: SELECTION_COLUMN_NAME,
+                          desc: true,
+                      },
+                  ]
+                : []),
+        ];
+    }, [props.sortBy, sortBySelectionColumn, initialSelectedRowIds]);
 
-    const columns = useMemo(() => {
-        const columnsFiltered: any = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
-        if (!disableExpand) {
-            columnsFiltered.unshift({
-                id: '_expander_',
-                Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }: any) => (
-                    <span {...getToggleAllRowsExpandedProps()}>
-                        {isAllRowsExpanded ? <ExpandMoreIcon /> : <ChevronRightIcon />}
-                    </span>
-                ),
-                Cell: ({ row }: any) =>
-                    row.canExpand ? (
-                        <span {...row.getToggleRowExpandedProps()}>
-                            {row.isExpanded ? <ExpandMoreIcon /> : <ChevronRightIcon />}
-                        </span>
-                    ) : null,
-            });
-        }
-        if (!disableRowSelect) {
-            columnsFiltered.unshift({
-                id: SELECTION_COLUMN_NAME,
-                width: 50,
-                defaultCanFilter: false,
-                disableFilters: true,
-                disableGlobalFilter: true,
-                accessor: selectionColumnAccessor,
-                Header: (props: any) => {
-                    return multiSelect && !isItemDisabled ? (
-                        <Checkbox
-                            controlId={`${SELECTION_COLUMN_NAME}_all`}
-                            ariaLabel="Checkbox to select all row items"
-                            {...props.getToggleAllRowsSelectedProps()}
-                        />
-                    ) : null;
-                },
-                Cell: ({ row, toggleAllRowsSelected }: any) => {
-                    const isSelectDisabled = !!isItemDisabled?.(row.original);
-                    return (
-                        <div>
-                            {multiSelect ? (
-                                <Checkbox
-                                    ariaLabel="Checkbox to select row item"
-                                    {...row.getToggleRowSelectedProps()}
-                                    disabled={isSelectDisabled}
-                                    controlId={row.id}
-                                />
-                            ) : (
-                                <RadioButton
-                                    name="select"
-                                    checked={row.isSelected}
-                                    controlId={row.id}
-                                    data-testid={row.id}
-                                    disabled={isSelectDisabled}
-                                    onChange={() => {
-                                        toggleAllRowsSelected(false);
-                                        row.toggleRowSelected(true);
-                                    }}
-                                />
-                            )}
-                        </div>
-                    );
-                },
-            });
-        }
-
-        return columnsFiltered;
-    }, [columnDefinitions, showColumns, disableRowSelect, disableExpand, multiSelect, isItemDisabled]);
+    const columns = useTableColumnFilter({
+        columnDefinitions,
+        showColumns,
+        disableRowSelect,
+        disableExpand,
+        multiSelect,
+        isItemDisabled,
+        sortBySelectionColumn,
+        getRowId,
+        selectedRowIdMap,
+    });
 
     const rowCount = useMemo(() => {
         if (typeof props.rowCount === 'undefined') {
@@ -543,7 +339,7 @@ export default function Table<D extends object>({
 
     useEffect(() => {
         selectedRowIds && onSelectedRowIdsChange?.(convertBooleanObjectToArray(selectedRowIds) || []);
-    }, [selectedRowIds]);
+    }, [selectedRowIds, onSelectedRowIdsChange]);
 
     useEffect(() => {
         if (onFetchData) {
@@ -654,4 +450,6 @@ export default function Table<D extends object>({
     );
 }
 
-export type { CellProps } from 'react-table';
+export type { CellProps, SortingRule } from 'react-table';
+
+export type { Column, Row };

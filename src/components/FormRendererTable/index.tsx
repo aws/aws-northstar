@@ -19,6 +19,7 @@ import Table from '../Table';
 import FormField from '../FormField';
 import useUniqueId from '../../hooks/useUniqueId';
 import { getErrorText } from '../FormRenderer/utils/getErrorText';
+import isEqual from '../../utils/isEqual';
 
 const TableMapping = (props: UseFieldApiConfig) => {
     const {
@@ -29,7 +30,7 @@ const TableMapping = (props: UseFieldApiConfig) => {
         isDisabled,
         isReadOnly,
         placeholder,
-        input,
+        input: { onChange, name, value },
         validateOnMount,
         showError,
         getRowId,
@@ -38,37 +39,25 @@ const TableMapping = (props: UseFieldApiConfig) => {
         sortBy: defaultSortBy,
         ...rest
     } = useFieldApi(props);
-    const controlId = useUniqueId(input.name);
+    const controlId = useUniqueId(name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
+
+    const selectedRowIds = useMemo(() => {
+        return (value && getRowId && value.map(getRowId)) || [];
+    }, [value, getRowId]);
+
     const handleSelectedRowIdsChange = useCallback(
         (selectedIds) => {
-            const selectedItems = items.filter((i: any[]) => {
-                const id = getRowId?.(i) || i['id'];
-                return id && selectedIds.includes(id);
-            });
-            input.onChange(selectedItems);
+            if (!isEqual(selectedIds, selectedRowIds)) {
+                const selectedItems = items.filter((i: any[]) => {
+                    const id = getRowId?.(i);
+                    return id && selectedIds.includes(id);
+                });
+                onChange(selectedItems);
+            }
         },
-        [input]
+        [onChange, items, getRowId, selectedRowIds]
     );
-    const selectedRowIds = useMemo(() => {
-        return (input.value && getRowId && input.value.map(getRowId)) || [];
-    }, [input.value, getRowId]);
-
-    const sortBy = useMemo(() => {
-        if (selectedRowIds?.length > 0) {
-            return [
-                ...(defaultSortBy || []),
-                ...[
-                    {
-                        id: '_selection_',
-                        desc: true,
-                    },
-                ],
-            ];
-        }
-
-        return undefined;
-    }, [defaultSortBy, selectedRowIds]);
 
     return (
         <FormField controlId={controlId} errorText={errorText} stretch={stretch}>
@@ -80,7 +69,7 @@ const TableMapping = (props: UseFieldApiConfig) => {
                 columnDefinitions={columnDefinitions}
                 onSelectedRowIdsChange={handleSelectedRowIdsChange}
                 getRowId={getRowId}
-                sortBy={sortBy}
+                sortBySelectionColumn={true}
                 {...rest}
             />
         </FormField>
