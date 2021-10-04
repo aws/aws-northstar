@@ -145,7 +145,7 @@ export interface TableBaseOptions<D extends object> {
      * */
     errorText?: string;
     /**
-     * Triggers when an row/rows are selected or the filters are changed. <br/>
+     * Triggers when a row/rows are selected or the selection are filtered out by filters. <br/>
      * The callback argument only includes the rows after taking filters (global filter or column filters) result into account. <br/>
      * See also <i>onSelectedRowIdsChange</i>.
      * */
@@ -175,7 +175,7 @@ export interface TableBaseOptions<D extends object> {
      * */
     selectedRowIds?: string[];
     /**
-     * Triggers when an row/rows are selected. <br/>
+     * Triggers when a row/rows are selected. <br/>
      * Use <b>getRowId</b> to specify how Table constructs each row's underlying <i>id</i> property. <br/>
      * This callback argument includes the rows the users select no matter whether the filters filter out the selections. <br/>
      * See also <i>onSelectionChange</i>.

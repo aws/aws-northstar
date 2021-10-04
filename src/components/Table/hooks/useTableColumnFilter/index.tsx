@@ -82,6 +82,7 @@ const useTableColumnFilter = <D extends object>({
                                     ariaLabel="Checkbox to select row item"
                                     {...row.getToggleRowSelectedProps()}
                                     disabled={isSelectDisabled}
+                                    data-testid={row.id}
                                     controlId={row.id}
                                 />
                             ) : (

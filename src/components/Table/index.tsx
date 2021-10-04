@@ -46,7 +46,7 @@ import ColumnsSelector from './components/ColumnsSelector';
 import ColumnsGrouping from './components/ColumnsGrouping';
 import DefaultColumnFilter from './components/DefaultColumnFilter';
 import useTableColumnFilter from './hooks/useTableColumnFilter';
-import { Column, BooleanObject, TableOptions, TableBaseOptions, TableInstance } from './types';
+import { Column, BooleanObject, TableOptions, TableBaseOptions, TableInstance, FetchDataOptions } from './types';
 
 import { convertBooleanObjectToArray, convertArrayToBooleanObject } from './utils/converter';
 
@@ -434,4 +434,4 @@ export default function Table<D extends object>({
 
 export type { CellProps, SortingRule } from 'react-table';
 
-export type { Column, Row };
+export type { Column, Row, TableOptions, FetchDataOptions, TableBaseOptions };
