@@ -47,12 +47,8 @@ import ColumnsGrouping from './components/ColumnsGrouping';
 import DefaultColumnFilter from './components/DefaultColumnFilter';
 import useTableColumnFilter from './hooks/useTableColumnFilter';
 import { Column, BooleanObject, TableOptions, TableBaseOptions, TableInstance, FetchDataOptions } from './types';
-
 import { convertBooleanObjectToArray, convertArrayToBooleanObject } from './utils/converter';
-
-const DEFAULT_PAGE_SIZE = 10;
-const DEFAULT_PAGE_SIZES = [10, 25, 50];
-const DEFAULT_DEBOUNCE_TIMER = 250;
+import { DEFAULT_DEBOUNCE_TIMER, DEFAULT_PAGE_SIZE, DEFAULT_PAGE_SIZES } from './constants';
 
 const useStyles = makeStyles((theme) => ({
     tableBar: {

@@ -20,7 +20,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Column, BooleanObject } from '../../types';
 import Checkbox from '../../../Checkbox';
 import { RadioButton } from '../../../RadioGroup';
-import { SELECTION_COLUMN_NAME } from '../../constants';
+import { SELECTION_COLUMN_NAME, EXPANDER_COLUMN_NAME } from '../../constants';
 
 export interface useTableColumnFilterProps<D extends object> {
     columnDefinitions: Column<D>[];
@@ -43,7 +43,7 @@ const useTableColumnFilter = <D extends object>({
         const columnsFiltered: any = columnDefinitions.filter((column: Column<D>) => showColumns[column.id || '']);
         if (!disableExpand) {
             columnsFiltered.unshift({
-                id: '_expander_',
+                id: EXPANDER_COLUMN_NAME,
                 Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }: any) => (
                     <span {...getToggleAllRowsExpandedProps()}>
                         {isAllRowsExpanded ? <ExpandMoreIcon /> : <ChevronRightIcon />}

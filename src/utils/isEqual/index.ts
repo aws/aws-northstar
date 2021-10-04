@@ -13,9 +13,24 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-const isEqual = (arr1: string[], arr2: string[]) => {
-    const array2Sorted = [...arr2].sort();
-    return arr1.length === arr2.length && [...arr1].sort().every((value, index) => value === array2Sorted[index]);
+const isEqual = (arr1?: string[] | null, arr2?: string[] | null) => {
+    if (!arr1 && !arr2) {
+        return true;
+    }
+
+    if (!arr1 || !arr2) {
+        return false;
+    }
+
+    const lenArr1 = arr1!.length;
+    const lenArr2 = arr2!.length;
+
+    if (lenArr1 !== lenArr2) {
+        return false;
+    }
+
+    const array2Sorted = [...arr2!].sort();
+    return arr1!.length === arr2!.length && [...arr1!].sort().every((value, index) => value === array2Sorted[index]);
 };
 
 export default isEqual;

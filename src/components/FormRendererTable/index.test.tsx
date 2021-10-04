@@ -108,10 +108,12 @@ describe('FormRendererTable', () => {
                 />
             );
 
-            const id2 = getAllByRole('checkbox').filter((cb) => cb.id === 'id2')[0];
+            const id2 = getAllByRole('checkbox').find((cb) => cb.id === 'id2');
+
+            expect(id2).not.toBeUndefined();
 
             act(() => {
-                fireEvent.click(id2);
+                fireEvent.click(id2!);
             });
 
             expect(id2).toBeChecked();

@@ -15,3 +15,8 @@
  ******************************************************************************************************************** */
 
 export const SELECTION_COLUMN_NAME = '_selection_';
+export const EXPANDER_COLUMN_NAME = '_expander_';
+
+export const DEFAULT_PAGE_SIZE = 10;
+export const DEFAULT_PAGE_SIZES = [10, 25, 50];
+export const DEFAULT_DEBOUNCE_TIMER = 250;

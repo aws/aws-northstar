@@ -39,6 +39,34 @@ describe('isEqual', () => {
             expect(result).toEqual(true);
         });
 
+        it('returns true if two arrays are both undefined', () => {
+            const arr1 = undefined;
+            const arr2 = undefined;
+            const result = isEqual(arr1, arr2);
+            expect(result).toEqual(true);
+        });
+
+        it('returns true if two arrays are both null', () => {
+            const arr1 = null;
+            const arr2 = null;
+            const result = isEqual(arr1, arr2);
+            expect(result).toEqual(true);
+        });
+
+        it('returns false if one of arrays are undefined and another null', () => {
+            const arr1 = undefined;
+            const arr2 = null;
+            const result = isEqual(arr1, arr2);
+            expect(result).toEqual(true);
+        });
+
+        it('returns false if one of arrays are undefined and another is an array', () => {
+            const arr1 = undefined;
+            const arr2: string[] = [];
+            const result = isEqual(arr1, arr2);
+            expect(result).toEqual(false);
+        });
+
         it('returns false when two arrays have different lengths', () => {
             const arr1 = ['1', '3', '5', '11'];
             const arr2 = ['3', '5'];
@@ -46,14 +74,14 @@ describe('isEqual', () => {
             expect(result).toEqual(false);
         });
 
-        it('returns false when two arrays are different in items', () => {
+        it('returns false when two arrays have different items', () => {
             const arr1 = ['1', '3', '5', '11'];
             const arr2 = ['a', 'b', 'c', 'd'];
             const result = isEqual(arr1, arr2);
             expect(result).toEqual(false);
         });
 
-        it('returns false when two arrays are differents in even one item', () => {
+        it('returns false when two arrays have differents in even just one item', () => {
             const arr1 = ['1', '3', '5', '11'];
             const arr2 = ['1', '3', '5', '1'];
             const result = isEqual(arr1, arr2);
