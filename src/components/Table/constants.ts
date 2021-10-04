@@ -13,15 +13,11 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { StrictMode } from 'react';
-import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
 
-const Decorator = (storyFn) => {
-    return (
-        <StrictMode>
-            <NorthStarThemeProvider>{storyFn()}</NorthStarThemeProvider>
-        </StrictMode>
-    );
-};
+export const SELECTION_COLUMN_NAME = '_selection_';
+export const EXPANDER_COLUMN_NAME = '_expander_';
+export const SEARCH_COLUMN_NAME = '_all_';
 
-export default Decorator;
+export const DEFAULT_PAGE_SIZE = 10;
+export const DEFAULT_PAGE_SIZES = [10, 25, 50];
+export const DEFAULT_DEBOUNCE_TIMER = 250;

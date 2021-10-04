@@ -72,6 +72,7 @@ export const MultiSelect = () => {
             items={shortData}
             selectedRowIds={['id0000012', 'id0000013']}
             onSelectionChange={action('onSelectionChange')}
+            onSelectedRowIdsChange={action('onSelectedRowIdsChange')}
             getRowId={getRowId}
         />
     );
@@ -103,6 +104,7 @@ export const SingleSelect = () => {
             multiSelect={false}
             selectedRowIds={['id0000012']}
             onSelectionChange={action('onSelectionChange')}
+            onSelectedRowIdsChange={action('onSelectedRowIdsChange')}
             getRowId={getRowId}
         />
     );
@@ -129,29 +131,42 @@ export const ColumnFilters = () => (
     />
 );
 
-export const ExpandedTable = () => (
-    <Table
-        tableTitle={'Expanded Table'}
-        columnDefinitions={columnDefinitions}
-        items={groupByData}
-        disableExpand={false}
-    />
-);
+export const ExpandedTable = () => {
+    const getRowId = useCallback((data) => data.id, []);
 
-export const Complex = () => (
-    <Table
-        onSelectionChange={action('onSelectionChange')}
-        tableTitle={'Complex Table'}
-        columnDefinitions={columnDefinitions}
-        items={longData}
-        sortBy={[
-            {
-                id: 'name',
-                desc: false,
-            },
-        ]}
-    />
-);
+    return (
+        <Table
+            tableTitle={'Expanded Table'}
+            columnDefinitions={columnDefinitions}
+            getRowId={getRowId}
+            items={groupByData}
+            disableExpand={false}
+            onSelectionChange={action('onSelectionChange')}
+            onSelectedRowIdsChange={action('onSelectedRowIdsChange')}
+        />
+    );
+};
+
+export const Complex = () => {
+    const getRowId = useCallback((data) => data.id, []);
+
+    return (
+        <Table
+            onSelectionChange={action('onSelectionChange')}
+            onSelectedRowIdsChange={action('onSelectedRowIdsChange')}
+            tableTitle={'Complex Table'}
+            columnDefinitions={columnDefinitions}
+            items={longData}
+            getRowId={getRowId}
+            sortBy={[
+                {
+                    id: 'name',
+                    desc: false,
+                },
+            ]}
+        />
+    );
+};
 
 export const WithActionGroup = () => {
     const [selected, setSelected] = useState<DataType[]>();

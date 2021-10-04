@@ -13,15 +13,21 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { StrictMode } from 'react';
-import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
+const isEqual = (arr1?: string[] | null, arr2?: string[] | null) => {
+    if (!arr1 && !arr2) {
+        return true;
+    }
 
-const Decorator = (storyFn) => {
-    return (
-        <StrictMode>
-            <NorthStarThemeProvider>{storyFn()}</NorthStarThemeProvider>
-        </StrictMode>
-    );
+    if (!arr1 || !arr2) {
+        return false;
+    }
+
+    if (arr1!.length !== arr2!.length) {
+        return false;
+    }
+
+    const array2Sorted = [...arr2!].sort();
+    return [...arr1!].sort().every((value, index) => value === array2Sorted[index]);
 };
 
-export default Decorator;
+export default isEqual;

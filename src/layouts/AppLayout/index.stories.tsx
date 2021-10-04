@@ -36,6 +36,9 @@ import { Default as GeneralInfo } from '../../components/KeyValuePair/index.stor
 export default {
     component: AppLayout,
     title: 'AppLayout',
+    parameters: {
+        layout: 'fullscreen',
+    },
 };
 
 const header = <Header title="HelloWorld" logoPath="img/logo-light-short.png" hideHeaderBelow="sm" />;
@@ -333,7 +336,7 @@ export const CustomHeader = () => {
             paddingY="auto"
             color="primary.contrastText"
         >
-            Custom Header
+            Header
         </Box>
     );
     return (

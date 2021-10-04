@@ -19,6 +19,7 @@ import Table from '../Table';
 import FormField from '../FormField';
 import useUniqueId from '../../hooks/useUniqueId';
 import { getErrorText } from '../FormRenderer/utils/getErrorText';
+import isEqual from '../../utils/isEqual';
 
 const TableMapping = (props: UseFieldApiConfig) => {
     const {
@@ -29,25 +30,35 @@ const TableMapping = (props: UseFieldApiConfig) => {
         isDisabled,
         isReadOnly,
         placeholder,
-        input,
+        input: { onChange, name, value },
         validateOnMount,
         showError,
         getRowId,
         stretch,
         meta: { error, submitFailed },
+        sortBy: defaultSortBy,
         ...rest
     } = useFieldApi(props);
-    const controlId = useUniqueId(input.name);
+    const controlId = useUniqueId(name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
-    const handleSelectionChange = useCallback(
-        (selectedItems) => {
-            input.onChange(selectedItems);
-        },
-        [input]
-    );
+
     const selectedRowIds = useMemo(() => {
-        return getRowId && input.value ? input.value.map(getRowId) : [];
-    }, [input.value, getRowId]);
+        return (value && getRowId && value.map(getRowId)) || [];
+    }, [value, getRowId]);
+
+    const handleSelectedRowIdsChange = useCallback(
+        (selectedIds) => {
+            if (!isEqual(selectedIds, selectedRowIds)) {
+                const selectedItems = items.filter((i: any[]) => {
+                    const id = getRowId?.(i);
+                    return id && selectedIds.includes(id);
+                });
+                onChange(selectedItems);
+            }
+        },
+        [onChange, items, getRowId, selectedRowIds]
+    );
+
     return (
         <FormField controlId={controlId} errorText={errorText} stretch={stretch}>
             <Table
@@ -56,7 +67,7 @@ const TableMapping = (props: UseFieldApiConfig) => {
                 items={items}
                 selectedRowIds={selectedRowIds}
                 columnDefinitions={columnDefinitions}
-                onSelectionChange={handleSelectionChange}
+                onSelectedRowIdsChange={handleSelectedRowIdsChange}
                 getRowId={getRowId}
                 {...rest}
             />

@@ -29,6 +29,7 @@ import {
 } from 'react-table';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { Stack } from '../../../../layouts';
+import { SEARCH_COLUMN_NAME } from '../../constants';
 
 export interface TableHeadProps<D extends object> {
     headerGroups: HeaderGroup<D>[];
@@ -54,7 +55,7 @@ export default function TableHead<D extends object>({ headerGroups, styles }: Ta
                                     UseFiltersColumnProps<D>
                             >
                         ) =>
-                            column.id !== '_all_' && (
+                            column.id !== SEARCH_COLUMN_NAME && (
                                 <TableCell {...column.getHeaderProps!()}>
                                     <Stack spacing="xs">
                                         {column.canSort ? (

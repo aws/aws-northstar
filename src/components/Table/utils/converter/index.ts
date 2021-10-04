@@ -13,15 +13,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { StrictMode } from 'react';
-import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
 
-const Decorator = (storyFn) => {
-    return (
-        <StrictMode>
-            <NorthStarThemeProvider>{storyFn()}</NorthStarThemeProvider>
-        </StrictMode>
+import { BooleanObject } from '../../types';
+
+export const convertArrayToBooleanObject = (arr: string[]): BooleanObject =>
+    arr.reduce((map, id) => ({ ...map, [id]: true }), {});
+
+export const convertBooleanObjectToArray = (selectedRowIdsMap: BooleanObject): string[] =>
+    Object.keys(selectedRowIdsMap).reduce(
+        (arr: string[], key: string) => [...arr, ...(selectedRowIdsMap[key] ? [key] : [])],
+        []
     );
-};
-
-export default Decorator;
