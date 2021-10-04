@@ -22,15 +22,12 @@ const isEqual = (arr1?: string[] | null, arr2?: string[] | null) => {
         return false;
     }
 
-    const lenArr1 = arr1!.length;
-    const lenArr2 = arr2!.length;
-
-    if (lenArr1 !== lenArr2) {
+    if (arr1!.length !== arr2!.length) {
         return false;
     }
 
     const array2Sorted = [...arr2!].sort();
-    return arr1!.length === arr2!.length && [...arr1!].sort().every((value, index) => value === array2Sorted[index]);
+    return [...arr1!].sort().every((value, index) => value === array2Sorted[index]);
 };
 
 export default isEqual;
