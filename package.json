@@ -46,7 +46,7 @@
     "url": "https://github.com/aws/aws-northstar"
   },
   "devDependencies": {
-    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/exec": "^6.0.1",
     "@semantic-release/github": "^8.0.1",
     "@storybook/addon-a11y": "^6.3.8",
     "@storybook/addon-actions": "^6.3.8",
