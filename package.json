@@ -62,7 +62,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
-    "@types/jest": "^27.0.1",
+    "@types/jest": "^27.0.2",
     "@types/jest-axe": "^3.2.2",
     "@types/lodash.orderby": "^4.6.6",
     "@types/node": "^16.11.1",
