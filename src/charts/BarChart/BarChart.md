@@ -18,11 +18,11 @@ const sampleData = [
 
 <Container>
     <BarChart title="Bar Chart - two data series" width={400} height={200} data={sampleData}>
-        <Bar dataKey="pv" fill={NORTHSTAR_COLORS.ORANGE} stroke={NORTHSTAR_COLORS.ORANGE} />
-        <Bar dataKey="uv" fill={NORTHSTAR_COLORS.BLUE} stroke={NORTHSTAR_COLORS.BLUE}/>
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
+        <Bar dataKey="pv" fill={NORTHSTAR_COLORS.ORANGE} stroke={NORTHSTAR_COLORS.ORANGE} />
+        <Bar dataKey="uv" fill={NORTHSTAR_COLORS.BLUE} stroke={NORTHSTAR_COLORS.BLUE}/>
     </BarChart>
 </Container>
 ```
