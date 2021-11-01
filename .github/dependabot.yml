@@ -26,6 +26,6 @@ updates:
       - dependency-name: "remark-frontmatter"
         versions: ["4.x"]
       - dependency-name: "remark-gfm"
-        versions: ["2.x"]
+        versions: ["2.x","3.x"]
       - dependency-name: "typescript"
         versions: ["4.4.x"]
