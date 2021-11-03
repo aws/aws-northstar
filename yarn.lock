@@ -3245,10 +3245,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-table@7.7.2":
-  version "7.7.2"
-  resolved "https://registry.yarnpkg.com/@types/react-table/-/react-table-7.7.2.tgz#434f8230eb011c7eed8f3550fdf25befafebcfac"
-  integrity sha512-NwB78t3YV5pZ1NK3m2vylb/d0DKVyWH4y4GMCtlE4tg2n5ENM4ejzKnT46YKuqG2cPjWc+PIxuRVMd5OYX1z4A==
+"@types/react-table@7.7.7":
+  version "7.7.7"
+  resolved "https://registry.yarnpkg.com/@types/react-table/-/react-table-7.7.7.tgz#503be1ce2e06857c11b281629f539358d32671f9"
+  integrity sha512-3l2TP4detx9n5Jt44XhdH7Ku6PYwz6kB83P8W+YcBMUkIHtiw2gsCCcq9c4wyCIcdSwcTlWZ9WqH4PF7Yfbprg==
   dependencies:
     "@types/react" "*"
 
@@ -3266,16 +3266,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@>=16.9.0":
-  version "17.0.8"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.8.tgz#fe76e3ba0fbb5602704110fd1e3035cf394778e3"
-  integrity sha512-3sx4c0PbXujrYAKwXxNONXUtRp9C+hE2di0IuxFyf5BELD+B+AXL8G7QrmSKhVwKZDbv0igiAjQAMhXj8Yg3aw==
-  dependencies:
-    "@types/prop-types" "*"
-    "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@^17.0.27":
+"@types/react@*", "@types/react@>=16.9.0", "@types/react@^17.0.27":
   version "17.0.27"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.27.tgz#6498ed9b3ad117e818deb5525fa1946c09f2e0e6"
   integrity sha512-zgiJwtsggVGtr53MndV7jfiUESTqrbxOcBvwfe6KS/9bzaVPCTDieTWnFNecVNx6EAaapg5xsLLWFfHHR437AA==
