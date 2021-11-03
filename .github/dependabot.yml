@@ -10,6 +10,7 @@ updates:
     schedule:
       interval: "weekly"
     versioning-strategy: "increase"
+    rebase-strategy: "disabled"
     ignore:
       - dependency-name: "react"
       - dependency-name: "@types/react"
