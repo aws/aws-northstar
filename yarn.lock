@@ -12228,10 +12228,10 @@ please-upgrade-node@^3.2.0:
   dependencies:
     semver-compare "^1.0.0"
 
-plotly.js@^2.6.2:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.6.2.tgz#79827a4233d445475072e800938d094f226bacfc"
-  integrity sha512-KzOwyNNdRnJVvZPnBvA2VwgcO9202FexFpiivuWaAFvmQiX+oC3yKrQHyXaPeNqZn4lAq3GVgYYPQdx3o5uEuw==
+plotly.js@^2.6.3:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.6.3.tgz#a86b797e4b1299d2c6935d29e562aa2b838d5ec9"
+  integrity sha512-MSdevryj5VvSZvr+slTnJcZgOmvMPZEUe8rFY+3ygxbVUFqmcOvT0TurUx4g07tfAVZ+UhXIaskHnAZNmUcNTg==
   dependencies:
     "@plotly/d3" "3.8.0"
     "@plotly/d3-sankey" "0.7.2"
