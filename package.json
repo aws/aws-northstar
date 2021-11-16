@@ -128,7 +128,7 @@
     "clsx": "^1.1.1",
     "date-fns": "^2.25.0",
     "react-markdown": "^6.0.3",
-    "react-syntax-highlighter": "^15.4.4",
+    "react-syntax-highlighter": "^15.4.5",
     "react-table": "7.7.0",
     "react-use-localstorage": "^3.4.1",
     "recharts": "^2.1.6",
