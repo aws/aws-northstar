@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Box from 'aws-northstar/layouts/Box';
 import Button from 'aws-northstar/components/Button';

@@ -84,8 +84,8 @@ curl https://northstar.aws-prototyping.cloud/examples/create-react-app.tar.gz | 
 Install it and run:
 
 ```markdown
-npm install
-npm start
+yarn
+yarn start
 ```
 
 ### CodeSandbox
