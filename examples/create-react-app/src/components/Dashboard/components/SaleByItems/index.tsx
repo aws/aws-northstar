@@ -13,7 +13,6 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
 import BarChart, { Bar, NORTHSTAR_COLORS, YAxis, XAxis, Tooltip, Legend } from 'aws-northstar/charts/BarChart';
 import { sumByItem } from '../../../../data';
 

@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import PieChart, { Pie, NORTHSTAR_COLORS, Tooltip, Cell } from 'aws-northstar/charts/PieChart';
 import { sumByItem } from '../../../../data';
 
