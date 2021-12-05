@@ -48,7 +48,7 @@
   "devDependencies": {
     "@semantic-release/exec": "^6.0.2",
     "@semantic-release/github": "^8.0.2",
-    "@storybook/addon-a11y": "^6.4.0",
+    "@storybook/addon-a11y": "^6.4.7",
     "@storybook/addon-actions": "^6.4.0",
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-docs": "^6.4.0",
@@ -126,7 +126,7 @@
     "@types/react-table": "7.7.8",
     "@types/uuid": "^8.3.3",
     "clsx": "^1.1.1",
-    "date-fns": "^2.26.0",
+    "date-fns": "^2.27.0",
     "react-markdown": "^6.0.3",
     "react-syntax-highlighter": "^15.4.5",
     "react-table": "7.7.0",
