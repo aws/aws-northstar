@@ -12273,10 +12273,10 @@ pkg-up@3.1.0:
   dependencies:
     find-up "^3.0.0"
 
-plotly.js@^2.6.4:
-  version "2.6.4"
-  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.6.4.tgz#c82a2ce8b00d700371bd80231f112144f8b90752"
-  integrity sha512-TYfp9PsacmWWL06Eac775G9M7YRXutJw3LppABZvvH2r2x6RUxifvLcPnqCMTjAQEo9i97pAj7DPpseBCSZ9Bg==
+plotly.js@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.7.0.tgz#9d78d167364a27333ee7699afd0de29b8cefe883"
+  integrity sha512-dxtIYBBK8KQ5adlYSKo/hziTN1spsnaTI/ej8NZ3z53nw63GOOcruYOLM6skfcqXdjDMuvEI5osRQGrUejkE/Q==
   dependencies:
     "@plotly/d3" "3.8.0"
     "@plotly/d3-sankey" "0.7.2"
@@ -12312,7 +12312,7 @@ plotly.js@^2.6.4:
     native-promise-only "^0.8.1"
     parse-svg-path "^0.1.2"
     polybooljs "^1.2.0"
-    probe-image-size "^7.2.1"
+    probe-image-size "^7.2.2"
     regl "^2.1.0"
     regl-error2d "^2.0.12"
     regl-line2d "^3.1.2"
@@ -12562,10 +12562,10 @@ private@^0.1.8:
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz"
   integrity sha512-VvivMrbvd2nKkiG38qjULzlc+4Vx4wm/whI9pQD35YrARNnhxeiRktSOhSukRLFNlzg6Br/cJPet5J/u19r/mg==
 
-probe-image-size@^7.2.1:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/probe-image-size/-/probe-image-size-7.2.1.tgz#df0c924e67e247bc94f8fcb0fad7f0081061fc44"
-  integrity sha512-d+6L3NvQBCNt4peRDoEfA7r9bPm6/qy18FnLKwg4NWBC5JrJm0pMLRg1kF4XNsPe1bUdt3WIMonPJzQWN2HXjQ==
+probe-image-size@^7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/probe-image-size/-/probe-image-size-7.2.2.tgz#e5851b9be7864f21e3bac5e6e4fac9da9055b412"
+  integrity sha512-QUm+w1S9WTsT5GZB830u0BHExrUmF0J4fyRm5kbLUMEP3fl9UVYXc3xOBVqZNnH9tnvVEJO8vDk3PMtsLqjxug==
   dependencies:
     lodash.merge "^4.6.2"
     needle "^2.5.2"
