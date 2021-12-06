@@ -34,6 +34,6 @@ export const TwoToneIcon = () => <Icon name="Cloud" variant="TwoTone" />;
 
 export const SharpIcon = () => <Icon name="Cloud" variant="Sharp" />;
 
-export const htmlColor = () => <Icon name="Cloud" variant="Sharp" htmlColor="#00FFFF" />;
+export const HTMLColor = () => <Icon name="Cloud" variant="Sharp" htmlColor="#00FFFF" />;
 
 export const FullExample = () => <Icon name="Dns" variant="TwoTone" color="error" fontSize="large" />;

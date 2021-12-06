@@ -31,4 +31,4 @@ export const Default = () => (
 export const Checked = () => <Toggle label="Checked" checked={true} />;
 export const Disabled = () => <Toggle label="Disabled" disabled={true} description="short description" />;
 
-export const withOnChange = () => <Toggle label="With onChange" onChange={action('onChange')} />;
+export const WithOnChange = () => <Toggle label="With onChange" onChange={action('onChange')} />;
