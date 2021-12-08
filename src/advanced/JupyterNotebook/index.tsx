@@ -26,8 +26,22 @@ import Heading from '../../components/Heading';
 import Paper from '../../layouts/Paper';
 
 // cats an array of lines together
-const sourceLines = (lines: string[]) => {
-    return lines.join('');
+const sourceLines = (lines: string[]) => lines.join('');
+
+const ansiControlRegex = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
+
+const redCellColor = '#FDD';
+const greenCellColor = '#DFD';
+const plainCellStyle = {
+    padding: '0',
+    margin: '0',
+    border: '1px solid #AAA',
+};
+
+const indentedCellStyle = {
+    padding: '0px 8px 0px 8px',
+    margin: '0px 0px',
+    border: '1px solid #AAA',
 };
 
 export interface JupyterNotebookProps {
@@ -61,7 +75,7 @@ const JupyterNotebookCellRenderTemplate: React.FC<JupyterNotebookCellRenderTempl
                 {idColumnContent}
             </Grid>
             <Grid item xs={11}>
-                <Paper variant={'outlined'} style={bodyColumnStyle}>
+                <Paper variant="outlined" style={bodyColumnStyle}>
                     {bodyColumnContent}
                 </Paper>
             </Grid>
@@ -79,7 +93,7 @@ const JupyterNotebookMarkdownCell: React.FC<JupyterNotebookCellProps> = ({
         <JupyterNotebookCellRenderTemplate
             idColumnContent={''}
             bodyColumnContent={<ReactMarkdown children={sourceLines(cell.source)} />}
-            bodyColumnStyle={{ padding: '0px 8px 0px 8px', margin: '0px 0px', border: '1px solid #AAA' }}
+            bodyColumnStyle={indentedCellStyle}
         />
     );
 };
@@ -103,7 +117,7 @@ const JupyterNotebookHeadingCell: React.FC<JupyterNotebookCellProps> = ({
                     <Heading variant="h1">{cell.source[0]}</Heading>
                 </Container>
             }
-            bodyColumnStyle={{ padding: '0px 8px 0px 8px', margin: '0px 0px', border: '1px solid #AAA' }}
+            bodyColumnStyle={indentedCellStyle}
         />
     );
 };
@@ -124,7 +138,7 @@ const JupyterNotebookOutputStreamCell: React.FC<JupyterNotebookOutputCellProps> 
             bodyColumnStyle={{
                 padding: '0px 8px 0px 8px',
                 margin: '0px 0px',
-                backgroundColor: output.name === 'stderr' ? '#FDD' : '#DFD',
+                backgroundColor: output.name === 'stderr' ? redCellColor : greenCellColor,
                 border: '1px solid #AAA',
             }}
         />
@@ -148,7 +162,7 @@ const JupyterNotebookOutputErrorCell: React.FC<JupyterNotebookOutputCellProps> =
                         output.evalue +
                         ']**\n```\n ' +
                         sourceLines(output.traceback).replace(
-                            /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, // strip out ansi control sequences common in output traces
+                            ansiControlRegex, // strip out ansi control sequences common in output traces
                             ''
                         ) +
                         '\n```'
@@ -159,7 +173,7 @@ const JupyterNotebookOutputErrorCell: React.FC<JupyterNotebookOutputCellProps> =
                 padding: '0px 8px 0px 8px',
                 margin: '0px 0px',
                 border: '1px solid #AAA',
-                backgroundColor: '#FDD',
+                backgroundColor: redCellColor,
             }}
         />
     );
@@ -196,7 +210,7 @@ const JupyterNotebookOutputDataCell: React.FC<JupyterNotebookOutputCellProps> = 
                     )}
                 </Container>
             }
-            bodyColumnStyle={{ padding: '0px 0px 0px 0px', margin: '0px 0px', border: '1px solid #AAA' }}
+            bodyColumnStyle={plainCellStyle}
         />
     );
 };
@@ -206,7 +220,7 @@ const CodeBlock: CodeComponent = ({ inline = false, className, children }) => {
     const match = /language-(\w+)/.exec(className || '');
     const codeLanguage = useMemo(() => {
         const langs = ['python', 'java', 'javascript', 'c++', 'typescript', 'objective-c', 'json'];
-        return langs.find((lang) => match && match[1] && match[1].startsWith(lang)) || 'javascript';
+        return langs.find((lang) => match?.[1]?.startsWith(lang)) || 'javascript';
     }, [match]);
 
     return (
@@ -220,7 +234,7 @@ const CodeBlock: CodeComponent = ({ inline = false, className, children }) => {
 const JupyterNotebookCodeCell: React.FC<JupyterNotebookCellProps> = ({ cell, executionCount, language }) => {
     return (
         <>
-            {cell.metadata && cell.metadata.jupyter && cell.metadata.jupyter.source_hidden ? (
+            {cell.metadata?.jupyter?.outputs_hidden ? (
                 <></>
             ) : (
                 <JupyterNotebookCellRenderTemplate
@@ -231,14 +245,10 @@ const JupyterNotebookCodeCell: React.FC<JupyterNotebookCellProps> = ({ cell, exe
                             children={'```' + language + '\n\n' + sourceLines(cell.source) + '\n```'}
                         />
                     }
-                    bodyColumnStyle={{
-                        padding: '0px 0px 0px 0px',
-                        margin: '0px 0px 0px 0px',
-                        border: '1px solid #AAA',
-                    }}
+                    bodyColumnStyle={plainCellStyle}
                 />
             )}
-            {cell.metadata && cell.metadata.jupyter && cell.metadata.jupyter.outputs_hidden ? (
+            {cell.metadata?.jupyter?.source_hidden ? (
                 <></>
             ) : (
                 cell.outputs.map((output: any, outputIdx: number) => {
@@ -303,18 +313,17 @@ const JupyterNotebook: React.FC<JupyterNotebookProps> = ({ notebookData }) => {
     const notebook = JSON.parse(notebookData);
 
     return (
-        <Grid container spacing={1} alignItems={'flex-start'} alignContent={'flex-start'}>
-            {notebook.cells &&
-                notebook.cells.map((cell: any, index: number) => {
-                    return (
-                        <JupyterNotebookCell
-                            key={`cell-${index}`}
-                            cell={cell}
-                            executionCount={cell.execution_count ?? ''}
-                            language={notebook.metadata.kernelspec.language}
-                        />
-                    );
-                })}
+        <Grid container spacing={1} alignItems="flex-start" alignContent="flex-start">
+            {notebook.cells?.map((cell: any, index: number) => {
+                return (
+                    <JupyterNotebookCell
+                        key={`cell-${index}`}
+                        cell={cell}
+                        executionCount={cell.execution_count ?? ''}
+                        language={notebook.metadata.kernelspec.language}
+                    />
+                );
+            })}
         </Grid>
     );
 };
