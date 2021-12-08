@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import Grid from '../../layouts/Grid';
 import Container from '../../layouts/Container';
 import ReactMarkdown from 'react-markdown';
@@ -25,21 +25,9 @@ import { CodeComponent } from 'react-markdown/src/ast-to-react';
 import Heading from '../../components/Heading';
 import Paper from '../../layouts/Paper';
 
-/*
- TODO:
-   - finesse table rendering
-   - centre images
-   - add worksheets handing option
-        - if has worksheets, use specified worksheet idx (0 if not specified)
-        - add worksheet idx parameter
-   - write documentation 
-*/
-
 // cats an array of lines together
-const sourceLines = (lines: any[]) => {
-    return lines.reduce((result, value) => {
-        return result + value;
-    }, '');
+const sourceLines = (lines: string[]) => {
+    return lines.join('');
 };
 
 export interface JupyterNotebookProps {
@@ -48,7 +36,7 @@ export interface JupyterNotebookProps {
 
 interface JupyterNotebookCellProps {
     cell: any;
-    execution_count: string;
+    executionCount: string;
     language: string;
 }
 
@@ -82,7 +70,11 @@ const JupyterNotebookCellRenderTemplate: React.FC<JupyterNotebookCellRenderTempl
 };
 
 // -- renders a cell of type 'markdown'
-const JupyterNotebookMarkdownCell: React.FC<JupyterNotebookCellProps> = ({ cell, execution_count, language }) => {
+const JupyterNotebookMarkdownCell: React.FC<JupyterNotebookCellProps> = ({
+    cell,
+    executionCount: execution_count,
+    language,
+}) => {
     return (
         <JupyterNotebookCellRenderTemplate
             idColumnContent={''}
@@ -93,7 +85,11 @@ const JupyterNotebookMarkdownCell: React.FC<JupyterNotebookCellProps> = ({ cell,
 };
 
 // -- renders a cell of type 'heading'
-const JupyterNotebookHeadingCell: React.FC<JupyterNotebookCellProps> = ({ cell, execution_count, language }) => {
+const JupyterNotebookHeadingCell: React.FC<JupyterNotebookCellProps> = ({
+    cell,
+    executionCount: execution_count,
+    language,
+}) => {
     return (
         <JupyterNotebookCellRenderTemplate
             idColumnContent={''}
@@ -115,13 +111,13 @@ const JupyterNotebookHeadingCell: React.FC<JupyterNotebookCellProps> = ({ cell, 
 // -- renders a cell of type 'stream'
 const JupyterNotebookOutputStreamCell: React.FC<JupyterNotebookOutputCellProps> = ({
     cell,
-    execution_count,
+    executionCount,
     output,
     language,
 }) => {
     return (
         <JupyterNotebookCellRenderTemplate
-            idColumnContent={`Out [${execution_count}]`}
+            idColumnContent={`Out [${executionCount}]`}
             bodyColumnContent={
                 <ReactMarkdown children={'**[' + output.name + ']**\n```\n ' + sourceLines(output.text) + '```'} />
             }
@@ -138,13 +134,13 @@ const JupyterNotebookOutputStreamCell: React.FC<JupyterNotebookOutputCellProps> 
 // -- renders a cell of type 'error'
 const JupyterNotebookOutputErrorCell: React.FC<JupyterNotebookOutputCellProps> = ({
     cell,
-    execution_count,
+    executionCount,
     output,
     language,
 }) => {
     return (
         <JupyterNotebookCellRenderTemplate
-            idColumnContent={`In [${execution_count}]`}
+            idColumnContent={`In [${executionCount}]`}
             bodyColumnContent={
                 <ReactMarkdown
                     children={
@@ -152,7 +148,7 @@ const JupyterNotebookOutputErrorCell: React.FC<JupyterNotebookOutputCellProps> =
                         output.evalue +
                         ']**\n```\n ' +
                         sourceLines(output.traceback).replace(
-                            /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
+                            /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, // strip out ansi control sequences common in output traces
                             ''
                         ) +
                         '\n```'
@@ -172,13 +168,13 @@ const JupyterNotebookOutputErrorCell: React.FC<JupyterNotebookOutputCellProps> =
 // -- renders various data cell types (html, png, text)
 const JupyterNotebookOutputDataCell: React.FC<JupyterNotebookOutputCellProps> = ({
     cell,
-    execution_count,
+    executionCount,
     output,
     language,
 }) => {
     return (
         <JupyterNotebookCellRenderTemplate
-            idColumnContent={`Out [${execution_count}]`}
+            idColumnContent={`Out [${executionCount}]`}
             bodyColumnContent={
                 <Container
                     style={{
@@ -208,14 +204,10 @@ const JupyterNotebookOutputDataCell: React.FC<JupyterNotebookOutputCellProps> = 
 // -- helper class used in syntax highlighting the code
 const CodeBlock: CodeComponent = ({ inline = false, className, children }) => {
     const match = /language-(\w+)/.exec(className || '');
-    let codeLanguage = 'javascript';
-    let langs = ['python', 'java', 'javascript', 'c++', 'typescript', 'objective-c', 'json'];
-
-    for (const lang of langs) {
-        if (match && match[1] && match[1].startsWith(lang)) {
-            codeLanguage = lang;
-        }
-    }
+    const codeLanguage = useMemo(() => {
+        const langs = ['python', 'java', 'javascript', 'c++', 'typescript', 'objective-c', 'json'];
+        return langs.find((lang) => match && match[1] && match[1].startsWith(lang)) || 'javascript';
+    }, [match]);
 
     return (
         <SyntaxHighlighter language={codeLanguage} style={coy}>
@@ -225,14 +217,14 @@ const CodeBlock: CodeComponent = ({ inline = false, className, children }) => {
 };
 
 // -- renders a cell of type 'code'
-const JupyterNotebookCodeCell: React.FC<JupyterNotebookCellProps> = ({ cell, execution_count, language }) => {
+const JupyterNotebookCodeCell: React.FC<JupyterNotebookCellProps> = ({ cell, executionCount, language }) => {
     return (
         <>
             {cell.metadata && cell.metadata.jupyter && cell.metadata.jupyter.source_hidden ? (
                 <></>
             ) : (
                 <JupyterNotebookCellRenderTemplate
-                    idColumnContent={`In [${execution_count}]`}
+                    idColumnContent={`In [${executionCount}]`}
                     bodyColumnContent={
                         <ReactMarkdown
                             components={{ code: CodeBlock }}
@@ -253,9 +245,9 @@ const JupyterNotebookCodeCell: React.FC<JupyterNotebookCellProps> = ({ cell, exe
                     if (output.output_type === 'stream') {
                         return (
                             <JupyterNotebookOutputStreamCell
-                                key={`stream-${execution_count}-${outputIdx}`}
+                                key={`stream-${executionCount}-${outputIdx}`}
                                 cell={cell}
-                                execution_count={execution_count}
+                                executionCount={executionCount}
                                 output={output}
                                 language={language}
                             />
@@ -263,9 +255,9 @@ const JupyterNotebookCodeCell: React.FC<JupyterNotebookCellProps> = ({ cell, exe
                     } else if (output.output_type === 'execute_result' || output.output_type === 'display_data') {
                         return (
                             <JupyterNotebookOutputDataCell
-                                key={`exec-${execution_count}-${outputIdx}`}
+                                key={`exec-${executionCount}-${outputIdx}`}
                                 cell={cell}
-                                execution_count={execution_count}
+                                executionCount={executionCount}
                                 output={output}
                                 language={language}
                             />
@@ -273,9 +265,9 @@ const JupyterNotebookCodeCell: React.FC<JupyterNotebookCellProps> = ({ cell, exe
                     } else if (output.output_type === 'error') {
                         return (
                             <JupyterNotebookOutputErrorCell
-                                key={`error-${execution_count}-${outputIdx}`}
+                                key={`error-${executionCount}-${outputIdx}`}
                                 cell={cell}
-                                execution_count={execution_count}
+                                executionCount={executionCount}
                                 output={output}
                                 language={language}
                             />
@@ -290,16 +282,19 @@ const JupyterNotebookCodeCell: React.FC<JupyterNotebookCellProps> = ({ cell, exe
 };
 
 // -- router to render the two main input cell types
-const JupyterNotebookCell: React.FC<JupyterNotebookCellProps> = ({ cell, execution_count, language }) => {
-    if (cell.cell_type === 'markdown') {
-        return <JupyterNotebookMarkdownCell cell={cell} execution_count={execution_count} language={language} />;
-    } else if (cell.cell_type === 'code') {
-        return <JupyterNotebookCodeCell cell={cell} execution_count={execution_count} language={language} />;
-    } else if (cell.cell_type === 'heading') {
-        //cell.source[0] = `# ${cell.source[0]}\n`;
-        return <JupyterNotebookHeadingCell cell={cell} execution_count={execution_count} language={language} />;
-    } else {
-        return <></>;
+const JupyterNotebookCell: React.FC<JupyterNotebookCellProps> = ({ cell, executionCount, language }) => {
+    switch (cell.cell_type) {
+        case 'markdown':
+            return <JupyterNotebookMarkdownCell cell={cell} executionCount={executionCount} language={language} />;
+
+        case 'code':
+            return <JupyterNotebookCodeCell cell={cell} executionCount={executionCount} language={language} />;
+
+        case 'heading':
+            return <JupyterNotebookHeadingCell cell={cell} executionCount={executionCount} language={language} />;
+
+        default:
+            return <></>;
     }
 };
 
@@ -315,7 +310,7 @@ const JupyterNotebook: React.FC<JupyterNotebookProps> = ({ notebookData }) => {
                         <JupyterNotebookCell
                             key={`cell-${index}`}
                             cell={cell}
-                            execution_count={cell.execution_count ?? ''}
+                            executionCount={cell.execution_count ?? ''}
                             language={notebook.metadata.kernelspec.language}
                         />
                     );
