@@ -12,7 +12,8 @@
               "!@material-ui/core/test-utils/*"
             ]
           }
-        ]
+        ],
+        "no-control-regex": 0
     },
     "overrides": [
         {
