@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useMemo } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import Grid from '../../layouts/Grid';
 import Container from '../../layouts/Container';
 import ReactMarkdown from 'react-markdown';
@@ -45,6 +45,9 @@ const indentedCellStyle = {
 };
 
 export interface JupyterNotebookProps {
+    /**
+     * The Notebook Data in JSON string format
+     */
     notebookData: string;
 }
 
@@ -64,7 +67,7 @@ interface JupyterNotebookCellRenderTemplateProps {
     bodyColumnStyle: any;
 }
 
-const JupyterNotebookCellRenderTemplate: React.FC<JupyterNotebookCellRenderTemplateProps> = ({
+const JupyterNotebookCellRenderTemplate: FunctionComponent<JupyterNotebookCellRenderTemplateProps> = ({
     idColumnContent,
     bodyColumnContent,
     bodyColumnStyle,
@@ -84,7 +87,7 @@ const JupyterNotebookCellRenderTemplate: React.FC<JupyterNotebookCellRenderTempl
 };
 
 // -- renders a cell of type 'markdown'
-const JupyterNotebookMarkdownCell: React.FC<JupyterNotebookCellProps> = ({
+const JupyterNotebookMarkdownCell: FunctionComponent<JupyterNotebookCellProps> = ({
     cell,
     executionCount: execution_count,
     language,
@@ -99,7 +102,7 @@ const JupyterNotebookMarkdownCell: React.FC<JupyterNotebookCellProps> = ({
 };
 
 // -- renders a cell of type 'heading'
-const JupyterNotebookHeadingCell: React.FC<JupyterNotebookCellProps> = ({
+const JupyterNotebookHeadingCell: FunctionComponent<JupyterNotebookCellProps> = ({
     cell,
     executionCount: execution_count,
     language,
@@ -308,8 +311,10 @@ const JupyterNotebookCell: React.FC<JupyterNotebookCellProps> = ({ cell, executi
     }
 };
 
-// -- top level Jupyter notebook component
-const JupyterNotebook: React.FC<JupyterNotebookProps> = ({ notebookData }) => {
+/**
+ * Renders a Jupyter Notebook Viewer.
+ */
+const JupyterNotebook: FunctionComponent<JupyterNotebookProps> = ({ notebookData }) => {
     const notebook = JSON.parse(notebookData);
 
     return (
