@@ -1,19 +1,11 @@
 # Example
 
-**More examples** are available on <a href="http://localhost:9090/?path=/story/jupyter-notebook-viewer--simple-notebook-view" target="_blank">NorthStar Storybook</a>.
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/jupyter-notebook-viewer--simple-notebook-view" target="_blank">NorthStar Storybook</a>.
 
 ```jsx
 import React from 'react';
-import JupyterNotebook from '.';
-
+import JupyterNotebook from 'aws-northstar/advanced/JupyterNotebook';
 import SampleNotebook from './sample-notebook';
 
-export default {
-    component: JupyterNotebook,
-    title: 'Jupyter Notebook Viewer',
-};
-
-export const SimpleNotebookView = () => (
-    <JupyterNotebook notebookData={JSON.stringify(SampleNotebook)}/>
-);
+<JupyterNotebook notebookData={JSON.stringify(SampleNotebook)}/>
 ```
