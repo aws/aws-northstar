@@ -20,8 +20,9 @@ import { Link as RouterLink } from 'react-router-dom';
 import MaterialLink from '@material-ui/core/Link';
 import Launch from '@material-ui/icons/Launch';
 import clsx from 'clsx';
+import { ComponentBaseProps } from '../../props/common';
 
-export interface LinkProps {
+export interface LinkProps extends ComponentBaseProps {
     /** The link's destination */
     href: string;
     /** The node to be displayed */
@@ -63,8 +64,9 @@ const Link: FunctionComponent<LinkProps> = ({
     underlineHover = true,
     forceExternal = false,
     onClick,
+    ...props
 }) => {
-    const classes = useStyles({});
+    const classes = useStyles();
     const isExternal = useMemo(() => forceExternal || externalPattern.test(href), [forceExternal, href]);
 
     return (
@@ -75,6 +77,7 @@ const Link: FunctionComponent<LinkProps> = ({
             href={href}
             to={href}
             variant="body1"
+            data-testid={props['data-testid']}
             rel={isExternal ? 'noreferrer' : undefined}
             onClick={onClick}
         >

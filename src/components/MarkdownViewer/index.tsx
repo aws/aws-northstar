@@ -13,17 +13,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import gfm from 'remark-gfm';
 import frontmatter from 'remark-frontmatter';
 import ReactMarkdown, { ReactMarkdownOptions } from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { ComponentBaseProps } from '../../props/common';
 import Heading from '../Heading';
 import Text from '../Text';
 import Link from '../Link';
 
-export interface MarkdownViewerProps {
+export interface MarkdownViewerProps extends ComponentBaseProps {
     /** The markdown content to be displayed */
     children: string;
 }
@@ -50,8 +51,12 @@ const components: ReactMarkdownOptions['components'] = {
 /**
  * MarkdownViewer renders content with Markdown format.
  */
-const MarkdownViewer = ({ children }: MarkdownViewerProps) => {
-    return <ReactMarkdown plugins={[gfm, frontmatter]} components={components} children={children} />;
+const MarkdownViewer: FunctionComponent<MarkdownViewerProps> = ({ children, ...props }) => {
+    return (
+        <div data-testid={props['data-testid']}>
+            <ReactMarkdown plugins={[gfm, frontmatter]} components={components} children={children} />
+        </div>
+    );
 };
 
 export default MarkdownViewer;

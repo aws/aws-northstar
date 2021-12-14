@@ -17,6 +17,7 @@
 import React, { FunctionComponent } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
+import { ComponentBaseProps } from '../../props/common';
 
 const useStyles = makeStyles((theme) => ({
     blue: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export interface BadgeProps {
+export interface BadgeProps extends ComponentBaseProps {
     /** Indicates the badge color. */
     color?: 'blue' | 'grey' | 'green' | 'red';
     /** Text displayed inside the badge. */
@@ -47,9 +48,9 @@ export interface BadgeProps {
 /**
  * A badge is a small color-coded visual element, containing letters or numbers, that you can use to label, categorize or organize items.
  */
-const Badge: FunctionComponent<BadgeProps> = ({ color = 'grey', content }) => {
+const Badge: FunctionComponent<BadgeProps> = ({ color = 'grey', content, ...props }) => {
     const classes = useStyles();
-    return <Chip className={classes[color]} label={content} />;
+    return <Chip className={classes[color]} label={content} data-testid={props['data-testid']} />;
 };
 
 export default Badge;

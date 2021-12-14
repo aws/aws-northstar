@@ -30,3 +30,8 @@ export interface AriaBaseProps {
      */
     ariaLabelledby?: string;
 }
+
+export interface ComponentBaseProps {
+    /**Specifies the testid to the core component*/
+    'data-testid'?: string;
+}

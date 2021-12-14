@@ -27,6 +27,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Button from '../Button';
 import Box from '../../layouts/Box';
+import { ComponentBaseProps } from '../../props/common';
 
 export type AlertType = 'error' | 'info' | 'success' | 'warning';
 
@@ -51,7 +52,7 @@ const iconMapping = {
     info: <InfoOutlinedIcon fontSize="inherit" titleAccess="info" aria-label="info" />,
 };
 
-export interface AlertProps {
+export interface AlertProps extends ComponentBaseProps {
     /** Indicates the type of the message to be displayed. Available options 'error' | 'info' | 'success' | 'warning' */
     type?: AlertType;
     /** Determines whether the alert is displayed to the user or not. */
@@ -164,7 +165,7 @@ const Alert: FunctionComponent<AlertProps> = ({
     );
 
     return (
-        <Box data-testid={props.type} width="100%">
+        <Box data-testid={props['data-testid'] || props.type} width="100%">
             {visible && show && renderAlert(props)}
         </Box>
     );

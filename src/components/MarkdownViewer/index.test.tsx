@@ -76,4 +76,14 @@ https://reactjs.org
         );
         expect(container.querySelector('code')).toBeInTheDocument();
     });
+
+    it('can be accessed by custom testid', () => {
+        const { getByTestId } = render(
+            <MarkdownViewer data-testid="markdown_editor">{` 
+# Heading One 
+This is just some text for testing
+        `}</MarkdownViewer>
+        );
+        expect(getByTestId('markdown_editor')).toBeInTheDocument();
+    });
 });

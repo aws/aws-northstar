@@ -18,7 +18,7 @@ import React, { FunctionComponent } from 'react';
 import TextareaAutosize, { TextareaAutosizeProps } from '@material-ui/core/TextareaAutosize';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import { v4 as uuidv4 } from 'uuid';
+import useUniqueId from '../../hooks/useUniqueId';
 
 const useStyles = makeStyles((theme) => ({
     textarea: {
@@ -107,13 +107,12 @@ export interface TextareaProps {
 
 const mapTextareaProps = ({
     rows = 3,
-    controlId = uuidv4(),
+    controlId,
     invalid = false,
     disableBrowserAutocorrect = false,
     ...props
 }: TextareaProps): TextareaAutosizeProps => {
     const autoCompleteString = disableBrowserAutocorrect ? 'off' : 'on';
-
     return {
         id: controlId,
         rowsMin: rows,
@@ -137,12 +136,15 @@ const mapTextareaProps = ({
     };
 };
 
-/** A Textarea is a multi-line text input control. */
+/**
+ * A Textarea is a multi-line text input control.
+ * */
 const Textarea: FunctionComponent<TextareaProps> = ({ invalid, ...props }) => {
     const classes = useStyles();
+    const controlId = useUniqueId(props.controlId);
     return (
         <TextareaAutosize
-            {...mapTextareaProps(props)}
+            {...mapTextareaProps({ ...props, controlId })}
             className={clsx(classes.textarea, { [classes.invalid]: invalid }, props.className)}
         />
     );

@@ -19,7 +19,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MaterialRadioButton from '@material-ui/core/Radio';
 import clsx from 'clsx';
-import { v4 as uuidv4 } from 'uuid';
+import useUniqueId from '../../hooks/useUniqueId';
+
 export interface RadioButtonProps {
     /** Use this property to name the radio buttons.*/
     name?: string;
@@ -111,9 +112,10 @@ const RadioButton: FunctionComponent<RadioButtonProps> = ({
     description,
 }) => {
     const classes = useStyles();
+    const id = useUniqueId();
     return (
         <FormControlLabel
-            key={uuidv4()}
+            key={id}
             className={classes.root}
             control={
                 <MaterialRadioButton

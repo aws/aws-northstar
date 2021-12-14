@@ -25,6 +25,11 @@ describe('Alert', () => {
 
     afterEach(cleanup);
 
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(<Alert type="info" data-testid="info-alert" />);
+        expect(getByTestId('info-alert')).toBeInTheDocument();
+    });
+
     alertTypes.forEach((alertType) => {
         describe(`with the ${alertType} type`, () => {
             it(`should render the ${alertType} styled Alert`, () => {

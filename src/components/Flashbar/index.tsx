@@ -19,10 +19,11 @@ import Box from '../../layouts/Box';
 import { FlashbarMessage as _FlashbarMessage } from './types';
 import FlashbarItem from './component/FlashbarItem';
 import { v4 as uuidv4 } from 'uuid';
+import { ComponentBaseProps } from '../../props/common';
 
 export type FlashbarMessage = _FlashbarMessage;
 
-export interface FlashbarProps {
+export interface FlashbarProps extends ComponentBaseProps {
     /**
      * A list of flash notifications.
      */
@@ -37,10 +38,10 @@ export interface FlashbarProps {
  * A flashbar component shows one or more page-level flash notifications to communicate a user action's status, such as failed, successful, and so on.
  * Flashbar is rendered as part of AppLayout.
  **/
-const Flashbar: FunctionComponent<FlashbarProps> = ({ items = [], maxItemsDisplayed = Number.MAX_VALUE }) => {
+const Flashbar: FunctionComponent<FlashbarProps> = ({ items = [], maxItemsDisplayed = Number.MAX_VALUE, ...props }) => {
     const renderedItems = items.slice(0, Math.min(maxItemsDisplayed, items.length));
     return (
-        <Box>
+        <Box data-testid={props['data-testid']}>
             {renderedItems.map((item) => (
                 <FlashbarItem {...item} key={item.id || uuidv4()} />
             ))}
