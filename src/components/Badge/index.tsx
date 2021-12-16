@@ -17,7 +17,6 @@
 import React, { FunctionComponent } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
-import { ComponentBaseProps } from '../../props/common';
 
 const useStyles = makeStyles((theme) => ({
     blue: {
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export interface BadgeProps extends ComponentBaseProps {
+export interface BadgeProps {
     /** Indicates the badge color. */
     color?: 'blue' | 'grey' | 'green' | 'red';
     /** Text displayed inside the badge. */

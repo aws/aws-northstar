@@ -19,11 +19,10 @@ import Box from '../../layouts/Box';
 import { FlashbarMessage as _FlashbarMessage } from './types';
 import FlashbarItem from './component/FlashbarItem';
 import { v4 as uuidv4 } from 'uuid';
-import { ComponentBaseProps } from '../../props/common';
 
 export type FlashbarMessage = _FlashbarMessage;
 
-export interface FlashbarProps extends ComponentBaseProps {
+export interface FlashbarProps {
     /**
      * A list of flash notifications.
      */

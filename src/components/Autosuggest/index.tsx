@@ -366,12 +366,12 @@ const AutosuggestBase: FunctionComponent<AutosuggestBaseProps> = ({
         },
         [inputValue, setInputValue, props]
     );
-
+    const testId = props['data-testId'] || (props.multiple ? 'multiselect' : 'autosuggest');
     return (
         <Stack>
             <MaterialUIAutocomplete
                 multiple={props.multiple}
-                data-testid={props.multiple ? 'multiselect' : 'autosuggest'}
+                data-testid={testId}
                 disabled={disabled}
                 autoHighlight
                 popupIcon={null}

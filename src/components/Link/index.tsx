@@ -20,9 +20,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import MaterialLink from '@material-ui/core/Link';
 import Launch from '@material-ui/icons/Launch';
 import clsx from 'clsx';
-import { ComponentBaseProps } from '../../props/common';
 
-export interface LinkProps extends ComponentBaseProps {
+export interface LinkProps {
     /** The link's destination */
     href: string;
     /** The node to be displayed */

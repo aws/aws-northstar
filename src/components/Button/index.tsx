@@ -139,6 +139,7 @@ const Button: FunctionComponent<ButtonProps> = ({
     children,
     type = 'button',
     size = 'medium',
+    ...props
 }) => {
     const styles = useStyles({});
     const isDisabled = useMemo(() => disabled || loading, [disabled, loading]);
@@ -146,7 +147,13 @@ const Button: FunctionComponent<ButtonProps> = ({
     switch (variant) {
         case 'icon':
             return (
-                <IconButton aria-label={label} disabled={isDisabled} onClick={onClick} className={styles.iconButton}>
+                <IconButton
+                    aria-label={label}
+                    disabled={isDisabled}
+                    onClick={onClick}
+                    className={styles.iconButton}
+                    {...props}
+                >
                     {loading ? (
                         <CircularProgress size={14} className={styles.loadingIcon} />
                     ) : (
@@ -169,6 +176,7 @@ const Button: FunctionComponent<ButtonProps> = ({
                         type,
                         size,
                     })}
+                    {...props}
                 >
                     {children}
                 </MaterialButton>

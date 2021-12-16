@@ -30,14 +30,13 @@ export interface TextProps {
  * Text can be used to render any arbitrary text. Given children will be rendered inside a span with the global font
  * style applied.
  */
-const Text: FunctionComponent<TextProps> = ({ children, variant = 'span', color }) => {
+const Text: FunctionComponent<TextProps> = ({ children, variant = 'span', color, ...props }) => {
     const textProps = {
         span: { variant: 'body1', component: 'span' },
         small: { variant: 'body2', component: 'small' },
     };
-
     return (
-        <Typography {...(textProps[variant] ?? { variant: 'body1' })} color={color}>
+        <Typography {...(textProps[variant] ?? { variant: 'body1' })} color={color} data-testid={props['data-testid']}>
             {children}
         </Typography>
     );

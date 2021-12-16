@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent, ReactNode, MouseEvent } from 'react';
+import React, { FunctionComponent, ReactNode, MouseEvent, useMemo } from 'react';
 import MUICard from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader, { CardHeaderProps } from '@material-ui/core/CardHeader';
@@ -83,10 +83,17 @@ const Card: FunctionComponent<CardProps> = ({
     onMouseMove,
     onMouseOut,
     withHover,
+    ...props
 }) => {
     const styles = useStyles({ withHover });
-    const content = (
-        <CardContent>{typeof children === 'string' ? <Text variant="p">{children}</Text> : children}</CardContent>
+    const testId = props['data-testid'] || 'card';
+    const content = useMemo(
+        () => (
+            <CardContent data-testid={`${testId}-content`}>
+                {typeof children === 'string' ? <Text variant="p">{children}</Text> : children}
+            </CardContent>
+        ),
+        [children, testId]
     );
     return (
         <MUICard
@@ -95,8 +102,14 @@ const Card: FunctionComponent<CardProps> = ({
             onMouseEnter={onMouseEnter}
             onMouseMove={onMouseMove}
             onMouseOut={onMouseOut}
+            data-testid="testId"
         >
-            <CardHeader title={title} subheader={subtitle} titleTypographyProps={titleTypographyProps} />
+            <CardHeader
+                title={title}
+                subheader={subtitle}
+                titleTypographyProps={titleTypographyProps}
+                data-testid={`${testId}-header`}
+            />
             {content}
         </MUICard>
     );

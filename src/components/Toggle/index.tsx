@@ -21,12 +21,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx';
-import { ComponentBaseProps } from '../../props/common';
 
 /**
  * Toggle props
  */
-export interface ToggleProps extends ComponentBaseProps {
+export interface ToggleProps {
     /** Specifies whether the component is checked */
     checked?: boolean;
     /** Specifies that the input should be disabled, preventing the user from modifying the value */

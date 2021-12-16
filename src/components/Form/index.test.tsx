@@ -78,10 +78,12 @@ describe('Form', () => {
             name: 'user-form',
             method: 'post',
             action: '/user',
+            'data-testid': 'form-element',
         };
-        const { getByRole } = render(<Form {...props} />);
+        const { getByRole, getByTestId } = render(<Form {...props} />);
 
         expect(getByRole('form')).toHaveAttribute('method', 'post');
         expect(getByRole('form')).toHaveAttribute('action', '/user');
+        expect(getByTestId('form-element')).toBeInTheDocument();
     });
 });

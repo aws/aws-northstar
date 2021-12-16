@@ -21,7 +21,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
 import Link from '../Link';
-import { ComponentBaseProps } from '../../props/common';
 
 export interface TreeItemNode {
     id: string;
@@ -31,7 +30,7 @@ export interface TreeItemNode {
     children?: TreeItemNode[];
 }
 
-export interface TreeViewProps extends ComponentBaseProps {
+export interface TreeViewProps {
     /** The root node of the tree */
     root: TreeItemNode;
     /** Ids of items to be expanded by default */
@@ -98,6 +97,8 @@ const TreeView: FunctionComponent<TreeViewProps> = ({
         [setSelected, onNodeSelect]
     );
 
+    const testId = props['data-testid'] || 'tree-view';
+
     return (
         <MuiTreeView
             className={classes.root}
@@ -110,7 +111,7 @@ const TreeView: FunctionComponent<TreeViewProps> = ({
             multiSelect={multiSelect || undefined}
             expanded={expanded}
             selected={selected}
-            data-testid={props['data-testid']}
+            data-testid={testId}
         >
             {renderTree(root)}
         </MuiTreeView>

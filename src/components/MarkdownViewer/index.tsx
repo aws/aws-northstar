@@ -19,12 +19,11 @@ import frontmatter from 'remark-frontmatter';
 import ReactMarkdown, { ReactMarkdownOptions } from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import { ComponentBaseProps } from '../../props/common';
 import Heading from '../Heading';
 import Text from '../Text';
 import Link from '../Link';
 
-export interface MarkdownViewerProps extends ComponentBaseProps {
+export interface MarkdownViewerProps {
     /** The markdown content to be displayed */
     children: string;
 }

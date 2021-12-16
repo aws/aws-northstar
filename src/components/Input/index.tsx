@@ -149,6 +149,8 @@ const Input: FunctionComponent<InputProps> = ({ onChange, ...props }): ReactElem
         </InputAdornment>
     );
 
+    const testId = props['data-testid'] || `input-${props.type || 'text'}`;
+
     return (
         <MaterialInput
             id={id}
@@ -166,6 +168,7 @@ const Input: FunctionComponent<InputProps> = ({ onChange, ...props }): ReactElem
             onChange={(e) => handleChange(e.target.value)}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
+            data-testid={testId}
         />
     );
 };

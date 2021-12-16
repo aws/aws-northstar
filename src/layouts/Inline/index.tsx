@@ -38,12 +38,13 @@ export interface InlineProps {
 /**
  * Renders components horizontally with consistent spacing between them.
  */
-const Inline: FunctionComponent<InlineProps> = ({ children, spacing = 'm' }) => {
+const Inline: FunctionComponent<InlineProps> = ({ children, spacing = 'm', ...props }) => {
     const styles = useStyles();
     const stackItems = Children.toArray(children).filter((c) => c);
     const lastIndex = stackItems.length - 1;
+    const testId = props['data-testid'] || 'layout-inline';
     return (
-        <Box display="flex" flexDirection="row" flexWrap="wrap" className={styles.root} data-testid="layout-inline">
+        <Box display="flex" flexDirection="row" flexWrap="wrap" className={styles.root} data-testid={testId}>
             {stackItems.map((child, index) => (
                 <Box key={index} mr={index === lastIndex ? 'undefined' : spacingMapping[spacing]}>
                     {child}

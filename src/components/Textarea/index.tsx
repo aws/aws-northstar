@@ -145,6 +145,7 @@ const Textarea: FunctionComponent<TextareaProps> = ({ invalid, ...props }) => {
     return (
         <TextareaAutosize
             {...mapTextareaProps({ ...props, controlId })}
+            data-testid={props['data-testid']}
             className={clsx(classes.textarea, { [classes.invalid]: invalid }, props.className)}
         />
     );

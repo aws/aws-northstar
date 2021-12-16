@@ -40,7 +40,7 @@ describe('TokenGroup', () => {
         expect(getByText('itemLabel1')).toBeVisible();
         expect(getByText('itemLabel2')).toBeVisible();
         expect(getByText('itemLabel3')).toBeVisible();
-        expect(getByTestId('layout-inline')).toBeInTheDocument();
+        expect(getByTestId('token-group')).toBeInTheDocument();
     });
 
     it('should handle dismiss event', () => {
@@ -64,6 +64,6 @@ describe('TokenGroup', () => {
         expect(getByText('itemLabel1')).toBeVisible();
         expect(getByText('itemLabel2')).toBeVisible();
         expect(getByText('itemLabel3')).toBeVisible();
-        expect(getByTestId('layout-stack')).toBeInTheDocument();
+        expect(getByTestId('token-group')).toBeInTheDocument();
     });
 });

@@ -65,8 +65,11 @@ const HelpPanel: FunctionComponent<HelpPanelProps> = ({
     children,
     learnMoreFooter,
     loading = false,
+    ...props
 }) => {
     const styles = useStyles();
+
+    const testId = props['data-testid'] || 'app-help-panel';
 
     const header = useMemo(() => {
         return (
@@ -98,7 +101,7 @@ const HelpPanel: FunctionComponent<HelpPanelProps> = ({
     }, [children, learnMoreFooter, styles]);
 
     return (
-        <Box>
+        <Box data-testid={testId}>
             {loading ? (
                 <LoadingIndicator />
             ) : (
