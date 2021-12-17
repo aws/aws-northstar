@@ -48,6 +48,13 @@ describe('FileUpload', () => {
         expect(getByText('Custom button text')).toBeVisible();
     });
 
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(<FileUpload data-testid="file-upload-1" {...baseProps} />);
+        expect(getByTestId('file-upload-1')).toBeInTheDocument();
+        expect(getByTestId('file-upload-1-input')).toBeInTheDocument();
+        expect(getByTestId('file-upload-1-button')).toBeInTheDocument();
+    });
+
     describe('should be used for uploading single file', () => {
         it('should allow users to choose a file to upload', () => {
             const handleChange = jest.fn();
@@ -63,12 +70,10 @@ describe('FileUpload', () => {
                 },
             };
 
-            const { getByTestId, getByText } = render(
-                <FileUpload data-testid="file-upload-1" {...baseProps} onChange={handleChange} />
-            );
+            const { getByTestId, getByText } = render(<FileUpload {...baseProps} onChange={handleChange} />);
 
             act(() => {
-                fireEvent.change(getByTestId('file-upload-1-input'), event);
+                fireEvent.change(getByTestId('file-upload-input'), event);
             });
 
             expect(handleChange).toHaveBeenLastCalledWith([selectedFile]);

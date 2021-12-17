@@ -40,6 +40,11 @@ describe('Button', () => {
             expect(getByRole('button')).toHaveAttribute('aria-label', props.label);
         });
 
+        it('can be accessed by custom test-id', () => {
+            const { getByTestId } = render(<Button data-testid="test-button">test</Button>);
+            expect(getByTestId('test-button')).toBeInTheDocument();
+        });
+
         describe('when loading', () => {
             it('disables button and renders a loader without icon from props ', () => {
                 const props = { loading: true, variant, icon: 'add_plus' as ButtonIconType };
@@ -70,6 +75,15 @@ describe('Button', () => {
             const results = await axe(container);
 
             expect(results).toHaveNoViolations();
+        });
+
+        it('can be accessed by custom test-id', () => {
+            const { getByTestId } = render(
+                <Button {...props} data-testid="test-icon-button">
+                    test
+                </Button>
+            );
+            expect(getByTestId('test-icon-button')).toBeInTheDocument();
         });
 
         describe('when loading', () => {

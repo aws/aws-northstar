@@ -41,4 +41,15 @@ describe('ExpandableSection', () => {
             expect(getByText('the content')).toBeVisible();
         });
     });
+
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <ExpandableSection data-testid="expandable-section-1" header="the header">
+                the content
+            </ExpandableSection>
+        );
+        expect(getByTestId('expandable-section-1')).toBeInTheDocument();
+        expect(getByTestId('expandable-section-1-header')).toBeInTheDocument();
+        expect(getByTestId('expandable-section-1-content')).toBeInTheDocument();
+    });
 });

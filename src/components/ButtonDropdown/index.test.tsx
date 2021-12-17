@@ -81,6 +81,12 @@ describe('ButtonDropdown', () => {
         expect(handleClickMock).toBeCalled();
     });
 
+    it('can be accessed by custom test-id', () => {
+        const props = { content: 'the content', items: [{ text: 'the item' }] };
+        const { getByTestId } = render(<ButtonDropdown {...props} data-testid="button-dropdown-1" />);
+        expect(getByTestId('button-dropdown-1')).toBeInTheDocument();
+    });
+
     it('renders accessible component', async () => {
         const { container } = render(<ButtonDropdown content="some content" />);
         const results = await axe(container);

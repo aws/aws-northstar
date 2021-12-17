@@ -26,6 +26,11 @@ describe('Date', () => {
         expect(getByRole('textbox')).toBeInTheDocument();
     });
 
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(<DatePicker data-testid="datepicker-1" />);
+        expect(getByTestId('datepicker-1')).toBeInTheDocument();
+    });
+
     it('use the specified yyyy/MM/dd date format', () => {
         const { getByRole } = render(<DatePicker />);
         fireEvent.change(getByRole('textbox'), { target: { value: '20200603' } });

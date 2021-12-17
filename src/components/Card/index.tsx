@@ -102,7 +102,7 @@ const Card: FunctionComponent<CardProps> = ({
             onMouseEnter={onMouseEnter}
             onMouseMove={onMouseMove}
             onMouseOut={onMouseOut}
-            data-testid="testId"
+            data-testid={testId}
         >
             <CardHeader
                 title={title}
