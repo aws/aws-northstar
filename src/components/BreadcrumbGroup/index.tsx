@@ -56,7 +56,8 @@ const matchRoute = (path: string, availableRoutes: RouteProps[]) => {
 /**
  * The Breadcrumb group is rendered as part of AppLayout on top of main content area to provide page navigation information.
  */
-const BreadcrumbGroup = ({ items, rootPath = 'Home', availableRoutes = [] }: BreadcrumbGroupProps) => {
+const BreadcrumbGroup = ({ items, rootPath = 'Home', availableRoutes = [], ...props }: BreadcrumbGroupProps) => {
+    const testId = props['data-testid'] || 'breadcrumb';
     if (!items) {
         return (
             <Route>
@@ -65,7 +66,11 @@ const BreadcrumbGroup = ({ items, rootPath = 'Home', availableRoutes = [] }: Bre
                     pathnames.unshift('/');
 
                     return (
-                        <MaterialBreadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="Breadcrumb">
+                        <MaterialBreadcrumbs
+                            separator={<NavigateNextIcon fontSize="small" />}
+                            aria-label="Breadcrumb"
+                            data-testid={testId}
+                        >
                             {pathnames.map((value: string, index: number) => {
                                 const last = index === pathnames.length - 1;
                                 const segment = pathnames.slice(0, index + 1);
@@ -98,7 +103,11 @@ const BreadcrumbGroup = ({ items, rootPath = 'Home', availableRoutes = [] }: Bre
 
     return (
         <Route>
-            <MaterialBreadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="Breadcrumb">
+            <MaterialBreadcrumbs
+                separator={<NavigateNextIcon fontSize="small" />}
+                aria-label="Breadcrumb"
+                data-testid={testId}
+            >
                 {items.map((item: BreadcrumbGroupItem, idx: number) =>
                     idx === items.length - 1 ? (
                         <Typography key={item.text} color="textPrimary">

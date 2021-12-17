@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent, ReactNode, ElementType } from 'react';
+import React, { FunctionComponent, ReactNode, ElementType, useMemo } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '../Alert';
@@ -65,20 +65,23 @@ const Form: FunctionComponent<FormProps> = ({
 }) => {
     const classes = useStyles();
 
-    const content = (
-        <>
-            <div className={classes.headerContainer}>
-                <Typography variant="h3">{header}</Typography>
-                {description && (
-                    <Typography className={classes.description} variant="body1">
-                        {description}
-                    </Typography>
-                )}
-                {errorText && <Alert type="error">{errorText}</Alert>}
-            </div>
-            <div className={classes.contentContainer}>{children}</div>
-            <div className={classes.actions}>{actions}</div>
-        </>
+    const content = useMemo(
+        () => (
+            <>
+                <div className={classes.headerContainer}>
+                    <Typography variant="h3">{header}</Typography>
+                    {description && (
+                        <Typography className={classes.description} variant="body1">
+                            {description}
+                        </Typography>
+                    )}
+                    {errorText && <Alert type="error">{errorText}</Alert>}
+                </div>
+                <div className={classes.contentContainer}>{children}</div>
+                <div className={classes.actions}>{actions}</div>
+            </>
+        ),
+        [classes, header, description, actions, errorText, children]
     );
 
     return FormComponent ? (

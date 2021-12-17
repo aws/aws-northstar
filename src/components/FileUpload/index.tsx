@@ -65,12 +65,15 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
     buttonText,
     files = [],
     onChange,
+    ...props
 }) => {
     const [selectedFiles, setSelectedFiles] = useState<(File | FileMetadata)[]>(files);
     const inputElement = useRef<HTMLInputElement | null>(null);
     const displayedButtonText = useMemo(() => {
         return buttonText || `Choose ${multiple ? 'files' : 'file'}`;
     }, [buttonText, multiple]);
+
+    const testId = props['data-testid'] || 'file-upload';
 
     const handleFileSelectionDismiss = useCallback(
         (dismissedItem) => {
@@ -127,6 +130,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
             footer={footer}
             hintText={hintText}
             errorText={errorText}
+            data-testid={testId}
         >
             <input
                 ref={inputElement}
@@ -137,9 +141,9 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
                 multiple={multiple}
                 accept={accept}
                 onChange={handleFileSelectionChange}
-                data-testid="input-file"
+                data-testid={`${testId}-input`}
             />
-            <Button icon={CloudUpload} onClick={handleFileSelectionButtonClick}>
+            <Button data-testid={`${testId}-button`} icon={CloudUpload} onClick={handleFileSelectionButtonClick}>
                 {displayedButtonText}
             </Button>
         </FormField>

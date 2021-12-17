@@ -21,13 +21,14 @@ import BreadcrumbGroup from '.';
 
 describe('BreadcrumbGroup', () => {
     it('renders the route when provided no items', () => {
-        const { getByText } = render(
+        const { getByText, getByTestId } = render(
             <MemoryRouter initialEntries={['/current/route/']}>
                 <BreadcrumbGroup />
             </MemoryRouter>
         );
         expect(getByText('Current')).toBeInTheDocument();
         expect(getByText('Route')).toBeInTheDocument();
+        expect(getByTestId('breadcrumb')).toBeInTheDocument();
     });
 
     it('preserves the casing of links when provided no items', () => {
@@ -50,14 +51,15 @@ describe('BreadcrumbGroup', () => {
             { text: 'first', href: '#first' },
             { text: 'second', href: '#second' },
         ];
-        const { getByText, getAllByRole } = render(
+        const { getByText, getAllByRole, getByTestId } = render(
             <MemoryRouter>
-                <BreadcrumbGroup items={items} />
+                <BreadcrumbGroup items={items} data-testid="breadcrumb-1" />
             </MemoryRouter>
         );
         expect(getByText('first')).toBeInTheDocument();
         expect(getByText('second')).toBeInTheDocument();
         expect(getAllByRole('listitem')).toHaveLength(2);
+        expect(getByTestId('breadcrumb-1')).toBeInTheDocument();
     });
 
     it('renders the links', () => {

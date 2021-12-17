@@ -42,7 +42,7 @@ const Subform: FunctionComponent<SubformProps> = ({ title, description, ...props
 
     return (
         <Box mb={2}>
-            <FormSection header={title} description={description}>
+            <FormSection header={title} description={description} data-testid={props['data-testid']}>
                 {renderForm(fields)}
             </FormSection>
         </Box>

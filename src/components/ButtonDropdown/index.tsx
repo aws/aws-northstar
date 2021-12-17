@@ -31,6 +31,7 @@ import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 import Box from '../../layouts/Box';
 import Button from '../Button';
+import useUniqueId from '../../hooks/useUniqueId';
 
 export interface ButtonDropdownItem {
     /**
@@ -138,9 +139,13 @@ const ButtonDropdown: FunctionComponent<ButtonDropdownProps> = ({
     menuItemClassName,
     darkTheme,
     onClick,
+    ...props
 }) => {
     const classes = useStyles();
+    const menuId = useUniqueId();
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+
+    const testId = props['data-testid'] || 'button-dropdown';
 
     const handleClick = useCallback(
         (event: React.MouseEvent<HTMLElement>) => {
@@ -219,20 +224,21 @@ const ButtonDropdown: FunctionComponent<ButtonDropdownProps> = ({
     );
 
     return (
-        <Box className={clsx({ [classes.darkTheme]: darkTheme })}>
+        <Box className={clsx({ [classes.darkTheme]: darkTheme })} data-testid={testId}>
             <Button
                 variant={variant}
                 onClick={handleClick}
                 loading={loading}
                 disabled={disabled}
+                data-testid={`${testId}-button`}
                 aria-haspopup="true"
-                aria-controls="simple-menu"
+                aria-controls={menuId}
             >
                 {content} {!disableArrowDropdown && <ArrowDropDown fontSize="small" />}
             </Button>
 
             <Menu
-                id="account-menu"
+                id={menuId}
                 anchorEl={anchorEl}
                 keepMounted
                 getContentAnchorEl={null}
@@ -244,6 +250,7 @@ const ButtonDropdown: FunctionComponent<ButtonDropdownProps> = ({
                 transitionDuration={0}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
+                data-testid={`${testId}-menu`}
             >
                 {items.map((item: ButtonDropdownItem) =>
                     item.items ? renderMenuItemWithHeading(item) : renderMenuItem(item)

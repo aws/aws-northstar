@@ -105,7 +105,7 @@ const Toggle: FunctionComponent<ToggleProps> = ({ onChange, ...props }) => {
 
     return (
         <FormControlLabel
-            control={<Switch {...mapProps(props)} onChange={handleChange} />}
+            control={<Switch {...mapProps(props)} onChange={handleChange} data-testid={props['data-testid']} />}
             label={label}
             className={clsx(classes.label, { [classes.labelWitDesc]: props.description })}
         />

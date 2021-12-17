@@ -60,12 +60,13 @@ export interface HeaderProps {
 /**
  * A header bar for an application
  */
-const Header = ({ title, logoPath, rightContent = null, hideHeaderBelow }: HeaderProps) => {
+const Header = ({ title, logoPath, rightContent = null, hideHeaderBelow, ...props }: HeaderProps) => {
     const classes = useStyles({});
     const theme = useTheme();
     const matched = useMediaQuery(theme.breakpoints.up(hideHeaderBelow || 'sm'));
+    const testId = props['data-testid'] || 'app-header';
     return (
-        <AppBar className={classes.root} position="static" elevation={0}>
+        <AppBar className={classes.root} position="static" elevation={0} data-testid={testId}>
             <Toolbar className={classes.paddedChildren}>
                 {logoPath && (
                     <a href="/">

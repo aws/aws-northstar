@@ -19,9 +19,38 @@ import { render } from '@testing-library/react';
 import StatusIndicator from '.';
 
 describe('StatusIndicator', () => {
-    it('renders label and icon', () => {
+    it('renders label and icon with info type', () => {
         const { getAllByText, getByTitle } = render(<StatusIndicator statusType="info">Info</StatusIndicator>);
         expect(getByTitle('Info')).toBeInTheDocument();
         expect(getAllByText('Info')).toHaveLength(2);
+    });
+
+    it('renders label and icon with positive type', () => {
+        const { getByTitle, getAllByText } = render(
+            <StatusIndicator statusType="positive">Submitted!</StatusIndicator>
+        );
+        expect(getByTitle('Submitted!')).toBeInTheDocument();
+        expect(getAllByText('Submitted!')).toHaveLength(2);
+    });
+
+    it('renders label and icon with warning type', () => {
+        const { getByTitle, getAllByText } = render(<StatusIndicator statusType="warning">Warning!</StatusIndicator>);
+        expect(getByTitle('Warning!')).toBeInTheDocument();
+        expect(getAllByText('Warning!')).toHaveLength(2);
+    });
+
+    it('renders label and icon with negative type', () => {
+        const { getByTitle, getAllByText } = render(<StatusIndicator statusType="negative">Error!</StatusIndicator>);
+        expect(getByTitle('Error!')).toBeInTheDocument();
+        expect(getAllByText('Error!')).toHaveLength(2);
+    });
+
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <StatusIndicator data-testid="negative-status-indicator" statusType="negative">
+                Error
+            </StatusIndicator>
+        );
+        expect(getByTestId('negative-status-indicator')).toBeInTheDocument();
     });
 });

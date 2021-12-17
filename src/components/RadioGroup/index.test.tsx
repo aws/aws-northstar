@@ -42,6 +42,20 @@ describe('RadioButtonGroup', () => {
             const { queryByRole } = render(<RadioGroup />);
             expect(queryByRole('radio')).toBeNull();
         });
+
+        it('can be accessed by custom test-id', () => {
+            const { getByTestId } = render(
+                <RadioGroup
+                    data-testid="radiogroup-1"
+                    items={[
+                        <RadioButton key="1">radio</RadioButton>,
+                        <RadioButton key="2">radio</RadioButton>,
+                        <RadioButton key="3">radio</RadioButton>,
+                    ]}
+                />
+            );
+            expect(getByTestId('radiogroup-1')).toBeInTheDocument();
+        });
     });
 
     describe('with props', () => {

@@ -72,6 +72,7 @@ const ColumnLayout: FunctionComponent<ColumnLayoutProps> = ({
     children,
     renderDivider = true,
     collapseBelow = 'xs',
+    ...props
 }) => {
     const classes = useStyles();
     const theme = useTheme();
@@ -79,7 +80,13 @@ const ColumnLayout: FunctionComponent<ColumnLayoutProps> = ({
     const columns = Children.toArray(children);
 
     return (
-        <Grid container justify="flex-start" alignItems="flex-start" className={classes.root}>
+        <Grid
+            container
+            justify="flex-start"
+            alignItems="flex-start"
+            className={classes.root}
+            data-testid={props['data-testid']}
+        >
             {columns.map((column, index) => (
                 <Fragment key={`column${index}`}>
                     <Grid

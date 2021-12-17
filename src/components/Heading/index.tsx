@@ -24,8 +24,12 @@ export interface HeadingProps {
 }
 
 /** A text heading element */
-const Heading: FunctionComponent<HeadingProps> = ({ children, variant }) => {
-    return <Typography variant={variant}>{children}</Typography>;
+const Heading: FunctionComponent<HeadingProps> = ({ children, variant, ...props }) => {
+    return (
+        <Typography variant={variant} data-testid={props['data-testid']}>
+            {children}
+        </Typography>
+    );
 };
 
 export default Heading;

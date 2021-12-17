@@ -74,13 +74,13 @@ const SelectMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
             createNewLinkHref={createNewLinkHref}
         >
             {isSearchable ? (
-                <Autosuggest {...input} {...rest} {...commonProps} />
+                <Autosuggest {...rest} {...input} {...commonProps} />
             ) : multiSelect ? (
-                <Multiselect {...input} {...rest} {...commonProps} />
+                <Multiselect {...rest} {...input} {...commonProps} />
             ) : (
                 <Select
-                    {...input}
                     {...rest}
+                    {...input}
                     {...commonProps}
                     selectedOption={{
                         value: input.value,

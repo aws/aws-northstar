@@ -82,4 +82,9 @@ describe('TreeView', () => {
         expect(getByText('Child 1 (1)').closest('li')).toHaveClass('Mui-selected');
         expect(getByText('Child 2').closest('li')).toHaveClass('Mui-selected');
     });
+
+    it('can be accessed by testid', () => {
+        const { getByTestId } = render(<TreeView root={treeItem} defaultExpanded={['1']} data-testid="tree_view" />);
+        expect(getByTestId('tree_view')).toBeInTheDocument();
+    });
 });

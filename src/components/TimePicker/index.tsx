@@ -16,6 +16,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { KeyboardTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import useUniqueId from '../../hooks/useUniqueId';
 
 export interface TimePickerProps {
     /**
@@ -104,7 +105,9 @@ const TimePicker: FunctionComponent<TimePickerProps> = ({
     ariaDescribedby,
     ariaRequired,
     onChange,
+    ...props
 }) => {
+    const id = useUniqueId(controlId);
     const [selectedDate, setSelectedDate] = useState<Date | null>(value || null);
 
     const handleDateChange = (date?: Date | null) => {
@@ -115,7 +118,8 @@ const TimePicker: FunctionComponent<TimePickerProps> = ({
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardTimePicker
-                id={controlId}
+                id={id}
+                data-testid={props['data-testid']}
                 PopoverProps={{
                     anchorOrigin: {
                         vertical: 'bottom',

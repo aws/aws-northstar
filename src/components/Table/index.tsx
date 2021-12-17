@@ -352,6 +352,8 @@ export default function Table<D extends object>({
         return rows.filter((row: Row<D> & Partial<UseGroupByRowProps<D>>) => row.isGrouped).length;
     }, [rows]);
 
+    const testId = props['data-testid'] || 'table';
+
     const settingsBarProps = {
         pageIndex: pageIndex || 0,
         pageSize: pageSize || DEFAULT_PAGE_SIZE,
@@ -392,11 +394,13 @@ export default function Table<D extends object>({
             disableFilters && disableSettings && disablePagination ? null : (
                 <ContainerHeaderContent {...containerHeaderContentProps} />
             ),
+        'data-testid': testId,
     };
 
     const tableHeadProps = {
         headerGroups,
         styles,
+        'data-testid': `${testId}-head`,
     };
 
     const tableBodyProps = {
@@ -405,6 +409,7 @@ export default function Table<D extends object>({
         wrapText,
         prepareRow,
         styles,
+        'data-testid': `${testId}-body`,
     };
 
     const tableFooterProps = {
@@ -413,6 +418,7 @@ export default function Table<D extends object>({
         styles,
         colSpan: columns.length,
         pageLength: page?.length,
+        'data-testid': `${testId}-footer`,
     };
 
     return (

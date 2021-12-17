@@ -40,7 +40,6 @@ describe('Flashbar', () => {
                 content: 'message 3 content',
             },
         ];
-
         const { getByText } = render(<Flashbar items={items} />);
         expect(getByText('message 1')).toBeInTheDocument();
         expect(getByText('message 2')).toBeInTheDocument();
@@ -89,5 +88,29 @@ describe('Flashbar', () => {
         const results = await axe(container);
 
         expect(results).toHaveNoViolations();
+    });
+
+    it('can be accessed by custom test-id', () => {
+        const items: FlashbarMessage[] = [
+            {
+                id: 'message-1',
+                header: 'message 1',
+                type: 'success',
+                dismissible: true,
+                content: 'message 1 content',
+            },
+            {
+                id: 'message-2',
+                header: 'message 2',
+                type: 'error',
+                content: 'message 2 content',
+            },
+        ];
+        const { getByTestId } = render(<Flashbar items={items} data-testid="flashbar-1" />);
+        expect(getByTestId('flashbar-1')).toBeInTheDocument();
+        expect(getByTestId('flashbar-1-item-message-1')).toBeInTheDocument();
+        expect(getByTestId('flashbar-1-item-message-1-body')).toBeInTheDocument();
+        expect(getByTestId('flashbar-1-item-message-1-dismiss-button')).toBeInTheDocument();
+        expect(getByTestId('flashbar-1-item-message-2')).toBeInTheDocument();
     });
 });

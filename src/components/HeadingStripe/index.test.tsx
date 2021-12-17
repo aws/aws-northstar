@@ -31,4 +31,9 @@ describe('HeadingStripe', () => {
 
         expect(getByRole('button')).toBeVisible();
     });
+
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(<HeadingStripe title="title" data-testid="heading-stripe-1" />);
+        expect(getByTestId('heading-stripe-1')).toBeInTheDocument();
+    });
 });

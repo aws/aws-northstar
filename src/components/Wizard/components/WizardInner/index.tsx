@@ -64,6 +64,7 @@ const WizardInner: FunctionComponent<WizardInnerProps> = ({
     onStepNavigationClick,
     onSubmitButtonClick,
     onCancelButtonClick,
+    ...props
 }) => {
     const actions = useMemo(() => {
         return (
@@ -100,7 +101,7 @@ const WizardInner: FunctionComponent<WizardInnerProps> = ({
     ]);
 
     return (
-        <Container>
+        <Container data-testid={props['data-testid']}>
             <Box display="flex">
                 <Box>
                     <Box mr={8}>

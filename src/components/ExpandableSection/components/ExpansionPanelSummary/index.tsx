@@ -57,11 +57,13 @@ const ExpansionPanelSummary: FunctionComponent<ExpansionPanelSummaryProps> = ({
     expanded,
     header,
     description,
+    ...props
 }) => {
     const styles = useStyles();
     const isContainer = variant === 'container';
     return (
         <AccordionSummary
+            {...props}
             className={clsx({
                 [styles.rootContainer]: isContainer,
                 [styles.root]: !isContainer,

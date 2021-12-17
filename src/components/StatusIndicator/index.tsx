@@ -31,12 +31,13 @@ export interface StatusIndicatorProps {
     children?: ReactNode | string;
 }
 
+const icons = {
+    positive: CheckCircleOutlineOutlinedIcon,
+    negative: CancelOutlinedIcon,
+    warning: ReportProblemOutlinedIcon,
+};
+
 const getIconByStatusType = (statusType: string, title?: string) => {
-    const icons = {
-        positive: CheckCircleOutlineOutlinedIcon,
-        negative: CancelOutlinedIcon,
-        warning: ReportProblemOutlinedIcon,
-    };
     const IconComponent = icons[statusType] ?? InfoOutlinedIcon;
     return <IconComponent fontSize="small" titleAccess={title} />;
 };
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
  * A status indicator is a small component that communicates the state of a resource (either in its entirety,
  * or a particular facet of a resource) in a compact form that is easily embedded in a card, table, list or header view.
  */
-const StatusIndicator: FunctionComponent<StatusIndicatorProps> = ({ statusType, children }) => {
+const StatusIndicator: FunctionComponent<StatusIndicatorProps> = ({ statusType, children, ...props }) => {
     const styles = useStyles({});
     const variantMap = {
         positive: styles.positive,
@@ -73,7 +74,7 @@ const StatusIndicator: FunctionComponent<StatusIndicatorProps> = ({ statusType, 
     };
     const className = clsx(styles.root, variantMap[statusType]);
     return (
-        <Box className={className}>
+        <Box className={className} data-testid={props['data-testid']}>
             {getIconByStatusType(statusType, children?.toString())}
             <Text>{children}</Text>
         </Box>

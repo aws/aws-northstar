@@ -27,10 +27,16 @@ interface RadioButtonMappingProps {
     description?: string;
 }
 
-const RadioButtonMapping: FunctionComponent<RadioButtonMappingProps> = ({ option, name, description }) => {
+const RadioButtonMapping: FunctionComponent<RadioButtonMappingProps> = ({ option, name, description, ...rest }) => {
     const { input } = useFieldApi({ description, name, type: 'radio', value: option.value });
     return (
-        <RadioButton {...input} value={option.value} name={name} description={description}>
+        <RadioButton
+            {...input}
+            value={option.value}
+            name={name}
+            description={description}
+            data-testid={rest['data-testid']}
+        >
             {option.label}
         </RadioButton>
     );
@@ -47,6 +53,7 @@ const RadioGroupMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         stretch,
         showError,
         meta: { error, submitFailed },
+        ...rest
     } = useFieldApi(props);
     const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
@@ -60,6 +67,7 @@ const RadioGroupMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
             stretch={stretch}
         >
             <RadioGroup
+                {...rest}
                 {...input}
                 items={options.map((option: Option) => (
                     <RadioButtonMapping
@@ -67,6 +75,7 @@ const RadioGroupMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
                         name={input.name}
                         description={option.description}
                         key={option.value}
+                        data-testid={rest['data-testid'] ? `${rest['data-testid']}-${option.value}` : undefined}
                     />
                 ))}
             />

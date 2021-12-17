@@ -28,6 +28,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '../../../Button';
 import Box from '../../../../layouts/Box';
+import useUniqueId from '../../../../hooks/useUniqueId';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -66,9 +67,13 @@ const FlashbarItem: FunctionComponent<FlashbarMessage> = ({
     buttonText,
     header,
     content,
+    ...props
 }) => {
     const styles = useStyles({});
     const [show, setShow] = React.useState(true);
+    const id = useUniqueId(props.id);
+
+    const testId = props['data-testid'] || `flashbar-item-${id}`;
 
     const actions = useMemo(() => {
         return (
@@ -77,6 +82,7 @@ const FlashbarItem: FunctionComponent<FlashbarMessage> = ({
                 {dismissible && (
                     <IconButton
                         aria-label="Close"
+                        data-testid={`${testId}-dismiss-button`}
                         onClick={() => {
                             onDismiss?.();
                             setShow(false);
@@ -87,13 +93,14 @@ const FlashbarItem: FunctionComponent<FlashbarMessage> = ({
                 )}
             </Box>
         );
-    }, [buttonText, styles.button, onDismiss, onButtonClick, setShow, dismissible]);
+    }, [buttonText, styles.button, onDismiss, onButtonClick, setShow, dismissible, testId]);
 
     const body = useMemo(() => {
         const props = {
             severity: loading ? 'info' : type,
             iconMapping,
             action: actions,
+            'data-testid': `${testId}-body`,
             ...(loading && { icon: <CircularProgress className={styles.loading} size="16px" /> }),
         };
 
@@ -113,9 +120,9 @@ const FlashbarItem: FunctionComponent<FlashbarMessage> = ({
                 </MaterialAlert>
             </Paper>
         );
-    }, [type, actions, header, content, loading, styles]);
+    }, [type, actions, header, content, loading, styles, testId]);
 
-    return <Box data-testid={type}>{show && body}</Box>;
+    return <Box data-testid={testId}>{show && body}</Box>;
 };
 
 export default FlashbarItem;

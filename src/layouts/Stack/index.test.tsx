@@ -20,24 +20,24 @@ import Stack from '.';
 
 describe('Stack', () => {
     it('renders 1 item', () => {
-        const { getAllByTestId } = render(
+        const { getByTestId, getAllByTestId } = render(
             <Stack>
                 <Placeholder />
             </Stack>
         );
-
+        expect(getByTestId('layout-stack')).toBeInTheDocument();
         expect(getAllByTestId('placeholder')).toHaveLength(1);
     });
 
     it('renders a list of items', () => {
-        const { getAllByTestId } = render(
-            <Stack>
+        const { getAllByTestId, getByTestId } = render(
+            <Stack data-testid="stack-element">
                 <Placeholder />
                 <Placeholder />
                 <Placeholder />
             </Stack>
         );
-
+        expect(getByTestId('stack-element')).toBeInTheDocument();
         expect(getAllByTestId('placeholder')).toHaveLength(3);
     });
 });

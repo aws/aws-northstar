@@ -202,7 +202,12 @@ const ProgressBar: FunctionComponent<ProgressBarProps & Omit<LinearProgressProps
             }
 
             return (
-                <ProgressBarComponent value={value || (value === 0 ? 0 : 100)} displayValue={displayValue} {...props} />
+                <ProgressBarComponent
+                    value={value || (value === 0 ? 0 : 100)}
+                    displayValue={displayValue}
+                    {...props}
+                    data-testid={`${testId}-indicator`}
+                />
             );
         };
 
@@ -211,8 +216,10 @@ const ProgressBar: FunctionComponent<ProgressBarProps & Omit<LinearProgressProps
             [variant]
         );
 
+        const testId = props['data-testid'] || 'progress-bar';
+
         return (
-            <>
+            <div data-testid={testId}>
                 {label && <Heading variant="h3">{label}</Heading>}
                 {description && (
                     <Typography className={classes.description} variant="body1">
@@ -225,7 +232,7 @@ const ProgressBar: FunctionComponent<ProgressBarProps & Omit<LinearProgressProps
                         {additionalInfo}
                     </Typography>
                 )}
-            </>
+            </div>
         );
     };
 

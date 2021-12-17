@@ -67,6 +67,15 @@ describe('Container', () => {
         expect(getByText(footer)).toBeInTheDocument();
     });
 
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <Container title={title} data-testid="container-1">
+                <Text>{bodyText}</Text>
+            </Container>
+        );
+        expect(getByTestId('container-1')).toBeInTheDocument();
+    });
+
     describe('headerContent', () => {
         const header = 'Header';
 

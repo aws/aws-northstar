@@ -63,8 +63,9 @@ const Link: FunctionComponent<LinkProps> = ({
     underlineHover = true,
     forceExternal = false,
     onClick,
+    ...props
 }) => {
-    const classes = useStyles({});
+    const classes = useStyles();
     const isExternal = useMemo(() => forceExternal || externalPattern.test(href), [forceExternal, href]);
 
     return (
@@ -75,6 +76,7 @@ const Link: FunctionComponent<LinkProps> = ({
             href={href}
             to={href}
             variant="body1"
+            data-testid={props['data-testid']}
             rel={isExternal ? 'noreferrer' : undefined}
             onClick={onClick}
         >

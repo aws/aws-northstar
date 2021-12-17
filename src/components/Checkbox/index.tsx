@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent, ChangeEvent, ReactNode } from 'react';
+import React, { FunctionComponent, ChangeEvent, ReactNode, useMemo } from 'react';
 import Typography from '@material-ui/core/Typography';
 import MaterialCheckbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -104,18 +104,22 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
     ariaLabelledby,
     name,
     value,
+    ...props
 }) => {
     const classes = useStyles();
 
-    const label = (
-        <>
-            {children}
-            {description && (
-                <Typography variant="subtitle1" component="div">
-                    {description}
-                </Typography>
-            )}
-        </>
+    const label = useMemo(
+        () => (
+            <>
+                {children}
+                {description && (
+                    <Typography variant="subtitle1" component="div">
+                        {description}
+                    </Typography>
+                )}
+            </>
+        ),
+        [children, description]
     );
 
     const muiCheckBox = (
@@ -134,6 +138,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
                 'aria-labelledby': ariaLabelledby,
                 name,
             }}
+            data-testid={props['data-testid']}
         />
     );
 

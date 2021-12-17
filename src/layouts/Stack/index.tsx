@@ -28,11 +28,12 @@ export interface StackProps {
 /**
  * Renders components vertically with consistent spacing between them.
  */
-const Stack: FunctionComponent<StackProps> = ({ children, spacing = 'm' }) => {
+const Stack: FunctionComponent<StackProps> = ({ children, spacing = 'm', ...props }) => {
     const stackItems = Children.toArray(children);
     const lastIndex = stackItems.length - 1;
+    const testId = props['data-testid'] || 'layout-stack';
     return (
-        <Box data-testid="layout-stack">
+        <Box data-testid={testId}>
             {stackItems.map((child, index) => (
                 <Box key={index} mb={index === lastIndex ? 'undefined' : spacingMapping[spacing]}>
                     {child}

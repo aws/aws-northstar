@@ -87,4 +87,14 @@ describe('Modal', () => {
         expect(getByTestId('modal').className).not.toMatch(/cycloramaActive/);
         expect(handleClose).toHaveBeenCalled();
     });
+
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <Modal title="modal title" visible data-testid="modal-1">
+                model body
+            </Modal>
+        );
+        expect(getByTestId('modal-1')).toBeInTheDocument();
+        expect(getByTestId('modal-1-inner')).toBeInTheDocument();
+    });
 });

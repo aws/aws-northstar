@@ -163,8 +163,10 @@ const Alert: FunctionComponent<AlertProps> = ({
         [renderAlertBody, mapProps]
     );
 
+    const testId = props['data-testid'] || props.type;
+
     return (
-        <Box data-testid={props.type} width="100%">
+        <Box data-testid={testId} width="100%">
             {visible && show && renderAlert(props)}
         </Box>
     );

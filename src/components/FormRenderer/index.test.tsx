@@ -155,6 +155,17 @@ describe('FormRenderer', () => {
 
             expect(getByDisplayValue('My name')).toBeVisible();
         });
+
+        it('can be accessed by custom test-id', () => {
+            const schemaWithTestId = {
+                ...schema,
+                'data-testid': 'form-renderer-1',
+            };
+            const { getByTestId } = render(
+                <FormRenderer schema={schemaWithTestId} onSubmit={handleSubmit} onCancel={handleCancel} />
+            );
+            expect(getByTestId('form-renderer-1')).toBeInTheDocument();
+        });
     });
 
     describe('Checkbox', () => {
@@ -180,6 +191,7 @@ describe('FormRenderer', () => {
                         },
                     ],
                     isRequired: true,
+                    'data-testid': 'checkbox-1',
                     validate: [
                         {
                             type: validatorTypes.REQUIRED,
@@ -197,12 +209,15 @@ describe('FormRenderer', () => {
                         name: 'checkbox',
                         label: 'Checkbox',
                         isRequired: true,
+                        'data-testid': 'checkbox-1',
                     },
                 ],
             };
-            const { getByLabelText, getByText } = render(
+            const { getByLabelText, getByText, getByTestId } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
+
+            expect(getByTestId('checkbox-1')).toBeInTheDocument();
 
             fireEvent.click(getByLabelText('Checkbox'));
             fireEvent.click(getByText('Submit'));
@@ -211,9 +226,14 @@ describe('FormRenderer', () => {
         });
 
         it('should render checkboxes', () => {
-            const { getByLabelText, getByText } = render(
+            const { getByLabelText, getByText, getByTestId } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
+
+            expect(getByTestId('checkbox-1')).toBeInTheDocument();
+            expect(getByTestId('checkbox-1-1')).toBeInTheDocument();
+            expect(getByTestId('checkbox-1-2')).toBeInTheDocument();
+            expect(getByTestId('checkbox-1-3')).toBeInTheDocument();
 
             fireEvent.click(getByLabelText('Option 1'));
             fireEvent.click(getByLabelText('Option 3'));
@@ -275,6 +295,7 @@ describe('FormRenderer', () => {
                     treeItems: treeItems,
                     multiSelect: true,
                     defaultExpanded: ['1', '2', '5'],
+                    'data-testid': 'tree-view-1',
                     validate: [
                         {
                             type: validatorTypes.REQUIRED,
@@ -285,9 +306,12 @@ describe('FormRenderer', () => {
         };
 
         it('should render Treeview', () => {
-            const { getByText } = render(
+            const { getByText, getByTestId } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
+
+            expect(getByTestId('tree-view-1')).toBeInTheDocument();
+
             act(() => {
                 fireEvent.click(getByText('Node 1.1'));
                 fireEvent.click(getByText('Submit'));
@@ -366,15 +390,17 @@ describe('FormRenderer', () => {
                             ],
                         },
                     ],
+                    'data-testid': 'wizard-1',
                 },
             ],
         };
 
         it('should render Wizard', () => {
-            const { getByText, getAllByText, getByLabelText } = render(
+            const { getByText, getAllByText, getByLabelText, getByTestId } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
             expect(getAllByText('Step 1')).toHaveLength(3);
+            expect(getByTestId('wizard-1')).toBeInTheDocument();
             expect(getByText('Descrirption for Step 1')).toBeVisible();
             act(() => {
                 fireEvent.change(getByLabelText('textarea'), { target: { value: 'my content' } });
@@ -444,6 +470,7 @@ describe('FormRenderer', () => {
                     title: 'Subform 1',
                     description: 'This is a subform',
                     name: 'subform1',
+                    'data-testid': 'subform-1',
                     fields: [
                         {
                             component: componentTypes.TEXT_FIELD,
@@ -461,9 +488,10 @@ describe('FormRenderer', () => {
         };
 
         it('should render Subform', () => {
-            const { getByText, getByLabelText } = render(
+            const { getByText, getByLabelText, getByTestId } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
+            expect(getByTestId('subform-1')).toBeInTheDocument();
             expect(getByText('Subform 1')).toBeVisible();
             expect(getByText('This is a subform')).toBeVisible();
             act(() => {
@@ -556,6 +584,7 @@ describe('FormRenderer', () => {
                     title: 'Additional information',
                     description: 'This is for additional information',
                     name: 'additionalInfo',
+                    'data-testid': 'expandable-section-1',
                     fields: [
                         {
                             component: componentTypes.TEXT_FIELD,
@@ -573,12 +602,13 @@ describe('FormRenderer', () => {
         };
 
         it('should render ExpandableSection', () => {
-            const { getByText, getByLabelText } = render(
+            const { getByText, getByLabelText, getByTestId } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
             expect(getByText('Additional information')).toBeVisible();
             expect(getByText('This is for additional information')).toBeVisible();
             expect(getByLabelText('Name')).not.toBeVisible();
+            expect(getByTestId('expandable-section-1')).toBeInTheDocument();
             act(() => {
                 fireEvent.click(getByText('Additional information'));
                 fireEvent.change(getByLabelText('Name'), { target: { value: 'my name' } });
@@ -615,15 +645,21 @@ describe('FormRenderer', () => {
                     name: 'switch',
                     label: 'Switch',
                     initialValue: false,
+                    'data-testid': 'switch-1',
                 },
             ],
         };
         it('should render Switch', async () => {
-            const { getByLabelText, getByText } = render(
+            const { getByLabelText, getByText, getByTestId } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
             expect(getByLabelText('Switch')).toBeInTheDocument();
-            fireEvent.click(getByText('Submit'));
+            expect(getByTestId('switch-1')).toBeInTheDocument();
+
+            act(() => {
+                fireEvent.click(getByText('Submit'));
+            });
+
             expect(handleSubmit).toHaveBeenCalledWith({ switch: false }, expect.any(Object), expect.any(Function));
         });
     });
@@ -636,6 +672,7 @@ describe('FormRenderer', () => {
                     component: componentTypes.DATE_PICKER,
                     name: 'datePicker',
                     label: 'Date picker',
+                    'data-testid': 'date-picker-1',
                     isRequired: true,
                     validate: [
                         {
@@ -647,11 +684,13 @@ describe('FormRenderer', () => {
         };
 
         it('should render Datepicker', () => {
-            const { getByLabelText, getByText } = render(
+            const { getByLabelText, getByText, getByTestId } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
 
             expect(getByText('Date picker')).toBeVisible();
+            expect(getByTestId('date-picker-1')).toBeInTheDocument();
+
             act(() => {
                 fireEvent.change(getByLabelText('Date picker'), { target: { value: '20200101' } });
             });
@@ -708,6 +747,7 @@ describe('FormRenderer', () => {
                     component: componentTypes.TIME_PICKER,
                     name: 'timePicker',
                     label: 'Time picker',
+                    'data-testid': 'time-picker-1',
                     isRequired: true,
                     validate: [
                         {
@@ -719,11 +759,13 @@ describe('FormRenderer', () => {
         };
 
         it('should render a TimePicker', () => {
-            const { getByLabelText, getByText } = render(
+            const { getByLabelText, getByText, getByTestId } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
 
             expect(getByText('Time picker')).toBeVisible();
+            expect(getByTestId('time-picker-1')).toBeInTheDocument();
+
             act(() => {
                 fireEvent.change(getByLabelText('Time picker'), { target: { value: '10:35 AM' } });
             });
@@ -768,6 +810,7 @@ describe('FormRenderer', () => {
                             value: '3',
                         },
                     ],
+                    'data-testid': 'radio-1',
                     isRequired: true,
                     validate: [
                         {
@@ -778,13 +821,17 @@ describe('FormRenderer', () => {
             ],
         };
         it('should render radio buttons', () => {
-            const { getByLabelText, getByText, getAllByRole } = render(
+            const { getByLabelText, getByText, getAllByRole, getByTestId } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
 
             expect(getByText('Radio')).toBeVisible();
             expect(getAllByRole('radio')).toHaveLength(3);
             expect(getByText('Description 1')).toBeVisible();
+            expect(getByTestId('radio-1')).toBeInTheDocument();
+            expect(getByTestId('radio-1-1')).toBeInTheDocument();
+            expect(getByTestId('radio-1-2')).toBeInTheDocument();
+            expect(getByTestId('radio-1-3')).toBeInTheDocument();
 
             fireEvent.click(getByLabelText('Option 3'));
             fireEvent.click(getByText('Submit'));
@@ -832,6 +879,7 @@ describe('FormRenderer', () => {
         it('should render Select', () => {
             const schema = {
                 ...baseSchema,
+                'data-testid': 'select-1',
                 fields: [field],
             };
 
@@ -840,7 +888,7 @@ describe('FormRenderer', () => {
             );
 
             expect(getByText('Select')).toBeVisible();
-            expect(getByTestId('select')).toBeInTheDocument();
+            expect(getByTestId('select-1')).toBeInTheDocument();
         });
 
         it('should render Autosuggest when isSearchable is true', () => {
@@ -881,6 +929,8 @@ describe('FormRenderer', () => {
     });
 
     describe('FieldArray', () => {
+        const fieldArrayName = 'fieldArray';
+        const fieldArrayTestId = 'field-array-1';
         const schema = {
             ...baseSchema,
             fields: [
@@ -888,11 +938,12 @@ describe('FormRenderer', () => {
                     component: componentTypes.FIELD_ARRAY,
                     label: 'Attribute Editor',
                     description: 'This is a form array',
-                    name: 'fieldArray',
+                    name: fieldArrayName,
                     helperText: 'You can add up to 6 more items.',
                     minItems: 1,
                     maxItems: 3,
                     noItemsMessage: 'Please add new item',
+                    'data-testid': fieldArrayTestId,
                     defaultItem: {
                         key: 'key',
                         value: 'value',
@@ -933,7 +984,7 @@ describe('FormRenderer', () => {
         };
 
         const fieldArrayTest = (schema: any) => {
-            const { getByText, getAllByRole, getByLabelText } = render(
+            const { getByText, getAllByRole, getByLabelText, getByTestId } = render(
                 <FormRenderer schema={schema} onSubmit={handleSubmit} onCancel={handleCancel} />
             );
 
@@ -941,6 +992,8 @@ describe('FormRenderer', () => {
             expect(getByText('This is a form array')).toBeVisible();
             expect(getByText('You can add up to 6 more items.')).toBeVisible();
             expect(getByText('Please add new item'));
+            expect(getByTestId(fieldArrayTestId)).toBeInTheDocument();
+            expect(getByTestId(`${fieldArrayTestId}-add-button`)).toBeInTheDocument();
 
             act(() => {
                 fireEvent.click(getAllByRole('button')[0]);
@@ -948,7 +1001,14 @@ describe('FormRenderer', () => {
 
             expect(getByText('Key')).toBeVisible();
             expect(getByText('Value')).toBeVisible();
-
+            expect(getByTestId(`${fieldArrayTestId}-${fieldArrayName}[0]`)).toBeInTheDocument();
+            expect(
+                getByTestId(`${fieldArrayTestId}-${fieldArrayName}[0]-${fieldArrayName}[0].key`)
+            ).toBeInTheDocument();
+            expect(
+                getByTestId(`${fieldArrayTestId}-${fieldArrayName}[0]-${fieldArrayName}[0].value`)
+            ).toBeInTheDocument();
+            expect(getByTestId(`${fieldArrayTestId}-${fieldArrayName}[0]-remove-button`)).toBeInTheDocument();
             act(() => {
                 fireEvent.change(getByLabelText('Key'), { target: { value: 'key' } });
                 fireEvent.change(getByLabelText('Value'), { target: { value: 'value' } });

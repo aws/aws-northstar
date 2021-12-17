@@ -26,7 +26,9 @@ describe('FlashbarItem', () => {
     messageTypes.forEach((messageType) => {
         describe(`with the ${messageType} type`, () => {
             it(`should render the ${messageType} styled FlashbarItem`, () => {
-                const { getByTestId } = render(<FlashbarItem type={messageType} header="header" content="content" />);
+                const { getByTestId } = render(
+                    <FlashbarItem type={messageType} data-testid={messageType} header="header" content="content" />
+                );
                 expect(getByTestId(messageType)).toBeInTheDocument();
             });
 

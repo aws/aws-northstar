@@ -34,6 +34,7 @@ const DatepickerMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         stretch,
         showError,
         meta: { error, submitFailed },
+        ...rest
     } = useFieldApi(props);
     const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
@@ -47,6 +48,7 @@ const DatepickerMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
             stretch={stretch}
         >
             <Datepicker
+                {...rest}
                 {...input}
                 placeholder={placeholder}
                 controlId={controlId}

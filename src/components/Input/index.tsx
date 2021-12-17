@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent, ReactElement, useEffect } from 'react';
+import React, { FunctionComponent, ReactElement, useCallback, useEffect, useMemo } from 'react';
 import MaterialInput, { OutlinedInputProps as MaterialInputProps } from '@material-ui/core/OutlinedInput';
 import { v4 as uuidv4 } from 'uuid';
 import SearchIcon from '@material-ui/icons/Search';
@@ -129,24 +129,32 @@ const Input: FunctionComponent<InputProps> = ({ onChange, ...props }): ReactElem
         setInputValue(props.value === undefined ? '' : props.value);
     }, [props.value]);
 
-    const handleChange = (value: string): void => {
-        onChange?.(value);
-        setShowClearInputButton(true);
-        setInputValue(value);
-    };
+    const handleChange = useCallback(
+        (value: string) => {
+            onChange?.(value);
+            setShowClearInputButton(true);
+            setInputValue(value);
+        },
+        [onChange]
+    );
 
-    const clearSearchInput = (): ReactElement => (
-        <InputAdornment position="start">
-            <ClearIcon
-                color="action"
-                data-testid="clear-input"
-                onClick={() => {
-                    setShowClearInputButton(false);
-                    setInputValue('');
-                    handleChange('');
-                }}
-            />
-        </InputAdornment>
+    const testId = props['data-testid'] || `input-${props.type || 'text'}`;
+
+    const clearSearchInput = useMemo(
+        () => (
+            <InputAdornment position="start">
+                <ClearIcon
+                    color="action"
+                    data-testid={`${testId}-clear-input`}
+                    onClick={() => {
+                        setShowClearInputButton(false);
+                        setInputValue('');
+                        handleChange('');
+                    }}
+                />
+            </InputAdornment>
+        ),
+        [testId, handleChange]
     );
 
     return (
@@ -161,11 +169,12 @@ const Input: FunctionComponent<InputProps> = ({ onChange, ...props }): ReactElem
                     </InputAdornment>
                 )
             }
-            endAdornment={props.type === 'search' && showClearInputButton && clearSearchInput()}
+            endAdornment={props.type === 'search' && showClearInputButton && clearSearchInput}
             value={inputValue}
             onChange={(e) => handleChange(e.target.value)}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
+            data-testid={testId}
         />
     );
 };

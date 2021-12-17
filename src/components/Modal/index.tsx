@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { FunctionComponent, useState, useEffect, ReactNode } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
@@ -40,7 +40,16 @@ export interface ModalProps {
 }
 
 /** A modal is a pop-up dialog that can be used to prompt a user for confirmation. */
-const Modal = ({ visible = false, children, title, subtitle, footer, onClose, width }: ModalProps) => {
+const Modal: FunctionComponent<ModalProps> = ({
+    visible = false,
+    children,
+    title,
+    subtitle,
+    footer,
+    onClose,
+    width,
+    ...props
+}) => {
     const [isVisible, setVisible] = useState(false);
     const useStyles = makeStyles({
         cyclorama: {
@@ -88,9 +97,11 @@ const Modal = ({ visible = false, children, title, subtitle, footer, onClose, wi
         </IconButton>
     );
 
+    const testId = props['data-testid'] || 'modal';
+
     return (
-        <section data-testid="modal" className={clsx(styles.cyclorama, { [styles.cycloramaActive]: isVisible })}>
-            <div data-testid="modal-inner" className={styles.modalPlaceholder}>
+        <section data-testid={testId} className={clsx(styles.cyclorama, { [styles.cycloramaActive]: isVisible })}>
+            <div data-testid={`${testId}-inner`} className={styles.modalPlaceholder}>
                 <Container title={title} subtitle={subtitle} actionGroup={<CloseButton />} footerContent={footer}>
                     {children}
                 </Container>

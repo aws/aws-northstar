@@ -38,6 +38,11 @@ describe('Badge', () => {
         expect(getByText('0')).toBeInTheDocument();
     });
 
+    it('can be accessed by testid', async () => {
+        const { getByTestId } = render(<Badge content="some text" data-testid="badge"></Badge>);
+        expect(getByTestId('badge')).toBeInTheDocument();
+    });
+
     it('renders accessible component', async () => {
         const { container } = render(<Badge content="some text"></Badge>);
         const results = await axe(container);

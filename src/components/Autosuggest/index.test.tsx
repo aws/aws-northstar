@@ -101,6 +101,13 @@ describe('Autosuggest', () => {
         expect(getByPlaceholderText('input-1')).toHaveValue(preSelectedValue.label);
     });
 
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <Autosuggest options={awsServices} placeholder="input-1" data-testid="autosuggest-1" />
+        );
+        expect(getByTestId('autosuggest-1')).toBeInTheDocument();
+    });
+
     describe('Custom Label', () => {
         const customOptions = [
             {

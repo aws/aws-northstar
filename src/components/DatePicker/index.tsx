@@ -154,6 +154,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
         <MuiPickersUtilsProvider utils={DateFnsUtils} locale={localeMap[locale]}>
             <MaterialKeyboardDatePicker
                 id={props.controlId}
+                data-testid={props['data-testid']}
                 PopoverProps={{
                     anchorOrigin: {
                         vertical: 'bottom',

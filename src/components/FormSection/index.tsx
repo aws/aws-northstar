@@ -28,9 +28,9 @@ export interface FormSectionProps {
 }
 
 /**A form section separates a group of information within a form.*/
-const FormSection: FunctionComponent<FormSectionProps> = ({ header, description, children, footer }) => {
+const FormSection: FunctionComponent<FormSectionProps> = ({ header, description, children, footer, ...props }) => {
     return (
-        <Container title={header} subtitle={description} footerContent={footer}>
+        <Container title={header} subtitle={description} footerContent={footer} data-testid={props['data-testid']}>
             {children}
         </Container>
     );

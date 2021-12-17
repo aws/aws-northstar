@@ -29,6 +29,17 @@ describe('Link', () => {
         expect(getByRole('link')).toBeInTheDocument();
     });
 
+    it('can be accessed by custom testid', () => {
+        const { getByTestId } = render(
+            <BrowserRouter>
+                <Link href="/route1" data-testid="link">
+                    Normal Link
+                </Link>
+            </BrowserRouter>
+        );
+        expect(getByTestId('link')).toBeInTheDocument();
+    });
+
     describe('with external url', () => {
         it('renders external icon', () => {
             const { getByTitle } = render(

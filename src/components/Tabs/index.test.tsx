@@ -59,6 +59,18 @@ describe('Tabs', () => {
         expect(getByText(tabs[0].content)).toBeVisible();
     });
 
+    it('can be accessed by custom test-id', () => {
+        const props = { tabs };
+        const { getByTestId } = render(<Tabs {...props} data-testid="tabs-1" />);
+        expect(getByTestId('tabs-1')).toBeInTheDocument();
+        expect(getByTestId('tabs-1-header-first')).toBeInTheDocument();
+        expect(getByTestId('tabs-1-content-first')).toBeVisible();
+        expect(getByTestId('tabs-1-header-second')).toBeInTheDocument();
+        expect(getByTestId('tabs-1-content-second')).not.toBeVisible();
+        expect(getByTestId('tabs-1-header-third')).toBeInTheDocument();
+        expect(getByTestId('tabs-1-content-third')).not.toBeVisible();
+    });
+
     it('renders with container variant and without padding in the content area', () => {
         const { getByText } = render(<Tabs tabs={tabs} variant="container" paddingContentArea={false} />);
         expect(getByText(tabs[0].content)).toBeVisible();

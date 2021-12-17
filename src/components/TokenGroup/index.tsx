@@ -34,14 +34,15 @@ export interface TokenGroupProps {
 }
 
 /** A token group can be used to display dismissible tags or properties */
-const TokenGroup: FunctionComponent<TokenGroupProps> = ({ items, onDismiss, inline = true }) => {
+const TokenGroup: FunctionComponent<TokenGroupProps> = ({ items, onDismiss, inline = true, ...props }) => {
     const WrapperComponent = useMemo(() => {
         return inline ? Inline : Stack;
     }, [inline]);
+    const testId = props['data-testid'] || 'token-group';
     return (
-        <WrapperComponent spacing={inline ? 'm' : 's'}>
+        <WrapperComponent spacing={inline ? 'm' : 's'} data-testid={testId}>
             {items.map((item) => (
-                <Token key={item.value} item={item} onDismiss={onDismiss} />
+                <Token key={item.value} data-testid={`${testId}-${item.value}`} item={item} onDismiss={onDismiss} />
             ))}
         </WrapperComponent>
     );

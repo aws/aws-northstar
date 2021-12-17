@@ -78,6 +78,11 @@ describe('Checkbox', () => {
         });
     });
 
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(<Checkbox data-testid="checkbox-1" />);
+        expect(getByTestId('checkbox-1')).toBeInTheDocument();
+    });
+
     it('renders accessible component', async () => {
         const { container } = render(<Checkbox>label</Checkbox>);
         const results = await axe(container);

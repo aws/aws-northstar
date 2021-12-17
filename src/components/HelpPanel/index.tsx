@@ -65,23 +65,26 @@ const HelpPanel: FunctionComponent<HelpPanelProps> = ({
     children,
     learnMoreFooter,
     loading = false,
+    ...props
 }) => {
     const styles = useStyles();
 
+    const testId = props['data-testid'] || 'app-help-panel';
+
     const header = useMemo(() => {
         return (
-            <Box className={styles.header}>
+            <Box className={styles.header} data-testid={`${testId}-header`}>
                 <Heading variant="h2">{headerLabel}</Heading>
             </Box>
         );
-    }, [headerLabel, styles]);
+    }, [headerLabel, styles, testId]);
 
     const content = useMemo(() => {
         return (
-            <Box className={styles.content}>
+            <Box className={styles.content} data-testid={`${testId}-content`}>
                 {children}
                 {learnMoreFooter && (
-                    <>
+                    <div data-testid={`${testId}-footer`}>
                         <Divider className={styles.divider} />
                         <Stack spacing="s">
                             <Typography variant="h3" className={styles.learnMore}>
@@ -91,14 +94,14 @@ const HelpPanel: FunctionComponent<HelpPanelProps> = ({
                                 <Fragment key={index}>{link}</Fragment>
                             ))}
                         </Stack>
-                    </>
+                    </div>
                 )}
             </Box>
         );
-    }, [children, learnMoreFooter, styles]);
+    }, [children, learnMoreFooter, styles, testId]);
 
     return (
-        <Box>
+        <Box data-testid={testId}>
             {loading ? (
                 <LoadingIndicator />
             ) : (

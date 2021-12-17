@@ -42,6 +42,7 @@ const WizardStep: FunctionComponent<WizardStepProps> = ({
     onPreviousButtonClick,
     submitButtonText,
     isSubmitting,
+    ...props
 }) => {
     const [showError, setShowError] = useState(false);
     const formOptions = useFormApi();
@@ -68,6 +69,7 @@ const WizardStep: FunctionComponent<WizardStepProps> = ({
 
     return (
         <WizardInner
+            {...props}
             step={{
                 title,
                 description,

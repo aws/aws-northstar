@@ -69,4 +69,9 @@ describe('Toggle', () => {
         };
         expect(mapProps(inputProps)).toEqual(expectedMappedProps);
     });
+
+    it('can be accessed by testid', async () => {
+        const { getByTestId } = render(<Toggle label="On" data-testid="toggle" />);
+        expect(getByTestId('toggle')).toBeInTheDocument();
+    });
 });

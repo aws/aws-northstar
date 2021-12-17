@@ -69,6 +69,11 @@ describe('Textarea', () => {
         expect(getByPlaceholderText('textarea')).toHaveClass('custom1', 'custom2');
     });
 
+    it('can be accessed by testid', async () => {
+        const { getByTestId } = render(<Textarea placeholder="textarea" data-testid="textarea-1" />);
+        expect(getByTestId('textarea-1')).toBeInTheDocument();
+    });
+
     it('maps props correctly', () => {
         const inputProps: TextareaProps = {
             placeholder: 'placeholder',

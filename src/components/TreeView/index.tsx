@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { FunctionComponent, ChangeEvent } from 'react';
+import React, { FunctionComponent, ChangeEvent, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MuiTreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -75,20 +75,29 @@ const TreeView: FunctionComponent<TreeViewProps> = ({
     onNodeToggle,
     defaultSelected,
     multiSelect,
+    ...props
 }) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState<string[]>(defaultExpanded || []);
     const [selected, setSelected] = React.useState<string[]>(defaultSelected || []);
 
-    const handleToggle = (event: React.ChangeEvent<{}>, nodeIds: string[]) => {
-        setExpanded(nodeIds);
-        onNodeToggle?.(event, nodeIds);
-    };
+    const handleToggle = useCallback(
+        (event: React.ChangeEvent<{}>, nodeIds: string[]) => {
+            setExpanded(nodeIds);
+            onNodeToggle?.(event, nodeIds);
+        },
+        [setExpanded, onNodeToggle]
+    );
 
-    const handleSelect = (event: React.ChangeEvent<{}>, nodeIds: string[]) => {
-        setSelected(nodeIds);
-        onNodeSelect?.(event, nodeIds);
-    };
+    const handleSelect = useCallback(
+        (event: React.ChangeEvent<{}>, nodeIds: string[]) => {
+            setSelected(nodeIds);
+            onNodeSelect?.(event, nodeIds);
+        },
+        [setSelected, onNodeSelect]
+    );
+
+    const testId = props['data-testid'] || 'tree-view';
 
     return (
         <MuiTreeView
@@ -102,6 +111,7 @@ const TreeView: FunctionComponent<TreeViewProps> = ({
             multiSelect={multiSelect || undefined}
             expanded={expanded}
             selected={selected}
+            data-testid={testId}
         >
             {renderTree(root)}
         </MuiTreeView>

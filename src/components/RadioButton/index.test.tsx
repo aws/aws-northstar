@@ -35,6 +35,11 @@ describe('RadioButton', () => {
         });
     });
 
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(<RadioButton data-testid="radio-button-1" />);
+        expect(getByTestId('radio-button-1')).toBeInTheDocument();
+    });
+
     describe('with props', () => {
         const tests = [
             { propKey: 'ariaDescribedby', propValue: 'the description', attribute: 'aria-describedBy' },

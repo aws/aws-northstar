@@ -49,6 +49,17 @@ describe('Card', () => {
         expect(getByTestId('content')).toBeVisible();
     });
 
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <Card {...props} data-testid="card-1">
+                Content
+            </Card>
+        );
+        expect(getByTestId('card-1')).toBeInTheDocument();
+        expect(getByTestId('card-1-header')).toBeInTheDocument();
+        expect(getByTestId('card-1-content')).toBeInTheDocument();
+    });
+
     it('renders the header using custom titleTypographyProps', () => {
         const { container } = render(
             <Card

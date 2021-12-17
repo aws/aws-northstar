@@ -53,6 +53,7 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
     displayLablePerItem,
     collapse,
     gridStyle,
+    ...props
 }) => {
     const formOptions = useFormApi();
 
@@ -72,13 +73,20 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
         });
     }, [fields, showError, collapse, getFieldKey, displayLablePerItem]);
 
+    const testId = props['data-testid'];
+
     const getBox = useCallback(
         (field: Field) => (
             <Box width="100%" pr={1}>
-                {formOptions.renderForm([field])}
+                {formOptions.renderForm([
+                    {
+                        ...field,
+                        'data-testid': `${testId}-${field.name}`,
+                    },
+                ])}
             </Box>
         ),
-        [formOptions]
+        [formOptions, testId]
     );
 
     const getHeader = useCallback(
@@ -106,11 +114,13 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
                 ? {
                       display: 'flex',
                       alignItems: 'center',
+                      'data-testid': `${testId}-remove-button`,
                   }
                 : {
                       display: 'flex',
                       alignItems: 'flex-start',
                       pt: 0.3,
+                      'data-testid': `${testId}-remove-button`,
                   };
             const getKey = (field: Field) => (isHeaderRow ? `${field.name}-header` : field.key);
             return (
@@ -155,14 +165,14 @@ const FieldArrayItem: FunctionComponent<FieldArrayItemProps> = ({
                 </Box>
             );
         },
-        [isReadOnly, removeLabel, onRemove, layout, collapse, fieldIndex, gridStyle]
+        [isReadOnly, removeLabel, onRemove, layout, collapse, fieldIndex, gridStyle, testId]
     );
 
     return (
-        <>
+        <div data-testid={testId}>
             {fieldIndex === 0 && !collapse && !displayLablePerItem && renderRow(fields, getHeader, true)}
             {renderRow(editedFields, getBox)}
-        </>
+        </div>
     );
 };
 

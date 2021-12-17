@@ -43,4 +43,18 @@ describe('HelpPanel', () => {
         );
         expect(getAllByRole('link')).toHaveLength(footerLinks.length);
     });
+
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <BrowserRouter>
+                <HelpPanel header="Help panel title" learnMoreFooter={footerLinks} data-testid="app-help-panel-1">
+                    {content}
+                </HelpPanel>
+            </BrowserRouter>
+        );
+        expect(getByTestId('app-help-panel-1')).toBeInTheDocument();
+        expect(getByTestId('app-help-panel-1-header')).toBeInTheDocument();
+        expect(getByTestId('app-help-panel-1-content')).toBeInTheDocument();
+        expect(getByTestId('app-help-panel-1-footer')).toBeInTheDocument();
+    });
 });

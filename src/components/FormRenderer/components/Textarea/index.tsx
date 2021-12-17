@@ -35,6 +35,7 @@ const TextareaMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         showError,
         secondaryControl,
         meta: { error, submitFailed },
+        ...rest
     } = useFieldApi(props);
     const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
@@ -49,6 +50,7 @@ const TextareaMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
             secondaryControl={secondaryControl}
         >
             <Textarea
+                {...rest}
                 {...input}
                 placeholder={placeholder}
                 controlId={controlId}

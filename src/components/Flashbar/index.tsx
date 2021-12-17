@@ -37,12 +37,13 @@ export interface FlashbarProps {
  * A flashbar component shows one or more page-level flash notifications to communicate a user action's status, such as failed, successful, and so on.
  * Flashbar is rendered as part of AppLayout.
  **/
-const Flashbar: FunctionComponent<FlashbarProps> = ({ items = [], maxItemsDisplayed = Number.MAX_VALUE }) => {
+const Flashbar: FunctionComponent<FlashbarProps> = ({ items = [], maxItemsDisplayed = Number.MAX_VALUE, ...props }) => {
     const renderedItems = items.slice(0, Math.min(maxItemsDisplayed, items.length));
+    const testId = props['data-testid'] || 'flashbar';
     return (
-        <Box>
-            {renderedItems.map((item) => (
-                <FlashbarItem {...item} key={item.id || uuidv4()} />
+        <Box data-testid={testId}>
+            {renderedItems.map((item, index) => (
+                <FlashbarItem {...item} key={item.id || uuidv4()} data-testid={`${testId}-item-${item.id || index}`} />
             ))}
         </Box>
     );

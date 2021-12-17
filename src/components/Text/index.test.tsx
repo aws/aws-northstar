@@ -40,4 +40,9 @@ describe('Text', () => {
 
         expect(getByText('sometext')).toContainHTML('<p>sometext</p>');
     });
+
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(<Text data-testid="text-1">sometext</Text>);
+        expect(getByTestId('text-1')).toBeInTheDocument();
+    });
 });

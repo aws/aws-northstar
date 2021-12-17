@@ -28,9 +28,9 @@ export interface KeyValuePairProps {
 /**
  * Key/value pairs are lists of properties (keys) followed by the corresponding value.
  */
-const KeyValuePair: FunctionComponent<KeyValuePairProps> = ({ label, value }) => {
+const KeyValuePair: FunctionComponent<KeyValuePairProps> = ({ label, value, ...props }) => {
     return (
-        <Box>
+        <Box data-testid={props['data-testid']}>
             <Box color="grey.600" fontSize="body1.fontSize">
                 {label}
             </Box>

@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode, useCallback, useMemo } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -79,9 +79,15 @@ interface TabPanelProps {
     paddingContentArea: boolean;
 }
 
-function TabPanel({ children, value, index, paddingContentArea }: TabPanelProps) {
+function TabPanel({ children, value, index, paddingContentArea, ...props }: TabPanelProps) {
     return (
-        <Typography component="div" role="tabpanel" hidden={value !== index} id={`tabpanel-${index}`}>
+        <Typography
+            component="div"
+            role="tabpanel"
+            hidden={value !== index}
+            id={`tabpanel-${index}`}
+            data-testid={props['data-testid']}
+        >
             <Box py={paddingContentArea ? 3 : undefined}>{children}</Box>
         </Typography>
     );
@@ -96,45 +102,76 @@ const Tabs = ({
     variant = 'default',
     paddingContentArea = true,
     onChange,
+    ...props
 }: TabsProps): ReactElement => {
     const classes = useStyles({});
     const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
     const [value, setValue] = React.useState(tabIndex === -1 ? 0 : tabIndex);
-    const handleChange = (_event: React.ChangeEvent<{}>, index: number) => {
-        onChange?.(tabs[index].id);
-        setValue(index);
-    };
-
-    const headerContent = (
-        <MuiTabs
-            variant="scrollable"
-            indicatorColor="secondary"
-            TabIndicatorProps={{ color: 'primary' }}
-            value={value}
-            onChange={handleChange}
-            className={clsx({ [classes.noBorder]: variant === 'container' })}
-        >
-            {tabs.map((tab) => (
-                <Tab key={tab.id} className={classes.tab} label={tab.label} disabled={tab.disabled} />
-            ))}
-        </MuiTabs>
+    const handleChange = useCallback(
+        (_event: React.ChangeEvent<{}>, index: number) => {
+            onChange?.(tabs[index].id);
+            setValue(index);
+        },
+        [onChange, tabs]
     );
 
-    const tabContent = tabs.map((tab, idx) => (
-        <TabPanel key={tab.id} value={value} index={idx} paddingContentArea={paddingContentArea}>
-            {tab.content}
-        </TabPanel>
-    ));
+    const testId = props['data-testid'] || 'tabs';
+
+    const headerContent = useMemo(
+        () => (
+            <MuiTabs
+                variant="scrollable"
+                indicatorColor="secondary"
+                TabIndicatorProps={{ color: 'primary' }}
+                value={value}
+                onChange={handleChange}
+                className={clsx({ [classes.noBorder]: variant === 'container' })}
+                data-testid={`${testId}-header`}
+            >
+                {tabs.map((tab) => (
+                    <Tab
+                        key={tab.id}
+                        data-testid={`${testId}-header-${tab.id}`}
+                        className={classes.tab}
+                        label={tab.label}
+                        disabled={tab.disabled}
+                    />
+                ))}
+            </MuiTabs>
+        ),
+        [tabs, variant, value, handleChange, classes, testId]
+    );
+
+    const tabContent = useMemo(
+        () =>
+            tabs.map((tab, idx) => (
+                <TabPanel
+                    key={tab.id}
+                    data-testid={`${testId}-content-${tab.id}`}
+                    value={value}
+                    index={idx}
+                    paddingContentArea={paddingContentArea}
+                >
+                    {tab.content}
+                </TabPanel>
+            )),
+        [tabs, value, paddingContentArea, testId]
+    );
 
     return variant === 'container' ? (
-        <Container headerContent={headerContent} headerGutters={false} gutters={paddingContentArea}>
+        <Container
+            data-testid={testId}
+            headerContent={headerContent}
+            headerGutters={false}
+            gutters={paddingContentArea}
+        >
             {tabContent}
         </Container>
     ) : (
-        <>
+        <Box data-testid={testId}>
             {headerContent}
             {tabContent}
-        </>
+        </Box>
     );
 };
 

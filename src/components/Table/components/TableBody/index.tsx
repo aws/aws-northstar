@@ -42,9 +42,10 @@ export default function TableBody<D extends object>({
     wrapText = true,
     reactTableBodyProps,
     styles,
+    ...props
 }: TableBodyProps<D>) {
     return (
-        <BaseTableBody {...reactTableBodyProps}>
+        <BaseTableBody {...reactTableBodyProps} data-testid={props['data-testid']}>
             {page!
                 .map((row: Row<D>) => {
                     prepareRow(row);

@@ -88,6 +88,7 @@ const ExpandableSection: FunctionComponent<ExpandableSectionProps> = ({
     onChange,
     variant = 'default',
     description,
+    ...props
 }) => {
     const [isExpanded, setExpanded] = useState(expanded);
     const styles = useStyles();
@@ -102,11 +103,27 @@ const ExpandableSection: FunctionComponent<ExpandableSectionProps> = ({
         onChange?.(toBeState);
     };
 
+    const testId = props['data-testid'] || 'expandable-section';
+
     return (
-        <Accordion className={styles[variant]} square expanded={isExpanded} onChange={handleChange}>
-            <ExpansionPanelSummary variant={variant} header={header} description={description} expanded={isExpanded} />
+        <Accordion
+            className={styles[variant]}
+            square
+            expanded={isExpanded}
+            onChange={handleChange}
+            data-testid={testId}
+        >
+            <ExpansionPanelSummary
+                variant={variant}
+                header={header}
+                description={description}
+                expanded={isExpanded}
+                data-testid={`${testId}-header`}
+            />
             {variant !== 'borderless' && <Divider />}
-            <AccordionDetails>{typeof children === 'string' ? <Text>{children}</Text> : children}</AccordionDetails>
+            <AccordionDetails data-testid={`${testId}-content`}>
+                {typeof children === 'string' ? <Text>{children}</Text> : children}
+            </AccordionDetails>
         </Accordion>
     );
 };
