@@ -45,4 +45,13 @@ describe('FormGroup', () => {
         expect(getAllByRole('checkbox')).toHaveLength(5);
         expect(container.querySelector('.MuiFormGroup-row')).toBeInTheDocument();
     });
+
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <FormGroup row data-testid="form-group-1">
+                <Checkbox>Default checkbox</Checkbox>
+            </FormGroup>
+        );
+        expect(getByTestId('form-group-1')).toBeInTheDocument();
+    });
 });

@@ -70,8 +70,8 @@ describe('Textarea', () => {
     });
 
     it('can be accessed by testid', async () => {
-        const { getByTestId } = render(<Textarea placeholder="textarea" data-testid="textarea" />);
-        expect(getByTestId('textarea')).toBeInTheDocument();
+        const { getByTestId } = render(<Textarea placeholder="textarea" data-testid="textarea-1" />);
+        expect(getByTestId('textarea-1')).toBeInTheDocument();
     });
 
     it('maps props correctly', () => {

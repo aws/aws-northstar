@@ -107,6 +107,15 @@ describe('FormField', () => {
         expect(getByText('This is footer content')).toBeVisible();
     });
 
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <FormField {...requiredProps} data-testid="formfield-1">
+                <Input />
+            </FormField>
+        );
+        expect(getByTestId('formfield-1')).toBeInTheDocument();
+    });
+
     describe('stretch', () => {
         it('uses 9:3 Grid when stretch is false', () => {
             const props = {

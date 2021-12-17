@@ -43,6 +43,12 @@ describe('Select', () => {
         expect(getByText('Choose an option')).toBeVisible();
     });
 
+    it('can be accessed by custom test-id', () => {
+        const props: SelectProps = { options, selectedOption: { value: '1' } };
+        const { getByTestId } = render(<Select {...props} data-testid="select-1" />);
+        expect(getByTestId('select-1')).toBeInTheDocument();
+    });
+
     it('should set class disabled when disabled prop is given', () => {
         const props: SelectProps = { options, disabled: true };
         const { getByRole } = render(<Select {...props} />);

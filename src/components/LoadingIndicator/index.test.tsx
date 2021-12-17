@@ -18,7 +18,7 @@ import React from 'react';
 import LoadingIndicator from '.';
 import { render } from '@testing-library/react';
 
-describe('Alert', () => {
+describe('LoadingIndicator', () => {
     it('renders a custom button with the button label text', () => {
         const { getByText } = render(<LoadingIndicator label="the label" />);
         expect(getByText('the label')).toBeInTheDocument();
@@ -43,5 +43,10 @@ describe('Alert', () => {
     it('renders progress bar with custom size', () => {
         const { getByRole } = render(<LoadingIndicator label="the label" size={100} />);
         expect(getByRole('progressbar')).toHaveStyle('width: 100px; height: 100px;');
+    });
+
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(<LoadingIndicator label="the label" data-testid="loading-indicator-1" />);
+        expect(getByTestId('loading-indicator-1')).toBeInTheDocument();
     });
 });

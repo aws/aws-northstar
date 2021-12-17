@@ -44,4 +44,11 @@ describe('KeyValuePair', () => {
         const { getByTestId } = render(<KeyValuePair label="Property Label" value={value} />);
         expect(getByTestId('value')).toContainElement(getByTestId('valuenode'));
     });
+
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <KeyValuePair label="Property Label" value="Property Value" data-testid="key-value-pair-1" />
+        );
+        expect(getByTestId('key-value-pair-1')).toBeInTheDocument();
+    });
 });

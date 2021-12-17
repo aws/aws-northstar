@@ -66,6 +66,16 @@ describe('Input', () => {
         expect(getByPlaceholderText('input-1').hasAttribute('id')).toBeTruthy();
     });
 
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(<Input data-testid="input-1" />);
+        expect(getByTestId('input-1')).toBeInTheDocument();
+    });
+
+    it('can be accessed by default test-id', () => {
+        const { getByTestId } = render(<Input type="number" />);
+        expect(getByTestId('input-number')).toBeInTheDocument();
+    });
+
     it('should render aria attributes', () => {
         const { getByPlaceholderText } = render(
             <Input placeholder="input-1" ariaLabelledby="ariaLabelledby" ariaDescribedby="ariaDescribedby" required />
@@ -94,7 +104,7 @@ describe('Input', () => {
         it('does not render clear button on default', () => {
             const { queryByTestId } = render(<Input type="search" placeholder="input-1" />);
 
-            expect(queryByTestId('input-1')).toBeNull();
+            expect(queryByTestId('input-1-clear-input')).toBeNull();
         });
 
         it('fires onChange event', () => {
@@ -109,7 +119,7 @@ describe('Input', () => {
 
         it('clears input value', () => {
             const { getByPlaceholderText, getByTestId } = render(
-                <Input type="search" placeholder="input-1" onChange={mockOnChange} />
+                <Input type="search" placeholder="input-1" data-testid="input-1" onChange={mockOnChange} />
             );
 
             /**user types into input */
@@ -117,7 +127,7 @@ describe('Input', () => {
             expect(getByPlaceholderText('input-1').getAttribute('value')).toEqual('23');
 
             /**user clears input */
-            fireEvent.click(getByTestId('clear-input'));
+            fireEvent.click(getByTestId('input-1-clear-input'));
             expect(getByPlaceholderText('input-1').getAttribute('value')).toEqual('');
             expect(mockOnChange).toHaveBeenCalledTimes(2);
         });

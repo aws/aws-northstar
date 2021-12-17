@@ -79,9 +79,15 @@ interface TabPanelProps {
     paddingContentArea: boolean;
 }
 
-function TabPanel({ children, value, index, paddingContentArea }: TabPanelProps) {
+function TabPanel({ children, value, index, paddingContentArea, ...props }: TabPanelProps) {
     return (
-        <Typography component="div" role="tabpanel" hidden={value !== index} id={`tabpanel-${index}`}>
+        <Typography
+            component="div"
+            role="tabpanel"
+            hidden={value !== index}
+            id={`tabpanel-${index}`}
+            data-testid={props['data-testid']}
+        >
             <Box py={paddingContentArea ? 3 : undefined}>{children}</Box>
         </Typography>
     );
@@ -162,7 +168,7 @@ const Tabs = ({
             {tabContent}
         </Container>
     ) : (
-        <Box>
+        <Box data-testid={testId}>
             {headerContent}
             {tabContent}
         </Box>
