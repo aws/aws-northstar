@@ -58,12 +58,12 @@ describe('TokenGroup', () => {
     it('should display a list of items in stack layout when inline is false', () => {
         const handleDismiss = jest.fn();
         const { getByText, getByTestId } = render(
-            <TokenGroup items={items} onDismiss={handleDismiss} inline={false} />
+            <TokenGroup items={items} onDismiss={handleDismiss} inline={false} data-testid="token-group-1" />
         );
 
         expect(getByText('itemLabel1')).toBeVisible();
         expect(getByText('itemLabel2')).toBeVisible();
         expect(getByText('itemLabel3')).toBeVisible();
-        expect(getByTestId('token-group')).toBeInTheDocument();
+        expect(getByTestId('token-group-1')).toBeInTheDocument();
     });
 });
