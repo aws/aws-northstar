@@ -50,11 +50,17 @@ export interface RadioGroupProps {
  * RadioGroup is a helpful wrapper used to group Radio components.
  */
 
-const RadioGroup: FunctionComponent<RadioGroupProps> = ({ name, value, items = [], onChange }) => {
+const RadioGroup: FunctionComponent<RadioGroupProps> = ({ name, value, items = [], onChange, ...props }) => {
     const classes = useStyles();
     return (
         <div className={clsx(classes.root, classes.div)}>
-            <MaterialRadioButtonGroup className={classes.radio} value={value} name={name} onChange={onChange}>
+            <MaterialRadioButtonGroup
+                className={classes.radio}
+                value={value}
+                name={name}
+                onChange={onChange}
+                data-testid={props['data-testid']}
+            >
                 {items.map((item, index) => (
                     <Fragment key={index}>{item}</Fragment>
                 ))}

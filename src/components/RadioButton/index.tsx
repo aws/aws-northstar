@@ -110,6 +110,7 @@ const RadioButton: FunctionComponent<RadioButtonProps> = ({
     onChange,
     children,
     description,
+    ...props
 }) => {
     const classes = useStyles();
     const id = useUniqueId();
@@ -120,6 +121,7 @@ const RadioButton: FunctionComponent<RadioButtonProps> = ({
             control={
                 <MaterialRadioButton
                     id={controlId}
+                    data-testid={props['data-testid']}
                     value={value}
                     checked={checked}
                     disabled={disabled}

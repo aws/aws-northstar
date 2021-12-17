@@ -162,6 +162,8 @@ const Select: FunctionComponent<SelectProps> = ({
         event.stopPropagation();
     };
 
+    const testId = props['data-testid'] || 'select';
+
     return (
         <MuiSelect
             variant="outlined"
@@ -188,7 +190,7 @@ const Select: FunctionComponent<SelectProps> = ({
                 transitionDuration: 0,
                 getContentAnchorEl: null,
             }}
-            data-testid="select"
+            data-testid={testId}
         >
             {placeholder && (
                 <MenuItem key="__placeholder__" value="" disabled className={classes.placeholder}>

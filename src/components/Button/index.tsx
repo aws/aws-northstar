@@ -148,11 +148,11 @@ const Button: FunctionComponent<ButtonProps> = ({
         case 'icon':
             return (
                 <IconButton
+                    {...props}
                     aria-label={label}
                     disabled={isDisabled}
                     onClick={onClick}
                     className={styles.iconButton}
-                    {...props}
                 >
                     {loading ? (
                         <CircularProgress size={14} className={styles.loadingIcon} />
@@ -164,6 +164,7 @@ const Button: FunctionComponent<ButtonProps> = ({
         default:
             return (
                 <MaterialButton
+                    {...props}
                     {...muiButtonProps({
                         disabled: isDisabled,
                         onClick,
@@ -176,7 +177,6 @@ const Button: FunctionComponent<ButtonProps> = ({
                         type,
                         size,
                     })}
-                    {...props}
                 >
                     {children}
                 </MaterialButton>

@@ -212,7 +212,7 @@ const ProgressBar: FunctionComponent<ProgressBarProps & Omit<LinearProgressProps
         );
 
         return (
-            <>
+            <div data-testid={props['data-testid']}>
                 {label && <Heading variant="h3">{label}</Heading>}
                 {description && (
                     <Typography className={classes.description} variant="body1">
@@ -225,7 +225,7 @@ const ProgressBar: FunctionComponent<ProgressBarProps & Omit<LinearProgressProps
                         {additionalInfo}
                     </Typography>
                 )}
-            </>
+            </div>
         );
     };
 

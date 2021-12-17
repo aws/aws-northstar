@@ -32,12 +32,20 @@ export interface TableFooterProps {
     colSpan: number;
     pageLength?: number;
     errorText?: string;
+    testId: string;
 }
 
-export default function TableFooter({ errorText, loading = false, styles, colSpan, pageLength = 0 }: TableFooterProps) {
+export default function TableFooter({
+    errorText,
+    loading = false,
+    styles,
+    colSpan,
+    pageLength = 0,
+    testId,
+}: TableFooterProps) {
     if (pageLength === 0) {
         return (
-            <BaseTableFooter>
+            <BaseTableFooter data-testid={testId}>
                 <TableRow>
                     <TableCell className={styles.footerCell} colSpan={colSpan}>
                         {!loading ? (

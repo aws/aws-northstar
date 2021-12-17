@@ -25,9 +25,10 @@ export interface HeadingStripeProps {
 }
 
 /** A heading that spans the full width of its container */
-const HeadingStripe: FunctionComponent<HeadingStripeProps> = ({ title, actionButtons }) => {
+const HeadingStripe: FunctionComponent<HeadingStripeProps> = ({ title, actionButtons, ...props }) => {
+    const testId = props['data-testid'] || 'heading-stripe';
     return (
-        <Box width="100%" display="flex">
+        <Box width="100%" display="flex" data-testid={testId}>
             <Box flexGrow="1">
                 <Heading variant="h1">{title}</Heading>
             </Box>

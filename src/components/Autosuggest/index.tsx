@@ -366,7 +366,7 @@ const AutosuggestBase: FunctionComponent<AutosuggestBaseProps> = ({
         },
         [inputValue, setInputValue, props]
     );
-    const testId = props['data-testId'] || (props.multiple ? 'multiselect' : 'autosuggest');
+    const testId = props['data-testid'] || (props.multiple ? 'multiselect' : 'autosuggest');
     return (
         <Stack>
             <MaterialUIAutocomplete

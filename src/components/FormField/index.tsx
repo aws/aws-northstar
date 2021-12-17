@@ -187,6 +187,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
     stretch = false,
     expandable = false,
     footer,
+    ...props
 }) => {
     const classes = useStyles();
 
@@ -237,7 +238,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
 
     if (!expandable) {
         return (
-            <FormControl className={classes.formFieldRoot}>
+            <FormControl className={classes.formFieldRoot} data-testid={props['data-testid']}>
                 {header}
                 {content}
             </FormControl>
@@ -245,7 +246,12 @@ const FormField: FunctionComponent<FormFieldProps> = ({
     }
 
     return (
-        <ExpandableSection variant="borderless" header={header} expanded={!!errorText}>
+        <ExpandableSection
+            variant="borderless"
+            header={header}
+            expanded={!!errorText}
+            data-testid={props['data-testid']}
+        >
             {content}
         </ExpandableSection>
     );

@@ -39,7 +39,7 @@ describe('FileUpload', () => {
     it('should set the accept attribute of the input', () => {
         const { getByTestId } = render(<FileUpload {...baseProps} accept="image/*" />);
 
-        expect(getByTestId('input-file')).toHaveAttribute('accept', 'image/*');
+        expect(getByTestId('file-upload-input')).toHaveAttribute('accept', 'image/*');
     });
 
     it('should set the button text if provided', () => {
@@ -63,10 +63,12 @@ describe('FileUpload', () => {
                 },
             };
 
-            const { getByTestId, getByText } = render(<FileUpload {...baseProps} onChange={handleChange} />);
+            const { getByTestId, getByText } = render(
+                <FileUpload data-testid="file-upload-1" {...baseProps} onChange={handleChange} />
+            );
 
             act(() => {
-                fireEvent.change(getByTestId('input-file'), event);
+                fireEvent.change(getByTestId('file-upload-1-input'), event);
             });
 
             expect(handleChange).toHaveBeenLastCalledWith([selectedFile]);
@@ -110,7 +112,7 @@ describe('FileUpload', () => {
             );
 
             act(() => {
-                fireEvent.change(getByTestId('input-file'), event1);
+                fireEvent.change(getByTestId('file-upload-input'), event1);
             });
 
             expect(handleChange).toHaveBeenLastCalledWith([selectedFile1]);
@@ -127,7 +129,7 @@ describe('FileUpload', () => {
             };
 
             act(() => {
-                fireEvent.change(getByTestId('input-file'), event2);
+                fireEvent.change(getByTestId('file-upload-input'), event2);
             });
 
             expect(handleChange).toHaveBeenLastCalledWith([selectedFile2]);
@@ -160,7 +162,7 @@ describe('FileUpload', () => {
         it('should set the multiple attribute of the input', () => {
             const { getByTestId } = render(<FileUpload {...baseProps} multiple />);
 
-            expect(getByTestId('input-file')).toHaveAttribute('multiple');
+            expect(getByTestId('file-upload-input')).toHaveAttribute('multiple');
         });
 
         it('should allow users to choose multiple files to upload', () => {
@@ -175,7 +177,7 @@ describe('FileUpload', () => {
             const { getByTestId, getByText } = render(<FileUpload {...baseProps} onChange={handleChange} multiple />);
 
             act(() => {
-                fireEvent.change(getByTestId('input-file'), event);
+                fireEvent.change(getByTestId('file-upload-input'), event);
             });
 
             expect(handleChange).toHaveBeenLastCalledWith([selectedFile1, selectedFile2, selectedFile3]);
@@ -213,7 +215,7 @@ describe('FileUpload', () => {
             );
 
             act(() => {
-                fireEvent.change(getByTestId('input-file'), event1);
+                fireEvent.change(getByTestId('file-upload-input'), event1);
             });
 
             expect(handleChange).toHaveBeenLastCalledWith([selectedFile1, selectedFile2]);
@@ -225,7 +227,7 @@ describe('FileUpload', () => {
             };
 
             act(() => {
-                fireEvent.change(getByTestId('input-file'), event2);
+                fireEvent.change(getByTestId('file-upload-input'), event2);
             });
 
             expect(handleChange).toHaveBeenLastCalledWith([selectedFile1, selectedFile2, selectedFile3]);
@@ -249,7 +251,7 @@ describe('FileUpload', () => {
             );
 
             act(() => {
-                fireEvent.change(getByTestId('input-file'), event);
+                fireEvent.change(getByTestId('file-upload-input'), event);
             });
 
             expect(getByText('fileName1')).toBeVisible();

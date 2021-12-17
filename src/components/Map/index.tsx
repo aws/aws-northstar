@@ -68,6 +68,7 @@ const Map: FunctionComponent<MapProps> = ({
     viewportLongitude,
     viewportZoom = 5,
     pins,
+    ...props
 }) => {
     const viewportInitialConfig: ViewportProps = useMemo(
         () => ({
@@ -94,17 +95,19 @@ const Map: FunctionComponent<MapProps> = ({
     );
 
     return (
-        <MapGL
-            mapStyle={MAP_STYLE[mapStyle]}
-            mapboxApiAccessToken={token}
-            {...viewport}
-            onViewportChange={(nextViewport: ViewportProps) => setViewport(nextViewport)}
-        >
-            {pins.map((city) => marker({ ...city }))}
-            <div className={classes.navStyle}>
-                <NavigationControl />
-            </div>
-        </MapGL>
+        <div data-testid={props['data-testid']}>
+            <MapGL
+                mapStyle={MAP_STYLE[mapStyle]}
+                mapboxApiAccessToken={token}
+                {...viewport}
+                onViewportChange={(nextViewport: ViewportProps) => setViewport(nextViewport)}
+            >
+                {pins.map((city) => marker({ ...city }))}
+                <div className={classes.navStyle}>
+                    <NavigationControl />
+                </div>
+            </MapGL>
+        </div>
     );
 };
 
