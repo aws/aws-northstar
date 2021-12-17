@@ -29,12 +29,11 @@ interface CheckboxMappingProps {
 
 const CheckboxMapping: FunctionComponent<CheckboxMappingProps> = ({ option, name, ...rest }) => {
     const { input } = useFieldApi({ name, type: 'checkbox', value: option.value });
-    const testId = rest['data-testid'] ? `${rest['data-testid']}-${option.value}` : undefined;
     return (
         <Checkbox
             {...input}
             key={option.value}
-            data-testid={testId}
+            data-testid={rest['data-testid']}
             value={option.value}
             name={name}
             disabled={option.disabled}
@@ -77,7 +76,7 @@ const CheckboxGroupMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
                             option={option}
                             name={controlId}
                             key={option.value}
-                            data-testid={rest['data-testid']}
+                            data-testid={rest['data-testid'] ? `${rest['data-testid']}-${option.value}` : undefined}
                         />
                     ))}
                 </Stack>

@@ -74,6 +74,26 @@ describe('Table', () => {
         expect(getByText('Item one')).toBeVisible();
     });
 
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <Table
+                tableTitle={'My Table'}
+                columnDefinitions={columnDefinitions}
+                items={data}
+                disableSortBy={true}
+                disableSettings={true}
+                disablePagination={true}
+                disableFilters={true}
+                disableRowSelect={true}
+                disableGroupBy={true}
+                data-testid="table-1"
+            />
+        );
+        expect(getByTestId('table-1')).toBeInTheDocument();
+        expect(getByTestId('table-1-head')).toBeInTheDocument();
+        expect(getByTestId('table-1-body')).toBeInTheDocument();
+    });
+
     it('renders checkbox', () => {
         const { getByLabelText } = render(
             <Table

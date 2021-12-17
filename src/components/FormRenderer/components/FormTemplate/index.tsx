@@ -65,7 +65,7 @@ const FormTemplate: FunctionComponent<RenderProps> = ({ formFields, schema }) =>
         return !(fields.length > 0 && fields[0].component === componentTypes.WIZARD);
     }, [fields]);
 
-    const testId = rest['data-testid'] || 'form-renderer-form';
+    const testId = rest['data-testid'] || 'form-renderer';
 
     return (
         <Form

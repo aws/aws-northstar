@@ -62,4 +62,13 @@ describe('TableFooter', () => {
 
         expect(container.childElementCount).toBe(0);
     });
+
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <table>
+                <TableFooter colSpan={10} styles={styles} data-testid="table-1-footer" />
+            </table>
+        );
+        expect(getByTestId('table-1-footer')).toBeInTheDocument();
+    });
 });

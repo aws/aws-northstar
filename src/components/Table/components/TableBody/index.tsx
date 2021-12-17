@@ -34,7 +34,6 @@ export interface TableBodyProps<D extends object> {
         ellipsizeText: string;
         aggregated: string;
     };
-    testId?: string;
 }
 
 export default function TableBody<D extends object>({
@@ -43,10 +42,10 @@ export default function TableBody<D extends object>({
     wrapText = true,
     reactTableBodyProps,
     styles,
-    testId,
+    ...props
 }: TableBodyProps<D>) {
     return (
-        <BaseTableBody {...reactTableBodyProps} data-testid={testId}>
+        <BaseTableBody {...reactTableBodyProps} data-testid={props['data-testid']}>
             {page!
                 .map((row: Row<D>) => {
                     prepareRow(row);

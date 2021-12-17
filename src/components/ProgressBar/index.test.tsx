@@ -79,5 +79,6 @@ describe('ProgressBar', () => {
     it('can be accessed by custom test-id', () => {
         const { getByTestId } = render(<ProgressBar value={44} data-testid="progress-bar-1" />);
         expect(getByTestId('progress-bar-1')).toBeInTheDocument();
+        expect(getByTestId('progress-bar-1-indicator')).toBeInTheDocument();
     });
 });

@@ -31,12 +31,13 @@ export interface StatusIndicatorProps {
     children?: ReactNode | string;
 }
 
+const icons = {
+    positive: CheckCircleOutlineOutlinedIcon,
+    negative: CancelOutlinedIcon,
+    warning: ReportProblemOutlinedIcon,
+};
+
 const getIconByStatusType = (statusType: string, title?: string) => {
-    const icons = {
-        positive: CheckCircleOutlineOutlinedIcon,
-        negative: CancelOutlinedIcon,
-        warning: ReportProblemOutlinedIcon,
-    };
     const IconComponent = icons[statusType] ?? InfoOutlinedIcon;
     return <IconComponent fontSize="small" titleAccess={title} />;
 };

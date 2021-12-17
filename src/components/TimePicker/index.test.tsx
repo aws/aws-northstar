@@ -41,6 +41,11 @@ describe('TimePicker', () => {
         expect(getByRole('textbox')).toHaveValue('22:35');
     });
 
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(<TimePicker data-testid="time-picker-1" />);
+        expect(getByTestId('time-picker-1')).toBeInTheDocument();
+    });
+
     describe('with a valid input value', () => {
         it('fires onChange event', () => {
             const mockOnChange = jest.fn();

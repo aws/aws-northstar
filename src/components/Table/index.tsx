@@ -394,13 +394,13 @@ export default function Table<D extends object>({
             disableFilters && disableSettings && disablePagination ? null : (
                 <ContainerHeaderContent {...containerHeaderContentProps} />
             ),
-        testId,
+        'data-testid': testId,
     };
 
     const tableHeadProps = {
         headerGroups,
         styles,
-        testId: `${testId}-head`,
+        'data-testid': `${testId}-head`,
     };
 
     const tableBodyProps = {
@@ -409,7 +409,7 @@ export default function Table<D extends object>({
         wrapText,
         prepareRow,
         styles,
-        testId: `${testId}-body`,
+        'data-testid': `${testId}-body`,
     };
 
     const tableFooterProps = {
@@ -418,7 +418,7 @@ export default function Table<D extends object>({
         styles,
         colSpan: columns.length,
         pageLength: page?.length,
-        testId: `${testId}-footer`,
+        'data-testid': `${testId}-footer`,
     };
 
     return (

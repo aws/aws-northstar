@@ -38,12 +38,11 @@ export interface TableHeadProps<D extends object> {
         tableHeadRow: string;
         resizer: string;
     };
-    testId?: string;
 }
 
-export default function TableHead<D extends object>({ headerGroups, styles, testId }: TableHeadProps<D>) {
+export default function TableHead<D extends object>({ headerGroups, styles, ...props }: TableHeadProps<D>) {
     return (
-        <BaseTableHead data-testid={testId}>
+        <BaseTableHead data-testid={props['data-testid']}>
             {headerGroups.map((headerGroup: HeaderGroup<D>) => (
                 <TableRow {...headerGroup.getHeaderGroupProps()} className={styles.tableHeadRow}>
                     {headerGroup.headers.map(

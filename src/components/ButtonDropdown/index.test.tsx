@@ -17,6 +17,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import ButtonDropdown from '.';
 import { axe } from 'jest-axe';
+import { act } from 'react-test-renderer';
 
 describe('ButtonDropdown', () => {
     beforeEach(() => jest.clearAllMocks());
@@ -85,6 +86,12 @@ describe('ButtonDropdown', () => {
         const props = { content: 'the content', items: [{ text: 'the item' }] };
         const { getByTestId } = render(<ButtonDropdown {...props} data-testid="button-dropdown-1" />);
         expect(getByTestId('button-dropdown-1')).toBeInTheDocument();
+
+        act(() => {
+            fireEvent.click(getByTestId('button-dropdown-1-button'));
+        });
+
+        expect(getByTestId('button-dropdown-1-menu')).toBeInTheDocument();
     });
 
     it('renders accessible component', async () => {

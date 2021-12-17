@@ -67,7 +67,6 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
     subscription,
     customComponentWrapper,
 }) => {
-    const testId = schema['data-testid'] || 'form-renderer';
     return (
         <FormRendererContext.Provider value={{ isSubmitting }}>
             <ReactFormRenderer
@@ -79,7 +78,6 @@ const FormRenderer: FunctionComponent<FormRendererProps> = ({
                 onCancel={onCancel}
                 subscription={subscription}
                 initialValues={initialValues}
-                data-testid={testId}
             />
         </FormRendererContext.Provider>
     );
