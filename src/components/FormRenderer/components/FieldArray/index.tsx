@@ -62,6 +62,7 @@ const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         validateOnMount,
         input,
         isReadOnly = false,
+        ...rest
     } = useFieldApi(props);
     const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
@@ -70,6 +71,8 @@ const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     const matched = useMediaQuery(theme.breakpoints.down('xs'));
     const styles = useStyles();
 
+    const testId = rest['data-testid'] || 'form-array';
+
     return (
         <FormField
             controlId={controlId}
@@ -77,6 +80,7 @@ const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
             description={description}
             hintText={helperText}
             errorText={errorText}
+            data-testid={testId}
         >
             <FieldArrayBase key={controlId} name={controlId} validate={arrayValidator}>
                 {({ fields }) => {
@@ -101,13 +105,18 @@ const FieldArrayMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
                                         removeLabel={renderedButtonLabels.remove}
                                         isReadOnly={isReadOnly}
                                         collapse={layout === 'stack' || matched}
+                                        data-testid={`${testId}-${name}`}
                                     />
                                 );
 
                                 return renderContainer ? <Container key={`Container-${name}`}>{item}</Container> : item;
                             })}
                             {!isReadOnly && (
-                                <Button onClick={() => push(defaultItem)} disabled={!!length && length >= maxItems}>
+                                <Button
+                                    onClick={() => push(defaultItem)}
+                                    disabled={!!length && length >= maxItems}
+                                    data-testid={`${testId}-add-button`}
+                                >
                                     {renderedButtonLabels.add}
                                 </Button>
                             )}

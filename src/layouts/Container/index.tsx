@@ -94,10 +94,11 @@ const Container: FunctionComponent<ContainerProps> = ({
     headerGutters = true,
     headingVariant = 'h2',
     style,
+    ...props
 }) => {
     const classes = useStyles({ gutters, headerGutters });
     return (
-        <div style={style} className={classes.containerRoot}>
+        <div style={style} className={classes.containerRoot} data-testid={props['data-testid']}>
             {!title && !subtitle && !actionGroup && !headerContent ? null : (
                 <div className={classes.containerHeader}>
                     <div className={classes.containerHeaderStripe}>

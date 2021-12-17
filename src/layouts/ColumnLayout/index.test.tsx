@@ -80,4 +80,15 @@ describe('ColumnLayout', () => {
 
         expect(container.querySelector('hr')).not.toBeInTheDocument();
     });
+
+    it('can be accessed by custom test-id', () => {
+        const { getByTestId } = render(
+            <ColumnLayout data-testid="column-layout-1">
+                <Column>
+                    <Placeholder />
+                </Column>
+            </ColumnLayout>
+        );
+        expect(getByTestId('column-layout-1')).toBeInTheDocument();
+    });
 });

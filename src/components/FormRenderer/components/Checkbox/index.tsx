@@ -27,10 +27,18 @@ interface CheckboxMappingProps {
     name: string;
 }
 
-const CheckboxMapping: FunctionComponent<CheckboxMappingProps> = ({ option, name }) => {
+const CheckboxMapping: FunctionComponent<CheckboxMappingProps> = ({ option, name, ...rest }) => {
     const { input } = useFieldApi({ name, type: 'checkbox', value: option.value });
+    const testId = rest['data-testid'] ? `${rest['data-testid']}-${option.value}` : undefined;
     return (
-        <Checkbox {...input} key={option.value} value={option.value} name={name} disabled={option.disabled}>
+        <Checkbox
+            {...input}
+            key={option.value}
+            data-testid={testId}
+            value={option.value}
+            name={name}
+            disabled={option.disabled}
+        >
             {option.label}
         </Checkbox>
     );
@@ -48,6 +56,7 @@ const CheckboxGroupMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         stretch,
         showError,
         meta: { error, submitFailed },
+        ...rest
     } = useFieldApi(props);
     const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
@@ -60,10 +69,16 @@ const CheckboxGroupMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
                 hintText={helperText}
                 errorText={errorText}
                 stretch={stretch}
+                data-testid={rest['data-testid']}
             >
                 <Stack spacing="xs">
                     {options.map((option: Option) => (
-                        <CheckboxMapping option={option} name={controlId} key={option.value} />
+                        <CheckboxMapping
+                            option={option}
+                            name={controlId}
+                            key={option.value}
+                            data-testid={rest['data-testid']}
+                        />
                     ))}
                 </Stack>
             </FormField>
@@ -72,6 +87,7 @@ const CheckboxGroupMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         return (
             <FormField controlId={controlId} errorText={errorText} stretch={stretch}>
                 <Checkbox
+                    {...rest}
                     {...input}
                     name={controlId}
                     controlId={controlId}

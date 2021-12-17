@@ -57,6 +57,7 @@ const WizardMapping: FunctionComponent<WizardMappingProps> = (props) => {
 
     return (
         <WizardStep
+            data-testid={props['data-testid']}
             activeStepIndex={activeStepIndex}
             maxStepIndex={maxStepIndex}
             stepsInfo={stepsInfo}

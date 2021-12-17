@@ -32,6 +32,7 @@ const FormTemplate: FunctionComponent<RenderProps> = ({ formFields, schema }) =>
         fields,
         header,
         description,
+        ...rest
     } = schema;
     const { isSubmitting } = useFormRendererContext();
 
@@ -64,8 +65,15 @@ const FormTemplate: FunctionComponent<RenderProps> = ({ formFields, schema }) =>
         return !(fields.length > 0 && fields[0].component === componentTypes.WIZARD);
     }, [fields]);
 
+    const testId = rest['data-testid'] || 'form-renderer-form';
+
     return (
-        <Form header={header} description={description} actions={actionsVisible ? actions : undefined}>
+        <Form
+            header={header}
+            description={description}
+            actions={actionsVisible ? actions : undefined}
+            data-testid={testId}
+        >
             {formFields}
         </Form>
     );

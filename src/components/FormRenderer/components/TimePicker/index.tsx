@@ -34,6 +34,7 @@ const TimePickerMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         stretch,
         showError,
         meta: { error, submitFailed },
+        ...rest
     } = useFieldApi(props);
 
     const controlId = useUniqueId(input.name);
@@ -51,6 +52,7 @@ const TimePickerMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
             stretch={stretch}
         >
             <TimePicker
+                {...rest}
                 {...input}
                 value={value}
                 onChange={(date?: Date | null) => {

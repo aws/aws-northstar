@@ -35,6 +35,7 @@ const TreeViewMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
         treeItems, // from TreeView
         onNodeToggle, // from TreeView
         defaultExpanded, // from TreeView
+        ...rest
     } = useFieldApi(props);
 
     const controlId = useUniqueId(input.name);
@@ -51,6 +52,7 @@ const TreeViewMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
             stretch={stretch}
         >
             <TreeView
+                {...rest}
                 root={treeItems}
                 multiSelect={multiSelect}
                 defaultSelected={input.value || []}

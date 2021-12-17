@@ -25,8 +25,8 @@ const SwitchMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
     return (
         <FormField controlId={controlId}>
             <Toggle
-                {...input}
                 {...rest}
+                {...input}
                 label={label}
                 checked={!!input.value}
                 description={description}

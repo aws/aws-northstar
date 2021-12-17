@@ -178,6 +178,16 @@ describe('Wizard', () => {
         });
     });
 
+    it('can be accessed by custom test-id', () => {
+        const history = createMemoryHistory();
+        const { getByTestId } = render(
+            <Router history={history}>
+                <Wizard steps={steps} data-testid="wizard-1" />
+            </Router>
+        );
+        expect(getByTestId('wizard-1')).toBeInTheDocument();
+    });
+
     it('renders accessible component', async () => {
         const { container } = render(<Default />);
         const results = await axe(container);

@@ -30,14 +30,14 @@ describe('Inline', () => {
     });
 
     it('renders a list of items', () => {
-        const { getAllByTestId } = render(
-            <Inline>
+        const { getByTestId, getAllByTestId } = render(
+            <Inline data-testid="inline-element">
                 <Placeholder />
                 <Placeholder />
                 <Placeholder />
             </Inline>
         );
-
+        expect(getByTestId('inline-element')).toBeInTheDocument();
         expect(getAllByTestId('placeholder')).toHaveLength(3);
     });
 

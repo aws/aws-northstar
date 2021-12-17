@@ -51,6 +51,7 @@ const TextFieldMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
             secondaryControl={secondaryControl}
         >
             <Input
+                {...rest}
                 {...input}
                 type={input.type as InputProps['type']}
                 placeholder={placeholder}
@@ -59,7 +60,6 @@ const TextFieldMapping: FunctionComponent<UseFieldApiConfig> = (props) => {
                 required={isRequired}
                 readonly={isReadOnly}
                 invalid={!!errorText}
-                {...rest}
             />
         </FormField>
     );

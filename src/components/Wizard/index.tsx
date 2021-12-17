@@ -140,6 +140,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
         onStepNavigationClick: handleStepNavigationClick,
         onSubmitButtonClick: onSubmitButtonClick,
         onCancelButtonClick: onCancelButtonClick,
+        'data-testid': props['data-testid'],
     };
 
     return <WizardInner {...wizardProps} />;

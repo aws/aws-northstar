@@ -31,6 +31,7 @@ const ExpandableSectionMapping: FunctionComponent<UseFieldApiConfig> = (props) =
         validateOnMount,
         showError,
         meta: { submitFailed, error },
+        expanded: propsExpanded,
         ...rest
     } = useFieldApi(props);
     const { renderForm } = useFormApi();
@@ -42,7 +43,7 @@ const ExpandableSectionMapping: FunctionComponent<UseFieldApiConfig> = (props) =
         }));
     }, [fields, input.name, showError]);
 
-    const [expanded, setExpanded] = useState(rest.expanded || false);
+    const [expanded, setExpanded] = useState(propsExpanded || false);
     useEffect(() => {
         if (!expanded) {
             const isError = (validateOnMount || submitFailed || showError) && !!error;
@@ -55,6 +56,7 @@ const ExpandableSectionMapping: FunctionComponent<UseFieldApiConfig> = (props) =
     return (
         <Box mb={2}>
             <ExpandableSection
+                {...rest}
                 header={title}
                 variant={variant}
                 description={description}
