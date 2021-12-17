@@ -38,7 +38,7 @@ export interface TableHeadProps<D extends object> {
         tableHeadRow: string;
         resizer: string;
     };
-    testId: string;
+    testId?: string;
 }
 
 export default function TableHead<D extends object>({ headerGroups, styles, testId }: TableHeadProps<D>) {

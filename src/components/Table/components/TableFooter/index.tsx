@@ -32,7 +32,7 @@ export interface TableFooterProps {
     colSpan: number;
     pageLength?: number;
     errorText?: string;
-    testId: string;
+    testId?: string;
 }
 
 export default function TableFooter({

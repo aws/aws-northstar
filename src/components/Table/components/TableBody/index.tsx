@@ -34,7 +34,7 @@ export interface TableBodyProps<D extends object> {
         ellipsizeText: string;
         aggregated: string;
     };
-    testId: string;
+    testId?: string;
 }
 
 export default function TableBody<D extends object>({
