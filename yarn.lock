@@ -1154,10 +1154,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@data-driven-forms/react-form-renderer@^3.16.0":
-  version "3.16.0"
-  resolved "https://registry.yarnpkg.com/@data-driven-forms/react-form-renderer/-/react-form-renderer-3.16.0.tgz#748b1f817893c3cd7877bba1a1f7fe84c627d91d"
-  integrity sha512-J/oHf+15V+Am/LpShlwdD5HqEvmYJY2u/yunXwz1gwN8g4Idt6WMC3blNCbXb7F52zYTDZZvD193fy/47l1+sw==
+"@data-driven-forms/react-form-renderer@^3.16.2":
+  version "3.16.2"
+  resolved "https://registry.yarnpkg.com/@data-driven-forms/react-form-renderer/-/react-form-renderer-3.16.2.tgz#580b11471a93d7212a4a1c1ab9a6287019c354a2"
+  integrity sha512-NMVYTMuax4meIqfyftVgIu6Y8jZYcP9YqGoJL1GDR/dB2T5U/7gRCPFPtHw86N/uj94VQhbNm/oSyt4AZj5SKw==
   dependencies:
     final-form "^4.20.4"
     final-form-arrays "^3.0.2"
