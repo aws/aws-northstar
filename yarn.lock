@@ -9158,11 +9158,6 @@ is-descriptor@^1.0.0, is-descriptor@^1.0.2:
     is-data-descriptor "^1.0.0"
     kind-of "^6.0.2"
 
-is-directory@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/is-directory/-/is-directory-0.3.1.tgz"
-  integrity sha1-YTObbyR1/Hcv2cnYP1yFddwVSuE=
-
 is-docker@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/is-docker/-/is-docker-2.1.1.tgz"
@@ -13274,10 +13269,10 @@ react-sortablejs@^1.3.4:
   dependencies:
     prop-types ">=15.0.0"
 
-react-styleguidist@^11.1.7:
-  version "11.1.7"
-  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-11.1.7.tgz#09c490b9c4f35c09b19ef20f262d654b63de63f8"
-  integrity sha512-kiLXbRWoc7hzY9h8rAltYMkby7PIBEj0+nG2s6I/riCwpHPF7GvwM5U1tPCWiveCI8nqYSKAfWSErvUH8eVNDQ==
+react-styleguidist@^11.1.8:
+  version "11.1.8"
+  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-11.1.8.tgz#79fb07f7d9e7d148b20b4f9aa997fb65f631cd65"
+  integrity sha512-GdFX3z76SJ2aDxKLKNOBRKPimROTPhsmlavUtB6RALzlXs+y5EyuG0lwaxlvfBgjoS1AxoqmYiowcJL2BKpZxQ==
   dependencies:
     "@tippyjs/react" "4.1.0"
     "@vxna/mini-html-webpack-template" "^2.0.0"
@@ -13304,7 +13299,6 @@ react-styleguidist@^11.1.7:
     glob "^7.1.5"
     glogg "^1.0.2"
     hash-sum "^2.0.0"
-    is-directory "^0.3.1"
     javascript-stringify "^2.0.0"
     jss "^10.0.0"
     jss-plugin-camel-case "^10.0.0"
