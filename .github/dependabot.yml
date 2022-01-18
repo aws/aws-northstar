@@ -23,7 +23,7 @@ updates:
       - dependency-name: "webpack"
         versions: ["5.x"]
       - dependency-name: "react-markdown"
-        versions: ["7.x"]
+        versions: ["7.x","8.x"]
       - dependency-name: "remark-frontmatter"
         versions: ["4.x"]
       - dependency-name: "remark-gfm"
