@@ -1,8 +1,4 @@
 {
-    branches: [
-                {name: 'main'},
-                {name: 'next', channel: 'next'}
-            ],
     "plugins": [
         ["@semantic-release/commit-analyzer", {
             "preset": "angular",
