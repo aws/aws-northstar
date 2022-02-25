@@ -15,8 +15,8 @@
   ],
   "scripts": {
     "build:build-readme": "cp ./README_NPM_PACKAGE.md ./build/README.md && cat ./docs/GettingStarted.md >> ./build/README.md",
-    "build:copy-file": "cp ./package.json ./build/",
-    "build": "tsc --build tsconfig.build.json && yarn build:copy-file && yarn build:build-readme",
+    "build:build-package-json": "cat package.json | jq 'del(.devDependencies, .resolutions, .scripts, .\"lint-staged\")' > ./build/package.json",
+    "build": "tsc --build tsconfig.build.json && yarn build:build-package-json && yarn build:build-readme",
     "build:esm": "tsc --build tsconfig.build.esm.json",
     "check:all": "yarn test:ci && yarn build && yarn storybook:build && yarn styleguide:build",
     "generate:attribution": "generate-attribution && mv oss-attribution/attribution.txt LICENSE-THIRD-PARTY",
