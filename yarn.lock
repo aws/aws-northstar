@@ -8263,13 +8263,12 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-git-conventional-commits@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/git-conventional-commits/-/git-conventional-commits-1.1.0.tgz#fa344da62eb585e7e6af3ff6feacba7128d247d5"
-  integrity sha512-QFlbxQyXc9njQ13c4PsAI90zjn1/7KrkKVrN4B5TYhXAI1y4dEqx4uRQcVOb9yQUAWI4QRg02e+jN/mnuW2vbQ==
+git-conventional-commits@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/git-conventional-commits/-/git-conventional-commits-1.2.0.tgz#baf9532ca2c878585ac45a621e37717cfa967c40"
+  integrity sha512-8nYsnOX3RYlWxGWAt6DgfWtlI1zXxrrcTj1cMqrIIN+KjLdBXaj2sG1Qd3+Lu9vtPLx9VjcAv9SE50GLY8Tx9Q==
   dependencies:
-    execa "^5.0.0"
-    yargs "^16.1.1"
+    yargs "^17.3.1"
 
 github-slugger@^1.0.0, github-slugger@^1.2.1:
   version "1.3.0"
@@ -17202,7 +17201,7 @@ yaml@^1.10.0, yaml@^1.10.2, yaml@^1.7.2:
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
-yargs-parser@20.x, yargs-parser@^20.2.2:
+yargs-parser@20.x:
   version "20.2.7"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-20.2.7.tgz#61df85c113edfb5a7a4e36eb8aa60ef423cbc90a"
   integrity sha512-FiNkvbeHzB/syOjIUxFDCnhSfzAL8R5vs40MgLFBorXACCOAEaWu0gRZl14vG8MR9AOJIZbmkjhusqBYZ3HTHw==
@@ -17222,6 +17221,11 @@ yargs-parser@^18.1.2:
   dependencies:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
+
+yargs-parser@^21.0.0:
+  version "21.0.1"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-21.0.1.tgz#0267f286c877a4f0f728fceb6f8a3e4cb95c6e35"
+  integrity sha512-9BK1jFpLzJROCI5TzwZL/TU4gqjK5xiHV/RfWLOahrjAko/e4DJkRDZQXfvqAsiZzzYhgAzbgz6lg48jcm4GLg==
 
 yargs@^13.3.2:
   version "13.3.2"
@@ -17256,18 +17260,18 @@ yargs@^15.4.1:
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
 
-yargs@^16.1.1:
-  version "16.2.0"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-16.2.0.tgz#1c82bf0f6b6a66eafce7ef30e376f49a12477f66"
-  integrity sha512-D1mvvtDG0L5ft/jGWkLpG1+m0eQxOfaBvTNELraWj22wSVUMWxZUvYgJYcKh6jGGIkJFhH4IZPQhR4TKpc8mBw==
+yargs@^17.3.1:
+  version "17.3.1"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.3.1.tgz#da56b28f32e2fd45aefb402ed9c26f42be4c07b9"
+  integrity sha512-WUANQeVgjLbNsEmGk20f+nlHgOqzRFpiGWVaBrYGYIGANIIu3lWjoyi0fNlFmJkvfhCZ6BXINe7/W2O2bV4iaA==
   dependencies:
     cliui "^7.0.2"
     escalade "^3.1.1"
     get-caller-file "^2.0.5"
     require-directory "^2.1.1"
-    string-width "^4.2.0"
+    string-width "^4.2.3"
     y18n "^5.0.5"
-    yargs-parser "^20.2.2"
+    yargs-parser "^21.0.0"
 
 yauzl@^2.10.0:
   version "2.10.0"
