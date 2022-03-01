@@ -13,6 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
+
 module.exports = {
     stories: [
         '../src/components/**/*.stories.tsx',
@@ -21,10 +22,13 @@ module.exports = {
         '../src/advanced/**/*.stories.tsx',
     ],
     addons: [
-        '@storybook/addon-actions/register',
         '@storybook/addon-links',
-        '@storybook/addon-storysource',
+        '@storybook/addon-essentials',
+        '@storybook/addon-interactions',
         '@storybook/addon-a11y',
-        '@storybook/addon-viewport/register',
     ],
+    framework: '@storybook/react',
+    core: {
+        builder: 'webpack5',
+    },
 };

@@ -13,9 +13,26 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { addDecorator } from '@storybook/react';
-import Decorator from './Decorator';
-import { withConsole } from '@storybook/addon-console';
 
-addDecorator(Decorator);
-addDecorator((storyFn, context) => withConsole()(storyFn)(context));
+import React, { StrictMode } from 'react';
+import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
+
+export const parameters = {
+    actions: { argTypesRegex: '^on[A-Z].*' },
+    controls: {
+        matchers: {
+            color: /(background|color)$/i,
+            date: /Date$/,
+        },
+    },
+};
+
+export const decorators = [
+    (Story) => (
+        <StrictMode>
+            <NorthStarThemeProvider>
+                <Story />
+            </NorthStarThemeProvider>
+        </StrictMode>
+    ),
+];
