@@ -1,18 +1,42 @@
 {
+    "branches": [{
+            "name": "main"
+        },
+        {
+            "name": "next",
+            "channel": "next"
+        }
+    ],
     "plugins": [
         ["@semantic-release/commit-analyzer", {
             "preset": "angular",
-            "releaseRules": [
-                {"type": "docs", "scope": "README", "release": "patch"},
-                {"message": "*BREAKING CHANGE*", "release": "minor"},
-                {"type": "refactor", "message": "*RENAME Props*", "release": "minor"},
-                {"type": "feat", "release": "patch"},
-                {"type": "style", "release": "patch"}
+            "releaseRules": [{
+                    "type": "docs",
+                    "scope": "README",
+                    "release": "patch"
+                },
+                {
+                    "message": "*BREAKING CHANGE*",
+                    "release": "minor"
+                },
+                {
+                    "type": "refactor",
+                    "message": "*RENAME Props*",
+                    "release": "minor"
+                },
+                {
+                    "type": "feat",
+                    "release": "patch"
+                },
+                {
+                    "type": "style",
+                    "release": "patch"
+                }
             ]
         }],
         "@semantic-release/release-notes-generator",
         ["@semantic-release/npm", {
-            "pkgRoot": "./build",
+            "pkgRoot": "./build"
         }],
         ["@semantic-release/exec", {
             "successCmd": "RELEASED_VERSION=${nextRelease.version} ./scripts/postRelease.sh"
