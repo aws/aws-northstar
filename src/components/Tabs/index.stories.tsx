@@ -77,6 +77,7 @@ export const DynamicActiveId = () => {
     useEffect(() => {
         setTimeout(() => setActiveId('first'), 3000);
         setTimeout(() => setActiveId('second'), 6000);
+        setTimeout(() => setActiveId('second'), 9000);
     }, []);
 
     return <Tabs tabs={tabs} onChange={action('onChange')} activeId={activeId} variant="container" />;

@@ -99,7 +99,7 @@ function TabPanel({ children, value, index, paddingContentArea, ...props }: TabP
  */
 const Tabs = ({
     tabs,
-    activeId = '',
+    activeId,
     variant = 'default',
     paddingContentArea = true,
     onChange,
@@ -120,7 +120,7 @@ const Tabs = ({
     );
 
     useEffect(() => {
-        if (previousActiveId !== activeId) {
+        if (typeof activeId !== 'undefined' && previousActiveId !== activeId) {
             // Only fired when activeId change
             const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
             if (tabIndex !== -1 && tabIndex !== value) {
