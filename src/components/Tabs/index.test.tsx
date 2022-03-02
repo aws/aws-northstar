@@ -120,7 +120,7 @@ describe('Tabs', () => {
         return <Tabs tabs={tabs} activeId={activeId} />;
     };
 
-    it('change active Id with the activeId changed', () => {
+    it('change active tab with the activeId changed', () => {
         const props = { tabs };
         const { getByText, rerender } = render(<TabsWithActiveId {...props} activeId="second" />);
         expect(getByText(tabs[0].content)).not.toBeVisible();
