@@ -22,6 +22,7 @@ import Tab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 import Container from '../../layouts/Container';
 import Box from '../../layouts/Box';
+import usePrevious from '../../hooks/usePrevious';
 
 const useStyles = makeStyles((theme) => ({
     tab: {
@@ -106,6 +107,7 @@ const Tabs = ({
 }: TabsProps): ReactElement => {
     const classes = useStyles({});
     const [value, setValue] = React.useState(0);
+    const previousActiveId = usePrevious<string>(activeId);
     const handleChange = useCallback(
         (_event: React.ChangeEvent<{}>, index: number) => {
             onChange?.(tabs[index].id);
@@ -115,11 +117,14 @@ const Tabs = ({
     );
 
     useEffect(() => {
-        const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
-        if (tabIndex !== -1 && tabIndex !== value) {
-            setValue(tabIndex);
+        if (previousActiveId !== activeId) {
+            // Only fired when activeId change
+            const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
+            if (tabIndex !== -1 && tabIndex !== value) {
+                setValue(tabIndex);
+            }
         }
-    }, [activeId, tabs, value]);
+    }, [activeId, previousActiveId, tabs, value]);
 
     const testId = props['data-testid'] || 'tabs';
 

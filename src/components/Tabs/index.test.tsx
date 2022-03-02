@@ -129,5 +129,15 @@ describe('Tabs', () => {
         rerender(<TabsWithActiveId {...props} activeId="first" />);
         expect(getByText(tabs[0].content)).toBeVisible();
         expect(getByText(tabs[1].content)).not.toBeVisible();
+
+        const tab = getByText(THIRD_TAB_LABEL).closest('button');
+
+        if (tab) {
+            fireEvent.click(tab);
+        }
+
+        expect(getByText(tabs[0].content)).not.toBeVisible();
+        expect(getByText(tabs[1].content)).not.toBeVisible();
+        expect(getByText(tabs[2].content)).toBeVisible();
     });
 });

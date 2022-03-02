@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Tabs from '.';
 import Box from '../../layouts/Box';
 import { action } from '@storybook/addon-actions';
@@ -69,4 +69,15 @@ export const NoPaddingContainer = () => {
             variant="container"
         />
     );
+};
+
+export const DynamicActiveId = () => {
+    const [activeId, setActiveId] = useState('second');
+
+    useEffect(() => {
+        setTimeout(() => setActiveId('first'), 3000);
+        setTimeout(() => setActiveId('second'), 6000);
+    }, []);
+
+    return <Tabs tabs={tabs} onChange={action('onChange')} activeId={activeId} variant="container" />;
 };
