@@ -106,8 +106,11 @@ const Tabs = ({
     ...props
 }: TabsProps): ReactElement => {
     const classes = useStyles({});
-    const [value, setValue] = React.useState(0);
-    const previousActiveId = usePrevious<string>(activeId);
+    const [value, setValue] = React.useState(() => {
+        const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
+        return tabIndex === -1 ? 0 : tabIndex;
+    });
+    const previousActiveId = usePrevious(activeId);
     const handleChange = useCallback(
         (_event: React.ChangeEvent<{}>, index: number) => {
             onChange?.(tabs[index].id);
