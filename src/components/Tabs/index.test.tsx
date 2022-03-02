@@ -115,4 +115,19 @@ describe('Tabs', () => {
 
         expect(labelContent).toBeVisible();
     });
+
+    const TabsWithActiveId = ({ activeId }: { activeId: string }) => {
+        return <Tabs tabs={tabs} activeId={activeId} />;
+    };
+
+    it('change active Id with the activeId changed', () => {
+        const props = { tabs };
+        const { getByText, rerender } = render(<TabsWithActiveId {...props} activeId="second" />);
+        expect(getByText(tabs[0].content)).not.toBeVisible();
+        expect(getByText(tabs[1].content)).toBeVisible();
+
+        rerender(<TabsWithActiveId {...props} activeId="first" />);
+        expect(getByText(tabs[0].content)).toBeVisible();
+        expect(getByText(tabs[1].content)).not.toBeVisible();
+    });
 });

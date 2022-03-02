@@ -20,7 +20,7 @@
         "outDir": "build",
         "skipLibCheck": true,
         "rootDirs": ["src"],
-        "sourceMap": false,
+        "sourceMap": true,
         "strict": true,
         "strictNullChecks": true,
         "suppressImplicitAnyIndexErrors": true,

@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactElement, ReactNode, useCallback, useMemo } from 'react';
+import React, { ReactElement, ReactNode, useCallback, useEffect, useMemo } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -105,8 +105,7 @@ const Tabs = ({
     ...props
 }: TabsProps): ReactElement => {
     const classes = useStyles({});
-    const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
-    const [value, setValue] = React.useState(tabIndex === -1 ? 0 : tabIndex);
+    const [value, setValue] = React.useState(0);
     const handleChange = useCallback(
         (_event: React.ChangeEvent<{}>, index: number) => {
             onChange?.(tabs[index].id);
@@ -114,6 +113,13 @@ const Tabs = ({
         },
         [onChange, tabs]
     );
+
+    useEffect(() => {
+        const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
+        if (tabIndex !== -1 && tabIndex !== value) {
+            setValue(tabIndex);
+        }
+    }, [activeId, tabs, value]);
 
     const testId = props['data-testid'] || 'tabs';
 
