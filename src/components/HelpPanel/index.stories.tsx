@@ -21,7 +21,7 @@ import Heading from '../Heading';
 
 export default {
     component: HelpPanel,
-    title: 'HelpPanel',
+    title: 'Components/HelpPanel',
 };
 
 const footerLinks = [

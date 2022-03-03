@@ -18,7 +18,7 @@ import Text from '.';
 
 export default {
     component: Text,
-    title: 'Text',
+    title: 'Components/Text',
 };
 
 export const Default = () => <Text>This is my text body...</Text>;

@@ -20,7 +20,7 @@ import { MemoryRouter } from 'react-router';
 
 export default {
     component: BreadcrumbGroup,
-    title: 'BreadcrumbGroup',
+    title: 'Components/BreadcrumbGroup',
 };
 
 export const BreadcrumbsWithNoItems = () => {

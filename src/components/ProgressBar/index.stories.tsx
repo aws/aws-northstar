@@ -20,7 +20,7 @@ import Stack from '../../layouts/Stack';
 
 export default {
     component: ProgressBar,
-    title: 'ProgressBar',
+    title: 'Components/ProgressBar',
 };
 
 export const Default = () => (

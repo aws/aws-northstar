@@ -21,7 +21,7 @@ import Inline from '../../layouts/Inline';
 
 export default {
     component: HeadingStripe,
-    title: 'HeadingStripe',
+    title: 'Components/HeadingStripe',
 };
 
 export const Default = () => {

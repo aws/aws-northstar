@@ -20,7 +20,7 @@ const PivotTable = React.lazy(() => import('.'));
 
 export default {
     component: PivotTable,
-    title: 'PivotTable',
+    title: 'Components/PivotTable',
 };
 
 const data = [

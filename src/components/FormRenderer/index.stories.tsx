@@ -28,7 +28,7 @@ import FormRendererTable from '../FormRendererTable';
 
 export default {
     component: FormRenderer,
-    title: 'FormRenderer',
+    title: 'Components/FormRenderer',
 };
 
 const treeItems = {

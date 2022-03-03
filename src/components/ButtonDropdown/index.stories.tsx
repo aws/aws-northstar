@@ -19,7 +19,7 @@ import Box from '../../layouts/Box';
 
 export default {
     component: ButtonDropdown,
-    title: 'ButtonDropdown',
+    title: 'Components/ButtonDropdown',
 };
 
 export const StandardButton = () => (

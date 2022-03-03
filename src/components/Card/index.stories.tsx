@@ -21,7 +21,7 @@ import Placeholder from '../Placeholder';
 
 export default {
     component: Card,
-    title: 'Card',
+    title: 'Components/Card',
 };
 
 export const Default = () => (

@@ -18,7 +18,7 @@ import TreeView, { TreeItemNode } from '.';
 
 export default {
     component: TreeView,
-    title: 'TreeView',
+    title: 'Components/TreeView',
 };
 
 const treeItem: TreeItemNode = {

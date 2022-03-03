@@ -19,7 +19,7 @@ import Box from '../Box';
 
 export default {
     component: ColumnLayout,
-    title: 'ColumnLayout',
+    title: 'Layouts/ColumnLayout',
 };
 
 const DemoBox = ({ content, bgcolor }: any) => {

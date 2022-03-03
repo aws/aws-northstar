@@ -20,7 +20,7 @@ import StatusIndicator from '.';
 
 export default {
     component: StatusIndicator,
-    title: 'StatusIndicator',
+    title: 'Components/StatusIndicator',
 };
 
 export const Default = () => (

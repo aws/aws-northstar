@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default {
     component: Form,
-    title: 'Form',
+    title: 'Components/Form',
 };
 
 const Actions = () => (

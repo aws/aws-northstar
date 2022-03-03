@@ -18,7 +18,7 @@ import LineChart, { Line, YAxis, XAxis, Tooltip, Legend, CartesianGrid, NORTHSTA
 
 export default {
     component: LineChart,
-    title: 'LineChart',
+    title: 'Charts/LineChart',
 };
 
 const sampleData = [

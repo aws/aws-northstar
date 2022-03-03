@@ -18,7 +18,7 @@ import BarChart, { Bar, YAxis, XAxis, Tooltip, Legend, CartesianGrid, NORTHSTAR_
 
 export default {
     component: BarChart,
-    title: 'BarChart',
+    title: 'Charts/BarChart',
 };
 
 const sampleData = [

@@ -19,7 +19,7 @@ import LoadingIndicator from '.';
 
 export default {
     component: LoadingIndicator,
-    title: 'LoadingIndicator',
+    title: 'Components/LoadingIndicator',
 };
 
 export const Default = () => {

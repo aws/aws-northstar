@@ -21,7 +21,7 @@ import SampleNotebook from './sample-notebook';
 
 export default {
     component: JupyterNotebook,
-    title: 'Jupyter Notebook Viewer',
+    title: 'Advanced Components/Jupyter Notebook Viewer',
 };
 
 export const SimpleNotebookView = () => <JupyterNotebook notebookData={JSON.stringify(SampleNotebook)} />;

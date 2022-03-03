@@ -18,7 +18,7 @@ import Badge from '.';
 
 export default {
     component: Badge,
-    title: 'Badge',
+    title: 'Components/Badge',
 };
 
 export const Default = () => <Badge content="10" />;

@@ -29,7 +29,7 @@ const options = [
 
 export default {
     component: ExpandableSection,
-    title: 'ExpandableSection',
+    title: 'Components/ExpandableSection',
 };
 
 export const Default = () => <ExpandableSection header="Header">Expandable content</ExpandableSection>;

@@ -18,7 +18,7 @@ import RadioButton from '.';
 
 export default {
     component: RadioButton,
-    title: 'RadioButton',
+    title: 'Components/RadioButton',
 };
 
 export const Default = () => <RadioButton />;

@@ -19,7 +19,7 @@ import { Container } from '../../layouts';
 
 export default {
     component: Heading,
-    title: 'Heading',
+    title: 'Components/Heading',
 };
 
 export const Default = () => (

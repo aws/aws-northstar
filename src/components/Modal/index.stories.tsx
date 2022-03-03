@@ -20,7 +20,7 @@ import { Button } from '../index';
 
 export default {
     component: Modal,
-    title: 'Modal',
+    title: 'Components/Modal',
 };
 
 export const Default = () => {

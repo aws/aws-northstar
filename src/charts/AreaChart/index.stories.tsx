@@ -18,7 +18,7 @@ import AreaChart, { Area, YAxis, XAxis, Tooltip, NORTHSTAR_COLORS } from '.';
 
 export default {
     component: AreaChart,
-    title: 'AreaChart',
+    title: 'Charts/AreaChart',
 };
 
 const sampleData = [

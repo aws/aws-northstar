@@ -35,7 +35,7 @@ import { Default as GeneralInfo } from '../../components/KeyValuePair/index.stor
 
 export default {
     component: AppLayout,
-    title: 'AppLayout',
+    title: 'Layouts/AppLayout',
     parameters: {
         layout: 'fullscreen',
     },

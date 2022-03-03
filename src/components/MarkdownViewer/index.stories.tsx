@@ -19,7 +19,7 @@ import MarkdownViewer from '.';
 
 export default {
     component: MarkdownViewer,
-    title: 'MarkdownViewer',
+    title: 'Components/MarkdownViewer',
 };
 
 const markdown = `

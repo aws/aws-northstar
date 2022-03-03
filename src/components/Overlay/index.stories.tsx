@@ -21,7 +21,7 @@ import LoadingIndicator from '../LoadingIndicator';
 
 export default {
     component: Overlay,
-    title: 'Overlay',
+    title: 'Components/Overlay',
 };
 
 export const Default = () => {

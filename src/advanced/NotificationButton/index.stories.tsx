@@ -21,7 +21,7 @@ import Box from '../../layouts/Box';
 
 export default {
     component: NotificationButton,
-    title: 'NotificationButton',
+    title: 'Advanced Components/NotificationButton',
 };
 
 const defaultNotifications: NotificationMessage[] = [

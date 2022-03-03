@@ -24,7 +24,7 @@ import { awsServices, groupedAwsServices } from './data/data';
 
 export default {
     component: Autosuggest,
-    title: 'Autosuggest',
+    title: 'Components/Autosuggest',
 };
 
 function sleep(delay = 0) {

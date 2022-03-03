@@ -30,7 +30,7 @@ addDecorator(
 
 export default {
     component: SideNavigation,
-    title: 'SideNavigation',
+    title: 'Components/SideNavigation',
 };
 
 export const Default = () => {

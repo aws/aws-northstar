@@ -19,7 +19,7 @@ import Icon from '.';
 
 export default {
     component: Icon,
-    title: 'Icon',
+    title: 'Components/Icon',
 };
 
 export const DefaultExample = () => <Icon name="AcUnit" />;

@@ -23,7 +23,7 @@ import Stack from '../../layouts/Stack';
 
 export default {
     componet: KeyValuePair,
-    title: 'KeyValuePair',
+    title: 'Components/KeyValuePair',
 };
 
 const ExternalLink = (
