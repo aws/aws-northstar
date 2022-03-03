@@ -94,18 +94,31 @@ export interface SideNavigationItem {
 /** Populate the initial expanded state of the section based on the settings */
 const populateInitialExpandedState = (
     items: SideNavigationItem[],
+    defaultExpandedAll: boolean,
     initialState: { [itemText: string]: boolean } = {}
 ): { [itemText: string]: boolean } => {
     items.forEach((item) => {
-        if (item.expanded && item.text !== undefined) {
+        if ((defaultExpandedAll || item.expanded) && item.text !== undefined) {
             initialState[item.text] = true;
         }
 
         if (item.items && item.items.length > 0) {
-            populateInitialExpandedState(item.items, initialState);
+            populateInitialExpandedState(item.items, defaultExpandedAll, initialState);
         }
     });
     return initialState;
+};
+
+const wrapInHref = (children: ReactNode, href?: string) => {
+    return href ? (
+        <div style={{ width: '100%' }}>
+            <Link href={href} underlineHover={false}>
+                {children}
+            </Link>
+        </div>
+    ) : (
+        children
+    );
 };
 
 export interface SideNavigationProps extends RouteComponentProps {
@@ -133,32 +146,31 @@ export interface SideNavigationProps extends RouteComponentProps {
      *  * Divider: Object that represents a horizontal divider between navigation content.
      **/
     items?: SideNavigationItem[];
+    /**
+     * Determines whether all sections should be expanded by default.
+     */
+    defaultExpandedAll?: boolean;
 }
 
 /**
  * The side navigation refers to a list of links that point to the pages within an application.
  */
-export const SideNavigation: FunctionComponent<SideNavigationProps> = ({ header, items = [], location }) => {
+export const SideNavigation: FunctionComponent<SideNavigationProps> = ({
+    header,
+    items = [],
+    defaultExpandedAll = false,
+    location,
+}) => {
     const classes = useStyles({});
-    const [expandedSections, setExpandedSections] = React.useState(populateInitialExpandedState(items));
+    const [expandedSections, setExpandedSections] = React.useState(
+        populateInitialExpandedState(items, defaultExpandedAll)
+    );
 
     const expandToggle = (itemText: string) => {
         setExpandedSections((prevExpandedSections) => ({
             ...prevExpandedSections,
             [itemText]: !prevExpandedSections[itemText],
         }));
-    };
-
-    const wrapInHref = (children: ReactNode, href?: string) => {
-        return href ? (
-            <div style={{ width: '100%' }}>
-                <Link href={href} underlineHover={false}>
-                    {children}
-                </Link>
-            </div>
-        ) : (
-            children
-        );
     };
 
     const renderDivider = () => <Divider key={uuidv4()} className={classes.divider} />;
