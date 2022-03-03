@@ -97,6 +97,51 @@ describe('SideNavigation', () => {
         expect(getByText('Page 2').closest('a')).toHaveAttribute('href', '/page2');
     });
 
+    it('should render all sub list items when the defaultExpandedAll is true', () => {
+        const navigationItems = [
+            { type: SideNavigationItemType.LINK, text: 'Page 1', href: '/page1' },
+            {
+                type: SideNavigationItemType.SECTION,
+                text: 'Section 1',
+                items: [
+                    {
+                        type: SideNavigationItemType.LINK,
+                        text: 'Page 2',
+                        href: '/page2',
+                    },
+                ],
+            },
+            {
+                type: SideNavigationItemType.SECTION,
+                text: 'Section 2',
+                items: [
+                    {
+                        type: SideNavigationItemType.LINK,
+                        text: 'Page 3',
+                        href: '/page3',
+                    },
+                ],
+            },
+        ];
+        const history = createMemoryHistory();
+        const { getByText } = render(
+            <Router history={history}>
+                <SideNavigation
+                    header={{
+                        href: '/',
+                        text: 'Site header',
+                    }}
+                    defaultExpandedAll={true}
+                    items={navigationItems}
+                />
+            </Router>
+        );
+        expect(getByText('Site header').closest('a')).toHaveAttribute('href', '/');
+        expect(getByText('Page 1').closest('a')).toHaveAttribute('href', '/page1');
+        expect(getByText('Page 2').closest('a')).toHaveAttribute('href', '/page2');
+        expect(getByText('Page 3').closest('a')).toHaveAttribute('href', '/page3');
+    });
+
     it('should not render sub list items when the section is not expanded', () => {
         const navigationItems = [
             { type: SideNavigationItemType.LINK, text: 'Page 1', href: '/page1' },

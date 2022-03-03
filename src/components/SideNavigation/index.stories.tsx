@@ -129,3 +129,70 @@ export const WithSections = () => {
         />
     );
 };
+
+export const WithSectionsDefaultExpandedAll = () => {
+    const navigationItems = [
+        {
+            type: SideNavigationItemType.LINK,
+            text: 'Page 1',
+            href: '/page1',
+        },
+        {
+            type: SideNavigationItemType.LINK,
+            text: 'Page 2',
+            href: '/page2',
+        },
+        {
+            type: SideNavigationItemType.SECTION,
+            text: 'Section 1',
+            items: [
+                {
+                    type: SideNavigationItemType.LINK,
+                    text: 'Page 4',
+                    href: '/page4',
+                },
+                {
+                    type: SideNavigationItemType.LINK,
+                    text: 'Page 5',
+                    href: '/page5',
+                },
+                {
+                    type: SideNavigationItemType.LINK,
+                    text: 'Page 6',
+                    href: '/page6',
+                },
+            ],
+        },
+        {
+            type: SideNavigationItemType.SECTION,
+            text: 'Section 2',
+            items: [
+                {
+                    type: SideNavigationItemType.LINK,
+                    text: 'Page 7',
+                    href: '/page7',
+                },
+                {
+                    type: SideNavigationItemType.LINK,
+                    text: 'Page 8',
+                    href: '/page8',
+                },
+                {
+                    type: SideNavigationItemType.LINK,
+                    text: 'Page 9',
+                    href: '/page9',
+                },
+            ],
+        },
+    ];
+    return (
+        <SideNavigation
+            header={{
+                href: '/',
+                text: 'Service name',
+            }}
+            defaultExpandedAll={true}
+            items={navigationItems}
+        />
+    );
+};
