@@ -18,7 +18,7 @@ import ScatterChart, { Scatter, YAxis, XAxis, Tooltip, NORTHSTAR_COLORS } from '
 
 export default {
     component: ScatterChart,
-    title: 'ScatterChart',
+    title: 'Charts/ScatterChart',
 };
 
 const sampleData = [

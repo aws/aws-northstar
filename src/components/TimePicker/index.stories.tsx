@@ -18,7 +18,7 @@ import TimePicker from '.';
 
 export default {
     component: TimePicker,
-    title: 'TimePicker',
+    title: 'Components/TimePicker',
 };
 
 export const Default = () => <TimePicker />;

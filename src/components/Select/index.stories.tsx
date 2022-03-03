@@ -22,7 +22,7 @@ import { useCallback } from 'react';
 
 export default {
     component: Select,
-    title: 'Select',
+    title: 'Components/Select',
 };
 
 const options: SelectOption[] = [

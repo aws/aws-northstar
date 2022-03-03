@@ -20,7 +20,7 @@ import { FlashbarMessage } from './types';
 
 export default {
     component: Flashbar,
-    title: 'Flashbar',
+    title: 'Components/Flashbar',
 };
 
 export const Default = () => {

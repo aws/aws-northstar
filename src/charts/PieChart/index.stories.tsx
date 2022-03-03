@@ -18,7 +18,7 @@ import PieChart, { Pie, NORTHSTAR_COLORS } from '.';
 
 export default {
     component: PieChart,
-    title: 'PieChart',
+    title: 'Charts/PieChart',
 };
 
 const sampleData = [

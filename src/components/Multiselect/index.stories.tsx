@@ -22,7 +22,7 @@ import { awsServices } from '../Autosuggest/data/data';
 
 export default {
     component: Multiselect,
-    title: 'Multiselect',
+    title: 'Components/Multiselect',
 };
 
 function sleep(delay = 0) {

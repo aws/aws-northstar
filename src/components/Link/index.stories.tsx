@@ -20,7 +20,7 @@ import Link from '.';
 
 export default {
     component: Link,
-    title: 'Link',
+    title: 'Components/Link',
 };
 
 export const Normal = () => (

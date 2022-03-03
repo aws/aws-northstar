@@ -28,7 +28,7 @@ import filterColumnDefinition from './data/filterColumnDefinitions';
 
 export default {
     component: Table,
-    title: 'Table',
+    title: 'Components/Table',
 };
 
 export const Loading = () => (

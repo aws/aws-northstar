@@ -20,7 +20,7 @@ import { action } from '@storybook/addon-actions';
 
 export default {
     component: Input,
-    title: 'Input',
+    title: 'Components/Input',
 };
 
 export const Default = () => (

@@ -24,7 +24,7 @@ import Button from '../Button';
 
 export default {
     component: TokenGroup,
-    title: 'TokenGroup',
+    title: 'Components/TokenGroup',
 };
 
 export const Default = () => {

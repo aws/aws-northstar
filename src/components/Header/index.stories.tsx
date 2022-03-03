@@ -18,7 +18,7 @@ import Header from '.';
 
 export default {
     component: Header,
-    title: 'Header',
+    title: 'Components/Header',
 };
 
 export const Default = () => {

@@ -18,7 +18,7 @@ import DatePicker from '.';
 
 export default {
     component: DatePicker,
-    title: 'Datepicker',
+    title: 'Components/Datepicker',
 };
 
 export const Default = () => <DatePicker />;

@@ -25,7 +25,7 @@ import Dns from '@material-ui/icons/Dns';
 
 export default {
     component: Button,
-    title: 'Button',
+    title: 'Components/Button',
 };
 
 export const PrimaryButton = () => (

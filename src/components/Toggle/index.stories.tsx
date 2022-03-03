@@ -19,7 +19,7 @@ import { action } from '@storybook/addon-actions';
 
 export default {
     component: Toggle,
-    title: 'Toggle',
+    title: 'Components/Toggle',
 };
 
 export const Default = () => (

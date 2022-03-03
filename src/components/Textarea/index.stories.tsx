@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 
 export default {
     component: Textarea,
-    title: 'Textarea',
+    title: 'Components/Textarea',
 };
 
 export const Default = () => <Textarea value="This is a textarea" />;

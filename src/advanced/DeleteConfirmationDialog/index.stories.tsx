@@ -23,7 +23,7 @@ import Stack from '../../layouts/Stack';
 
 export default {
     component: DeleteConfirmationDialog,
-    title: 'DeleteConfirmationDialog',
+    title: 'Advanced Components/DeleteConfirmationDialog',
 };
 
 export const DeleteWithFriction = () => {

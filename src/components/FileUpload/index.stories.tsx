@@ -20,7 +20,7 @@ import Container from '../../layouts/Container';
 
 export default {
     component: FileUpload,
-    title: 'FileUpload',
+    title: 'Components/FileUpload',
 };
 
 const singleFile = [

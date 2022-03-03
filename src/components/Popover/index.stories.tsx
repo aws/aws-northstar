@@ -24,7 +24,7 @@ import { action } from '@storybook/addon-actions';
 
 export default {
     component: Popover,
-    title: 'Popover',
+    title: 'Components/Popover',
 };
 
 export const Small = () => (

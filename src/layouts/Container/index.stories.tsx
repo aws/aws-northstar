@@ -20,7 +20,7 @@ import Text from '../../components/Text';
 
 export default {
     component: Container,
-    title: 'Container',
+    title: 'Layouts/Container',
 };
 
 export const Default = () => (

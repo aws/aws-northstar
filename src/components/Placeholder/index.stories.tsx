@@ -19,7 +19,7 @@ import Placeholder from '.';
 
 export default {
     component: Placeholder,
-    title: 'Placeholder',
+    title: 'Components/Placeholder',
 };
 
 export const Default = () => {

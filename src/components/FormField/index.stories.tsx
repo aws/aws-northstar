@@ -22,7 +22,7 @@ import Select from '../Select';
 import Stack from '../../layouts/Stack';
 export default {
     component: FormField,
-    title: 'FormField',
+    title: 'Components/FormField',
 };
 
 export const Default = () => {

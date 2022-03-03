@@ -24,7 +24,7 @@ import Toggle from '../Toggle';
 
 export default {
     component: Wizard,
-    title: 'Wizard',
+    title: 'Components/Wizard',
 };
 
 export const Default = () => {

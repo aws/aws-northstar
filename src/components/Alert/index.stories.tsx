@@ -21,7 +21,7 @@ import Stack from '../../layouts/Stack';
 
 export default {
     component: Alert,
-    title: 'Alert',
+    title: 'Components/Alert',
 };
 
 export const Success = () => (

@@ -20,7 +20,7 @@ import Input from '../Input';
 
 export default {
     component: FormSection,
-    title: 'FormSection',
+    title: 'Components/FormSection',
 };
 
 export const Default = () => {
