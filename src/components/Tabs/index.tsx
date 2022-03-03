@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import React, { ReactElement, ReactNode, useCallback, useMemo } from 'react';
+import React, { ReactElement, ReactNode, useCallback, useEffect, useMemo } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -22,6 +22,7 @@ import Tab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 import Container from '../../layouts/Container';
 import Box from '../../layouts/Box';
+import usePrevious from '../../hooks/usePrevious';
 
 const useStyles = makeStyles((theme) => ({
     tab: {
@@ -98,15 +99,18 @@ function TabPanel({ children, value, index, paddingContentArea, ...props }: TabP
  */
 const Tabs = ({
     tabs,
-    activeId = '',
+    activeId,
     variant = 'default',
     paddingContentArea = true,
     onChange,
     ...props
 }: TabsProps): ReactElement => {
     const classes = useStyles({});
-    const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
-    const [value, setValue] = React.useState(tabIndex === -1 ? 0 : tabIndex);
+    const [value, setValue] = React.useState(() => {
+        const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
+        return tabIndex === -1 ? 0 : tabIndex;
+    });
+    const previousActiveId = usePrevious(activeId);
     const handleChange = useCallback(
         (_event: React.ChangeEvent<{}>, index: number) => {
             onChange?.(tabs[index].id);
@@ -114,6 +118,16 @@ const Tabs = ({
         },
         [onChange, tabs]
     );
+
+    useEffect(() => {
+        if (typeof activeId !== 'undefined' && previousActiveId !== activeId) {
+            // Only fired when activeId change
+            const tabIndex = tabs.findIndex((tab) => tab.id === activeId);
+            if (tabIndex !== -1 && tabIndex !== value) {
+                setValue(tabIndex);
+            }
+        }
+    }, [activeId, previousActiveId, tabs, value]);
 
     const testId = props['data-testid'] || 'tabs';
 
