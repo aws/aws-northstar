@@ -26,14 +26,13 @@
     "lint-staged": "lint-staged",
     "prettier": "prettier --write {src,infra,styleguide}{/**/,/}**.{js,jsx,ts,tsx}",
     "storybook:build": "build-storybook -s ./public -o storybook.out",
-    "storybook": "start-storybook -p 9090",
+    "storybook": "start-storybook -s ./public -p 9090",
     "styleguide:build": "styleguidist build",
     "styleguide": "styleguidist server",
     "test:ci": "yarn test --coverage && yarn lint && yarn license:check && git secrets --scan",
     "test": "jest",
     "test:watch": "jest --runInBand --watch ./src",
-    "prepare": "husky install",
-    "build-storybook": "build-storybook"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "(src|infra|styleguide|docs)(/**/|/*)**.(js|jsx|ts|tsx)": [
@@ -155,6 +154,7 @@
     "react-router-dom": "^5.1.2"
   },
   "resolutions": {
+    "webpack": "^5.69.1",
     "trim": "^0.0.3",
     "glob-parent": "^5.1.2",
     "set-value": "^4.0.1",
