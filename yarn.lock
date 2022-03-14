@@ -11801,10 +11801,10 @@ pkg-up@^3.1.0:
   dependencies:
     find-up "^3.0.0"
 
-plotly.js@^2.9.0:
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.9.0.tgz#3ffa428c351c5665e9e0ad20234bebe23f5f7b08"
-  integrity sha512-A3kqjGq2PCeL/z19BNvg5YD712mWCMaRW2WbmYA+qpdbNPUjBNjMK/MWXDi7pV53CUM2ZKAqre4j6Uy7bIoAGA==
+plotly.js@^2.11.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.11.0.tgz#599c35d0f21835fc6786cd3c413cb289cde9f17a"
+  integrity sha512-zFPWymQdnrw8fN6VL4LMIHo9OxneItuo2Zdnggv1mCGy2SMt1ZX2d4b/hs2xrbeuvW2C9JZ9r3Rj1b5abXRlPA==
   dependencies:
     "@plotly/d3" "3.8.0"
     "@plotly/d3-sankey" "0.7.2"
@@ -11841,7 +11841,7 @@ plotly.js@^2.9.0:
     parse-svg-path "^0.1.2"
     polybooljs "^1.2.0"
     probe-image-size "^7.2.3"
-    regl "^2.1.0"
+    regl "npm:@plotly/regl@^2.1.1"
     regl-error2d "^2.0.12"
     regl-line2d "^3.1.2"
     regl-scatter2d "^3.2.8"
@@ -13194,10 +13194,15 @@ regl-splom@^1.0.14:
     raf "^3.4.1"
     regl-scatter2d "^3.2.3"
 
-regl@^2.0.0, regl@^2.1.0:
+regl@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/regl/-/regl-2.1.0.tgz#7dae71e9ff20f29c4f42f510c70cd92ebb6b657c"
   integrity sha512-oWUce/aVoEvW5l2V0LK7O5KJMzUSKeiOwFuJehzpSFd43dO5spP9r+sSUfhKtsky4u6MCqWJaRL+abzExynfTg==
+
+"regl@npm:@plotly/regl@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@plotly/regl/-/regl-2.1.1.tgz#4ba88de964dc7fce6e34680cac27411c9a9d41ad"
+  integrity sha512-srKD8UCOQGwf1QSH/sUpK6R2TzYQdK/WRHc+LM22fTIDMnAvZiQR6DnWiOknsWkDGEmspCT6wrxMXEUiPfEZbQ==
 
 relateurl@^0.2.7:
   version "0.2.7"
