@@ -29,6 +29,8 @@ updates:
       - dependency-name: "remark-gfm"
         versions: ["2.x","3.x"]
       - dependency-name: "typescript"
-        versions: ["4.4.x","4.5.x"]
+        versions: ["4.4.x","4.5.x","4.6.x"]
       - dependency-name: "@date-io/date-fns"
         versions: ["2.x"]
+      - dependency-name: "jest-axe"
+        versions: ["6.x"]
