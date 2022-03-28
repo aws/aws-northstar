@@ -116,7 +116,7 @@
     "webpack": "^5.69.1"
   },
   "dependencies": {
-    "@data-driven-forms/react-form-renderer": "^3.16.9",
+    "@data-driven-forms/react-form-renderer": "^3.16.10",
     "@date-io/date-fns": "^1.3.1",
     "@material-ui/core": "4.11.4",
     "@material-ui/icons": "^4.11.2",
