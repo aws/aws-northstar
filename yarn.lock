@@ -3468,10 +3468,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-table@7.7.9":
-  version "7.7.9"
-  resolved "https://registry.yarnpkg.com/@types/react-table/-/react-table-7.7.9.tgz#ea82875775fc6ee71a28408dcc039396ae067c92"
-  integrity sha512-ejP/J20Zlj9VmuLh73YgYkW2xOSFTW39G43rPH93M4mYWdMmqv66lCCr+axZpkdtlNLGjvMG2CwzT4S6abaeGQ==
+"@types/react-table@7.7.10":
+  version "7.7.10"
+  resolved "https://registry.yarnpkg.com/@types/react-table/-/react-table-7.7.10.tgz#ca8bb5420bfeae964ff61682f31f1cadfcfee726"
+  integrity sha512-yt7FHv/2cFsucStSWLBOB3OmsRZF08DvVHzz8Zg41B4tzRL6pQ+5VYvmhaR1dKS//tDG4UOJ1RQJPEINHYoRtg==
   dependencies:
     "@types/react" "*"
 
