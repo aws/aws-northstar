@@ -94,7 +94,7 @@
     "lint-staged": "^12.3.7",
     "lodash.orderby": "^4.6.0",
     "plotly.js": "^2.9.0",
-    "prettier": "^2.6.0",
+    "prettier": "^2.6.1",
     "react": "^17.0.2",
     "react-color-square": "^1.0.1",
     "react-docgen-typescript-loader": "^3.6.0",
