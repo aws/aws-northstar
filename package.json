@@ -49,7 +49,7 @@
     "@babel/core": "^7.17.8",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/github": "^8.0.2",
-    "@storybook/addon-a11y": "^6.4.19",
+    "@storybook/addon-a11y": "^6.4.20",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-interactions": "^6.4.19",
