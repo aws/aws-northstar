@@ -46,7 +46,7 @@
     "url": "https://github.com/aws/aws-northstar"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.8",
+    "@babel/core": "^7.18.2",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/github": "^8.0.4",
     "@storybook/addon-a11y": "^6.4.22",
@@ -60,7 +60,7 @@
     "@storybook/testing-library": "^0.0.11",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.5",
-    "@testing-library/react-hooks": "^7.0.2",
+    "@testing-library/react-hooks": "^8.0.0",
     "@types/jest": "^27.4.1",
     "@types/jest-axe": "^3.5.3",
     "@types/lodash.orderby": "^4.6.7",
