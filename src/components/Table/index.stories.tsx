@@ -16,7 +16,7 @@
 
 import React, { useCallback, useMemo, useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import Table, { FetchDataOptions, Column } from '.';
+import Table, { FetchDataOptions } from '.';
 import Button from '../Button';
 import longData from './data/long';
 import shortData from './data/short';
