@@ -20,16 +20,37 @@ const data: DataType[] = [
         id: 'id0000011',
         name: 'Order 11',
         createdDate: '2020-01-01',
+        subRows: [
+            {
+                id: 'id0000111',
+                name: 'Order 111',
+                createdDate: '2020-01-01',
+            },
+        ],
     },
     {
         id: 'id0000012',
         name: 'Order 12',
         createdDate: '2020-01-01',
+        subRows: [
+            {
+                id: 'id0000211',
+                name: 'Order 211',
+                createdDate: '2020-01-01',
+            },
+        ],
     },
     {
         id: 'id0000013',
         name: 'Order 12',
         createdDate: '2020-01-02',
+        subRows: [
+            {
+                id: 'id0000311',
+                name: 'Order 311',
+                createdDate: '2020-01-01',
+            },
+        ],
     },
     {
         id: 'id0000014',

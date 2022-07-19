@@ -25,7 +25,7 @@ const columnDefinition: Column<DataType>[] = [
     },
     {
         id: 'name',
-        width: 200,
+        width: 120,
         Header: 'Name',
         accessor: 'name',
     },

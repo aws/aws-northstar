@@ -21,6 +21,7 @@ import Button from '../Button';
 import longData from './data/long';
 import shortData from './data/short';
 import groupByData from './data/groupBy';
+import expandableData from './data/expandable';
 import { DataType } from './data/type';
 import columnDefinitions from './data/columnDefinitions';
 import orderBy from 'lodash.orderby';
@@ -30,6 +31,10 @@ export default {
     component: Table,
     title: 'Components/Table',
 };
+
+export const Default = () => (
+    <Table tableTitle={'Default Table'} columnDefinitions={columnDefinitions} items={shortData} />
+);
 
 export const Loading = () => (
     <Table
@@ -59,15 +64,14 @@ export const Simple = () => (
     />
 );
 
-export const Default = () => (
-    <Table tableTitle={'Default Table'} columnDefinitions={columnDefinitions} items={shortData} />
-);
-
 export const MultiSelect = () => {
     const getRowId = useCallback((data) => data.id, []);
     return (
         <Table
             tableTitle={'Multi Select Table'}
+            tableDescription={
+                'Specifies getRowId to avoid the infinite re-rendering loop when onSelectionChange is used'
+            }
             columnDefinitions={columnDefinitions}
             items={shortData}
             selectedRowIds={['id0000012', 'id0000013']}
@@ -84,6 +88,9 @@ export const MultiSelectWithRowsDisabled = () => {
     return (
         <Table
             tableTitle={'Multi Select Table'}
+            tableDescription={
+                'Specifies getRowId to avoid the infinite re-rendering loop when onSelectionChange is used'
+            }
             columnDefinitions={columnDefinitions}
             items={shortData}
             selectedRowIds={['id0000012', 'id0000013']}
@@ -99,6 +106,9 @@ export const SingleSelect = () => {
     return (
         <Table
             tableTitle={'Single Select Table'}
+            tableDescription={
+                'Specifies getRowId to avoid the infinite re-rendering loop when onSelectionChange is used'
+            }
             columnDefinitions={columnDefinitions}
             items={shortData}
             multiSelect={false}
@@ -121,6 +131,47 @@ export const GroupBy = () => (
     />
 );
 
+export const GroupBySingleSelect = () => {
+    const getRowId = useCallback((data) => data.id, []);
+    return (
+        <Table
+            tableTitle={'GroupBy Table'}
+            tableDescription={
+                'Specifies getRowId to avoid the infinite re-rendering loop when onSelectionChange is used and use onSelectedRowIdsChange to catch the update'
+            }
+            columnDefinitions={columnDefinitions}
+            items={groupByData}
+            disableGroupBy={false}
+            disableRowSelect={false}
+            multiSelect={false}
+            defaultGroups={['name']}
+            getRowId={getRowId}
+            onSelectedRowIdsChange={action('onSelectedRowIdsChange')}
+        />
+    );
+};
+
+export const GroupByMultiSelect = () => {
+    const getRowId = useCallback((data) => data.id, []);
+    return (
+        <Table
+            tableTitle={'GroupBy Table'}
+            tableDescription={
+                'Specifies getRowId to avoid the infinite re-rendering loop when onSelectionChange is used and use onSelectedRowIdsChange to catch the update'
+            }
+            columnDefinitions={columnDefinitions}
+            selectedRowIds={['id0000012', 'id0000013']}
+            items={groupByData}
+            disableGroupBy={false}
+            disableRowSelect={false}
+            multiSelect={true}
+            defaultGroups={['name']}
+            getRowId={getRowId}
+            onSelectedRowIdsChange={action('onSelectedRowIdsChange')}
+        />
+    );
+};
+
 export const ColumnFilters = () => (
     <Table
         tableTitle={'Column Filter Table'}
@@ -139,7 +190,7 @@ export const ExpandedTable = () => {
             tableTitle={'Expanded Table'}
             columnDefinitions={columnDefinitions}
             getRowId={getRowId}
-            items={groupByData}
+            items={expandableData}
             disableExpand={false}
             onSelectionChange={action('onSelectionChange')}
             onSelectedRowIdsChange={action('onSelectedRowIdsChange')}
@@ -202,7 +253,7 @@ export const RemoteFetch = () => {
     const fetchIdRef = React.useRef(0);
     const getRowId = useCallback((data) => data.id, []);
     const data = useMemo<DataType[]>(() => {
-        const data = [];
+        const data: DataType[] = [];
         for (let i = 0; i < 1000; i++) {
             data.push({
                 id: i.toString(),

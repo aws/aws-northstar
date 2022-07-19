@@ -86,17 +86,19 @@ const useTableColumnFilter = <D extends object>({
                                     controlId={row.id}
                                 />
                             ) : (
-                                <RadioButton
-                                    name="select"
-                                    checked={row.isSelected}
-                                    controlId={row.id}
-                                    data-testid={row.id}
-                                    disabled={isSelectDisabled}
-                                    onChange={() => {
-                                        toggleAllRowsSelected(false);
-                                        row.toggleRowSelected(true);
-                                    }}
-                                />
+                                !row.isGrouped && (
+                                    <RadioButton
+                                        name="select"
+                                        checked={row.isSelected}
+                                        controlId={row.id}
+                                        data-testid={row.id}
+                                        disabled={isSelectDisabled}
+                                        onChange={() => {
+                                            toggleAllRowsSelected(false);
+                                            row.toggleRowSelected(true);
+                                        }}
+                                    />
+                                )
                             )}
                         </div>
                     );
