@@ -33,3 +33,8 @@ Actively encourage a broad open source community to accelerate the development o
 ## The future of NorthStar
 Looking to the future, NorthStar will continue to grow as a visual, design, and development system targeted at the delivery of intuitive, meaningful and accessible user experiences. We encourage you to contribute to the project. See our contribution guide [here](#/Contribution%20Guide).
 
+## Cloudscape Design System and NorthStar
+
+On July 19, 2022, AWS released [Cloudscape Design System](https://cloudscape.design/) as open source. Cloudscape is a solution for building intuitive user experiences. It offers guidelines to create web applications, along with the design resources and front-end components to streamline implementation. While NorthStar is a design system to rapidly prototype user experiences, Cloudscape is a design system that is intended for use in production environments, beyond the prototypal phase.
+
+
