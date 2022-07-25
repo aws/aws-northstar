@@ -14,10 +14,9 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, act } from '@testing-library/react';
 import ButtonDropdown from '.';
 import { axe } from 'jest-axe';
-import { act } from 'react-test-renderer';
 
 describe('ButtonDropdown', () => {
     beforeEach(() => jest.clearAllMocks());
