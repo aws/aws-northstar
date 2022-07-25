@@ -60,7 +60,7 @@
     "@storybook/testing-library": "^0.0.13",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
-    "@testing-library/react-hooks": "^7.0.2",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/jest": "^27.4.1",
     "@types/jest-axe": "^3.5.3",
     "@types/lodash.orderby": "^4.6.7",
