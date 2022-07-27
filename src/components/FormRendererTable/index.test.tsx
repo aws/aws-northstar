@@ -14,10 +14,9 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React from 'react';
-import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
+import { render, cleanup, fireEvent, waitFor, act } from '@testing-library/react';
 import FormRenderer from '../FormRenderer';
 import FormRendererTable from '.';
-import { act } from 'react-dom/test-utils';
 
 describe('FormRendererTable', () => {
     afterEach(() => {
