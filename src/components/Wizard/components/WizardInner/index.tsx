@@ -35,6 +35,7 @@ export interface WizardInnerProps {
     nextButtonText?: string;
     submitButtonText?: string;
     isLoadingNextStep?: boolean;
+    isDisabledNextStep?: boolean;
     onCancelButtonClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     onPreviousButtonClick: () => void;
     onNextButtonClick: () => void;
@@ -58,6 +59,7 @@ const WizardInner: FunctionComponent<WizardInnerProps> = ({
     submitButtonText = 'Submit',
     optionalText = 'optional',
     isLoadingNextStep = false,
+    isDisabledNextStep = false,
     disableStepNavigation = false,
     onNextButtonClick,
     onPreviousButtonClick,
@@ -80,6 +82,7 @@ const WizardInner: FunctionComponent<WizardInnerProps> = ({
                 <Button
                     variant="primary"
                     loading={isLoadingNextStep}
+                    disabled={isDisabledNextStep}
                     onClick={activeStepIndex === stepCount - 1 ? onSubmitButtonClick : onNextButtonClick}
                 >
                     {activeStepIndex === stepCount - 1 ? submitButtonText : nextButtonText}
@@ -90,6 +93,7 @@ const WizardInner: FunctionComponent<WizardInnerProps> = ({
         activeStepIndex,
         stepCount,
         isLoadingNextStep,
+        isDisabledNextStep,
         cancelButtonText,
         nextButtonText,
         previousButtonText,

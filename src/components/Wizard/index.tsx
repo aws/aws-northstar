@@ -50,6 +50,8 @@ export interface WizardProps {
     optionalText?: string;
     /** Renders the next or submit button in a loading state. Use this if you need to wait for a response from the server before the user can proceed to the next step, such as during server-side validation or retrieving the next step's information.*/
     isLoadingNextStep?: boolean;
+    /** Renders the next or submit button in disabled state. Use this if you need to disable the next button until some conditions are met and then only let the user be able to proceed to the next step, such as in the case of client-side validation.*/
+    isDisabledNextStep?: boolean;
     /** Fired when a user clicks the cancel button. */
     onCancelButtonClick?: () => void;
     /**
@@ -83,6 +85,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
     submitButtonText = 'Submit',
     optionalText = 'optional',
     isLoadingNextStep = false,
+    isDisabledNextStep = false,
     disableStepNavigation = false,
     onNextButtonClick = () => true,
     onPreviousButtonClick = () => {},
@@ -134,6 +137,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
         submitButtonText,
         optionalText,
         isLoadingNextStep,
+        isDisabledNextStep,
         disableStepNavigation,
         onNextButtonClick: handleNextButtonClick,
         onPreviousButtonClick: handlePreviousButtonClick,

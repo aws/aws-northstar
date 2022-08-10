@@ -42,6 +42,28 @@ const steps = [
 describe('Wizard', () => {
     afterEach(cleanup);
 
+    it('Ensure isDisabledNextStep props is enbled by default.', () => {
+        const history = createMemoryHistory();
+        const { getByText } = render(
+            <Router history={history}>
+                <Wizard steps={steps} />
+            </Router>
+        );
+
+        expect(getByText('Next').parentNode).toBeEnabled();
+    });
+
+    it('Ensure isDisabledNextStep props can disable Next button.', () => {
+        const history = createMemoryHistory();
+        const { getByText } = render(
+            <Router history={history}>
+                <Wizard steps={steps} isDisabledNextStep />
+            </Router>
+        );
+
+        expect(getByText('Next').parentNode).toBeDisabled();
+    });
+
     it('renders Wizard step 1', () => {
         const history = createMemoryHistory();
         const { getByText, getAllByText, getByTestId } = render(
