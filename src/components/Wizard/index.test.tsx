@@ -50,7 +50,7 @@ describe('Wizard', () => {
             </Router>
         );
 
-        expect(getByText('Next')).toBeEnabled();
+        expect(getByText('Next').parentNode).toBeEnabled();
     });
 
     it('Ensure isDisabledNextStep props can disable Next button.', () => {
