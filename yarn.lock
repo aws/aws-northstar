@@ -7850,10 +7850,10 @@ get-value@^2.0.3, get-value@^2.0.6:
   resolved "https://registry.yarnpkg.com/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"
   integrity sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
 
-git-conventional-commits@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/git-conventional-commits/-/git-conventional-commits-1.2.1.tgz#71a368a09668f36db850320283aca8ffedae8698"
-  integrity sha512-hHObCM8hSENjg2QJnMYQXQq0HSBIn4JZ1nqLDnqSK8f7LV+lV6GvLRAtR96SQmU66kQ/tzQTdO6YOdKhyAzMxA==
+git-conventional-commits@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/git-conventional-commits/-/git-conventional-commits-2.1.2.tgz#73a323b27be5bb71cb370f6961767d82b0749782"
+  integrity sha512-j6wb+kPaxVaPmdi5sPhkT65r3ytsnzUFpoR+MfsNnLz7s28DCdtOAU3PQTHgY1JpTONnEBHoeQpFwTP36WkJhA==
   dependencies:
     yargs "^17.3.1"
 
