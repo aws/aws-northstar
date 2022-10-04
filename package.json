@@ -132,7 +132,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-table": "7.7.0",
     "react-use-localstorage": "^3.4.1",
-    "recharts": "^2.1.12",
+    "recharts": "^2.1.14",
     "remark-code-blocks": "^2.0.1",
     "remark-frontmatter": "^3.0.0",
     "remark-gfm": "^1.0.0",
@@ -161,7 +161,8 @@
     "ansi-regex": "^5.0.1",
     "json-schema": "^0.4.0",
     "node-forge": "^1.2.1",
-    "trim-newlines": "3.0.1"
+    "trim-newlines": "3.0.1",
+    "d3-color": "^3.1.0"
   },
   "browserslist": {
     "production": [
