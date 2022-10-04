@@ -1,0 +1,5 @@
+{
+  "@plotly/regl": {
+      "ignore": true 
+  }
+}
