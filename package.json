@@ -46,7 +46,7 @@
     "url": "https://github.com/aws/aws-northstar"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.9",
+    "@babel/core": "^7.19.3",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/github": "^8.0.5",
     "@storybook/addon-a11y": "^6.5.12",
