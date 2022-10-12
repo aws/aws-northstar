@@ -123,7 +123,7 @@
     "@material-ui/lab": "4.0.0-alpha.58",
     "@material-ui/pickers": "^3.3.10",
     "@material-ui/system": "4.11.3",
-    "@types/react-syntax-highlighter": "11.0.5",
+    "@types/react-syntax-highlighter": "15.5.5",
     "@types/react-table": "7.7.10",
     "@types/uuid": "^8.3.4",
     "clsx": "^1.2.1",
@@ -137,7 +137,7 @@
     "remark-code-blocks": "^2.0.1",
     "remark-frontmatter": "^3.0.0",
     "remark-gfm": "^1.0.0",
-    "use-debounce": "^8.0.1",
+    "use-debounce": "^8.0.4",
     "uuid": "^8.3.2"
   },
   "peerDependencies": {
