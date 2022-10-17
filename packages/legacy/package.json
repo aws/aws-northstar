@@ -4,6 +4,7 @@
   "description": "NorthStar Design System",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "module": "build/esm/index.js",
   "files": [
     "build"
   ],
@@ -23,8 +24,6 @@
     "build": "tsc --build tsconfig.build.json && yarn build:build-package-json && yarn build:build-readme",
     "build:esm": "tsc --build tsconfig.build.esm.json",
     "check:all": "yarn test:ci && yarn build && yarn storybook:build && yarn styleguide:build",
-    "generate:attribution": "generate-attribution && mv oss-attribution/attribution.txt LICENSE-THIRD-PARTY",
-    "license:check": "license-checker --summary --production --onlyAllow 'MIT;Apache-2.0;Unlicense;BSD;BSD*;BSD-2-Clause;BSD-3-Clause;ISC;Zlib;WTFPL;Custom: https://github.com/tmcw/jsonlint;Custom: http://badges.github.io/stability-badges/dist/stable.svg;Custom: https://github.com/substack/node-browserify'",
     "lint:fix": "eslint --fix --ext .ts --ext .tsx --ext .js --ext .jsx .",
     "lint": "eslint --max-warnings 0 --ext .ts --ext .tsx --ext .js --ext .jsx .",
     "storybook:build": "build-storybook -s ./public -o storybook.out",

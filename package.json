@@ -16,9 +16,9 @@
   ],
   "scripts": {
     "build": "yarn workspaces run build",
+    "build:esm": "yarn workspaces run build:esm",
     "check:all": "yarn workspaces run check:all",
-    "generate:attribution": "yarn workspace aws-northstar run generate:attribution",
-    "license:check": "yarn workspace aws-northstar run generate:attribution",
+    "license:check": "yarn license-checker --summary --production --onlyAllow 'MIT;Apache-2.0;Unlicense;UNLICENSED;BSD;BSD*;BSD-2-Clause;BSD-3-Clause;ISC;Zlib;WTFPL;Custom: https://github.com/tmcw/jsonlint;Custom: http://badges.github.io/stability-badges/dist/stable.svg;Custom: https://github.com/substack/node-browserify;'",
     "lint:fix": "yarn workspaces run lint:fix",
     "lint": "yarn workspaces run lint",
     "lint-staged": "lint-staged",

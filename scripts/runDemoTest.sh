@@ -20,7 +20,7 @@ cp -r $DEMO_FOLDER/. $TEST_FOLDER/.
 pushd $TEST_FOLDER 
 
 echo "Building the project"
-yarn add $BUILD_FOLDER
+yarn add file://$BUILD_FOLDER
 yarn
 yarn build
 
@@ -32,7 +32,7 @@ cat result.json | jq ".results[] | .bundleName,.totalBytes"
 
 FAILED_FILE_COUNT=$(cat result.json | jq ".results[] | select(.totalBytes>${BUNDLE_SIZE_THRESHOLD}) | .bundleName" -r | wc -l | awk '{$1=$1;print}')
 
-FAILED_MAIN_FILE_COUNT=$(cat result.json | jq ".results[0] | select(.totalBytes>${MAIN_BUNDLE_SIZE_THRESHOLD}) | .bundleName" -r | wc -l | awk '{$1=$1;print}')
+FAILED_MAIN_FILE_COUNT=$(cat result.json | jq ".results | .[] | select(.bundleName | contains(\"main\")) | select(.totalBytes>${MAIN_BUNDLE_SIZE_THRESHOLD}) | .bundleName" -r | wc -l | awk '{$1=$1;print}')
 
 popd
 
@@ -52,6 +52,6 @@ if [ ${FAILED_MAIN_FILE_COUNT} -gt 0 ] ; then
     exit 1
 else
     echo "PASS: The main file bundle size is below threshold ${MAIN_BUNDLE_SIZE_THRESHOLD}"
-fi
+fico
 
-rm -rf $TEST_FOLDER
+#rm -rf $TEST_FOLDER

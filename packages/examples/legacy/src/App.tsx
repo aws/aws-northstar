@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import { ComponentType, FunctionComponent } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import NorthStarThemeProvider from 'aws-northstar';
+import NorthStarThemeProvider from 'aws-northstar/components/NorthStarThemeProvider';
 import AppLayout from './components/AppLayout';
 import Analytics from './components/Analytics';
 import Dashboard from './components/Dashboard';
