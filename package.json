@@ -25,6 +25,8 @@
     "prettier": "prettier --write **",
     "styleguide:build": "yarn workspace aws-northstar run styleguidist build",
     "styleguide": "yarn workspace aws-northstar run styleguidist server",
+    "storybook:build": "yarn workspace aws-northstar run storybook:build",
+    "storybook": "yarn workspace aws-northstar run storybook",
     "test:ci": "yarn workspaces run test --coverage && yarn workspaces run lint && yarn license:check && git secrets --scan",
     "test": "yarn workspaces run test",
     "test:watch": "yarn workspaces run test:watch",
