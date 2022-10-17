@@ -14,7 +14,6 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import React, { FunctionComponent } from 'react';
-import ReactColorSquare from 'react-color-square';
 import Box from '../../../src/layouts/Box';
 import Table from '../../../src/components/Table';
 import Stack from '../../../src/layouts/Stack';
@@ -51,33 +50,18 @@ const generateDataFromTheme = (theme: any) => {
             displayValue: (
                 <Stack spacing="xs">
                     {colorOptions.main && (
-                        <Box color={colorOptions.contrastText}>
-                            <ReactColorSquare
-                                height={80}
-                                width={80}
-                                color={colorOptions.main}
-                                text={`main (${colorOptions.main})`}
-                            />
+                        <Box height={80} width={80} color={colorOptions.contrastText} bgcolor={colorOptions.main}>
+                            {`main (${colorOptions.main})`}
                         </Box>
                     )}
                     {colorOptions.light && (
-                        <Box color="text.primary">
-                            <ReactColorSquare
-                                height={80}
-                                width={80}
-                                color={colorOptions.light}
-                                text={`light (${colorOptions.light})`}
-                            />
+                        <Box height={80} width={80} color="text.primary" bgcolor={colorOptions.light}>
+                            {`light (${colorOptions.light})`}
                         </Box>
                     )}
                     {colorOptions.dark && (
-                        <Box color={colorOptions.contrastText}>
-                            <ReactColorSquare
-                                height={80}
-                                width={80}
-                                color={colorOptions.dark}
-                                text={`dark (${colorOptions.dark})`}
-                            />
+                        <Box height={80} width={80} color={colorOptions.contrastText} bgcolor={colorOptions.dark}>
+                            {`dark (${colorOptions.dark})`}
                         </Box>
                     )}
                 </Stack>

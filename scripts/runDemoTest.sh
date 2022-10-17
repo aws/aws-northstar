@@ -5,8 +5,8 @@
 set -e
 
 TEST_FOLDER=/tmp/$(date +%s)
-DEMO_FOLDER=$PWD/examples/create-react-app
-BUILD_FOLDER=$PWD/build
+DEMO_FOLDER=$PWD/packages/examples/legacy
+BUILD_FOLDER=$PWD/packages/legacy/build
 BUNDLE_SIZE_THRESHOLD=4000000
 MAIN_BUNDLE_SIZE_THRESHOLD=1700000
 

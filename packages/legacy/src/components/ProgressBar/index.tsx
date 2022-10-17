@@ -167,74 +167,73 @@ const CircularProgressWithLabel: React.FunctionComponent<
 /**
  * A progress bar is a horizontal progress-bar for indicating progress and activity.
  */
-const ProgressBar: FunctionComponent<
-    ProgressBarProps & Omit<LinearProgressProps & CircularProgressProps, 'variant'>
-> = ({
-    value,
-    displayValue = true,
-    status = 'in-progress',
-    variant = 'linear',
-    label,
-    description,
-    additionalInfo,
-    resultText,
-    resultButtonText,
-    resultButtonClick,
-    ...props
-}) => {
-    const classes = useStyles();
+const ProgressBar: FunctionComponent<ProgressBarProps & Omit<LinearProgressProps & CircularProgressProps, 'variant'>> =
+    ({
+        value,
+        displayValue = true,
+        status = 'in-progress',
+        variant = 'linear',
+        label,
+        description,
+        additionalInfo,
+        resultText,
+        resultButtonText,
+        resultButtonClick,
+        ...props
+    }) => {
+        const classes = useStyles();
 
-    const progressBody = (
-        ProgressBarComponent: React.FunctionComponent<ProgressBarComponentProps>
-    ): React.ReactNode => {
-        if (status === 'error' || status === 'success') {
-            return (
-                <div className={classes.body}>
-                    <div className={classes.icon}>
-                        <StatusIndicator statusType={statusMapping[status]}>{resultText}</StatusIndicator>
-                    </div>
-                    {resultButtonText && (
-                        <div className={classes.resultButton}>
-                            <Button onClick={resultButtonClick}>{resultButtonText}</Button>
+        const progressBody = (
+            ProgressBarComponent: React.FunctionComponent<ProgressBarComponentProps>
+        ): React.ReactNode => {
+            if (status === 'error' || status === 'success') {
+                return (
+                    <div className={classes.body}>
+                        <div className={classes.icon}>
+                            <StatusIndicator statusType={statusMapping[status]}>{resultText}</StatusIndicator>
                         </div>
-                    )}
-                </div>
+                        {resultButtonText && (
+                            <div className={classes.resultButton}>
+                                <Button onClick={resultButtonClick}>{resultButtonText}</Button>
+                            </div>
+                        )}
+                    </div>
+                );
+            }
+
+            return (
+                <ProgressBarComponent
+                    value={value || (value === 0 ? 0 : 100)}
+                    displayValue={displayValue}
+                    {...props}
+                    data-testid={`${testId}-indicator`}
+                />
             );
-        }
+        };
+
+        const ProgressBarComponent = useMemo(
+            () => (variant === 'linear' ? LinearProgressComponent : CircularProgressWithLabel),
+            [variant]
+        );
+
+        const testId = props['data-testid'] || 'progress-bar';
 
         return (
-            <ProgressBarComponent
-                value={value || (value === 0 ? 0 : 100)}
-                displayValue={displayValue}
-                {...props}
-                data-testid={`${testId}-indicator`}
-            />
+            <div data-testid={testId}>
+                {label && <Heading variant="h3">{label}</Heading>}
+                {description && (
+                    <Typography className={classes.description} variant="body1">
+                        {description}
+                    </Typography>
+                )}
+                {progressBody(ProgressBarComponent)}
+                {additionalInfo && (
+                    <Typography className={classes.description} variant="body1">
+                        {additionalInfo}
+                    </Typography>
+                )}
+            </div>
         );
     };
-
-    const ProgressBarComponent = useMemo(
-        () => (variant === 'linear' ? LinearProgressComponent : CircularProgressWithLabel),
-        [variant]
-    );
-
-    const testId = props['data-testid'] || 'progress-bar';
-
-    return (
-        <div data-testid={testId}>
-            {label && <Heading variant="h3">{label}</Heading>}
-            {description && (
-                <Typography className={classes.description} variant="body1">
-                    {description}
-                </Typography>
-            )}
-            {progressBody(ProgressBarComponent)}
-            {additionalInfo && (
-                <Typography className={classes.description} variant="body1">
-                    {additionalInfo}
-                </Typography>
-            )}
-        </div>
-    );
-};
 
 export default ProgressBar;
