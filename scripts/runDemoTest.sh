@@ -52,6 +52,6 @@ if [ ${FAILED_MAIN_FILE_COUNT} -gt 0 ] ; then
     exit 1
 else
     echo "PASS: The main file bundle size is below threshold ${MAIN_BUNDLE_SIZE_THRESHOLD}"
-fico
+fi
 
-#rm -rf $TEST_FOLDER
+rm -rf $TEST_FOLDER
