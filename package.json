@@ -1,79 +1,76 @@
 {
-  "name": "aws-northstar-monorepo",
-  "version": "0.0.1-development",
-  "description": "NorthStar Design System Monorepo",
-  "main": "index.js",
-  "private": true,
-  "homepage": "https://northstar.aws-prototyping.cloud/",
-  "keywords": [
-    "ui",
-    "design-system",
-    "front-end",
-    "web",
-    "react",
-    "react-component",
-    "aws-northstar"
-  ],
-  "scripts": {
-    "build": "yarn workspaces run build",
-    "build:esm": "yarn workspaces run build:esm",
-    "check:all": "yarn workspaces run check:all",
-    "license:check": "yarn license-checker --summary --production --onlyAllow 'MIT;Apache-2.0;Unlicense;UNLICENSED;BSD;BSD*;BSD-2-Clause;BSD-3-Clause;ISC;Zlib;WTFPL;Custom: https://github.com/tmcw/jsonlint;Custom: http://badges.github.io/stability-badges/dist/stable.svg;Custom: https://github.com/substack/node-browserify;'",
-    "lint:fix": "yarn workspaces run lint:fix",
-    "lint": "yarn workspaces run lint",
-    "lint-staged": "lint-staged",
-    "prettier": "prettier --write **",
-    "styleguide:build": "yarn workspace aws-northstar run styleguidist build",
-    "styleguide": "yarn workspace aws-northstar run styleguidist server",
-    "storybook:build": "yarn workspace aws-northstar run storybook:build",
-    "storybook": "yarn workspace aws-northstar run storybook",
-    "test:ci": "yarn workspaces run test --coverage && yarn workspaces run lint && yarn license:check && git secrets --scan",
-    "test": "yarn workspaces run test",
-    "test:watch": "yarn workspaces run test:watch",
-    "prepare": "husky install"
-  },
-  "lint-staged": {
-    "(/**/|/*)**.(js|jsx|ts|tsx)": [
-      "yarn lint:fix"
-    ]
-  },
-  "author": "Amazon Web Services",
-  "license": "Apache-2.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aws/aws-northstar"
-  },
-  "devDependencies": {
-    "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/github": "^8.0.6",
-    "@types/eslint": "^8.4.6",
-    "@types/eslint-plugin-prettier": "^3.1.0",
-    "@types/license-checker": "^25.0.3",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "4.33.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-config-react-app": "^6.0.0",
-    "eslint-plugin-flowtype": "^7.0.0",
-    "eslint-plugin-header": "^3.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.10",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-storybook": "^0.6.6",
-    "git-conventional-commits": "^2.1.2",
-    "husky": "^8.0.1",
-    "license-checker": "^25.0.1",
-    "lint-staged": "^13.0.3"
-  },
-  "resolutions": {
-    "**/@types/react": "^17",
-    "**/@types/react-dom": "^17"
-  },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  }
+    "name": "aws-northstar-monorepo",
+    "version": "0.0.1-development",
+    "description": "NorthStar Design System Monorepo",
+    "main": "index.js",
+    "private": true,
+    "homepage": "https://northstar.aws-prototyping.cloud/",
+    "keywords": [
+        "ui",
+        "design-system",
+        "front-end",
+        "web",
+        "react",
+        "react-component",
+        "aws-northstar"
+    ],
+    "scripts": {
+        "build": "yarn workspaces run build",
+        "check:all": "yarn test:ci && yarn build && yarn storybook:build && yarn styleguide:build",
+        "license:check": "yarn license-checker --summary --production --excludePrivatePackages --onlyAllow 'MIT;Apache-2.0;Unlicense;BSD;BSD*;BSD-2-Clause;BSD-3-Clause;ISC;Zlib;WTFPL;Custom: https://github.com/tmcw/jsonlint;Custom: http://badges.github.io/stability-badges/dist/stable.svg;Custom: https://github.com/substack/node-browserify;'",
+        "lint:fix": "yarn workspaces run lint:fix",
+        "lint": "yarn workspaces run lint",
+        "lint-staged": "lint-staged",
+        "storybook:build": "yarn workspace aws-northstar run storybook:build",
+        "storybook": "yarn workspace aws-northstar run storybook",
+        "styleguide:build": "yarn workspace aws-northstar run styleguidist build",
+        "styleguide": "yarn workspace aws-northstar run styleguidist server",
+        "test:ci": "yarn workspaces run test:ci && yarn license:check && git secrets --scan",
+        "test": "yarn workspaces run test",
+        "prepare": "husky install"
+    },
+    "lint-staged": {
+        "(/**/|/*)**.(js|jsx|ts|tsx)": [
+            "yarn lint:fix"
+        ]
+    },
+    "author": "Amazon Web Services",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/aws/aws-northstar"
+    },
+    "devDependencies": {
+        "@semantic-release/exec": "^6.0.3",
+        "@semantic-release/github": "^8.0.6",
+        "@types/eslint": "^8.4.6",
+        "@types/eslint-plugin-prettier": "^3.1.0",
+        "@types/license-checker": "^25.0.3",
+        "@typescript-eslint/eslint-plugin": "^4.33.0",
+        "@typescript-eslint/parser": "4.33.0",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-config-react-app": "^6.0.0",
+        "eslint-plugin-flowtype": "^7.0.0",
+        "eslint-plugin-header": "^3.0.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jsx-a11y": "^6.6.1",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-react": "^7.31.10",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-storybook": "^0.6.6",
+        "git-conventional-commits": "^2.1.2",
+        "husky": "^8.0.1",
+        "license-checker": "^25.0.1",
+        "lint-staged": "^13.0.3"
+    },
+    "resolutions": {
+        "**/@types/react": "^17",
+        "**/@types/react-dom": "^17"
+    },
+    "workspaces": {
+        "packages": [
+            "packages/*"
+        ]
+    }
 }

@@ -1,18 +1,18 @@
 {
-  "convention" : {
-    "commitTypes": [
-      "chore",
-      "feat",
-      "fix",
-      "perf",
-      "refactor",
-      "style",
-      "test",
-      "build",
-      "ops",
-      "docs",
-      "merge",
-      "revert"
-    ]
-  }
+    "convention": {
+        "commitTypes": [
+            "chore",
+            "feat",
+            "fix",
+            "perf",
+            "refactor",
+            "style",
+            "test",
+            "build",
+            "ops",
+            "docs",
+            "merge",
+            "revert"
+        ]
+    }
 }
