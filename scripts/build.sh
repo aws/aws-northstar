@@ -22,6 +22,14 @@ echo 'Copy license files'
 cp ./LICENSE ${BUILD_FOLDER_LEGACY}
 cp ./NOTICE ${BUILD_FOLDER_LEGACY}
 
+echo 'Merge coverage reports'
+if ! [ -d .nyc_output/ ]; then mkdir .nyc_output/; fi 
+find ./packages -type f -name "coverage-final.json" -path "*/coverage/*" -not \( -path "*/node_modules/*" -prune \) \
+| nl -bt -nln \
+| sed -re 's!^([0-9]+) +\t(.+)$!\2 .nyc_output/coverage-final-\1.json!' \
+| xargs -t cp
+npx nyc report --reporter lcov 
+
 echo 'Copy the examples to published examples folder'
 if [ ! -d ${STYLEGUIDE_FOLDER_LEGACY_EXAMPLE} ]; then mkdir -p ${STYLEGUIDE_FOLDER_LEGACY_EXAMPLE} ; fi
 pushd ${EXAMPLES_FOLDER}
