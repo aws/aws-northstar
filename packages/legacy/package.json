@@ -21,8 +21,8 @@
     "scripts": {
         "build:build-readme": "cp ./README_NPM_PACKAGE.md ./build/README.md && cat ./docs/GettingStarted.md >> ./build/README.md",
         "build:build-package-json": "cat package.json | jq 'del(.devDependencies, .resolutions, .scripts, .\"lint-staged\")' > ./build/package.json",
-        "build": "tsc --build tsconfig.build.json && yarn build:build-package-json && yarn build:build-readme",
         "build:esm": "tsc --build tsconfig.build.esm.json",
+        "build": "tsc --build tsconfig.build.json && yarn build:esm && yarn build:build-package-json && yarn build:build-readme",
         "check:all": "yarn test:ci && yarn build && yarn storybook:build && yarn styleguide:build",
         "lint:fix": "eslint --fix --ext .ts --ext .tsx --ext .js --ext .jsx .",
         "lint": "eslint --max-warnings 0 --ext .ts --ext .tsx --ext .js --ext .jsx .",
@@ -30,7 +30,7 @@
         "storybook": "start-storybook -s ./public -p 9090",
         "styleguide:build": "styleguidist build",
         "styleguide": "styleguidist server",
-        "test:ci": "yarn test --coverage && yarn lint && yarn license:check && git secrets --scan",
+        "test:ci": "yarn test --coverage && yarn lint",
         "test": "jest",
         "test:watch": "jest --runInBand --watch ./src"
     },

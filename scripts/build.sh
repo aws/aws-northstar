@@ -17,7 +17,6 @@ yarn storybook:build
 echo 'Remove build folder to make sure the npm package only includes clean built components'
 if [ -d ${BUILD_FOLDER_LEGACY} ]; then rm -rf ${BUILD_FOLDER_LEGACY}; fi 
 yarn build
-yarn build:esm
 
 echo 'Copy license files'
 cp ./LICENSE ${BUILD_FOLDER_LEGACY}
