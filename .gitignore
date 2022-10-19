@@ -6,6 +6,7 @@ styleguide.out/
 coverage/
 oss-attribution/
 temp/
+.nyc_output/
 
 .cache/
 .vscode/
@@ -20,3 +21,5 @@ package-lock.json
 *.swp
 
 CODECOMMIT_SOURCE_VERSION
+
+

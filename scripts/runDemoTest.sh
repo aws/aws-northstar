@@ -5,8 +5,8 @@
 set -e
 
 TEST_FOLDER=/tmp/$(date +%s)
-DEMO_FOLDER=$PWD/examples/create-react-app
-BUILD_FOLDER=$PWD/build
+DEMO_FOLDER=$PWD/packages/examples/legacy
+BUILD_FOLDER=$PWD/packages/legacy/build
 BUNDLE_SIZE_THRESHOLD=4000000
 MAIN_BUNDLE_SIZE_THRESHOLD=1700000
 
@@ -20,7 +20,7 @@ cp -r $DEMO_FOLDER/. $TEST_FOLDER/.
 pushd $TEST_FOLDER 
 
 echo "Building the project"
-yarn add $BUILD_FOLDER
+yarn add file://$BUILD_FOLDER
 yarn
 yarn build
 
@@ -32,7 +32,7 @@ cat result.json | jq ".results[] | .bundleName,.totalBytes"
 
 FAILED_FILE_COUNT=$(cat result.json | jq ".results[] | select(.totalBytes>${BUNDLE_SIZE_THRESHOLD}) | .bundleName" -r | wc -l | awk '{$1=$1;print}')
 
-FAILED_MAIN_FILE_COUNT=$(cat result.json | jq ".results[0] | select(.totalBytes>${MAIN_BUNDLE_SIZE_THRESHOLD}) | .bundleName" -r | wc -l | awk '{$1=$1;print}')
+FAILED_MAIN_FILE_COUNT=$(cat result.json | jq ".results | .[] | select(.bundleName | contains(\"main\")) | select(.totalBytes>${MAIN_BUNDLE_SIZE_THRESHOLD}) | .bundleName" -r | wc -l | awk '{$1=$1;print}')
 
 popd
 

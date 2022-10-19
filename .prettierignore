@@ -1,0 +1,11 @@
+build/
+coverage/
+storybook.out/
+styleguide.out/
+scripts/
+
+LICENSE
+NOTICE
+
+**/*.md
+**/*.html

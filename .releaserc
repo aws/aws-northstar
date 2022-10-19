@@ -36,10 +36,7 @@
         }],
         "@semantic-release/release-notes-generator",
         ["@semantic-release/npm", {
-            "pkgRoot": "./build"
-        }],
-        ["@semantic-release/exec", {
-            "successCmd": "RELEASED_VERSION=${nextRelease.version} ./scripts/postRelease.sh"
+            "pkgRoot": "./packages/legacy/build"
         }],
         ["@semantic-release/github"]
     ]

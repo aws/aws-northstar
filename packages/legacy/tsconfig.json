@@ -24,14 +24,9 @@
         "strict": true,
         "strictNullChecks": true,
         "suppressImplicitAnyIndexErrors": true,
-        "target":"es6",
-        "typeRoots": ["node_modules/@types", "./src/types"]
+        "target": "es6",
+        "typeRoots": ["node_modules/@types", "../../node_modules/@types", "./src/types"]
     },
-    "include": [
-        "src/**/*"
-    ],
-    "exclude": [
-        "**/*.stories.ts",
-        "**/*.stories.tsx"
-      ]
+    "include": ["src/**/*"],
+    "exclude": ["**/*.stories.ts", "**/*.stories.tsx"]
 }
