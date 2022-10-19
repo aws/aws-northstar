@@ -66,7 +66,11 @@
     },
     "resolutions": {
         "**/@types/react": "^17",
-        "**/@types/react-dom": "^17"
+        "**/@types/react-dom": "^17",
+        "d3-color": "^3.1.0",
+        "glob-parent": "^5.1.2",
+        "trim": "^0.0.3",
+        "terser": "^5.15.1"
     },
     "workspaces": {
         "packages": [
