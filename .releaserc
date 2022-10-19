@@ -38,9 +38,6 @@
         ["@semantic-release/npm", {
             "pkgRoot": "./packages/legacy/build"
         }],
-        ["@semantic-release/exec", {
-            "successCmd": "RELEASED_VERSION=${nextRelease.version} ./scripts/postRelease.sh"
-        }],
         ["@semantic-release/github"]
     ]
 }
