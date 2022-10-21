@@ -2,12 +2,9 @@
     "name": "aws-northstar",
     "version": "0.0.1-development",
     "description": "NorthStar Design System",
-    "main": "build/index.js",
-    "types": "build/index.d.ts",
-    "module": "build/esm/index.js",
-    "files": [
-        "build"
-    ],
+    "main": "index.js",
+    "types": "index.d.ts",
+    "module": "esm/index.js",
     "homepage": "https://northstar.aws-prototyping.cloud/",
     "keywords": [
         "ui",
