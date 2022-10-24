@@ -1,4 +1,5 @@
 {
+    "extends": "semantic-release-monorepo",
     "branches": [{
             "name": "main"
         },
@@ -36,7 +37,7 @@
         }],
         "@semantic-release/release-notes-generator",
         ["@semantic-release/npm", {
-            "pkgRoot": "./packages/legacy/build"
+            "pkgRoot": "./build"
         }],
         ["@semantic-release/github"]
     ]
