@@ -40,9 +40,6 @@
     },
     "devDependencies": {
         "@babel/core": "^7.19.3",
-        "@semantic-release/commit-analyzer": "^9.0.2",
-        "@semantic-release/exec": "^6.0.3",
-        "@semantic-release/github": "^8.0.6",
         "@storybook/addon-a11y": "^6.5.12",
         "@storybook/addon-actions": "^6.5.12",
         "@storybook/addon-essentials": "^6.5.12",
@@ -140,8 +137,6 @@
         "remark-code-blocks": "^2.0.1",
         "remark-frontmatter": "^3.0.0",
         "remark-gfm": "^1.0.0",
-        "semantic-release": "^19.0.5",
-        "semantic-release-monorepo": "^7.0.5",
         "use-debounce": "^8.0.4",
         "uuid": "^9.0.0"
     },

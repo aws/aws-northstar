@@ -46,6 +46,11 @@
         "@types/license-checker": "^25.0.3",
         "@typescript-eslint/eslint-plugin": "^4.33.0",
         "@typescript-eslint/parser": "4.33.0",
+        "@semantic-release/commit-analyzer": "^9.0.2",
+        "@semantic-release/exec": "^6.0.3",
+        "@semantic-release/github": "^8.0.6",
+        "@semantic-release/npm": "^9.0.1",
+        "@semantic-release/release-notes-generator": "^10.0.3",
         "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-config-react-app": "^6.0.0",
@@ -60,7 +65,8 @@
         "git-conventional-commits": "^2.1.2",
         "husky": "^8.0.1",
         "license-checker": "^25.0.1",
-        "lint-staged": "^13.0.3"
+        "lint-staged": "^13.0.3",
+        "semantic-release-monorepo": "^7.0.5"
     },
     "resolutions": {
         "**/@types/react": "^17",
