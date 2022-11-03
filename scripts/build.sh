@@ -32,8 +32,8 @@ npx nyc report --reporter lcov
 
 echo 'Copy the examples to published examples folder'
 if [ ! -d ${STYLEGUIDE_FOLDER_LEGACY_EXAMPLE} ]; then mkdir -p ${STYLEGUIDE_FOLDER_LEGACY_EXAMPLE} ; fi
-pushd ${EXAMPLES_FOLDER}
-tar -czvf ../legacy/styleguide.out/create-react-app.tar.gz ./legacy
+pushd ${EXAMPLES_FOLDER}/legacy
+tar -czvf ../../legacy/styleguide.out/examples/create-react-app.tar.gz .
 popd
 
 # Test the example app

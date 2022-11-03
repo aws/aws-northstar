@@ -78,7 +78,7 @@ Download the example:
 
 ```markdown
 mkdir northstar && cd northstar
-curl https://northstar.aws-prototyping.cloud/examples/create-react-app.tar.gz | tar -xz && cd create-react-app
+curl https://northstar.aws-prototyping.cloud/examples/create-react-app.tar.gz | tar -xz
 ```
 
 Install it and run:
