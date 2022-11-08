@@ -17,7 +17,9 @@ import React from 'react';
 import useScrollPosition from '.';
 import { renderHook, act } from '@testing-library/react-hooks';
 
-jest.useFakeTimers();
+jest.useFakeTimers({
+    legacyFakeTimers: true
+});
 
 describe('useScrollPosition', () => {
     it('should return the element position', () => {

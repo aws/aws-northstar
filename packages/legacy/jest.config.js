@@ -14,6 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 module.exports = {
+    testEnvironment: 'jsdom',
     roots: ['./src'],
     transform: {
         '^.+\\.tsx?$': 'ts-jest',
@@ -22,6 +23,7 @@ module.exports = {
     },
     testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+    
     moduleNameMapper: {
         '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.ts',
     },

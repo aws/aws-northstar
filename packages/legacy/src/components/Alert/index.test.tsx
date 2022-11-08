@@ -120,12 +120,69 @@ describe('Alert', () => {
         });
     });
 
-    it('renders accessible component', async () => {
+    it('renders accessible Success component', async () => {
         const { container } = render(
             <>
                 {Success()}
-                {Info()}
+            </>
+        );
+        const results = await axe(container, {
+            rules: {
+                'aria-required-attr': { enabled: false },
+            },
+        });
+
+        expect(results).toHaveNoViolations();
+    });
+
+    it('renders accessible Warning component', async () => {
+        const { container } = render(
+            <>
                 {Warning()}
+            </>
+        );
+        const results = await axe(container, {
+            rules: {
+                'aria-required-attr': { enabled: false },
+            },
+        });
+
+        expect(results).toHaveNoViolations();
+    });
+
+    it('renders accessible Info component', async () => {
+        const { container } = render(
+            <>
+                {Info()}
+            </>
+        );
+        const results = await axe(container, {
+            rules: {
+                'aria-required-attr': { enabled: false },
+            },
+        });
+
+        expect(results).toHaveNoViolations();
+    });
+
+    it('renders accessible Success component', async () => {
+        const { container } = render(
+            <>
+                {Success()}
+            </>
+        );
+        const results = await axe(container, {
+            rules: {
+                'aria-required-attr': { enabled: false },
+            },
+        });
+
+        expect(results).toHaveNoViolations();
+    });
+
+    it('renders accessible Error component', async () => {
+        const { container } = render(
+            <>
                 {Error()}
             </>
         );
