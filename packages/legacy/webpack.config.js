@@ -18,6 +18,7 @@ const SRC_PATH = path.join(__dirname, './src');
 const DOC_COMPONENTS_SRC_PATH = path.join(__dirname, './docs/components');
 const STYLE_GUIDE_PATH = path.join(__dirname, './styleguide');
 const CopyPlugin = require('copy-webpack-plugin');
+const ReactDocgenTypescriptPlugin = require('react-docgen-typescript-plugin').default;
 
 module.exports = {
     resolve: {
@@ -34,6 +35,9 @@ module.exports = {
                     from: './public',
                 },
             ],
+        }),
+        new ReactDocgenTypescriptPlugin({
+            include: [path.join(SRC_PATH, '**', '*.tsx')],
         }),
     ],
 
