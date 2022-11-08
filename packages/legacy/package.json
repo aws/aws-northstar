@@ -154,19 +154,6 @@
         "react-router": "^5.1.2",
         "react-router-dom": "^5.1.2"
     },
-    "resolutions": {
-        "@types/react": "^17",
-        "@types/react-dom": "^17",
-        "webpack": "^5.69.1",
-        "trim": "^0.0.3",
-        "glob-parent": "^5.1.2",
-        "set-value": "^4.0.1",
-        "ansi-regex": "^5.0.1",
-        "json-schema": "^0.4.0",
-        "node-forge": "^1.2.1",
-        "trim-newlines": "3.0.1",
-        "d3-color": "^3.1.0"
-    },
     "browserslist": {
         "production": [
             ">0.2%",
