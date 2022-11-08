@@ -18,7 +18,7 @@ import useScrollPosition from '.';
 import { renderHook, act } from '@testing-library/react-hooks';
 
 jest.useFakeTimers({
-    legacyFakeTimers: true
+    legacyFakeTimers: true,
 });
 
 describe('useScrollPosition', () => {

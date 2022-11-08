@@ -121,11 +121,7 @@ describe('Alert', () => {
     });
 
     it('renders accessible Success component', async () => {
-        const { container } = render(
-            <>
-                {Success()}
-            </>
-        );
+        const { container } = render(<>{Success()}</>);
         const results = await axe(container, {
             rules: {
                 'aria-required-attr': { enabled: false },
@@ -136,11 +132,7 @@ describe('Alert', () => {
     });
 
     it('renders accessible Warning component', async () => {
-        const { container } = render(
-            <>
-                {Warning()}
-            </>
-        );
+        const { container } = render(<>{Warning()}</>);
         const results = await axe(container, {
             rules: {
                 'aria-required-attr': { enabled: false },
@@ -151,11 +143,7 @@ describe('Alert', () => {
     });
 
     it('renders accessible Info component', async () => {
-        const { container } = render(
-            <>
-                {Info()}
-            </>
-        );
+        const { container } = render(<>{Info()}</>);
         const results = await axe(container, {
             rules: {
                 'aria-required-attr': { enabled: false },
@@ -166,11 +154,7 @@ describe('Alert', () => {
     });
 
     it('renders accessible Success component', async () => {
-        const { container } = render(
-            <>
-                {Success()}
-            </>
-        );
+        const { container } = render(<>{Success()}</>);
         const results = await axe(container, {
             rules: {
                 'aria-required-attr': { enabled: false },
@@ -181,11 +165,7 @@ describe('Alert', () => {
     });
 
     it('renders accessible Error component', async () => {
-        const { container } = render(
-            <>
-                {Error()}
-            </>
-        );
+        const { container } = render(<>{Error()}</>);
         const results = await axe(container, {
             rules: {
                 'aria-required-attr': { enabled: false },
