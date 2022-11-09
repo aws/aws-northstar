@@ -4311,10 +4311,10 @@
   resolved "https://registry.yarnpkg.com/@types/parse5/-/parse5-5.0.3.tgz#e7b5aebbac150f8b5fdd4a46e7f0bd8e65e19109"
   integrity sha512-kUNnecmtkunAoQ3CnjmMkzNU/gtxG8guhi+Fk2U/kOpIKjIMKnXGp4IJCgQJrXSgMsWYimYG4TGjz/UzbGEBTw==
 
-"@types/plotly.js@*", "@types/plotly.js@^2.12.7":
-  version "2.12.7"
-  resolved "https://registry.yarnpkg.com/@types/plotly.js/-/plotly.js-2.12.7.tgz#5960126d6cb727e38dc52e9fbc0a9aae9ddbb4da"
-  integrity sha512-jMP4lHOJ3Av1GeCGG9DvaiuiU+vTVkX4v+CpLqY8RJ52yp3t/5Nur1JdKq2z9ZhmXrDOsedkmbh1BOhpmaJoQA==
+"@types/plotly.js@*", "@types/plotly.js@^2.12.8":
+  version "2.12.8"
+  resolved "https://registry.yarnpkg.com/@types/plotly.js/-/plotly.js-2.12.8.tgz#0047cc07eb083eac9c8845288799042452bae9b2"
+  integrity sha512-h7gkIDxjC7ZgAZTActvrMJNDFsEPIAOr6kvMIhTOgxOrXTnXH3ywnmjtfoUViuKFNhos3zhhTtcT5QQT/bH/2w==
 
 "@types/prettier@^2.1.5", "@types/prettier@^2.7.1":
   version "2.7.1"
@@ -5141,7 +5141,7 @@ ajv-keywords@^5.0.0:
   dependencies:
     fast-deep-equal "^3.1.3"
 
-ajv@^6.1.0, ajv@^6.1.1, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.2, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5:
+ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.2, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5:
   version "6.12.6"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
   integrity sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==
@@ -14436,10 +14436,10 @@ pkg-up@^3.1.0:
   dependencies:
     find-up "^3.0.0"
 
-plotly.js@^2.9.0:
-  version "2.15.1"
-  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.15.1.tgz#5e92608a3bddf3dbd937b00674bf16adf44a1ef3"
-  integrity sha512-mqOCtVjuCwiLPAgHxzRrvzHYzi3TN5PKWgYox1hSHrXt7D8J3Jmh4ONpyQI/tLk1GsR50LTTb//5LnnaRA0HvQ==
+plotly.js@^2.16.1:
+  version "2.16.1"
+  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.16.1.tgz#9548f90bea9628592d79874f075423c8cc644415"
+  integrity sha512-83BJWgbXSjeEl31+zq66ZzU/QWfd/CItzGm5mtYeWHWHyoOcCzHDW4I+QgkicGq0ntLZ2PfEb0fjM0qMzGGXVw==
   dependencies:
     "@plotly/d3" "3.8.0"
     "@plotly/d3-sankey" "0.7.2"
@@ -15132,15 +15132,7 @@ react-docgen-typescript-plugin@^1.0.2:
     tslib "^2.0.0"
     webpack-sources "^2.2.0"
 
-react-docgen-typescript-webpack-plugin@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-docgen-typescript-webpack-plugin/-/react-docgen-typescript-webpack-plugin-1.1.0.tgz#4bfb8c3312fce487083924842cf03f66177ab9df"
-  integrity sha512-9e71HtUPHMzRzTCR0piXKvQzHGNMSFq7S1LUtfYL0bp4HRYVKjseV2WatpnkTrd4AGM4h8pb7AJtRIwy7cTE7g==
-  dependencies:
-    ajv "^6.1.1"
-    react-docgen-typescript "^1.2.3"
-
-react-docgen-typescript@2.2.2, react-docgen-typescript@^1.15.0, react-docgen-typescript@^1.2.3, react-docgen-typescript@^2.1.1, react-docgen-typescript@^2.2.2:
+react-docgen-typescript@2.2.2, react-docgen-typescript@^1.15.0, react-docgen-typescript@^2.1.1, react-docgen-typescript@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-2.2.2.tgz#4611055e569edc071204aadb20e1c93e1ab1659c"
   integrity sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==
