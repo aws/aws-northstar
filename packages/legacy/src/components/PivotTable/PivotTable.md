@@ -2,7 +2,7 @@
 
 `PivotTable`'s dependencies are listed as peer dependencies so you will need to install them mannually by running the following command.
 ```bash
-npm install react-pivottable@^0.11.0 react-plotly.js@^2.6.0 @types/react-plotly.js@^2.5.2 plotly.js@^2.16.1 @types/plotly.js@^2.12.8
+npm install react-pivottable@^0.11.0 react-plotly.js@^2.6.0 @types/react-plotly.js@^2.5.2 plotly.js@^2.16.2 @types/plotly.js@^2.12.8
 ```
 
 ### Usage
