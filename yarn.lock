@@ -14511,10 +14511,10 @@ pkg-up@^3.1.0:
   dependencies:
     find-up "^3.0.0"
 
-plotly.js@^2.16.2:
-  version "2.16.2"
-  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.16.2.tgz#36d0737a992e54332759bdae8f6e0f601141c3ac"
-  integrity sha512-pcp2DF97j1PzTIXdj+JSpLhbZt1jg0udvt+3fyqEUOFTcraQ1Q9HKt2301cG3KZLyiUlUfzcbV1GFN5xkr9oXQ==
+plotly.js@^2.16.3:
+  version "2.16.3"
+  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.16.3.tgz#5e62032d7997d42b18fe8e9d9d808479aef75756"
+  integrity sha512-l/2vpjJxiaNOdsnRx/sK8W2b+25JP4XFrkT5Lo4i5b5WNxrsqK7QdProvfflufZkHmByuFe6YnrOv9JNSiE6ZA==
   dependencies:
     "@plotly/d3" "3.8.0"
     "@plotly/d3-sankey" "0.7.2"
