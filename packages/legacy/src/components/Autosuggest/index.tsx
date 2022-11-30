@@ -313,7 +313,6 @@ const AutosuggestBase: FunctionComponent<AutosuggestBaseProps> = ({
                 margin="normal"
                 name={name}
                 InputProps={{
-                    'aria-required': ariaRequired,
                     'aria-describedby': ariaDescribedby,
                     'aria-labelledby': ariaLabelledby,
                     ...params.InputProps,
