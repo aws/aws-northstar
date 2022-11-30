@@ -65,7 +65,7 @@
         "git-conventional-commits": "^2.1.2",
         "husky": "^8.0.2",
         "license-checker": "^25.0.1",
-        "lint-staged": "^13.0.3",
+        "lint-staged": "^13.0.4",
         "semantic-release-monorepo": "^7.0.5"
     },
     "resolutions": {
