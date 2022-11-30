@@ -101,7 +101,7 @@ const FlashbarItem: FunctionComponent<FlashbarMessage> = ({
             iconMapping,
             action: actions,
             'data-testid': `${testId}-body`,
-            ...(loading && { icon: <CircularProgress className={styles.loading} size="16px" /> }),
+            ...(loading && { icon: <CircularProgress className={styles.loading} size="16px" aria-label="loading" /> }),
         };
 
         return (
