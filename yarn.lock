@@ -4326,10 +4326,10 @@
   resolved "https://registry.yarnpkg.com/@types/parse5/-/parse5-5.0.3.tgz#e7b5aebbac150f8b5fdd4a46e7f0bd8e65e19109"
   integrity sha512-kUNnecmtkunAoQ3CnjmMkzNU/gtxG8guhi+Fk2U/kOpIKjIMKnXGp4IJCgQJrXSgMsWYimYG4TGjz/UzbGEBTw==
 
-"@types/plotly.js@*", "@types/plotly.js@^2.12.8":
-  version "2.12.8"
-  resolved "https://registry.yarnpkg.com/@types/plotly.js/-/plotly.js-2.12.8.tgz#0047cc07eb083eac9c8845288799042452bae9b2"
-  integrity sha512-h7gkIDxjC7ZgAZTActvrMJNDFsEPIAOr6kvMIhTOgxOrXTnXH3ywnmjtfoUViuKFNhos3zhhTtcT5QQT/bH/2w==
+"@types/plotly.js@*", "@types/plotly.js@^2.12.10":
+  version "2.12.10"
+  resolved "https://registry.yarnpkg.com/@types/plotly.js/-/plotly.js-2.12.10.tgz#daf5c343baf97b2d6f8665c28ad181d252cf2054"
+  integrity sha512-uxVKhKQODD+AyIyMAJl+PFQCiyXUe3GXENLo1rj0CtMiw6Pmq1pSMEueZKQZM5pAfYzu9YOXFoDc5HA9hzPVuA==
 
 "@types/prettier@^2.1.5", "@types/prettier@^2.7.1":
   version "2.7.1"
@@ -14518,10 +14518,10 @@ pkg-up@^3.1.0:
   dependencies:
     find-up "^3.0.0"
 
-plotly.js@^2.16.2:
-  version "2.16.2"
-  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.16.2.tgz#36d0737a992e54332759bdae8f6e0f601141c3ac"
-  integrity sha512-pcp2DF97j1PzTIXdj+JSpLhbZt1jg0udvt+3fyqEUOFTcraQ1Q9HKt2301cG3KZLyiUlUfzcbV1GFN5xkr9oXQ==
+plotly.js@^2.16.4:
+  version "2.16.4"
+  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.16.4.tgz#b7bea31ec697167b1391a7b7e038b7b707d0d421"
+  integrity sha512-g5ZV2XOeZjvpDJknCOxY5WFcLeTBYxL1rpNnllU58815KBwfTgvD3yPFtGGywAZSdtEoJAj09BNThJmADhbGfQ==
   dependencies:
     "@plotly/d3" "3.8.0"
     "@plotly/d3-sankey" "0.7.2"
