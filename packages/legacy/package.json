@@ -87,7 +87,7 @@
         "eslint-plugin-react": "^7.31.11",
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-storybook": "^0.6.7",
-        "git-conventional-commits": "^2.1.2",
+        "git-conventional-commits": "^2.3.0",
         "husky": "^8.0.2",
         "jest": "29.3.1",
         "jest-axe": "^7.0.0",

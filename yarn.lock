@@ -9513,12 +9513,12 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-git-conventional-commits@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/git-conventional-commits/-/git-conventional-commits-2.1.2.tgz#73a323b27be5bb71cb370f6961767d82b0749782"
-  integrity sha512-j6wb+kPaxVaPmdi5sPhkT65r3ytsnzUFpoR+MfsNnLz7s28DCdtOAU3PQTHgY1JpTONnEBHoeQpFwTP36WkJhA==
+git-conventional-commits@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/git-conventional-commits/-/git-conventional-commits-2.3.0.tgz#d0a70b982216ac9ea5bca1c72468f5a0958f3f9c"
+  integrity sha512-D9tLRmkztCKJAQCw+DCrlnmuNOgyz5pDB7AlhTl/KixyL53LYyumMetiburjCtHHfknLU98BZJMT1o4Q/NpIFQ==
   dependencies:
-    yargs "^17.3.1"
+    yargs "^17.6.2"
 
 github-slugger@^1.0.0, github-slugger@^1.2.1:
   version "1.4.0"
@@ -19124,7 +19124,7 @@ yargs-parser@^20.2.2, yargs-parser@^20.2.3, yargs-parser@^20.2.9:
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-20.2.9.tgz#2eb7dc3b0289718fc295f362753845c41a0c94ee"
   integrity sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==
 
-yargs-parser@^21.0.0, yargs-parser@^21.0.1:
+yargs-parser@^21.0.1, yargs-parser@^21.1.1:
   version "21.1.1"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-21.1.1.tgz#9096bceebf990d21bb31fa9516e0ede294a77d35"
   integrity sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==
@@ -19142,10 +19142,10 @@ yargs@^16.2.0:
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
 
-yargs@^17.3.1:
-  version "17.6.0"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.6.0.tgz#e134900fc1f218bc230192bdec06a0a5f973e46c"
-  integrity sha512-8H/wTDqlSwoSnScvV2N/JHfLWOKuh5MVla9hqLjK3nsfyy6Y4kDSYSvkU5YCUEPOSnRXfIyx3Sq+B/IWudTo4g==
+yargs@^17.3.1, yargs@^17.6.2:
+  version "17.6.2"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.6.2.tgz#2e23f2944e976339a1ee00f18c77fedee8332541"
+  integrity sha512-1/9UrdHjDZc0eOU0HxOHoS78C69UD3JRMvzlJ7S79S2nTaWRA/whGCTV8o9e/N/1Va9YIV7Q4sOxD8VV4pCWOw==
   dependencies:
     cliui "^8.0.1"
     escalade "^3.1.1"
@@ -19153,7 +19153,7 @@ yargs@^17.3.1:
     require-directory "^2.1.1"
     string-width "^4.2.3"
     y18n "^5.0.5"
-    yargs-parser "^21.0.0"
+    yargs-parser "^21.1.1"
 
 yocto-queue@^0.1.0:
   version "0.1.0"
