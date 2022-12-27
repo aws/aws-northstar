@@ -9,7 +9,7 @@ STYLEGUIDE_FOLDER_LEGACY=./packages/legacy/styleguide.out/
 STYLEGUIDE_FOLDER_LEGACY_EXAMPLE=${STYLEGUIDE_FOLDER_LEGACY}examples/
 EXAMPLES_FOLDER=./packages/examples/
 
-yarn install --frozen-lockfile
+yarn install --immutable
 yarn test:ci
 yarn styleguide:build
 yarn storybook:build

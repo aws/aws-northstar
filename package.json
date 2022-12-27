@@ -14,19 +14,20 @@
         "react-component",
         "aws-northstar"
     ],
+    "packageManager": "yarn@3.3.1",
     "scripts": {
-        "build": "yarn workspaces run build",
+        "build": "yarn workspaces foreach --parallel run build",
         "check:all": "yarn test:ci && yarn build && yarn storybook:build && yarn styleguide:build",
         "license:check": "yarn license-checker --summary --production --excludePrivatePackages --onlyAllow 'MIT;Apache-2.0;Unlicense;BSD;BSD*;BSD-2-Clause;BSD-3-Clause;ISC;Zlib;WTFPL;Custom: https://github.com/tmcw/jsonlint;Custom: http://badges.github.io/stability-badges/dist/stable.svg;Custom: https://github.com/substack/node-browserify;'",
-        "lint:fix": "yarn workspaces run lint:fix",
-        "lint": "yarn workspaces run lint",
+        "lint:fix": "yarn workspaces foreach --parallel run lint:fix",
+        "lint": "yarn workspaces foreach --parallel run lint",
         "lint-staged": "lint-staged",
         "storybook:build": "yarn workspace aws-northstar run storybook:build",
         "storybook": "yarn workspace aws-northstar run storybook",
         "styleguide:build": "yarn workspace aws-northstar run styleguidist build",
         "styleguide": "yarn workspace aws-northstar run styleguidist server",
-        "test:ci": "yarn workspaces run test:ci && yarn license:check && git secrets --scan",
-        "test": "yarn workspaces run test",
+        "test:ci": "yarn workspaces foreach run run test:ci && yarn license:check && git secrets --scan",
+        "test": "yarn workspaces foreach run run test",
         "prepare": "husky install"
     },
     "lint-staged": {
@@ -46,21 +47,7 @@
         "@semantic-release/github": "^8.0.7",
         "@semantic-release/npm": "^8.0.3",
         "@semantic-release/release-notes-generator": "^10.0.3",
-        "@types/eslint": "^8.4.6",
-        "@types/eslint-plugin-prettier": "^3.1.0",
         "@types/license-checker": "^25.0.3",
-        "@typescript-eslint/eslint-plugin": "^4.33.0",
-        "@typescript-eslint/parser": "4.33.0",
-        "eslint": "^7.32.0",
-        "eslint-config-prettier": "^8.5.0",
-        "eslint-config-react-app": "^6.0.0",
-        "eslint-plugin-flowtype": "^7.0.0",
-        "eslint-plugin-header": "^3.0.0",
-        "eslint-plugin-import": "^2.26.0",
-        "eslint-plugin-jsx-a11y": "^6.6.1",
-        "eslint-plugin-prettier": "^4.2.1",
-        "eslint-plugin-react": "^7.31.11",
-        "eslint-plugin-react-hooks": "^4.6.0",
         "git-conventional-commits": "^2.4.0",
         "husky": "^8.0.2",
         "license-checker": "^25.0.1",
@@ -68,8 +55,6 @@
         "semantic-release-monorepo": "^7.0.5"
     },
     "resolutions": {
-        "**/@types/react": "^17",
-        "**/@types/react-dom": "^17",
         "d3-color": "^3.1.0",
         "glob-parent": "^5.1.2",
         "trim": "^0.0.3",
@@ -79,7 +64,8 @@
     },
     "workspaces": {
         "packages": [
-            "packages/*"
+            "packages/*",
+            "packages/examples/*"
         ]
     }
 }

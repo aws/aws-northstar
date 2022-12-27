@@ -5,7 +5,7 @@
   "author": "Amazon Web Services",
   "license": "Apache-2.0",
   "dependencies": {
-    "aws-northstar": "latest",
+    "aws-northstar": "0.0.1-development",
     "plotly.js": "^2.8.3",
     "react": "^17",
     "react-dom": "^17",
