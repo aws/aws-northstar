@@ -5709,6 +5709,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jest-axe@npm:^3.5.3":
+  version: 3.5.5
+  resolution: "@types/jest-axe@npm:3.5.5"
+  dependencies:
+    "@types/jest": "*"
+    axe-core: ^3.5.5
+  checksum: 535038968034fe80fb466dcd5939ea5d9e9adb3ef00852ded3e41c62536c05137eb30bcbfd608142d2bc571d65c20b8e3563181674fb48594c2662d340bb4da5
+  languageName: node
+  linkType: hard
+
 "@types/jest@npm:*":
   version: 29.2.2
   resolution: "@types/jest@npm:29.2.2"
@@ -7622,6 +7632,7 @@ __metadata:
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^12.1.5
     "@testing-library/react-hooks": ^8.0.1
+    "@types/jest-axe": ^3.5.3
     "@types/lodash.orderby": ^4.6.7
     "@types/node": ^18.11.17
     "@types/plotly.js": ^2.12.10
@@ -7701,6 +7712,13 @@ __metadata:
   version: 4.5.1
   resolution: "axe-core@npm:4.5.1"
   checksum: db90c6b41483e9c3452393933072fe0b8c2221e6d9b96ae0e6a03a4ce1e4c35bec539c92e9b6fcd63c4acf6678ad3c3ca7f5ab1d884210d157867cc54acd4f6a
+  languageName: node
+  linkType: hard
+
+"axe-core@npm:^3.5.5":
+  version: 3.5.6
+  resolution: "axe-core@npm:3.5.6"
+  checksum: 000777d2b6bf1f390beb1fb4b8714ed9127797c021c345b032db0c144e07320dbbe8cb0bcb7688b90b79cfbd3cdc1f27a4dc857804e3c61d7e0defb34deeb830
   languageName: node
   linkType: hard
 
