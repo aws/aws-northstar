@@ -22,4 +22,12 @@ package-lock.json
 
 CODECOMMIT_SOURCE_VERSION
 
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
 
