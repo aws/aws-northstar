@@ -2,7 +2,7 @@
     "extends": ["react-app", "plugin:prettier/recommended", "plugin:storybook/recommended"],
     "plugins": ["header"],
     "rules": {
-        "header/header": [2, "../../header.js"],
+        "header/header": [2, "header.js"],
         "no-restricted-imports": [
             2,
             {

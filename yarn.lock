@@ -5411,7 +5411,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/babel__core@npm:^7.1.14, @types/babel__core@npm:^7.1.19":
+"@types/babel__core@npm:^7.1.14":
   version: 7.1.19
   resolution: "@types/babel__core@npm:7.1.19"
   dependencies:
@@ -5538,15 +5538,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint-plugin-prettier@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "@types/eslint-plugin-prettier@npm:3.1.0"
-  dependencies:
-    "@types/eslint": "*"
-  checksum: e8fc9991cc181967a961c344ab894b57122e54b5f36950373f42638bb05847caef89a0e12decbb5b4a42e4eefaeefe63053ee2cbf6e1dfce43d77a445bbae728
-  languageName: node
-  linkType: hard
-
 "@types/eslint-scope@npm:^3.7.3":
   version: 3.7.4
   resolution: "@types/eslint-scope@npm:3.7.4"
@@ -5557,7 +5548,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:*, @types/eslint@npm:^8.4.6":
+"@types/eslint@npm:*":
   version: 8.4.6
   resolution: "@types/eslint@npm:8.4.6"
   dependencies:
@@ -5718,17 +5709,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest-axe@npm:^3.5.3":
-  version: 3.5.5
-  resolution: "@types/jest-axe@npm:3.5.5"
-  dependencies:
-    "@types/jest": "*"
-    axe-core: ^3.5.5
-  checksum: 535038968034fe80fb466dcd5939ea5d9e9adb3ef00852ded3e41c62536c05137eb30bcbfd608142d2bc571d65c20b8e3563181674fb48594c2662d340bb4da5
-  languageName: node
-  linkType: hard
-
-"@types/jest@npm:*, @types/jest@npm:^29.2.2":
+"@types/jest@npm:*":
   version: 29.2.2
   resolution: "@types/jest@npm:29.2.2"
   dependencies:
@@ -5884,7 +5865,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prettier@npm:^2.1.5, @types/prettier@npm:^2.7.1":
+"@types/prettier@npm:^2.1.5":
   version: 2.7.1
   resolution: "@types/prettier@npm:2.7.1"
   checksum: 5e3f58e229d6c73b5f5cae2e8f96c1c4a5b5805f83459e17a045ba8e96152b1d38e86b63e3172fb159dac923388699660862b75b2d37e54220805f0e691e26f1
@@ -7593,11 +7574,27 @@ __metadata:
     "@semantic-release/npm": ^8.0.3
     "@semantic-release/release-notes-generator": ^10.0.3
     "@types/license-checker": ^25.0.3
+    "@typescript-eslint/eslint-plugin": ^4.33.0
+    "@typescript-eslint/parser": 4.33.0
+    babel-eslint: ^10.1.0
+    eslint: ^7.32.0
+    eslint-config-prettier: ^8.5.0
+    eslint-config-react-app: ^6.0.0
+    eslint-plugin-flowtype: ^7.0.0
+    eslint-plugin-header: ^3.0.0
+    eslint-plugin-import: ^2.26.0
+    eslint-plugin-jsx-a11y: ^6.6.1
+    eslint-plugin-prettier: ^4.2.1
+    eslint-plugin-react: ^7.31.11
+    eslint-plugin-react-hooks: ^4.6.0
+    eslint-plugin-storybook: ^0.6.8
     git-conventional-commits: ^2.4.0
     husky: ^8.0.2
     license-checker: ^25.0.1
     lint-staged: ^13.0.4
+    prettier: ^2.7.1
     semantic-release-monorepo: ^7.0.5
+    typescript: ^4.8.4
   languageName: unknown
   linkType: soft
 
@@ -7625,16 +7622,9 @@ __metadata:
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^12.1.5
     "@testing-library/react-hooks": ^8.0.1
-    "@types/babel__core": ^7.1.19
-    "@types/eslint": ^8.4.6
-    "@types/eslint-plugin-prettier": ^3.1.0
-    "@types/jest": ^29.2.2
-    "@types/jest-axe": ^3.5.3
-    "@types/license-checker": ^25.0.3
     "@types/lodash.orderby": ^4.6.7
     "@types/node": ^18.11.17
     "@types/plotly.js": ^2.12.10
-    "@types/prettier": ^2.7.1
     "@types/react": ^17.0.27
     "@types/react-dom": ^17.0.9
     "@types/react-plotly.js": ^2.5.2
@@ -7646,25 +7636,11 @@ __metadata:
     "@types/storybook-react-router": ^1.0.2
     "@types/testing-library__jest-dom": ^5.14.5
     "@types/uuid": ^8.3.4
-    "@typescript-eslint/eslint-plugin": ^4.33.0
-    "@typescript-eslint/parser": 4.33.0
-    babel-eslint: ^10.1.0
     babel-loader: ^9.1.0
     clsx: ^1.2.1
     copy-webpack-plugin: ^11.0.0
     css-loader: ^6.7.3
     date-fns: ^2.29.3
-    eslint: ^7.32.0
-    eslint-config-prettier: ^8.5.0
-    eslint-config-react-app: ^6.0.0
-    eslint-plugin-flowtype: ^7.0.0
-    eslint-plugin-header: ^3.0.0
-    eslint-plugin-import: ^2.26.0
-    eslint-plugin-jsx-a11y: ^6.6.1
-    eslint-plugin-prettier: ^4.2.1
-    eslint-plugin-react: ^7.31.11
-    eslint-plugin-react-hooks: ^4.6.0
-    eslint-plugin-storybook: ^0.6.8
     git-conventional-commits: ^2.4.0
     html-react-parser: ^3.0.4
     husky: ^8.0.2
@@ -7675,7 +7651,6 @@ __metadata:
     lint-staged: ^13.0.4
     lodash.orderby: ^4.6.0
     plotly.js: ^2.16.4
-    prettier: ^2.7.1
     react: ^17.0.2
     react-docgen-typescript-loader: ^3.6.0
     react-docgen-typescript-plugin: ^1.0.2
@@ -7726,13 +7701,6 @@ __metadata:
   version: 4.5.1
   resolution: "axe-core@npm:4.5.1"
   checksum: db90c6b41483e9c3452393933072fe0b8c2221e6d9b96ae0e6a03a4ce1e4c35bec539c92e9b6fcd63c4acf6678ad3c3ca7f5ab1d884210d157867cc54acd4f6a
-  languageName: node
-  linkType: hard
-
-"axe-core@npm:^3.5.5":
-  version: 3.5.6
-  resolution: "axe-core@npm:3.5.6"
-  checksum: 000777d2b6bf1f390beb1fb4b8714ed9127797c021c345b032db0c144e07320dbbe8cb0bcb7688b90b79cfbd3cdc1f27a4dc857804e3c61d7e0defb34deeb830
   languageName: node
   linkType: hard
 

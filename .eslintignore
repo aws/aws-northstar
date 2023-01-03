@@ -1,11 +1,11 @@
 !/.storybook
 
-build/ 
+**/build/ 
 temp/
-cdk.out/ 
-coverage/
+**/cdk.out/ 
+**/coverage/
 node_modules/ 
 **/node_modules/ 
 oss-attribution/ 
-storybook.out/ 
-styleguide.out/
+**/storybook.out/ 
+**/styleguide.out/
