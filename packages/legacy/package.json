@@ -72,7 +72,7 @@
         "jest-axe": "^7.0.0",
         "jest-environment-jsdom": "^29.3.0",
         "license-checker": "^25.0.1",
-        "lint-staged": "^13.0.4",
+        "lint-staged": "^13.1.0",
         "lodash.orderby": "^4.6.0",
         "plotly.js": "^2.16.4",
         "react": "^17.0.2",
