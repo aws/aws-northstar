@@ -13,25 +13,25 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { StrictMode } from 'react';
-import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
+import { componentTypes } from './types';
+import TextField from './components/TextField';
+import Textarea from './components/Textarea';
+import Checkbox from './components/Checkbox';
+import DatePicker from './components/DatePicker';
+import Radio from './components/Radio';
+import Switch from './components/Switch';
+import Select from './components/Select';
+import Custom from './components/Custom';
 
-export const parameters = {
-    actions: { argTypesRegex: '^on[A-Z].*' },
-    controls: {
-        matchers: {
-            color: /(background|color)$/i,
-            date: /Date$/,
-        },
-    },
+const componentMapper = {
+    [componentTypes.CHECKBOX]: Checkbox,
+    [componentTypes.CUSTOM]: Custom,
+    [componentTypes.DATE_PICKER]: DatePicker,
+    [componentTypes.RADIO]: Radio,
+    [componentTypes.SELECT]: Select,
+    [componentTypes.SWITCH]: Switch,
+    [componentTypes.TEXT_FIELD]: TextField,
+    [componentTypes.TEXTAREA]: Textarea,
 };
 
-export const decorators = [
-    (Story) => (
-        <StrictMode>
-            <NorthStarThemeProvider>
-                <Story />
-            </NorthStarThemeProvider>
-        </StrictMode>
-    ),
-];
+export default componentMapper;

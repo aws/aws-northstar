@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "sourceMap": false
+    },
+    "extends": "./tsconfig.json",
+    "exclude": [
+        "node_modules",
+        "build",
+        "cdk.out",
+        "dist",
+        "docs",
+        "examples",
+        "jest",
+        "scripts",
+        "storybook.out",
+        "**/*.test.ts",
+        "**/*.test.tsx",
+        "**/*.spec.ts",
+        "**/*.spec.tsx",
+        "**/*.stories.ts",
+        "**/*.stories.tsx",
+        "**/__mocks__",
+        "src/types"
+    ]
+}

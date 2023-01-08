@@ -13,25 +13,21 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { StrictMode } from 'react';
-import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
+// @ts-nocheck
 
-export const parameters = {
-    actions: { argTypesRegex: '^on[A-Z].*' },
-    controls: {
-        matchers: {
-            color: /(background|color)$/i,
-            date: /Date$/,
-        },
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+
+import { toHaveNoViolations } from 'jest-axe';
+window.URL.createObjectURL = () => {};
+window.HTMLCanvasElement.prototype.getContext = () => {};
+window.document.createRange = () => ({
+    setStart: () => {},
+    setEnd: () => {},
+    commonAncestorContainer: {
+        nodeName: 'BODY',
+        ownerDocument: document,
     },
-};
+});
 
-export const decorators = [
-    (Story) => (
-        <StrictMode>
-            <NorthStarThemeProvider>
-                <Story />
-            </NorthStarThemeProvider>
-        </StrictMode>
-    ),
-];
+expect.extend(toHaveNoViolations);

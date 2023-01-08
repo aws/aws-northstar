@@ -13,25 +13,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { StrictMode } from 'react';
-import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
-
-export const parameters = {
-    actions: { argTypesRegex: '^on[A-Z].*' },
-    controls: {
-        matchers: {
-            color: /(background|color)$/i,
-            date: /Date$/,
-        },
-    },
+const getErrorText = (validateOnMount: any, submitFailed: boolean | undefined, showError: any, error: any) => {
+    return (validateOnMount || submitFailed || showError) && error && typeof error === 'string' ? error : undefined;
 };
 
-export const decorators = [
-    (Story) => (
-        <StrictMode>
-            <NorthStarThemeProvider>
-                <Story />
-            </NorthStarThemeProvider>
-        </StrictMode>
-    ),
-];
+export default getErrorText;

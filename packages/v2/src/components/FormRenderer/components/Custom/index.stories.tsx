@@ -13,25 +13,32 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { StrictMode } from 'react';
-import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
+import React from 'react';
+import { action } from '@storybook/addon-actions';
+import Input from '@cloudscape-design/components/input';
+import FormRenderer, { componentTypes } from '../..';
 
-export const parameters = {
-    actions: { argTypesRegex: '^on[A-Z].*' },
-    controls: {
-        matchers: {
-            color: /(background|color)$/i,
-            date: /Date$/,
-        },
-    },
+export default {
+    component: FormRenderer,
+    title: 'Components/FormRenderer/Custom',
 };
 
-export const decorators = [
-    (Story) => (
-        <StrictMode>
-            <NorthStarThemeProvider>
-                <Story />
-            </NorthStarThemeProvider>
-        </StrictMode>
-    ),
-];
+export const Default = () => {
+    const CustomComponent = ({ input }) => (
+        <Input onChange={({ detail }) => input.onChange(detail.value)} value={input.value} />
+    );
+
+    const schema = {
+        header: 'Data driven form with Custom component',
+        description: 'Define your form in JSON format',
+        fields: [
+            {
+                component: componentTypes.CUSTOM,
+                name: 'input',
+                CustomComponent: CustomComponent,
+            },
+        ],
+    };
+
+    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+};

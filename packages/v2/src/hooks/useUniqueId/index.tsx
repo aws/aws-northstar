@@ -13,25 +13,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { StrictMode } from 'react';
-import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
+import { useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-export const parameters = {
-    actions: { argTypesRegex: '^on[A-Z].*' },
-    controls: {
-        matchers: {
-            color: /(background|color)$/i,
-            date: /Date$/,
-        },
-    },
+const useUniqueId = (defaultId?: string): string => {
+    const { current: uniqueId } = useRef(defaultId ?? uuidv4());
+    return uniqueId;
 };
 
-export const decorators = [
-    (Story) => (
-        <StrictMode>
-            <NorthStarThemeProvider>
-                <Story />
-            </NorthStarThemeProvider>
-        </StrictMode>
-    ),
-];
+export default useUniqueId;

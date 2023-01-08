@@ -16,7 +16,7 @@
         "aws-northstar"
     ],
     "scripts": {
-        "build:build-readme": "cp ./README_NPM_PACKAGE.md ./build/README.md && cat ./docs/GettingStarted.md >> ./build/README.md",
+        "build:build-readme": "cp ./README.md ./build/README.md && cat ./docs/GettingStarted.md >> ./build/README.md",
         "build:build-package-json": "cat package.json | jq 'del(.devDependencies, .resolutions, .scripts, .\"lint-staged\")' > ./build/package.json",
         "build:esm": "tsc --build tsconfig.build.esm.json",
         "build": "tsc --build tsconfig.build.json && yarn build:esm && yarn build:build-package-json && yarn build:build-readme",
@@ -72,7 +72,6 @@
         "jest-axe": "^7.0.0",
         "jest-environment-jsdom": "^29.3.0",
         "license-checker": "^25.0.1",
-        "lint-staged": "^13.1.0",
         "lodash.orderby": "^4.6.0",
         "plotly.js": "^2.16.4",
         "react": "^17.0.2",

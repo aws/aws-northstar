@@ -13,25 +13,19 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { StrictMode } from 'react';
-import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
-
-export const parameters = {
-    actions: { argTypesRegex: '^on[A-Z].*' },
-    controls: {
-        matchers: {
-            color: /(background|color)$/i,
-            date: /Date$/,
-        },
+module.exports = {
+    stories: [
+        '../src/**/*.stories.mdx', 
+        '../src/**/*.stories.@(js|jsx|ts|tsx)'
+    ],
+    addons: [
+        '@storybook/addon-links', 
+        '@storybook/addon-essentials', 
+        '@storybook/addon-interactions',
+        '@storybook/addon-a11y',
+    ],
+    framework: '@storybook/react',
+    core: {
+        builder: 'webpack5',
     },
 };
-
-export const decorators = [
-    (Story) => (
-        <StrictMode>
-            <NorthStarThemeProvider>
-                <Story />
-            </NorthStarThemeProvider>
-        </StrictMode>
-    ),
-];
