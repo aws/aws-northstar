@@ -13,17 +13,22 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { ComponentMeta } from '@storybook/react';
 import FormRenderer, { componentTypes, validatorTypes } from '../..';
+import { Template, DEFAULT_ARGS } from '../../index.stories';
 
 export default {
-    component: FormRenderer,
+    ...DEFAULT_ARGS,
     title: 'Components/FormRenderer/Textarea',
-};
+    excludeStories: ['TEXT_CONTENT'],
+} as ComponentMeta<typeof FormRenderer>;
 
-export const Default = () => {
-    const schema = {
+export const TEXT_CONTENT =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
+export const Default = Template.bind({});
+Default.args = {
+    schema: {
         header: (
             <>
                 Data driven form with{' '}
@@ -53,49 +58,30 @@ export const Default = () => {
                     },
                     {
                         type: validatorTypes.MAX_LENGTH,
-                        threshold: 1000,
+                        threshold: 500,
                     },
                 ],
             },
         ],
-    };
-    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+    },
 };
 
-export const CustomProps = () => {
-    const schema = {
-        header: (
-            <>
-                Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/textarea" rel="noreferrer">
-                    Textarea
-                </a>
-            </>
-        ),
+export const WithInitialValue = Template.bind({});
+WithInitialValue.args = {
+    ...Default.args,
+    schema: {
+        ...Default.args.schema,
         fields: [
             {
-                component: componentTypes.TEXTAREA,
-                name: 'textarea',
-                label: 'Textarea',
-                description: 'This is description',
-                helperText: 'This is helper text',
-                rows: 20,
+                ...Default.args.schema!.fields[0],
                 ariaDescribedby: 'Textarea ariaDescribedby',
                 ariaLabel: 'Textarea ariaLabel',
                 autoComplete: false,
-                disableBrowserAutocorrect: true,
+                rows: '20',
             },
         ],
-    };
-    return (
-        <FormRenderer
-            schema={schema}
-            initialValues={{
-                textarea:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            }}
-            onSubmit={action('Submit')}
-            onCancel={action('Cancel')}
-        />
-    );
+    },
+    initialValues: {
+        textarea: TEXT_CONTENT,
+    },
 };

@@ -18,10 +18,9 @@ import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Button from '@cloudscape-design/components/button';
 import Form from '@cloudscape-design/components/form';
-import Header from '@cloudscape-design/components/header';
-import Link from '@cloudscape-design/components/link';
 import { RenderProps, componentTypes } from '../../types';
 import { useFormRendererContext } from '../../formRendererContext';
+import FormHeader from '../FormHeader';
 
 const FormTemplate: FC<RenderProps> = ({ formFields, schema }) => {
     const { handleSubmit, onCancel, onReset } = useFormApi();
@@ -73,29 +72,15 @@ const FormTemplate: FC<RenderProps> = ({ formFields, schema }) => {
 
     const testId = rest['data-testid'] || 'form-renderer';
 
-    const formHeader = useMemo(() => {
-        if (typeof header === 'string' || description || headerVariant || info) {
-            const headerInfo =
-                info && typeof info === 'string' ? (
-                    <Link variant="info" href={info}>
-                        Info
-                    </Link>
-                ) : (
-                    info
-                );
-            return (
-                <Header variant={headerVariant} description={description} info={headerInfo}>
-                    {header}
-                </Header>
-            );
-        }
-
-        return header;
-    }, [header, description, info, headerVariant]);
-
     return (
         <form onSubmit={(e) => e.preventDefault()}>
-            <Form header={formHeader} actions={actionsVisible ? actions : undefined} data-testid={testId}>
+            <Form
+                header={
+                    <FormHeader header={header} description={description} headerVariant={headerVariant} info={info} />
+                }
+                actions={actionsVisible ? actions : undefined}
+                data-testid={testId}
+            >
                 <SpaceBetween direction="vertical" size="s">
                     {formFields}
                 </SpaceBetween>

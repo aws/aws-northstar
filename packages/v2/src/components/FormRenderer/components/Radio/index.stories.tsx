@@ -13,17 +13,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { ComponentMeta } from '@storybook/react';
 import FormRenderer, { componentTypes, validatorTypes } from '../..';
+import { Template, DEFAULT_ARGS } from '../../index.stories';
 
 export default {
-    component: FormRenderer,
+    ...DEFAULT_ARGS,
     title: 'Components/FormRenderer/Radio',
-};
+} as ComponentMeta<typeof FormRenderer>;
 
-export const Default = () => {
-    const schema = {
+export const Default = Template.bind({});
+Default.args = {
+    schema: {
         header: (
             <>
                 Data driven form with{' '}
@@ -51,70 +52,27 @@ export const Default = () => {
                     {
                         label: 'Option 2',
                         value: '2',
+                    },
+                    {
+                        label: 'Option 3',
+                        value: '3',
                         disabled: true,
                     },
+                ],
+                validate: [
                     {
-                        label: 'Option 3',
-                        value: '3',
+                        type: validatorTypes.REQUIRED,
                     },
                 ],
             },
         ],
-        isRequired: true,
-        validate: [
-            {
-                type: validatorTypes.REQUIRED,
-            },
-        ],
-    };
-    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+    },
 };
 
-export const WithInitialValue = () => {
-    const schema = {
-        header: (
-            <>
-                Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/radio-group" rel="noreferrer">
-                    Radio Group
-                </a>
-            </>
-        ),
-        description: 'Define your form in JSON format',
-        info: 'https://data-driven-forms.org/provided-mappers/radio',
-        fields: [
-            {
-                component: componentTypes.RADIO,
-                name: 'radio',
-                label: 'Radio',
-                description: 'This is description',
-                helperText: 'This is helper text',
-                options: [
-                    {
-                        label: 'Option 1',
-                        value: '1',
-                        description: 'This is option 1 description',
-                    },
-                    {
-                        label: 'Option 2',
-                        value: '2',
-                    },
-                    {
-                        label: 'Option 3',
-                        value: '3',
-                    },
-                ],
-            },
-        ],
-    };
-    return (
-        <FormRenderer
-            schema={schema}
-            initialValues={{
-                radio: '2',
-            }}
-            onSubmit={action('Submit')}
-            onCancel={action('Cancel')}
-        />
-    );
+export const WithInitialValue = Template.bind({});
+WithInitialValue.args = {
+    ...Default.args,
+    initialValues: {
+        radio: '2',
+    },
 };

@@ -22,6 +22,14 @@ import Radio from './components/Radio';
 import Switch from './components/Switch';
 import Select from './components/Select';
 import Custom from './components/Custom';
+import Subform from './components/Subform';
+import ExpandableSection from './components/ExpandableSection';
+import DateRangePicker from './components/DateRangePicker';
+import TimeInput from './components/TimeInput';
+import Review from './components/Review';
+import PlainText from './components/PlainText';
+import Wizard from './components/Wizard';
+import FieldArray from './components/FieldArray';
 
 const componentMapper = {
     [componentTypes.CHECKBOX]: Checkbox,
@@ -29,9 +37,17 @@ const componentMapper = {
     [componentTypes.DATE_PICKER]: DatePicker,
     [componentTypes.RADIO]: Radio,
     [componentTypes.SELECT]: Select,
+    [componentTypes.SUB_FORM]: Subform,
     [componentTypes.SWITCH]: Switch,
     [componentTypes.TEXT_FIELD]: TextField,
     [componentTypes.TEXTAREA]: Textarea,
+    [componentTypes.EXPANDABLE_SECTION]: ExpandableSection,
+    [componentTypes.DATA_RANGE_PICKER]: DateRangePicker,
+    [componentTypes.TIME_INPUT]: TimeInput,
+    [componentTypes.REVIEW]: Review,
+    [componentTypes.PLAIN_TEXT]: PlainText,
+    [componentTypes.WIZARD]: Wizard,
+    [componentTypes.FIELD_ARRAY]: FieldArray,
 };
 
 export default componentMapper;

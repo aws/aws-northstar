@@ -13,17 +13,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { ComponentMeta } from '@storybook/react';
 import FormRenderer, { componentTypes } from '../..';
+import { Template, DEFAULT_ARGS } from '../../index.stories';
 
 export default {
-    component: FormRenderer,
+    ...DEFAULT_ARGS,
     title: 'Components/FormRenderer/Switch',
-};
+} as ComponentMeta<typeof FormRenderer>;
 
-export const Default = () => {
-    const schema = {
+export const Default = Template.bind({});
+Default.args = {
+    schema: {
         header: (
             <>
                 Data driven form with{' '}
@@ -43,64 +44,27 @@ export const Default = () => {
                 helperText: 'This is helper text',
             },
         ],
-    };
-    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+    },
 };
 
-export const DefaultSwitchOn = () => {
-    const schema = {
-        header: (
-            <>
-                Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/toggle" rel="noreferrer">
-                    Toggle
-                </a>
-            </>
-        ),
-        description: 'Define your form in JSON format',
-        info: 'https://data-driven-forms.org/provided-mappers/switch',
-        fields: [
-            {
-                component: componentTypes.SWITCH,
-                name: 'switch',
-                label: 'Switch',
-                description: 'This is description',
-                helperText: 'This is helper text',
-            },
-        ],
-    };
-    return (
-        <FormRenderer
-            schema={schema}
-            initialValues={{ switch: true }}
-            onSubmit={action('Submit')}
-            onCancel={action('Cancel')}
-        />
-    );
+export const DefaultSwitchOn = Template.bind({});
+DefaultSwitchOn.args = {
+    ...Default.args,
+    initialValues: {
+        switch: true,
+    },
 };
 
-export const Disabled = () => {
-    const schema = {
-        header: (
-            <>
-                Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/toggle" rel="noreferrer">
-                    Toggle
-                </a>
-            </>
-        ),
-        description: 'Define your form in JSON format',
-        info: 'https://data-driven-forms.org/provided-mappers/switch',
+export const Disabled = Template.bind({});
+Disabled.args = {
+    ...Default.args,
+    schema: {
+        ...Default.args.schema,
         fields: [
             {
-                component: componentTypes.SWITCH,
-                name: 'switch',
-                label: 'Switch',
-                description: 'This is description',
-                helperText: 'This is helper text',
+                ...Default.args.schema!.fields[0],
                 isDisabled: true,
             },
         ],
-    };
-    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+    },
 };

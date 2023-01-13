@@ -13,17 +13,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { ComponentMeta } from '@storybook/react';
 import FormRenderer, { componentTypes, validatorTypes } from '../..';
+import { Template, DEFAULT_ARGS } from '../../index.stories';
 
 export default {
-    component: FormRenderer,
+    ...DEFAULT_ARGS,
     title: 'Components/FormRenderer/Select',
-};
+} as ComponentMeta<typeof FormRenderer>;
 
-export const Select = () => {
-    const schema = {
+export const Select = Template.bind({});
+Select.args = {
+    schema: {
         header: (
             <>
                 Data driven form with{' '}
@@ -43,9 +44,10 @@ export const Select = () => {
                 helperText: 'This is helper text',
                 placeholder: 'This is placeholder text',
                 isRequired: true,
+                'data-testid': 'testId',
                 options: [
                     { label: 'Option 1', value: '1' },
-                    { label: 'Option 2', value: '2' },
+                    { label: 'Option 2', value: '2', disabled: true },
                     { label: 'Option 3', value: '3' },
                     { label: 'Option 4', value: '4' },
                     { label: 'Option 5', value: '5' },
@@ -57,60 +59,20 @@ export const Select = () => {
                 ],
             },
         ],
-    };
-    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+    },
 };
 
-export const SelectWithInitialValue = () => {
-    const schema = {
-        header: (
-            <>
-                Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/select" rel="noreferrer">
-                    Select
-                </a>
-            </>
-        ),
-        description: 'Define your form in JSON format',
-        info: 'https://data-driven-forms.org/provided-mappers/select',
-        fields: [
-            {
-                component: componentTypes.SELECT,
-                name: 'select',
-                label: 'Select',
-                description: 'This is description',
-                helperText: 'This is helper text',
-                placeholder: 'This is placeholder text',
-                isRequired: true,
-                options: [
-                    { label: 'Option 1', value: '1' },
-                    { label: 'Option 2', value: '2' },
-                    { label: 'Option 3', value: '3' },
-                    { label: 'Option 4', value: '4' },
-                    { label: 'Option 5', value: '5' },
-                ],
-                validate: [
-                    {
-                        type: validatorTypes.REQUIRED,
-                    },
-                ],
-            },
-        ],
-    };
-    return (
-        <FormRenderer
-            schema={schema}
-            initialValues={{
-                select: { label: 'Option 3', value: '3' },
-            }}
-            onSubmit={action('Submit')}
-            onCancel={action('Cancel')}
-        />
-    );
+export const SelectWithInitialValue = Template.bind({});
+SelectWithInitialValue.args = {
+    ...Select.args,
+    initialValues: {
+        select: { label: 'Option 3', value: '3' },
+    },
 };
 
-export const Multiselect = () => {
-    const schema = {
+export const Multiselect = Template.bind({});
+Multiselect.args = {
+    schema: {
         header: (
             <>
                 Data driven form with{' '}
@@ -131,13 +93,13 @@ export const Multiselect = () => {
                 isRequired: true,
                 isMulti: true,
                 placeholder: 'Choose options',
-                deselectAriaLabel: (e) => `Remove ${e.label}`,
+                deselectAriaLabel: (e: any) => `Remove ${e.label}`,
                 selectedAriaLabel: 'Selected',
                 options: [
                     {
                         label: 'Option 1',
                         value: '1',
-                        description: 'This is a description',
+                        description: 'This is Option 1 description',
                     },
                     {
                         label: 'Option 2',
@@ -155,7 +117,6 @@ export const Multiselect = () => {
                     {
                         label: 'Option 4',
                         value: '4',
-                        filteringTags: ['filtering', 'tags', 'these are filtering tags'],
                     },
                     { label: 'Option 5', value: '5' },
                 ],
@@ -166,88 +127,30 @@ export const Multiselect = () => {
                 ],
             },
         ],
-    };
-    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+    },
 };
 
-export const MultiselectWithInitialValue = () => {
-    const schema = {
-        header: (
-            <>
-                Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/multiselectd" rel="noreferrer">
-                    Multiselect
-                </a>
-            </>
-        ),
-        description: 'Define your form in JSON format',
-        info: 'https://data-driven-forms.org/provided-mappers/select',
-        fields: [
+export const MultiselectWithInitialValue = Template.bind({});
+MultiselectWithInitialValue.args = {
+    ...Multiselect.args,
+    initialValues: {
+        select: [
             {
-                component: componentTypes.SELECT,
-                name: 'select',
-                label: 'Select',
-                description: 'This is description',
-                helperText: 'This is helper text',
-                isRequired: true,
-                isMulti: true,
-                placeholder: 'Choose options',
-                deselectAriaLabel: (e) => `Remove ${e.label}`,
-                selectedAriaLabel: 'Selected',
-                options: [
-                    {
-                        label: 'Option 1',
-                        value: '1',
-                        description: 'This is a description',
-                    },
-                    {
-                        label: 'Option 2',
-                        value: '2',
-                        iconName: 'unlocked',
-                        labelTag: 'This is a label tag',
-                    },
-                    {
-                        label: 'Option 3 (disabled)',
-                        value: '3',
-                        iconName: 'share',
-                        tags: ['Tags go here', 'Tag1', 'Tag2'],
-                        disabled: true,
-                    },
-                    {
-                        label: 'Option 4',
-                        value: '4',
-                        filteringTags: ['filtering', 'tags', 'these are filtering tags'],
-                    },
-                    { label: 'Option 5', value: '5' },
-                ],
-                validate: [
-                    {
-                        type: validatorTypes.REQUIRED,
-                    },
-                ],
+                label: 'Option 1',
+                value: '1',
+                description: 'This is Option 1 description',
+            },
+            {
+                label: 'Option 4',
+                value: '4',
             },
         ],
-    };
-    return (
-        <FormRenderer
-            schema={schema}
-            initialValues={{
-                select: [
-                    {
-                        label: 'Option 1',
-                        value: '1',
-                        description: 'This is a description',
-                    },
-                ],
-            }}
-            onSubmit={action('Submit')}
-            onCancel={action('Cancel')}
-        />
-    );
+    },
 };
 
-export const Autosuggest = () => {
-    const schema = {
+export const Autosuggest = Template.bind({});
+Autosuggest.args = {
+    schema: {
         header: (
             <>
                 Data driven form with{' '}
@@ -269,10 +172,10 @@ export const Autosuggest = () => {
                 isRequired: true,
                 isSearchable: true,
                 options: [
-                    { value: 'Suggestion 1' },
-                    { value: 'Suggestion 2' },
-                    { value: 'Suggestion 3' },
-                    { value: 'Suggestion 4' },
+                    { value: '1', label: 'Suggestion 1' },
+                    { value: '2', label: 'Suggestion 2' },
+                    { value: '3', label: 'Suggestion 3' },
+                    { value: '4', label: 'Suggestion 4' },
                 ],
                 validate: [
                     {
@@ -281,54 +184,21 @@ export const Autosuggest = () => {
                 ],
             },
         ],
-    };
-    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+    },
 };
 
-export const AutosuggestWithInitialValue = () => {
-    const schema = {
-        header: (
-            <>
-                Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/autosuggest" rel="noreferrer">
-                    Autosuggest
-                </a>
-            </>
-        ),
-        description: 'Define your form in JSON format',
-        info: 'https://data-driven-forms.org/provided-mappers/select',
-        fields: [
-            {
-                component: componentTypes.SELECT,
-                name: 'select',
-                label: 'Select',
-                description: 'This is description',
-                helperText: 'This is helper text',
-                placeholder: 'This is placeholder text',
-                isRequired: true,
-                isSearchable: true,
-                options: [
-                    { value: 'Suggestion 1' },
-                    { value: 'Suggestion 2' },
-                    { value: 'Suggestion 3' },
-                    { value: 'Suggestion 4' },
-                ],
-                validate: [
-                    {
-                        type: validatorTypes.REQUIRED,
-                    },
-                ],
-            },
-        ],
-    };
-    return (
-        <FormRenderer
-            schema={schema}
-            initialValues={{
-                select: 'Suggestion 2',
-            }}
-            onSubmit={action('Submit')}
-            onCancel={action('Cancel')}
-        />
-    );
+export const AutosuggestWithInitialValue = Template.bind({});
+AutosuggestWithInitialValue.args = {
+    ...Autosuggest.args,
+    initialValues: {
+        select: { value: '2', label: 'Suggestion 2' },
+    },
+};
+
+export const AutosuggestWithFreeText = Template.bind({});
+AutosuggestWithFreeText.args = {
+    ...Autosuggest.args,
+    initialValues: {
+        select: { value: 'Suggestion 5' },
+    },
 };

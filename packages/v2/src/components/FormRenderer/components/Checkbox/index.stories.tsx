@@ -13,17 +13,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { ComponentMeta } from '@storybook/react';
 import FormRenderer, { componentTypes, validatorTypes } from '../..';
+import { Template, DEFAULT_ARGS } from '../../index.stories';
 
 export default {
-    component: FormRenderer,
+    ...DEFAULT_ARGS,
     title: 'Components/FormRenderer/Checkbox',
-};
+} as ComponentMeta<typeof FormRenderer>;
 
-export const Default = () => {
-    const schema = {
+export const Single = Template.bind({});
+Single.args = {
+    schema: {
         header: (
             <>
                 Data driven form with{' '}
@@ -41,6 +42,7 @@ export const Default = () => {
                 label: 'Checkbox',
                 description: 'This is description',
                 helperText: 'This is helper text',
+                'data-testid': 'checkbox-1',
                 isRequired: true,
                 validate: [
                     {
@@ -49,50 +51,18 @@ export const Default = () => {
                 ],
             },
         ],
-    };
-    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
+    },
 };
 
-export const SingleWithInitialValues = () => {
-    const schema = {
-        header: (
-            <>
-                Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/checkbox" rel="noreferrer">
-                    Checkbox
-                </a>
-            </>
-        ),
-        description: 'Define your form in JSON format',
-        info: 'https://data-driven-forms.org/provided-mappers/checkbox',
-        fields: [
-            {
-                component: componentTypes.CHECKBOX,
-                name: 'checkbox',
-                label: 'Checkbox',
-                description: 'This is description',
-                helperText: 'This is helper text',
-                isRequired: true,
-                validate: [
-                    {
-                        type: validatorTypes.REQUIRED,
-                    },
-                ],
-            },
-        ],
-    };
-    return (
-        <FormRenderer
-            schema={schema}
-            initialValues={{ checkbox: true }}
-            onSubmit={action('Submit')}
-            onCancel={action('Cancel')}
-        />
-    );
+export const SingleWithInitialValues = Template.bind({});
+SingleWithInitialValues.args = {
+    ...Single.args,
+    initialValues: { checkbox: true },
 };
 
-export const Multiple = () => {
-    const schema = {
+export const Multiple = Template.bind({});
+Multiple.args = {
+    schema: {
         header: (
             <>
                 Data driven form with{' '}
@@ -110,6 +80,7 @@ export const Multiple = () => {
                 label: 'Checkbox',
                 description: 'This is description',
                 helperText: 'This is helper text',
+                'data-testid': 'checkbox-1',
                 isRequired: true,
                 options: [
                     {
@@ -120,54 +91,8 @@ export const Multiple = () => {
                     {
                         label: 'Option 2',
                         value: '2',
-                    },
-                    {
-                        label: 'Option 3',
-                        value: '3',
                         disabled: true,
                     },
-                ],
-                validate: [
-                    {
-                        type: validatorTypes.REQUIRED,
-                    },
-                ],
-            },
-        ],
-    };
-    return <FormRenderer schema={schema} onSubmit={action('Submit')} onCancel={action('Cancel')} />;
-};
-
-export const MultipleWithInitialValues = () => {
-    const schema = {
-        header: (
-            <>
-                Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/checkbox" rel="noreferrer">
-                    Checkbox
-                </a>
-            </>
-        ),
-        description: 'Define your form in JSON format',
-        info: 'https://data-driven-forms.org/provided-mappers/checkbox-multiple',
-        fields: [
-            {
-                component: componentTypes.CHECKBOX,
-                name: 'checkbox',
-                label: 'Checkbox',
-                description: 'This is description',
-                helperText: 'This is helper text',
-                isRequired: true,
-                options: [
-                    {
-                        label: 'Option 1',
-                        value: '1',
-                        description: 'This is option 1 description',
-                    },
-                    {
-                        label: 'Option 2',
-                        value: '2',
-                    },
                     {
                         label: 'Option 3',
                         value: '3',
@@ -178,18 +103,15 @@ export const MultipleWithInitialValues = () => {
                         type: validatorTypes.REQUIRED,
                     },
                 ],
-                'data-testid': 'testId',
             },
         ],
-    };
-    return (
-        <FormRenderer
-            schema={schema}
-            initialValues={{
-                checkbox: ['1', '2'],
-            }}
-            onSubmit={action('Submit')}
-            onCancel={action('Cancel')}
-        />
-    );
+    },
+};
+
+export const MultipleWithInitialValues = Template.bind({});
+MultipleWithInitialValues.args = {
+    ...Multiple.args,
+    initialValues: {
+        checkbox: ['1', '3'],
+    },
 };

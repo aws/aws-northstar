@@ -13,11 +13,20 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, useEffect } from 'react';
+import { applyMode, Mode } from '@cloudscape-design/global-styles';
 
 import '@cloudscape-design/global-styles/index.css';
 
-const NorthStarThemeProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
+export interface NorthStarThemeProviderProps {
+    colorMode?: Mode.Light | Mode.Dark;
+}
+
+const NorthStarThemeProvider: FC<PropsWithChildren<NorthStarThemeProviderProps>> = ({ children, colorMode }) => {
+    useEffect(() => {
+        applyMode(colorMode || Mode.Light);
+    }, [colorMode]);
+
     return <>{children}</>;
 };
 

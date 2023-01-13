@@ -27,7 +27,7 @@
         "storybook": "start-storybook -s ./public -p 9090",
         "styleguide:build": "styleguidist build",
         "styleguide": "styleguidist server",
-        "test:ci": "yarn test --coverage",
+        "test:ci": "yarn test --coverage --silent",
         "test": "jest",
         "test:watch": "jest --runInBand --watch ./src"
     },

@@ -80,7 +80,6 @@ const Checkbox: FC<UseFieldApiConfig> = ({ component, ...props }) => {
     if (options && options.length > 0) {
         return (
             <FormField
-                controlId={controlId}
                 label={label}
                 description={description}
                 errorText={errorText}
@@ -92,7 +91,7 @@ const Checkbox: FC<UseFieldApiConfig> = ({ component, ...props }) => {
             >
                 <SpaceBetween direction="vertical" size="xs">
                     {options.map((option: Option) => (
-                        <CheckboxMapping input={input} option={option} key={option.value} />
+                        <CheckboxMapping {...rest} input={input} option={option} key={option.value} />
                     ))}
                 </SpaceBetween>
             </FormField>

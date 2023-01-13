@@ -83,3 +83,4 @@ export default FormRenderer;
 export { componentTypes, validatorTypes };
 export type { ValidatorMapper, Schema };
 export type { Field } from '@data-driven-forms/react-form-renderer/common-types';
+export type { FieldInputProps } from 'react-final-form';

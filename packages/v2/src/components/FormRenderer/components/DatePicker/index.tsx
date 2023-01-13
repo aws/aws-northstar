@@ -30,7 +30,6 @@ const DatePicker: FC<UseFieldApiConfig> = (props) => {
         stretch,
         secondaryControl,
 
-        type,
         input,
         isRequired,
         isDisabled,

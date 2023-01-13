@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React, { StrictMode } from 'react';
+import React, { StrictMode, useEffect, useState } from 'react';
 import NorthStarThemeProvider from '../src/components/NorthStarThemeProvider';
 
 export const parameters = {
@@ -24,15 +24,37 @@ export const parameters = {
             date: /Date$/,
         },
     },
+    backgrounds: {
+        default: 'light',
+        values: [
+            {
+                name: 'light',
+                value: '#ffffff',
+            },
+            {
+                name: 'dark',
+                value: '#0f1b2a',
+            }
+        ]
+    }
 };
 
 export const decorators = [
-    (Story) => (
-        <StrictMode>
-            <NorthStarThemeProvider>
+    (Story, args) => {
+        const [colorMode, setColorMode] = useState('light');
+
+        useEffect(() => {
+            const color = args.globals.backgrounds?.value;
+            const matchColorMode = color && args.parameters?.backgrounds?.values?.find(v => v.value === color)?.name;
+            matchColorMode && setColorMode(matchColorMode);
+
+        }, [args.globals.backgrounds?.value]);
+
+        return (<StrictMode>
+            <NorthStarThemeProvider colorMode={colorMode}>
                 <Story />
             </NorthStarThemeProvider>
-        </StrictMode>
-    ),
+        </StrictMode>);
+    },
 ];
 

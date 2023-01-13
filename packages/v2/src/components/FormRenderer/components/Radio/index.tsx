@@ -17,7 +17,6 @@ import { FC, memo } from 'react';
 import RadioGroup from '@cloudscape-design/components/radio-group';
 import FormField from '@cloudscape-design/components/form-field';
 import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import useUniqueId from '../../../../hooks/useUniqueId';
 import getErrorText from '../../utils/getErrorText';
 import { Option } from '../../types';
 
@@ -31,7 +30,7 @@ const Radio: FC<UseFieldApiConfig> = ({ component, ...props }) => {
         stretch,
         secondaryControl,
 
-        options = [],
+        options,
         input,
         isRequired,
         isDisabled,
@@ -44,12 +43,10 @@ const Radio: FC<UseFieldApiConfig> = ({ component, ...props }) => {
         ...rest
     } = useFieldApi(props);
 
-    const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
 
     return (
         <FormField
-            controlId={controlId}
             label={label}
             description={description}
             errorText={errorText}
@@ -62,14 +59,13 @@ const Radio: FC<UseFieldApiConfig> = ({ component, ...props }) => {
             <RadioGroup
                 {...rest}
                 {...input}
-                items={options.map((option: Option) => ({
+                items={options?.map((option: Option) => ({
                     ...option,
-                    controlId: `${controlId}-${option.value}`,
+                    controlId: `${input.name}-${option.value}`,
                 }))}
                 ariaRequired={isRequired}
                 value={input.value}
                 onChange={({ detail }) => {
-                    console.log('detail', detail);
                     input.onChange(detail.value);
                 }}
             />

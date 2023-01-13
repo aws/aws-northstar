@@ -14,9 +14,29 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import basicComponentTypes from '@data-driven-forms/react-form-renderer/component-types';
-import { Schema as FormRendererSchema } from '@data-driven-forms/react-form-renderer/common-types';
+import {
+    Schema as FormRendererSchema,
+    Field as FormRendererField,
+} from '@data-driven-forms/react-form-renderer/common-types';
 import { FormTemplateRenderProps } from '@data-driven-forms/react-form-renderer/common-types/form-template-render-props';
 import { HeaderProps } from '@cloudscape-design/components/header';
+import { FormFieldProps as CloudscapeFormFieldProps } from '@cloudscape-design/components/form-field';
+
+export const componentTypes = {
+    ...basicComponentTypes,
+    TIME_INPUT: 'TIME_INPUT',
+    EXPANDABLE_SECTION: 'EXPANDABLE_SECTION',
+    REVIEW: 'REVIEW',
+    DATA_RANGE_PICKER: 'DATA_RANGE_PICKER',
+    CUSTOM: 'CUSTOM',
+};
+
+export interface FormFieldProps
+    extends Pick<CloudscapeFormFieldProps, 'label' | 'description' | 'i18nStrings' | 'stretch' | 'secondaryControl'> {
+    helperText?: CloudscapeFormFieldProps['constraintText'];
+}
+
+export interface Field extends FormRendererField, FormFieldProps {}
 
 export type Schema = Omit<FormRendererSchema, 'title'> & {
     header?: FormRendererSchema['title'];
@@ -27,16 +47,11 @@ export type Schema = Omit<FormRendererSchema, 'title'> & {
     resetLabel?: string;
     canReset?: boolean;
     submitLabel?: string;
+    fields: Field[];
 };
 
 export type RenderProps = Omit<FormTemplateRenderProps, 'schema'> & {
     schema: Schema;
-};
-
-export const componentTypes = {
-    ...basicComponentTypes,
-    TIME_INPUT: 'TIME_INPUT',
-    CUSTOM: 'CUSTOM',
 };
 
 export interface Option {
