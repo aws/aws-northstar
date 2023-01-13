@@ -59,20 +59,6 @@ Default.args = {
     },
 };
 
-export const Disabled = Template.bind({});
-Disabled.args = {
-    ...Default.args,
-    schema: {
-        ...Default.args.schema,
-        fields: [
-            {
-                ...Default.args.schema!.fields[0],
-                isDisabled: true,
-            },
-        ],
-    },
-};
-
 export const WithInitialValue = Template.bind({});
 WithInitialValue.args = {
     ...Default.args,
@@ -86,12 +72,22 @@ ReadOnly.args = {
     ...WithInitialValue.args,
     schema: {
         ...WithInitialValue.args.schema,
-        fields: [
-            {
-                ...WithInitialValue.args.schema!.fields[0],
-                isReadOnly: true,
-            },
-        ],
+        fields: WithInitialValue.args.schema!.fields.map((field) => ({
+            ...field,
+            isReadOnly: true,
+        })),
+    },
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+    ...WithInitialValue.args,
+    schema: {
+        ...WithInitialValue.args.schema,
+        fields: WithInitialValue.args.schema!.fields.map((field) => ({
+            ...field,
+            isDisabled: true,
+        })),
     },
 };
 

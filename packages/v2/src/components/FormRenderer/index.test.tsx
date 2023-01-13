@@ -31,6 +31,8 @@ describe('FormRenderer', () => {
     });
 
     it('should render form with controls', async () => {
+        jest.setTimeout(10000);
+
         const { container } = render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
         await act(() => {
             Default.play({
@@ -50,7 +52,7 @@ describe('FormRenderer', () => {
             await userEvent.click(screen.getByText('Submit'));
         });
 
-        expect(screen.queryAllByText('Required')).toHaveLength(10);
+        expect(screen.queryAllByText('Required')).toHaveLength(11);
         expect(screen.getByText('please accept the terms and condition')).toBeVisible();
         expect(handleSubmit).not.toBeCalled();
     });

@@ -30,11 +30,8 @@ const Switch: FC<UseFieldApiConfig> = (props) => {
         stretch,
         secondaryControl,
 
-        type,
         input,
-        isRequired,
         isDisabled,
-        isReadOnly,
 
         validateOnMount,
         meta: { error, submitFailed },

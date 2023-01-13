@@ -24,15 +24,19 @@ export interface WizardStepProps {
     fields: Field[];
     header?: React.ReactNode;
     showError?: boolean;
+    isReadOnly?: boolean;
+    isDisabled?: boolean;
 }
 
-const WizardStep: FC<WizardStepProps> = ({ header, fields, showError }) => {
+const WizardStep: FC<WizardStepProps> = ({ header, fields, showError, isReadOnly, isDisabled }) => {
     const { renderForm } = useFormApi();
     return (
         <Container header={<FormHeader header={header} />}>
             <SpaceBetween direction="vertical" size="l">
                 {renderForm(
                     fields.map((field) => ({
+                        isReadOnly,
+                        isDisabled,
                         ...field,
                         showError,
                     }))

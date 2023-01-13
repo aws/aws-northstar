@@ -70,6 +70,18 @@ SelectWithInitialValue.args = {
     },
 };
 
+export const SelectDisabled = Template.bind({});
+SelectDisabled.args = {
+    ...SelectWithInitialValue.args,
+    schema: {
+        ...SelectWithInitialValue.args.schema,
+        fields: SelectWithInitialValue.args.schema!.fields.map((field) => ({
+            ...field,
+            isDisabled: true,
+        })),
+    },
+};
+
 export const Multiselect = Template.bind({});
 Multiselect.args = {
     schema: {
@@ -148,6 +160,18 @@ MultiselectWithInitialValue.args = {
     },
 };
 
+export const MultiselectDisabled = Template.bind({});
+MultiselectDisabled.args = {
+    ...MultiselectWithInitialValue.args,
+    schema: {
+        ...MultiselectWithInitialValue.args.schema,
+        fields: MultiselectWithInitialValue.args.schema!.fields.map((field) => ({
+            ...field,
+            isDisabled: true,
+        })),
+    },
+};
+
 export const Autosuggest = Template.bind({});
 Autosuggest.args = {
     schema: {
@@ -192,6 +216,18 @@ AutosuggestWithInitialValue.args = {
     ...Autosuggest.args,
     initialValues: {
         select: { value: '2', label: 'Suggestion 2' },
+    },
+};
+
+export const AutosuggestDisabled = Template.bind({});
+AutosuggestDisabled.args = {
+    ...AutosuggestWithInitialValue.args,
+    schema: {
+        ...AutosuggestWithInitialValue.args.schema,
+        fields: AutosuggestWithInitialValue.args.schema!.fields.map((field) => ({
+            ...field,
+            isDisabled: true,
+        })),
     },
 };
 

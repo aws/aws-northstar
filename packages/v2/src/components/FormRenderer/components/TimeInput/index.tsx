@@ -20,6 +20,9 @@ import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-re
 import useUniqueId from '../../../../hooks/useUniqueId';
 import getErrorText from '../../utils/getErrorText';
 
+const DEFAULT_FORMAT = 'hh:mm';
+const DEFAULT_PLACEHOLDER = 'hh:mm';
+
 const TimeInput: FC<UseFieldApiConfig> = (props) => {
     const {
         label,
@@ -57,6 +60,8 @@ const TimeInput: FC<UseFieldApiConfig> = (props) => {
             secondaryControl={secondaryControl}
         >
             <TimeInputComponent
+                format={DEFAULT_FORMAT}
+                placeholder={DEFAULT_PLACEHOLDER}
                 {...rest}
                 {...input}
                 controlId={controlId}

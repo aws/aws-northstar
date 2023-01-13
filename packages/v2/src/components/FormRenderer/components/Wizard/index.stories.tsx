@@ -119,3 +119,42 @@ WithInitialValue.args = {
         config3: 'Config 3 Content',
     },
 };
+
+export const Submittting = Template.bind({});
+Submittting.args = {
+    ...WithInitialValue.args,
+    schema: {
+        ...WithInitialValue.args.schema,
+        fields: [
+            {
+                ...WithInitialValue.args.schema!.fields[0],
+                activeStepIndex: 3,
+            },
+        ],
+    },
+    isSubmitting: true,
+};
+
+export const ReadOnly = Template.bind({});
+ReadOnly.args = {
+    ...WithInitialValue.args,
+    schema: {
+        ...WithInitialValue.args.schema,
+        fields: WithInitialValue.args.schema!.fields.map((field) => ({
+            ...field,
+            isReadOnly: true,
+        })),
+    },
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+    ...WithInitialValue.args,
+    schema: {
+        ...WithInitialValue.args.schema,
+        fields: WithInitialValue.args.schema!.fields.map((field) => ({
+            ...field,
+            isDisabled: true,
+        })),
+    },
+};

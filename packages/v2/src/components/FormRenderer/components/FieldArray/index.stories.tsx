@@ -118,51 +118,27 @@ WithInitialValue.args = {
 
 export const ReadOnly = Template.bind({});
 ReadOnly.args = {
-    ...Default.args,
+    ...WithInitialValue.args,
     schema: {
-        ...Default.args.schema,
+        ...WithInitialValue.args.schema,
         fields: [
             {
-                ...Default.args.schema!.fields[0],
+                ...WithInitialValue.args.schema!.fields[0],
                 isReadOnly: true,
-            },
-        ],
-    },
-    initialValues: {
-        keyValuePairs: [
-            {
-                key: 'Key1',
-                value: 'Value1',
-            },
-            {
-                key: 'Key2',
-                value: 'Value2',
             },
         ],
     },
 };
 
-export const DisabledOnly = Template.bind({});
-DisabledOnly.args = {
-    ...Default.args,
+export const Disabled = Template.bind({});
+Disabled.args = {
+    ...WithInitialValue.args,
     schema: {
-        ...Default.args.schema,
+        ...WithInitialValue.args.schema,
         fields: [
             {
-                ...Default.args.schema!.fields[0],
+                ...WithInitialValue.args.schema!.fields[0],
                 isDisabled: true,
-            },
-        ],
-    },
-    initialValues: {
-        keyValuePairs: [
-            {
-                key: 'Key1',
-                value: 'Value1',
-            },
-            {
-                key: 'Key2',
-                value: 'Value2',
             },
         ],
     },

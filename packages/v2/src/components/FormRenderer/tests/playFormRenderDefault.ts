@@ -45,6 +45,12 @@ export const TEST_DATA = {
     ],
     confirm: true,
     datePicker: '2022-01-01',
+    dateRange: {
+        amount: 5,
+        key: 'previous-5-minutes',
+        type: 'relative',
+        unit: 'minute',
+    },
 };
 
 const playFormRenderDefault: PlayFunction<ReactFramework, FormRendererProps> = async ({ args, canvasElement }) => {
@@ -85,6 +91,12 @@ const playFormRenderDefault: PlayFunction<ReactFramework, FormRendererProps> = a
     await userEvent.type(canvas.getByText('Switch'), TEST_DATA.textarea);
 
     wrapper(canvasElement).findDatePicker()?.setInputValue('2022/01/01');
+
+    const dateRangePicker = wrapper(canvasElement).findDateRangePicker();
+    dateRangePicker?.openDropdown();
+    await userEvent.click(canvas.getByLabelText('Last 5 minutes'));
+    await waitFor(() => expect(canvas.getByLabelText('Last 5 minutes')).toBeChecked());
+    await userEvent.click(canvas.getByText('Apply'));
 
     await userEvent.click(canvas.getByLabelText('I understand the terms and condition'));
     await userEvent.click(canvas.getByText('Submit'));

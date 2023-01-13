@@ -60,6 +60,18 @@ SingleWithInitialValues.args = {
     initialValues: { checkbox: true },
 };
 
+export const SingleDisabled = Template.bind({});
+SingleDisabled.args = {
+    ...SingleWithInitialValues.args,
+    schema: {
+        ...SingleWithInitialValues.args.schema,
+        fields: SingleWithInitialValues.args.schema!.fields.map((field) => ({
+            ...field,
+            isDisabled: true,
+        })),
+    },
+};
+
 export const Multiple = Template.bind({});
 Multiple.args = {
     schema: {
@@ -113,5 +125,17 @@ MultipleWithInitialValues.args = {
     ...Multiple.args,
     initialValues: {
         checkbox: ['1', '3'],
+    },
+};
+
+export const MultipleDisabled = Template.bind({});
+MultipleDisabled.args = {
+    ...MultipleWithInitialValues.args,
+    schema: {
+        ...MultipleWithInitialValues.args.schema,
+        fields: MultipleWithInitialValues.args.schema!.fields.map((field) => ({
+            ...field,
+            isDisabled: true,
+        })),
     },
 };

@@ -34,7 +34,6 @@ const Radio: FC<UseFieldApiConfig> = ({ component, ...props }) => {
         input,
         isRequired,
         isDisabled,
-        isReadOnly,
 
         validateOnMount,
         meta: { error, submitFailed },
@@ -61,6 +60,7 @@ const Radio: FC<UseFieldApiConfig> = ({ component, ...props }) => {
                 {...input}
                 items={options?.map((option: Option) => ({
                     ...option,
+                    disabled: typeof option.disabled !== 'undefined' ? option.disabled : isDisabled,
                     controlId: `${input.name}-${option.value}`,
                 }))}
                 ariaRequired={isRequired}

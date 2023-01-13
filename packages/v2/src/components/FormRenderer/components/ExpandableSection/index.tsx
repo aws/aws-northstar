@@ -31,6 +31,9 @@ const ExpandableSection: FC<UseFieldApiConfig> = (props) => {
 
         input,
 
+        isReadOnly,
+        isDisabled,
+
         validateOnMount,
         showError,
         meta: { submitFailed, error },
@@ -41,11 +44,13 @@ const ExpandableSection: FC<UseFieldApiConfig> = (props) => {
     const { renderForm } = useFormApi();
     const editedFields = useMemo(() => {
         return fields.map((field: Field) => ({
+            isReadOnly,
+            isDisabled,
             ...field,
             showError,
             name: `${input.name}.${field.name}`,
         }));
-    }, [fields, input.name, showError]);
+    }, [fields, input.name, showError, isReadOnly, isDisabled]);
 
     const [expanded, setExpanded] = useState(propsExpanded || false);
     useEffect(() => {

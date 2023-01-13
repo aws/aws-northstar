@@ -76,3 +76,15 @@ WithInitialValue.args = {
         radio: '2',
     },
 };
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+    ...WithInitialValue.args,
+    schema: {
+        ...WithInitialValue.args.schema,
+        fields: WithInitialValue.args.schema!.fields.map((field) => ({
+            ...field,
+            isDisabled: true,
+        })),
+    },
+};

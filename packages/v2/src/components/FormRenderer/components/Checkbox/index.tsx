@@ -27,11 +27,13 @@ interface CheckboxMappingProps {
     input: FieldInputProps<any, HTMLInputElement>;
     option: Option;
     value?: Option['value'][];
+    isDisabled?: boolean;
 }
 
-const CheckboxMapping: FC<CheckboxMappingProps> = ({ input, option, ...rest }) => {
+const CheckboxMapping: FC<CheckboxMappingProps> = ({ input, option, isDisabled, ...rest }) => {
     return (
         <CheckboxComponent
+            disabled={isDisabled}
             {...input}
             {...option}
             checked={(input.value || []).includes(option.value)}
@@ -91,7 +93,13 @@ const Checkbox: FC<UseFieldApiConfig> = ({ component, ...props }) => {
             >
                 <SpaceBetween direction="vertical" size="xs">
                     {options.map((option: Option) => (
-                        <CheckboxMapping {...rest} input={input} option={option} key={option.value} />
+                        <CheckboxMapping
+                            isDisabled={isDisabled}
+                            {...rest}
+                            input={input}
+                            option={option}
+                            key={option.value}
+                        />
                     ))}
                 </SpaceBetween>
             </FormField>

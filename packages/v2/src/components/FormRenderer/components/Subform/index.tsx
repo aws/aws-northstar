@@ -25,9 +25,11 @@ export interface SubformProps {
     title: string;
     description?: string;
     headerVariant?: FormHeaderProps['headerVariant'];
+    isReadOnly?: boolean;
+    isDisabled?: boolean;
 }
 
-const Subform: FC<SubformProps> = ({ title, description, headerVariant, fields, ...props }) => {
+const Subform: FC<SubformProps> = ({ title, description, headerVariant, fields, isReadOnly, isDisabled, ...props }) => {
     const { renderForm } = useFormApi();
     return (
         <Container
@@ -35,7 +37,13 @@ const Subform: FC<SubformProps> = ({ title, description, headerVariant, fields, 
             data-testid={props['data-testid']}
         >
             <SpaceBetween direction="vertical" size="s">
-                {renderForm(fields)}
+                {renderForm(
+                    fields.map((field) => ({
+                        isReadOnly,
+                        isDisabled,
+                        ...field,
+                    }))
+                )}
             </SpaceBetween>
         </Container>
     );

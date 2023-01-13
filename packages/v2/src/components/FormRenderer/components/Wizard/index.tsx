@@ -25,6 +25,8 @@ export interface WizardProps {
     allowSkipTo: WizardComponentProps['allowSkipTo'];
     i18nStrings: WizardComponentProps['i18nStrings'];
     activeStepIndex: WizardComponentProps['activeStepIndex'];
+    isReadOnly?: boolean;
+    isDisabled?: boolean;
 }
 
 const DEFAULT_RESOURCE_STRINGS: WizardComponentProps.I18nStrings = {
@@ -39,7 +41,7 @@ const DEFAULT_RESOURCE_STRINGS: WizardComponentProps.I18nStrings = {
     optional: 'optional',
 };
 
-const Wizard: FC<WizardProps> = ({ i18nStrings, allowSkipTo, fields, ...props }) => {
+const Wizard: FC<WizardProps> = ({ i18nStrings, allowSkipTo, fields, isReadOnly, isDisabled, ...props }) => {
     const [showError, setShowError] = useState(false);
     const formOptions = useFormApi();
     const { isSubmitting } = useFormRendererContext();
@@ -61,10 +63,18 @@ const Wizard: FC<WizardProps> = ({ i18nStrings, allowSkipTo, fields, ...props })
                 description: field.description,
                 isOptional: field.isOptional,
                 errorText: field.errorText,
-                content: <WizardSteps showError={showError} fields={fieldFields} {...rest} />,
+                content: (
+                    <WizardSteps
+                        isReadOnly={isReadOnly}
+                        isDisabled={isDisabled}
+                        showError={showError}
+                        fields={fieldFields}
+                        {...rest}
+                    />
+                ),
             };
         });
-    }, [fields, showError]);
+    }, [fields, showError, isReadOnly, isDisabled]);
 
     useEffect(() => {
         setShowError(false); // When steps change

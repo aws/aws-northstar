@@ -247,6 +247,18 @@ Default.args = {
                 ],
             },
             {
+                component: componentTypes.DATA_RANGE_PICKER,
+                name: 'dateRange',
+                label: 'Date Range',
+                description: 'This is description',
+                helperText: 'This is helper text',
+                validate: [
+                    {
+                        type: validatorTypes.REQUIRED,
+                    },
+                ],
+            },
+            {
                 component: componentTypes.CHECKBOX,
                 name: 'confirm',
                 label: 'I understand the terms and condition',

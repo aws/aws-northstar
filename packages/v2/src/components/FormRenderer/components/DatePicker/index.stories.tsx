@@ -29,7 +29,7 @@ Default.args = {
             <>
                 Data driven form with{' '}
                 <a target="_blank" href="https://cloudscape.design/components/date-picker" rel="noreferrer">
-                    DatePicker
+                    Date Picker
                 </a>
             </>
         ),
@@ -59,5 +59,29 @@ WithInitialValue.args = {
     ...Default.args,
     initialValues: {
         date: '2022-01-01',
+    },
+};
+
+export const ReadOnly = Template.bind({});
+ReadOnly.args = {
+    ...WithInitialValue.args,
+    schema: {
+        ...WithInitialValue.args.schema,
+        fields: WithInitialValue.args.schema!.fields.map((field) => ({
+            ...field,
+            isReadOnly: true,
+        })),
+    },
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+    ...WithInitialValue.args,
+    schema: {
+        ...WithInitialValue.args.schema,
+        fields: WithInitialValue.args.schema!.fields.map((field) => ({
+            ...field,
+            isDisabled: true,
+        })),
     },
 };

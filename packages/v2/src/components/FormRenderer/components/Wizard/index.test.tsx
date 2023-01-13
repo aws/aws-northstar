@@ -19,7 +19,7 @@ import wrapper from '@cloudscape-design/components/test-utils/dom';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './index.stories';
 
-const { Default, WithInitialValue } = composeStories(stories);
+const { Default, WithInitialValue, Submittting } = composeStories(stories);
 
 const handleCancel = jest.fn();
 const handleSubmit = jest.fn();
@@ -137,5 +137,12 @@ describe('Wizard', () => {
             expect.any(Object),
             expect.any(Function)
         );
+    });
+
+    it('should display button in submitting state', async () => {
+        render(<Submittting />);
+
+        expect(screen.getByText('Submit').parentElement).toBeDisabled();
+        expect(screen.getByText('Previous').parentElement).toBeDisabled();
     });
 });
