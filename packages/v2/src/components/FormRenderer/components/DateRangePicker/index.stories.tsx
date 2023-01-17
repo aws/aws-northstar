@@ -41,6 +41,7 @@ Default.args = {
                 label: 'Date Range',
                 description: 'This is description',
                 helperText: 'This is helper text',
+                'data-testid': 'testId',
                 validate: [
                     {
                         type: validatorTypes.REQUIRED,

@@ -24,6 +24,8 @@ const { Default, WithInitialValue } = composeStories(stories);
 const handleCancel = jest.fn();
 const handleSubmit = jest.fn();
 
+jest.setTimeout(10000);
+
 describe('DateRangePicker', () => {
     afterEach(() => {
         jest.resetAllMocks();
@@ -69,6 +71,63 @@ describe('DateRangePicker', () => {
             expect.any(Object),
             expect.any(Function)
         );
+    });
+
+    it('should allow users to choose an absolute date range', async () => {
+        const dateNowSpy = jest.spyOn(Date, 'now').mockImplementation(() => Date.UTC(2022, 1, 1));
+
+        render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
+
+        const element = await screen.findByTestId('form-renderer');
+        const datePicker = wrapper(element).findDateRangePicker();
+
+        await act(async () => {
+            datePicker?.openDropdown();
+        });
+
+        await waitFor(() => expect(screen.getByLabelText('Last 5 minutes')).toBeVisible());
+
+        await act(async () => {
+            await userEvent.click(screen.getByText('Absolute range'));
+        });
+
+        await waitFor(() => expect(screen.getByLabelText('Start date')).toBeVisible());
+
+        await act(async () => {
+            await userEvent.click(screen.queryAllByText('1')[0]);
+        });
+
+        await waitFor(() => expect(screen.getByLabelText('Start date')).toHaveValue('2022/01/01'));
+
+        await act(async () => {
+            await userEvent.click(screen.queryAllByText('31')[0]);
+        });
+
+        await waitFor(() => expect(screen.getByLabelText('End date')).toHaveValue('2022/01/31'));
+
+        await act(async () => {
+            await userEvent.click(screen.getByText('Apply'));
+        });
+
+        await waitFor(() => expect(screen.getByText('2022-01-01T00:00:00+00:00')).toBeVisible());
+
+        await act(async () => {
+            await userEvent.click(screen.getByText('Submit'));
+        });
+
+        expect(handleSubmit).toHaveBeenCalledWith(
+            {
+                dateRange: {
+                    endDate: '2022-01-31T23:59:59+00:00',
+                    startDate: '2022-01-01T00:00:00+00:00',
+                    type: 'absolute',
+                },
+            },
+            expect.any(Object),
+            expect.any(Function)
+        );
+
+        dateNowSpy?.mockRestore();
     });
 
     it('should trigger validation', async () => {

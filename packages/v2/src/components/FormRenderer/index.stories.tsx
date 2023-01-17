@@ -280,28 +280,3 @@ WithInitialValue.args = {
     ...Default.args,
     initialValues: TEST_DATA,
 };
-
-export const Submitting = Template.bind({});
-Submitting.args = {
-    schema: {
-        header: 'Data driven form',
-        description: 'Define your form in JSON format',
-        fields: [
-            {
-                component: componentTypes.TEXT_FIELD,
-                name: 'email',
-                label: 'Email',
-                description: 'Email Address',
-                helperText: 'Enter a valid email address',
-                isRequired: true,
-                validate: [
-                    {
-                        type: validatorTypes.REQUIRED,
-                    },
-                ],
-            },
-        ],
-    },
-    isSubmitting: true,
-    initialValues: { email: 'test@test.com' },
-};

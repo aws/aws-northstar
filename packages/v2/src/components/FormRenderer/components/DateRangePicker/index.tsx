@@ -61,7 +61,7 @@ const DEFAULT_RESOURCE_STRINGS: DateRangePickerProps.I18nStrings = {
         return `Last ${e.amount} ${n}`;
     },
     formatUnit: (e: any, n: number) => (1 === n ? e : `${e}s`),
-    dateTimeConstraintText: 'Range is 6 to 30 days. For date, use YYYY/MM/DD. For time, use 24 hr format.',
+    dateTimeConstraintText: 'For date, use YYYY/MM/DD. For time, use 24 hr format.',
     relativeModeTitle: 'Relative range',
     absoluteModeTitle: 'Absolute range',
     relativeRangeSelectionHeading: 'Choose a range',

@@ -31,7 +31,7 @@ const FormHeader: FC<FormHeaderProps> = ({ header, description, info, headerVari
 
     const headerInfo =
         info && typeof info === 'string' ? (
-            <Link variant="info" href={info}>
+            <Link variant="info" href={info} target="_blank">
                 Info
             </Link>
         ) : (

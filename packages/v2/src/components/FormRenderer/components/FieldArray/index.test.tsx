@@ -92,7 +92,7 @@ describe('FieldArray', () => {
         const attributeEditor = wrapper(element).findAttributeEditor();
 
         await act(async () => {
-            userEvent.click(attributeEditor?.findAddButton().getElement()!);
+            await userEvent.click(attributeEditor?.findAddButton().getElement()!);
             await userEvent.click(screen.getByText('Submit'));
         });
 
@@ -109,10 +109,10 @@ describe('FieldArray', () => {
         const addButton = attributeEditor?.findAddButton().getElement();
 
         await act(async () => {
-            userEvent.click(addButton!);
-            userEvent.click(addButton!);
-            userEvent.click(addButton!);
-            userEvent.click(addButton!);
+            await userEvent.click(addButton!);
+            await userEvent.click(addButton!);
+            await userEvent.click(addButton!);
+            await userEvent.click(addButton!);
         });
 
         expect(addButton).toBeDisabled();

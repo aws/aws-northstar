@@ -15,14 +15,21 @@
  ******************************************************************************************************************** */
 import { render, screen, cleanup, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { composeStories } from '@storybook/testing-react';
+import { composeStories, composeStory } from '@storybook/testing-react';
 import * as stories from './index.stories';
+import SubmittingMeta, { Submitting as SubmittingStory } from './stories/Submitting.stories';
+import ResetMeta, { Reset as ResetStory } from './stories/Reset.stories';
 import { TEST_DATA } from './tests/playFormRenderDefault';
+import FormRenderer, { ValidatorMapper, componentTypes } from '.';
 
 const { Default, WithInitialValue } = composeStories(stories);
+const Submitting = composeStory(SubmittingStory, SubmittingMeta);
+const Reset = composeStory(ResetStory, ResetMeta);
 
 const handleCancel = jest.fn();
 const handleSubmit = jest.fn();
+
+jest.setTimeout(10000);
 
 describe('FormRenderer', () => {
     afterEach(() => {
@@ -31,8 +38,6 @@ describe('FormRenderer', () => {
     });
 
     it('should render form with controls', async () => {
-        jest.setTimeout(10000);
-
         const { container } = render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
         await act(() => {
             Default.play({
@@ -89,5 +94,75 @@ describe('FormRenderer', () => {
         });
 
         expect(handleSubmit).toHaveBeenCalledWith(TEST_DATA, expect.any(Object), expect.any(Function));
+    });
+
+    it('should render form in submitting state', async () => {
+        render(<Submitting onSubmit={handleSubmit} onCancel={handleCancel} />);
+
+        expect(screen.getByText('Submit').parentElement).toBeDisabled();
+    });
+
+    it('should reset the form when reset button is clicked', async () => {
+        render(<Reset onSubmit={handleSubmit} onCancel={handleCancel} />);
+
+        await act(async () => {
+            await userEvent.type(screen.getByLabelText('Email'), 'test@test.com');
+        });
+
+        expect(screen.getByLabelText('Email')).toHaveValue('test@test.com');
+
+        await act(async () => {
+            await userEvent.click(screen.getByText('Reset'));
+        });
+
+        expect(screen.getByLabelText('Email')).toHaveValue('');
+    });
+
+    it('should support custom validator', async () => {
+        const mockValidationFn = jest.fn().mockReturnValue(true);
+
+        const validatorMapping: ValidatorMapper = {
+            custom: jest.fn(
+                ({ threshold }: any) =>
+                    (value: number) =>
+                        mockValidationFn(threshold, value)
+            ),
+        };
+
+        const schema = {
+            header: 'Data driven form with custom validator',
+            info: 'https://data-driven-forms.org/mappers/validator-mapper',
+            fields: [
+                {
+                    component: componentTypes.TEXT_FIELD,
+                    name: 'number',
+                    label: 'Number',
+                    type: 'number',
+                    isRequired: true,
+                    validate: [
+                        {
+                            type: 'custom',
+                            threshold: 6,
+                        },
+                    ],
+                },
+            ],
+        };
+
+        render(
+            <FormRenderer
+                schema={schema}
+                validatorMapper={validatorMapping}
+                onSubmit={handleSubmit}
+                onCancel={handleCancel}
+            />
+        );
+
+        await act(async () => {
+            await userEvent.type(screen.getByLabelText('Number'), '4');
+            await userEvent.click(screen.getByText('Submit'));
+        });
+
+        expect(mockValidationFn).lastCalledWith(6, '4');
     });
 });
