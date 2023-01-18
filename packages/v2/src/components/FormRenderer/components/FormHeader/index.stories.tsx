@@ -48,7 +48,12 @@ WithFormHeader.args = {
                 variant="h1"
                 description="Define your form in JSON format"
                 info={
-                    <Link variant="info" href="https://cloudscape.design/components/header" target="_blank">
+                    <Link
+                        variant="info"
+                        href="https://cloudscape.design/components/header"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                    >
                         Info
                     </Link>
                 }

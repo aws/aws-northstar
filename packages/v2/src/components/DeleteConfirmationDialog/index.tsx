@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 
-import { ReactNode, FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
+import { ReactNode, FC, useCallback, useEffect, useMemo, useState } from 'react';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Modal from '@cloudscape-design/components/modal';
 import FormField from '@cloudscape-design/components/form-field';
@@ -91,7 +91,7 @@ export type DeleteConfirmationDialogProps = DeleteConfirmationBaseProps &
  * A model dialog used to verify users truly intend to perform deletion or some kind of destructive action. <br/>
  * When deleting resources, you can choose between different levels of friction: <b>friction</b> or <b>confirmation</b>.
  * */
-const DeleteConfirmationDialog: FunctionComponent<DeleteConfirmationDialogProps> = ({
+const DeleteConfirmationDialog: FC<DeleteConfirmationDialogProps> = ({
     visible = false,
     onDeleteClicked,
     onCancelClicked,

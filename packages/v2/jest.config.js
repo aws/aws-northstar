@@ -31,5 +31,5 @@ module.exports = merge.recursive(tsPreset, cloudscapePreset, {
             statements: 90,
         },
     },
-    coveragePathIgnorePatterns: ['/node_modules/', '/components/index.ts', '.*/index.stories.tsx'],
+    coveragePathIgnorePatterns: ['/node_modules/', '/components/index.ts', '**.stories.tsx'],
 });

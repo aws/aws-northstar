@@ -14,8 +14,13 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { action } from '@storybook/addon-actions';
-import Box from '@cloudscape-design/components/box';
+import StatusIndicator from '@cloudscape-design/components/status-indicator';
+import Link from '@cloudscape-design/components/link';
+import Header from '@cloudscape-design/components/header';
+import Container from '@cloudscape-design/components/container';
+
 import FormRenderer, { componentTypes } from '../..';
+import KeyValuePairs from '../../../KeyValuePairs';
 
 export default {
     component: FormRenderer,
@@ -24,9 +29,15 @@ export default {
 };
 
 export const TEST_DATA = {
-    key1: 'value1',
-    key2: 'value2',
-    key3: 'value3',
+    distributionId: 'E1WG1ZNPRXT0D4',
+    domainName: 'example.com',
+    arn: 'arn:aws:cloudfront::111122223333:distribution/E1WG1ZNPRXT0D4',
+    available: true,
+    priceClass: 'Use only US, Canada, Europe, and Asia',
+    infoLink: '/',
+    updateProgress: 37,
+    logging: true,
+    sslClientSupport: undefined,
 };
 
 const defaultArgs = {
@@ -35,12 +46,74 @@ const defaultArgs = {
 };
 
 export const Default = (args = defaultArgs) => {
-    const ReviewTemplate = ({ data }: any) => {
-        return <Box>{JSON.stringify(data)}</Box>;
+    const ReviewTemplate = ({ data }: { data: typeof TEST_DATA }) => {
+        return (
+            <Container header={<Header variant="h2">Header</Header>}>
+                <KeyValuePairs
+                    items={[
+                        [
+                            {
+                                label: 'Distribution Id',
+                                value: data.distributionId,
+                            },
+                            {
+                                label: 'Domain name',
+                                value: data.domainName,
+                            },
+                            {
+                                label: 'ARN',
+                                value: data.arn,
+                            },
+                        ],
+                        [
+                            {
+                                label: 'Status',
+                                value: data.available ? (
+                                    <StatusIndicator type="success">Available</StatusIndicator>
+                                ) : undefined,
+                            },
+                            {
+                                label: 'Price class',
+                                value: data.priceClass,
+                            },
+                            {
+                                label: 'Link',
+                                value: (
+                                    <Link
+                                        href={data.infoLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        external={true}
+                                    >
+                                        Label with external link
+                                    </Link>
+                                ),
+                            },
+                        ],
+                        [
+                            {
+                                label: 'SSL Certificate',
+                                description: 'Update in progress',
+                                value: data.updateProgress,
+                                variant: 'key-value',
+                            },
+                            {
+                                label: 'Custom SSL client support',
+                                value: data.sslClientSupport,
+                            },
+                            {
+                                label: 'Logging',
+                                value: data.logging ? 'On' : 'Off',
+                            },
+                        ],
+                    ]}
+                />
+            </Container>
+        );
     };
 
     const schema = {
-        header: ' Data driven form displaying Review with input Template',
+        header: ' Data driven form displaying Review with Template',
         description: 'Define your form in JSON format',
         fields: [
             {

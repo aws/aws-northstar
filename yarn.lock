@@ -1820,6 +1820,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cloudscape-design/design-tokens@npm:^3.0.7":
+  version: 3.0.7
+  resolution: "@cloudscape-design/design-tokens@npm:3.0.7"
+  checksum: 69646b7a1ae02ee9d186b28e356cd8f6ab832c991ab14bbb472d40570bcd044dc72d703cad23c0dc397fbc80acd0fe34c1ce8114e179bf6d5c0a17eb4b188499
+  languageName: node
+  linkType: hard
+
 "@cloudscape-design/global-styles@npm:^1.0.1":
   version: 1.0.7
   resolution: "@cloudscape-design/global-styles@npm:1.0.7"
@@ -7949,6 +7956,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.20.2
     "@cloudscape-design/components": ^3.0.112
+    "@cloudscape-design/design-tokens": ^3.0.7
     "@cloudscape-design/global-styles": ^1.0.1
     "@cloudscape-design/jest-preset": ^2.0.6
     "@data-driven-forms/react-form-renderer": ^3.19.0

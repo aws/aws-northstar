@@ -13,36 +13,26 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, isValidElement } from 'react';
-import Header, { HeaderProps } from '@cloudscape-design/components/header';
-import Link from '@cloudscape-design/components/link';
+import { ReactNode, FC } from 'react';
+import Box from '@cloudscape-design/components/box';
 
-export interface FormHeaderProps {
-    header: React.ReactNode;
-    headerVariant?: HeaderProps['variant'];
-    description?: HeaderProps['description'];
-    info?: React.ReactNode;
+export interface KeyValuePairProps {
+    /** The property label */
+    label: string;
+    /** The property value. Empty value will be displayed as "-" (minus sign) */
+    value?: ReactNode;
 }
 
-const FormHeader: FC<FormHeaderProps> = ({ header, description, info, headerVariant }) => {
-    if (header && isValidElement(header) && header.type === Header) {
-        return header;
-    }
-
-    const headerInfo =
-        info && typeof info === 'string' ? (
-            <Link variant="info" href={info} rel="noopener noreferrer" target="_blank">
-                Info
-            </Link>
-        ) : (
-            info
-        );
-
+/**
+ * Key-value pairs are lists of properties (keys) followed by the corresponding value.
+ */
+const KeyValuePair: FC<KeyValuePairProps> = ({ label, value, ...props }) => {
     return (
-        <Header variant={headerVariant} description={description} info={headerInfo}>
-            {header}
-        </Header>
+        <div {...props}>
+            <Box variant="awsui-key-label">{label}</Box>
+            <Box>{!value ? '-' : value}</Box>
+        </div>
     );
 };
 
-export default FormHeader;
+export default KeyValuePair;

@@ -13,22 +13,17 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render, screen, cleanup } from '@testing-library/react';
-import { Default, TEST_DATA } from './index.stories';
+import { render, screen } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './index.stories';
 
-const handleCancel = jest.fn();
-const handleSubmit = jest.fn();
+const { Default } = composeStories(stories);
 
-describe('Review', () => {
-    afterEach(() => {
-        jest.resetAllMocks();
-        cleanup();
-    });
+describe('KeyValuePair', () => {
+    it('should render key value pair with string value', async () => {
+        render(<Default />);
 
-    it('should render review', async () => {
-        render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
-
-        expect(screen.getByText(TEST_DATA.domainName)).toBeVisible();
-        expect(screen.getByText(TEST_DATA.arn)).toBeVisible();
+        expect(screen.getByText('Domain name')).toBeVisible();
+        expect(screen.getByText('example.com')).toBeVisible();
     });
 });
