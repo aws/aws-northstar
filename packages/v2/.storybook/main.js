@@ -14,13 +14,10 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 module.exports = {
-    stories: [
-        '../src/**/*.stories.mdx', 
-        '../src/**/*.stories.@(js|jsx|ts|tsx)'
-    ],
+    stories: ['../docs/**/*.stories.mdx', '../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
     addons: [
-        '@storybook/addon-links', 
-        '@storybook/addon-essentials', 
+        '@storybook/addon-links',
+        '@storybook/addon-essentials',
         '@storybook/addon-interactions',
         '@storybook/addon-a11y',
     ],
@@ -28,7 +25,24 @@ module.exports = {
     core: {
         builder: 'webpack5',
     },
+    staticDirs: ['../public'],
     features: {
         interactionsDebugger: true,
     },
+    typescript: {
+        reactDocgen: 'react-docgen-typescript',
+        reactDocgenTypescriptOptions: {
+            compilerOptions: {
+                allowSyntheticDefaultImports: false,
+                esModuleInterop: false,
+            },
+        },
+    },
+    previewHead: (head) => (`
+        ${head}
+        <script>
+            document.title = 'NorthStar';
+        </script>
+        <link rel="icon" type="image/png" href="./favicon.ico">
+    `)
 };

@@ -13,4 +13,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export * from './components';
+import { render } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './index.stories';
+
+const { Default } = composeStories(stories);
+
+describe('FileUpload', () => {
+    it('should render file upload widget', async () => {
+        render(<Default />);
+    });
+});

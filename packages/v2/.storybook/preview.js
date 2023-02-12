@@ -34,9 +34,14 @@ export const parameters = {
             {
                 name: 'dark',
                 value: '#0f1b2a',
-            }
-        ]
-    }
+            },
+        ],
+    },
+    options: {
+        storySort: {
+            order: ['About NorthStar V2', 'Getting Start', 'Components', 'Migration', ['Default']]
+        }
+    } 
 };
 
 export const decorators = [
@@ -45,16 +50,16 @@ export const decorators = [
 
         useEffect(() => {
             const color = args.globals.backgrounds?.value;
-            const matchColorMode = color && args.parameters?.backgrounds?.values?.find(v => v.value === color)?.name;
+            const matchColorMode = color && args.parameters?.backgrounds?.values?.find((v) => v.value === color)?.name;
             matchColorMode && setColorMode(matchColorMode);
-
         }, [args.globals.backgrounds?.value]);
 
-        return (<StrictMode>
-            <NorthStarThemeProvider colorMode={colorMode}>
-                <Story />
-            </NorthStarThemeProvider>
-        </StrictMode>);
+        return (
+            <StrictMode>
+                <NorthStarThemeProvider colorMode={colorMode}>
+                    <Story />
+                </NorthStarThemeProvider>
+            </StrictMode>
+        );
     },
 ];
-

@@ -13,4 +13,37 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export * from './components';
+import { DataType } from './type';
+import { ColumnDefinition } from '..';
+
+const columnDefinition: ColumnDefinition<DataType>[] = [
+    {
+        id: 'id',
+        width: 100,
+        header: 'Id',
+        cell: (data) => data.id,
+        sortingField: 'id',
+    },
+    {
+        id: 'name',
+        width: 120,
+        header: 'Name',
+        cell: (data) => data.name,
+        sortingField: 'name',
+    },
+    {
+        id: 'totalAmount',
+        width: 200,
+        header: 'Total Amount',
+        cell: (data) => data.totalAmount,
+        sortingField: 'totalAmount',
+    },
+    {
+        id: 'countItems',
+        width: 200,
+        header: '# Items',
+        cell: (data) => data.items?.length,
+    },
+];
+
+export default columnDefinition;

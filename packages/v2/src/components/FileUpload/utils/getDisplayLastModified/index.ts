@@ -13,4 +13,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export * from './components';
+const getDisplayLastModified = (lastModified: number | Date) => {
+    const date = new Date(lastModified);
+    return `Last modified: ${date.toLocaleString()}`;
+};
+
+export default getDisplayLastModified;

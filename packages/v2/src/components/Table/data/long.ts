@@ -13,4 +13,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export * from './components';
+import { DataType } from './type';
+
+const data: DataType[] = [...Array(555).keys()].map((num) => ({
+    id: `id${(num + 1).toString().padStart(6, '0')}`,
+    name: `Order ${num + 1}`,
+    totalAmount: Math.floor(Math.random() * 100),
+}));
+
+export default data;

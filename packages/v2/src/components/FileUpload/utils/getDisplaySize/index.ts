@@ -13,4 +13,16 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export * from './components';
+const getDisplaySize = (size?: number | null) => {
+    if (!size) return undefined;
+
+    const k = 1000;
+    const dm = 2;
+    const sizes = ['bytes', 'KB', 'MB', 'GB'];
+
+    const i = Math.floor(Math.log(size) / Math.log(k));
+
+    return `Size: ${parseFloat((size / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+};
+
+export default getDisplaySize;

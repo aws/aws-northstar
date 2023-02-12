@@ -30,6 +30,9 @@ export interface KeyValuePairsProps {
     items: (KeyValuePairProps | KeyValuePairWithProgressBarProps)[][];
 }
 
+/**
+ * Key-value pairs are lists of properties (keys) followed by the corresponding value.
+ */
 const KeyValuePairs: FC<KeyValuePairsProps> = ({ items, ...props }) => {
     return (
         <div {...props}>

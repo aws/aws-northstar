@@ -13,6 +13,19 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
+export { default as DeleteConfirmationDialog } from './DeleteConfirmationDialog';
+export * from './DeleteConfirmationDialog';
+export { default as FileUpload } from './FileUpload';
+export * from './FileUpload';
 export { default as FormRenderer } from './FormRenderer';
 export * from './FormRenderer';
+export { default as KeyValuePair } from './KeyValuePair';
+export * from './KeyValuePair';
+export { default as KeyValuePairs } from './KeyValuePairs';
+export * from './KeyValuePairs';
+export { default as MarkdownViewer } from './MarkdownViewer';
+export * from './MarkdownViewer';
 export { default as NorthStarThemeProvider } from './NorthStarThemeProvider';
+export * from './NorthStarThemeProvider';
+export { default as Table } from './Table';
+export * from './Table';

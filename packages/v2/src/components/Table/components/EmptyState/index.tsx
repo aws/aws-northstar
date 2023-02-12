@@ -13,4 +13,25 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export * from './components';
+import { FC } from 'react';
+import Box from '@cloudscape-design/components/box';
+
+const EmptyState: FC<{
+    title: string;
+    subtitle: string;
+    action?: React.ReactNode;
+}> = ({ title, subtitle, action }) => {
+    return (
+        <Box textAlign="center" color="inherit">
+            <Box variant="strong" textAlign="center" color="inherit">
+                {title}
+            </Box>
+            <Box variant="p" padding={{ bottom: 's' }} color="inherit">
+                {subtitle}
+            </Box>
+            {action}
+        </Box>
+    );
+};
+
+export default EmptyState;

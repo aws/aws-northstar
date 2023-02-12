@@ -13,4 +13,19 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export * from './components';
+import { render, cleanup } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './index.stories';
+
+const { Default } = composeStories(stories);
+
+describe('Tablew', () => {
+    afterEach(() => {
+        jest.resetAllMocks();
+        cleanup();
+    });
+
+    it('should render table', async () => {
+        render(<Default />);
+    });
+});

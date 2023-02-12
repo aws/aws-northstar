@@ -24,7 +24,7 @@ export interface KeyValuePairProps {
 }
 
 /**
- * Key-value pairs are lists of properties (keys) followed by the corresponding value.
+ * A key/value pair represents a key followed by the corresponding value.
  */
 const KeyValuePair: FC<KeyValuePairProps> = ({ label, value, ...props }) => {
     return (

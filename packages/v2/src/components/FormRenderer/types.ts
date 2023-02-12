@@ -29,6 +29,10 @@ export const componentTypes = {
     REVIEW: 'REVIEW',
     DATA_RANGE_PICKER: 'DATA_RANGE_PICKER',
     CUSTOM: 'CUSTOM',
+    CODE_EDITOR: 'CODE_EDITOR',
+    ALERT: 'ALERT',
+    MARKDOWN_EDITOR: 'MARKDOWN_EDITOR',
+    DATE_INPUT: 'DATE_INPUT',
 };
 
 export interface FormFieldProps
