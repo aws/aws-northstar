@@ -19,11 +19,8 @@ import { Template, DEFAULT_ARGS } from '../../index.stories';
 
 export default {
     ...DEFAULT_ARGS,
-    title: 'Components/FormRenderer/CodeEditor',
-    excludeStories: ['TEXT_CONTENT'],
+    title: 'Components/FormRenderer/DateInput',
 } as ComponentMeta<typeof FormRenderer>;
-
-export const TEXT_CONTENT = 'const pi = 3.14;';
 
 export const Default = Template.bind({});
 Default.args = {
@@ -31,22 +28,21 @@ Default.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/code-editor/" rel="noreferrer">
-                    Code Editor
+                <a target="_blank" href="https://cloudscape.design/components/date-input/" rel="noreferrer">
+                    Date Input
                 </a>
             </>
         ),
         description: 'Define your form in JSON format',
         fields: [
             {
-                component: componentTypes.CODE_EDITOR,
-                name: 'codeEditor',
-                label: 'Code Editor',
+                component: componentTypes.DATE_INPUT,
+                name: 'date',
+                label: 'Date',
                 description: 'This is description',
                 helperText: 'This is helper text',
-                placeholder: 'This is placeholder text',
+                placeholder: 'YYYY/MM/DD',
                 isRequired: true,
-                language: 'javascript',
                 validate: [
                     {
                         type: validatorTypes.REQUIRED,
@@ -61,6 +57,30 @@ export const WithInitialValue = Template.bind({});
 WithInitialValue.args = {
     ...Default.args,
     initialValues: {
-        codeEditor: TEXT_CONTENT,
+        date: '2022-02-01',
+    },
+};
+
+export const ReadOnly = Template.bind({});
+ReadOnly.args = {
+    ...WithInitialValue.args,
+    schema: {
+        ...WithInitialValue.args.schema,
+        fields: WithInitialValue.args.schema!.fields.map((field) => ({
+            ...field,
+            isReadOnly: true,
+        })),
+    },
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+    ...WithInitialValue.args,
+    schema: {
+        ...WithInitialValue.args.schema,
+        fields: WithInitialValue.args.schema!.fields.map((field) => ({
+            ...field,
+            isDisabled: true,
+        })),
     },
 };

@@ -14,16 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { ComponentMeta } from '@storybook/react';
-import FormRenderer, { componentTypes, validatorTypes } from '../..';
+import FormRenderer, { componentTypes } from '../..';
 import { Template, DEFAULT_ARGS } from '../../index.stories';
+import { TEXT_CONTENT } from '../Textarea/index.stories';
 
 export default {
     ...DEFAULT_ARGS,
-    title: 'Components/FormRenderer/CodeEditor',
-    excludeStories: ['TEXT_CONTENT'],
+    title: 'Components/FormRenderer/Alert',
 } as ComponentMeta<typeof FormRenderer>;
-
-export const TEXT_CONTENT = 'const pi = 3.14;';
 
 export const Default = Template.bind({});
 Default.args = {
@@ -31,36 +29,19 @@ Default.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/code-editor/" rel="noreferrer">
-                    Code Editor
+                <a target="_blank" href="https://cloudscape.design/components/alert/" rel="noreferrer">
+                    Alert
                 </a>
             </>
         ),
         description: 'Define your form in JSON format',
         fields: [
             {
-                component: componentTypes.CODE_EDITOR,
-                name: 'codeEditor',
-                label: 'Code Editor',
-                description: 'This is description',
-                helperText: 'This is helper text',
-                placeholder: 'This is placeholder text',
-                isRequired: true,
-                language: 'javascript',
-                validate: [
-                    {
-                        type: validatorTypes.REQUIRED,
-                    },
-                ],
+                component: componentTypes.ALERT,
+                name: 'alert',
+                content: TEXT_CONTENT,
+                type: 'warning',
             },
         ],
-    },
-};
-
-export const WithInitialValue = Template.bind({});
-WithInitialValue.args = {
-    ...Default.args,
-    initialValues: {
-        codeEditor: TEXT_CONTENT,
     },
 };

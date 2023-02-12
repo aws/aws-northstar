@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, ElementType } from 'react';
+import { FC } from 'react';
 import {
     FormRenderer as ReactFormRenderer,
     FormRendererProps as ReactFormRendererProps,
@@ -41,7 +41,7 @@ export interface FormRendererProps {
     subscription?: ReactFormSubscription;
     /** Custom component wrappers*/
     customComponentWrapper?: {
-        [componentType: string]: ElementType;
+        [key: string]: React.ComponentType | React.FunctionComponent | React.ElementType;
     };
     /** Custom validator mapper */
     validatorMapper?: ValidatorMapper;

@@ -13,8 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render, screen, cleanup, act } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, cleanup } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './index.stories';
 
@@ -23,28 +22,13 @@ const { Default } = composeStories(stories);
 const handleCancel = jest.fn();
 const handleSubmit = jest.fn();
 
-describe('CodeEditor', () => {
+describe('CustomLayout', () => {
     afterEach(() => {
         jest.resetAllMocks();
         cleanup();
     });
 
-    it('should render code editor', async () => {
+    it('should render custom layout', async () => {
         render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
-
-        expect(screen.getByText('This is description')).toBeVisible();
-        expect(screen.getByText('This is helper text')).toBeVisible();
-        expect(screen.getByLabelText('Textarea')).toHaveAttribute('aria-required');
-
-        await act(async () => {
-            await userEvent.type(screen.getByLabelText('Code Editor'), stories.TEXT_CONTENT);
-            await userEvent.click(screen.getByText('Submit'));
-        });
-
-        expect(handleSubmit).toHaveBeenCalledWith(
-            { codeEditor: stories.TEXT_CONTENT },
-            expect.any(Object),
-            expect.any(Function)
-        );
     });
 });

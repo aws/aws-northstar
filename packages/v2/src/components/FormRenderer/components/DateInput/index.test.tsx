@@ -15,36 +15,60 @@
  ******************************************************************************************************************** */
 import { render, screen, cleanup, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import wrapper from '@cloudscape-design/components/test-utils/dom';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './index.stories';
 
-const { Default } = composeStories(stories);
+const { Default, WithInitialValue } = composeStories(stories);
 
 const handleCancel = jest.fn();
 const handleSubmit = jest.fn();
 
-describe('CodeEditor', () => {
+describe('DateInput', () => {
     afterEach(() => {
         jest.resetAllMocks();
         cleanup();
     });
 
-    it('should render code editor', async () => {
+    it('should render date input', async () => {
         render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
 
         expect(screen.getByText('This is description')).toBeVisible();
         expect(screen.getByText('This is helper text')).toBeVisible();
-        expect(screen.getByLabelText('Textarea')).toHaveAttribute('aria-required');
+
+        expect(screen.getByPlaceholderText('YYYY/MM/DD')).toBeVisible();
+
+        const element = await screen.findByTestId('form-renderer');
+        const dateInput = wrapper(element).findDateInput();
 
         await act(async () => {
-            await userEvent.type(screen.getByLabelText('Code Editor'), stories.TEXT_CONTENT);
+            dateInput?.setInputValue('2022-02-01');
             await userEvent.click(screen.getByText('Submit'));
         });
 
-        expect(handleSubmit).toHaveBeenCalledWith(
-            { codeEditor: stories.TEXT_CONTENT },
-            expect.any(Object),
-            expect.any(Function)
-        );
+        expect(handleSubmit).toHaveBeenCalledWith({ date: '2022-02-01' }, expect.any(Object), expect.any(Function));
+    });
+
+    it('should trigger validation', async () => {
+        render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
+
+        await act(async () => {
+            await userEvent.click(screen.getByText('Submit'));
+        });
+
+        expect(screen.getByText('Required')).toBeVisible();
+        expect(handleSubmit).not.toBeCalled();
+    });
+
+    it('should be populated with initial value', async () => {
+        render(<WithInitialValue onSubmit={handleSubmit} onCancel={handleCancel} />);
+
+        expect(screen.getByPlaceholderText('YYYY/MM/DD')).toHaveValue('2022/02/01');
+
+        await act(async () => {
+            await userEvent.click(screen.getByText('Submit'));
+        });
+
+        expect(handleSubmit).toHaveBeenCalledWith({ date: '2022-02-01' }, expect.any(Object), expect.any(Function));
     });
 });

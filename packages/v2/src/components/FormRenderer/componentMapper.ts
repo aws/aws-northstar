@@ -13,41 +13,54 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
+import { ComponentMapper } from '@data-driven-forms/react-form-renderer';
 import { componentTypes } from './types';
-import TextField from './components/TextField';
-import Textarea from './components/Textarea';
+import Alert from './components/Alert';
 import Checkbox from './components/Checkbox';
-import DatePicker from './components/DatePicker';
-import Radio from './components/Radio';
-import Switch from './components/Switch';
-import Select from './components/Select';
+import CodeEditor from './components/CodeEditor';
+import ColumnLayout from './components/ColumnLayout';
 import Custom from './components/Custom';
-import Subform from './components/Subform';
-import ExpandableSection from './components/ExpandableSection';
+import CustomLayout from './components/CustomLayout';
+import DateInput from './components/DateInput';
+import DatePicker from './components/DatePicker';
 import DateRangePicker from './components/DateRangePicker';
-import TimeInput from './components/TimeInput';
-import Review from './components/Review';
-import PlainText from './components/PlainText';
-import Wizard from './components/Wizard';
+import ExpandableSection from './components/ExpandableSection';
 import FieldArray from './components/FieldArray';
+import FieldGroup from './components/FieldGroup';
+import PlainText from './components/PlainText';
+import Radio from './components/Radio';
+import Review from './components/Review';
+import Select from './components/Select';
+import Subform from './components/Subform';
+import Switch from './components/Switch';
+import Textarea from './components/Textarea';
+import TextField from './components/TextField';
+import TimeInput from './components/TimeInput';
+import Wizard from './components/Wizard';
 
-const componentMapper = {
+const componentMapper: ComponentMapper = {
+    [componentTypes.ALERT]: Alert,
     [componentTypes.CHECKBOX]: Checkbox,
+    [componentTypes.CODE_EDITOR]: CodeEditor,
+    [componentTypes.COLUMN_LAYOUT]: ColumnLayout,
     [componentTypes.CUSTOM]: Custom,
+    [componentTypes.CUSTOM_LAYOUT]: CustomLayout,
+    [componentTypes.DATA_RANGE_PICKER]: DateRangePicker,
+    [componentTypes.DATE_INPUT]: DateInput,
     [componentTypes.DATE_PICKER]: DatePicker,
+    [componentTypes.EXPANDABLE_SECTION]: ExpandableSection,
+    [componentTypes.FIELD_ARRAY]: FieldArray,
+    [componentTypes.FIELD_GROUP]: FieldGroup,
+    [componentTypes.PLAIN_TEXT]: PlainText,
     [componentTypes.RADIO]: Radio,
+    [componentTypes.REVIEW]: Review,
     [componentTypes.SELECT]: Select,
     [componentTypes.SUB_FORM]: Subform,
     [componentTypes.SWITCH]: Switch,
     [componentTypes.TEXT_FIELD]: TextField,
     [componentTypes.TEXTAREA]: Textarea,
-    [componentTypes.EXPANDABLE_SECTION]: ExpandableSection,
-    [componentTypes.DATA_RANGE_PICKER]: DateRangePicker,
     [componentTypes.TIME_INPUT]: TimeInput,
-    [componentTypes.REVIEW]: Review,
-    [componentTypes.PLAIN_TEXT]: PlainText,
     [componentTypes.WIZARD]: Wizard,
-    [componentTypes.FIELD_ARRAY]: FieldArray,
 };
 
 export default componentMapper;

@@ -77,19 +77,20 @@ const CodeEditor: FC<UseFieldApiConfig> = (props) => {
     const loadAce = useCallback(() => {
         return import('ace-builds')
             .then((ace) => {
-                return import('ace-builds/webpack-resolver')
-                    .then(() => {
-                        ace.config.set('useStrictCSP', true);
-                        ace.config.set('loadWorkerFromBlob', false);
-                        setAce(ace);
-                        setLoading(false);
-                    })
-                    .catch(() => setLoading(false));
+                ace.config.set('useStrictCSP', true);
+                ace.config.set('loadWorkerFromBlob', false);
+                setAce(ace);
+                setLoading(false);
             })
-            .catch(() => setLoading(false));
+            .catch((e) => {
+                console.log('Error in importing ace-builds', e);
+                setLoading(false);
+            });
     }, []);
 
-    useEffect(() => {}, [loadAce]);
+    useEffect(() => {
+        loadAce();
+    }, [loadAce]);
 
     const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
@@ -116,6 +117,7 @@ const CodeEditor: FC<UseFieldApiConfig> = (props) => {
                 onPreferencesChange={(e) => setPreferences(e.detail)}
                 controlId={controlId}
                 onChange={({ detail }) => input.onChange(detail.value)}
+                onRecoveryClick={loadAce}
             />
         </FormField>
     );
