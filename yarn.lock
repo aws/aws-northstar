@@ -8031,6 +8031,7 @@ __metadata:
     react-syntax-highlighter: ^15.5.0
     remark-frontmatter: ^4.0.1
     remark-gfm: ^3.0.1
+    storybook-addon-react-router-v6: ^0.2.1
     ts-jest: ^29.0.3
     typescript: ^4.9.3
     use-debounce: ^9.0.3
@@ -21725,7 +21726,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-inspector@npm:^5.1.0":
+"react-inspector@npm:^5.1.0, react-inspector@npm:^5.1.1":
   version: 5.1.1
   resolution: "react-inspector@npm:5.1.1"
   dependencies:
@@ -24258,6 +24259,30 @@ __metadata:
   version: 2.14.2
   resolution: "store2@npm:2.14.2"
   checksum: 6f270fc5bab99b63f45fcc7bd8b99c2714b4adf880f557ed7ffb5ed3987131251165bccde425a00928aaf044870aee79ddeef548576d093c68703ed2edec45d7
+  languageName: node
+  linkType: hard
+
+"storybook-addon-react-router-v6@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "storybook-addon-react-router-v6@npm:0.2.1"
+  dependencies:
+    react-inspector: ^5.1.1
+  peerDependencies:
+    "@storybook/addons": ^6.4.0
+    "@storybook/api": ^6.4.0
+    "@storybook/components": ^6.4.0
+    "@storybook/core-events": ^6.4.0
+    "@storybook/theming": ^6.4.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-router: ^6.3.0
+    react-router-dom: ^6.3.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 6e1e858fa66e79da36dffc77dfa9b48298a31ca2797389926e7b7a6dafc5919673eda7a19eb882a71085a2eb2dce69811616b6a06cfbe0f9c112ea268a5d9ebb
   languageName: node
   linkType: hard
 

@@ -13,21 +13,66 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, PropsWithChildren, useEffect } from 'react';
-import { applyMode, Mode } from '@cloudscape-design/global-styles';
+import { FC, PropsWithChildren, useEffect, useState, createContext, useContext } from 'react';
+import { applyMode, Mode, applyDensity, Density } from '@cloudscape-design/global-styles';
 
 import '@cloudscape-design/global-styles/index.css';
 
 export interface NorthStarThemeProviderProps {
-    colorMode?: Mode.Light | Mode.Dark;
+    theme?: Mode.Light | Mode.Dark;
+    density?: Density.Comfortable | Density.Compact;
 }
 
-const NorthStarThemeProvider: FC<PropsWithChildren<NorthStarThemeProviderProps>> = ({ children, colorMode }) => {
-    useEffect(() => {
-        applyMode(colorMode || Mode.Light);
-    }, [colorMode]);
+export interface NorthStarThemeContextApi {
+    theme: Mode.Light | Mode.Dark;
+    density: Density.Comfortable | Density.Compact;
+    setTheme: React.Dispatch<React.SetStateAction<Mode>>;
+    setDensity: React.Dispatch<React.SetStateAction<Density>>;
+}
 
-    return <>{children}</>;
+const initialState: NorthStarThemeContextApi = {
+    theme: Mode.Light,
+    density: Density.Comfortable,
+    setTheme: () => {},
+    setDensity: () => {},
 };
+
+const NorthStarThemeContext = createContext<NorthStarThemeContextApi>(initialState);
+
+const NorthStarThemeProvider: FC<PropsWithChildren<NorthStarThemeProviderProps>> = ({ children, ...props }) => {
+    const [theme, setTheme] = useState(props.theme || Mode.Light);
+    const [density, setDensity] = useState(props.density || Density.Comfortable);
+
+    useEffect(() => {
+        setTheme(props.theme || Mode.Light);
+    }, [props.theme]);
+
+    useEffect(() => {
+        setDensity(props.density || Density.Comfortable);
+    }, [props.density]);
+
+    useEffect(() => {
+        applyMode(theme);
+    }, [theme]);
+
+    useEffect(() => {
+        applyDensity(density);
+    }, [density]);
+
+    return (
+        <NorthStarThemeContext.Provider
+            value={{
+                theme,
+                density,
+                setTheme,
+                setDensity,
+            }}
+        >
+            {children}
+        </NorthStarThemeContext.Provider>
+    );
+};
+
+export const useNorthStarThemeContext = () => useContext(NorthStarThemeContext);
 
 export default NorthStarThemeProvider;
