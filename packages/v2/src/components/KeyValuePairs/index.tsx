@@ -37,13 +37,13 @@ const KeyValuePairs: FC<KeyValuePairsProps> = ({ items, ...props }) => {
     return (
         <div {...props}>
             <ColumnLayout columns={items.length} variant="text-grid">
-                {items.map((keyValuePairArray) => (
-                    <SpaceBetween size="l">
-                        {keyValuePairArray.map((pair) =>
+                {items.map((keyValuePairArray, indexColumn) => (
+                    <SpaceBetween key={`column_${indexColumn}`} size="l">
+                        {keyValuePairArray.map((pair, index) =>
                             'variant' in pair && pair.variant === 'key-value' ? (
-                                <ProgressBar {...(pair as KeyValuePairWithProgressBarProps)} />
+                                <ProgressBar key={`column_${indexColumn}_item_${index}`} {...(pair as KeyValuePairWithProgressBarProps)} />
                             ) : (
-                                <KeyValuePair {...(pair as KeyValuePairProps)} />
+                                <KeyValuePair key={`column_${indexColumn}_item_${index}`} {...(pair as KeyValuePairProps)} />
                             )
                         )}
                     </SpaceBetween>

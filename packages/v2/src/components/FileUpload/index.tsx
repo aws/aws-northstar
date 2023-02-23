@@ -132,9 +132,22 @@ const FileUpload: FC<FileUploadProps> = ({
 
     const handleFileSelectionChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
         (event) => {
+            const newSelectedFiles: File[] = [];
+
+            if (event.target.files) {
+                const targetFiles = event.target.files;
+                const len = targetFiles.length;
+                for (let i = 0; i < len; i++) {
+                    const file = targetFiles.item(i);
+                    if (file) {
+                        newSelectedFiles.push(file);
+                    }
+                }
+            }
+
             const newFiles = multi
-                ? [...selectedFiles, ...(event.target.files || [])]
-                : [...(event.target.files || [])];
+                ? [...selectedFiles, ...newSelectedFiles]
+                : [...newSelectedFiles];
 
             setSelectedFiles(newFiles);
             onChange?.(newFiles);

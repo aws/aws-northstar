@@ -13,8 +13,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render, screen, cleanup, act } from '@testing-library/react';
+import { render, screen, cleanup, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import wrapper from '@cloudscape-design/components/test-utils/dom';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './index.stories';
 
@@ -30,14 +31,17 @@ describe('CodeEditor', () => {
     });
 
     it('should render code editor', async () => {
-        render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
+        const { container } = render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
 
         expect(screen.getByText('This is description')).toBeVisible();
         expect(screen.getByText('This is helper text')).toBeVisible();
-        expect(screen.getByLabelText('Textarea')).toHaveAttribute('aria-required');
+
+        const codeEditor = wrapper(container).findCodeEditor();
+
+        await waitFor(() => expect(codeEditor?.findEditor()).not.toBeNull());
 
         await act(async () => {
-            await userEvent.type(screen.getByLabelText('Code Editor'), stories.TEXT_CONTENT);
+            codeEditor?.setValue(stories.TEXT_CONTENT);
             await userEvent.click(screen.getByText('Submit'));
         });
 

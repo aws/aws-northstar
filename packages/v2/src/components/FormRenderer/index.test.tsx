@@ -19,7 +19,6 @@ import { composeStories, composeStory } from '@storybook/testing-react';
 import * as stories from './index.stories';
 import SubmittingMeta, { Submitting as SubmittingStory } from './stories/Submitting.stories';
 import ResetMeta, { Reset as ResetStory } from './stories/Reset.stories';
-import { TEST_DATA } from './tests/playFormRenderDefault';
 import FormRenderer, { ValidatorMapper, componentTypes } from '.';
 
 const { Default, WithInitialValue } = composeStories(stories);
@@ -65,21 +64,21 @@ describe('FormRenderer', () => {
     it('should be populated with initial value', async () => {
         render(<WithInitialValue onSubmit={handleSubmit} onCancel={handleCancel} />);
 
-        expect(screen.getByLabelText('Email')).toHaveValue(TEST_DATA.email);
-        expect(screen.getByLabelText('Password')).toHaveValue(TEST_DATA.password);
-        expect(screen.getByLabelText('Number')).toHaveValue(TEST_DATA.number);
+        expect(screen.getByLabelText('Email')).toHaveValue(stories.TEST_DATA.email);
+        expect(screen.getByLabelText('Password')).toHaveValue(stories.TEST_DATA.password);
+        expect(screen.getByLabelText('Number')).toHaveValue(stories.TEST_DATA.number);
         expect(screen.queryAllByLabelText('Option 1')![0]).toBeChecked();
         expect(screen.queryAllByLabelText('Option 2')![0]).toBeChecked();
         expect(screen.queryAllByLabelText('Option 3')![1]).toBeChecked();
 
         expect(screen.getAllByText('Option 2')[2].parentElement?.id).toBe('select');
 
-        expect(screen.getByLabelText('Autosuggest')).toHaveValue(TEST_DATA.autosugguest.label);
+        expect(screen.getByLabelText('Autosuggest')).toHaveValue(stories.TEST_DATA.autosugguest.label);
 
         expect(screen.getByText('EC2 - Amazon Elastic Compute Cloud')).toBeVisible();
         expect(screen.getByText('Lambda - Amazon Lambda')).toBeVisible();
 
-        expect(screen.getByLabelText('Textarea')).toHaveValue(TEST_DATA.textarea);
+        expect(screen.getByLabelText('Textarea')).toHaveValue(stories.TEST_DATA.textarea);
 
         expect(screen.getByLabelText('Switch')).toBeChecked();
         expect(screen.getByLabelText('Switch 1')).not.toBeChecked();
@@ -93,7 +92,7 @@ describe('FormRenderer', () => {
             await userEvent.click(screen.getByText('Submit'));
         });
 
-        expect(handleSubmit).toHaveBeenCalledWith(TEST_DATA, expect.any(Object), expect.any(Function));
+        expect(handleSubmit).toHaveBeenCalledWith(stories.TEST_DATA, expect.any(Object), expect.any(Function));
     });
 
     it('should render form in submitting state', async () => {

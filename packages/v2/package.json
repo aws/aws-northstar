@@ -4,7 +4,6 @@
   "description": "NorthStar Design System v2",
   "main": "index.js",
   "types": "index.d.ts",
-  "module": "esm/index.js",
   "homepage": "https://northstar.aws-prototyping.cloud/",
   "keywords": [
     "ui",
@@ -16,10 +15,10 @@
     "aws-northstar"
   ],
   "scripts": {
-    "build:build-readme": "cp ./README.md ./build/README.md",
-    "build:build-package-json": "cat package.json | jq 'del(.devDependencies, .resolutions, .scripts, .\"lint-staged\")' > ./build/package.json",
-    "build:esm": "tsc --build tsconfig.build.esm.json",
-    "build": "tsc --build tsconfig.build.json && yarn build:esm && yarn build:build-package-json && yarn build:build-readme",
+    "build:readme": "cp ./README.md ./build/README.md",
+    "build:package-json": "(cat package.json | jq 'del(.devDependencies, .resolutions, .scripts, .\"lint-staged\")') > ./build/package.json",
+    "build:package": "tsc --build tsconfig.build.json",
+    "build": "yarn build:package && yarn build:package-json && yarn build:readme",
     "check:all": "yarn test:ci && yarn build && yarn storybook:build && yarn styleguide:build",
     "license:check": "yarn license-checker --summary --production --excludePrivatePackages --onlyAllow 'MIT;Apache-2.0;Unlicense;BSD;BSD*;BSD-2-Clause;BSD-3-Clause;ISC;Zlib;WTFPL;'",
     "semantic-release": "semantic-release --dry-run",
@@ -84,6 +83,7 @@
     "@cloudscape-design/global-styles": "^1.0.1",
     "@data-driven-forms/react-form-renderer": "^3.19.0",
     "@types/uuid": "^9.0.0",
+    "identity-obj-proxy": "^3.0.0",
     "use-debounce": "^9.0.3",
     "uuid": "^9.0.0"
   },

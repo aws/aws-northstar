@@ -31,18 +31,16 @@ describe('DateInput', () => {
     });
 
     it('should render date input', async () => {
-        render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
+        const { container } = render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
 
         expect(screen.getByText('This is description')).toBeVisible();
         expect(screen.getByText('This is helper text')).toBeVisible();
 
         expect(screen.getByPlaceholderText('YYYY/MM/DD')).toBeVisible();
 
-        const element = await screen.findByTestId('form-renderer');
-        const dateInput = wrapper(element).findDateInput();
-
+        const dateInput = wrapper(container).findDateInput();
         await act(async () => {
-            dateInput?.setInputValue('2022-02-01');
+            dateInput?.setInputValue('2022/02/01');
             await userEvent.click(screen.getByText('Submit'));
         });
 

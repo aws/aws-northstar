@@ -19,13 +19,16 @@ const cloudscapePreset = require('@cloudscape-design/jest-preset');
 
 module.exports = merge.recursive(tsPreset, cloudscapePreset, {
     testEnvironment: 'jsdom',
+    moduleNameMapper: {
+        '\\.(css|less)$': 'identity-obj-proxy',
+    },
     roots: ['./src'],
     globalSetup: './jest/jest.globalsetup.js',
     setupFilesAfterEnv: ['./jest/jest.setup.ts'],
     maxWorkers: '50%',
     coverageThreshold: {
         global: {
-            branches: 85,
+            branches: 90,
             functions: 90,
             lines: 90,
             statements: 90,

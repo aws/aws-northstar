@@ -45,7 +45,6 @@ Default.args = {
                 description: 'This is description',
                 helperText: 'This is helper text',
                 placeholder: 'This is placeholder text',
-                isRequired: true,
                 language: 'javascript',
                 validate: [
                     {

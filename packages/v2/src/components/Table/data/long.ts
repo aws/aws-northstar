@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import { DataType } from './type';
 
-const data: DataType[] = [...Array(555).keys()].map((num) => ({
+const data: DataType[] = Array.from(Array(555).keys()).map((num) => ({
     id: `id${(num + 1).toString().padStart(6, '0')}`,
     name: `Order ${num + 1}`,
     totalAmount: Math.floor(Math.random() * 100),
