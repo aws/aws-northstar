@@ -1,5 +1,5 @@
 {
-  "name": "aws-northstar-v2",
+  "name": "@aws-northstar/ui",
   "version": "0.0.1-development",
   "description": "NorthStar Design System v2",
   "main": "index.js",
@@ -22,7 +22,7 @@
     "check:all": "yarn test:ci && yarn build && yarn storybook:build && yarn styleguide:build",
     "license:check": "yarn license-checker --summary --production --excludePrivatePackages --onlyAllow 'MIT;Apache-2.0;Unlicense;BSD;BSD*;BSD-2-Clause;BSD-3-Clause;ISC;Zlib;WTFPL;'",
     "semantic-release": "semantic-release --dry-run",
-    "storybook:build": "build-storybook -s ./public -o storybook.out",
+    "storybook:build": "build-storybook -o storybook.out",
     "storybook": "start-storybook -p 6006",
     "test:ci": "yarn test --coverage --silent",
     "test": "jest",

@@ -30,7 +30,6 @@ export const DEFAULT_ARGS = {
     },
 };
 
-
 export const TEST_DATA = {
     email: 'test@test.com',
     password: 'password',
@@ -111,7 +110,7 @@ const playFormRenderDefault: PlayFunction<ReactFramework, FormRendererProps> = a
 
     await userEvent.click(canvas.getByLabelText('I understand the terms and condition'));
     await userEvent.click(canvas.getByText('Submit'));
-    
+
     expect(args.onSubmit).toHaveBeenCalledWith(TEST_DATA, expect.anything(), expect.anything());
 };
 

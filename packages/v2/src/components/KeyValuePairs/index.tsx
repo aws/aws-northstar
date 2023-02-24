@@ -41,9 +41,15 @@ const KeyValuePairs: FC<KeyValuePairsProps> = ({ items, ...props }) => {
                     <SpaceBetween key={`column_${indexColumn}`} size="l">
                         {keyValuePairArray.map((pair, index) =>
                             'variant' in pair && pair.variant === 'key-value' ? (
-                                <ProgressBar key={`column_${indexColumn}_item_${index}`} {...(pair as KeyValuePairWithProgressBarProps)} />
+                                <ProgressBar
+                                    key={`column_${indexColumn}_item_${index}`}
+                                    {...(pair as KeyValuePairWithProgressBarProps)}
+                                />
                             ) : (
-                                <KeyValuePair key={`column_${indexColumn}_item_${index}`} {...(pair as KeyValuePairProps)} />
+                                <KeyValuePair
+                                    key={`column_${indexColumn}_item_${index}`}
+                                    {...(pair as KeyValuePairProps)}
+                                />
                             )
                         )}
                     </SpaceBetween>

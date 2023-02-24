@@ -145,9 +145,7 @@ const FileUpload: FC<FileUploadProps> = ({
                 }
             }
 
-            const newFiles = multi
-                ? [...selectedFiles, ...newSelectedFiles]
-                : [...newSelectedFiles];
+            const newFiles = multi ? [...selectedFiles, ...newSelectedFiles] : [...newSelectedFiles];
 
             setSelectedFiles(newFiles);
             onChange?.(newFiles);
