@@ -35,9 +35,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-northstar/ui@workspace:packages/v2":
+"@aws-northstar/ui@workspace:packages/ui":
   version: 0.0.0-use.local
-  resolution: "@aws-northstar/ui@workspace:packages/v2"
+  resolution: "@aws-northstar/ui@workspace:packages/ui"
   dependencies:
     "@babel/core": ^7.20.2
     "@cloudscape-design/collection-hooks": ^1.0.19
