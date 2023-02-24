@@ -27,9 +27,11 @@ const FileTokenLabel: FunctionComponent<FileMetadata> = ({ name, size, lastModif
             <StatusIndicator type="success" />
             <TextContent>
                 <Spacebetween direction="vertical" size="xxxs">
-                    <b>{name}</b>
-                    {getDisplaySize(size)}
-                    {lastModified && getDisplayLastModified(lastModified)}
+                    <div key="name">
+                        <b>{name}</b>
+                    </div>
+                    <div key="size">{getDisplaySize(size)}</div>
+                    <div key="lastModified">{lastModified && getDisplayLastModified(lastModified)}</div>
                 </Spacebetween>
             </TextContent>
         </Spacebetween>

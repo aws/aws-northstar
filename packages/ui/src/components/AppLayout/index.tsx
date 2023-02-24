@@ -17,6 +17,7 @@ import { FC, useState, useCallback, createContext, PropsWithChildren, ReactEleme
 import { useNavigate } from 'react-router-dom';
 import BreadcrumbGroup, { BreadcrumbGroupProps } from '@cloudscape-design/components/breadcrumb-group';
 import SideNavigation, { SideNavigationProps } from '@cloudscape-design/components/side-navigation';
+import Box from '@cloudscape-design/components/box';
 import AppLayoutComponent, {
     AppLayoutProps as AppLayoutComponentProps,
 } from '@cloudscape-design/components/app-layout';
@@ -138,7 +139,24 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
                             setAppLayoutProps: setAppLayoutPropsSafe,
                         }}
                     >
-                        {children}
+                        {!props.contentType || props.contentType === 'default' ? (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        flex: '1 0 auto',
+                                        overflowY: 'scroll',
+                                    }}
+                                >
+                                    <Box margin="l">{children}</Box>
+                                </div>
+                            </div>
+                        ) : (
+                            children
+                        )}
                     </AppLayoutContext.Provider>
                 }
                 {...props}

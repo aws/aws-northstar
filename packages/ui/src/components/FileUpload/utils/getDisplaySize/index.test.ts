@@ -13,18 +13,13 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render } from '@testing-library/react';
-import { composeStories } from '@storybook/testing-react';
-import * as stories from './index.stories';
+import getDisplaySie from '.';
 
-const { Default, WithUser } = composeStories(stories);
-
-describe('AppLayout', () => {
-    it('should render default AppLayout', async () => {
-        render(<Default />);
-    });
-
-    it('should render AppLayout with user', async () => {
-        render(<WithUser />);
+describe('getDisplaySie', () => {
+    it('should return the displayed file size', () => {
+        expect(getDisplaySie(11)).toBe('Size: 11 bytes');
+        expect(getDisplaySie(1011)).toBe('Size: 1.01 KB');
+        expect(getDisplaySie(1011000)).toBe('Size: 1.01 MB');
+        expect(getDisplaySie(1011000000)).toBe('Size: 1.01 GB');
     });
 });

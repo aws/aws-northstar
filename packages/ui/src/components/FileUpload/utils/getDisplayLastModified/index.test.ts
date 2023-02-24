@@ -13,18 +13,16 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render } from '@testing-library/react';
-import { composeStories } from '@storybook/testing-react';
-import * as stories from './index.stories';
+import getDisplayLastModified from '.';
 
-const { Default, WithUser } = composeStories(stories);
-
-describe('AppLayout', () => {
-    it('should render default AppLayout', async () => {
-        render(<Default />);
+describe('getDisplayLastModified', () => {
+    it('should return the displayed last modified date text of the date object', () => {
+        const date = new Date(2022, 0, 1, 1, 1);
+        expect(getDisplayLastModified(date)).toBe('Last modified: 1/1/2022, 1:01:00 AM');
     });
 
-    it('should render AppLayout with user', async () => {
-        render(<WithUser />);
+    it('should return the displayed last modified date text of the date number', () => {
+        const date = new Date(2022, 0, 1, 1, 1).getTime();
+        expect(getDisplayLastModified(date)).toBe('Last modified: 1/1/2022, 1:01:00 AM');
     });
 });

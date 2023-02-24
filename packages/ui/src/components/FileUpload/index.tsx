@@ -47,7 +47,7 @@ export interface FileUploadProps extends FormFieldProps {
     /**
      * The list of choosen files.
      */
-    files?: FileMetadata[];
+    files?: (File | FileMetadata)[];
     /**
      * Event handler for the file selection change event.
      */
@@ -157,6 +157,7 @@ const FileUpload: FC<FileUploadProps> = ({
         <SpaceBetween direction="vertical" size="m">
             <FormField
                 {...props}
+                controlId={id}
                 label={label}
                 info={info}
                 description={description}

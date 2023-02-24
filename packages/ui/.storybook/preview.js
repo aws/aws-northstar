@@ -56,7 +56,7 @@ export const decorators = [
 
         return (
             <StrictMode>
-                <NorthStarThemeProvider colorMode={colorMode}>
+                <NorthStarThemeProvider theme={colorMode}>
                     <Story />
                 </NorthStarThemeProvider>
             </StrictMode>

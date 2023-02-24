@@ -13,11 +13,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import React from 'react';
 import { withRouter } from 'storybook-addon-react-router-v6';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Badge from '@cloudscape-design/components/badge';
+import SpaceBetween from '@cloudscape-design/components/space-between';
+import { composeStory } from '@storybook/testing-react';
 import AppLayout from '.';
+import KeyValuePairsStoryMeta, { Default as KeyValuePairsStory } from '../KeyValuePairs/index.stories';
+import TableMeta, { LongData as TableStory } from '../Table/index.stories';
 
 export default {
     component: AppLayout,
@@ -28,8 +31,18 @@ export default {
     },
 } as ComponentMeta<typeof AppLayout>;
 
+const KeyValuePairs = composeStory(KeyValuePairsStory, KeyValuePairsStoryMeta);
+const Table = composeStory(TableStory, TableMeta);
+
 const Template: ComponentStory<typeof AppLayout> = (args) => {
-    return <AppLayout {...args} />;
+    return (
+        <AppLayout {...args}>
+            <SpaceBetween size="l">
+                <KeyValuePairs />
+                <Table />
+            </SpaceBetween>
+        </AppLayout>
+    );
 };
 
 export const Default = Template.bind({});
