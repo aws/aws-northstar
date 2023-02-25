@@ -28,10 +28,10 @@ module.exports = merge.recursive(tsPreset, cloudscapePreset, {
     maxWorkers: '50%',
     coverageThreshold: {
         global: {
-            branches: 68,
-            functions: 75,
-            lines: 88,
-            statements: 87,
+            branches: 80,
+            functions: 80,
+            lines: 90,
+            statements: 90,
         },
     },
     coveragePathIgnorePatterns: ['/node_modules/', '/components/index.ts', '.*/.*.stories.tsx'],

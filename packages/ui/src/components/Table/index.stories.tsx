@@ -27,6 +27,7 @@ export default {
     argTypes: {
         onSelectionChange: { action: true },
     },
+    excludeStories: ['columnDefinitionsRemoteUpdateTable', 'dataRemoteUpdateTable']
 } as ComponentMeta<typeof Table>;
 
 const Template: ComponentStory<typeof Table> = ({ onSelectionChange, ...args }: TableProps) => {
@@ -136,43 +137,34 @@ interface TestDataType {
     name: string;
 }
 
+export const columnDefinitionsRemoteUpdateTable = [
+    {
+        id: 'id',
+        width: 200,
+        header: 'Id',
+        cell: (data: any) => data.id,
+        sortingField: 'id',
+    },
+    {
+        id: 'name',
+        width: 200,
+        header: 'Name',
+        cell: (data: any) => data.name,
+        sortingField: 'name',
+    },
+];
+
+export const dataRemoteUpdateTable = Array.from(Array(1000).keys()).map(i => ({
+    id: i,
+    name: `Name ${i}`,
+}));
+
 export const RemoteUpdateTable = () => {
-    const columnDefinitions = useMemo(
-        () => [
-            {
-                id: 'id',
-                width: 200,
-                header: 'Id',
-                cell: (data: any) => data.id,
-                sortingField: 'id',
-            },
-            {
-                id: 'name',
-                width: 200,
-                header: 'Name',
-                cell: (data: any) => data.name,
-                sortingField: 'name',
-            },
-        ],
-        []
-    );
     const [items, setItems] = useState<TestDataType[]>([]);
     const [loading, setLoading] = useState(false);
-
     const fetchIdRef = useRef(0);
-    const data = useMemo(() => {
-        const data = [];
-        for (let i = 1; i <= 1000; i++) {
-            data.push({
-                id: i,
-                name: `Name ${i}`,
-            });
-        }
-
-        return data;
-    }, []);
-
-    const [totalItemsCount, setTotalItemsCount] = useState(data.length);
+    
+    const [totalItemsCount, setTotalItemsCount] = useState(dataRemoteUpdateTable.length);
 
     const handleFetchData = useCallback(
         (options: FetchDataOptions) => {
@@ -181,7 +173,7 @@ export const RemoteUpdateTable = () => {
             setTimeout(() => {
                 if (fetchId === fetchIdRef.current) {
                     // You could fetch your data from server.
-                    let tempData = data.filter((d) => {
+                    let tempData = dataRemoteUpdateTable.filter((d) => {
                         if (options.filterText) {
                             return d.name.indexOf(options.filterText) >= 0;
                         }
@@ -205,13 +197,13 @@ export const RemoteUpdateTable = () => {
                 }
             }, 1000);
         },
-        [data]
+        []
     );
 
     return (
         <Table
             header="Remote Update Table"
-            columnDefinitions={columnDefinitions}
+            columnDefinitions={columnDefinitionsRemoteUpdateTable}
             onFetchData={handleFetchData}
             totalItemsCount={totalItemsCount}
             defaultPageSize={10}

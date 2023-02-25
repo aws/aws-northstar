@@ -15,10 +15,11 @@
  ******************************************************************************************************************** */
 import { render, screen, cleanup } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
+import wrapper from '@cloudscape-design/components/test-utils/dom';
 import * as stories from './index.stories';
 import { TEXT_CONTENT } from '../Textarea/index.stories';
 
-const { Default } = composeStories(stories);
+const { Default, Warning } = composeStories(stories);
 
 const handleCancel = jest.fn();
 const handleSubmit = jest.fn();
@@ -29,8 +30,17 @@ describe('Alert', () => {
         cleanup();
     });
 
-    it('should render alert', async () => {
-        render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
+    it('should render default info alert', async () => {
+        const { container } = render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
         expect(screen.getByText(TEXT_CONTENT)).toBeVisible();
+
+        expect(wrapper(container).findAlert()?.find('[aria-label="info"]')).not.toBeNull();
+    });
+
+    it('should render warning alert', async () => {
+        const { container } = render(<Warning onSubmit={handleSubmit} onCancel={handleCancel} />);
+        expect(screen.getByText(TEXT_CONTENT)).toBeVisible();
+
+        expect(wrapper(container).findAlert()?.find('[aria-label="warning"]')).not.toBeNull();
     });
 });

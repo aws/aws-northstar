@@ -40,8 +40,25 @@ Default.args = {
                 component: componentTypes.ALERT,
                 name: 'alert',
                 content: TEXT_CONTENT,
-                type: 'warning',
             },
         ],
     },
 };
+
+export const Warning = Template.bind({});
+Warning.args = {
+    ...Default.args,
+    schema: {
+        ...Default.args.schema,
+        fields: [
+            {
+                component: componentTypes.ALERT,
+                name: 'alert',
+                content: TEXT_CONTENT,
+                type: 'warning'
+            },
+        ],
+    }
+};
+
+
