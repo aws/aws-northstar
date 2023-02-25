@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { useState, useCallback, useRef, useMemo } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import orderBy from 'lodash.orderby';
 import Table, { TableProps, FetchDataOptions } from '.';
 import columnDefinition from './data/columnDefinitions';
@@ -27,7 +27,7 @@ export default {
     argTypes: {
         onSelectionChange: { action: true },
     },
-    excludeStories: ['columnDefinitionsRemoteUpdateTable', 'dataRemoteUpdateTable']
+    excludeStories: ['columnDefinitionsRemoteUpdateTable', 'dataRemoteUpdateTable'],
 } as ComponentMeta<typeof Table>;
 
 const Template: ComponentStory<typeof Table> = ({ onSelectionChange, ...args }: TableProps) => {
@@ -154,7 +154,7 @@ export const columnDefinitionsRemoteUpdateTable = [
     },
 ];
 
-export const dataRemoteUpdateTable = Array.from(Array(1000).keys()).map(i => ({
+export const dataRemoteUpdateTable = Array.from(Array(1000).keys()).map((i) => ({
     id: i,
     name: `Name ${i}`,
 }));
@@ -163,42 +163,39 @@ export const RemoteUpdateTable = () => {
     const [items, setItems] = useState<TestDataType[]>([]);
     const [loading, setLoading] = useState(false);
     const fetchIdRef = useRef(0);
-    
+
     const [totalItemsCount, setTotalItemsCount] = useState(dataRemoteUpdateTable.length);
 
-    const handleFetchData = useCallback(
-        (options: FetchDataOptions) => {
-            setLoading(true);
-            const fetchId = ++fetchIdRef.current;
-            setTimeout(() => {
-                if (fetchId === fetchIdRef.current) {
-                    // You could fetch your data from server.
-                    let tempData = dataRemoteUpdateTable.filter((d) => {
-                        if (options.filterText) {
-                            return d.name.indexOf(options.filterText) >= 0;
-                        }
-
-                        return true;
-                    });
-                    const filterDataCount = tempData.length;
-
-                    if (options.sortingField) {
-                        tempData = orderBy(tempData, options.sortingField, options.isDescending ? 'desc' : 'asc');
+    const handleFetchData = useCallback((options: FetchDataOptions) => {
+        setLoading(true);
+        const fetchId = ++fetchIdRef.current;
+        setTimeout(() => {
+            if (fetchId === fetchIdRef.current) {
+                // You could fetch your data from server.
+                let tempData = dataRemoteUpdateTable.filter((d) => {
+                    if (options.filterText) {
+                        return d.name.indexOf(options.filterText) >= 0;
                     }
 
-                    tempData = tempData.slice(
-                        (options.pageIndex - 1) * options.pageSize,
-                        options.pageIndex * options.pageSize
-                    );
+                    return true;
+                });
+                const filterDataCount = tempData.length;
 
-                    setItems(tempData);
-                    setTotalItemsCount(filterDataCount);
-                    setLoading(false);
+                if (options.sortingField) {
+                    tempData = orderBy(tempData, options.sortingField, options.isDescending ? 'desc' : 'asc');
                 }
-            }, 1000);
-        },
-        []
-    );
+
+                tempData = tempData.slice(
+                    (options.pageIndex - 1) * options.pageSize,
+                    options.pageIndex * options.pageSize
+                );
+
+                setItems(tempData);
+                setTotalItemsCount(filterDataCount);
+                setLoading(false);
+            }
+        }, 1000);
+    }, []);
 
     return (
         <Table

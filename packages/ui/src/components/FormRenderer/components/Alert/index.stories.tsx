@@ -55,10 +55,8 @@ Warning.args = {
                 component: componentTypes.ALERT,
                 name: 'alert',
                 content: TEXT_CONTENT,
-                type: 'warning'
+                type: 'warning',
             },
         ],
-    }
+    },
 };
-
-

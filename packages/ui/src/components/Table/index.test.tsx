@@ -33,9 +33,9 @@ describe('Table', () => {
         const table = wrapper(container).findTable();
         const pagination = wrapper(container).findPagination();
         const search = wrapper(container).findTextFilter();
-        expect(table?.findRows()).toHaveLength(9);    
-        expect(screen.getByText('Table Title')).toBeVisible(); 
-        expect(screen.getByText('(9)')).toBeVisible(); 
+        expect(table?.findRows()).toHaveLength(9);
+        expect(screen.getByText('Table Title')).toBeVisible();
+        expect(screen.getByText('(9)')).toBeVisible();
         expect(pagination?.findPageNumbers()).toHaveLength(1);
 
         expect(table?.findColumnHeaders()[1].getElement()).toHaveTextContent('Id');
@@ -54,11 +54,11 @@ describe('Table', () => {
         const { container } = render(<LongData />);
         const table = wrapper(container).findTable();
         const pagination = wrapper(container).findPagination();
-        expect(table?.findRows()).toHaveLength(10); 
+        expect(table?.findRows()).toHaveLength(10);
 
-        expect(screen.getByText('Table Title')).toBeVisible(); 
-        expect(screen.getByText('(555)')).toBeVisible(); 
-        expect(pagination?.findPageNumbers().map(pg => pg.getElement())).toHaveLength(8); // Maximum display 8
+        expect(screen.getByText('Table Title')).toBeVisible();
+        expect(screen.getByText('(555)')).toBeVisible();
+        expect(pagination?.findPageNumbers().map((pg) => pg.getElement())).toHaveLength(8); // Maximum display 8
 
         expect(table?.findBodyCell(1, 2)?.getElement()).toHaveTextContent('id000001');
 
