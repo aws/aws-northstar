@@ -7602,7 +7602,7 @@ __metadata:
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-react: ^7.31.11
     eslint-plugin-react-hooks: ^4.6.0
-    eslint-plugin-storybook: ^0.6.8
+    eslint-plugin-storybook: ^0.6.11
     git-conventional-commits: ^2.4.0
     husky: ^8.0.2
     license-checker: ^25.0.1
@@ -11637,9 +11637,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-storybook@npm:^0.6.8":
-  version: 0.6.8
-  resolution: "eslint-plugin-storybook@npm:0.6.8"
+"eslint-plugin-storybook@npm:^0.6.11":
+  version: 0.6.11
+  resolution: "eslint-plugin-storybook@npm:0.6.11"
   dependencies:
     "@storybook/csf": ^0.0.1
     "@typescript-eslint/utils": ^5.45.0
@@ -11647,7 +11647,7 @@ __metadata:
     ts-dedent: ^2.2.0
   peerDependencies:
     eslint: ">=6"
-  checksum: f9906f867178406da7236b073d254fbac9e1af4139608e28ffc105d668f8a328db4d719de02b4850417f4ea154c8e93791def3cfce996c20a85782bcd9b34302
+  checksum: efb85688041d4fd02be0cc51f07803acffaa54fdf61c21e9ae9eb18f26e6b8aec50911cfa71855ff4322b377b62cd53e7bf549faf60df4f20b8840171eab0029
   languageName: node
   linkType: hard
 
