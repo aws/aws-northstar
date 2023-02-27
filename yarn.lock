@@ -7669,7 +7669,7 @@ __metadata:
     plotly.js: ^2.16.4
     react: ^17.0.2
     react-docgen-typescript-loader: ^3.6.0
-    react-docgen-typescript-plugin: ^1.0.2
+    react-docgen-typescript-plugin: ^1.0.5
     react-dom: ^17.0.2
     react-map-gl: ^6.1.20
     react-markdown: ^6.0.3
@@ -20424,9 +20424,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-docgen-typescript-plugin@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "react-docgen-typescript-plugin@npm:1.0.2"
+"react-docgen-typescript-plugin@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "react-docgen-typescript-plugin@npm:1.0.5"
   dependencies:
     debug: ^4.1.1
     endent: ^2.0.1
@@ -20435,11 +20435,10 @@ __metadata:
     micromatch: ^4.0.2
     react-docgen-typescript: ^2.2.2
     tslib: ^2.0.0
-    webpack-sources: ^2.2.0
   peerDependencies:
     typescript: ">= 4.x"
     webpack: ">= 4"
-  checksum: 01083a2745939812e514fc531b0b20fbdf9ab6471ed3b9c7f12776816755152dc3abcd8e13f48ea6a25624aed1c958047201edba05060a41e720c98ac97e8b3c
+  checksum: 0f83d33c7b6dc82fef34ee820c94485c374d853774c5c26b04754ba3674fe4db2c7fc210b30fa0ca77c5033633553c12742aab6305a7f16cd263c70fedf27589
   languageName: node
   linkType: hard
 
@@ -25277,7 +25276,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-sources@npm:^2.0.1, webpack-sources@npm:^2.2.0":
+"webpack-sources@npm:^2.0.1":
   version: 2.3.1
   resolution: "webpack-sources@npm:2.3.1"
   dependencies:
