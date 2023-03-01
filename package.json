@@ -78,7 +78,8 @@
         "trim-newlines": "^3.0.1",
         "terser": "^5.15.1",
         "react-docgen-typescript": "2.2.2",
-        "npm/chalk": "^4.1.2"
+        "npm/chalk": "^4.1.2",
+        "npm": "^8.11.0"
     },
     "workspaces": {
         "packages": [
