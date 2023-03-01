@@ -124,6 +124,7 @@ const FullDataTable: FC<BaseTableProps & InternalTableProps> = ({
                             ? `(${collectionProps.selectedItems.length}/${allItems.length})`
                             : `(${allItems.length})`
                     }
+                    actions={props.actions}
                 >
                     {header}
                 </Header>

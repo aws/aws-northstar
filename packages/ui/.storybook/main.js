@@ -38,11 +38,4 @@ module.exports = {
             },
         },
     },
-    previewHead: (head) => (`
-        ${head}
-        <script>
-            document.title = 'NorthStar';
-        </script>
-        <link rel="icon" type="image/png" href="./favicon.ico">
-    `)
 };

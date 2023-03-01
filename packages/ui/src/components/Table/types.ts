@@ -45,6 +45,10 @@ export interface BaseTableProps extends CloudscapeTableProps {
      * The default index of the page that should be displayed
      * */
     defaultPageIndex?: number;
+    /**
+     * The actions displayed on the header
+     */
+    actions?: React.ReactNode;
 }
 
 export interface FetchDataOptions {
@@ -70,3 +74,5 @@ export interface InternalTableProps {
 export type TableProps = RemoteUpdateTableProps | BaseTableProps;
 
 export interface ColumnDefinition<T> extends CloudscapeTableProps.ColumnDefinition<T> {}
+
+export interface SelectionChangeDetail<T> extends CloudscapeTableProps.SelectionChangeDetail<T> {}
