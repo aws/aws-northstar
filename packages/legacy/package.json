@@ -16,10 +16,11 @@
         "aws-northstar"
     ],
     "scripts": {
+        "build:copy-files": "cp ../../LICENSE ./build/LICENSE",
         "build:build-readme": "cp ./README.md ./build/README.md && cat ./docs/GettingStarted.md >> ./build/README.md",
         "build:build-package-json": "cat package.json | jq 'del(.devDependencies, .resolutions, .scripts, .\"lint-staged\")' > ./build/package.json",
         "build:esm": "tsc --build tsconfig.build.esm.json",
-        "build": "tsc --build tsconfig.build.json && yarn build:esm && yarn build:build-package-json && yarn build:build-readme",
+        "build": "tsc --build tsconfig.build.json && yarn build:esm && yarn build:build-package-json && yarn build:build-readme && yarn build:copy-files",
         "check:all": "yarn test:ci && yarn build && yarn storybook:build && yarn styleguide:build",
         "license:check": "yarn license-checker --summary --production --excludePrivatePackages --onlyAllow 'MIT;Apache-2.0;Unlicense;BSD;BSD*;BSD-2-Clause;BSD-3-Clause;ISC;Zlib;WTFPL;Custom: https://github.com/tmcw/jsonlint;Custom: http://badges.github.io/stability-badges/dist/stable.svg;Custom: https://github.com/substack/node-browserify;'",
         "semantic-release": "semantic-release",

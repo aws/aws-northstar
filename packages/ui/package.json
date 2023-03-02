@@ -16,9 +16,10 @@
   ],
   "scripts": {
     "build:readme": "cp ./README.md ./build/README.md",
+    "build:copy-files": "cp ../../LICENSE ./build/LICENSE",
     "build:package-json": "(cat package.json | jq 'del(.devDependencies, .resolutions, .scripts, .\"lint-staged\")') > ./build/package.json",
     "build:package": "tsc --build tsconfig.build.json",
-    "build": "yarn build:package && yarn build:package-json && yarn build:readme",
+    "build": "yarn build:package && yarn build:package-json && yarn build:readme && yarn build:copy-files",
     "check:all": "yarn test:ci && yarn build && yarn storybook:build && yarn styleguide:build",
     "license:check": "yarn license-checker --summary --production --excludePrivatePackages --onlyAllow 'MIT;Apache-2.0;Unlicense;BSD;BSD*;BSD-2-Clause;BSD-3-Clause;ISC;Zlib;WTFPL;'",
     "semantic-release": "semantic-release --dry-run",
