@@ -1687,9 +1687,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@data-driven-forms/react-form-renderer@npm:^3.19.0":
-  version: 3.19.0
-  resolution: "@data-driven-forms/react-form-renderer@npm:3.19.0"
+"@data-driven-forms/react-form-renderer@npm:^3.20.2":
+  version: 3.20.2
+  resolution: "@data-driven-forms/react-form-renderer@npm:3.20.2"
   dependencies:
     final-form: ^4.20.4
     final-form-arrays: ^3.0.2
@@ -1701,7 +1701,7 @@ __metadata:
   peerDependencies:
     react: ^16.13.1 || ^17.0.2 || ^18.0.0
     react-dom: ^16.13.1 || ^17.0.2 || ^18.0.0
-  checksum: c56f2abe6c5b8ae7ced417151420da1584b57c9cf8fbe037161795a923dc34467d778e0c91707b9ee910b2e2f7550dd8df4310b1c3243e84d5ae2d7e14d90778
+  checksum: 024d79320779e341857c36e19a8066e6b6baf987a56e2a7501538db6d6ae2e026d48412c61de275b9fbc8063d80098ae12ef5cafe84b2c784de4bd75a6446076
   languageName: node
   linkType: hard
 
@@ -7618,7 +7618,7 @@ __metadata:
   resolution: "aws-northstar@workspace:packages/legacy"
   dependencies:
     "@babel/core": ^7.20.2
-    "@data-driven-forms/react-form-renderer": ^3.19.0
+    "@data-driven-forms/react-form-renderer": ^3.20.2
     "@date-io/date-fns": ^1.3.1
     "@material-ui/core": 4.11.4
     "@material-ui/icons": ^4.11.3
