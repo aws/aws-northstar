@@ -28,6 +28,9 @@ export const DEFAULT_ARGS = {
         onSubmit: { action: true },
         onCancel: { action: true },
     },
+    parameters: {
+        layout: 'fullscreen',
+    },
 };
 
 export const TEST_DATA = {

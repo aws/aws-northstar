@@ -19,7 +19,7 @@ import wrapper from '@cloudscape-design/components/test-utils/dom';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './index.stories';
 
-const { Default, WithInitialValue } = composeStories(stories);
+const { Default, Container, ExpandedContainer, WithInitialValue } = composeStories(stories);
 
 const handleCancel = jest.fn();
 const handleSubmit = jest.fn();
@@ -34,18 +34,10 @@ describe('ExpandableSection', () => {
         render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
 
         expect(screen.getByText('Section 1')).toBeVisible();
-        expect(screen.getByText('Section 2')).toBeVisible();
-        expect(screen.getByText('Section 3')).toBeVisible();
 
         const element = screen.getByTestId('form-renderer');
         const section1 = wrapper(element).findExpandableSection("[data-testid='section1']");
         expect(section1?.findExpandedContent()).toBeNull();
-
-        const section2 = wrapper(element).findExpandableSection("[data-testid='section2']");
-        expect(section2?.findExpandedContent()).toBeNull();
-
-        const section3 = wrapper(element).findExpandableSection("[data-testid='section3']");
-        expect(section3?.findExpandedContent()).not.toBeNull();
 
         await act(async () => {
             await userEvent.click(screen.getByText('Section 1'));
@@ -54,15 +46,7 @@ describe('ExpandableSection', () => {
         expect(section1?.findExpandedContent()).not.toBeNull();
 
         await act(async () => {
-            await userEvent.click(screen.getByText('Section 2'));
-        });
-
-        expect(section2?.findExpandedContent()).not.toBeNull();
-
-        await act(async () => {
             await userEvent.type(screen.getByLabelText('Textfield'), 'TextFieldContent');
-            await userEvent.type(screen.getByLabelText('Textarea 1'), 'TextareaContent');
-            await userEvent.type(screen.getByLabelText('Textarea 2'), 'TextareaContent');
             await userEvent.click(screen.getByText('Submit'));
         });
 
@@ -71,9 +55,61 @@ describe('ExpandableSection', () => {
                 section1: {
                     textfield: 'TextFieldContent',
                 },
+            },
+            expect.any(Object),
+            expect.any(Function)
+        );
+    });
+
+    it('should render expandable sections with container variant', async () => {
+        render(<Container onSubmit={handleSubmit} onCancel={handleCancel} />);
+
+        expect(screen.getByText('Section 2')).toBeVisible();
+
+        const element = screen.getByTestId('form-renderer');
+
+        const section2 = wrapper(element).findExpandableSection("[data-testid='section2']");
+        expect(section2?.findExpandedContent()).toBeNull();
+
+        await act(async () => {
+            await userEvent.click(screen.getByText('Section 2'));
+        });
+
+        expect(section2?.findExpandedContent()).not.toBeNull();
+
+        await act(async () => {
+            await userEvent.type(screen.getByLabelText('Textarea 1'), 'TextareaContent');
+            await userEvent.click(screen.getByText('Submit'));
+        });
+
+        expect(handleSubmit).toHaveBeenCalledWith(
+            {
                 section2: {
                     textarea1: 'TextareaContent',
                 },
+            },
+            expect.any(Object),
+            expect.any(Function)
+        );
+    });
+
+    it('should render expandable sections with container variant in a expanded state', async () => {
+        render(<ExpandedContainer onSubmit={handleSubmit} onCancel={handleCancel} />);
+
+        expect(screen.getByText('Section 3')).toBeVisible();
+
+        const element = screen.getByTestId('form-renderer');
+
+        const section3 = wrapper(element).findExpandableSection("[data-testid='section3']");
+        expect(section3?.findExpandedContent()).not.toBeNull();
+
+        await act(async () => {
+            await userEvent.type(screen.getByLabelText('Textarea 2'), 'TextareaContent');
+            await userEvent.click(screen.getByText('Submit'));
+        });
+
+        expect(handleSubmit).toHaveBeenCalledWith(
+            {
                 section3: {
                     textarea2: 'TextareaContent',
                 },
@@ -83,21 +119,49 @@ describe('ExpandableSection', () => {
         );
     });
 
-    it('should trigger validation', async () => {
+    it('should trigger validation on default expandable section', async () => {
         render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
 
         await act(async () => {
             await userEvent.click(screen.getByText('Submit'));
         });
 
-        expect(screen.queryAllByText('Required')).toHaveLength(3);
+        expect(screen.queryAllByText('Required')).toHaveLength(1);
 
         const element = screen.getByTestId('form-renderer');
         const section1 = wrapper(element).findExpandableSection("[data-testid='section1']");
         expect(section1?.findExpandedContent()).not.toBeNull();
 
+        expect(handleSubmit).not.toBeCalled();
+    });
+
+    it('should trigger validation on expandable section with container variant', async () => {
+        render(<Container onSubmit={handleSubmit} onCancel={handleCancel} />);
+
+        await act(async () => {
+            await userEvent.click(screen.getByText('Submit'));
+        });
+
+        expect(screen.queryAllByText('Required')).toHaveLength(1);
+
+        const element = screen.getByTestId('form-renderer');
+
         const section2 = wrapper(element).findExpandableSection("[data-testid='section2']");
         expect(section2?.findExpandedContent()).not.toBeNull();
+
+        expect(handleSubmit).not.toBeCalled();
+    });
+
+    it('should trigger validation on expandable section with container variant in expanded state', async () => {
+        render(<ExpandedContainer onSubmit={handleSubmit} onCancel={handleCancel} />);
+
+        await act(async () => {
+            await userEvent.click(screen.getByText('Submit'));
+        });
+
+        expect(screen.queryAllByText('Required')).toHaveLength(1);
+
+        const element = screen.getByTestId('form-renderer');
 
         const section3 = wrapper(element).findExpandableSection("[data-testid='section3']");
         expect(section3?.findExpandedContent()).not.toBeNull();

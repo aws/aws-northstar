@@ -21,6 +21,7 @@ import {
 import { FormTemplateRenderProps } from '@data-driven-forms/react-form-renderer/common-types/form-template-render-props';
 import { HeaderProps } from '@cloudscape-design/components/header';
 import { FormFieldProps as CloudscapeFormFieldProps } from '@cloudscape-design/components/form-field';
+import { FormProps } from '@cloudscape-design/components/form';
 
 export const componentTypes = {
     ...basicComponentTypes,
@@ -48,6 +49,7 @@ export interface Field extends FormRendererField, FormFieldProps {}
 export type Schema = Omit<FormRendererSchema, 'title'> & {
     header?: FormRendererSchema['title'];
     headerVariant?: HeaderProps['variant'];
+    variant?: FormProps['variant'];
     info?: HeaderProps['info'];
     cancelLabel?: string;
     canCancel?: boolean;

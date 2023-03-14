@@ -54,6 +54,23 @@ Default.args = {
                     },
                 ],
             },
+        ],
+    },
+};
+
+export const Container = Template.bind({});
+Container.args = {
+    schema: {
+        header: (
+            <>
+                Data driven form with{' '}
+                <a target="_blank" href="https://cloudscape.design/components/expandable-section" rel="noreferrer">
+                    Expandable Section
+                </a>
+            </>
+        ),
+        description: 'Define your form in JSON format',
+        fields: [
             {
                 component: componentTypes.EXPANDABLE_SECTION,
                 name: 'section2',
@@ -75,6 +92,23 @@ Default.args = {
                     },
                 ],
             },
+        ],
+    },
+};
+
+export const ExpandedContainer = Template.bind({});
+ExpandedContainer.args = {
+    schema: {
+        header: (
+            <>
+                Data driven form with{' '}
+                <a target="_blank" href="https://cloudscape.design/components/expandable-section" rel="noreferrer">
+                    Expandable Section
+                </a>
+            </>
+        ),
+        description: 'Define your form in JSON format',
+        fields: [
             {
                 component: componentTypes.EXPANDABLE_SECTION,
                 name: 'section3',
@@ -104,6 +138,14 @@ Default.args = {
 export const WithInitialValue = Template.bind({});
 WithInitialValue.args = {
     ...Default.args,
+    schema: {
+        ...Default.args.schema,
+        fields: [
+            ...(Default.args.schema?.fields || []),
+            ...(Container.args.schema?.fields || []),
+            ...(ExpandedContainer.args.schema?.fields || []),
+        ],
+    },
     initialValues: {
         section1: {
             textfield: 'TextFieldContent',
