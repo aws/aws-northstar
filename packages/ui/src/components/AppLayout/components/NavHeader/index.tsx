@@ -114,20 +114,22 @@ const NavHeader: FC<NavHeaderProps> = ({ title, href = '/', logo, user, onSignou
     }, [theme, density, setDensity, setTheme, user, onSignout]);
 
     return (
-        <TopNavigation
-            utilities={utilities}
-            i18nStrings={{ overflowMenuTitleText: title, overflowMenuTriggerText: title }}
-            identity={{
-                title: title,
-                href: href,
-                logo: logo
-                    ? {
-                          src: logo,
-                          alt: title,
-                      }
-                    : undefined,
-            }}
-        />
+        <div style={{ position: 'sticky', top: 0, zIndex: 1002 }}>
+            <TopNavigation
+                utilities={utilities}
+                i18nStrings={{ overflowMenuTitleText: title, overflowMenuTriggerText: title }}
+                identity={{
+                    title: title,
+                    href: href,
+                    logo: logo
+                        ? {
+                              src: logo,
+                              alt: title,
+                          }
+                        : undefined,
+                }}
+            />
+        </div>
     );
 };
 

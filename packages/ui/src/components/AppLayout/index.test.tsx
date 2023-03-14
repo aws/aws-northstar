@@ -13,18 +13,61 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
+import wrapper from '@cloudscape-design/components/test-utils/dom';
 import * as stories from './index.stories';
+import userEvent from '@testing-library/user-event';
 
-const { Default, WithUser } = composeStories(stories);
+const { Default, WithUser, WithCustomHeader } = composeStories(stories);
 
 describe('AppLayout', () => {
     it('should render default AppLayout', async () => {
-        render(<Default />);
+        const { container } = render(<Default />);
+        const applayout = wrapper(container).findAppLayout();
+        const appHeader = wrapper(container).findTopNavigation();
+        const sideNav = applayout?.findNavigation();
+
+        expect(applayout).not.toBeNull();
+        expect(appHeader).not.toBeNull();
+        expect(sideNav).not.toBeNull();
+
+        expect(appHeader?.findTitle()?.getElement()).toHaveTextContent('HelloWorld App');
+        expect(appHeader?.findLogo()).not.toBeNull();
+
+        expect(screen.getByText('Page 1')).toBeVisible();
+        expect(screen.getByText('Page 2')).toBeVisible();
+        expect(screen.getByText('Page 3')).toBeVisible();
+        expect(screen.getByText('Page 4')).toBeVisible();
     });
 
     it('should render AppLayout with user', async () => {
-        render(<WithUser />);
+        const { container } = render(<WithUser />);
+        const appHeader = wrapper(container).findTopNavigation();
+        expect(appHeader).not.toBeNull();
+
+        expect(screen.queryAllByText('Username')).toHaveLength(3);
+    });
+
+    it('should set active breadcrumb', () => {
+        const { container } = render(<Default />);
+
+        const breadcrumb = wrapper(container).findBreadcrumbGroup();
+        expect(breadcrumb?.findBreadcrumbLinks()).toHaveLength(1);
+        expect(breadcrumb?.findBreadcrumbLinks()[0].getElement()).toHaveTextContent('home');
+
+        act(() => {
+            userEvent.click(screen.getByText('Page 2'));
+        });
+
+        expect(breadcrumb?.findBreadcrumbLinks()).toHaveLength(2);
+        expect(breadcrumb?.findBreadcrumbLinks()[0].getElement()).toHaveTextContent('home');
+        expect(breadcrumb?.findBreadcrumbLinks()[1].getElement()).toHaveTextContent('page2');
+    });
+
+    it('should render AppLayout with custom header', async () => {
+        render(<WithCustomHeader />);
+
+        expect(screen.queryAllByText('Custom Header')).toHaveLength(2);
     });
 });

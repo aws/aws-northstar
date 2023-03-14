@@ -17,6 +17,7 @@ import { withRouter } from 'storybook-addon-react-router-v6';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Badge from '@cloudscape-design/components/badge';
 import SpaceBetween from '@cloudscape-design/components/space-between';
+import TopNavigation from '@cloudscape-design/components/top-navigation';
 import { composeStory } from '@storybook/testing-react';
 import AppLayout from '.';
 import KeyValuePairsStoryMeta, { Default as KeyValuePairsStory } from '../KeyValuePairs/index.stories';
@@ -78,4 +79,23 @@ WithUser.args = {
         username: 'Username',
         email: 'test@test.com',
     },
+};
+
+const CustomHeader = (
+    <TopNavigation
+        identity={{
+            href: '/',
+            title: 'Custom Header',
+        }}
+        i18nStrings={{
+            overflowMenuTitleText: 'All',
+            overflowMenuTriggerText: 'More',
+        }}
+    />
+);
+
+export const WithCustomHeader = Template.bind({});
+WithCustomHeader.args = {
+    ...Default.args,
+    header: CustomHeader,
 };

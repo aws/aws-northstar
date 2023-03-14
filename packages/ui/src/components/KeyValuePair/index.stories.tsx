@@ -16,14 +16,14 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import StatusIndicator from '@cloudscape-design/components/status-indicator';
 import Link from '@cloudscape-design/components/link';
-import KeyValuePair from '.';
+import KeyValuePair, { KeyValuePairProps } from '.';
 
 export default {
     component: KeyValuePair,
     title: 'Components/KeyValuePair',
 } as ComponentMeta<typeof KeyValuePair>;
 
-const Template: ComponentStory<typeof KeyValuePair> = (args) => {
+const Template: ComponentStory<typeof KeyValuePair> = (args: KeyValuePairProps) => {
     return <KeyValuePair {...args} />;
 };
 
