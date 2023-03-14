@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Build script is to be run from the root directory of the aws-northstar package
-
+echo "[!] Building..."
 set -ev
 
 BUILD_FOLDER_LEGACY=./packages/legacy/build/
