@@ -75,6 +75,7 @@ const FormTemplate: FC<RenderProps> = ({ formFields, schema }) => {
     return (
         <form onSubmit={(e) => e.preventDefault()}>
             <Form
+                variant="embedded"
                 header={
                     <FormHeader header={header} description={description} headerVariant={headerVariant} info={info} />
                 }

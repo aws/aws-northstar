@@ -59,6 +59,10 @@ const NorthStarThemeProvider: FC<PropsWithChildren<NorthStarThemeProviderProps>>
         applyDensity(density);
     }, [density]);
 
+    useEffect(() => {
+        applyMode(Mode.Light);
+    }, []);
+
     return (
         <NorthStarThemeContext.Provider
             value={{

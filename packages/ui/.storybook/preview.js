@@ -39,9 +39,9 @@ export const parameters = {
     },
     options: {
         storySort: {
-            order: ['About NorthStar V2', 'Getting Start', 'Components', 'Migration', ['Default']]
+            order: ['About NorthStar V2', 'Getting Start', 'Components', 'Migration', ['Default', 'MigratingFromLegacy']]
         }
-    } 
+    }
 };
 
 export const decorators = [
