@@ -35,6 +35,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@aws-northstar/ui@npm:latest":
+  version: 0.0.1-development
+  resolution: "@aws-northstar/ui@npm:0.0.1-development"
+  dependencies:
+    "@cloudscape-design/collection-hooks": ^1.0.19
+    "@cloudscape-design/components": ^3.0.112
+    "@cloudscape-design/design-tokens": ^3.0.7
+    "@cloudscape-design/global-styles": ^1.0.1
+    "@data-driven-forms/react-form-renderer": ^3.19.0
+    "@types/uuid": ^9.0.0
+    remark-frontmatter: ^4.0.1
+    remark-gfm: ^3.0.1
+    use-debounce: ^9.0.3
+    uuid: ^9.0.0
+  peerDependencies:
+    "@types/react": ^18
+    "@types/react-dom": ^18
+    "@types/react-router-dom": ^5
+    react: ^18
+    react-dom: ^18
+    react-markdown: ^8.0.5
+    react-router-dom: ^6
+    remark-frontmatter: ^4.0.1
+    remark-gfm: ^3.0.1
+  checksum: 4a28513eb2d81100632782dbb9db3d4cf063ffc032ff3ffd195b45bdf9ba6142d4b2ce811449833296bd2ff0e1646e545359b5b44bd31a7bc03702642ca0d33b
+  languageName: node
+  linkType: hard
+
 "@aws-northstar/ui@workspace:packages/ui":
   version: 0.0.0-use.local
   resolution: "@aws-northstar/ui@workspace:packages/ui"
@@ -2372,6 +2400,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cloudscape-design/component-toolkit@npm:^1.0.0-beta":
+  version: 1.0.0-beta.10
+  resolution: "@cloudscape-design/component-toolkit@npm:1.0.0-beta.10"
+  dependencies:
+    "@juggle/resize-observer": ^3.3.1
+  checksum: e4192650b90c6d98f8435df0a27555f152abf607507a4c5f1671ed59e01c6d9bfdd772cd2b89dd069e016da5420365bb203cd6086f2dec9615fba46e9f8b1833
+  languageName: node
+  linkType: hard
+
 "@cloudscape-design/components@npm:^3.0.112":
   version: 3.0.209
   resolution: "@cloudscape-design/components@npm:3.0.209"
@@ -2396,6 +2433,35 @@ __metadata:
     react: ^16.8 || ^17 || ^18
     react-dom: ^16.8 || ^17 || ^18
   checksum: d0130bdcdffc87edefcac37f1287262d00726831d746d384b726e4ca9f35f05f8b51608c7ed2a9d47a7593dc6dd8cca9e77ccfdad9a2f2eb975a7e026f314f63
+  languageName: node
+  linkType: hard
+
+"@cloudscape-design/components@npm:^3.0.209":
+  version: 3.0.233
+  resolution: "@cloudscape-design/components@npm:3.0.233"
+  dependencies:
+    "@cloudscape-design/collection-hooks": ^1.0.0
+    "@cloudscape-design/component-toolkit": ^1.0.0-beta
+    "@cloudscape-design/test-utils-core": ^1.0.0
+    "@cloudscape-design/theming-runtime": ^1.0.0
+    "@juggle/resize-observer": ^3.3.1
+    ace-builds: ^1.4.13
+    balanced-match: ^1.0.2
+    clsx: ^1.1.0
+    d3-shape: ^1.3.7
+    date-fns: ^2.25.0
+    intl-messageformat: ^10.3.1
+    mnth: ^2.0.0
+    react-focus-lock: ~2.8.1
+    react-keyed-flatten-children: ^1.3.0
+    react-transition-group: ^4.4.2
+    react-virtual: ^2.8.2
+    tslib: ^2.4.0
+    weekstart: ^1.1.0
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18
+    react-dom: ^16.8 || ^17 || ^18
+  checksum: fa4c6d81a93696c4243ca1b8c12c095563a772e69da0005133cba38662370795f7e86487b664e15f2b4ba48754532edefff95fce646519dfd51256aa7e8f6828
   languageName: node
   linkType: hard
 
@@ -2827,6 +2893,55 @@ __metadata:
   version: 8.36.0
   resolution: "@eslint/js@npm:8.36.0"
   checksum: b7d6b84b823c8c7784be390741196617565527b1f7c0977fde9455bfb57fd88f81c074a03dd878757d2c33fa29f24291e9ecbc1425710f067917324b55e1bf3a
+  languageName: node
+  linkType: hard
+
+"@formatjs/ecma402-abstract@npm:1.14.3":
+  version: 1.14.3
+  resolution: "@formatjs/ecma402-abstract@npm:1.14.3"
+  dependencies:
+    "@formatjs/intl-localematcher": 0.2.32
+    tslib: ^2.4.0
+  checksum: 504ae9775094adec611aa0bbc6dadec2360ba30c13331f376feacd75b23f856ac1e45e3c88a572fb91ff917e726d0cc7e6e1b6c5b73af48f53896592362c91d5
+  languageName: node
+  linkType: hard
+
+"@formatjs/fast-memoize@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@formatjs/fast-memoize@npm:2.0.0"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: 0afca38e57a90bbb204cf56116f96c18066c4df6a46dbed010f4f9e724ff4efa0e3a9e73717a4112096b31a93cc2136d26ccce0acb16400843a30ef82440c8ae
+  languageName: node
+  linkType: hard
+
+"@formatjs/icu-messageformat-parser@npm:2.3.0":
+  version: 2.3.0
+  resolution: "@formatjs/icu-messageformat-parser@npm:2.3.0"
+  dependencies:
+    "@formatjs/ecma402-abstract": 1.14.3
+    "@formatjs/icu-skeleton-parser": 1.3.18
+    tslib: ^2.4.0
+  checksum: e8aca733bed81c94ec16fa9f1a88dbaf93a644a8c5796a6ab1e795112dd1f6c1e92528a123483d3034ac5e6b2b454481ef61f7e56e6e77f1467f9524be7fe331
+  languageName: node
+  linkType: hard
+
+"@formatjs/icu-skeleton-parser@npm:1.3.18":
+  version: 1.3.18
+  resolution: "@formatjs/icu-skeleton-parser@npm:1.3.18"
+  dependencies:
+    "@formatjs/ecma402-abstract": 1.14.3
+    tslib: ^2.4.0
+  checksum: 19655c452ed3c45db07b03c90fbfe6172655b0babb9579f2d9397ca2b3c56e5e17a3beed1d13af12104313e6ed1f14976d7c996756f1a59c977d6f3228518fad
+  languageName: node
+  linkType: hard
+
+"@formatjs/intl-localematcher@npm:0.2.32":
+  version: 0.2.32
+  resolution: "@formatjs/intl-localematcher@npm:0.2.32"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: 477e18aabaf2e6e90fc12952a3cb6c0ebb40ad99414d6b9d2501c6348fbad58cacb433ec6630955cfd1491ea7630f32a9dc280bb27d0fb8a784251404a54140a
   languageName: node
   linkType: hard
 
@@ -4380,6 +4495,13 @@ __metadata:
   version: 1.3.2
   resolution: "@remix-run/router@npm:1.3.2"
   checksum: ee2108b87d4a1241cdea137dd7e1741ee679228bd33fd81e22a6bb2940f81186cefe9a85e26d60cc49bbcc1bdbc57d1954b7d4d62f8a51ef69feddfc899f55fa
+  languageName: node
+  linkType: hard
+
+"@remix-run/router@npm:1.4.0":
+  version: 1.4.0
+  resolution: "@remix-run/router@npm:1.4.0"
+  checksum: 707dce35a2b8138005cf19e63f6fd3c4da05b4b892e9e9118e8b727c3b95953efe27307ca2df35084044df30fa1fc367cf0bbc98d1ded9020c82e61e6242caaf
   languageName: node
   linkType: hard
 
@@ -7589,7 +7711,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^16.18.3":
+"@types/node@npm:^16.18.12, @types/node@npm:^16.18.3":
   version: 16.18.18
   resolution: "@types/node@npm:16.18.18"
   checksum: 021936e4fcd5cb038cd5d2d26328c7c0bf501d15793e48a12501129cf8770cbbe9a6936fcb64eeb10a102ff273c2606b75c1635a5834abd786014c98c112aaee
@@ -7691,7 +7813,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18, @types/react-dom@npm:^18.0.0":
+"@types/react-dom@npm:^18, @types/react-dom@npm:^18.0.0, @types/react-dom@npm:^18.0.11":
   version: 18.0.11
   resolution: "@types/react-dom@npm:18.0.11"
   dependencies:
@@ -7710,7 +7832,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-router-dom@npm:^5, @types/react-router-dom@npm:^5.1.3":
+"@types/react-router-dom@npm:^5, @types/react-router-dom@npm:^5.1.3, @types/react-router-dom@npm:^5.3.3":
   version: 5.3.3
   resolution: "@types/react-router-dom@npm:5.3.3"
   dependencies:
@@ -7778,7 +7900,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18":
+"@types/react@npm:^18, @types/react@npm:^18.0.28":
   version: 18.0.28
   resolution: "@types/react@npm:18.0.28"
   dependencies:
@@ -9641,6 +9763,29 @@ __metadata:
     react-router-dom: ^5
     react-scripts: 5.0.1
     typescript: ^4.8.4
+    web-vitals: ^2.1.4
+  languageName: unknown
+  linkType: soft
+
+"aws-northstar-demo-ui@workspace:packages/examples/ui":
+  version: 0.0.0-use.local
+  resolution: "aws-northstar-demo-ui@workspace:packages/examples/ui"
+  dependencies:
+    "@aws-northstar/ui": latest
+    "@cloudscape-design/components": ^3.0.209
+    "@testing-library/jest-dom": ^5.16.5
+    "@testing-library/react": ^13.4.0
+    "@testing-library/user-event": ^13.5.0
+    "@types/jest": ^27.5.2
+    "@types/node": ^16.18.12
+    "@types/react": ^18.0.28
+    "@types/react-dom": ^18.0.11
+    "@types/react-router-dom": ^5.3.3
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    react-router-dom: ^6.8.1
+    react-scripts: 5.0.1
+    typescript: ^4.9.5
     web-vitals: ^2.1.4
   languageName: unknown
   linkType: soft
@@ -17506,6 +17651,18 @@ __metadata:
   version: 2.2.0
   resolution: "interpret@npm:2.2.0"
   checksum: f51efef7cb8d02da16408ffa3504cd6053014c5aeb7bb8c223727e053e4235bf565e45d67028b0c8740d917c603807aa3c27d7bd2f21bf20b6417e2bb3e5fd6e
+  languageName: node
+  linkType: hard
+
+"intl-messageformat@npm:^10.3.1":
+  version: 10.3.2
+  resolution: "intl-messageformat@npm:10.3.2"
+  dependencies:
+    "@formatjs/ecma402-abstract": 1.14.3
+    "@formatjs/fast-memoize": 2.0.0
+    "@formatjs/icu-messageformat-parser": 2.3.0
+    tslib: ^2.4.0
+  checksum: 466f2d01e6b7acc621699539266a24a0fbf66099fa0e3f1b74cbdba223280f9aef736236527b5248fef420743c5070244cc2d76506c323590e9b445ff10b4e00
   languageName: node
   linkType: hard
 
@@ -25824,7 +25981,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18":
+"react-dom@npm:^18, react-dom@npm:^18.2.0":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0"
   dependencies:
@@ -26165,6 +26322,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-router-dom@npm:^6.8.1":
+  version: 6.9.0
+  resolution: "react-router-dom@npm:6.9.0"
+  dependencies:
+    "@remix-run/router": 1.4.0
+    react-router: 6.9.0
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: 4d593491ab8db5611feda70002c62902baebb84d5c1c5e5b6172496f31f91130deee132bf4240dea634a88cb86c76d6da348f15b9cd5e5197be455efd88edf72
+  languageName: node
+  linkType: hard
+
 "react-router@npm:5.3.4, react-router@npm:^5.1.2":
   version: 5.3.4
   resolution: "react-router@npm:5.3.4"
@@ -26192,6 +26362,17 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: 8e7cc7a516adeb6060911861af99d9b512893c15ec732cbf8574872919be4f3fe439ffa8c0876d1bcbced880d081bfeda3c01cb505b5a243565d10500ee0ac36
+  languageName: node
+  linkType: hard
+
+"react-router@npm:6.9.0":
+  version: 6.9.0
+  resolution: "react-router@npm:6.9.0"
+  dependencies:
+    "@remix-run/router": 1.4.0
+  peerDependencies:
+    react: ">=16.8"
+  checksum: b2a5f42e042bee7a7f116ca7817b0e58359e5353d84887c9fe7a633d7490c03b1e0ae37cd01830c2a381e3d1e7d501bb4751e53cc3d491e25f36582d3f6e0546
   languageName: node
   linkType: hard
 
@@ -26509,7 +26690,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18":
+"react@npm:^18, react@npm:^18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
@@ -30252,7 +30433,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.9.3":
+"typescript@npm:^4.9.3, typescript@npm:^4.9.5":
   version: 4.9.5
   resolution: "typescript@npm:4.9.5"
   bin:
@@ -30272,7 +30453,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=ad5954"
   bin:
