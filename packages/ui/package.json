@@ -4,7 +4,7 @@
   "description": "NorthStar Design System v2",
   "main": "index.js",
   "types": "index.d.ts",
-  "homepage": "https://northstar.aws-prototyping.cloud/",
+  "homepage": "https://aws.github.io/aws-northstar/",
   "keywords": [
     "ui",
     "design-system",
