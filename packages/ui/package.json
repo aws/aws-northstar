@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build:readme": "cp ./README.md ./build/README.md",
-    "build:copy-files": "cp ../../LICENSE ./build/LICENSE",
+    "build:copy-files": "cp ../../(LICENSE|NOTICE) ./build/",
     "build:package-json": "(cat package.json | jq 'del(.devDependencies, .resolutions, .scripts, .\"lint-staged\")') > ./build/package.json",
     "build:package": "tsc --build tsconfig.build.json",
     "build": "yarn build:package && yarn build:package-json && yarn build:readme && yarn build:copy-files",

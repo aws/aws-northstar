@@ -5,6 +5,7 @@
 set -ev
 
 BUILD_FOLDER_LEGACY=./packages/legacy/build/
+BUILD_FOLDER_UI=./packages/ui/build/
 STYLEGUIDE_FOLDER_LEGACY=./packages/legacy/styleguide.out/
 STYLEGUIDE_FOLDER_LEGACY_EXAMPLE=${STYLEGUIDE_FOLDER_LEGACY}examples/
 EXAMPLES_FOLDER=./packages/examples/
@@ -16,11 +17,9 @@ yarn storybook:build
 
 echo 'Remove build folder to make sure the npm package only includes clean built components'
 if [ -d ${BUILD_FOLDER_LEGACY} ]; then rm -rf ${BUILD_FOLDER_LEGACY}; fi 
-yarn build
+if [ -d ${BUILD_FOLDER_UI} ]; then rm -rf ${BUILD_FOLDER_UI}; fi 
 
-echo 'Copy license files'
-cp ./LICENSE ${BUILD_FOLDER_LEGACY}
-cp ./NOTICE ${BUILD_FOLDER_LEGACY}
+yarn build
 
 echo 'Merge coverage reports'
 if ! [ -d .nyc_output/ ]; then mkdir .nyc_output/; fi 
