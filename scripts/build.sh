@@ -4,11 +4,14 @@
 
 set -ev
 
-BUILD_FOLDER_LEGACY=./packages/legacy/build/
-BUILD_FOLDER_UI=./packages/ui/build/
-STYLEGUIDE_FOLDER_LEGACY=./packages/legacy/styleguide.out/
+BUILD_FOLDER_LEGACY=${PWD}/packages/legacy/build/
+STYLEGUIDE_FOLDER_LEGACY=${PWD}/packages/legacy/styleguide.out/
 STYLEGUIDE_FOLDER_LEGACY_EXAMPLE=${STYLEGUIDE_FOLDER_LEGACY}examples/
-EXAMPLES_FOLDER=./packages/examples/
+EXAMPLES_FOLDER=${PWD}/packages/examples/
+
+BUILD_FOLDER_UI=${PWD}/packages/ui/build/
+STORYBOOK_FOLDER_UI=${PWD}/packages/ui/storybook.out/
+STORYBOOK_FOLDER_UI_EXAMPLE=${STORYBOOK_FOLDER_UI}static/examples/
 
 yarn install --immutable
 yarn test:ci
@@ -27,13 +30,11 @@ find ./packages -type f -name "coverage-final.json" -path "*/coverage/*" -not \(
 | nl -bt -nln \
 | sed -re 's!^([0-9]+) +\t(.+)$!\2 .nyc_output/coverage-final-\1.json!' \
 | xargs -L 1 -t cp 
-npx nyc report --reporter lcov 
+npx nyc report --reporter lcov
 
-echo 'Copy the examples to published examples folder'
-if [ ! -d ${STYLEGUIDE_FOLDER_LEGACY_EXAMPLE} ]; then mkdir -p ${STYLEGUIDE_FOLDER_LEGACY_EXAMPLE} ; fi
-pushd ${EXAMPLES_FOLDER}/legacy
-tar -czvf ../../legacy/styleguide.out/examples/create-react-app.tar.gz .
-popd
+echo "Package the example app for legacy"
+./scripts/packageDemo.sh legacy ${PWD}/packages/examples/legacy ${STYLEGUIDE_FOLDER_LEGACY_EXAMPLE} ${PWD}/packages/legacy/build 4000000 1700000
 
-# Test the example app
-./scripts/runDemoTest.sh
+echo "Package the example app for ui"
+
+./scripts/packageDemo.sh ui ${PWD}/packages/examples/ui ${STORYBOOK_FOLDER_UI_EXAMPLE} ${PWD}/packages/ui/build 1500000 900000

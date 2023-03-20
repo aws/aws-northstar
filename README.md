@@ -2,7 +2,8 @@
 
 [![CodeBuild Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiTm9JSkpnb2IrV09tcGcwU2E5c0diN1lJaVdkbEQza0FoeVVpWnljb3hSZHBEb09mS1pCMmwva3R5SXlYa2Fqem1NVVUrNGJaSFVMTCt5R1VKZ1hDRm5FPSIsIml2UGFyYW1ldGVyU3BlYyI6Ijkyd2FEMFc5cmlmN3hxUnYiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiTm9JSkpnb2IrV09tcGcwU2E5c0diN1lJaVdkbEQza0FoeVVpWnljb3hSZHBEb09mS1pCMmwva3R5SXlYa2Fqem1NVVUrNGJaSFVMTCt5R1VKZ1hDRm5FPSIsIml2UGFyYW1ldGVyU3BlYyI6Ijkyd2FEMFc5cmlmN3hxUnYiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
 [![Github Action Workflow - CI](https://github.com/aws/aws-northstar/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aws/aws-northstar/actions/workflows/ci.yml)
-[![NPM latest version](https://img.shields.io/npm/v/aws-northstar)](https://www.npmjs.com/package/aws-northstar)
+[![NorthStar Legacy NPM latest version](https://img.shields.io/npm/v/aws-northstar)](https://www.npmjs.com/package/aws-northstar)
+[![NorthStar UI NPM latest version](https://img.shields.io/npm/v/@aws-northstar/ui)](https://www.npmjs.com/package/@aws-northstar/ui)
 [![Coverage Status](https://coveralls.io/repos/github/aws/aws-northstar/badge.svg?branch=main)](https://coveralls.io/github/aws/aws-northstar?branch=main)
 [![GitHub Release Date](https://img.shields.io/github/release-date/aws/aws-northstar)](https://github.com/aws/aws-northstar/releases)
 [![NPM Download](https://img.shields.io/npm/dw/aws-northstar)](https://www.npmjs.com/package/aws-northstar)
@@ -20,6 +21,8 @@ Check out our [documentation website](https://northstar.aws-prototyping.cloud/) 
 ## Cloudscape Design System and NorthStar
 
 On July 19, 2022, AWS released [Cloudscape Design System](https://cloudscape.design/) as open source. Cloudscape is a solution for building intuitive user experiences. It offers guidelines to create web applications, along with the design resources and front-end components to streamline implementation. While NorthStar is a design system to rapidly prototype user experiences, Cloudscape is a design system that is intended for use in production environments, beyond the prototypal phase.
+
+
 
 ## Development
 
