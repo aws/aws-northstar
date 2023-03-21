@@ -4,7 +4,7 @@ NorthStar is an open source design system with reusable React components for rap
 
 Whether you are a developer or a designer, NorthStar will help you delight your customers from inception to prototype.
 
-NorthStar v2 improves upon the previous version by leveraging [Cloudscape Design System](https://cloudscape.design/) and with updates to the existing components with new features that make even better the development experience.  
+NorthStar v2 improves upon the previous version by leveraging [Cloudscape Design System](https://cloudscape.design/) and with updates to the existing components with new features that make the development experience even better.  
 
 ## Before you start
 
@@ -37,7 +37,7 @@ import NorthStarThemeProvider from '@aws-northstar/v2/components/NorthStarThemeP
 
 export default () => (
     <NorthStarThemeProvider>
-        ...redux provider, Apollo client provider, react route...
+        ...redux provider, Apollo client provider, react routre...
     </NorthStarThemeProvider>
 );
 ```

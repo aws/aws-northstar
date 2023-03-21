@@ -20,9 +20,60 @@ import StatusIndicator from '@cloudscape-design/components/status-indicator';
 import Link from '@cloudscape-design/components/link';
 import KeyValuePairs from '.';
 
+export const KEY_VALUE_PAIR_ITEMS = [
+    [
+        {
+            label: 'Distribution ID',
+            value: 'E1WG1ZNPRXT0D4',
+        },
+        {
+            label: 'Domain name',
+            value: 'example.com',
+        },
+        {
+            label: 'ARN',
+            value: 'arn:aws:cloudfront::111122223333:distribution/E1WG1ZNPRXT0D4',
+        },
+    ],
+    [
+        {
+            label: 'Status',
+            value: <StatusIndicator type="success">Available</StatusIndicator>,
+        },
+        {
+            label: 'Price class',
+            value: 'Use only US, Canada, Europe, and Asia',
+        },
+        {
+            label: 'Link',
+            value: (
+                <Link href="/" target="_blank" rel="noopener noreferrer" external={true}>
+                    Value with external link
+                </Link>
+            ),
+        },
+    ],
+    [
+        {
+            label: 'SSL Certificate',
+            description: 'Update in progress',
+            value: 37,
+            variant: 'key-value',
+        },
+        {
+            label: 'Custom SSL client support',
+        },
+        {
+            label: 'Logging',
+            value: 'Off',
+        },
+    ],
+];
+
 export default {
     component: KeyValuePairs,
     title: 'Components/KeyValuePairs',
+    excludeStories: ['KEY_VALUE_PAIR_ITEMS'],
 } as ComponentMeta<typeof KeyValuePairs>;
 
 const Template: ComponentStory<typeof KeyValuePairs> = (args) => {
@@ -35,53 +86,5 @@ const Template: ComponentStory<typeof KeyValuePairs> = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-    items: [
-        [
-            {
-                label: 'Distribution ID',
-                value: 'E1WG1ZNPRXT0D4',
-            },
-            {
-                label: 'Domain name',
-                value: 'example.com',
-            },
-            {
-                label: 'ARN',
-                value: 'arn:aws:cloudfront::111122223333:distribution/E1WG1ZNPRXT0D4',
-            },
-        ],
-        [
-            {
-                label: 'Status',
-                value: <StatusIndicator type="success">Available</StatusIndicator>,
-            },
-            {
-                label: 'Price class',
-                value: 'Use only US, Canada, Europe, and Asia',
-            },
-            {
-                label: 'Link',
-                value: (
-                    <Link href="/" target="_blank" rel="noopener noreferrer" external={true}>
-                        Value with external link
-                    </Link>
-                ),
-            },
-        ],
-        [
-            {
-                label: 'SSL Certificate',
-                description: 'Update in progress',
-                value: 37,
-                variant: 'key-value',
-            },
-            {
-                label: 'Custom SSL client support',
-            },
-            {
-                label: 'Logging',
-                value: 'Off',
-            },
-        ],
-    ],
+    items: KEY_VALUE_PAIR_ITEMS,
 };

@@ -18,19 +18,49 @@ import { Mode, Density } from '@cloudscape-design/global-styles';
 import TopNavigation, { TopNavigationProps } from '@cloudscape-design/components/top-navigation';
 import { useNorthStarThemeContext } from '../../../NorthStarThemeProvider';
 
+/**
+ * User information displayed on the right top corner of the app.
+ */
 export interface User {
+    /**
+     * Username displayed as the label of the User menu dropdown.
+     */
     username: string;
+    /**
+     * User email information displayed within the User menu dropdown.
+     */
     email?: string;
 }
 
+/**
+ * Props for Top Navigation Header
+ */
 export interface NavHeaderProps {
+    /**
+     * The title of the app.
+     */
     title: string;
+    /**
+     * The src of the logo.
+     */
     logo?: string;
+    /**
+     * The href that the header links to
+     */
     href?: string;
+    /**
+     * The user information displayed on the right top corner of the app.
+     */
     user?: User;
+    /**
+     * The callback for User Sign out
+     */
     onSignout?: () => Promise<void>;
 }
 
+/**
+ * Top Navigation Header displayed on AppLayout.
+ */
 const NavHeader: FC<NavHeaderProps> = ({ title, href = '/', logo, user, onSignout }) => {
     const { theme, density, setTheme, setDensity } = useNorthStarThemeContext();
 

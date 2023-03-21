@@ -13,23 +13,17 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { ComponentMeta } from '@storybook/react';
-import FormRenderer from '..';
-import { Template, DEFAULT_ARGS, WithInitialValue } from '../index.stories';
+import { SplitPanelProps } from '@cloudscape-design/components/split-panel';
 
-export default {
-    ...DEFAULT_ARGS,
-    title: 'Components/FormRenderer/Layout',
-    parameters: {
-        layout: 'padded',
-    },
-} as ComponentMeta<typeof FormRenderer>;
-
-export const Embeded = Template.bind({});
-Embeded.args = {
-    ...WithInitialValue.args,
-    schema: {
-        ...WithInitialValue.args.schema,
-        variant: 'embeded',
-    },
+export const splitPanelI18nStrings: SplitPanelProps.I18nStrings = {
+    preferencesTitle: 'Preferences',
+    preferencesPositionLabel: 'Split panel position',
+    preferencesPositionDescription: 'Choose the default split panel position',
+    preferencesPositionSide: 'Side',
+    preferencesPositionBottom: 'Bottom',
+    preferencesConfirm: 'Confirm',
+    preferencesCancel: 'Cancel',
+    closeButtonAriaLabel: 'Close panel',
+    openButtonAriaLabel: 'Open panel',
+    resizeHandleAriaLabel: 'Resize split panel',
 };

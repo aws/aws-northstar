@@ -18,8 +18,9 @@ import { composeStories } from '@storybook/testing-react';
 import wrapper from '@cloudscape-design/components/test-utils/dom';
 import * as stories from './index.stories';
 import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router-dom';
 
-const { Default, WithUser, WithCustomHeader } = composeStories(stories);
+const { Default, WithUser, WithCustomHeader, FormContentType } = composeStories(stories);
 
 describe('AppLayout', () => {
     it('should render default AppLayout', async () => {
@@ -69,5 +70,70 @@ describe('AppLayout', () => {
         render(<WithCustomHeader />);
 
         expect(screen.queryAllByText('Custom Header')).toHaveLength(2);
+    });
+
+    it('should be able to open/close split panel', async () => {
+        const { container } = render(
+            <BrowserRouter>
+                <stories.SplitPanel />
+            </BrowserRouter>
+        );
+
+        expect(screen.queryByText('Details')).toBeNull();
+
+        act(() => {
+            userEvent.click(screen.getByText('Open Split Panel'));
+        });
+
+        expect(screen.getByText('Details')).toBeVisible();
+        const splitPanel = wrapper(container).findSplitPanel();
+        expect(splitPanel).not.toBeNull();
+
+        act(() => {
+            userEvent.click(screen.getByText('Collapse Split Panel'));
+        });
+
+        expect(splitPanel!.findCloseButton()).toBeNull();
+
+        act(() => {
+            splitPanel!.findOpenButton()?.click();
+        });
+
+        expect(splitPanel!.findOpenButton()).toBeNull();
+
+        act(() => {
+            userEvent.click(screen.getByText('Hide Split Panel'));
+        });
+
+        expect(wrapper(container).findSplitPanel()).toBeNull();
+    });
+
+    it('should be able to open/close tools panel', async () => {
+        render(
+            <BrowserRouter>
+                <stories.ToolsPanel />
+            </BrowserRouter>
+        );
+
+        expect(screen.queryByText('Help Panel')).toBeNull();
+
+        act(() => {
+            userEvent.click(screen.getByText('Open Tools Panel'));
+        });
+
+        expect(screen.getByText('Help Panel')).toBeVisible();
+        expect(screen.getByText('Help Panel').parentNode?.parentNode).toHaveAttribute('aria-hidden', 'false');
+
+        act(() => {
+            userEvent.click(screen.getByText('Close Tools Panel'));
+        });
+
+        expect(screen.getByText('Help Panel').parentNode?.parentNode).toHaveAttribute('aria-hidden', 'true');
+    });
+
+    it('should render content of form content type', async () => {
+        render(<FormContentType />);
+
+        expect(screen.getByText('Data driven form')).toBeVisible();
     });
 });

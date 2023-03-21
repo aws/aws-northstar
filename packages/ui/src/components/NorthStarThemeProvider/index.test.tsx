@@ -13,23 +13,28 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { ComponentMeta } from '@storybook/react';
-import FormRenderer from '..';
-import { Template, DEFAULT_ARGS, WithInitialValue } from '../index.stories';
+import { render } from '@testing-library/react';
+import NorthStarThemeProvider from '.';
+import { applyMode, Mode, applyDensity, Density } from '@cloudscape-design/global-styles';
 
-export default {
-    ...DEFAULT_ARGS,
-    title: 'Components/FormRenderer/Layout',
-    parameters: {
-        layout: 'padded',
-    },
-} as ComponentMeta<typeof FormRenderer>;
+jest.mock('@cloudscape-design/global-styles');
 
-export const Embeded = Template.bind({});
-Embeded.args = {
-    ...WithInitialValue.args,
-    schema: {
-        ...WithInitialValue.args.schema,
-        variant: 'embeded',
-    },
-};
+describe('NorthStarThemeProvider', () => {
+    afterEach(() => {
+        jest.resetAllMocks();
+    });
+
+    it('should use default theme and density', async () => {
+        render(<NorthStarThemeProvider />);
+
+        expect(applyMode).toHaveBeenCalledWith(Mode.Light);
+        expect(applyDensity).toHaveBeenCalledWith(Density.Comfortable);
+    });
+
+    it('should render key value pair with string value', async () => {
+        render(<NorthStarThemeProvider theme={Mode.Dark} density={Density.Compact} />);
+
+        expect(applyMode).toHaveBeenCalledWith(Mode.Dark);
+        expect(applyDensity).toHaveBeenCalledWith(Density.Compact);
+    });
+});

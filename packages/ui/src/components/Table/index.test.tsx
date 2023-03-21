@@ -20,7 +20,7 @@ import Table from './';
 import * as stories from './index.stories';
 import userEvent from '@testing-library/user-event';
 
-const { Default, LongData, Empty } = composeStories(stories);
+const { Default, LongData, Empty, DefaultSelected } = composeStories(stories);
 
 describe('Table', () => {
     afterEach(() => {
@@ -108,5 +108,42 @@ describe('Table', () => {
             pageIndex: 1,
             filterText: '',
         });
+    });
+
+    it('should handle selection change', async () => {
+        const handleSelectionChange = jest.fn();
+        const { container } = render(<Default onSelectionChange={handleSelectionChange} />);
+
+        const table = wrapper(container).findTable();
+
+        act(() => table?.findRowSelectionArea(1)?.click());
+
+        expect(handleSelectionChange).toHaveBeenCalledWith(
+            expect.objectContaining({
+                detail: {
+                    selectedItems: [
+                        {
+                            id: 'id0000011',
+                            items: ['item111', 'item112', 'item113'],
+                            name: 'Order 11',
+                            totalAmount: 5,
+                        },
+                    ],
+                },
+            })
+        );
+    });
+
+    it('should render default selected item', async () => {
+        const { container } = render(<DefaultSelected />);
+
+        const table = wrapper(container).findTable();
+
+        const selectedRows = table?.findSelectedRows();
+
+        expect(selectedRows).toHaveLength(2);
+
+        expect(selectedRows![0].getElement()).toHaveTextContent('id0000011');
+        expect(selectedRows![1].getElement()).toHaveTextContent('id0000016');
     });
 });

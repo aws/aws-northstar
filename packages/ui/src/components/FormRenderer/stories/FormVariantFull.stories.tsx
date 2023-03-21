@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import { ComponentMeta } from '@storybook/react';
 import FormRenderer from '..';
-import { Template, DEFAULT_ARGS, Default } from '../index.stories';
+import { Template, DEFAULT_ARGS, WithInitialValue } from '../index.stories';
 
 export default {
     ...DEFAULT_ARGS,
@@ -24,8 +24,5 @@ export default {
 
 export const DefaultFullLayout = Template.bind({});
 DefaultFullLayout.args = {
-    ...Default.args,
-    schema: {
-        ...Default.args.schema,
-    },
+    ...WithInitialValue.args,
 };

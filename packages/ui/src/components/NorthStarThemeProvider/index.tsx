@@ -19,7 +19,13 @@ import { applyMode, Mode, applyDensity, Density } from '@cloudscape-design/globa
 import '@cloudscape-design/global-styles/index.css';
 
 export interface NorthStarThemeProviderProps {
+    /**
+     * The default theme.
+     */
     theme?: Mode.Light | Mode.Dark;
+    /**
+     * The default density.
+     */
     density?: Density.Comfortable | Density.Compact;
 }
 
@@ -39,6 +45,9 @@ const initialState: NorthStarThemeContextApi = {
 
 const NorthStarThemeContext = createContext<NorthStarThemeContextApi>(initialState);
 
+/**
+ * NorthStarThemeProvider provides a layer abstract to interact with Cloudscape theme and theme related settings.
+ */
 const NorthStarThemeProvider: FC<PropsWithChildren<NorthStarThemeProviderProps>> = ({ children, ...props }) => {
     const [theme, setTheme] = useState(props.theme || Mode.Light);
     const [density, setDensity] = useState(props.density || Density.Comfortable);

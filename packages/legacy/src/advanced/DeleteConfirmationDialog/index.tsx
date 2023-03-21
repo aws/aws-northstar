@@ -23,33 +23,11 @@ import FormField from '../../components/FormField';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-export interface DeleteConfirmationWithFrictionProps {
-    variant?: 'friction';
-    /**
-     * The label of the input field.
-     */
-    label?: ReactNode;
-    /**
-     * The placeholder text of the input field.
-     */
-    placeholderText?: string;
-    /**
-     * The hint text of the input field.
-     */
-    hintText?: string;
-    /**
-     * The confirmation text that is expected from users to type in the input field.
-     */
-    confirmationText?: string;
-}
-
-export interface DeleteConfirmationWithConfirmationProps {
-    variant: 'confirmation';
-}
+export type VariantType = 'confirmation' | 'friction';
 
 export interface DeleteConfirmationBaseProps {
     /**The variant of the Delete Confirmation Dialog*/
-    variant?: 'confirmation' | 'friction';
+    variant?: VariantType;
     /**
      * Determines whether the Delete Confirmation Dialog is displayed on the screen. <br/>
      * The Delete Confirmation Dialog is hidden by default. Set this property to true to show it.
@@ -83,6 +61,36 @@ export interface DeleteConfirmationBaseProps {
      * Override the Delete button label.
      */
     deleteButtonText?: string;
+}
+
+export interface DeleteConfirmationWithFrictionProps {
+    /**
+     * Overrides the variant props DeleteConfirmationBaseProps to be 'friction'
+     */
+    variant?: 'friction';
+    /**
+     * The label of the input field.
+     */
+    label?: ReactNode;
+    /**
+     * The placeholder text of the input field.
+     */
+    placeholderText?: string;
+    /**
+     * The hint text of the input field.
+     */
+    hintText?: string;
+    /**
+     * The confirmation text that is expected from users to type in the input field.
+     */
+    confirmationText?: string;
+}
+
+export interface DeleteConfirmationWithConfirmationProps {
+    /**
+     * Overrides the variant props DeleteConfirmationBaseProps to be 'confirmation'
+     */
+    variant: 'confirmation';
 }
 
 export type DeleteConfirmationDialogProps = DeleteConfirmationBaseProps &

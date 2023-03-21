@@ -17,16 +17,28 @@ import { withRouter } from 'storybook-addon-react-router-v6';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Badge from '@cloudscape-design/components/badge';
 import SpaceBetween from '@cloudscape-design/components/space-between';
+import Box from '@cloudscape-design/components/box';
+import Button from '@cloudscape-design/components/button';
 import TopNavigation from '@cloudscape-design/components/top-navigation';
 import { composeStory } from '@storybook/testing-react';
-import AppLayout from '.';
-import KeyValuePairsStoryMeta, { Default as KeyValuePairsStory } from '../KeyValuePairs/index.stories';
+import AppLayout, { useAppLayoutContext } from '.';
+import KeyValuePairsStoryMeta, {
+    Default as KeyValuePairsStory,
+    KEY_VALUE_PAIR_ITEMS,
+} from '../KeyValuePairs/index.stories';
+import KeyValuePairsComponent from '../KeyValuePairs';
+import FormRendererStoryMeta, {
+    DefaultFullLayout as DefaultFullLayoutStory,
+} from '../FormRenderer/stories/FormVariantFull.stories';
 import TableMeta, { LongData as TableStory } from '../Table/index.stories';
 
 export default {
     component: AppLayout,
     title: 'Components/AppLayout',
     decorators: [withRouter],
+    argTypes: {
+        onSignout: { action: true },
+    },
     parameters: {
         layout: 'fullscreen',
     },
@@ -34,14 +46,17 @@ export default {
 
 const KeyValuePairs = composeStory(KeyValuePairsStory, KeyValuePairsStoryMeta);
 const Table = composeStory(TableStory, TableMeta);
+const FormRendererFullLayout = composeStory(DefaultFullLayoutStory, FormRendererStoryMeta);
 
 const Template: ComponentStory<typeof AppLayout> = (args) => {
     return (
         <AppLayout {...args}>
-            <SpaceBetween size="l">
-                <KeyValuePairs />
-                <Table />
-            </SpaceBetween>
+            {args.children ?? (
+                <SpaceBetween size="l">
+                    <KeyValuePairs />
+                    <Table />
+                </SpaceBetween>
+            )}
         </AppLayout>
     );
 };
@@ -98,4 +113,118 @@ export const WithCustomHeader = Template.bind({});
 WithCustomHeader.args = {
     ...Default.args,
     header: CustomHeader,
+};
+
+export const FormContentType = Template.bind({});
+FormContentType.args = {
+    ...Default.args,
+    contentType: 'form',
+    children: <FormRendererFullLayout />,
+};
+
+const SplitPanelExamples = () => {
+    return (
+        <Box padding="l">
+            <KeyValuePairsComponent items={KEY_VALUE_PAIR_ITEMS} />
+        </Box>
+    );
+};
+
+const SplitPanelInner = () => {
+    const { setSplitPanelOpen, setSplitPanelProps } = useAppLayoutContext();
+
+    return (
+        <SpaceBetween direction="vertical" size="l">
+            <Button
+                onClick={() => {
+                    setSplitPanelProps({
+                        header: 'Details',
+                        children: <SplitPanelExamples />,
+                    });
+
+                    setSplitPanelOpen(true);
+                }}
+            >
+                Open Split Panel
+            </Button>
+            <Button
+                onClick={() => {
+                    setSplitPanelOpen(false);
+                }}
+            >
+                Collapse Split Panel
+            </Button>
+            <Button
+                onClick={() => {
+                    setSplitPanelProps(undefined);
+                }}
+            >
+                Hide Split Panel
+            </Button>
+        </SpaceBetween>
+    );
+};
+
+export const SplitPanel = () => {
+    return (
+        <AppLayout
+            title="HelloWorld App"
+            navigationItems={[
+                { type: 'link', text: 'home', href: '/' },
+                { type: 'link', text: 'Page 1', href: '/page1' },
+                { type: 'link', text: 'Page 2', href: '/page2' },
+                { type: 'link', text: 'Page 3', href: '/page3' },
+                { type: 'link', text: 'Page 4', href: '/page4' },
+            ]}
+        >
+            <SplitPanelInner />
+        </AppLayout>
+    );
+};
+
+const ToolsExample = () => {
+    return <Box padding="l">Help Panel</Box>;
+};
+
+const ToolsInner = () => {
+    const { setTools, setToolsOpen, setToolsWidth } = useAppLayoutContext();
+
+    return (
+        <SpaceBetween direction="vertical" size="l">
+            <Button
+                onClick={() => {
+                    setTools(<ToolsExample />);
+                    setToolsOpen(true);
+                    setToolsWidth(500);
+                }}
+            >
+                Open Tools Panel
+            </Button>
+            <Button
+                onClick={() => {
+                    setToolsOpen(false);
+                }}
+            >
+                Close Tools Panel
+            </Button>
+        </SpaceBetween>
+    );
+};
+
+export const ToolsPanel = () => {
+    return (
+        <AppLayout
+            title="HelloWorld App"
+            toolsHide={false}
+            navigationItems={[
+                { type: 'link', text: 'home', href: '/' },
+                { type: 'link', text: 'Page 1', href: '/page1' },
+                { type: 'link', text: 'Page 2', href: '/page2' },
+                { type: 'link', text: 'Page 3', href: '/page3' },
+                { type: 'link', text: 'Page 4', href: '/page4' },
+            ]}
+        >
+            <ToolsInner />
+        </AppLayout>
+    );
 };
