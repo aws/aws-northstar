@@ -15,7 +15,6 @@
  ******************************************************************************************************************** */
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Container from '@cloudscape-design/components/container';
 import FormRenderer, { componentTypes, validatorTypes } from '@aws-northstar/ui/components/FormRenderer';
 
 export const items = Array.from(Array(8).keys()).map((i) => ({
@@ -138,13 +137,11 @@ const formSchema = {
 const OrderForm: FC = () => {
     const navigate = useNavigate();
     return (
-        <Container>
-            <FormRenderer
-                schema={formSchema}
-                onSubmit={(data: any) => alert(`Data Submitted: ${JSON.stringify(data)}`)}
-                onCancel={() => navigate(-1)}
-            />
-        </Container>
+        <FormRenderer
+            schema={formSchema}
+            onSubmit={(data: any) => alert(`Data Submitted: ${JSON.stringify(data)}`)}
+            onCancel={() => navigate(-1)}
+        />
     );
 };
 

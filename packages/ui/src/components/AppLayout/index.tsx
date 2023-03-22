@@ -207,24 +207,7 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
                     )
                 }
                 content={
-                    !contentType || contentType === 'default' ? (
-                        <div
-                            style={{
-                                display: 'flex',
-                            }}
-                        >
-                            <div
-                                style={{
-                                    flex: '1 0 auto',
-                                    overflowY: 'scroll',
-                                }}
-                            >
-                                <Box margin="l">{children}</Box>
-                            </div>
-                        </div>
-                    ) : (
-                        children
-                    )
+                    !contentType || contentType === 'default' ? <Box padding={{ top: 'l' }}>{children}</Box> : children
                 }
                 {...props}
                 contentType={contentType}
@@ -244,6 +227,7 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
                 toolsWidth={toolsWidth}
                 onToolsChange={({ detail }) => setToolsOpen(detail.open)}
             />
+            {}
         </AppLayoutContext.Provider>
     );
 };
