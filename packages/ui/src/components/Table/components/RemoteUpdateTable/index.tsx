@@ -21,6 +21,7 @@ import Header from '@cloudscape-design/components/header';
 import Button from '@cloudscape-design/components/button';
 import { NonCancelableEventHandler } from '@cloudscape-design/components/internal/events';
 import { useDebouncedCallback } from 'use-debounce';
+import getPageCount from '../../utils/getPageCount';
 
 import EmptyState from '../EmptyState';
 import { RemoteUpdateTableProps, InternalTableProps, FetchDataOptions } from '../../types';
@@ -112,15 +113,7 @@ const RemoteUpdateTable: FC<RemoteUpdateTableProps & InternalTableProps> = ({
     }, [fetchOption.filterText, handleClearFilter]);
 
     const pagesCount = useMemo(() => {
-        if (!totalItemsCount || !collectionPreferences.pageSize) {
-            return 0;
-        }
-
-        if (totalItemsCount % collectionPreferences.pageSize === 0) {
-            return Math.floor(totalItemsCount / collectionPreferences.pageSize);
-        }
-
-        return Math.floor(totalItemsCount / collectionPreferences.pageSize + 1);
+        return getPageCount(totalItemsCount, collectionPreferences.pageSize);
     }, [totalItemsCount, collectionPreferences.pageSize]);
 
     const handleSortingChange: NonCancelableEventHandler<CloudscapeTableProps.SortingState<any>> = useCallback(

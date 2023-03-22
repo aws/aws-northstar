@@ -79,7 +79,7 @@ const Checkbox: FC<UseFieldApiConfig> = ({ component, ...props }) => {
     } = useFieldApi(props);
     const controlId = useUniqueId(input.name);
     const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
-    if (options && options.length > 0) {
+    if (options?.length > 0) {
         return (
             <FormField
                 label={label}

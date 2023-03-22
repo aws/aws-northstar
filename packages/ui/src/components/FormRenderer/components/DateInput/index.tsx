@@ -64,7 +64,7 @@ const DateInput: FC<UseFieldApiConfig> = (props) => {
                 readOnly={isReadOnly}
                 ariaRequired={isRequired}
                 invalid={!!errorText}
-                onChange={({ detail }: any) => input.onChange(detail.value)}
+                onChange={({ detail }) => input.onChange(detail.value)}
                 onBlur={() => input.onBlur()}
                 onFocus={() => input.onFocus()}
             />

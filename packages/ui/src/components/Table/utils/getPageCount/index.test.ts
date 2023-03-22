@@ -13,23 +13,19 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export interface FileMetadata {
-    /**
-     * File name.
-     */
-    name: string;
-    /**
-     * A DOMString representing the MIME type of the content that will be put into the file.
-     */
-    type?: string;
-    /**
-     * File size in bytes.
-     */
-    size?: number;
-    /**
-     * Last modified.
-     */
-    lastModified?: number;
-}
+import getPageCount from '.';
 
-export type FileType = File | FileMetadata;
+describe('getPageCount', () => {
+    it('should return the page count', () => {
+        expect(getPageCount()).toBe(0);
+        expect(getPageCount(undefined, 10)).toBe(0);
+        expect(getPageCount(10)).toBe(0);
+        expect(getPageCount(0, 0)).toBe(0);
+        expect(getPageCount(0, 10)).toBe(0);
+        expect(getPageCount(10, 0)).toBe(0);
+        expect(getPageCount(9, 10)).toBe(1);
+        expect(getPageCount(100, 10)).toBe(10);
+        expect(getPageCount(101, 10)).toBe(11);
+        expect(getPageCount(109, 11)).toBe(10);
+    });
+});

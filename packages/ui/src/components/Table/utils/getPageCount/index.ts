@@ -13,23 +13,13 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export interface FileMetadata {
-    /**
-     * File name.
-     */
-    name: string;
-    /**
-     * A DOMString representing the MIME type of the content that will be put into the file.
-     */
-    type?: string;
-    /**
-     * File size in bytes.
-     */
-    size?: number;
-    /**
-     * Last modified.
-     */
-    lastModified?: number;
-}
 
-export type FileType = File | FileMetadata;
+const getPageCount = (totalItemsCount?: number, pageSize?: number) => {
+    if (!totalItemsCount || !pageSize) {
+        return 0;
+    }
+
+    return Math.ceil(totalItemsCount / pageSize);
+};
+
+export default getPageCount;

@@ -18,7 +18,7 @@ import Button from '@cloudscape-design/components/button';
 import TokenGroup, { TokenGroupProps } from '@cloudscape-design/components/token-group';
 import StatusIndicator from '@cloudscape-design/components/status-indicator';
 import { FC, useCallback, useRef, useMemo, useState } from 'react';
-import { FileMetadata } from './types';
+import { FileType } from './types';
 import useUniqueId from '../../hooks/useUniqueId';
 import FileTokenLabel from './components/FileTokenLabel';
 import SpaceBetween from '@cloudscape-design/components/space-between';
@@ -47,11 +47,11 @@ export interface FileUploadProps extends FormFieldProps {
     /**
      * The list of choosen files.
      */
-    files?: (File | FileMetadata)[];
+    files?: FileType[];
     /**
      * Event handler for the file selection change event.
      */
-    onChange?: (files: (File | FileMetadata)[]) => void;
+    onChange?: (files: FileType[]) => void;
 }
 
 /**
@@ -74,7 +74,7 @@ const FileUpload: FC<FileUploadProps> = ({
     files,
     ...props
 }) => {
-    const [selectedFiles, setSelectedFiles] = useState<(File | FileMetadata)[]>(files || []);
+    const [selectedFiles, setSelectedFiles] = useState<FileType[]>(files || []);
     const id = useUniqueId(controlId);
     const inputElement = useRef<HTMLInputElement | null>(null);
     const displayedButtonText = useMemo(() => {
@@ -85,7 +85,7 @@ const FileUpload: FC<FileUploadProps> = ({
 
     const handleFileSelectionDismiss: NonCancelableEventHandler<TokenGroupProps.DismissDetail> = useCallback(
         ({ detail: { itemIndex } }) => {
-            const newFiles = [...selectedFiles.slice(0, itemIndex), ...selectedFiles.slice(itemIndex + 1)];
+            const newFiles = selectedFiles.filter((_, index) => index !== itemIndex);
 
             setSelectedFiles(newFiles);
             onChange?.(newFiles);
@@ -132,20 +132,9 @@ const FileUpload: FC<FileUploadProps> = ({
 
     const handleFileSelectionChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
         (event) => {
-            const newSelectedFiles: File[] = [];
-
-            if (event.target.files) {
-                const targetFiles = event.target.files;
-                const len = targetFiles.length;
-                for (let i = 0; i < len; i++) {
-                    const file = targetFiles.item(i);
-                    if (file) {
-                        newSelectedFiles.push(file);
-                    }
-                }
-            }
-
-            const newFiles = multi ? [...selectedFiles, ...newSelectedFiles] : [...newSelectedFiles];
+            const { files } = event.target;
+            const newSelectedFiles = files ? Array.from(files).filter((file) => file) : [];
+            const newFiles = multi ? [...selectedFiles, ...newSelectedFiles] : newSelectedFiles;
 
             setSelectedFiles(newFiles);
             onChange?.(newFiles);
@@ -187,3 +176,4 @@ const FileUpload: FC<FileUploadProps> = ({
 };
 
 export default FileUpload;
+export * from './types';
