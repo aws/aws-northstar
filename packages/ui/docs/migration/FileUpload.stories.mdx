@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from "@cloudscape-design/components/link";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
+<Meta title="Migration/FileUpload" />
+
+# Migrating from NorthStar legacy - FileUpload
+
+Use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-fileupload--default' target='_blank'>NorthStar v2 FileUpload component</Link>
+
+## Update Import
+
+```diff
+- import FileUpload from 'aws-northstar/components/FileUpload';
++ import FileUpload from '@aws-northstar/ui/components/FileUpload';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

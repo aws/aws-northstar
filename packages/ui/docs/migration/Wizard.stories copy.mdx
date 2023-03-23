@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from "@cloudscape-design/components/link";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
+<Meta title="Migration/Wizard" />
+
+# Migrating from NorthStar legacy - Wizard
+
+Use <Link href='https://cloudscape.design/components/wizard' target='_blank' external>Cloudscape Wizard component</Link>
+
+## Update Import
+
+```diff
+- import Wizard from 'aws-northstar/components/Wizard';
++ import Wizard from '@cloudscape-design/components/wizard';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

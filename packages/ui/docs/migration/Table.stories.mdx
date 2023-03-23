@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from "@cloudscape-design/components/link";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
+<Meta title="Migration/Table" />
+
+# Migrating from NorthStar legacy - Table
+
+Use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-table--default' target='_blank' external>NorthStar v2 Table component</Link>
+
+## Update Import
+
+```diff
+- import Table from 'aws-northstar/components/Table';
++ import Table from '@aws-northstar/ui/components/Table';
+```
+
+## Update Table Column Definition
+
+```diff
+- const columnDefinition: Column<DataType>[] = [
++ const columnDefinition: ColumnDefinition<DataType>[] = [
+    {
+        id: 'id',
+        width: 200,
+-       Header: 'Id',
++       header: 'Id',
+-       accessor: 'id',
++       cell: (data) => data.id,
++       sortingField: 'id', // If sorting is required on this column
+    },
+    ...
+]
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

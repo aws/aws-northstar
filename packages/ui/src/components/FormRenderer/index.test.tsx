@@ -13,12 +13,13 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render, screen, cleanup, act } from '@testing-library/react';
+import { render, screen, cleanup, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { composeStories, composeStory } from '@storybook/testing-react';
-import * as stories from './index.stories';
+import wrapper from '@cloudscape-design/components/test-utils/dom';
 import SubmittingMeta, { Submitting as SubmittingStory } from './stories/Submitting.stories';
 import ResetMeta, { Reset as ResetStory } from './stories/Reset.stories';
+import * as stories from './index.stories';
 import FormRenderer, { ValidatorMapper, componentTypes } from '.';
 
 const { Default, WithInitialValue } = composeStories(stories);
@@ -38,15 +39,95 @@ describe('FormRenderer', () => {
 
     it('should render form with controls', async () => {
         const { container } = render(<Default onSubmit={handleSubmit} onCancel={handleCancel} />);
-        await act(() => {
-            Default.play({
-                args: {
-                    onSubmit: handleSubmit,
-                    onCancel: handleCancel,
-                },
-                canvasElement: container,
-            });
+
+        act(() => {
+            userEvent.type(screen.getByLabelText('Email'), stories.TEST_DATA.email);
+            userEvent.type(screen.getByLabelText('Password'), stories.TEST_DATA.password);
+            userEvent.type(screen.getByLabelText('Number'), stories.TEST_DATA.number.toString());
+
+            userEvent.click(screen.queryAllByText('Option 1')![0]);
         });
+
+        await waitFor(() => expect(screen.queryAllByLabelText('Option 1')![0]).toBeChecked());
+
+        act(() => {
+            userEvent.click(screen.queryAllByText('Option 2')![0]);
+        });
+
+        await waitFor(() => expect(screen.queryAllByLabelText('Option 2')![0]).toBeChecked());
+
+        act(() => {
+            userEvent.click(screen.queryAllByText('Option 3')![1]);
+        });
+
+        await waitFor(() => expect(screen.queryAllByLabelText('Option 3')![1]).toBeChecked());
+
+        const select = wrapper(container).findSelect();
+
+        act(() => {
+            select?.openDropdown();
+        });
+
+        act(() => {
+            select?.selectOptionByValue('2');
+            select?.closeDropdown();
+        });
+
+        act(() => {
+            userEvent.type(screen.getByLabelText('Autosuggest'), 'Lambda');
+        });
+
+        const autosugguest = wrapper(container).findAutosuggest();
+        const dropdown = autosugguest?.findDropdown();
+
+        await waitFor(() => expect(dropdown?.findOptionByValue('Lambda')?.getElement()).toBeVisible());
+
+        act(() => {
+            userEvent.click(dropdown?.findOptionByValue('Lambda')?.getElement()!);
+        });
+
+        const multiSelect = wrapper(container).findMultiselect();
+
+        act(() => {
+            multiSelect?.openDropdown();
+        });
+
+        act(() => {
+            multiSelect?.selectOptionByValue('EC2');
+        });
+
+        act(() => {
+            multiSelect?.selectOptionByValue('Lambda');
+            multiSelect?.closeDropdown();
+            multiSelect?.blur();
+        });
+
+        act(() => {
+            userEvent.type(screen.getByLabelText('Textarea'), stories.TEST_DATA.textarea);
+            userEvent.type(screen.getByText('Switch'), stories.TEST_DATA.textarea);
+
+            wrapper(container).findDatePicker()?.setInputValue('2022/01/01');
+        });
+
+        const dateRangePicker = wrapper(container).findDateRangePicker();
+
+        act(() => {
+            dateRangePicker?.openDropdown();
+        });
+
+        act(() => {
+            userEvent.click(screen.getByLabelText('Last 5 minutes'));
+        });
+
+        await waitFor(() => expect(screen.getByLabelText('Last 5 minutes')).toBeChecked());
+
+        act(() => {
+            userEvent.click(screen.getByText('Apply'));
+            userEvent.click(screen.getByLabelText('I understand the terms and condition'));
+            userEvent.click(screen.getByText('Submit'));
+        });
+
+        expect(handleSubmit).toHaveBeenCalledWith(stories.TEST_DATA, expect.anything(), expect.anything());
     });
 
     it('should trigger validation', async () => {

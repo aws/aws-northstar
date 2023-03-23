@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from "@cloudscape-design/components/link";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
+<Meta title="Migration/Button" />
+
+# Migrating from NorthStar legacy - Button
+
+Use <Link href='https://cloudscape.design/components/button' target='_blank'>Cloudscape Button component </Link>
+
+## Update Import
+
+```diff
+- import Button from 'aws-northstar/components/Button';
++ import Button from '@cloudscape-design/components/button';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

@@ -14,12 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { userEvent, within, waitFor } from '@storybook/testing-library';
-import { ReactFramework } from '@storybook/react';
-import { PlayFunction } from '@storybook/csf';
-import { expect } from '@storybook/jest';
-import wrapper from '@cloudscape-design/components/test-utils/dom';
-import FormRenderer, { componentTypes, validatorTypes, FormRendererProps } from '.';
+
+import FormRenderer, { componentTypes, validatorTypes } from '.';
 import { awsServices } from './fixtures/data';
 
 export const DEFAULT_ARGS = {
@@ -64,57 +60,6 @@ export const TEST_DATA = {
         type: 'relative',
         unit: 'minute',
     },
-};
-
-const playFormRenderDefault: PlayFunction<ReactFramework, FormRendererProps> = async ({ args, canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await userEvent.type(canvas.getByLabelText('Email'), TEST_DATA.email);
-    await userEvent.type(canvas.getByLabelText('Password'), TEST_DATA.password);
-    await userEvent.type(canvas.getByLabelText('Number'), TEST_DATA.number.toString());
-
-    await userEvent.click(canvas.queryAllByText('Option 1')![0]);
-    await waitFor(() => expect(canvas.queryAllByLabelText('Option 1')![0]).toBeChecked());
-
-    await userEvent.click(canvas.queryAllByText('Option 2')![0]);
-    await waitFor(() => expect(canvas.queryAllByLabelText('Option 2')![0]).toBeChecked());
-
-    await userEvent.click(canvas.queryAllByText('Option 3')![1]);
-    await waitFor(() => expect(canvas.queryAllByLabelText('Option 3')![1]).toBeChecked());
-
-    const select = wrapper(canvasElement).findSelect();
-    select?.openDropdown();
-    select?.selectOptionByValue('2');
-    select?.closeDropdown();
-
-    await userEvent.type(canvas.getByLabelText('Autosuggest'), 'Lambda');
-    const autosugguest = wrapper(canvasElement).findAutosuggest();
-    const dropdown = autosugguest?.findDropdown();
-    await waitFor(() => expect(dropdown?.findOptionByValue('Lambda')?.getElement()).toBeVisible());
-    await userEvent.click(dropdown?.findOptionByValue('Lambda')?.getElement()!);
-
-    const multiSelect = wrapper(canvasElement).findMultiselect();
-    multiSelect?.openDropdown();
-    multiSelect?.selectOptionByValue('EC2');
-    multiSelect?.selectOptionByValue('Lambda');
-    multiSelect?.closeDropdown();
-    multiSelect?.blur();
-
-    await userEvent.type(canvas.getByLabelText('Textarea'), TEST_DATA.textarea);
-    await userEvent.type(canvas.getByText('Switch'), TEST_DATA.textarea);
-
-    wrapper(canvasElement).findDatePicker()?.setInputValue('2022/01/01');
-
-    const dateRangePicker = wrapper(canvasElement).findDateRangePicker();
-    dateRangePicker?.openDropdown();
-    await userEvent.click(canvas.getByLabelText('Last 5 minutes'));
-    await waitFor(() => expect(canvas.getByLabelText('Last 5 minutes')).toBeChecked());
-    await userEvent.click(canvas.getByText('Apply'));
-
-    await userEvent.click(canvas.getByLabelText('I understand the terms and condition'));
-    await userEvent.click(canvas.getByText('Submit'));
-
-    expect(args.onSubmit).toHaveBeenCalledWith(TEST_DATA, expect.anything(), expect.anything());
 };
 
 export default {
@@ -364,7 +309,6 @@ Default.args = {
         ],
     },
 };
-Default.play = playFormRenderDefault;
 
 export const WithInitialValue = Template.bind({});
 WithInitialValue.args = {

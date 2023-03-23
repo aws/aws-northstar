@@ -1,0 +1,22 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from "@cloudscape-design/components/link";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
+<Meta title="Migration/KeyValuePair" />
+
+# Migrating from NorthStar legacy - KeyValuePair
+
+Use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-keyvaluepair--default' target='_blank'>NorthStar v2 KeyValuePair component</Link>. 
+Alternatively, you can use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-keyvaluepairs--default' target='_blank'>NorthStar v2 KeyValuePairs component</Link> 
+to display a list of key value pairs in a column layout. 
+
+## Update Import
+
+```diff
+- import KeyValuePair from 'aws-northstar/components/KeyValuePair';
++ import KeyValuePair from '@aws-northstar/ui/components/KeyValuePair';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};
