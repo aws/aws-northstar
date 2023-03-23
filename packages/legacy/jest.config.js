@@ -29,6 +29,7 @@ module.exports = {
     },
     globalSetup: './jest/jest.globalsetup.js',
     setupFilesAfterEnv: ['./jest/jest.setup.ts'],
+    maxWorkers: '50%',
     coverageThreshold: {
         global: {
             branches: 80,

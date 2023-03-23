@@ -1,5 +1,5 @@
 {
-  "name": "aws-northstar-demo",
+  "name": "aws-northstar-demo-legacy",
   "version": "0.0.1-development",
   "private": true,
   "author": "Amazon Web Services",
@@ -35,7 +35,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject"
   },
   "jest": {

@@ -1,0 +1,22 @@
+{
+    "extends": ["react-app", "plugin:prettier/recommended", "plugin:storybook/recommended"],
+    "plugins": ["header"],
+    "rules": {
+        "header/header": [2, "./header.js"],
+        "no-restricted-imports": [
+            2,
+            {
+                "paths": ["@cloudscape-design/components"],
+                "patterns": ["@cloudscape-design/*/*/*", "!@cloudscape-design/components/test-utils/*", "!@cloudscape-design/components/internal/events"]
+            }
+        ]
+    },
+    "overrides": [
+        {
+            "files": ["src/**/*.stories.tsx", "src/__mocks__/*.ts"],
+            "rules": {
+                "import/no-anonymous-default-export": "off"
+            }
+        }
+    ]
+}
