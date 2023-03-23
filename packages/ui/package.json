@@ -21,7 +21,7 @@
     "build:package": "tsc --build tsconfig.build.json",
     "build": "yarn build:package && yarn generate:attribution && yarn build:package-json && yarn build:readme && yarn build:copy-files",
     "check:all": "yarn test:ci && yarn build && yarn storybook:build && yarn styleguide:build",
-    "generate:attribution": "generate-attribution && mv oss-attribution/attribution.txt LICENSE-THIRD-PARTY",
+    "generate:attribution": "yarn generate-attribution && mv oss-attribution/attribution.txt LICENSE-THIRD-PARTY",
     "license:check": "yarn license-checker --summary --production --excludePrivatePackages --onlyAllow 'MIT;Apache-2.0;Unlicense;BSD;BSD*;BSD-2-Clause;BSD-3-Clause;ISC;Zlib;WTFPL;'",
     "semantic-release": "semantic-release --dry-run",
     "storybook:build": "build-storybook -o storybook.out",

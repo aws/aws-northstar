@@ -37,7 +37,7 @@ import NorthStarThemeProvider from '@aws-northstar/v2/components/NorthStarThemeP
 
 export default () => (
     <NorthStarThemeProvider>
-        ...redux provider, Apollo client provider, react routre...
+        ...redux provider, Apollo client provider, react router...
     </NorthStarThemeProvider>
 );
 ```
