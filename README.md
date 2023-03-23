@@ -2,7 +2,6 @@
 
 [![CodeBuild Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiTm9JSkpnb2IrV09tcGcwU2E5c0diN1lJaVdkbEQza0FoeVVpWnljb3hSZHBEb09mS1pCMmwva3R5SXlYa2Fqem1NVVUrNGJaSFVMTCt5R1VKZ1hDRm5FPSIsIml2UGFyYW1ldGVyU3BlYyI6Ijkyd2FEMFc5cmlmN3hxUnYiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiTm9JSkpnb2IrV09tcGcwU2E5c0diN1lJaVdkbEQza0FoeVVpWnljb3hSZHBEb09mS1pCMmwva3R5SXlYa2Fqem1NVVUrNGJaSFVMTCt5R1VKZ1hDRm5FPSIsIml2UGFyYW1ldGVyU3BlYyI6Ijkyd2FEMFc5cmlmN3hxUnYiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
 [![Github Action Workflow - CI](https://github.com/aws/aws-northstar/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aws/aws-northstar/actions/workflows/ci.yml)
-[![NorthStar Legacy NPM latest version](https://img.shields.io/npm/v/aws-northstar)](https://www.npmjs.com/package/aws-northstar)
 [![NorthStar UI NPM latest version](https://img.shields.io/npm/v/@aws-northstar/ui)](https://www.npmjs.com/package/@aws-northstar/ui)
 [![Coverage Status](https://coveralls.io/repos/github/aws/aws-northstar/badge.svg?branch=main)](https://coveralls.io/github/aws/aws-northstar?branch=main)
 [![GitHub Release Date](https://img.shields.io/github/release-date/aws/aws-northstar)](https://github.com/aws/aws-northstar/releases)
@@ -13,8 +12,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/aws/aws-northstar)](https://github.com/aws/aws-northstar/issues)
 [![GitHub issue resolution](https://isitmaintained.com/badge/resolution/aws/aws-northstar.svg)](https://github.com/aws/aws-northstar/issues)
 
-
-NorthStar aims to be the standard for rapidly prototyping intuitive, meaningful and accessible user experiences. It simplifies your work and ensures consistent, predictable experiences at scale for your customers. With NorthStar, you can focus on innovation and do more with less.
+NorthStar is an open source design system with reusable React components for rapidly prototyping intuitive, meaningful and accessible user experience. It simplifies your work and ensures consistent, predictable user experience at scale for your customers. With NorthStar, you can focus on innovation and do more with less.
 
 Check out our [documentation website](https://northstar.aws-prototyping.cloud/) for more details.
 
