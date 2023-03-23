@@ -79,7 +79,11 @@
         "terser": "^5.15.1",
         "react-docgen-typescript": "2.2.2",
         "npm/chalk": "^4.1.2",
-        "npm": "^8.11.0"
+        "npm": "^8.11.0",
+        "underscore": "^1.12.1",
+        "nth-check": "^2.0.1",
+        "deep-extend": "^0.5.1",
+        "debug": "^2.6.9"
     },
     "workspaces": {
         "packages": [
