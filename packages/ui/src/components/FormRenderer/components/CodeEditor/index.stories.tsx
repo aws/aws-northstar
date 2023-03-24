@@ -31,7 +31,7 @@ Default.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/code-editor/" rel="noreferrer">
+                <a target="_blank" href="https://cloudscape.design/components/code-editor/" rel="noreferrer noopener">
                     Code Editor
                 </a>
             </>

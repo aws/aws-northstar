@@ -1,6 +1,6 @@
 ### Examples
 
-**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/scatterchart" target="_blank">NorthStar Storybook</a>.
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/charts-scatterchart--default" target="_blank" rel="noreferrer noopener">NorthStar Storybook</a>.
 
 ```jsx
 import ScatterChart, { Scatter, NORTHSTAR_COLORS, YAxis, XAxis, Tooltip, Legend, CartesianGrid } from 'aws-northstar/charts/ScatterChart';

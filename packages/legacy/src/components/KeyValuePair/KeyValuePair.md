@@ -1,6 +1,6 @@
 ### Examples
 
-**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/keyvaluepair" target="_blank">NorthStar Storybook</a>.
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/components-keyvaluepair--default" target="_blank" rel="noreferrer noopener">NorthStar Storybook</a>.
 
 ```jsx
 import KeyValuePair from 'aws-northstar/components/KeyValuePair';

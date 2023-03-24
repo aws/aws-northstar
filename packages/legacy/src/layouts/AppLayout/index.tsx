@@ -199,12 +199,12 @@ export interface AppLayoutProps {
     /**SideNavigation drawer.*/
     navigation?: ReactElement<SideNavigationProps>;
     /**Help Panel drawer <br/>
-     * Alternatively, the helpPanel can be added dynamically via <b>setHelpPanelContent</b> callback in the AppLayoutContext. See <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/applayout--dynamic-help-panel" target="_blank">example</a>.
+     * Alternatively, the helpPanel can be added dynamically via <b>setHelpPanelContent</b> callback in the AppLayoutContext. See <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/layouts-applayout--dynamic-help-panel" target="_blank" rel="noreferrer noopener">example</a>.
      */
     helpPanel?: ReactElement<HelpPanelProps>;
     /**
      * Split Panel drawer <br/>
-     * Alternatively, the splitPanel can be added dynamically via <b>setSplitPanelContent</b> callback in the AppLayoutContext. See <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/applayout--dynamic-split-panel" target="_blank">example</a>.
+     * Alternatively, the splitPanel can be added dynamically via <b>setSplitPanelContent</b> callback in the AppLayoutContext. See <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/layouts-applayout--dynamic-split-panel" target="_blank" rel="noreferrer noopener">example</a>.
      */
     splitPanel?: ReactNode;
     /**Whether to render padding within the content area*/
@@ -216,7 +216,7 @@ export interface AppLayoutProps {
     /**A list of notifications. <br/>
      * The notifications are displayed on top of the main content in the scrollable area,
      * it occupies the full width and is not affected by the padding that is added to the content region. <br/>
-     * Alternatively, the notification can be pushed dynamically via <b>addNotification</b> callback in the AppLayoutContext. See <a href='http://https://storybook.northstar.aws-prototyping.cloud/?path=/story/applayout--dynamic-notification-add' target="_blank">example</a>.
+     * Alternatively, the notification can be pushed dynamically via <b>addNotification</b> callback in the AppLayoutContext. See <a href='http://https://storybook.northstar.aws-prototyping.cloud/?path=/story/layouts-applayout--dynamic-notification-add' target="_blank" rel="noreferrer noopener">example</a>.
      * */
     notifications?: Notification[];
     /**Maximum number of notifications to be displayed*/

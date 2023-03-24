@@ -1,6 +1,6 @@
 ### Examples
 
-**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/input" target="_blank">NorthStar Storybook</a>.
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/components-input--default" target="_blank" rel="noreferrer noopener">NorthStar Storybook</a>.
 
 ```jsx
 import Input from 'aws-northstar/components/Input';

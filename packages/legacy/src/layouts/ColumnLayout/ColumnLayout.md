@@ -1,6 +1,6 @@
 ### Examples
 
-**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/columnlayout" target="_blank">NorthStar Storybook</a>.
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/layouts-columnlayout--default" target="_blank" rel="noreferrer noopener">NorthStar Storybook</a>.
 
 ColumnLayout with dividers
 
@@ -62,7 +62,7 @@ import KeyValuePair from 'aws-northstar/components/KeyValuePair';
 import Stack from 'aws-northstar/layouts/Stack';
 
 const ExternalLink = (
-    <Link href="https://www.amazon.com" target="_blank">
+    <Link href="https://www.amazon.com" target="_blank" external>
         Value with external link
     </Link>
 );

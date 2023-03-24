@@ -28,7 +28,7 @@ Select.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/select" rel="noreferrer">
+                <a target="_blank" href="https://cloudscape.design/components/select" rel="noreferrer noopener">
                     Select
                 </a>
             </>
@@ -88,7 +88,7 @@ Multiselect.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/multiselectd" rel="noreferrer">
+                <a target="_blank" href="https://cloudscape.design/components/multiselectd" rel="noreferrer noopener">
                     Multiselect
                 </a>
             </>
@@ -178,7 +178,7 @@ Autosuggest.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/autosuggest" rel="noreferrer">
+                <a target="_blank" href="https://cloudscape.design/components/autosuggest" rel="noreferrer noopener">
                     Autosuggest
                 </a>
             </>

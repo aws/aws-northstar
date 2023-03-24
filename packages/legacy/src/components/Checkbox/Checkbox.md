@@ -1,6 +1,6 @@
 ### Examples
 
-**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/checkbox" target="_blank">NorthStar Storybook</a>.
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/components-checkbox--default" target="_blank" rel="noreferrer noopener">NorthStar Storybook</a>.
 
 ```jsx
 import Checkbox from 'aws-northstar/components/Checkbox';

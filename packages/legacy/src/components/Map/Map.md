@@ -1,6 +1,6 @@
 ### Usage
 
-To use NorthStar Map Component, you will need a <a href="https://docs.mapbox.com/help/getting-started/access-tokens/" target="_blank">MapBox access token</a>.
+To use NorthStar Map Component, you will need a <a href="https://docs.mapbox.com/help/getting-started/access-tokens/" target="_blank" rel="noreferrer noopener">MapBox access token</a>.
 
 ## Installing additional dependencies
 

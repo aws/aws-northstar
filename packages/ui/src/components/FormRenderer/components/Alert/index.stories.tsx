@@ -29,7 +29,7 @@ Default.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/alert/" rel="noreferrer">
+                <a target="_blank" href="https://cloudscape.design/components/alert/" rel="noreferrer noopener">
                     Alert
                 </a>
             </>

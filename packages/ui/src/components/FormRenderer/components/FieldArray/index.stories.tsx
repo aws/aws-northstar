@@ -28,7 +28,11 @@ Default.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/attribute-editor/" rel="noreferrer">
+                <a
+                    target="_blank"
+                    href="https://cloudscape.design/components/attribute-editor/"
+                    rel="noreferrer noopener"
+                >
                     Attribute Editor
                 </a>
             </>

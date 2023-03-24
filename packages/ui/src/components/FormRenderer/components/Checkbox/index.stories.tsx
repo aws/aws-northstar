@@ -28,7 +28,7 @@ Single.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/checkbox" rel="noreferrer">
+                <a target="_blank" href="https://cloudscape.design/components/checkbox" rel="noreferrer noopener">
                     Checkbox
                 </a>
             </>
@@ -78,7 +78,7 @@ Multiple.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/checkbox" rel="noreferrer">
+                <a target="_blank" href="https://cloudscape.design/components/checkbox" rel="noreferrer noopener">
                     Checkbox
                 </a>
             </>

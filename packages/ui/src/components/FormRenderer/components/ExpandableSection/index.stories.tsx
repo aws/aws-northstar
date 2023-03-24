@@ -28,7 +28,11 @@ Default.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/expandable-section" rel="noreferrer">
+                <a
+                    target="_blank"
+                    href="https://cloudscape.design/components/expandable-section"
+                    rel="noreferrer noopener"
+                >
                     Expandable Section
                 </a>
             </>
@@ -64,7 +68,11 @@ Container.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/expandable-section" rel="noreferrer">
+                <a
+                    target="_blank"
+                    href="https://cloudscape.design/components/expandable-section"
+                    rel="noreferrer noopener"
+                >
                     Expandable Section
                 </a>
             </>
@@ -102,7 +110,11 @@ ExpandedContainer.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/expandable-section" rel="noreferrer">
+                <a
+                    target="_blank"
+                    href="https://cloudscape.design/components/expandable-section"
+                    rel="noreferrer noopener"
+                >
                     Expandable Section
                 </a>
             </>

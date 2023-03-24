@@ -1,6 +1,6 @@
 ### Examples
 
-**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/alert" target="_blank">NorthStar Storybook</a>.
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/components-alert--success" target="_blank" rel="noreferrer noopener">NorthStar Storybook</a>.
 
 ```jsx
 import Alert from 'aws-northstar/components/Alert';

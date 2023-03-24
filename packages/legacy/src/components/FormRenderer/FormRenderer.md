@@ -24,7 +24,7 @@ return (
 
 ### Examples
 
-**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/formrenderer" target="_blank">NorthStar Storybook</a>.
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/components-formrenderer--default" target="_blank" rel="noreferrer noopener">NorthStar Storybook</a>.
 
 ```jsx
 import FormRenderer, { componentTypes, validatorTypes } from 'aws-northstar/components/FormRenderer';

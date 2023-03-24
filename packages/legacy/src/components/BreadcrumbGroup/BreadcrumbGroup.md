@@ -1,6 +1,6 @@
 ### Examples
 
-**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/breadcrumbgroup" target="_blank">NorthStar Storybook</a>.
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=components-breadcrumbgroup--breadcrumbs-with-items" target="_blank" rel="noreferrer noopener">NorthStar Storybook</a>.
 
 ```jsx
 import BreadcrumbGroup from 'aws-northstar/components/BreadcrumbGroup';

@@ -68,7 +68,7 @@ WithFormHeader.args = {
                 label: (
                     <>
                         The form header can be defined as a{' '}
-                        <Link href="https://cloudscape.design/components/header" target="_blank">
+                        <Link href="https://cloudscape.design/components/header" target="_blank" external>
                             Cloudscape Header component
                         </Link>
                         .

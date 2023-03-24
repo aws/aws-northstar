@@ -24,7 +24,7 @@ import { Suspense } from 'react';
 </Suspense>
 ```
 
-**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/pivottable" target="_blank">NorthStar Storybook</a>.
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/components-pivottable--default" target="_blank" rel="noreferrer noopener">NorthStar Storybook</a>.
 
 
 ```jsx

@@ -28,7 +28,7 @@ Default.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/radio-group" rel="noreferrer">
+                <a target="_blank" href="https://cloudscape.design/components/radio-group" rel="noreferrer noopener">
                     Radio Group
                 </a>
             </>

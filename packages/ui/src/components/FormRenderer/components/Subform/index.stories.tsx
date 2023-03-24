@@ -31,7 +31,7 @@ Default.args = {
                 <a
                     target="_blank"
                     href="https://cloudscape.design/components/form/?tabId=playground&example=with-form-containers-and-fields"
-                    rel="noreferrer"
+                    rel="noreferrer noopener"
                 >
                     Form Container
                 </a>
