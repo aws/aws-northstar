@@ -26,7 +26,11 @@ export interface MarkdownViewerProps {
 }
 
 const components = {
-    a: (props: any) => <Link href={props.href as string}>{props.children}</Link>,
+    a: (props: any) => (
+        <Link href={props.href as string} target="_black" external>
+            {props.children}
+        </Link>
+    ),
 };
 
 /**

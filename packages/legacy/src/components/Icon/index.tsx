@@ -68,7 +68,7 @@ export interface IconProps {
 }
 
 /**
- * Renders a <a href='https://material-ui.com/components/material-icons/' target='_blank'>Matertial Icon</a>.
+ * Renders a <a href='https://material-ui.com/components/material-icons/' target='_blank' rel='noreferrer noopener'>Matertial Icon</a>.
  */
 const Icon: FunctionComponent<IconProps> = ({ name, variant, ...rest }) => {
     // filled is the default icon variant

@@ -18,7 +18,7 @@ import MaterialPaper, { PaperProps } from '@material-ui/core/Paper';
 
 /**
  * Paper component is ported from Material UI Paper component.
- * Refer to <a href="https://material-ui.com/components/paper/" target="_blank">https://material-ui.com/components/paper/</a> for more details.
+ * Refer to <a href="https://material-ui.com/components/paper/" target="_blank" rel="noreferrer noopener">https://material-ui.com/components/paper/</a> for more details.
  * */
 const Paper: FunctionComponent<PaperProps> = (props) => {
     return <MaterialPaper {...props} />;

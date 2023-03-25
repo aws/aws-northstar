@@ -1,6 +1,6 @@
 ### Examples
-
-**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/barchart" target="_blank">NorthStar Storybook</a>.
+qgit
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/charts-barchart--default" target="_blank" rel="noreferrer noopener">NorthStar Storybook</a>.
 
 ```jsx
 import BarChart, { Bar, NORTHSTAR_COLORS, YAxis, XAxis, Tooltip, Legend, CartesianGrid } from 'aws-northstar/charts/BarChart';

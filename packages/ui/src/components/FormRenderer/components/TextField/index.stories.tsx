@@ -28,7 +28,7 @@ Default.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/input" rel="noreferrer">
+                <a target="_blank" href="https://cloudscape.design/components/input" rel="noreferrer noopener">
                     Input
                 </a>
             </>

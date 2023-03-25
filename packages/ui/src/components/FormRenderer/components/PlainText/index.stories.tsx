@@ -29,7 +29,7 @@ Default.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/text-content" rel="noreferrer">
+                <a target="_blank" href="https://cloudscape.design/components/text-content" rel="noreferrer noopener">
                     Text Content
                 </a>
             </>
@@ -53,7 +53,7 @@ HeaderContent.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/text-content" rel="noreferrer">
+                <a target="_blank" href="https://cloudscape.design/components/text-content" rel="noreferrer noopener">
                     Text Content
                 </a>
             </>
@@ -101,7 +101,7 @@ FreeContent.args = {
         header: (
             <>
                 Data driven form with{' '}
-                <a target="_blank" href="https://cloudscape.design/components/text-content" rel="noreferrer">
+                <a target="_blank" href="https://cloudscape.design/components/text-content" rel="noreferrer noopener">
                     Text Content
                 </a>
             </>

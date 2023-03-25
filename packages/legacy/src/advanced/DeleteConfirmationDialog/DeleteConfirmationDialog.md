@@ -1,6 +1,6 @@
 ### Examples
 
-**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/deleteconfirmationdialog" target="_blank">NorthStar Storybook</a>.
+**More examples** are available on <a href="https://storybook.northstar.aws-prototyping.cloud/?path=/story/advanced-components-deleteconfirmationdialog--delete-with-friction" target="_blank" rel="noreferrer noopener">NorthStar Storybook</a>.
 
 
 #### Delete with Friction - Default

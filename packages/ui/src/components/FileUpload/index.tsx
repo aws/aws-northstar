@@ -32,8 +32,8 @@ export interface FileUploadProps extends FormFieldProps {
      */
     multi?: boolean;
     /**
-     * One or more <a herf='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers' target='_blank'>
-     * unique file type specifiers</a> describing file types to allow
+     * One or more [unique file type specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers)
+     * describing file types to allow
      */
     accept?: string;
     /**

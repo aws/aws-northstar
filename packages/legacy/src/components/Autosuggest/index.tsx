@@ -78,7 +78,7 @@ interface AutosuggestPropsBase extends SelectBaseProps, AriaBaseProps {
      * Define the Icon to be used for the text input. <br/>
      * By default, Search icon will be displayed. <br/>
      * If false, no icon will be displayed. <br/>
-     * Or <a href='https://material-ui.com/components/material-icons/' target='_blank'>Material UI Icon Component Type</a> can be provided.
+     * Or <a href='https://material-ui.com/components/material-icons/' target='_blank' rel='noreferrer noopener'>Material UI Icon Component Type</a> can be provided.
      */
     icon?: false | ComponentType<SvgIconProps>;
     /**
