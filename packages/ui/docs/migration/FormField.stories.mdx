@@ -1,0 +1,23 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/FormField" />
+
+# Migrating from NorthStar legacy - FormField
+
+Use <Link href='https://cloudscape.design/components/form-field' target='_blank'>Cloudscape FormField component</Link>
+
+Alternatively, it is recommended to use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-formrenderer--default' target='_blank'>NorthStar v2 FormRenderer component</Link> 
+to build the form from JSON schema.
+
+## Update Import
+
+```diff
+- import FormField from 'aws-northstar/components/FormField';
++ import FormField from '@cloudscape-design/components/form-field';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

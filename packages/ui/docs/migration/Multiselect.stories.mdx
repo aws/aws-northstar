@@ -1,0 +1,24 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Multiselect" />
+
+# Migrating from NorthStar legacy - Multiselect
+
+Use <Link href='https://cloudscape.design/components/multiselect' target='_blank'>Cloudscape Multiselect component</Link>
+
+If the Multiselect is used in a Form setting, it is recommended to 
+use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-formrenderer--default' target='_blank'>NorthStar v2 FormRenderer component</Link> 
+to build the form from JSON schema.
+
+## Update Import
+
+```diff
+- import Multiselect from 'aws-northstar/components/Multiselect';
++ import Multiselect from '@cloudscape-design/components/multiselect';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

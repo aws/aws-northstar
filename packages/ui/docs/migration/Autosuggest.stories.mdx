@@ -1,0 +1,24 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Autosuggest" />
+
+# Migrating from NorthStar legacy - Autosuggest
+
+Use <Link href='https://cloudscape.design/components/autosuggest' target='_blank'>Cloudscape Autosuggest component</Link>
+
+If the Autosuggest is used in a Form setting, it is recommended to 
+use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-formrenderer--default' target='_blank'>NorthStar v2 FormRenderer component</Link> 
+to build the form from JSON schema.
+
+## Update Import
+
+```diff
+- import Autosuggest from 'aws-northstar/components/Autosuggest';
++ import Autosuggest from '@cloudscape-design/components/autosuggest'';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

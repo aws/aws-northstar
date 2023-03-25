@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/SideNavigation" />
+
+# Migrating from NorthStar legacy - SideNavigation
+
+Use <Link href='https://cloudscape.design/components/side-navigation' target='_blank'>Cloudscape SideNavigation component</Link>
+
+## Update Import
+
+```diff
+- import SideNavigation from 'aws-northstar/components/SideNavigation';
++ import SideNavigation from '@cloudscape-design/components/side-navigation';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

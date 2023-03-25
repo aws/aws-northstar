@@ -1,0 +1,27 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Heading" />
+
+# Migrating from NorthStar legacy - Heading
+
+Use <Link href='https://cloudscape.design/components/box' target='_blank'>Cloudscape Box component</Link>
+
+## Update Import
+
+```diff
+- import Heading from 'aws-northstar/components/Heading';
++ import Box from '@cloudscape-design/components/box';
+```
+
+## Update Code
+
+```diff
+- <Heading variant='h1'>Heading Level 1</Heading>
++ <Box variant='h1'>Heading Level 1</Box>
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

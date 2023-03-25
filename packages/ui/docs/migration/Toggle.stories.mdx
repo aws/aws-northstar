@@ -1,0 +1,25 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Toggle" />
+
+# Migrating from NorthStar legacy - Toggle
+
+Use <Link href='https://cloudscape.design/components/toggle' target='_blank'>Cloudscape Toggle component</Link>
+
+If the Toggle is used in a Form setting, it is recommended to 
+use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-formrenderer--default' target='_blank'>NorthStar v2 FormRenderer component</Link> 
+to build the form from JSON schema.
+
+
+## Update Import
+
+```diff
+- import Toggle from 'aws-northstar/components/Toggle';
++ import Toggle from '@cloudscape-design/components/toggle';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/ExpandableSection" />
+
+# Migrating from NorthStar legacy - ExpandableSection
+
+Use <Link href='https://cloudscape.design/components/expandable-section' target='_blank'>Cloudscape ExpandableSection component</Link>
+
+## Update Import
+
+```diff
+- import ExpandableSection from 'aws-northstar/components/ExpandableSection';
++ import ExpandableSection from '@cloudscape-design/components/expandable-section';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

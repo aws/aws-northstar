@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/AreaChart" />
+
+# Migrating from NorthStar legacy - AreaChart
+
+Use <Link href='https://cloudscape.design/components/area-chart' target='_blank'>Cloudscape AreaChart component</Link>
+
+## Update Import
+
+```diff
+- import AreaChart from 'aws-northstar/charts/AreaChart';
++ import AreaChart from '@cloudscape-design/components/area-chart';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Container" />
+
+# Migrating from NorthStar legacy - Container
+
+Use <Link href='https://cloudscape.design/components/container' target='_blank'>Cloudscape Container component</Link>
+
+## Update Import
+
+```diff
+- import Container from 'aws-northstar/layouts/Container';
++ import Container from '@cloudscape-design/components/container';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

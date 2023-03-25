@@ -1,0 +1,13 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/FormSection" />
+
+# Migrating from NorthStar legacy - FormSection
+
+There is not a matched FormSection component from Cloudscape. Use <Link href='https://cloudscape.design/components/container' target='_blank'>Cloudscape Container component</Link> to create FormSection inside a Form.
+
+Alternatively, it is recommended to use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-formrenderer--default' target='_blank'>NorthStar v2 FormRenderer component</Link> 
+to build the form from JSON schema. 
+Use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-formrenderer-subform--default' target='_blank'>SubForm component type in FormRenderer</Link> to add a FormSection to the Form.

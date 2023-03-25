@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Header" />
+
+# Migrating from NorthStar legacy - Header
+
+Use <Link href='https://cloudscape.design/components/top-navigation' target='_blank'>Cloudscape TopNavigation component</Link>
+
+## Update Import
+
+```diff
+- import Header from 'aws-northstar/components/Header';
++ import TopNavigation from '@cloudscape-design/components/top-navigation';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};
