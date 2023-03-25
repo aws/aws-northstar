@@ -16,10 +16,12 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useState, useCallback, useRef } from 'react';
 import orderBy from 'lodash.orderby';
-import Table, { TableProps, FetchDataOptions } from '.';
+import Table, { TableProps, FetchDataOptions, SelectionChangeDetail } from '.';
 import columnDefinition from './data/columnDefinitions';
 import shortData from './data/short';
 import longData from './data/long';
+import { DataType } from './data/type';
+import { NonCancelableEventHandler } from '@cloudscape-design/components/internal/events';
 
 export default {
     component: Table,
@@ -32,9 +34,8 @@ export default {
 
 const Template: ComponentStory<typeof Table> = ({ onSelectionChange, ...args }: TableProps) => {
     const [selectedItems, setSelectedItems] = useState(args.selectedItems);
-    const handleSelection = useCallback(
-        (props: any) => {
-            console.log(props.detail.selectedItems);
+    const handleSelection: NonCancelableEventHandler<SelectionChangeDetail<DataType>> = useCallback(
+        (props) => {
             setSelectedItems([...props.detail.selectedItems]);
             onSelectionChange?.(props);
         },

@@ -15,6 +15,37 @@ Use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-appl
 + import AppLayout from '@aws-northstar/ui/components/AppLayout';
 ```
 
+## Update Code
+### AppLayout
+
+* Prop *helpPanel* is renamed to *tools*.
+* A simpler way to initiate AppLayout:
+
+```jsx
+  <AppLayout
+    title="HelloWorld App" // The title will be used on both TopNavigation and SideNavigation. 
+    navigationItems={[
+      {
+        href: '/',
+        text: 'home',
+        type:  'link'
+      },
+      {
+        href: '/page1',
+        text: 'Page 1',
+        type: 'link'
+      },
+      ...
+    ]}
+  >
+```
+
+### useAppLayoutContext
+
+* AppLayoutContext *openHelpPanel*  function is renamed to *setToolsOpen*. 
+* AppLayoutContext *openSplitPanel* function is renamed to *setSplitPanelOpen*.
+* Use AppLayoutContext *setNotifications* to set the notifications. 
+
 export const Component = () => {
   return <SyntaxHighlighter/>;
 };

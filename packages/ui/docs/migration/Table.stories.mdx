@@ -33,6 +33,22 @@ Use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-tabl
 ]
 ```
 
+## Update SelectionChangeHandler
+
+```diff
++ import { NonCancelableEventHandler } from '@cloudscape-design/components/internal/events';
++ import { SelectionChangeDetail } from '@aws-northstar/ui/components/Table';
+
+- const handleSelectionChange = useCallback(
++ const handleSelectionChange: NonCancelableEventHandler<SelectionChangeDetail<DataType>> = useCallback(
+-     (selectedItems) => {
++     ({ detail }) => {
++        const selectItems = detail.selectedItems; 
+      },
+      []
+  );
+```
+
 export const Component = () => {
   return <SyntaxHighlighter/>;
 };
