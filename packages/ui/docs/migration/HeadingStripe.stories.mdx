@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/HeadingStripe" />
+
+# Migrating from NorthStar legacy - HeadingStripe
+
+Use <Link href='https://cloudscape.design/components/header' target='_blank' external>Cloudscape Header component</Link>
+
+## Update Import
+
+```diff
+- import HeadingStripe from 'aws-northstar/components/HeadingStripe';
++ import Header from '@cloudscape-design/components/header';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

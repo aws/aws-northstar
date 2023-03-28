@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Tabs" />
+
+# Migrating from NorthStar legacy - Tabs
+
+Use <Link href='https://cloudscape.design/components/tabs' target='_blank' external>Cloudscape Tabs component</Link>
+
+## Update Import
+
+```diff
+- import Tabs from 'aws-northstar/components/Tabs';
++ import Tabs from '@cloudscape-design/components/tabs';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

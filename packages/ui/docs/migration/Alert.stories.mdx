@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Alert" />
+
+# Migrating from NorthStar legacy - Alert
+
+Use <Link href='https://cloudscape.design/components/alert' target='_blank' external>Cloudscape Alert component</Link>
+
+## Update Import
+
+```diff
+- import Alert from 'aws-northstar/components/Alert';
++ import Alert from '@cloudscape-design/components/alert';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

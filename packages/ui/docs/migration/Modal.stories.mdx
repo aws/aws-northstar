@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Modal" />
+
+# Migrating from NorthStar legacy - Modal
+
+Use <Link href='https://cloudscape.design/components/modal' target='_blank' external>Cloudscape Modal component</Link>
+
+## Update Import
+
+```diff
+- import Modal from 'aws-northstar/components/Modal';
++ import Modal from '@cloudscape-design/components/modal';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

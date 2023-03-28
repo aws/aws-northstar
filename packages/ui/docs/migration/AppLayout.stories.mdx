@@ -1,0 +1,51 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/AppLayout" />
+
+# Migrating from NorthStar legacy - AppLayout
+
+Use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-applayout--default' target='_blank' external>NorthStar v2 AppLayout component</Link>
+
+## Update Import
+
+```diff
+- import AppLayout from 'aws-northstar/layouts/AppLayout';
++ import AppLayout from '@aws-northstar/ui/components/AppLayout';
+```
+
+## Update Code
+### AppLayout
+
+* Prop *helpPanel* is renamed to *tools*.
+* A simpler way to initiate AppLayout:
+
+```jsx
+  <AppLayout
+    title="HelloWorld App" // The title will be used on both TopNavigation and SideNavigation. 
+    navigationItems={[
+      {
+        href: '/',
+        text: 'home',
+        type:  'link'
+      },
+      {
+        href: '/page1',
+        text: 'Page 1',
+        type: 'link'
+      },
+      ...
+    ]}
+  >
+```
+
+### useAppLayoutContext
+
+* AppLayoutContext *openHelpPanel*  function is renamed to *setToolsOpen*. 
+* AppLayoutContext *openSplitPanel* function is renamed to *setSplitPanelOpen*.
+* Use AppLayoutContext *setNotifications* to set the notifications. 
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

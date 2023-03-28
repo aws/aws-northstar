@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/StatusIndicator" />
+
+# Migrating from NorthStar legacy - StatusIndicator
+
+Use <Link href='https://cloudscape.design/components/status-indicator' target='_blank' external>Cloudscape StatusIndicator component</Link>
+
+## Update Import
+
+```diff
+- import StatusIndicator from 'aws-northstar/components/StatusIndicator';
++ import StatusIndicator from '@cloudscape-design/components/status-indicator'';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

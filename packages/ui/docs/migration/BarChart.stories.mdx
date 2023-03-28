@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/BarChart" />
+
+# Migrating from NorthStar legacy - BarChart
+
+Use <Link href='https://cloudscape.design/components/bar-chart' target='_blank' external>Cloudscape BarChart component</Link>
+
+## Update Import
+
+```diff
+- import BarChart from 'aws-northstar/charts/BarChart';
++ import BarChart from '@cloudscape-design/components/bar-chart';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

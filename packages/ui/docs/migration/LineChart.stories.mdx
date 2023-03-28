@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/LineChart" />
+
+# Migrating from NorthStar legacy - LineChart
+
+Use <Link href='https://cloudscape.design/components/line-chart' target='_blank' external>Cloudscape LineChart component</Link>
+
+## Update Import
+
+```diff
+- import LineChart from 'aws-northstar/charts/LineChart';
++ import LineChart from '@cloudscape-design/components/line-chart';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

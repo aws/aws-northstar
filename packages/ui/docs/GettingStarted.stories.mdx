@@ -10,11 +10,9 @@ With NorthStar, you can easily design and develop your UI applications.
 
 Before you start using NorthStar for your project, please note that:
 
-* NorthStar currently only supports the React framework. It supports the most recent versions of React, starting from 16.12.0.
+* NorthStar currently only supports the React framework. It supports the most recent versions of React, starting from 18.
 
 * NorthStar supports the latest, stable releases of modern browsers - Chrome, Firefox and Safari.
-
-* NorthStar should be used as a rapid prototyping and design tool to ensure a consistent and repeatable design for your applications. 
 
 * NorthStar is shipped with the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
 
@@ -35,7 +33,7 @@ yarn add @aws-northstar/ui
 At the very top of your application, import the NorthStarThemeProvider component and render the NorthStarThemeProvider component.
 
 ```jsx static
-import NorthStarThemeProvider from '@aws-northstar/v2/components/NorthStarThemeProvider';
+import NorthStarThemeProvider from '@aws-northstar/ui/components/NorthStarThemeProvider';
 
 export default () => (
     <NorthStarThemeProvider>
@@ -88,16 +86,41 @@ This documentation website has detailed examples on how to use each component.
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+## Examples
+
+### Create React App
+
+This example demonstrates how you can setup NorthStar v2 in a React application created by [Create React App](https://reactjs.org/docs/create-a-new-react-app.html).  
+
+Download the example:
+
+```markdown
+mkdir northstar && cd northstar
+curl https://aws.github.io/aws-northstar/static/examples/create-react-app.tar.gz | tar -xz
+```
+
+Install it and run:
+
+```markdown
+yarn
+yarn start
+```
+
+### CodeSandbox
+
+You can use this [CodeSandbox template](https://codesandbox.io/s/github/aws/aws-northstar/tree/main/packages/examples/ui) to create a sandbox to play around with NorthStar components.
+
 ## Support
 
-We use [GitHub Issues](https://github.com/aws/aws-northstar/issues) as a bug tracker. If you think you have found a bug, please follow the **Submitting bugs** section in the [Contribution Guide](https://northstar.aws-prototyping.cloud/#/Contribution%20Guide) and open an issue with detailed information about the issue.
+We use [GitHub Issues](https://github.com/aws/aws-northstar/issues) as a bug tracker. If you think you have found a bug, please follow the **Submitting bugs** section in the [Contribution Guide](https://github.com/aws/aws-northstar/blob/main/CONTRIBUTING.md) and open an issue with detailed information about the issue.
 
 ## Sourcecode
 
 If you are interested in our source code, our repo is at [https://github.com/aws/aws-northstar](https://github.com/aws/aws-northstar).
 
-We welcome your contribution to NorthStar. Please check our [Contribution Guide](https://northstar.aws-prototyping.cloud/#/Contribution%20Guide) for more details. As a community run project, we rely on your contribution.
+We welcome your contribution to NorthStar. As a community run project, we rely on your contribution.
 
 ## Changelog
 
 Check out the [Changelog](https://github.com/aws/aws-northstar/releases)
+

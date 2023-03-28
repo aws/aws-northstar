@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Popover" />
+
+# Migrating from NorthStar legacy - Popover
+
+Use <Link href='https://cloudscape.design/components/popover' target='_blank' external>Cloudscape Popover component</Link>
+
+## Update Import
+
+```diff
+- import Popover from 'aws-northstar/components/Popover';
++ import Popover from '@cloudscape-design/components/popover';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

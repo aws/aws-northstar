@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/LoadingIndicator" />
+
+# Migrating from NorthStar legacy - LoadingIndicator
+
+Use <Link href='https://cloudscape.design/components/spinner' target='_blank' external>Cloudscape Spinner component</Link>
+
+## Update Import
+
+```diff
+- import LoadingIndicator from 'aws-northstar/components/LoadingIndicator';
++ import Spinner from '@cloudscape-design/components/spinner';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

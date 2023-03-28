@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Textarea" />
+
+# Migrating from NorthStar legacy - Textarea
+
+Use <Link href='https://cloudscape.design/components/textarea' target='_blank' external>Cloudscape Textarea component</Link>
+
+## Update Import
+
+```diff
+- import Textarea from 'aws-northstar/components/Textarea';
++ import Textarea from '@cloudscape-design/components/textarea';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

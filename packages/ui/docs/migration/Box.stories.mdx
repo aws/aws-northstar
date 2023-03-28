@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Box" />
+
+# Migrating from NorthStar legacy - Box
+
+Use <Link href='https://cloudscape.design/components/box' target='_blank' external>Cloudscape Box component</Link>
+
+## Limitations
+
+Not all the props are available in the <Link href='https://cloudscape.design/components/box' target='_blank' external>Cloudscape Box component</Link>. 
+For instance, the Box component does not include <Link href='https://mui.com/system/flexbox/' target='_blank' external>Flexbox</Link> support. 
+You can migrate the **Flexbox** to **div** with css to acchieve the same result.  
+
+## Update Import
+
+```diff
+- import Box from 'aws-northstar/layouts/Box';
++ import Box from '@cloudscape-design/components/box';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

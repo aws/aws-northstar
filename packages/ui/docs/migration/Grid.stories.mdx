@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Grid" />
+
+# Migrating from NorthStar legacy - Grid
+
+Use <Link href='https://cloudscape.design/components/grid' target='_blank' external>Cloudscape Grid component</Link>
+
+## Update Import
+
+```diff
+- import Grid from 'aws-northstar/layouts/Grid';
++ import Grid from '@cloudscape-design/components/grid';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

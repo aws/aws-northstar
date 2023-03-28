@@ -1,0 +1,23 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/Form" />
+
+# Migrating from NorthStar legacy - Form
+
+Use <Link href='https://cloudscape.design/components/form' target='_blank' external>Cloudscape Form component</Link>
+
+Alternatively, it is recommended to use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-formrenderer--default' target='_blank' external>NorthStar v2 FormRenderer component</Link> 
+to build the form from JSON schema.
+
+## Update Import
+
+```diff
+- import Form from 'aws-northstar/components/Form';
++ import Form from '@cloudscape-design/components/form';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

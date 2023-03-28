@@ -1,0 +1,24 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/DatePicker" />
+
+# Migrating from NorthStar legacy - DatePicker
+
+Use <Link href='https://cloudscape.design/components/checkbox' target='_blank' external>Cloudscape DatePicker component</Link>. 
+
+If the DatePicker is used in a Form setting, it is recommended to 
+use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-formrenderer--default' target='_blank' external>NorthStar v2 FormRenderer component</Link> 
+to build the form from JSON schema.
+
+## Update Import
+
+```diff
+- import DatePicker from 'aws-northstar/components/DatePicker';
++ import DatePicker from '@cloudscape-design/components/date-picker';
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};

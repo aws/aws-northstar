@@ -1,0 +1,86 @@
+import { Meta } from '@storybook/addon-docs';
+import Link from '@cloudscape-design/components/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+<Meta title="Migration/FormRenderer" />
+
+# Migrating from NorthStar legacy - FormRenderer
+
+Use <Link href='https://aws.github.io/aws-northstar/?path=/story/components-formrenderer--default' target='_blank' external>NorthStar v2 FormRenderer component</Link>
+
+## Limitations
+
+The following component mappers are not available:
+* MARKDOWN_EDITOR
+* TABLE
+* TREE_VIEW
+
+## Update Import
+
+```diff
+- import FormRenderer from 'aws-northstar/components/FormRenderer';
++ import FormRenderer from '@aws-northstar/ui/components/FormRenderer';
+```
+
+## Update Form Schema
+
+Since TimePicker component is no longer available in Cloudscape, TimeInput component replaces the TimePicker component. If TIME_PICKER component mapper is used, update it to use TIME_INPUT as well as the input/output data format. 
+
+```diff
+  fields: [
+    {
+-     component: componentTypes.TIME_PICKER,
+-     component: componentTypes.TIME_INPUT,
++     format: 'hh:mm',
+      label: 'Time',
+      name: 'time',
+      placeholder: 'hh:mm',
+    }
+```
+
+## Update Input/Output Data Format
+
+The input/output data format for some component mappers have been changed:
+* The data format for Select component is updated to be consistent with Autosuggest and Multiselect. 
+* The data format for DatePicker component is updated to match Cloudscape DatePicker component prop type. 
+* The data format for TimeInput component is updated to match Cloudscape TimeInput component prop type. 
+
+```diff
+const initialValues = {
+    email: 'test@test.com',
+    password: 'password',
+    number: 10,
+    textarea: 'textarea',
+    checkbox: ['1', '2'],
+    switch: true,
+    radio: '3',
+-   select: '2',
++   select: {
++     label: 'Option 2',
++     value: '2'
++   },
+    autosugguest: {
+        value: 'Lambda',
+        label: 'Lambda - Amazon Lambda',
+    },
+    multiselect: [
+        {
+            value: 'Lambda',
+            label: 'Lambda - Amazon Lambda',
+        },
+        {
+            value: 'EC2',
+            label: 'EC2 - Amazon Elastic Compute Cloud',
+        },
+    ],
+    confirm: true,
+-   datePicker: new Date(2020, 1, 1),
++   dataPicker: '2020-01-01',
+-   timePicker: '2020-01-01T00:00:00Z',
++   timeInput: '15:20',
+};
+```
+
+export const Component = () => {
+  return <SyntaxHighlighter/>;
+};
