@@ -1,0 +1,13 @@
+diff --git a/node_modules/@semantic-release/npm/lib/publish.js b/node_modules/@semantic-release/npm/lib/publish.js
+index c79d565..5380224 100644
+--- a/node_modules/@semantic-release/npm/lib/publish.js
++++ b/node_modules/@semantic-release/npm/lib/publish.js
+@@ -23,7 +23,7 @@ module.exports = async (npmrc, {npmPublish, pkgRoot}, pkg, context) => {
+     const result = execa(
+       'npm',
+       ['publish', basePath, '--userconfig', npmrc, '--tag', distTag, '--registry', registry],
+-      {cwd, env}
++      {cwd: basePath, env}
+     );
+     result.stdout.pipe(stdout, {end: false});
+     result.stderr.pipe(stderr, {end: false});
