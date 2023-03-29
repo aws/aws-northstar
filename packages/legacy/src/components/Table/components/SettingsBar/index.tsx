@@ -120,9 +120,13 @@ export default function SettingBar({
                         >
                             <NavigateBefore />
                         </IconButton>
-                        <span>{`${pageIndex * pageSize + 1}-${
-                            pageIndex * pageSize + pageLength
-                        } of ${totalCount}`}</span>
+                        {totalCount === 0 ? (
+                            <span>0-0 of 0</span>
+                        ) : (
+                            <span>{`${pageIndex * pageSize + 1}-${
+                                pageIndex * pageSize + pageLength
+                            } of ${totalCount}`}</span>
+                        )}
                         <IconButton
                             aria-label="next page"
                             size="small"
