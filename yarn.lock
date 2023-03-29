@@ -4686,6 +4686,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@semantic-release/npm@patch:@semantic-release/npm@9.0.2#./patches/@semantic-release+npm.9.0.2.patch::locator=aws-northstar-monorepo%40workspace%3A.":
+  version: 9.0.2
+  resolution: "@semantic-release/npm@patch:@semantic-release/npm@npm%3A9.0.2#./patches/@semantic-release+npm.9.0.2.patch::version=9.0.2&hash=7f8339&locator=aws-northstar-monorepo%40workspace%3A."
+  dependencies:
+    "@semantic-release/error": ^3.0.0
+    aggregate-error: ^3.0.0
+    execa: ^5.0.0
+    fs-extra: ^11.0.0
+    lodash: ^4.17.15
+    nerf-dart: ^1.0.0
+    normalize-url: ^6.0.0
+    npm: ^8.3.0
+    rc: ^1.2.8
+    read-pkg: ^5.0.0
+    registry-auth-token: ^5.0.0
+    semver: ^7.1.2
+    tempy: ^1.0.0
+  peerDependencies:
+    semantic-release: ">=19.0.0"
+  checksum: 1e1a9b90953da56276e46e08c650bc5447ecce7687770b1be5b114727786ef7ad33aadee08e73b04b0f9cc35783225a5fb43143d455152472c495d8088f57bda
+  languageName: node
+  linkType: hard
+
 "@semantic-release/release-notes-generator@npm:^10.0.3":
   version: 10.0.3
   resolution: "@semantic-release/release-notes-generator@npm:10.0.3"
@@ -11198,7 +11221,7 @@ __metadata:
     "@semantic-release/commit-analyzer": ^9.0.2
     "@semantic-release/exec": ^6.0.3
     "@semantic-release/github": ^8.0.7
-    "@semantic-release/npm": 9.0.2
+    "@semantic-release/npm": "patch:@semantic-release/npm@9.0.2#./patches/@semantic-release+npm.9.0.2.patch"
     "@semantic-release/release-notes-generator": ^10.0.3
     "@types/license-checker": ^25.0.3
     "@typescript-eslint/eslint-plugin": ^4.33.0
