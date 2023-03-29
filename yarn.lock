@@ -11204,7 +11204,7 @@ __metadata:
     remark-frontmatter: ^3.0.0
     remark-gfm: ^1.0.0
     storybook-react-router: ^1.0.8
-    style-loader: ^3.3.1
+    style-loader: ^3.3.2
     ts-jest: ^29.0.3
     ts-loader: ^9.4.1
     typescript: ^4.8.4
@@ -31077,6 +31077,15 @@ __metadata:
   peerDependencies:
     webpack: ^5.0.0
   checksum: 470feef680f59e2fce4d6601b5c55b88c01ad8d1dd693c528ffd591ff5fd7c01a4eff3bdbe62f26f847d6bd2430c9ab594be23307cfe7a3446ab236683f0d066
+  languageName: node
+  linkType: hard
+
+"style-loader@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "style-loader@npm:3.3.2"
+  peerDependencies:
+    webpack: ^5.0.0
+  checksum: 5ee5ce2dc885369eccb55d429376e83d02570d473ac5edeb69fd65ee894847f1e51429cf078351f617bd04516ece8a1dd967f9f40464bd8fa76d903c6b2a6f08
   languageName: node
   linkType: hard
 
