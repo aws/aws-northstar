@@ -73,6 +73,24 @@ describe('SettingsBar', () => {
         expect(getByTestId('last-page')).toHaveAttribute('disabled');
     });
 
+    it('renders SettingsBar when there is 0 row filtered out', () => {
+        const { getByText } = render(
+            <SettingsBar
+                pageIndex={0}
+                pageSize={25}
+                pageSizes={[10, 25, 100]}
+                pageLength={20}
+                canNextPage={false}
+                canPreviousPage={false}
+                {...commonProps}
+                rowCount={0}
+                totalCount={0}
+            />
+        );
+
+        expect(getByText('0-0 of 0')).toBeVisible();
+    });
+
     it('renders SettingsBar for the first page', () => {
         const { getByText, getByTestId } = render(
             <SettingsBar
@@ -84,6 +102,7 @@ describe('SettingsBar', () => {
                 canPreviousPage={false}
                 {...commonProps}
                 totalCount={130}
+                rowCount={130}
             />
         );
 

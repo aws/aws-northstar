@@ -348,10 +348,6 @@ export default function Table<D extends object>({
         styles,
     };
 
-    const groupCount = useMemo(() => {
-        return rows.filter((row: Row<D> & Partial<UseGroupByRowProps<D>>) => row.isGrouped).length;
-    }, [rows]);
-
     const testId = props['data-testid'] || 'table';
 
     const settingsBarProps = {
@@ -360,7 +356,7 @@ export default function Table<D extends object>({
         pageSizes: pageSizes || DEFAULT_PAGE_SIZES,
         pageLength: (page || []).length,
         rowCount: rows.length,
-        totalCount: rowCount + groupCount,
+        totalCount: props.rowCount ?? rows.length,
         loading,
         disablePagination,
         disableSettings,
