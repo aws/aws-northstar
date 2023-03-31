@@ -19,18 +19,61 @@ import Badge from '@cloudscape-design/components/badge';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Box from '@cloudscape-design/components/box';
 import Button from '@cloudscape-design/components/button';
+import Container from '@cloudscape-design/components/container';
 import TopNavigation from '@cloudscape-design/components/top-navigation';
-import { composeStory } from '@storybook/testing-react';
+import { SideNavigationProps } from '@cloudscape-design/components/side-navigation';
 import AppLayout, { useAppLayoutContext } from '.';
-import KeyValuePairsStoryMeta, {
-    Default as KeyValuePairsStory,
-    KEY_VALUE_PAIR_ITEMS,
-} from '../KeyValuePairs/index.stories';
-import KeyValuePairsComponent from '../KeyValuePairs';
-import FormRendererStoryMeta, {
-    DefaultFullLayout as DefaultFullLayoutStory,
-} from '../FormRenderer/stories/FormVariantFull.stories';
-import TableMeta, { LongData as TableStory } from '../Table/index.stories';
+import { KEY_VALUE_PAIR_ITEMS } from '../KeyValuePairs/index.stories';
+import KeyValuePairs from '../KeyValuePairs';
+import Table from '../Table';
+import columnDefinition from '../Table/data/columnDefinitions';
+import shortData from '../Table/data/short';
+import FormRenderer, { Schema } from '../FormRenderer';
+import { Default as FormRendererDefault, TEST_DATA } from '../FormRenderer/index.stories';
+import { action } from '@storybook/addon-actions';
+
+export const TEST_NAV_ITEMS: SideNavigationProps.Item[] = [
+    { type: 'link', text: 'home', href: '/' },
+    { type: 'link', text: 'Page 1', href: '/page1' },
+    { type: 'link', text: 'Page 2', href: '/page2' },
+    { type: 'link', text: 'Page 3', href: '/page3' },
+    { type: 'link', text: 'Page 4', href: '/page4' },
+    { type: 'divider' },
+    {
+        type: 'link',
+        text: 'Notifications',
+        href: '/notifications',
+        info: <Badge color="red">23</Badge>,
+    },
+    {
+        type: 'link',
+        text: 'Documentation',
+        href: 'https://docs.aws.amazon.com',
+        external: true,
+    },
+];
+
+const KeyValuePairsComponent = () => {
+    return (
+        <Container>
+            <KeyValuePairs items={KEY_VALUE_PAIR_ITEMS} />
+        </Container>
+    );
+};
+
+const DefaultTableComponent = () => {
+    return <Table columnDefinitions={columnDefinition} items={shortData} header="Table Title" />;
+};
+
+const FormRendererFullLayoutComponent = () => {
+    return (
+        <FormRenderer
+            schema={FormRendererDefault.args!.schema as Schema}
+            initialValues={TEST_DATA}
+            onSubmit={action('onSubmit')}
+        />
+    );
+};
 
 export default {
     component: AppLayout,
@@ -42,19 +85,16 @@ export default {
     parameters: {
         layout: 'fullscreen',
     },
+    excludeStories: ['TEST_NAV_ITEMS'],
 } as ComponentMeta<typeof AppLayout>;
-
-const KeyValuePairs = composeStory(KeyValuePairsStory, KeyValuePairsStoryMeta);
-const Table = composeStory(TableStory, TableMeta);
-const FormRendererFullLayout = composeStory(DefaultFullLayoutStory, FormRendererStoryMeta);
 
 const Template: ComponentStory<typeof AppLayout> = (args) => {
     return (
         <AppLayout {...args}>
             {args.children ?? (
                 <SpaceBetween size="l">
-                    <KeyValuePairs />
-                    <Table />
+                    <KeyValuePairsComponent />
+                    <DefaultTableComponent />
                 </SpaceBetween>
             )}
         </AppLayout>
@@ -65,26 +105,7 @@ export const Default = Template.bind({});
 Default.args = {
     title: 'HelloWorld App',
     logo: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNDNweCIgaGVpZ2h0PSIzMXB4IiB2aWV3Qm94PSIwIDAgNDMgMzEiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxyZWN0IGZpbGw9IiMyMzJmM2UiIHN0cm9rZT0iI2Q1ZGJkYiIgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSI0MiIgaGVpZ2h0PSIzMCIgcng9IjIiPjwvcmVjdD4KICAgICAgICA8dGV4dCBmb250LWZhbWlseT0iQW1hem9uRW1iZXItUmVndWxhciwgQW1hem9uIEVtYmVyIiBmb250LXNpemU9IjEyIiBmaWxsPSIjRkZGRkZGIj4KICAgICAgICAgICAgPHRzcGFuIHg9IjkiIHk9IjE5Ij5Mb2dvPC90c3Bhbj4KICAgICAgICA8L3RleHQ+CiAgICA8L2c+Cjwvc3ZnPgo=',
-    navigationItems: [
-        { type: 'link', text: 'home', href: '/' },
-        { type: 'link', text: 'Page 1', href: '/page1' },
-        { type: 'link', text: 'Page 2', href: '/page2' },
-        { type: 'link', text: 'Page 3', href: '/page3' },
-        { type: 'link', text: 'Page 4', href: '/page4' },
-        { type: 'divider' },
-        {
-            type: 'link',
-            text: 'Notifications',
-            href: '/notifications',
-            info: <Badge color="red">23</Badge>,
-        },
-        {
-            type: 'link',
-            text: 'Documentation',
-            href: 'https://docs.aws.amazon.com',
-            external: true,
-        },
-    ],
+    navigationItems: TEST_NAV_ITEMS,
 };
 
 export const WithUser = Template.bind({});
@@ -119,13 +140,13 @@ export const FormContentType = Template.bind({});
 FormContentType.args = {
     ...Default.args,
     contentType: 'form',
-    children: <FormRendererFullLayout />,
+    children: <FormRendererFullLayoutComponent />,
 };
 
 const SplitPanelExamples = () => {
     return (
         <Box padding="l">
-            <KeyValuePairsComponent items={KEY_VALUE_PAIR_ITEMS} />
+            <KeyValuePairsComponent />
         </Box>
     );
 };
