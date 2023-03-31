@@ -30,6 +30,11 @@
                     "release": "patch"
                 },
                 {
+                    "type": "feat",
+                    "message": "*New Component*",
+                    "release": "minor"
+                },
+                {
                     "type": "style",
                     "release": "patch"
                 }
@@ -39,6 +44,6 @@
         ["@semantic-release/npm", {
             "pkgRoot": "./build"
         }],
-        ["@semantic-release/github"]
+        ["@semantic-release/github", {}]
     ]
 }
