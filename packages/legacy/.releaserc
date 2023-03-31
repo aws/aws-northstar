@@ -39,6 +39,6 @@
         ["@semantic-release/npm", {
             "pkgRoot": "./build"
         }],
-        ["@semantic-release/github"]
+        ["@semantic-release/github", {}]
     ]
 }

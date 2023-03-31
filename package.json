@@ -28,7 +28,8 @@
         "styleguide": "yarn workspace aws-northstar run styleguidist server",
         "test:ci": "yarn lint && yarn workspaces foreach --exclude aws-northstar-demo-ui --exclude aws-northstar-demo-legacy run test:ci && yarn license:check && git secrets --scan",
         "test": "yarn workspaces foreach --exclude aws-northstar-demo-ui --exclude aws-northstar-demo-legacy run test",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "release": "yarn workspaces foreach --exclude aws-northstar-monorepo run semantic-release -e semantic-release-monorepo"
     },
     "lint-staged": {
         "**.(js|jsx|ts|tsx)": [
@@ -68,6 +69,7 @@
         "lint-staged": "^13.1.0",
         "oss-attribution-generator": "^1.7.1",
         "prettier": "^2.7.1",
+        "semantic-release": "^19.0.5",
         "semantic-release-monorepo": "^7.0.5",
         "typescript": "^4.8.4"
     },
@@ -83,7 +85,8 @@
         "underscore": "^1.12.1",
         "nth-check": "^2.0.1",
         "deep-extend": "^0.5.1",
-        "debug": "^2.6.9"
+        "debug": "^2.6.9",
+        "@semantic-release/npm": "patch:@semantic-release/npm@9.0.2#./patches/@semantic-release+npm.9.0.2.patch"
     },
     "workspaces": {
         "packages": [
