@@ -15,52 +15,31 @@
  ******************************************************************************************************************** */
 import { FC, memo, useMemo } from 'react';
 import AttributeEditor from '@cloudscape-design/components/attribute-editor';
-import FormField from '@cloudscape-design/components/form-field';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
-import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { FieldArray as FieldArrayBase } from '@data-driven-forms/react-form-renderer';
-import getErrorText from '../../utils/getErrorText';
-import useUniqueId from '../../../../hooks/useUniqueId';
 import { Field } from '../../types';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
 
 const DEFAULT_ADD_BUTTON_TEXT = 'Add new item';
 const DEFAULT_REMOVE_BUTTON_TEXT = 'Remove';
 
-const FieldArray: FC<UseFieldApiConfig> = ({ ...props }) => {
+const FieldArray: FC<DataDrivenFormFieldProps> = ({ ...props }) => {
     const { renderForm } = useFormApi();
+
     const {
-        label,
-        description,
-        helperText,
-        info,
-        i18nStrings,
-        stretch,
-        secondaryControl,
-
         input,
-        fields: formFields,
-
+        fields,
         isReadOnly,
         isDisabled,
-
         arrayValidator,
-
         maxItems = Number.MAX_SAFE_INTEGER,
         defaultItem,
-
         'data-testid': testId = 'field-array',
-
-        validateOnMount,
-        meta: { error, submitFailed },
-        showError,
-
-        ...rest
-    } = useFieldApi<object[]>(props);
-    const controlId = useUniqueId(input.name);
-    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
+        controlId,
+    } = props;
 
     const definition = useMemo(() => {
-        const fieldArrayItems = formFields.map((field: Field) => {
+        return fields.map((field: Field) => {
             const { label, name, ...rest } = field;
             return {
                 label: label,
@@ -77,44 +56,32 @@ const FieldArray: FC<UseFieldApiConfig> = ({ ...props }) => {
                 },
             };
         });
-        return fieldArrayItems;
-    }, [formFields, renderForm, input.name, isReadOnly, isDisabled, testId]);
+    }, [fields, renderForm, input.name, isReadOnly, isDisabled, testId]);
 
     return (
-        <FormField
-            label={label}
-            description={description}
-            errorText={errorText}
-            constraintText={helperText}
-            info={info}
-            i18nStrings={i18nStrings}
-            stretch={stretch}
-            secondaryControl={secondaryControl}
-        >
-            <FieldArrayBase key={controlId} name={controlId} validate={arrayValidator}>
-                {({ fields }) => {
-                    const { length, push, remove } = fields;
+        <FieldArrayBase key={controlId} name={controlId} validate={arrayValidator}>
+            {({ fields }) => {
+                const { length, push, remove } = fields;
 
-                    return (
-                        <AttributeEditor
-                            addButtonText={DEFAULT_ADD_BUTTON_TEXT}
-                            removeButtonText={DEFAULT_REMOVE_BUTTON_TEXT}
-                            disableAddButton={isDisabled || isReadOnly || (!!length && length >= maxItems)}
-                            {...rest}
-                            {...input}
-                            isItemRemovable={() => {
-                                return !isDisabled && !isReadOnly;
-                            }}
-                            items={input.value || []}
-                            definition={definition}
-                            onAddButtonClick={() => push(defaultItem || {})}
-                            onRemoveButtonClick={({ detail: { itemIndex } }) => remove(itemIndex)}
-                        />
-                    );
-                }}
-            </FieldArrayBase>
-        </FormField>
+                return (
+                    <AttributeEditor
+                        addButtonText={DEFAULT_ADD_BUTTON_TEXT}
+                        removeButtonText={DEFAULT_REMOVE_BUTTON_TEXT}
+                        disableAddButton={isDisabled || isReadOnly || (!!length && length >= maxItems)}
+                        {...props}
+                        {...props.input}
+                        isItemRemovable={() => {
+                            return !isDisabled && !isReadOnly;
+                        }}
+                        items={input.value || []}
+                        definition={definition}
+                        onAddButtonClick={() => push(defaultItem || {})}
+                        onRemoveButtonClick={({ detail: { itemIndex } }) => remove(itemIndex)}
+                    />
+                );
+            }}
+        </FieldArrayBase>
     );
 };
 
-export default memo(FieldArray);
+export default memo(withDataDrivenFormField(FieldArray));

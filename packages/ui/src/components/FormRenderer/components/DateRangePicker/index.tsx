@@ -15,10 +15,7 @@
  ******************************************************************************************************************** */
 import { FC, memo, useMemo, useCallback } from 'react';
 import DateRangePickerComponent, { DateRangePickerProps } from '@cloudscape-design/components/date-range-picker';
-import FormField from '@cloudscape-design/components/form-field';
-import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import useUniqueId from '../../../../hooks/useUniqueId';
-import getErrorText from '../../utils/getErrorText';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
 
 const DEFAULT_RELATIVE_OPTIONS: DateRangePickerProps.RelativeOption[] = [
     {
@@ -76,34 +73,13 @@ const DEFAULT_RESOURCE_STRINGS: DateRangePickerProps.I18nStrings = {
 
 const DEFAULT_PLACEHOLDER = 'Filter by a date and time range';
 
-const DateRangePicker: FC<UseFieldApiConfig> = (props) => {
-    const {
-        label,
-        description,
-        helperText,
-        info,
-        i18nStrings,
-        stretch,
-        secondaryControl,
-
-        input,
-        isDisabled,
-        isReadOnly,
-
-        validateOnMount,
-        meta: { error, submitFailed },
-        showError,
-
-        ...rest
-    } = useFieldApi(props);
-    const controlId = useUniqueId(input.name);
-    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
+const DateRangePicker: FC<DataDrivenFormFieldProps> = (props) => {
     const resourceStrings = useMemo(() => {
         return {
             ...DEFAULT_RESOURCE_STRINGS,
-            ...i18nStrings,
+            ...props.i18nStrings,
         };
-    }, [i18nStrings]);
+    }, [props.i18nStrings]);
 
     const isValidRange: DateRangePickerProps.ValidationFunction = useCallback(
         (range: DateRangePickerProps.Value | null) => {
@@ -138,34 +114,22 @@ const DateRangePicker: FC<UseFieldApiConfig> = (props) => {
     );
 
     return (
-        <FormField
-            controlId={controlId}
-            label={label}
-            description={description}
-            errorText={errorText}
-            constraintText={helperText}
-            info={info}
-            i18nStrings={rest?.i18nStrings}
-            stretch={stretch}
-            secondaryControl={secondaryControl}
-        >
-            <DateRangePickerComponent
-                relativeOptions={DEFAULT_RELATIVE_OPTIONS}
-                isValidRange={isValidRange}
-                placeholder={DEFAULT_PLACEHOLDER}
-                {...rest}
-                {...input}
-                controlId={controlId}
-                disabled={isDisabled}
-                readOnly={isReadOnly}
-                invalid={!!errorText}
-                i18nStrings={resourceStrings}
-                onChange={({ detail }: any) => input.onChange(detail.value)}
-                onBlur={() => input.onBlur()}
-                onFocus={() => input.onFocus()}
-            />
-        </FormField>
+        <DateRangePickerComponent
+            relativeOptions={DEFAULT_RELATIVE_OPTIONS}
+            isValidRange={isValidRange}
+            placeholder={DEFAULT_PLACEHOLDER}
+            {...props}
+            {...props.input}
+            controlId={props.controlId}
+            disabled={props.isDisabled}
+            readOnly={props.isReadOnly}
+            invalid={!!props.errorText}
+            i18nStrings={resourceStrings}
+            onChange={({ detail }) => props.input.onChange(detail.value)}
+            onBlur={props.onBlur}
+            onFocus={props.onFocus}
+        />
     );
 };
 
-export default memo(DateRangePicker);
+export default memo(withDataDrivenFormField(DateRangePicker));
