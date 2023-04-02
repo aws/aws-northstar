@@ -25,7 +25,6 @@ export interface DataDrivenFormFieldProps extends UseFieldApiProps<any> {
     controlId: string;
     onFocus: () => void;
     onBlur: () => void;
-    onChange: (event: React.ChangeEvent<any>) => void;
 }
 
 function withDataDrivenFormField(FieldComponent: React.FunctionComponent<any>, excludeComponentProp = false) {
