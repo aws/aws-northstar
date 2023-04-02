@@ -36,6 +36,7 @@ const FieldArray: FC<DataDrivenFormFieldProps> = ({ ...props }) => {
         defaultItem,
         'data-testid': testId = 'field-array',
         controlId,
+        ...rest
     } = props;
 
     const definition = useMemo(() => {
@@ -68,8 +69,8 @@ const FieldArray: FC<DataDrivenFormFieldProps> = ({ ...props }) => {
                         addButtonText={DEFAULT_ADD_BUTTON_TEXT}
                         removeButtonText={DEFAULT_REMOVE_BUTTON_TEXT}
                         disableAddButton={isDisabled || isReadOnly || (!!length && length >= maxItems)}
-                        {...props}
-                        {...props.input}
+                        {...rest}
+                        {...input}
                         isItemRemovable={() => {
                             return !isDisabled && !isReadOnly;
                         }}

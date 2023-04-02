@@ -80,7 +80,6 @@ const CodeEditor: FC<DataDrivenFormFieldProps> = (props) => {
             i18nStrings={resourceStrings}
             preferences={preferences}
             onPreferencesChange={(e) => setPreferences(e.detail)}
-            controlId={props.controlId}
             onChange={({ detail }) => props.input.onChange(detail.value)}
             onRecoveryClick={loadAce}
         />

@@ -15,62 +15,21 @@
  ******************************************************************************************************************** */
 import { FC, memo } from 'react';
 import Input, { InputProps } from '@cloudscape-design/components/input';
-import FormField from '@cloudscape-design/components/form-field';
-import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import useUniqueId from '../../../../hooks/useUniqueId';
-import getErrorText from '../../utils/getErrorText';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
 
-const TextField: FC<UseFieldApiConfig> = (props) => {
-    const {
-        label,
-        description,
-        helperText,
-        info,
-        i18nStrings,
-        stretch,
-        secondaryControl,
+const TextField: FC<DataDrivenFormFieldProps> = (props) => {
+    const { type, input, onBlur, onFocus, ...rest } = props;
 
-        type,
-        input,
-        isRequired,
-        isDisabled,
-        isReadOnly,
-
-        validateOnMount,
-        meta: { error, submitFailed },
-        showError,
-
-        ...rest
-    } = useFieldApi(props);
-    const controlId = useUniqueId(input.name);
-    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     return (
-        <FormField
-            controlId={controlId}
-            label={label}
-            description={description}
-            errorText={errorText}
-            constraintText={helperText}
-            info={info}
-            i18nStrings={i18nStrings}
-            stretch={stretch}
-            secondaryControl={secondaryControl}
-        >
-            <Input
-                {...rest}
-                {...input}
-                controlId={controlId}
-                disabled={isDisabled}
-                readOnly={isReadOnly}
-                ariaRequired={isRequired}
-                type={(type as InputProps.Type) || 'text'}
-                invalid={!!errorText}
-                onChange={({ detail }) => input.onChange(detail.value)}
-                onBlur={() => input.onBlur()}
-                onFocus={() => input.onFocus()}
-            />
-        </FormField>
+        <Input
+            {...rest}
+            {...input}
+            type={(type as InputProps.Type) || 'text'}
+            onChange={({ detail }) => input.onChange(detail.value)}
+            onBlur={onBlur}
+            onFocus={onFocus}
+        />
     );
 };
 
-export default memo(TextField);
+export default memo(withDataDrivenFormField(TextField));

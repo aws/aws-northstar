@@ -17,43 +17,30 @@ import { FC, memo } from 'react';
 import SelectComponent from '@cloudscape-design/components/select';
 import Multiselect from '@cloudscape-design/components/multiselect';
 import Autosuggest from '@cloudscape-design/components/autosuggest';
-import FormField from '@cloudscape-design/components/form-field';
-import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import useUniqueId from '../../../../hooks/useUniqueId';
-import getErrorText from '../../utils/getErrorText';
 import { Option } from '../../types';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
 
 const AUTOSUGGEST_DEFAULT_EMPTY_MESSAGE = 'No matches found';
 
-const Select: FC<UseFieldApiConfig> = (props) => {
+const Select: FC<DataDrivenFormFieldProps> = (props) => {
     const {
         label,
-        description,
-        helperText,
-        info,
-        i18nStrings,
-        stretch,
-        secondaryControl,
 
         options,
         input,
         isRequired,
         isDisabled,
-        isReadOnly,
 
         isMulti,
         isSearchable,
 
         enteredTextLabel,
 
-        validateOnMount,
-        meta: { error, submitFailed },
-        showError,
+        controlId,
+        errorText,
 
         ...rest
-    } = useFieldApi(props);
-    const controlId = useUniqueId(input.name);
-    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
+    } = props;
 
     const baseComponentProps = {
         ...rest,
@@ -63,56 +50,42 @@ const Select: FC<UseFieldApiConfig> = (props) => {
         ariaRequired: isRequired,
         invalid: !!errorText,
         options,
-        onBlur: () => input.onBlur(),
-        onFocus: () => input.onFocus(),
+        onBlur: props.onBlur,
+        onFocus: props.onFocus,
     };
 
-    return (
-        <FormField
-            controlId={controlId}
-            label={label}
-            description={description}
-            errorText={errorText}
-            constraintText={helperText}
-            info={info}
-            i18nStrings={i18nStrings}
-            stretch={stretch}
-            secondaryControl={secondaryControl}
-        >
-            {isMulti ? (
-                <Multiselect
-                    {...baseComponentProps}
-                    selectedOptions={input.value || []}
-                    onChange={({ detail }) => input.onChange(detail.selectedOptions)}
-                />
-            ) : isSearchable ? (
-                <Autosuggest
-                    empty={AUTOSUGGEST_DEFAULT_EMPTY_MESSAGE}
-                    enteredTextLabel={(value) => `Use: "${value}"`}
-                    {...baseComponentProps}
-                    value={input.value?.label || input.value?.value || ''}
-                    onChange={({ detail }) => {
-                        input.onChange({
-                            value: detail.value,
-                        });
-                    }}
-                    onSelect={({ detail }) => {
-                        input.onChange(
-                            options?.find((option: Option) => option.value === detail.value) || {
-                                value: detail.value,
-                            }
-                        );
-                    }}
-                />
-            ) : (
-                <SelectComponent
-                    {...baseComponentProps}
-                    selectedOption={input.value}
-                    onChange={({ detail }) => input.onChange(detail.selectedOption)}
-                />
-            )}
-        </FormField>
+    return isMulti ? (
+        <Multiselect
+            {...baseComponentProps}
+            selectedOptions={input.value || []}
+            onChange={({ detail }) => input.onChange(detail.selectedOptions)}
+        />
+    ) : isSearchable ? (
+        <Autosuggest
+            empty={AUTOSUGGEST_DEFAULT_EMPTY_MESSAGE}
+            enteredTextLabel={(value) => `Use: "${value}"`}
+            {...baseComponentProps}
+            value={input.value?.label || input.value?.value || ''}
+            onChange={({ detail }) => {
+                input.onChange({
+                    value: detail.value,
+                });
+            }}
+            onSelect={({ detail }) => {
+                input.onChange(
+                    options?.find((option: Option) => option.value === detail.value) || {
+                        value: detail.value,
+                    }
+                );
+            }}
+        />
+    ) : (
+        <SelectComponent
+            {...baseComponentProps}
+            selectedOption={input.value}
+            onChange={({ detail }) => input.onChange(detail.selectedOption)}
+        />
     );
 };
 
-export default memo(Select);
+export default memo(withDataDrivenFormField(Select));

@@ -15,62 +15,28 @@
  ******************************************************************************************************************** */
 import { FC, memo } from 'react';
 import RadioGroup from '@cloudscape-design/components/radio-group';
-import FormField from '@cloudscape-design/components/form-field';
-import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import getErrorText from '../../utils/getErrorText';
 import { Option } from '../../types';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
 
-const Radio: FC<UseFieldApiConfig> = ({ component, ...props }) => {
-    const {
-        label,
-        description,
-        helperText,
-        info,
-        i18nStrings,
-        stretch,
-        secondaryControl,
-
-        options,
-        input,
-        isRequired,
-        isDisabled,
-
-        validateOnMount,
-        meta: { error, submitFailed },
-        showError,
-
-        ...rest
-    } = useFieldApi(props);
-
-    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
+const Radio: FC<DataDrivenFormFieldProps> = (props) => {
+    const { options, input, isRequired, isDisabled } = props;
 
     return (
-        <FormField
-            label={label}
-            description={description}
-            errorText={errorText}
-            constraintText={helperText}
-            info={info}
-            i18nStrings={i18nStrings}
-            stretch={stretch}
-            secondaryControl={secondaryControl}
-        >
-            <RadioGroup
-                {...rest}
-                {...input}
-                items={options?.map((option: Option) => ({
-                    ...option,
-                    disabled: option.disabled ?? isDisabled,
-                    controlId: `${input.name}-${option.value}`,
-                }))}
-                ariaRequired={isRequired}
-                value={input.value}
-                onChange={({ detail }) => {
-                    input.onChange(detail.value);
-                }}
-            />
-        </FormField>
+        <RadioGroup
+            {...props}
+            {...props.input}
+            items={options?.map((option: Option) => ({
+                ...option,
+                disabled: option.disabled ?? isDisabled,
+                controlId: `${input.name}-${option.value}`,
+            }))}
+            ariaRequired={isRequired}
+            value={props.input.value}
+            onChange={({ detail }) => {
+                props.input.onChange(detail.value);
+            }}
+        />
     );
 };
 
-export default memo(Radio);
+export default memo(withDataDrivenFormField(Radio, true));

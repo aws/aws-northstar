@@ -74,12 +74,13 @@ const DEFAULT_RESOURCE_STRINGS: DateRangePickerProps.I18nStrings = {
 const DEFAULT_PLACEHOLDER = 'Filter by a date and time range';
 
 const DateRangePicker: FC<DataDrivenFormFieldProps> = (props) => {
+    const { input, i18nStrings, onBlur, onFocus, ...rest } = props;
     const resourceStrings = useMemo(() => {
         return {
             ...DEFAULT_RESOURCE_STRINGS,
-            ...props.i18nStrings,
+            ...i18nStrings,
         };
-    }, [props.i18nStrings]);
+    }, [i18nStrings]);
 
     const isValidRange: DateRangePickerProps.ValidationFunction = useCallback(
         (range: DateRangePickerProps.Value | null) => {
@@ -118,16 +119,12 @@ const DateRangePicker: FC<DataDrivenFormFieldProps> = (props) => {
             relativeOptions={DEFAULT_RELATIVE_OPTIONS}
             isValidRange={isValidRange}
             placeholder={DEFAULT_PLACEHOLDER}
-            {...props}
-            {...props.input}
-            controlId={props.controlId}
-            disabled={props.isDisabled}
-            readOnly={props.isReadOnly}
-            invalid={!!props.errorText}
+            {...rest}
+            {...input}
             i18nStrings={resourceStrings}
-            onChange={({ detail }) => props.input.onChange(detail.value)}
-            onBlur={props.onBlur}
-            onFocus={props.onFocus}
+            onChange={({ detail }) => input.onChange(detail.value)}
+            onBlur={onBlur}
+            onFocus={onFocus}
         />
     );
 };

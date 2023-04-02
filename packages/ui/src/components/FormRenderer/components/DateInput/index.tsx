@@ -18,18 +18,14 @@ import DateInputComponent from '@cloudscape-design/components/date-input';
 import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
 
 const DateInput: FC<DataDrivenFormFieldProps> = (props) => {
+    const { input, onBlur, onFocus, ...rest } = props;
     return (
         <DateInputComponent
-            {...props}
-            {...props.input}
-            controlId={props.controlId}
-            disabled={props.isDisabled}
-            readOnly={props.isReadOnly}
-            ariaRequired={props.isRequired}
-            invalid={!!props.errorText}
-            onChange={({ detail }) => props.input.onChange(detail.value)}
-            onBlur={props.onBlur}
-            onFocus={props.onFocus}
+            {...rest}
+            {...input}
+            onChange={({ detail }) => input.onChange(detail.value)}
+            onBlur={onBlur}
+            onFocus={onFocus}
         />
     );
 };

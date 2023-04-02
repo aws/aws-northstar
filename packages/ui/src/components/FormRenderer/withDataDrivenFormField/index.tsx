@@ -25,11 +25,16 @@ export interface DataDrivenFormFieldProps extends UseFieldApiProps<any> {
     controlId: string;
     onFocus: () => void;
     onBlur: () => void;
+    onChange: (event: React.ChangeEvent<any>) => void;
 }
 
-function withDataDrivenFormField(FieldComponent: React.FunctionComponent<any>) {
+function withDataDrivenFormField(FieldComponent: React.FunctionComponent<any>, excludeComponentProp = false) {
     return (formFieldProps: UseFieldApiConfig) => {
-        const useFieldApiProps = useFieldApi(formFieldProps);
+        let { component, ...props } = formFieldProps;
+        if (excludeComponentProp) {
+            props = { ...props };
+        }
+        const useFieldApiProps = useFieldApi(props);
         const {
             label,
             description,
@@ -38,6 +43,10 @@ function withDataDrivenFormField(FieldComponent: React.FunctionComponent<any>) {
             i18nStrings,
             stretch,
             secondaryControl,
+
+            isDisabled,
+            isReadOnly,
+            isRequired,
 
             input,
 
@@ -48,8 +57,16 @@ function withDataDrivenFormField(FieldComponent: React.FunctionComponent<any>) {
         const controlId = useUniqueId(input.name);
         const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
 
-        const onFocus = () => input.onFocus();
-        const onBlur = () => input.onBlur();
+        const onFocus = input.onFocus;
+        const onBlur = input.onBlur;
+
+        const cloudscapeProps = {
+            disabled: isDisabled,
+            readOnly: isReadOnly,
+            ariaRequired: isRequired,
+            invalid: !!errorText,
+            controlId,
+        };
 
         return (
             <FormField
@@ -63,7 +80,13 @@ function withDataDrivenFormField(FieldComponent: React.FunctionComponent<any>) {
                 stretch={stretch}
                 secondaryControl={secondaryControl}
             >
-                <FieldComponent {...useFieldApiProps} controlId={controlId} onFocus={onFocus} onBlur={onBlur} />
+                <FieldComponent
+                    {...useFieldApiProps}
+                    {...cloudscapeProps}
+                    controlId={controlId}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                />
             </FormField>
         );
     };
