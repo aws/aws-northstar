@@ -18,6 +18,7 @@ import FormField from '@cloudscape-design/components/form-field';
 import useFieldApi, { UseFieldApiConfig, UseFieldApiProps } from '@data-driven-forms/react-form-renderer/use-field-api';
 import getErrorText from '../utils/getErrorText';
 import useUniqueId from '../../../hooks/useUniqueId';
+import { componentTypes } from '../types';
 
 export interface DataDrivenFormFieldProps extends UseFieldApiProps<any> {
     isRequired: boolean;
@@ -29,9 +30,10 @@ export interface DataDrivenFormFieldProps extends UseFieldApiProps<any> {
 
 function withDataDrivenFormField(FieldComponent: React.FunctionComponent<any>, excludeComponentProp = false) {
     return (formFieldProps: UseFieldApiConfig) => {
-        let { component, ...props } = formFieldProps;
+        let props = formFieldProps;
         if (excludeComponentProp) {
-            props = { ...props };
+            props = { ...formFieldProps };
+            delete props.component;
         }
         const useFieldApiProps = useFieldApi(props);
         const {
@@ -70,8 +72,8 @@ function withDataDrivenFormField(FieldComponent: React.FunctionComponent<any>, e
         return (
             <FormField
                 controlId={controlId}
-                label={label}
-                description={description}
+                label={props.component !== componentTypes.SWITCH ? label : undefined}
+                description={props.component !== componentTypes.SWITCH ? description : undefined}
                 errorText={errorText}
                 constraintText={helperText}
                 info={info}
