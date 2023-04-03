@@ -23,32 +23,11 @@ import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDat
 const AUTOSUGGEST_DEFAULT_EMPTY_MESSAGE = 'No matches found';
 
 const Select: FC<DataDrivenFormFieldProps> = (props) => {
-    const {
-        label,
-
-        options,
-        input,
-        isRequired,
-        isDisabled,
-
-        isMulti,
-        isSearchable,
-
-        enteredTextLabel,
-
-        controlId,
-        errorText,
-
-        ...rest
-    } = props;
+    const { options, input, isMulti, isSearchable, errorText, ...rest } = props;
 
     const baseComponentProps = {
         ...rest,
         ...input,
-        controlId,
-        disabled: isDisabled,
-        ariaRequired: isRequired,
-        invalid: !!errorText,
         options,
         onBlur: props.onBlur,
         onFocus: props.onFocus,

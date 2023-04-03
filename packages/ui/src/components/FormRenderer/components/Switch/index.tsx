@@ -35,4 +35,4 @@ const Switch: FC<DataDrivenFormFieldProps> = (props) => {
     );
 };
 
-export default memo(withDataDrivenFormField(Switch));
+export default memo(withDataDrivenFormField(Switch, false, ['label', 'description', 'info']));

@@ -18,7 +18,6 @@ import FormField from '@cloudscape-design/components/form-field';
 import useFieldApi, { UseFieldApiConfig, UseFieldApiProps } from '@data-driven-forms/react-form-renderer/use-field-api';
 import getErrorText from '../utils/getErrorText';
 import useUniqueId from '../../../hooks/useUniqueId';
-import { componentTypes } from '../types';
 
 export interface DataDrivenFormFieldProps extends UseFieldApiProps<any> {
     isRequired: boolean;
@@ -28,13 +27,29 @@ export interface DataDrivenFormFieldProps extends UseFieldApiProps<any> {
     onBlur: () => void;
 }
 
-function withDataDrivenFormField(FieldComponent: React.FunctionComponent<any>, excludeComponentProp = false) {
+type ExcludedFieldPropKey =
+    | 'controlId'
+    | 'label'
+    | 'description'
+    | 'errorText'
+    | 'constraintText'
+    | 'info'
+    | 'i18nStrings'
+    | 'stretch'
+    | 'secondaryControl';
+
+function getProps(formFieldProps: UseFieldApiConfig, excludeComponentProp = false) {
+    let { component, ...props } = formFieldProps;
+    return excludeComponentProp ? props : formFieldProps;
+}
+
+function withDataDrivenFormField(
+    FieldComponent: React.FunctionComponent<any>,
+    excludeComponentProp = false,
+    excludedFieldPropKeys: ExcludedFieldPropKey[] = []
+) {
     return (formFieldProps: UseFieldApiConfig) => {
-        let props = formFieldProps;
-        if (excludeComponentProp) {
-            props = { ...formFieldProps };
-            delete props.component;
-        }
+        const props = getProps(formFieldProps, excludeComponentProp);
         const useFieldApiProps = useFieldApi(props);
         const {
             label,
@@ -61,7 +76,7 @@ function withDataDrivenFormField(FieldComponent: React.FunctionComponent<any>, e
         const onFocus = input.onFocus;
         const onBlur = input.onBlur;
 
-        const cloudscapeProps = {
+        const cloudscapeComponentProps = {
             disabled: isDisabled,
             readOnly: isReadOnly,
             ariaRequired: isRequired,
@@ -69,21 +84,28 @@ function withDataDrivenFormField(FieldComponent: React.FunctionComponent<any>, e
             controlId,
         };
 
+        const fieldProps = Object.entries({
+            controlId,
+            label,
+            description,
+            errorText,
+            constraintText: helperText,
+            info,
+            i18nStrings,
+            stretch,
+            secondaryControl,
+        }).reduce((props, [key, value]) => {
+            if (!excludedFieldPropKeys.includes(key as ExcludedFieldPropKey)) {
+                props[key] = value;
+            }
+            return props;
+        }, {});
+
         return (
-            <FormField
-                controlId={controlId}
-                label={props.component !== componentTypes.SWITCH ? label : undefined}
-                description={props.component !== componentTypes.SWITCH ? description : undefined}
-                errorText={errorText}
-                constraintText={helperText}
-                info={info}
-                i18nStrings={i18nStrings}
-                stretch={stretch}
-                secondaryControl={secondaryControl}
-            >
+            <FormField {...fieldProps}>
                 <FieldComponent
                     {...useFieldApiProps}
-                    {...cloudscapeProps}
+                    {...cloudscapeComponentProps}
                     controlId={controlId}
                     onFocus={onFocus}
                     onBlur={onBlur}
