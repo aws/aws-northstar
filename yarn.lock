@@ -112,7 +112,7 @@ __metadata:
     react-syntax-highlighter: ^15.5.0
     remark-frontmatter: ^4.0.1
     remark-gfm: ^3.0.1
-    storybook-addon-react-router-v6: ^0.2.1
+    storybook-addon-react-router-v6: ^0.3.5
     ts-jest: ^29.0.3
     typescript: ^4.9.3
     use-debounce: ^9.0.3
@@ -31072,9 +31072,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-react-router-v6@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "storybook-addon-react-router-v6@npm:0.2.1"
+"storybook-addon-react-router-v6@npm:^0.3.5":
+  version: 0.3.5
+  resolution: "storybook-addon-react-router-v6@npm:0.3.5"
   dependencies:
     react-inspector: ^5.1.1
   peerDependencies:
@@ -31092,7 +31092,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 6e1e858fa66e79da36dffc77dfa9b48298a31ca2797389926e7b7a6dafc5919673eda7a19eb882a71085a2eb2dce69811616b6a06cfbe0f9c112ea268a5d9ebb
+  checksum: 26f49e7f07f5aef516c2aaf5c1b6ef44da570355cf8aa035e607b942fbbd17d590cc3ba8caab6f316c9837f3191e382f97b72a56e224ef9e2a67f91f7f1c6b5e
   languageName: node
   linkType: hard
 
