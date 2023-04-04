@@ -42,7 +42,7 @@ const FormTemplate: FC<RenderProps> = ({ formFields, schema }) => {
 
         ...rest
     } = schema;
-    const { isSubmitting } = useFormRendererContext();
+    const { isSubmitting, errorText } = useFormRendererContext();
 
     const actions = (
         <SpaceBetween direction="horizontal" size="xs">
@@ -102,6 +102,7 @@ const FormTemplate: FC<RenderProps> = ({ formFields, schema }) => {
                 }
                 actions={actionsVisible ? actions : undefined}
                 data-testid={testId}
+                errorText={errorText}
             >
                 {containerWrappered ? (
                     <Container>

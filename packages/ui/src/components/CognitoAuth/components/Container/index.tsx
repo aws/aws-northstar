@@ -13,13 +13,31 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+import { FC, PropsWithChildren } from 'react';
+import ContainerComponent from '@cloudscape-design/components/container';
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
-}
+const Container: FC<PropsWithChildren<{}>> = ({ children }) => {
+    return (
+        <div
+            style={{
+                width: '100%',
+                height: '100vh',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
+        >
+            <ContainerComponent>
+                <div
+                    style={{
+                        width: '480px',
+                    }}
+                >
+                    {children}
+                </div>
+            </ContainerComponent>
+        </div>
+    );
+};
 
-export const FormRendererContext = createContext<FormRendererContextProps>({});
-
-export const useFormRendererContext = () => useContext(FormRendererContext);
+export default Container;

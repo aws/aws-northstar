@@ -13,13 +13,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+import { render } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './index.stories';
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
-}
+const { CognitoAuthFlow } = composeStories(stories);
 
-export const FormRendererContext = createContext<FormRendererContextProps>({});
-
-export const useFormRendererContext = () => useContext(FormRendererContext);
+describe('CognitoAuthFlow', () => {
+    it('should render CognitoAuthFlow', async () => {
+        render(<CognitoAuthFlow />);
+    });
+});
