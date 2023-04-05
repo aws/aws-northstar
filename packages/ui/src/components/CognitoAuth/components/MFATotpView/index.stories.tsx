@@ -14,18 +14,18 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import MFAView, { MFAViewProps } from '.';
+import MFATotpView, { MFATotpViewProps } from '.';
 import Container from '../Container';
 
 export default {
-    component: MFAView,
-    title: 'Components/CognitoAuth/MFA',
-} as ComponentMeta<typeof MFAView>;
+    component: MFATotpView,
+    title: 'Components/CognitoAuth/MFATOTP',
+} as ComponentMeta<typeof MFATotpView>;
 
-const Template: ComponentStory<typeof MFAView> = (args: MFAViewProps) => {
+const Template: ComponentStory<typeof MFATotpView> = (args: MFATotpViewProps) => {
     return (
         <Container>
-            <MFAView {...args} />
+            <MFATotpView {...args} />
         </Container>
     );
 };

@@ -13,21 +13,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import MFAView, { MFAViewProps } from '.';
-import Container from '../Container';
+import { render } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './index.stories';
 
-export default {
-    component: MFAView,
-    title: 'Components/CognitoAuth/MFA',
-} as ComponentMeta<typeof MFAView>;
+const { Default } = composeStories(stories);
 
-const Template: ComponentStory<typeof MFAView> = (args: MFAViewProps) => {
-    return (
-        <Container>
-            <MFAView {...args} />
-        </Container>
-    );
-};
-
-export const Default = Template.bind({});
+describe('MFATotp', () => {
+    it('should render MFATotp form', async () => {
+        render(<Default />);
+    });
+});

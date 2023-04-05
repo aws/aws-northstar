@@ -14,19 +14,14 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { FC, ReactNode, useState, createContext, useCallback, useMemo, useContext, useReducer } from 'react';
-import {
-    CognitoUserPool,
-    CognitoUser,
-    AuthenticationDetails,
-    IAuthenticationDetailsData,
-    CognitoUserSession,
-    ChallengeName,
-} from 'amazon-cognito-identity-js';
+import { CognitoUserPool, CognitoUser, ChallengeName } from 'amazon-cognito-identity-js';
 import Container from './components/Container';
 import ConfigError from './components/ConfigError';
-import SignInView from './components/SignInView';
-import NewPasswordView from './components/NewPasswordView';
-import MFAView from './components/MFAView';
+import MFA from './components/MFA';
+import MFASetup from './components/MFASetup';
+import MFATotp from './components/MFATotp';
+import NewPassword from './components/NewPassword';
+import SignIn from './components/SignIn';
 
 export interface CognitoAuthProps {
     /**
@@ -86,6 +81,7 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
 
     const handleSignOut = useCallback(() => {
         userPool?.getCurrentUser()?.signOut();
+        setTransition(undefined);
         forceUpdate();
     }, [userPool]);
 
@@ -93,117 +89,57 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
         return userPool?.getCurrentUser() || null;
     }, [userPool]);
 
-    const resetComponent = useCallback(() => {
-        setTransition(undefined);
-        forceUpdate();
-    }, []);
-
-    const handleMFA = useCallback(
-        async (cognitoUser: CognitoUser, mfaCode: string) => {
-            return new Promise((resolve, reject) => {
-                cognitoUser.sendMFACode(mfaCode, {
-                    onSuccess(result: CognitoUserSession) {
-                        console.debug('Cognito sendMFACode Success');
-                        resolve(result);
-                        resetComponent();
-                    },
-                    onFailure(err) {
-                        console.error('Cognito sendMFACode Failure', err);
-                        reject(err);
-                    },
-                });
-            });
-        },
-        [resetComponent]
-    );
-
     const handleMFARequired = useCallback(
         (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => {
             setTransition(
-                <MFAView
+                <MFA
+                    cognitoUser={cognitoUser}
                     challengeName={challengeName}
                     challengeParams={challengeParams}
-                    onConfirm={async (code) => handleMFA(cognitoUser, code)}
-                    onBackToSignIn={() => setTransition(undefined)}
+                    setTransition={setTransition}
                 />
             );
         },
-        [handleMFA]
+        [setTransition]
     );
 
-    const handleChangePassword = useCallback(
-        async (cognitoUser: CognitoUser, newPassword: string, attributes: any) => {
-            return new Promise((resolve, reject) => {
-                return cognitoUser.completeNewPasswordChallenge(newPassword, attributes, {
-                    onSuccess(result: CognitoUserSession) {
-                        console.debug('Cognito Change Password Success', result);
-                        resolve(result);
-                        setTransition(undefined);
-                    },
-                    onFailure(err) {
-                        console.error('Cognito Change Password Error', err);
-                        reject(err);
-                    },
-                    mfaRequired(challengeName, challengeParams) {
-                        handleMFARequired(cognitoUser, challengeName, challengeParams);
-                        resolve({});
-                    },
-                });
-            });
+    const handleAssociateSecretCode = useCallback(
+        (cognitoUser: CognitoUser, secretCode: string) => {
+            setTransition(<MFATotp cognitoUser={cognitoUser} secretCode={secretCode} setTransition={setTransition} />);
         },
-        [handleMFARequired]
+        [setTransition]
+    );
+
+    const handleMFASetup = useCallback(
+        (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => {
+            setTransition(
+                <MFASetup
+                    cognitoUser={cognitoUser}
+                    challengeName={challengeName}
+                    challengeParams={challengeParams}
+                    setTransition={setTransition}
+                    onAssociateSecretCode={handleAssociateSecretCode}
+                    onMFARequired={handleMFARequired}
+                />
+            );
+        },
+        [setTransition, handleAssociateSecretCode, handleMFARequired]
     );
 
     const handleNewPasswordRequired = useCallback(
         (cognitoUser: CognitoUser, userAttributes: any, requiredAttributes: any) => {
             setTransition(
-                <NewPasswordView
+                <NewPassword
+                    cognitoUser={cognitoUser}
                     userAttributes={userAttributes}
                     requiredAttributes={requiredAttributes}
-                    onChangePassword={async (newPassword, attributes) => {
-                        await handleChangePassword(cognitoUser, newPassword, attributes);
-                    }}
-                    onBackToSignIn={() => setTransition(undefined)}
+                    setTransition={setTransition}
+                    onMFARequired={handleMFARequired}
+                    onMFASetup={handleMFASetup}
                 />
             );
         },
-        [handleChangePassword]
-    );
-
-    const handleSignIn = useCallback(
-        async (authenticationDetails: IAuthenticationDetailsData) => {
-            if (userPool) {
-                const authDetails = new AuthenticationDetails(authenticationDetails);
-                const cognitoUser = new CognitoUser({
-                    Username: authenticationDetails.Username,
-                    Pool: userPool,
-                });
-
-                return new Promise((resolve, reject) => {
-                    cognitoUser.authenticateUser(authDetails, {
-                        onSuccess(result: CognitoUserSession) {
-                            console.debug('Congnito Auth Success', result);
-                            resolve(result);
-                            setTransition(undefined);
-                        },
-                        onFailure(err) {
-                            console.error('Congnito Auth Failure', err);
-                            reject(err);
-                        },
-                        newPasswordRequired(userAttributes, requiredAttributes) {
-                            handleNewPasswordRequired(cognitoUser, userAttributes, requiredAttributes);
-                            resolve({});
-                        },
-                        mfaRequired(challengeName, challengeParams) {
-                            console.log('mfaRequired', challengeName, challengeParams);
-                            handleMFARequired(cognitoUser, challengeName, challengeParams);
-                            resolve({});
-                        },
-                    });
-                });
-            }
-        },
-        [userPool, handleMFARequired, handleNewPasswordRequired]
+        [handleMFARequired, handleMFASetup, setTransition]
     );
 
     if (!userPool) {
@@ -231,7 +167,15 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
 
     return (
         <Container>
-            {transition ?? <SignInView onSignIn={handleSignIn} onResetPassword={() => console.log('WIP')} />}
+            {transition ?? (
+                <SignIn
+                    userPool={userPool}
+                    onMFARequired={handleMFARequired}
+                    onMFASetup={handleMFASetup}
+                    onNewPasswordRequired={handleNewPasswordRequired}
+                    setTransition={setTransition}
+                />
+            )}
         </Container>
     );
 };

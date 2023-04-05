@@ -19,8 +19,8 @@ import * as stories from './index.stories';
 
 const { Default } = composeStories(stories);
 
-describe('MFACode', () => {
-    it('should render MFACode form', async () => {
+describe('MFA', () => {
+    it('should render MFA form', async () => {
         render(<Default />);
     });
 });

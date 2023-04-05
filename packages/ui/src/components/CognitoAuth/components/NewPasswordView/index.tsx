@@ -21,7 +21,7 @@ import Button from '@cloudscape-design/components/button';
 export interface NewPasswordViewProps {
     userAttributes?: string[];
     requiredAttributes?: string[];
-    onChangePassword: (newPassword: string, attributes?: any) => Promise<void>;
+    onChangePassword: (newPassword: string, attributes?: any) => Promise<unknown>;
     onBackToSignIn: () => void;
 }
 

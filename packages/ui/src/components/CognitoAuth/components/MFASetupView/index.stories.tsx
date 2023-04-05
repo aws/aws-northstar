@@ -14,20 +14,27 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import MFAView, { MFAViewProps } from '.';
+import MFASetupView, { MFASetupViewProps } from '.';
 import Container from '../Container';
 
 export default {
-    component: MFAView,
-    title: 'Components/CognitoAuth/MFA',
-} as ComponentMeta<typeof MFAView>;
+    component: MFASetupView,
+    title: 'Components/CognitoAuth/MFASetup',
+} as ComponentMeta<typeof MFASetupView>;
 
-const Template: ComponentStory<typeof MFAView> = (args: MFAViewProps) => {
+const Template: ComponentStory<typeof MFASetupView> = (args: MFASetupViewProps) => {
     return (
         <Container>
-            <MFAView {...args} />
+            <MFASetupView {...args} />
         </Container>
     );
 };
 
 export const Default = Template.bind({});
+Default.args = {
+    challengeName: 'SMS_MFA',
+    challengeParams: {
+        CODE_DELIVERY_DESTINATION: 'SMS',
+        MFAS_CAN_SETUP: JSON.stringify(['SMS_MFA', 'SOFTWARE_TOKEN_MFA']),
+    },
+};
