@@ -17,13 +17,13 @@ import { CognitoUser } from 'amazon-cognito-identity-js';
 import MFATotpView from '../MFATotpView';
 import { useCallback, ReactNode, FC } from 'react';
 
-export interface MFASetupProps {
+export interface MFATotpProps {
     cognitoUser: CognitoUser;
     setTransition: React.Dispatch<React.SetStateAction<ReactNode>>;
     secretCode: string;
 }
 
-const MFASetup: FC<MFASetupProps> = ({ cognitoUser, setTransition, secretCode }) => {
+const MFATotp: FC<MFATotpProps> = ({ cognitoUser, setTransition, secretCode }) => {
     const handleConfirm = useCallback(
         async (mfaCode: string) => {
             return new Promise((resolve, reject) => {
@@ -51,4 +51,4 @@ const MFASetup: FC<MFASetupProps> = ({ cognitoUser, setTransition, secretCode })
     );
 };
 
-export default MFASetup;
+export default MFATotp;

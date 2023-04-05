@@ -31,3 +31,6 @@ const Template: ComponentStory<typeof MFATotpView> = (args: MFATotpViewProps) =>
 };
 
 export const Default = Template.bind({});
+Default.args = {
+    secretCode: '12345678',
+};

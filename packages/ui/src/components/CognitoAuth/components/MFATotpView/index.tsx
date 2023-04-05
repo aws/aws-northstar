@@ -37,7 +37,7 @@ const MFATotpView: FC<MFATotpViewProps> = ({ secretCode, onConfirm, onBackToSign
         async (data: any) => {
             try {
                 setIsSubmitting(true);
-                await onConfirm(data.mfaMethod);
+                await onConfirm(data.confirmationCode);
             } catch (err: any) {
                 setErrorMessage(err.message);
             } finally {
