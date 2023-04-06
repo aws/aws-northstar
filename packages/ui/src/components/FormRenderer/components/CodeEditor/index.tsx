@@ -15,11 +15,11 @@
  ******************************************************************************************************************** */
 import { FC, memo, useState, useMemo, useEffect, useCallback } from 'react';
 import CodeEditorComponent from '@cloudscape-design/components/code-editor';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 import 'ace-builds/css/ace.css';
 import 'ace-builds/css/theme/dawn.css';
 import 'ace-builds/css/theme/tomorrow_night_bright.css';
-import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
 
 const DEFAULT_RESOURCE_STRINGS = {
     loadingState: 'Loading code editor',

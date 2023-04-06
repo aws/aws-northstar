@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import { FC, memo } from 'react';
 import DateInputComponent from '@cloudscape-design/components/date-input';
-import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 const DateInput: FC<DataDrivenFormFieldProps> = (props) => {
     const { input, onBlur, onFocus, ...rest } = props;

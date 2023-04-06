@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import { FC, memo } from 'react';
 import Toggle from '@cloudscape-design/components/toggle';
-import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 const Switch: FC<DataDrivenFormFieldProps> = (props) => {
     const { label, description, input, onBlur, onFocus, ...rest } = props;

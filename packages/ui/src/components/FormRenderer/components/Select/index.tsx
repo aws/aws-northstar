@@ -18,7 +18,7 @@ import SelectComponent from '@cloudscape-design/components/select';
 import Multiselect from '@cloudscape-design/components/multiselect';
 import Autosuggest from '@cloudscape-design/components/autosuggest';
 import { Option } from '../../types';
-import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 const AUTOSUGGEST_DEFAULT_EMPTY_MESSAGE = 'No matches found';
 

@@ -18,7 +18,7 @@ import AttributeEditor from '@cloudscape-design/components/attribute-editor';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import { FieldArray as FieldArrayBase } from '@data-driven-forms/react-form-renderer';
 import { Field } from '../../types';
-import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 const DEFAULT_ADD_BUTTON_TEXT = 'Add new item';
 const DEFAULT_REMOVE_BUTTON_TEXT = 'Remove';

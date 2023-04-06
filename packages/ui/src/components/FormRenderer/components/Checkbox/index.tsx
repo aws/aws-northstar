@@ -18,7 +18,7 @@ import CheckboxComponent from '@cloudscape-design/components/checkbox';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { Option } from '../../types';
-import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 interface CheckboxMappingProps extends DataDrivenFormFieldProps {
     option: Option;
@@ -79,7 +79,7 @@ const SingleCheckbox: FC<DataDrivenFormFieldProps> = (props) => {
     );
 };
 
-const WrappedSingleCheckbox = memo(withDataDrivenFormField(SingleCheckbox, true, ['label', 'description']));
+const WrappedSingleCheckbox = memo(withDataDrivenFormField(SingleCheckbox, true, ['label', 'description', 'info']));
 
 const Checkbox: FC<UseFieldApiConfig> = ({ component, ...props }) => {
     return props.options?.length > 0 ? <WrappedMultipleCheckbox {...props} /> : <WrappedSingleCheckbox {...props} />;

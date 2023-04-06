@@ -16,8 +16,8 @@
 import React from 'react';
 import FormField from '@cloudscape-design/components/form-field';
 import useFieldApi, { UseFieldApiConfig, UseFieldApiProps } from '@data-driven-forms/react-form-renderer/use-field-api';
-import getErrorText from '../utils/getErrorText';
-import useUniqueId from '../../../hooks/useUniqueId';
+import getErrorText from '../../utils/getErrorText';
+import useUniqueId from '../../../../hooks/useUniqueId';
 
 export interface DataDrivenFormFieldProps extends UseFieldApiProps<any> {
     isRequired: boolean;

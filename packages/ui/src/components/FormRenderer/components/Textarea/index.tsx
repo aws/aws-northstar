@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import { FC, memo } from 'react';
 import TextareaComponent from '@cloudscape-design/components/textarea';
-import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 const Textarea: FC<DataDrivenFormFieldProps> = (props) => {
     const { input, onBlur, onFocus, ...rest } = props;

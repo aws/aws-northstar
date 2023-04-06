@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import { FC, memo, useMemo, useCallback } from 'react';
 import DateRangePickerComponent, { DateRangePickerProps } from '@cloudscape-design/components/date-range-picker';
-import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 const DEFAULT_RELATIVE_OPTIONS: DateRangePickerProps.RelativeOption[] = [
     {

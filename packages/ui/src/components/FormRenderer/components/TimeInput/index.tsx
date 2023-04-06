@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import { FC, memo } from 'react';
 import TimeInputComponent from '@cloudscape-design/components/time-input';
-import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 const DEFAULT_FORMAT = 'hh:mm';
 const DEFAULT_PLACEHOLDER = 'hh:mm';

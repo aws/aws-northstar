@@ -16,24 +16,24 @@
 import { FC, memo } from 'react';
 import RadioGroup from '@cloudscape-design/components/radio-group';
 import { Option } from '../../types';
-import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 const Radio: FC<DataDrivenFormFieldProps> = (props) => {
-    const { options, input, isRequired, isDisabled } = props;
+    const { options, input, isRequired, isDisabled, ...rest } = props;
 
     return (
         <RadioGroup
-            {...props}
-            {...props.input}
+            {...rest}
+            {...input}
             items={options?.map((option: Option) => ({
                 ...option,
                 disabled: option.disabled ?? isDisabled,
                 controlId: `${input.name}-${option.value}`,
             }))}
             ariaRequired={isRequired}
-            value={props.input.value}
+            value={input.value}
             onChange={({ detail }) => {
-                props.input.onChange(detail.value);
+                input.onChange(detail.value);
             }}
         />
     );

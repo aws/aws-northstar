@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import { FC, memo } from 'react';
 import Input, { InputProps } from '@cloudscape-design/components/input';
-import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../withDataDrivenFormField';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 const TextField: FC<DataDrivenFormFieldProps> = (props) => {
     const { type, input, onBlur, onFocus, ...rest } = props;
