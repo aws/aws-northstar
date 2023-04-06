@@ -8,7 +8,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '18'
-      - run: pushd /tmp & git clone --depth 1 https://github.com/awslabs/git-secrets.git && cd ./git-secrets && PREFIX=/tmp/git-secrets make install && popd
+      - run: pushd /tmp && git clone --depth 1 https://github.com/awslabs/git-secrets.git && cd ./git-secrets && PREFIX=/tmp/git-secrets make install && popd
       - run: npm install -g typescript
       - run: npm install -g yarn
       - run: npm install -g oss-attribution-generator
