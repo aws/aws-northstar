@@ -178,7 +178,7 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
                     onMFASetup={handleMFASetup}
                     onNewPasswordRequired={handleNewPasswordRequired}
                     resetView={resetView}
-                    onResetPassword={console.log}
+                    onForgotPassword={console.log}
                 />
             )}
         </Container>

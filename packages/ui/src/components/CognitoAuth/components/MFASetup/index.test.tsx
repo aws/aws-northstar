@@ -15,8 +15,8 @@
  ******************************************************************************************************************** */
 import { render, act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Default } from '../MFASetupView/index.stories';
 import MFASetup from '.';
+import { MFA_SETUP_CHALLENGE_PARAM } from '../../fixtures';
 
 const challengeName = 'SMS_MFA';
 const secretCode = '12345678';
@@ -30,7 +30,7 @@ describe('MFASetup', () => {
         const handleMFARequired = jest.fn();
 
         await testMFASetup(handleAssociateSecretCode, handleMFARequired, handleResetView, mockCognitoUser, 'SMS');
-        expect(handleMFARequired).toHaveBeenCalledWith(mockCognitoUser, challengeName, Default.args?.challengeParams);
+        expect(handleMFARequired).toHaveBeenCalledWith(mockCognitoUser, challengeName, MFA_SETUP_CHALLENGE_PARAM);
     });
 
     it('should handle SOFTWARE_TOKEN_MFA associateSecretCode flow', async () => {
@@ -94,7 +94,7 @@ const testMFASetup = async (
             cognitoUser={mockCognitoUser}
             resetView={handleResetView}
             challengeName={challengeName}
-            challengeParams={Default.args?.challengeParams}
+            challengeParams={MFA_SETUP_CHALLENGE_PARAM}
             onAssociateSecretCode={handleAssociateSecretCode}
             onMFARequired={handleMFARequired}
         />

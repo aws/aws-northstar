@@ -29,7 +29,7 @@ export interface SignInProps {
     onMFARequired: (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
     onNewPasswordRequired: (cognitoUser: CognitoUser, userAttributes: any, requiredAttributes: any) => void;
     onMFASetup: (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
-    onResetPassword: () => void;
+    onForgotPassword: () => void;
     resetView: () => void;
 }
 
@@ -39,7 +39,7 @@ const SignIn: FC<SignInProps> = ({
     onNewPasswordRequired,
     onMFASetup,
     resetView,
-    onResetPassword,
+    onForgotPassword,
 }) => {
     const handleSignIn = useCallback(
         async (authenticationDetails: IAuthenticationDetailsData) => {
@@ -93,7 +93,7 @@ const SignIn: FC<SignInProps> = ({
         [userPool, onMFARequired, onNewPasswordRequired, onMFASetup, resetView]
     );
 
-    return <SignInView onSignIn={handleSignIn} onResetPassword={onResetPassword} />;
+    return <SignInView onSignIn={handleSignIn} onForgotPassword={onForgotPassword} />;
 };
 
 export default SignIn;

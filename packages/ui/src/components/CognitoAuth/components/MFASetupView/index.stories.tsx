@@ -16,6 +16,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import MFASetupView, { MFASetupViewProps } from '.';
 import Container from '../Container';
+import { MFA_SETUP_CHALLENGE_PARAM } from '../../fixtures';
 
 export default {
     component: MFASetupView,
@@ -33,8 +34,5 @@ const Template: ComponentStory<typeof MFASetupView> = (args: MFASetupViewProps) 
 export const Default = Template.bind({});
 Default.args = {
     challengeName: 'SMS_MFA',
-    challengeParams: {
-        CODE_DELIVERY_DESTINATION: 'SMS',
-        MFAS_CAN_SETUP: JSON.stringify(['SMS_MFA', 'SOFTWARE_TOKEN_MFA']),
-    },
+    challengeParams: MFA_SETUP_CHALLENGE_PARAM,
 };

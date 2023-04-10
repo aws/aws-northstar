@@ -64,14 +64,14 @@ describe('SignIn', () => {
         const handleResetView = jest.fn();
         const handleMFARequired = jest.fn();
         const handleMFASetup = jest.fn();
-        const handleResetPassword = jest.fn();
+        const handleForgotPassword = jest.fn();
         const handleNewPasswordRequired = jest.fn();
 
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
             handleResetView,
-            handleResetPassword,
+            handleForgotPassword,
             handleNewPasswordRequired
         );
         expect(handleResetView).toHaveBeenCalled();
@@ -93,14 +93,14 @@ describe('SignIn', () => {
         const handleResetView = jest.fn();
         const handleMFARequired = jest.fn();
         const handleMFASetup = jest.fn();
-        const handleResetPassword = jest.fn();
+        const handleForgotPassword = jest.fn();
         const handleNewPasswordRequired = jest.fn();
 
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
             handleResetView,
-            handleResetPassword,
+            handleForgotPassword,
             handleNewPasswordRequired
         );
         expect(screen.getByText(errMsg)).toBeVisible();
@@ -118,14 +118,14 @@ describe('SignIn', () => {
         const handleResetView = jest.fn();
         const handleMFARequired = jest.fn();
         const handleMFASetup = jest.fn();
-        const handleResetPassword = jest.fn();
+        const handleForgotPassword = jest.fn();
         const handleNewPasswordRequired = jest.fn();
 
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
             handleResetView,
-            handleResetPassword,
+            handleForgotPassword,
             handleNewPasswordRequired
         );
         expect(handleMFARequired).toHaveBeenCalledWith(expect.any(Object), challengeName, MFA_CHALLENGE_PARAMS);
@@ -143,14 +143,14 @@ describe('SignIn', () => {
         const handleResetView = jest.fn();
         const handleMFARequired = jest.fn();
         const handleMFASetup = jest.fn();
-        const handleResetPassword = jest.fn();
+        const handleForgotPassword = jest.fn();
         const handleNewPasswordRequired = jest.fn();
 
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
             handleResetView,
-            handleResetPassword,
+            handleForgotPassword,
             handleNewPasswordRequired
         );
         expect(handleMFARequired).toHaveBeenCalledWith(expect.any(Object), challengeName, MFA_CHALLENGE_PARAMS);
@@ -168,14 +168,14 @@ describe('SignIn', () => {
         const handleResetView = jest.fn();
         const handleMFARequired = jest.fn();
         const handleMFASetup = jest.fn();
-        const handleResetPassword = jest.fn();
+        const handleForgotPassword = jest.fn();
         const handleNewPasswordRequired = jest.fn();
 
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
             handleResetView,
-            handleResetPassword,
+            handleForgotPassword,
             handleNewPasswordRequired
         );
         expect(handleMFASetup).toHaveBeenCalledWith(expect.any(Object), challengeName, MFA_CHALLENGE_PARAMS);
@@ -193,14 +193,14 @@ describe('SignIn', () => {
         const handleResetView = jest.fn();
         const handleMFARequired = jest.fn();
         const handleMFASetup = jest.fn();
-        const handleResetPassword = jest.fn();
+        const handleForgotPassword = jest.fn();
         const handleNewPasswordRequired = jest.fn();
 
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
             handleResetView,
-            handleResetPassword,
+            handleForgotPassword,
             handleNewPasswordRequired
         );
         expect(handleMFASetup).toHaveBeenCalledWith(expect.any(Object), challengeName, MFA_CHALLENGE_PARAMS);
@@ -218,14 +218,14 @@ describe('SignIn', () => {
         const handleResetView = jest.fn();
         const handleMFARequired = jest.fn();
         const handleMFASetup = jest.fn();
-        const handleResetPassword = jest.fn();
+        const handleForgotPassword = jest.fn();
         const handleNewPasswordRequired = jest.fn();
 
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
             handleResetView,
-            handleResetPassword,
+            handleForgotPassword,
             handleNewPasswordRequired
         );
         expect(handleNewPasswordRequired).toHaveBeenCalledWith(
@@ -240,7 +240,7 @@ const testAuthenciateUser = async (
     handleMFARequired: jest.Mock<any, any>,
     handleMFASetup: jest.Mock<any, any>,
     handleResetView: jest.Mock<any, any>,
-    handleResetPassword: jest.Mock<any, any>,
+    handleForgotPassword: jest.Mock<any, any>,
     handleNewPasswordRequired: jest.Mock<any, any>
 ) => {
     const userPool: any = {
@@ -254,7 +254,7 @@ const testAuthenciateUser = async (
             onMFARequired={handleMFARequired}
             onMFASetup={handleMFASetup}
             resetView={handleResetView}
-            onResetPassword={handleResetPassword}
+            onForgotPassword={handleForgotPassword}
             onNewPasswordRequired={handleNewPasswordRequired}
         />
     );

@@ -21,10 +21,10 @@ import Button from '@cloudscape-design/components/button';
 
 export interface SignInViewProps {
     onSignIn: (authenticationDetails: IAuthenticationDetailsData) => Promise<unknown>;
-    onResetPassword: () => void;
+    onForgotPassword: () => void;
 }
 
-const SignIn: FC<SignInViewProps> = ({ onSignIn, onResetPassword }) => {
+const SignIn: FC<SignInViewProps> = ({ onSignIn, onForgotPassword }) => {
     const [errorMessage, setErrorMessage] = useState<string>();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const schema: Schema = useMemo(() => {
@@ -77,7 +77,7 @@ const SignIn: FC<SignInViewProps> = ({ onSignIn, onResetPassword }) => {
     );
 
     return (
-        <SpaceBetween direction="vertical" size="xl">
+        <SpaceBetween direction="vertical" size="xl" data-testid="sign-in-form">
             <FormRenderer
                 schema={schema}
                 onSubmit={handleSubmit}
@@ -89,7 +89,7 @@ const SignIn: FC<SignInViewProps> = ({ onSignIn, onResetPassword }) => {
                     textAlign: 'center',
                 }}
             >
-                <Button variant="link" onClick={onResetPassword}>
+                <Button variant="link" onClick={onForgotPassword}>
                     Forgot your password?
                 </Button>
             </div>

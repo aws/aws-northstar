@@ -38,13 +38,13 @@ describe('SignIn', () => {
     });
 
     it('should handle ResetPassword button click', async () => {
-        const handleResetPassword = jest.fn();
-        render(<Default onResetPassword={handleResetPassword} />);
+        const handleForgotPassword = jest.fn();
+        render(<Default onForgotPassword={handleForgotPassword} />);
 
         act(() => {
             userEvent.click(screen.getByText('Forgot your password?'));
         });
 
-        expect(handleResetPassword).toHaveBeenCalled();
+        expect(handleForgotPassword).toHaveBeenCalled();
     });
 });
