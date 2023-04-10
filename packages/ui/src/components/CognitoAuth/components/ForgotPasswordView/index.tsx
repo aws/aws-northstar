@@ -18,25 +18,35 @@ import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Button from '@cloudscape-design/components/button';
 
-import AttributeMapping from '../../attributeMapping';
-
-export interface NewPasswordViewProps {
-    userAttributes?: string[];
-    requiredAttributes?: string[];
-    onChangePassword: (newPassword: string, attributes?: any) => Promise<unknown>;
+export interface ForgotPasswordViewProps {
+    data?: string;
+    onResetPassword: (verificationCode: string, newPassword: string) => Promise<unknown>;
     onBackToSignIn: () => void;
 }
 
-const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChangePassword, onBackToSignIn }) => {
+const ForgotPasswordView: FC<ForgotPasswordViewProps> = ({ onResetPassword, onBackToSignIn, data }) => {
     const [errorMessage, setErrorMessage] = useState();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const schema = useMemo(() => {
         const formSchema: Schema = {
-            header: 'Change Password',
+            header: 'Reset Password',
             variant: 'embedded',
             canCancel: false,
             submitLabel: 'Confirm',
             fields: [
+                {
+                    component: componentTypes.TEXT_FIELD,
+                    isRequired: true,
+                    label: 'Code',
+                    name: 'verificationCode',
+                    placeholder: 'Enter verification code',
+                    helperText: `A verification code has been sent to: ${data}`,
+                    validate: [
+                        {
+                            type: 'required',
+                        },
+                    ],
+                },
                 {
                     component: componentTypes.TEXT_FIELD,
                     isRequired: true,
@@ -66,37 +76,21 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChang
             ],
         };
 
-        requiredAttributes &&
-            formSchema.fields.push(
-                ...requiredAttributes.map((attr) => ({
-                    component: componentTypes.TEXT_FIELD,
-                    isRequired: true,
-                    label: AttributeMapping[attr] || attr,
-                    placeholder: `Enter ${AttributeMapping[attr] || attr}`,
-                    name: `attributes[${attr}]`,
-                    validate: [
-                        {
-                            type: 'required',
-                        },
-                    ],
-                }))
-            );
-
         return formSchema;
-    }, [requiredAttributes]);
+    }, [data]);
 
     const handleSubmit = useCallback(
         async (data: any) => {
             try {
                 setIsSubmitting(true);
-                await onChangePassword(data.password, data.attributes);
+                await onResetPassword(data.verificationCode, data.password);
             } catch (err: any) {
                 setErrorMessage(err.message);
             } finally {
                 setIsSubmitting(false);
             }
         },
-        [onChangePassword]
+        [onResetPassword]
     );
 
     const validate = useCallback((values: any) => {
@@ -131,4 +125,4 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChang
     );
 };
 
-export default NewPasswordView;
+export default ForgotPasswordView;

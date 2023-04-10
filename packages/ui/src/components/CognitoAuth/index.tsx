@@ -22,6 +22,7 @@ import MFASetup from './components/MFASetup';
 import MFATotp from './components/MFATotp';
 import NewPassword from './components/NewPassword';
 import SignIn from './components/SignIn';
+import ForgotPassword from './components/ForgotPassword';
 
 export interface CognitoAuthProps {
     /**
@@ -146,6 +147,10 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
         [handleMFARequired, handleMFASetup, resetView]
     );
 
+    const handleForgotPassword = useCallback(() => {
+        setTransition(<ForgotPassword userPool={userPool} resetView={resetView} />);
+    }, [userPool, resetView]);
+
     if (!userPool) {
         return (
             <Container>
@@ -178,7 +183,7 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
                     onMFASetup={handleMFASetup}
                     onNewPasswordRequired={handleNewPasswordRequired}
                     resetView={resetView}
-                    onForgotPassword={console.log}
+                    onForgotPassword={handleForgotPassword}
                 />
             )}
         </Container>

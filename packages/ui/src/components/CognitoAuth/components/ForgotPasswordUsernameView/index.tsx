@@ -18,45 +18,28 @@ import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Button from '@cloudscape-design/components/button';
 
-import AttributeMapping from '../../attributeMapping';
-
-export interface NewPasswordViewProps {
-    userAttributes?: string[];
-    requiredAttributes?: string[];
-    onChangePassword: (newPassword: string, attributes?: any) => Promise<unknown>;
+export interface ForgotPasswordUsernameViewProps {
+    onSendCode: (username: string) => void;
     onBackToSignIn: () => void;
 }
 
-const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChangePassword, onBackToSignIn }) => {
-    const [errorMessage, setErrorMessage] = useState();
+const ForgotPasswordUsernameView: FC<ForgotPasswordUsernameViewProps> = ({ onSendCode, onBackToSignIn }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMessage, setErrorMessage] = useState();
+
     const schema = useMemo(() => {
         const formSchema: Schema = {
-            header: 'Change Password',
+            header: 'Reset Password',
             variant: 'embedded',
             canCancel: false,
-            submitLabel: 'Confirm',
+            submitLabel: 'Send code',
             fields: [
                 {
                     component: componentTypes.TEXT_FIELD,
                     isRequired: true,
-                    label: 'Password',
-                    name: 'password',
-                    type: 'password',
-                    placeholder: 'Enter your Password',
-                    validate: [
-                        {
-                            type: 'required',
-                        },
-                    ],
-                },
-                {
-                    component: componentTypes.TEXT_FIELD,
-                    isRequired: true,
-                    label: 'Confirm Password',
-                    name: 'confirmPassword',
-                    type: 'password',
-                    placeholder: 'Confirm your Password',
+                    label: 'Username',
+                    name: 'username',
+                    placeholder: 'Enter your username',
                     validate: [
                         {
                             type: 'required',
@@ -66,57 +49,30 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChang
             ],
         };
 
-        requiredAttributes &&
-            formSchema.fields.push(
-                ...requiredAttributes.map((attr) => ({
-                    component: componentTypes.TEXT_FIELD,
-                    isRequired: true,
-                    label: AttributeMapping[attr] || attr,
-                    placeholder: `Enter ${AttributeMapping[attr] || attr}`,
-                    name: `attributes[${attr}]`,
-                    validate: [
-                        {
-                            type: 'required',
-                        },
-                    ],
-                }))
-            );
-
         return formSchema;
-    }, [requiredAttributes]);
+    }, []);
 
     const handleSubmit = useCallback(
         async (data: any) => {
             try {
                 setIsSubmitting(true);
-                await onChangePassword(data.password, data.attributes);
+                await onSendCode(data.username);
             } catch (err: any) {
                 setErrorMessage(err.message);
             } finally {
                 setIsSubmitting(false);
             }
         },
-        [onChangePassword]
+        [onSendCode]
     );
-
-    const validate = useCallback((values: any) => {
-        const errors: any = {};
-
-        if (values.password !== values.confirmPassword) {
-            errors.confirmPassword = 'Passwords do NOT match';
-        }
-
-        return errors;
-    }, []);
 
     return (
         <SpaceBetween direction="vertical" size="xl">
             <FormRenderer
                 schema={schema}
                 onSubmit={handleSubmit}
-                errorText={errorMessage}
                 isSubmitting={isSubmitting}
-                validate={validate}
+                errorText={errorMessage}
             />
             <div
                 style={{
@@ -131,4 +87,4 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChang
     );
 };
 
-export default NewPasswordView;
+export default ForgotPasswordUsernameView;

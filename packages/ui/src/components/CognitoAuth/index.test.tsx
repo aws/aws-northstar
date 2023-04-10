@@ -207,6 +207,21 @@ describe('CognitoAuth', () => {
 
         expect(await screen.findByText('Main Content')).toBeVisible();
     });
+
+    it('should render ForgotPassword form', async () => {
+        render(
+            <CognitoAuth clientId="TestClientId" userPoolId="TestUserPoolId">
+                Main Content
+            </CognitoAuth>
+        );
+        expect(screen.getByTestId('sign-in-form')).toBeVisible();
+
+        act(() => {
+            userEvent.click(screen.getByText('Forgot your password?'));
+        });
+
+        expect(screen.getByText('Reset Password')).toBeVisible();
+    });
 });
 
 const signIn = (preSubmitCallback?: () => void) => {
