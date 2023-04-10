@@ -15,15 +15,15 @@
  ******************************************************************************************************************** */
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import MFATotpView from '../MFATotpView';
-import { useCallback, ReactNode, FC } from 'react';
+import { useCallback, FC } from 'react';
 
 export interface MFATotpProps {
     cognitoUser: CognitoUser;
-    setTransition: React.Dispatch<React.SetStateAction<ReactNode>>;
+    resetView: () => void;
     secretCode: string;
 }
 
-const MFATotp: FC<MFATotpProps> = ({ cognitoUser, setTransition, secretCode }) => {
+const MFATotp: FC<MFATotpProps> = ({ cognitoUser, resetView, secretCode }) => {
     const handleConfirm = useCallback(
         async (mfaCode: string) => {
             return new Promise((resolve, reject) => {
@@ -31,7 +31,7 @@ const MFATotp: FC<MFATotpProps> = ({ cognitoUser, setTransition, secretCode }) =
                     onSuccess() {
                         console.debug('Cognito verifySoftwareToken Success');
                         resolve({});
-                        setTransition(undefined);
+                        resetView();
                     },
                     onFailure(err: any) {
                         console.error('Cognito verifySoftwareToken Failure', err);
@@ -40,15 +40,9 @@ const MFATotp: FC<MFATotpProps> = ({ cognitoUser, setTransition, secretCode }) =
                 });
             });
         },
-        [setTransition, cognitoUser]
+        [resetView, cognitoUser]
     );
-    return (
-        <MFATotpView
-            secretCode={secretCode}
-            onConfirm={handleConfirm}
-            onBackToSignIn={() => setTransition(undefined)}
-        />
-    );
+    return <MFATotpView secretCode={secretCode} onConfirm={handleConfirm} onBackToSignIn={resetView} />;
 };
 
 export default MFATotp;

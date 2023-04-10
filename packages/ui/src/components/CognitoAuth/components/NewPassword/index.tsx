@@ -15,13 +15,13 @@
  ******************************************************************************************************************** */
 import { CognitoUser, CognitoUserSession, ChallengeName } from 'amazon-cognito-identity-js';
 import NewPasswordView from '../NewPasswordView';
-import { useCallback, ReactNode, FC } from 'react';
+import { useCallback, FC } from 'react';
 
 export interface NewPasswordProps {
     cognitoUser: CognitoUser;
     onMFARequired: (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
     onMFASetup: (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
-    setTransition: React.Dispatch<React.SetStateAction<ReactNode>>;
+    resetView: () => void;
     userAttributes: any;
     requiredAttributes: any;
 }
@@ -29,7 +29,7 @@ export interface NewPasswordProps {
 const NewPassword: FC<NewPasswordProps> = ({
     onMFARequired,
     onMFASetup,
-    setTransition,
+    resetView,
     cognitoUser,
     userAttributes,
     requiredAttributes,
@@ -41,7 +41,7 @@ const NewPassword: FC<NewPasswordProps> = ({
                     onSuccess(result: CognitoUserSession) {
                         console.debug('Cognito Change Password Success');
                         resolve(result);
-                        setTransition(undefined);
+                        resetView();
                     },
                     onFailure(err) {
                         console.error('Cognito Change Password Error', err);
@@ -60,7 +60,7 @@ const NewPassword: FC<NewPasswordProps> = ({
                 });
             });
         },
-        [onMFARequired, setTransition, cognitoUser, onMFASetup]
+        [onMFARequired, resetView, cognitoUser, onMFASetup]
     );
 
     return (
@@ -68,7 +68,7 @@ const NewPassword: FC<NewPasswordProps> = ({
             userAttributes={userAttributes}
             requiredAttributes={requiredAttributes}
             onChangePassword={handleChangePassword}
-            onBackToSignIn={() => setTransition(undefined)}
+            onBackToSignIn={resetView}
         />
     );
 };

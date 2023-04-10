@@ -13,14 +13,51 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
 import * as stories from './index.stories';
 
-const { Default } = composeStories(stories);
+const { Default, AuthApp } = composeStories(stories);
 
 describe('MFA', () => {
-    it('should render MFA form', async () => {
-        render(<Default />);
+    it('should render SMS_MFA form', async () => {
+        const handleConfirm = jest.fn();
+        render(<Default onConfirm={handleConfirm} />);
+        expect(screen.getByText('A code has been sent to +0123456789')).toBeVisible();
+        expect(screen.getByText('Confirm SMS Code')).toBeVisible();
+
+        act(() => {
+            userEvent.type(screen.getByLabelText('Code'), '1234');
+            userEvent.click(screen.getByText('Confirm'));
+        });
+
+        expect(handleConfirm).toHaveBeenCalledWith('1234');
+    });
+
+    it('should render SOFTWARE_TOKEN_MFA form', async () => {
+        const handleConfirm = jest.fn();
+        render(<AuthApp onConfirm={handleConfirm} />);
+
+        expect(screen.getByText('Please enter the code from your Authenticator app')).toBeVisible();
+        expect(screen.getByText('Confirm Code')).toBeVisible();
+
+        act(() => {
+            userEvent.type(screen.getByLabelText('Code'), '1234');
+            userEvent.click(screen.getByText('Confirm'));
+        });
+
+        expect(handleConfirm).toHaveBeenCalledWith('1234');
+    });
+
+    it('should handle Back to Sign In button click', async () => {
+        const handleBackToSignIn = jest.fn();
+        render(<Default onBackToSignIn={handleBackToSignIn} />);
+
+        act(() => {
+            userEvent.click(screen.getByText('Back to Sign In'));
+        });
+
+        expect(handleBackToSignIn).toHaveBeenCalled();
     });
 });

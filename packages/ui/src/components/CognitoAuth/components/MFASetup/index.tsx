@@ -15,11 +15,11 @@
  ******************************************************************************************************************** */
 import { CognitoUser, ChallengeName } from 'amazon-cognito-identity-js';
 import MFASetupView from '../MFASetupView';
-import { useCallback, ReactNode, FC } from 'react';
+import { useCallback, FC } from 'react';
 
 export interface MFASetupProps {
     cognitoUser: CognitoUser;
-    setTransition: React.Dispatch<React.SetStateAction<ReactNode>>;
+    resetView: () => void;
     challengeName: ChallengeName;
     challengeParams: any;
     onAssociateSecretCode: (cognitoUser: CognitoUser, secretCode: string) => void;
@@ -28,7 +28,7 @@ export interface MFASetupProps {
 
 const MFASetup: FC<MFASetupProps> = ({
     cognitoUser,
-    setTransition,
+    resetView,
     challengeName,
     challengeParams,
     onAssociateSecretCode,
@@ -68,7 +68,7 @@ const MFASetup: FC<MFASetupProps> = ({
             challengeName={challengeName}
             challengeParams={challengeParams}
             onConfirm={handleMFASetup}
-            onBackToSignIn={() => setTransition(undefined)}
+            onBackToSignIn={resetView}
         />
     );
 };

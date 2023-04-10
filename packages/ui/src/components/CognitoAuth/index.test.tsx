@@ -13,14 +13,17 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './index.stories';
 
 const { CognitoAuthFlow } = composeStories(stories);
 
+jest.mock('');
+
 describe('CognitoAuthFlow', () => {
-    it('should render CognitoAuthFlow', async () => {
+    it('should render error message when userPooId or AppClientId is not provide', async () => {
         render(<CognitoAuthFlow />);
+        expect(screen.getByText('Missing or invalid Cognito User Pool Id or App Client Id.')).toBeVisible();
     });
 });

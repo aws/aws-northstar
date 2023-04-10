@@ -18,6 +18,8 @@ import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Button from '@cloudscape-design/components/button';
 
+import AttributeMapping from '../../attributeMapping';
+
 export interface NewPasswordViewProps {
     userAttributes?: string[];
     requiredAttributes?: string[];
@@ -38,13 +40,13 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({
             header: 'Change Password',
             variant: 'embedded',
             canCancel: false,
-            submitLabel: 'Change Password',
+            submitLabel: 'Confirm',
             fields: [
                 {
                     component: componentTypes.TEXT_FIELD,
                     isRequired: true,
                     label: 'Password',
-                    name: 'Password',
+                    name: 'password',
                     type: 'password',
                     placeholder: 'Enter your Password',
                     validate: [
@@ -57,7 +59,7 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({
                     component: componentTypes.TEXT_FIELD,
                     isRequired: true,
                     label: 'Confirm Password',
-                    name: 'ConfirmPassword',
+                    name: 'confirmPassword',
                     type: 'password',
                     placeholder: 'Confirm your Password',
                     validate: [
@@ -74,7 +76,8 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({
                 ...requiredAttributes.map((attr) => ({
                     component: componentTypes.TEXT_FIELD,
                     isRequired: true,
-                    label: attr,
+                    label: AttributeMapping[attr] || attr,
+                    placeholder: `Enter ${AttributeMapping[attr] || attr}`,
                     name: `attributes[${attr}]`,
                     validate: [
                         {
@@ -84,17 +87,8 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({
                 }))
             );
 
-        userAttributes &&
-            formSchema.fields.push(
-                ...userAttributes.map((attr) => ({
-                    component: componentTypes.TEXT_FIELD,
-                    label: attr,
-                    name: `attributes[${attr}]`,
-                }))
-            );
-
         return formSchema;
-    }, [requiredAttributes, userAttributes]);
+    }, [requiredAttributes]);
 
     const handleSubmit = useCallback(
         async (data: any) => {
@@ -110,6 +104,16 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({
         [onChangePassword]
     );
 
+    const validate = useCallback((values: any) => {
+        const errors: any = {};
+
+        if (values.password !== values.confirmPassword) {
+            errors.confirmPassword = 'Passwords do NOT match';
+        }
+
+        return errors;
+    }, []);
+
     return (
         <SpaceBetween direction="vertical" size="xl">
             <FormRenderer
@@ -117,6 +121,7 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({
                 onSubmit={handleSubmit}
                 errorText={errorMessage}
                 isSubmitting={isSubmitting}
+                validate={validate}
             />
             <div
                 style={{

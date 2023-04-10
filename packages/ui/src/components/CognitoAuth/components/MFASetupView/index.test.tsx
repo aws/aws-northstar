@@ -13,14 +13,46 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render } from '@testing-library/react';
+import { render, act, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
 import * as stories from './index.stories';
 
 const { Default } = composeStories(stories);
 
 describe('MFASetup', () => {
     it('should render MFASetup form', async () => {
-        render(<Default />);
+        const handleConfirm = jest.fn();
+        render(<Default onConfirm={handleConfirm} />);
+
+        act(() => {
+            userEvent.click(screen.getByText('SMS'));
+            userEvent.click(screen.getByText('Continue'));
+        });
+
+        expect(handleConfirm).toHaveBeenCalledWith('SMS_MFA');
+    });
+
+    it('should render MFASetup form', async () => {
+        const handleConfirm = jest.fn();
+        render(<Default onConfirm={handleConfirm} />);
+
+        act(() => {
+            userEvent.click(screen.getByText('Authenticator app'));
+            userEvent.click(screen.getByText('Continue'));
+        });
+
+        expect(handleConfirm).toHaveBeenCalledWith('SOFTWARE_TOKEN_MFA');
+    });
+
+    it('should handle Back to Sign In button click', async () => {
+        const handleBackToSignIn = jest.fn();
+        render(<Default onBackToSignIn={handleBackToSignIn} />);
+
+        act(() => {
+            userEvent.click(screen.getByText('Back to Sign In'));
+        });
+
+        expect(handleBackToSignIn).toHaveBeenCalled();
     });
 });

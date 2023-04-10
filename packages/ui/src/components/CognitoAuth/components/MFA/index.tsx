@@ -15,16 +15,16 @@
  ******************************************************************************************************************** */
 import { CognitoUser, CognitoUserSession, ChallengeName } from 'amazon-cognito-identity-js';
 import MFAView from '../MFAView';
-import { useCallback, ReactNode, FC } from 'react';
+import { useCallback, FC } from 'react';
 
 export interface MFAProps {
     cognitoUser: CognitoUser;
-    setTransition: React.Dispatch<React.SetStateAction<ReactNode>>;
+    resetView: () => void;
     challengeName: ChallengeName;
     challengeParams: any;
 }
 
-const MFA: FC<MFAProps> = ({ cognitoUser, setTransition, challengeName, challengeParams }) => {
+const MFA: FC<MFAProps> = ({ cognitoUser, resetView, challengeName, challengeParams }) => {
     const handleMFA = useCallback(
         async (mfaCode: string) => {
             return new Promise((resolve, reject) => {
@@ -32,7 +32,7 @@ const MFA: FC<MFAProps> = ({ cognitoUser, setTransition, challengeName, challeng
                     onSuccess(result: CognitoUserSession) {
                         console.debug('Cognito sendMFACode Success');
                         resolve(result);
-                        setTransition(undefined);
+                        resetView();
                     },
                     onFailure(err: any) {
                         console.error('Cognito sendMFACode Failure', err);
@@ -41,7 +41,7 @@ const MFA: FC<MFAProps> = ({ cognitoUser, setTransition, challengeName, challeng
                 });
             });
         },
-        [setTransition, cognitoUser]
+        [resetView, cognitoUser]
     );
 
     return (
@@ -49,7 +49,7 @@ const MFA: FC<MFAProps> = ({ cognitoUser, setTransition, challengeName, challeng
             challengeName={challengeName}
             challengeParams={challengeParams}
             onConfirm={handleMFA}
-            onBackToSignIn={() => setTransition(undefined)}
+            onBackToSignIn={resetView}
         />
     );
 };

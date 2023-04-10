@@ -22,17 +22,25 @@ import {
     AuthenticationDetails,
 } from 'amazon-cognito-identity-js';
 import SignInView from '../SignInView';
-import { useCallback, ReactNode, FC } from 'react';
+import { useCallback, FC } from 'react';
 
 export interface SignInProps {
     userPool: CognitoUserPool;
     onMFARequired: (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
     onNewPasswordRequired: (cognitoUser: CognitoUser, userAttributes: any, requiredAttributes: any) => void;
     onMFASetup: (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
-    setTransition: React.Dispatch<React.SetStateAction<ReactNode>>;
+    onResetPassword: () => void;
+    resetView: () => void;
 }
 
-const SignIn: FC<SignInProps> = ({ userPool, onMFARequired, onNewPasswordRequired, onMFASetup, setTransition }) => {
+const SignIn: FC<SignInProps> = ({
+    userPool,
+    onMFARequired,
+    onNewPasswordRequired,
+    onMFASetup,
+    resetView,
+    onResetPassword,
+}) => {
     const handleSignIn = useCallback(
         async (authenticationDetails: IAuthenticationDetailsData) => {
             if (userPool) {
@@ -47,7 +55,7 @@ const SignIn: FC<SignInProps> = ({ userPool, onMFARequired, onNewPasswordRequire
                         onSuccess(result: CognitoUserSession) {
                             console.debug('Congnito Auth Success');
                             resolve(result);
-                            setTransition(undefined);
+                            resetView();
                         },
                         onFailure(err) {
                             console.error('Congnito Auth Failure', err);
@@ -82,10 +90,10 @@ const SignIn: FC<SignInProps> = ({ userPool, onMFARequired, onNewPasswordRequire
                 });
             }
         },
-        [userPool, onMFARequired, onNewPasswordRequired, onMFASetup, setTransition]
+        [userPool, onMFARequired, onNewPasswordRequired, onMFASetup, resetView]
     );
 
-    return <SignInView onSignIn={handleSignIn} onResetPassword={() => console.log('WIP')} />;
+    return <SignInView onSignIn={handleSignIn} onResetPassword={onResetPassword} />;
 };
 
 export default SignIn;

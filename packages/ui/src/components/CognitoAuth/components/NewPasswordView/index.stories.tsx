@@ -16,6 +16,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import NewPasswordView, { NewPasswordViewProps } from '.';
 import Container from '../Container';
+import { REQUIRED_ATTRIBUTES } from '../../fixtures';
 
 export default {
     component: NewPasswordView,
@@ -31,3 +32,9 @@ const Template: ComponentStory<typeof NewPasswordView> = (args: NewPasswordViewP
 };
 
 export const Default = Template.bind({});
+
+export const WithRequiredAttributes = Template.bind({});
+WithRequiredAttributes.args = {
+    ...Default.args,
+    requiredAttributes: REQUIRED_ATTRIBUTES,
+};

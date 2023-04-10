@@ -13,14 +13,81 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render } from '@testing-library/react';
+import { render, act, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
 import * as stories from './index.stories';
 
-const { Default } = composeStories(stories);
+const { Default, WithRequiredAttributes } = composeStories(stories);
 
 describe('NewPassword', () => {
     it('should render NewPassword form', async () => {
-        render(<Default />);
+        const handleChangePassword = jest.fn().mockResolvedValue({});
+        const handleBackToSignIn = jest.fn();
+        render(<Default onChangePassword={handleChangePassword} onBackToSignIn={handleBackToSignIn} />);
+
+        act(() => {
+            userEvent.type(screen.getByLabelText('Password'), 'Password');
+            userEvent.type(screen.getByLabelText('Confirm Password'), 'Password');
+            userEvent.click(screen.getByText('Confirm'));
+        });
+
+        expect(handleChangePassword).toHaveBeenCalledWith('Password', undefined);
+    });
+
+    it('should trigger validation', async () => {
+        const handleChangePassword = jest.fn();
+        const handleBackToSignIn = jest.fn();
+        render(<Default onChangePassword={handleChangePassword} onBackToSignIn={handleBackToSignIn} />);
+
+        act(() => {
+            userEvent.click(screen.getByText('Confirm'));
+        });
+
+        expect(screen.queryAllByText('Required')).toHaveLength(2);
+    });
+
+    it('should validate 2 passwords match', async () => {
+        const handleChangePassword = jest.fn();
+        const handleBackToSignIn = jest.fn();
+        render(<Default onChangePassword={handleChangePassword} onBackToSignIn={handleBackToSignIn} />);
+
+        act(() => {
+            userEvent.type(screen.getByLabelText('Password'), 'Password1');
+            userEvent.type(screen.getByLabelText('Confirm Password'), 'Password2');
+            userEvent.click(screen.getByText('Confirm'));
+        });
+
+        expect(screen.getByText('Passwords do NOT match')).toBeVisible();
+    });
+
+    it('should render required attributes', async () => {
+        const handleChangePassword = jest.fn().mockResolvedValue({});
+        const handleBackToSignIn = jest.fn();
+        render(<WithRequiredAttributes onChangePassword={handleChangePassword} onBackToSignIn={handleBackToSignIn} />);
+
+        act(() => {
+            userEvent.type(screen.getByLabelText('Password'), 'Password');
+            userEvent.type(screen.getByLabelText('Confirm Password'), 'Password');
+            userEvent.type(screen.getByLabelText('Family Name'), 'Name1');
+            userEvent.type(screen.getByLabelText('Given Name(s)'), 'Name2');
+            userEvent.click(screen.getByText('Confirm'));
+        });
+
+        expect(handleChangePassword).toHaveBeenCalledWith('Password', {
+            family_name: 'Name1',
+            given_name: 'Name2',
+        });
+    });
+
+    it('should handle Back to Sign In button click', async () => {
+        const handleBackToSignIn = jest.fn();
+        render(<Default onBackToSignIn={handleBackToSignIn} />);
+
+        act(() => {
+            userEvent.click(screen.getByText('Back to Sign In'));
+        });
+
+        expect(handleBackToSignIn).toHaveBeenCalled();
     });
 });

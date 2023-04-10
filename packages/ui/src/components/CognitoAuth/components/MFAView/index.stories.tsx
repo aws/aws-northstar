@@ -15,6 +15,7 @@
  ******************************************************************************************************************** */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import MFAView, { MFAViewProps } from '.';
+import { MFA_CHALLENGE_PARAMS } from '../../fixtures';
 import Container from '../Container';
 
 export default {
@@ -31,3 +32,12 @@ const Template: ComponentStory<typeof MFAView> = (args: MFAViewProps) => {
 };
 
 export const Default = Template.bind({});
+Default.args = {
+    challengeName: 'SMS_MFA',
+    challengeParams: MFA_CHALLENGE_PARAMS,
+};
+
+export const AuthApp = Template.bind({});
+AuthApp.args = {
+    challengeName: 'SOFTWARE_TOKEN_MFA',
+};

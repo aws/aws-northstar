@@ -32,7 +32,7 @@ const MFAView: FC<MFAViewProps> = ({ challengeName, challengeParams, onConfirm, 
     const [errorMessage, setErrorMessage] = useState();
     const schema: Schema = useMemo(() => {
         return {
-            header: `Confirm ${challengeParams?.CODE_DELIVERY_DELIVERY_MEDIUM || ''} Code`,
+            header: `Confirm ${challengeParams?.CODE_DELIVERY_MEDIUM || ''} Code`,
             variant: 'embedded',
             canCancel: false,
             submitLabel: 'Confirm',

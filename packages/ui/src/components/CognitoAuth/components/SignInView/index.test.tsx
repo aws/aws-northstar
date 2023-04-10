@@ -13,14 +13,38 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render } from '@testing-library/react';
+import { render, act, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
 import * as stories from './index.stories';
 
 const { Default } = composeStories(stories);
 
 describe('SignIn', () => {
     it('should render SignIn form', async () => {
-        render(<Default />);
+        const handleSignIn = jest.fn();
+        render(<Default onSignIn={handleSignIn} />);
+
+        act(() => {
+            userEvent.type(screen.getByLabelText('Username'), 'TestUsername');
+            userEvent.type(screen.getByLabelText('Password'), 'TestPassword');
+            userEvent.click(screen.getByText('Sign in'));
+        });
+
+        expect(handleSignIn).toHaveBeenCalledWith({
+            Username: 'TestUsername',
+            Password: 'TestPassword',
+        });
+    });
+
+    it('should handle ResetPassword button click', async () => {
+        const handleResetPassword = jest.fn();
+        render(<Default onResetPassword={handleResetPassword} />);
+
+        act(() => {
+            userEvent.click(screen.getByText('Forgot your password?'));
+        });
+
+        expect(handleResetPassword).toHaveBeenCalled();
     });
 });

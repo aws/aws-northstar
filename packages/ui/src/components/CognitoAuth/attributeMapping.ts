@@ -13,24 +13,25 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-// @ts-nocheck
-
-import '@testing-library/jest-dom';
-import '@testing-library/jest-dom/extend-expect';
-
-import { toHaveNoViolations } from 'jest-axe';
-window.URL.createObjectURL = () => {};
-window.HTMLCanvasElement.prototype.getContext = () => {};
-window.document.createRange = () => ({
-    setStart: () => {},
-    setEnd: () => {},
-    commonAncestorContainer: {
-        nodeName: 'BODY',
-        ownerDocument: document,
-    },
-});
-window.navigator.clipboard = {
-    writeText: () => {},
+const AttributeMapping = {
+    address: 'Address',
+    birthdate: 'Birthdate',
+    email: 'Email',
+    family_name: 'Family Name',
+    gender: 'Gender',
+    given_name: 'Given Name(s)',
+    locale: 'Locale',
+    middle_name: 'Middle Name',
+    name: 'Name',
+    nickname: 'Nickname',
+    phone_number: 'Phone Number',
+    picture: 'Picture',
+    preferred_username: 'Preferred Username',
+    profile: 'Profile',
+    sub: 'Sub',
+    updated_at: 'Updated at',
+    website: 'Website',
+    zoneinfo: 'Zone Info',
 };
 
-expect.extend(toHaveNoViolations);
+export default AttributeMapping;

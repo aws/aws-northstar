@@ -79,6 +79,10 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
         }
     }, [userPoolId, clientId]);
 
+    const resetView = useCallback(() => {
+        transition ? setTransition(undefined) : forceUpdate();
+    }, [transition, forceUpdate]);
+
     const handleSignOut = useCallback(() => {
         userPool?.getCurrentUser()?.signOut();
         setTransition(undefined);
@@ -96,18 +100,18 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
                     cognitoUser={cognitoUser}
                     challengeName={challengeName}
                     challengeParams={challengeParams}
-                    setTransition={setTransition}
+                    resetView={resetView}
                 />
             );
         },
-        [setTransition]
+        [resetView]
     );
 
     const handleAssociateSecretCode = useCallback(
         (cognitoUser: CognitoUser, secretCode: string) => {
-            setTransition(<MFATotp cognitoUser={cognitoUser} secretCode={secretCode} setTransition={setTransition} />);
+            setTransition(<MFATotp cognitoUser={cognitoUser} secretCode={secretCode} resetView={resetView} />);
         },
-        [setTransition]
+        [resetView]
     );
 
     const handleMFASetup = useCallback(
@@ -117,13 +121,13 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
                     cognitoUser={cognitoUser}
                     challengeName={challengeName}
                     challengeParams={challengeParams}
-                    setTransition={setTransition}
+                    resetView={resetView}
                     onAssociateSecretCode={handleAssociateSecretCode}
                     onMFARequired={handleMFARequired}
                 />
             );
         },
-        [setTransition, handleAssociateSecretCode, handleMFARequired]
+        [resetView, handleAssociateSecretCode, handleMFARequired]
     );
 
     const handleNewPasswordRequired = useCallback(
@@ -133,13 +137,13 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
                     cognitoUser={cognitoUser}
                     userAttributes={userAttributes}
                     requiredAttributes={requiredAttributes}
-                    setTransition={setTransition}
+                    resetView={resetView}
                     onMFARequired={handleMFARequired}
                     onMFASetup={handleMFASetup}
                 />
             );
         },
-        [handleMFARequired, handleMFASetup, setTransition]
+        [handleMFARequired, handleMFASetup, resetView]
     );
 
     if (!userPool) {
@@ -173,7 +177,8 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
                     onMFARequired={handleMFARequired}
                     onMFASetup={handleMFASetup}
                     onNewPasswordRequired={handleNewPasswordRequired}
-                    setTransition={setTransition}
+                    resetView={resetView}
+                    onResetPassword={console.log}
                 />
             )}
         </Container>

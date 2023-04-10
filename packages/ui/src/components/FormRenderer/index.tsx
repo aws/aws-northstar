@@ -47,6 +47,10 @@ export interface FormRendererProps {
     };
     /** Custom validator mapper */
     validatorMapper?: ValidatorMapper;
+    /**
+     * Record level validation enables you to create validation function for whole form. It is useful for some cross validation between multiple fields etc
+     */
+    validate?: ReactFormRendererProps['validate'];
 }
 
 /**
@@ -64,10 +68,12 @@ const FormRenderer: FC<FormRendererProps> = ({
     initialValues,
     subscription,
     customComponentWrapper,
+    ...rest
 }) => {
     return (
         <FormRendererContext.Provider value={{ isSubmitting, errorText }}>
             <ReactFormRenderer
+                {...rest}
                 componentMapper={{ ...basicComponentMapper, ...customComponentWrapper }}
                 FormTemplate={FormTemplate}
                 validatorMapper={validatorMapper}

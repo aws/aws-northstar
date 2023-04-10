@@ -13,14 +13,48 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render } from '@testing-library/react';
+import { render, act, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
 import * as stories from './index.stories';
 
 const { Default } = composeStories(stories);
 
 describe('MFATotp', () => {
+    beforeAll(() => {
+        jest.spyOn(navigator.clipboard, 'writeText').mockImplementation(async (secretCode: any) => {
+            expect(secretCode).toBe(Default.args?.secretCode);
+        });
+    });
+
+    afterAll(() => {
+        (navigator.clipboard.writeText as jest.Mock).mockRestore();
+    });
+
     it('should render MFATotp form', async () => {
-        render(<Default />);
+        const handleConfirm = jest.fn();
+        render(<Default onConfirm={handleConfirm} />);
+
+        act(() => {
+            userEvent.click(screen.getByText('Copy secret key'));
+        });
+
+        act(() => {
+            userEvent.type(screen.getByLabelText('Code'), '1234');
+            userEvent.click(screen.getByText('Continue'));
+        });
+
+        expect(handleConfirm).toHaveBeenCalledWith('1234');
+    });
+
+    it('should handle Back to Sign In button click', async () => {
+        const handleBackToSignIn = jest.fn();
+        render(<Default onBackToSignIn={handleBackToSignIn} />);
+
+        act(() => {
+            userEvent.click(screen.getByText('Back to Sign In'));
+        });
+
+        expect(handleBackToSignIn).toHaveBeenCalled();
     });
 });

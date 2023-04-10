@@ -13,24 +13,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-// @ts-nocheck
-
-import '@testing-library/jest-dom';
-import '@testing-library/jest-dom/extend-expect';
-
-import { toHaveNoViolations } from 'jest-axe';
-window.URL.createObjectURL = () => {};
-window.HTMLCanvasElement.prototype.getContext = () => {};
-window.document.createRange = () => ({
-    setStart: () => {},
-    setEnd: () => {},
-    commonAncestorContainer: {
-        nodeName: 'BODY',
-        ownerDocument: document,
-    },
-});
-window.navigator.clipboard = {
-    writeText: () => {},
+export const TEST_USER_ATTRIBUTES = {
+    email_verified: 'true',
+    phone_number_verified: 'true',
+    phone_number: '+1234567890',
+    given_name: '',
+    family_name: '',
+    email: 'test@test.com',
 };
 
-expect.extend(toHaveNoViolations);
+export const REQUIRED_ATTRIBUTES = ['family_name', 'given_name'];
+
+export const MFA_CHALLENGE_PARAMS = {
+    CODE_DELIVERY_MEDIUM: 'SMS',
+    CODE_DELIVERY_DESTINATION: '+0123456789',
+};
