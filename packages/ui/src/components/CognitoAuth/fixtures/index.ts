@@ -33,3 +33,11 @@ export const MFA_SETUP_CHALLENGE_PARAM = {
     CODE_DELIVERY_DESTINATION: 'SMS',
     MFAS_CAN_SETUP: JSON.stringify(['SMS_MFA', 'SOFTWARE_TOKEN_MFA']),
 };
+
+export const FORGOT_PASSWORD_DATA = {
+    CodeDeliveryDetails: {
+        AttributeName: 'email',
+        DeliveryMedium: 'EMAIL',
+        Destination: 't***@t***',
+    },
+};

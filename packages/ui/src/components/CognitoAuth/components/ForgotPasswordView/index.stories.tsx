@@ -16,6 +16,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ForgotPasswordView, { ForgotPasswordViewProps } from '.';
 import Container from '../Container';
+import { FORGOT_PASSWORD_DATA } from '../../fixtures';
 
 export default {
     component: ForgotPasswordView,
@@ -32,5 +33,5 @@ const Template: ComponentStory<typeof ForgotPasswordView> = (args: ForgotPasswor
 
 export const Default = Template.bind({});
 Default.args = {
-    data: '+0123456789',
+    data: FORGOT_PASSWORD_DATA,
 };

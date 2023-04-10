@@ -81,8 +81,9 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
     }, [userPoolId, clientId]);
 
     const resetView = useCallback(() => {
-        transition ? setTransition(undefined) : forceUpdate();
-    }, [transition, forceUpdate]);
+        setTransition(undefined);
+        forceUpdate();
+    }, [forceUpdate]);
 
     const handleSignOut = useCallback(() => {
         userPool?.getCurrentUser()?.signOut();

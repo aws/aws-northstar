@@ -17,6 +17,7 @@ import { render, act, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import wrapper from '@cloudscape-design/components/test-utils/dom';
 import ForgotPassword from '.';
+import { FORGOT_PASSWORD_DATA } from '../../fixtures';
 
 const mockConfirmPassword = jest.fn();
 const mockForgotPassword = jest.fn();
@@ -37,7 +38,7 @@ const userPool: any = {
     ClientId: 'TestClientId',
     UserPoolId: 'TestUserPoolId',
 };
-const data = '+0123456789';
+const data = FORGOT_PASSWORD_DATA;
 
 describe('ForgetPassword', () => {
     afterEach(() => {
@@ -66,7 +67,7 @@ describe('ForgetPassword', () => {
         });
 
         expect(screen.getByText('Reset Password')).toBeVisible();
-        expect(screen.getByText('A verification code has been sent to: +0123456789')).toBeVisible();
+        expect(screen.getByText('A verification code has been sent to: t***@t***')).toBeVisible();
 
         act(() => {
             userEvent.type(screen.getByLabelText('Code'), verificationCode);

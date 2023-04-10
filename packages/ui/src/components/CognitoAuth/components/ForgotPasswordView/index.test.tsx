@@ -25,6 +25,8 @@ describe('ForgotPassword', () => {
         const handleResetPassword = jest.fn();
         render(<Default onResetPassword={handleResetPassword} />);
 
+        expect(screen.getByText('A verification code has been sent to: t***@t***')).toBeVisible();
+
         act(() => {
             userEvent.type(screen.getByLabelText('Password'), 'NewPassword');
             userEvent.type(screen.getByLabelText('Confirm Password'), 'NewPassword');
@@ -38,7 +40,6 @@ describe('ForgotPassword', () => {
     it('should validate 2 passwords match', async () => {
         const handleResetPassword = jest.fn();
         render(<Default onResetPassword={handleResetPassword} />);
-
         act(() => {
             userEvent.type(screen.getByLabelText('Password'), 'Password1');
             userEvent.type(screen.getByLabelText('Confirm Password'), 'Password2');

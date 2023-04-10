@@ -19,7 +19,7 @@ import SpaceBetween from '@cloudscape-design/components/space-between';
 import Button from '@cloudscape-design/components/button';
 
 export interface ForgotPasswordViewProps {
-    data?: string;
+    data?: any;
     onResetPassword: (verificationCode: string, newPassword: string) => Promise<unknown>;
     onBackToSignIn: () => void;
 }
@@ -28,6 +28,8 @@ const ForgotPasswordView: FC<ForgotPasswordViewProps> = ({ onResetPassword, onBa
     const [errorMessage, setErrorMessage] = useState();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const schema = useMemo(() => {
+        const destination = data?.CodeDeliveryDetails?.Destination;
+
         const formSchema: Schema = {
             header: 'Reset Password',
             variant: 'embedded',
@@ -40,7 +42,7 @@ const ForgotPasswordView: FC<ForgotPasswordViewProps> = ({ onResetPassword, onBa
                     label: 'Code',
                     name: 'verificationCode',
                     placeholder: 'Enter verification code',
-                    helperText: `A verification code has been sent to: ${data}`,
+                    helperText: `A verification code has been sent to: ${destination}`,
                     validate: [
                         {
                             type: 'required',

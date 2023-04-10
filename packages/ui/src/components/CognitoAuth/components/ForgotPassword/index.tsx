@@ -37,7 +37,7 @@ const ForgotPassword: FC<ForgotPasswordProps> = ({ userPool, resetView }) => {
                 return new Promise((resolve, reject) => {
                     cognitoUser.forgotPassword({
                         onSuccess(data: any) {
-                            console.debug('Congnito forgotPassword Success');
+                            console.debug('Congnito forgotPassword Success', data);
                             cognitoUserRef.current = cognitoUser;
                             resolve(data);
                             setForgotPasswordData(data);
