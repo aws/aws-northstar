@@ -13,8 +13,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, useCallback, useState, useMemo } from 'react';
-import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
+import { FC, useMemo } from 'react';
+import { Schema, componentTypes } from '../../../FormRenderer';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Box from '@cloudscape-design/components/box';
 import Popover from '@cloudscape-design/components/popover';
@@ -22,36 +22,24 @@ import StatusIndicator from '@cloudscape-design/components/status-indicator';
 import Button from '@cloudscape-design/components/button';
 import QRCode from 'react-qr-code';
 import { IMAGE_AUTH_APP } from '../../assets/images';
+import GenericView from '../GenericView';
+
+export interface MFATotpViewFormData {
+    confirmationCode: string;
+}
 
 export interface MFATotpViewProps {
     secretCode: string;
-    onConfirm: (mfaMethod: string) => Promise<unknown>;
+    onConfirm: (data: MFATotpViewFormData) => Promise<unknown>;
     onBackToSignIn: () => void;
 }
 
 const MFATotpView: FC<MFATotpViewProps> = ({ secretCode, onConfirm, onBackToSignIn }) => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState();
-
-    const handleSubmit = useCallback(
-        async (data: any) => {
-            try {
-                setIsSubmitting(true);
-                await onConfirm(data.confirmationCode);
-            } catch (err: any) {
-                setErrorMessage(err.message);
-            } finally {
-                setIsSubmitting(false);
-            }
-        },
-        [onConfirm]
-    );
-
     const CustomComponent = useMemo(() => {
         return () => {
             return (
-                <SpaceBetween size={'xl'} direction={'horizontal'}>
-                    <SpaceBetween size={'xl'} direction={'horizontal'}>
+                <SpaceBetween size="xl" direction="horizontal">
+                    <SpaceBetween size="xl" direction="horizontal">
                         <span>1.</span>
                         <img width={75} src={IMAGE_AUTH_APP} alt="authenticator_app_mfa" />
                         <span>Install an authenticator app on your mobile device.</span>
@@ -59,7 +47,7 @@ const MFATotpView: FC<MFATotpViewProps> = ({ secretCode, onConfirm, onBackToSign
                     <SpaceBetween size={'xl'} direction={'horizontal'}>
                         <span>2.</span>
                         <QRCode size={75} value={`otpauth://totp/${window.location.origin}?secret=${secretCode}`} />
-                        <span style={{ display: 'block', width: '400px' }}>
+                        <span style={{ display: 'block', width: '320px' }}>
                             Scan this QR code with your authenticator app. Alternatively, you can copy the secret key
                             below and enter it in your authenticator app.
                         </span>
@@ -120,25 +108,7 @@ const MFATotpView: FC<MFATotpViewProps> = ({ secretCode, onConfirm, onBackToSign
         };
     }, [CustomComponent]);
 
-    return (
-        <SpaceBetween direction="vertical" size="xl">
-            <FormRenderer
-                schema={schema}
-                onSubmit={handleSubmit}
-                errorText={errorMessage}
-                isSubmitting={isSubmitting}
-            />
-            <div
-                style={{
-                    textAlign: 'center',
-                }}
-            >
-                <Button variant="link" onClick={onBackToSignIn}>
-                    Back to Sign In
-                </Button>
-            </div>
-        </SpaceBetween>
-    );
+    return <GenericView schema={schema} onBackToSignIn={onBackToSignIn} onSubmit={onConfirm} />;
 };
 
 export default MFATotpView;

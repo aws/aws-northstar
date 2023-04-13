@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { CognitoUser } from 'amazon-cognito-identity-js';
-import MFATotpView from '../MFATotpView';
+import MFATotpView, { MFATotpViewFormData } from '../MFATotpView';
 import { useCallback, FC } from 'react';
 
 export interface MFATotpProps {
@@ -25,11 +25,10 @@ export interface MFATotpProps {
 
 const MFATotp: FC<MFATotpProps> = ({ cognitoUser, resetView, secretCode }) => {
     const handleConfirm = useCallback(
-        async (mfaCode: string) => {
+        async (data: MFATotpViewFormData) => {
             return new Promise((resolve, reject) => {
-                cognitoUser.verifySoftwareToken(mfaCode, '', {
+                cognitoUser.verifySoftwareToken(data.confirmationCode, '', {
                     onSuccess() {
-                        console.debug('Cognito verifySoftwareToken Success');
                         resolve({});
                         resetView();
                     },

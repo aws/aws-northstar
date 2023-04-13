@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { FC, ReactNode, useState, createContext, useCallback, useMemo, useContext, useReducer } from 'react';
-import { CognitoUserPool, CognitoUser, ChallengeName } from 'amazon-cognito-identity-js';
+import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
 import Container from './components/Container';
 import ConfigError from './components/ConfigError';
 import MFA from './components/MFA';
@@ -23,6 +23,7 @@ import MFATotp from './components/MFATotp';
 import NewPassword from './components/NewPassword';
 import SignIn from './components/SignIn';
 import ForgotPassword from './components/ForgotPassword';
+import { MFAEventHandler } from './types';
 
 export interface CognitoAuthProps {
     /**
@@ -95,8 +96,8 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
         return userPool?.getCurrentUser() || null;
     }, [userPool]);
 
-    const handleMFARequired = useCallback(
-        (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => {
+    const handleMFARequired: MFAEventHandler = useCallback(
+        (cognitoUser, challengeName, challengeParams) => {
             setTransition(
                 <MFA
                     cognitoUser={cognitoUser}
@@ -116,8 +117,8 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
         [resetView]
     );
 
-    const handleMFASetup = useCallback(
-        (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => {
+    const handleMFASetup: MFAEventHandler = useCallback(
+        (cognitoUser, challengeName, challengeParams) => {
             setTransition(
                 <MFASetup
                     cognitoUser={cognitoUser}

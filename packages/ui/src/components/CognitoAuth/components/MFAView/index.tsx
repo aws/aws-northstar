@@ -13,23 +13,24 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, useCallback, useMemo, useState } from 'react';
-import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
-import SpaceBetween from '@cloudscape-design/components/space-between';
+import { FC, useMemo } from 'react';
+import { Schema, componentTypes } from '../../../FormRenderer';
 import Box from '@cloudscape-design/components/box';
-import Button from '@cloudscape-design/components/button';
 import { ChallengeName } from 'amazon-cognito-identity-js';
+import GenericView from '../GenericView';
+
+export interface MFAViewFormData {
+    confirmationCode: string;
+}
 
 export interface MFAViewProps {
     challengeName: ChallengeName;
     challengeParams: any;
-    onConfirm: (confirmationCode: string) => Promise<unknown>;
+    onConfirm: (data: MFAViewFormData) => Promise<unknown>;
     onBackToSignIn: () => void;
 }
 
 const MFAView: FC<MFAViewProps> = ({ challengeName, challengeParams, onConfirm, onBackToSignIn }) => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState();
     const schema: Schema = useMemo(() => {
         return {
             header: `Confirm ${challengeParams?.CODE_DELIVERY_MEDIUM || ''} Code`,
@@ -64,39 +65,7 @@ const MFAView: FC<MFAViewProps> = ({ challengeName, challengeParams, onConfirm, 
         };
     }, [challengeParams, challengeName]);
 
-    const handleSubmit = useCallback(
-        async (data: any) => {
-            try {
-                setIsSubmitting(true);
-                await onConfirm(data.confirmationCode);
-            } catch (err: any) {
-                setErrorMessage(err.message);
-            } finally {
-                setIsSubmitting(false);
-            }
-        },
-        [onConfirm]
-    );
-
-    return (
-        <SpaceBetween direction="vertical" size="xl">
-            <FormRenderer
-                schema={schema}
-                onSubmit={handleSubmit}
-                errorText={errorMessage}
-                isSubmitting={isSubmitting}
-            />
-            <div
-                style={{
-                    textAlign: 'center',
-                }}
-            >
-                <Button variant="link" onClick={onBackToSignIn}>
-                    Back to Sign In
-                </Button>
-            </div>
-        </SpaceBetween>
-    );
+    return <GenericView schema={schema} onSubmit={onConfirm} onBackToSignIn={onBackToSignIn} />;
 };
 
 export default MFAView;

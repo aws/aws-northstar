@@ -13,68 +13,53 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, useCallback, useMemo, useState } from 'react';
-import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
+import { FC } from 'react';
 import { IAuthenticationDetailsData } from 'amazon-cognito-identity-js';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Button from '@cloudscape-design/components/button';
+import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
+import useSubmitCallback from '../../hooks/useSubmitCallback';
 
 export interface SignInViewProps {
     onSignIn: (authenticationDetails: IAuthenticationDetailsData) => Promise<unknown>;
     onForgotPassword: () => void;
 }
 
-const SignIn: FC<SignInViewProps> = ({ onSignIn, onForgotPassword }) => {
-    const [errorMessage, setErrorMessage] = useState<string>();
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const schema: Schema = useMemo(() => {
-        return {
-            variant: 'embedded',
-            canCancel: false,
-            submitLabel: 'Sign in',
-            fields: [
+const schema: Schema = {
+    variant: 'embedded',
+    canCancel: false,
+    submitLabel: 'Sign in',
+    fields: [
+        {
+            component: componentTypes.TEXT_FIELD,
+            isRequired: true,
+            label: 'Username',
+            name: 'Username',
+            placeholder: 'Enter your Username',
+            validate: [
                 {
-                    component: componentTypes.TEXT_FIELD,
-                    isRequired: true,
-                    label: 'Username',
-                    name: 'Username',
-                    placeholder: 'Enter your Username',
-                    validate: [
-                        {
-                            type: 'required',
-                        },
-                    ],
-                },
-                {
-                    component: componentTypes.TEXT_FIELD,
-                    isRequired: true,
-                    label: 'Password',
-                    name: 'Password',
-                    type: 'password',
-                    placeholder: 'Enter your Password',
-                    validate: [
-                        {
-                            type: 'required',
-                        },
-                    ],
+                    type: 'required',
                 },
             ],
-        };
-    }, []);
-
-    const handleSubmit = useCallback(
-        async (data: any) => {
-            try {
-                setIsSubmitting(true);
-                await onSignIn(data);
-            } catch (err: any) {
-                setErrorMessage(err.message);
-            } finally {
-                setIsSubmitting(false);
-            }
         },
-        [onSignIn]
-    );
+        {
+            component: componentTypes.TEXT_FIELD,
+            isRequired: true,
+            label: 'Password',
+            name: 'Password',
+            type: 'password',
+            placeholder: 'Enter your Password',
+            validate: [
+                {
+                    type: 'required',
+                },
+            ],
+        },
+    ],
+};
+
+const SignIn: FC<SignInViewProps> = ({ onSignIn, onForgotPassword }) => {
+    const { handleSubmit, isSubmitting, errorMessage } = useSubmitCallback(onSignIn);
 
     return (
         <SpaceBetween direction="vertical" size="xl" data-testid="sign-in-form">

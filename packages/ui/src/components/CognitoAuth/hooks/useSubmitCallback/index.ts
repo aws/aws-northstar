@@ -13,30 +13,30 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export const TEST_USER_ATTRIBUTES = {
-    email_verified: 'true',
-    phone_number_verified: 'true',
-    phone_number: '+1234567890',
-    given_name: '',
-    family_name: '',
-    email: 'test@test.com',
+import { useCallback, useState } from 'react';
+
+const useSubmitCallback = <T extends Record<string, any>>(onSubmitCallback: (data: T) => Promise<unknown>) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMessage, setErrorMessage] = useState();
+    const handleSubmit = useCallback(
+        async (data: Record<string, any>) => {
+            try {
+                setIsSubmitting(true);
+                await onSubmitCallback(data as T);
+            } catch (err: any) {
+                setErrorMessage(err.message);
+            } finally {
+                setIsSubmitting(false);
+            }
+        },
+        [onSubmitCallback]
+    );
+
+    return {
+        handleSubmit,
+        isSubmitting,
+        errorMessage,
+    };
 };
 
-export const REQUIRED_ATTRIBUTES = ['family_name', 'given_name'];
-
-export const MFA_CHALLENGE_PARAMS = {
-    CODE_DELIVERY_MEDIUM: 'SMS',
-    CODE_DELIVERY_DESTINATION: '+0123456789',
-};
-
-export const MFA_SETUP_CHALLENGE_PARAM = {
-    MFAS_CAN_SETUP: JSON.stringify(['SMS_MFA', 'SOFTWARE_TOKEN_MFA']),
-};
-
-export const FORGOT_PASSWORD_DATA = {
-    CodeDeliveryDetails: {
-        AttributeName: 'email',
-        DeliveryMedium: 'EMAIL',
-        Destination: 't***@t***',
-    },
-};
+export default useSubmitCallback;

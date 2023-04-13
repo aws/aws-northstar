@@ -13,24 +13,31 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { render, act, screen } from '@testing-library/react';
+import { render, act, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
+import wrapper from '@cloudscape-design/components/test-utils/dom';
 import userEvent from '@testing-library/user-event';
 import * as stories from './index.stories';
 
 const { Default } = composeStories(stories);
 
 describe('ForgotPasswordUsername', () => {
-    it('should render NewPassword form', async () => {
+    it('should render ForgotPasswordUsername form', async () => {
         const handleSendCode = jest.fn();
-        render(<Default onSendCode={handleSendCode} />);
+        const { container } = render(<Default onSendCode={handleSendCode} />);
 
         act(() => {
             userEvent.type(screen.getByLabelText('Username'), 'TestUsername');
             userEvent.click(screen.getByText('Send code'));
         });
 
-        expect(handleSendCode).toHaveBeenCalledWith('TestUsername');
+        const submitBtn = wrapper(container).findButton("[type='submit']");
+        expect(submitBtn?.findLoadingIndicator()).not.toBeNull();
+        await waitFor(() => expect(submitBtn?.findLoadingIndicator()).toBeNull());
+
+        expect(handleSendCode).toHaveBeenCalledWith({
+            username: 'TestUsername',
+        });
     });
 
     it('should handle Back to Sign In button click', async () => {

@@ -15,8 +15,8 @@
  ******************************************************************************************************************** */
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { useCallback, FC, useState, useRef } from 'react';
-import ForgotPasswordUsernameView from '../ForgotPasswordUsernameView';
-import ForgotPasswordView from '../ForgotPasswordView';
+import ForgotPasswordUsernameView, { ForgotPasswordUsernameViewData } from '../ForgotPasswordUsernameView';
+import ForgotPasswordView, { ForgotPasswordViewFormData } from '../ForgotPasswordView';
 
 export interface ForgotPasswordProps {
     userPool: CognitoUserPool | null;
@@ -27,17 +27,16 @@ const ForgotPassword: FC<ForgotPasswordProps> = ({ userPool, resetView }) => {
     const cognitoUserRef = useRef<CognitoUser>();
     const [forgotPasswordData, setForgotPasswordData] = useState();
     const handleSendCode = useCallback(
-        async (username: string) => {
+        async (data: ForgotPasswordUsernameViewData) => {
             if (userPool) {
                 const cognitoUser = new CognitoUser({
-                    Username: username,
+                    Username: data.username,
                     Pool: userPool,
                 });
 
                 return new Promise((resolve, reject) => {
                     cognitoUser.forgotPassword({
                         onSuccess(data: any) {
-                            console.debug('Congnito forgotPassword Success', data);
                             cognitoUserRef.current = cognitoUser;
                             resolve(data);
                             setForgotPasswordData(data);
@@ -54,12 +53,11 @@ const ForgotPassword: FC<ForgotPasswordProps> = ({ userPool, resetView }) => {
     );
 
     const handleResetPassword = useCallback(
-        async (verificationCode: string, newPassword: string) => {
+        async (data: ForgotPasswordViewFormData) => {
             if (cognitoUserRef.current) {
                 return new Promise((resolve, reject) => {
-                    cognitoUserRef.current!.confirmPassword(verificationCode, newPassword, {
+                    cognitoUserRef.current!.confirmPassword(data.verificationCode, data.password, {
                         onSuccess() {
-                            console.debug('Congnito confirmPassword Success');
                             resolve({});
                             resetView();
                         },

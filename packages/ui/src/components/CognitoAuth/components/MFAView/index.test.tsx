@@ -32,7 +32,9 @@ describe('MFA', () => {
             userEvent.click(screen.getByText('Confirm'));
         });
 
-        expect(handleConfirm).toHaveBeenCalledWith('1234');
+        expect(handleConfirm).toHaveBeenCalledWith({
+            confirmationCode: '1234',
+        });
     });
 
     it('should render SOFTWARE_TOKEN_MFA form', async () => {
@@ -47,7 +49,9 @@ describe('MFA', () => {
             userEvent.click(screen.getByText('Confirm'));
         });
 
-        expect(handleConfirm).toHaveBeenCalledWith('1234');
+        expect(handleConfirm).toHaveBeenCalledWith({
+            confirmationCode: '1234',
+        });
     });
 
     it('should handle Back to Sign In button click', async () => {

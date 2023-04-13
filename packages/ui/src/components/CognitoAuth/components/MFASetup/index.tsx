@@ -14,7 +14,8 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { CognitoUser, ChallengeName } from 'amazon-cognito-identity-js';
-import MFASetupView from '../MFASetupView';
+import MFASetupView, { MFASetupViewFormData } from '../MFASetupView';
+import { MFAEventHandler, MFA_METHODS } from '../../types';
 import { useCallback, FC } from 'react';
 
 export interface MFASetupProps {
@@ -23,7 +24,7 @@ export interface MFASetupProps {
     challengeName: ChallengeName;
     challengeParams: any;
     onAssociateSecretCode: (cognitoUser: CognitoUser, secretCode: string) => void;
-    onMFARequired: (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
+    onMFARequired: MFAEventHandler;
 }
 
 const MFASetup: FC<MFASetupProps> = ({
@@ -35,27 +36,26 @@ const MFASetup: FC<MFASetupProps> = ({
     onMFARequired,
 }) => {
     const handleMFASetup = useCallback(
-        async (mfaMethod: string) => {
+        async (data: MFASetupViewFormData) => {
             return new Promise((resolve, reject) => {
-                if (mfaMethod === 'SOFTWARE_TOKEN_MFA') {
+                if (data.mfaMethod === MFA_METHODS.SOFTWARE_TOKEN_MFA) {
                     cognitoUser.associateSoftwareToken({
                         associateSecretCode(secretCode: string): void {
-                            console.debug('associateSecretCode');
                             onAssociateSecretCode(cognitoUser, secretCode);
                             resolve(secretCode);
                         },
                         onFailure(err: any): void {
-                            console.error(err);
+                            console.error('Cognito associateSoftwareToken Failure', err);
                             reject(err);
                         },
                     });
-                } else if (mfaMethod === 'SMS_MFA') {
+                } else if (data.mfaMethod === MFA_METHODS.SMS_MFA) {
                     onMFARequired(cognitoUser, challengeName, challengeParams);
                     resolve({});
                 } else {
-                    console.debug('Unhandled mfaMethod', mfaMethod);
+                    console.error('Unhandled mfaMethod', data.mfaMethod);
                     reject({
-                        message: `Unhandled mfaMethod ${mfaMethod}`,
+                        message: `Unhandled mfaMethod ${data.mfaMethod}`,
                     });
                 }
             });

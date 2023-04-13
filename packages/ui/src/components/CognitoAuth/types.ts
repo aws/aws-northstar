@@ -13,30 +13,11 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export const TEST_USER_ATTRIBUTES = {
-    email_verified: 'true',
-    phone_number_verified: 'true',
-    phone_number: '+1234567890',
-    given_name: '',
-    family_name: '',
-    email: 'test@test.com',
+import { CognitoUser, ChallengeName } from 'amazon-cognito-identity-js';
+
+export const MFA_METHODS = {
+    SOFTWARE_TOKEN_MFA: 'SOFTWARE_TOKEN_MFA',
+    SMS_MFA: 'SMS_MFA',
 };
 
-export const REQUIRED_ATTRIBUTES = ['family_name', 'given_name'];
-
-export const MFA_CHALLENGE_PARAMS = {
-    CODE_DELIVERY_MEDIUM: 'SMS',
-    CODE_DELIVERY_DESTINATION: '+0123456789',
-};
-
-export const MFA_SETUP_CHALLENGE_PARAM = {
-    MFAS_CAN_SETUP: JSON.stringify(['SMS_MFA', 'SOFTWARE_TOKEN_MFA']),
-};
-
-export const FORGOT_PASSWORD_DATA = {
-    CodeDeliveryDetails: {
-        AttributeName: 'email',
-        DeliveryMedium: 'EMAIL',
-        Destination: 't***@t***',
-    },
-};
+export type MFAEventHandler = (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;

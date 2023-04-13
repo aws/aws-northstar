@@ -13,14 +13,15 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { CognitoUser, CognitoUserSession, ChallengeName } from 'amazon-cognito-identity-js';
-import NewPasswordView from '../NewPasswordView';
+import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
 import { useCallback, FC } from 'react';
+import NewPasswordView, { NewPasswordViewFormData } from '../NewPasswordView';
+import { MFAEventHandler } from '../../types';
 
 export interface NewPasswordProps {
     cognitoUser: CognitoUser;
-    onMFARequired: (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
-    onMFASetup: (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
+    onMFARequired: MFAEventHandler;
+    onMFASetup: MFAEventHandler;
     resetView: () => void;
     userAttributes: any;
     requiredAttributes: any;
@@ -35,25 +36,21 @@ const NewPassword: FC<NewPasswordProps> = ({
     requiredAttributes,
 }) => {
     const handleChangePassword = useCallback(
-        async (newPassword: string, attributes: any) => {
+        async (data: NewPasswordViewFormData) => {
             return new Promise((resolve, reject) => {
-                return cognitoUser.completeNewPasswordChallenge(newPassword, attributes, {
+                return cognitoUser.completeNewPasswordChallenge(data.password, data.attributes, {
                     onSuccess(result: CognitoUserSession) {
-                        console.debug('Cognito Change Password Success');
                         resolve(result);
                         resetView();
                     },
                     onFailure(err) {
-                        console.error('Cognito Change Password Error', err);
                         reject(err);
                     },
                     mfaSetup(challengeName, challengeParams) {
-                        console.debug('mfaSetup', challengeName, challengeParams);
                         onMFASetup(cognitoUser, challengeName, challengeParams);
                         resolve({});
                     },
                     mfaRequired(challengeName, challengeParams) {
-                        console.debug('mfaRequired', challengeName, challengeParams);
                         onMFARequired(cognitoUser, challengeName, challengeParams);
                         resolve({});
                     },

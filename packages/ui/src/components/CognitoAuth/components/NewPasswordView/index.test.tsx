@@ -32,7 +32,10 @@ describe('NewPassword', () => {
             userEvent.click(screen.getByText('Confirm'));
         });
 
-        expect(handleChangePassword).toHaveBeenCalledWith('Password', undefined);
+        expect(handleChangePassword).toHaveBeenCalledWith({
+            password: 'Password',
+            confirmPassword: 'Password',
+        });
     });
 
     it('should trigger validation', async () => {
@@ -74,9 +77,13 @@ describe('NewPassword', () => {
             userEvent.click(screen.getByText('Confirm'));
         });
 
-        expect(handleChangePassword).toHaveBeenCalledWith('Password', {
-            family_name: 'Name1',
-            given_name: 'Name2',
+        expect(handleChangePassword).toHaveBeenCalledWith({
+            password: 'Password',
+            confirmPassword: 'Password',
+            attributes: {
+                family_name: 'Name1',
+                given_name: 'Name2',
+            },
         });
     });
 

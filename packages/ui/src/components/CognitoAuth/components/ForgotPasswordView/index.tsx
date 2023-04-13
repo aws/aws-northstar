@@ -13,20 +13,22 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, useCallback, useMemo, useState } from 'react';
-import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
-import SpaceBetween from '@cloudscape-design/components/space-between';
-import Button from '@cloudscape-design/components/button';
+import { FC, useCallback, useMemo } from 'react';
+import { Schema, componentTypes } from '../../../FormRenderer';
+import GenericView from '../GenericView';
+
+export interface ForgotPasswordViewFormData {
+    verificationCode: string;
+    password: string;
+}
 
 export interface ForgotPasswordViewProps {
     data?: any;
-    onResetPassword: (verificationCode: string, newPassword: string) => Promise<unknown>;
+    onResetPassword: (data: ForgotPasswordViewFormData) => Promise<unknown>;
     onBackToSignIn: () => void;
 }
 
 const ForgotPasswordView: FC<ForgotPasswordViewProps> = ({ onResetPassword, onBackToSignIn, data }) => {
-    const [errorMessage, setErrorMessage] = useState();
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const schema = useMemo(() => {
         const destination = data?.CodeDeliveryDetails?.Destination;
 
@@ -81,20 +83,6 @@ const ForgotPasswordView: FC<ForgotPasswordViewProps> = ({ onResetPassword, onBa
         return formSchema;
     }, [data]);
 
-    const handleSubmit = useCallback(
-        async (data: any) => {
-            try {
-                setIsSubmitting(true);
-                await onResetPassword(data.verificationCode, data.password);
-            } catch (err: any) {
-                setErrorMessage(err.message);
-            } finally {
-                setIsSubmitting(false);
-            }
-        },
-        [onResetPassword]
-    );
-
     const validate = useCallback((values: any) => {
         const errors: any = {};
 
@@ -106,24 +94,7 @@ const ForgotPasswordView: FC<ForgotPasswordViewProps> = ({ onResetPassword, onBa
     }, []);
 
     return (
-        <SpaceBetween direction="vertical" size="xl">
-            <FormRenderer
-                schema={schema}
-                onSubmit={handleSubmit}
-                errorText={errorMessage}
-                isSubmitting={isSubmitting}
-                validate={validate}
-            />
-            <div
-                style={{
-                    textAlign: 'center',
-                }}
-            >
-                <Button variant="link" onClick={onBackToSignIn}>
-                    Back to Sign In
-                </Button>
-            </div>
-        </SpaceBetween>
+        <GenericView schema={schema} onSubmit={onResetPassword} onBackToSignIn={onBackToSignIn} validate={validate} />
     );
 };
 

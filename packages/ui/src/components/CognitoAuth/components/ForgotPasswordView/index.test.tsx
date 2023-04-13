@@ -34,7 +34,11 @@ describe('ForgotPassword', () => {
             userEvent.click(screen.getByText('Confirm'));
         });
 
-        expect(handleResetPassword).toHaveBeenCalledWith('123456', 'NewPassword');
+        expect(handleResetPassword).toHaveBeenCalledWith({
+            verificationCode: '123456',
+            password: 'NewPassword',
+            confirmPassword: 'NewPassword',
+        });
     });
 
     it('should validate 2 passwords match', async () => {

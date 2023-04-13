@@ -33,6 +33,6 @@ const Template: ComponentStory<typeof MFASetupView> = (args: MFASetupViewProps) 
 
 export const Default = Template.bind({});
 Default.args = {
-    challengeName: 'SMS_MFA',
+    challengeName: 'SELECT_MFA_TYPE',
     challengeParams: MFA_SETUP_CHALLENGE_PARAM,
 };

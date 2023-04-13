@@ -13,23 +13,25 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, useCallback, useMemo, useState } from 'react';
-import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
-import SpaceBetween from '@cloudscape-design/components/space-between';
-import Button from '@cloudscape-design/components/button';
+import { FC, useCallback, useMemo } from 'react';
+import { Schema, componentTypes } from '../../../FormRenderer';
 
 import AttributeMapping from '../../attributeMapping';
+import GenericView from '../GenericView';
+
+export interface NewPasswordViewFormData {
+    password: string;
+    attributes: Record<string, string>;
+}
 
 export interface NewPasswordViewProps {
     userAttributes?: string[];
     requiredAttributes?: string[];
-    onChangePassword: (newPassword: string, attributes?: any) => Promise<unknown>;
+    onChangePassword: (data: NewPasswordViewFormData) => Promise<unknown>;
     onBackToSignIn: () => void;
 }
 
 const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChangePassword, onBackToSignIn }) => {
-    const [errorMessage, setErrorMessage] = useState();
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const schema = useMemo(() => {
         const formSchema: Schema = {
             header: 'Change Password',
@@ -85,20 +87,6 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChang
         return formSchema;
     }, [requiredAttributes]);
 
-    const handleSubmit = useCallback(
-        async (data: any) => {
-            try {
-                setIsSubmitting(true);
-                await onChangePassword(data.password, data.attributes);
-            } catch (err: any) {
-                setErrorMessage(err.message);
-            } finally {
-                setIsSubmitting(false);
-            }
-        },
-        [onChangePassword]
-    );
-
     const validate = useCallback((values: any) => {
         const errors: any = {};
 
@@ -110,24 +98,7 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChang
     }, []);
 
     return (
-        <SpaceBetween direction="vertical" size="xl">
-            <FormRenderer
-                schema={schema}
-                onSubmit={handleSubmit}
-                errorText={errorMessage}
-                isSubmitting={isSubmitting}
-                validate={validate}
-            />
-            <div
-                style={{
-                    textAlign: 'center',
-                }}
-            >
-                <Button variant="link" onClick={onBackToSignIn}>
-                    Back to Sign In
-                </Button>
-            </div>
-        </SpaceBetween>
+        <GenericView schema={schema} validate={validate} onSubmit={onChangePassword} onBackToSignIn={onBackToSignIn} />
     );
 };
 

@@ -13,78 +13,42 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, useCallback, useMemo, useState } from 'react';
-import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
-import SpaceBetween from '@cloudscape-design/components/space-between';
-import Button from '@cloudscape-design/components/button';
+import { FC } from 'react';
+import { Schema, componentTypes } from '../../../FormRenderer';
+import GenericView from '../GenericView';
+
+export interface ForgotPasswordUsernameViewData {
+    username: string;
+}
 
 export interface ForgotPasswordUsernameViewProps {
-    onSendCode: (username: string) => void;
+    onSendCode: (data: ForgotPasswordUsernameViewData) => Promise<unknown>;
     onBackToSignIn: () => void;
 }
 
-const ForgotPasswordUsernameView: FC<ForgotPasswordUsernameViewProps> = ({ onSendCode, onBackToSignIn }) => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState();
-
-    const schema = useMemo(() => {
-        const formSchema: Schema = {
-            header: 'Reset Password',
-            variant: 'embedded',
-            canCancel: false,
-            submitLabel: 'Send code',
-            fields: [
+const schema: Schema = {
+    header: 'Reset Password',
+    variant: 'embedded',
+    canCancel: false,
+    submitLabel: 'Send code',
+    fields: [
+        {
+            component: componentTypes.TEXT_FIELD,
+            isRequired: true,
+            label: 'Username',
+            name: 'username',
+            placeholder: 'Enter your username',
+            validate: [
                 {
-                    component: componentTypes.TEXT_FIELD,
-                    isRequired: true,
-                    label: 'Username',
-                    name: 'username',
-                    placeholder: 'Enter your username',
-                    validate: [
-                        {
-                            type: 'required',
-                        },
-                    ],
+                    type: 'required',
                 },
             ],
-        };
-
-        return formSchema;
-    }, []);
-
-    const handleSubmit = useCallback(
-        async (data: any) => {
-            try {
-                setIsSubmitting(true);
-                await onSendCode(data.username);
-            } catch (err: any) {
-                setErrorMessage(err.message);
-            } finally {
-                setIsSubmitting(false);
-            }
         },
-        [onSendCode]
-    );
+    ],
+};
 
-    return (
-        <SpaceBetween direction="vertical" size="xl">
-            <FormRenderer
-                schema={schema}
-                onSubmit={handleSubmit}
-                isSubmitting={isSubmitting}
-                errorText={errorMessage}
-            />
-            <div
-                style={{
-                    textAlign: 'center',
-                }}
-            >
-                <Button variant="link" onClick={onBackToSignIn}>
-                    Back to Sign In
-                </Button>
-            </div>
-        </SpaceBetween>
-    );
+const ForgotPasswordUsernameView: FC<ForgotPasswordUsernameViewProps> = ({ onSendCode, onBackToSignIn }) => {
+    return <GenericView schema={schema} onSubmit={onSendCode} onBackToSignIn={onBackToSignIn} />;
 };
 
 export default ForgotPasswordUsernameView;

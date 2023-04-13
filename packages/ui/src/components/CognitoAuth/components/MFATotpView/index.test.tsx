@@ -44,7 +44,9 @@ describe('MFATotp', () => {
             userEvent.click(screen.getByText('Continue'));
         });
 
-        expect(handleConfirm).toHaveBeenCalledWith('1234');
+        expect(handleConfirm).toHaveBeenCalledWith({
+            confirmationCode: '1234',
+        });
     });
 
     it('should handle Back to Sign In button click', async () => {

@@ -17,18 +17,18 @@ import {
     CognitoUser,
     CognitoUserSession,
     CognitoUserPool,
-    ChallengeName,
     IAuthenticationDetailsData,
     AuthenticationDetails,
 } from 'amazon-cognito-identity-js';
 import SignInView from '../SignInView';
 import { useCallback, FC } from 'react';
+import { MFAEventHandler } from '../../types';
 
 export interface SignInProps {
     userPool: CognitoUserPool;
-    onMFARequired: (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
+    onMFARequired: MFAEventHandler;
     onNewPasswordRequired: (cognitoUser: CognitoUser, userAttributes: any, requiredAttributes: any) => void;
-    onMFASetup: (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
+    onMFASetup: MFAEventHandler;
     onForgotPassword: () => void;
     resetView: () => void;
 }
@@ -53,7 +53,6 @@ const SignIn: FC<SignInProps> = ({
                 return new Promise((resolve, reject) => {
                     cognitoUser.authenticateUser(authDetails, {
                         onSuccess(result: CognitoUserSession) {
-                            console.debug('Congnito Auth Success');
                             resolve(result);
                             resetView();
                         },
@@ -62,27 +61,22 @@ const SignIn: FC<SignInProps> = ({
                             reject(err);
                         },
                         selectMFAType(challengeName, challengeParams) {
-                            console.debug('selectMFAType', challengeName, challengeParams);
                             onMFASetup(cognitoUser, challengeName, challengeParams);
                             resolve({});
                         },
                         mfaSetup(challengeName, challengeParams) {
-                            console.debug('mfaSetup', challengeName, challengeParams);
                             onMFASetup(cognitoUser, challengeName, challengeParams);
                             resolve({});
                         },
                         totpRequired(challengeName, challengeParams) {
-                            console.debug('totpRequired', challengeName, challengeParams);
                             onMFARequired(cognitoUser, challengeName, challengeParams);
                             resolve({});
                         },
                         newPasswordRequired(userAttributes, requiredAttributes) {
-                            console.debug('newPasswordRequired', userAttributes, requiredAttributes);
                             onNewPasswordRequired(cognitoUser, userAttributes, requiredAttributes);
                             resolve({});
                         },
                         mfaRequired(challengeName, challengeParams) {
-                            console.debug('mfaRequired', challengeName, challengeParams);
                             onMFARequired(cognitoUser, challengeName, challengeParams);
                             resolve({});
                         },

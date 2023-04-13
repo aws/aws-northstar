@@ -30,7 +30,9 @@ describe('MFASetup', () => {
             userEvent.click(screen.getByText('Continue'));
         });
 
-        expect(handleConfirm).toHaveBeenCalledWith('SMS_MFA');
+        expect(handleConfirm).toHaveBeenCalledWith({
+            mfaMethod: 'SMS_MFA',
+        });
     });
 
     it('should render MFASetup form', async () => {
@@ -42,7 +44,9 @@ describe('MFASetup', () => {
             userEvent.click(screen.getByText('Continue'));
         });
 
-        expect(handleConfirm).toHaveBeenCalledWith('SOFTWARE_TOKEN_MFA');
+        expect(handleConfirm).toHaveBeenCalledWith({
+            mfaMethod: 'SOFTWARE_TOKEN_MFA',
+        });
     });
 
     it('should handle Back to Sign In button click', async () => {

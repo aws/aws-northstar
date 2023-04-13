@@ -14,7 +14,7 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { CognitoUser, CognitoUserSession, ChallengeName } from 'amazon-cognito-identity-js';
-import MFAView from '../MFAView';
+import MFAView, { MFAViewFormData } from '../MFAView';
 import { useCallback, FC } from 'react';
 
 export interface MFAProps {
@@ -26,11 +26,10 @@ export interface MFAProps {
 
 const MFA: FC<MFAProps> = ({ cognitoUser, resetView, challengeName, challengeParams }) => {
     const handleMFA = useCallback(
-        async (mfaCode: string) => {
+        async (data: MFAViewFormData) => {
             return new Promise((resolve, reject) => {
-                cognitoUser.sendMFACode(mfaCode, {
+                cognitoUser.sendMFACode(data.confirmationCode, {
                     onSuccess(result: CognitoUserSession) {
-                        console.debug('Cognito sendMFACode Success');
                         resolve(result);
                         resetView();
                     },
