@@ -39,7 +39,6 @@ describe('MFA', () => {
 
     it('should handle onFailure flow', async () => {
         const errMsg = 'Error Message';
-
         const mockCognitoUser: any = {
             sendMFACode: jest.fn().mockImplementation((mfaCode, callback) => {
                 expect(mfaCode).toBe(mfaCode);

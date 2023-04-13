@@ -26,6 +26,7 @@ export interface SignInViewProps {
 }
 
 const schema: Schema = {
+    header: 'Sign In',
     variant: 'embedded',
     canCancel: false,
     submitLabel: 'Sign in',

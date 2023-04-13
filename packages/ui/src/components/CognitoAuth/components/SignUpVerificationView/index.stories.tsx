@@ -13,32 +13,21 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export const TEST_USER_ATTRIBUTES = {
-    email_verified: 'true',
-    phone_number_verified: 'true',
-    phone_number: '+1234567890',
-    given_name: '',
-    family_name: '',
-    email: 'test@test.com',
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import SignUpVerificationView, { SignUpVerificationViewProps } from '.';
+import Container from '../Container';
+
+export default {
+    component: SignUpVerificationView,
+    title: 'Components/CognitoAuth/SignUpVerification',
+} as ComponentMeta<typeof SignUpVerificationView>;
+
+const Template: ComponentStory<typeof SignUpVerificationView> = (args: SignUpVerificationViewProps) => {
+    return (
+        <Container>
+            <SignUpVerificationView {...args} />
+        </Container>
+    );
 };
 
-export const REQUIRED_ATTRIBUTES = ['family_name', 'given_name'];
-
-export const REQUIRED_SIGNUP_ATTRIBUTES = ['family_name', 'given_name', 'email', 'phone_number'];
-
-export const MFA_CHALLENGE_PARAMS = {
-    CODE_DELIVERY_MEDIUM: 'SMS',
-    CODE_DELIVERY_DESTINATION: '+0123456789',
-};
-
-export const MFA_SETUP_CHALLENGE_PARAM = {
-    MFAS_CAN_SETUP: JSON.stringify(['SMS_MFA', 'SOFTWARE_TOKEN_MFA']),
-};
-
-export const FORGOT_PASSWORD_DATA = {
-    CodeDeliveryDetails: {
-        AttributeName: 'email',
-        DeliveryMedium: 'EMAIL',
-        Destination: 't***@t***',
-    },
-};
+export const Default = Template.bind({});

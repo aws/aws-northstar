@@ -22,7 +22,7 @@ export interface GenericViewProps<TData> {
     schema: Schema;
     validate?: (values: any) => any;
     onSubmit: (data: TData) => Promise<unknown>;
-    onBackToSignIn: () => void;
+    onBackToSignIn?: () => void;
 }
 
 const GenericView = <TData extends Record<string, any>>({
@@ -41,15 +41,17 @@ const GenericView = <TData extends Record<string, any>>({
                 errorText={errorMessage}
                 validate={validate}
             />
-            <div
-                style={{
-                    textAlign: 'center',
-                }}
-            >
-                <Button variant="link" onClick={onBackToSignIn}>
-                    Back to Sign In
-                </Button>
-            </div>
+            {onBackToSignIn && (
+                <div
+                    style={{
+                        textAlign: 'center',
+                    }}
+                >
+                    <Button variant="link" onClick={onBackToSignIn}>
+                        Back to Sign In
+                    </Button>
+                </div>
+            )}
         </SpaceBetween>
     );
 };

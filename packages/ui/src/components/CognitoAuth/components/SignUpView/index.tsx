@@ -14,31 +14,43 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { FC, useMemo } from 'react';
-import { Schema, componentTypes } from '../../../FormRenderer';
-import validatePasswords from '../../utils/validatePasswords';
+import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
+import SpaceBetween from '@cloudscape-design/components/space-between';
+import useSubmitCallback from '../../hooks/useSubmitCallback';
 import AttributeMapping from '../../attributeMapping';
-import GenericView from '../GenericView';
+import validatePasswords from '../../utils/validatePasswords';
 
-export interface NewPasswordViewFormData {
+export interface SignUpFormData {
+    username: string;
     password: string;
-    attributes: Record<string, string>;
+    attributes?: Record<string, string>;
 }
 
-export interface NewPasswordViewProps {
-    userAttributes?: Record<string, string>;
+export interface SignUpViewProps {
     requiredAttributes?: string[];
-    onChangePassword: (data: NewPasswordViewFormData) => Promise<unknown>;
-    onBackToSignIn: () => void;
+    onSignUp: (data: SignUpFormData) => Promise<unknown>;
 }
 
-const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChangePassword, onBackToSignIn }) => {
+const SignUpView: FC<SignUpViewProps> = ({ requiredAttributes, onSignUp }) => {
     const schema = useMemo(() => {
         const formSchema: Schema = {
-            header: 'Change Password',
+            header: 'Sign Up',
             variant: 'embedded',
             canCancel: false,
-            submitLabel: 'Confirm',
+            submitLabel: 'Sign up',
             fields: [
+                {
+                    component: componentTypes.TEXT_FIELD,
+                    isRequired: true,
+                    label: 'Username',
+                    name: 'username',
+                    placeholder: 'Enter your Username',
+                    validate: [
+                        {
+                            type: 'required',
+                        },
+                    ],
+                },
                 {
                     component: componentTypes.TEXT_FIELD,
                     isRequired: true,
@@ -87,14 +99,19 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChang
         return formSchema;
     }, [requiredAttributes]);
 
+    const { handleSubmit, isSubmitting, errorMessage } = useSubmitCallback(onSignUp);
+
     return (
-        <GenericView
-            schema={schema}
-            validate={validatePasswords}
-            onSubmit={onChangePassword}
-            onBackToSignIn={onBackToSignIn}
-        />
+        <SpaceBetween direction="vertical" size="xl" data-testid="sign-up-form">
+            <FormRenderer
+                schema={schema}
+                onSubmit={handleSubmit}
+                errorText={errorMessage}
+                isSubmitting={isSubmitting}
+                validate={validatePasswords}
+            />
+        </SpaceBetween>
     );
 };
 
-export default NewPasswordView;
+export default SignUpView;

@@ -21,6 +21,7 @@ import Box from '@cloudscape-design/components/box';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import CognitoAuth, { CognitoAuthProps } from '.';
 import Container from './components/Container';
+import { REQUIRED_SIGNUP_ATTRIBUTES } from './fixtures';
 
 export default {
     component: CognitoAuth,
@@ -50,3 +51,9 @@ const Template: ComponentStory<typeof CognitoAuth> = (args: CognitoAuthProps) =>
 };
 
 export const CognitoAuthFlow = Template.bind({});
+
+export const CognitoAuthFlowWithSignUp = Template.bind({});
+CognitoAuthFlowWithSignUp.args = {
+    allowSignup: true,
+    requiredSignUpAttributes: REQUIRED_SIGNUP_ATTRIBUTES,
+};

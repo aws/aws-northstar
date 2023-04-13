@@ -18,7 +18,7 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './index.stories';
 import CognitoAuth from '.';
-import { MFA_SETUP_CHALLENGE_PARAM } from './fixtures';
+import { MFA_SETUP_CHALLENGE_PARAM, REQUIRED_SIGNUP_ATTRIBUTES } from './fixtures';
 
 const { CognitoAuthFlow } = composeStories(stories);
 const mockGetCurrentUser = jest.fn();
@@ -214,6 +214,7 @@ describe('CognitoAuth', () => {
                 Main Content
             </CognitoAuth>
         );
+
         expect(screen.getByTestId('sign-in-form')).toBeVisible();
 
         act(() => {
@@ -221,6 +222,29 @@ describe('CognitoAuth', () => {
         });
 
         expect(screen.getByText('Reset Password')).toBeVisible();
+    });
+
+    it('should render SignUp form', async () => {
+        render(
+            <CognitoAuth
+                clientId="TestClientId"
+                userPoolId="TestUserPoolId"
+                allowSignup={true}
+                requiredSignUpAttributes={REQUIRED_SIGNUP_ATTRIBUTES}
+            >
+                Main Content
+            </CognitoAuth>
+        );
+
+        expect(screen.getByTestId('sign-in-form')).toBeVisible();
+        expect(screen.queryByTestId('sign-up-form')).toBeNull();
+
+        act(() => {
+            userEvent.click(screen.getByText('Sign Up'));
+        });
+
+        expect(screen.queryByTestId('sign-in-form')).toBeNull();
+        expect(screen.getByTestId('sign-up-form')).toBeVisible();
     });
 });
 

@@ -15,6 +15,7 @@
  ******************************************************************************************************************** */
 import { FC, ReactNode, useState, createContext, useCallback, useMemo, useContext, useReducer } from 'react';
 import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
+import Tabs from '@cloudscape-design/components/tabs';
 import Container from './components/Container';
 import ConfigError from './components/ConfigError';
 import MFA from './components/MFA';
@@ -22,6 +23,7 @@ import MFASetup from './components/MFASetup';
 import MFATotp from './components/MFATotp';
 import NewPassword from './components/NewPassword';
 import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 import ForgotPassword from './components/ForgotPassword';
 import { MFAEventHandler } from './types';
 
@@ -34,6 +36,14 @@ export interface CognitoAuthProps {
      * Cognito App client Id
      */
     clientId: string;
+    /**
+     * Whether to allow users to sign up.
+     */
+    allowSignup?: boolean;
+    /**
+     * Specifies the required attributes for sign up flow if allowSignup is true
+     */
+    requiredSignUpAttributes?: string[];
     /**
      * Main content show post authentication flow
      */
@@ -55,13 +65,20 @@ const initialState = {
 export const CognitoAuthContext = createContext<CognitoAuthContextAPI>(initialState);
 
 /**
- * Support cognito authentication flows.
+ * Support Cognito authentication flows.
  *
- * **Limitations**
- * * Sign up flow is not supported
- * * [Cognito hosted UI](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-app-integration.html) is not supported
+ * **Limitations:**
+ * The following authentication flows are not supported in the current version of CognitoAuth component:
+ * * Cognito Federated SignIn
+ * * [Cognito hosted UI](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-app-integration.html)
  */
-const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) => {
+const CognitoAuth: FC<CognitoAuthProps> = ({
+    children,
+    userPoolId,
+    clientId,
+    allowSignup,
+    requiredSignUpAttributes,
+}) => {
     const [transition, setTransition] = useState<ReactNode>();
     const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
@@ -178,16 +195,47 @@ const CognitoAuth: FC<CognitoAuthProps> = ({ children, userPoolId, clientId }) =
 
     return (
         <Container>
-            {transition ?? (
-                <SignIn
-                    userPool={userPool}
-                    onMFARequired={handleMFARequired}
-                    onMFASetup={handleMFASetup}
-                    onNewPasswordRequired={handleNewPasswordRequired}
-                    resetView={resetView}
-                    onForgotPassword={handleForgotPassword}
-                />
-            )}
+            {transition ??
+                (allowSignup ? (
+                    <Tabs
+                        tabs={[
+                            {
+                                label: 'Sign In',
+                                id: 'signIn',
+                                content: (
+                                    <SignIn
+                                        userPool={userPool}
+                                        onMFARequired={handleMFARequired}
+                                        onMFASetup={handleMFASetup}
+                                        onNewPasswordRequired={handleNewPasswordRequired}
+                                        resetView={resetView}
+                                        onForgotPassword={handleForgotPassword}
+                                    />
+                                ),
+                            },
+                            {
+                                label: 'Sign Up',
+                                id: 'signUp',
+                                content: (
+                                    <SignUp
+                                        userPool={userPool}
+                                        resetView={resetView}
+                                        requiredAttributes={requiredSignUpAttributes}
+                                    />
+                                ),
+                            },
+                        ]}
+                    />
+                ) : (
+                    <SignIn
+                        userPool={userPool}
+                        onMFARequired={handleMFARequired}
+                        onMFASetup={handleMFASetup}
+                        onNewPasswordRequired={handleNewPasswordRequired}
+                        resetView={resetView}
+                        onForgotPassword={handleForgotPassword}
+                    />
+                ))}
         </Container>
     );
 };

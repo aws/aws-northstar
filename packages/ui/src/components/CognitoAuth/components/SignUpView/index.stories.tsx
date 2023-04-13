@@ -13,32 +13,28 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-export const TEST_USER_ATTRIBUTES = {
-    email_verified: 'true',
-    phone_number_verified: 'true',
-    phone_number: '+1234567890',
-    given_name: '',
-    family_name: '',
-    email: 'test@test.com',
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import SignUpView, { SignUpViewProps } from '.';
+import Container from '../Container';
+import { REQUIRED_SIGNUP_ATTRIBUTES } from '../../fixtures';
+
+export default {
+    component: SignUpView,
+    title: 'Components/CognitoAuth/SignUp',
+} as ComponentMeta<typeof SignUpView>;
+
+const Template: ComponentStory<typeof SignUpView> = (args: SignUpViewProps) => {
+    return (
+        <Container>
+            <SignUpView {...args} />
+        </Container>
+    );
 };
 
-export const REQUIRED_ATTRIBUTES = ['family_name', 'given_name'];
+export const Default = Template.bind({});
 
-export const REQUIRED_SIGNUP_ATTRIBUTES = ['family_name', 'given_name', 'email', 'phone_number'];
-
-export const MFA_CHALLENGE_PARAMS = {
-    CODE_DELIVERY_MEDIUM: 'SMS',
-    CODE_DELIVERY_DESTINATION: '+0123456789',
-};
-
-export const MFA_SETUP_CHALLENGE_PARAM = {
-    MFAS_CAN_SETUP: JSON.stringify(['SMS_MFA', 'SOFTWARE_TOKEN_MFA']),
-};
-
-export const FORGOT_PASSWORD_DATA = {
-    CodeDeliveryDetails: {
-        AttributeName: 'email',
-        DeliveryMedium: 'EMAIL',
-        Destination: 't***@t***',
-    },
+export const WithRequiredAttributes = Template.bind({});
+WithRequiredAttributes.args = {
+    ...Default.args,
+    requiredAttributes: REQUIRED_SIGNUP_ATTRIBUTES,
 };

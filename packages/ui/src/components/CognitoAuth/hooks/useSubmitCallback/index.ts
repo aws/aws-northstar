@@ -35,7 +35,9 @@ const useSubmitCallback = <T extends Record<string, any>>(onSubmitCallback: (dat
     return {
         handleSubmit,
         isSubmitting,
+        setIsSubmitting,
         errorMessage,
+        setErrorMessage,
     };
 };
 
