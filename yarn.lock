@@ -68,7 +68,7 @@ __metadata:
   resolution: "@aws-northstar/ui@workspace:packages/ui"
   dependencies:
     "@babel/core": ^7.20.2
-    "@cloudscape-design/collection-hooks": ^1.0.19
+    "@cloudscape-design/collection-hooks": ^1.0.20
     "@cloudscape-design/components": ^3.0.112
     "@cloudscape-design/design-tokens": ^3.0.7
     "@cloudscape-design/global-styles": ^1.0.1
@@ -2397,6 +2397,15 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 9358f51d87db480f56814118f8b1e96572c73c6c55b3caf46c12f852c4de54b991c072ac108187002818e22e30ca380aa84b177be3578bf8f1cbdd9222a805fd
+  languageName: node
+  linkType: hard
+
+"@cloudscape-design/collection-hooks@npm:^1.0.20":
+  version: 1.0.20
+  resolution: "@cloudscape-design/collection-hooks@npm:1.0.20"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: bc29fc44467af4f216f0d54ecf4b3f7dbda3cc6ecedc9f6cdc75d3193a8ed89aa175f6b681ab49cac721bfb3f989c868df14cee73292f173d69a53147093aec0
   languageName: node
   linkType: hard
 
