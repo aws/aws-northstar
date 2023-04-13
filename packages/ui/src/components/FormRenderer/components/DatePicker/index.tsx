@@ -15,66 +15,25 @@
  ******************************************************************************************************************** */
 import { FC, memo } from 'react';
 import DatePickerComponent from '@cloudscape-design/components/date-picker';
-import FormField from '@cloudscape-design/components/form-field';
-import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import useUniqueId from '../../../../hooks/useUniqueId';
-import getErrorText from '../../utils/getErrorText';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
-const DatePicker: FC<UseFieldApiConfig> = (props) => {
-    const {
-        label,
-        description,
-        helperText,
-        info,
-        i18nStrings,
-        stretch,
-        secondaryControl,
-
-        input,
-        isRequired,
-        isDisabled,
-        isReadOnly,
-
-        validateOnMount,
-        meta: { error, submitFailed },
-        showError,
-
-        ...rest
-    } = useFieldApi(props);
-    const controlId = useUniqueId(input.name);
-    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
+const DatePicker: FC<DataDrivenFormFieldProps> = (props) => {
+    const { input, onBlur, onFocus, ...rest } = props;
     return (
-        <FormField
-            controlId={controlId}
-            label={label}
-            description={description}
-            errorText={errorText}
-            constraintText={helperText}
-            info={info}
-            i18nStrings={i18nStrings}
-            stretch={stretch}
-            secondaryControl={secondaryControl}
-        >
-            <DatePickerComponent
-                openCalendarAriaLabel={(selectedDate: any) =>
-                    selectedDate ? `, selected date is ${selectedDate}` : 'Choose date'
-                }
-                nextMonthAriaLabel="Next month"
-                previousMonthAriaLabel="Previous month"
-                todayAriaLabel="Today"
-                {...rest}
-                {...input}
-                controlId={controlId}
-                disabled={isDisabled}
-                readOnly={isReadOnly}
-                ariaRequired={isRequired}
-                invalid={!!errorText}
-                onChange={({ detail }: any) => input.onChange(detail.value)}
-                onBlur={() => input.onBlur()}
-                onFocus={() => input.onFocus()}
-            />
-        </FormField>
+        <DatePickerComponent
+            openCalendarAriaLabel={(selectedDate: string | null) =>
+                selectedDate ? `, selected date is ${selectedDate}` : 'Choose date'
+            }
+            nextMonthAriaLabel="Next month"
+            previousMonthAriaLabel="Previous month"
+            todayAriaLabel="Today"
+            {...rest}
+            {...input}
+            onChange={({ detail }) => input.onChange(detail.value)}
+            onBlur={onBlur}
+            onFocus={onFocus}
+        />
     );
 };
 
-export default memo(DatePicker);
+export default memo(withDataDrivenFormField(DatePicker));

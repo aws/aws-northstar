@@ -90,11 +90,7 @@ const FormTemplate: FC<RenderProps> = ({ formFields, schema }) => {
             return false;
         }
 
-        if (componentType === componentTypes.EXPANDABLE_SECTION && formFields[0].props.variant === 'container') {
-            return false;
-        }
-
-        return true;
+        return !(componentType === componentTypes.EXPANDABLE_SECTION && formFields[0].props.variant === 'container');
     }, [variant, formFields]);
 
     return (

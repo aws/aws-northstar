@@ -15,10 +15,7 @@
  ******************************************************************************************************************** */
 import { FC, memo, useState, useMemo, useEffect, useCallback } from 'react';
 import CodeEditorComponent from '@cloudscape-design/components/code-editor';
-import FormField from '@cloudscape-design/components/form-field';
-import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import useUniqueId from '../../../../hooks/useUniqueId';
-import getErrorText from '../../utils/getErrorText';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 import 'ace-builds/css/ace.css';
 import 'ace-builds/css/theme/dawn.css';
@@ -44,35 +41,16 @@ const DEFAULT_RESOURCE_STRINGS = {
     preferencesModalDarkThemes: 'Dark themes',
 };
 
-const CodeEditor: FC<UseFieldApiConfig> = (props) => {
-    const {
-        label,
-        description,
-        helperText,
-        info,
-        i18nStrings,
-        stretch,
-        secondaryControl,
-
-        input,
-        language,
-        preferences: codeEditorPreferences,
-
-        validateOnMount,
-        meta: { error, submitFailed },
-        showError,
-
-        ...rest
-    } = useFieldApi(props);
-    const [preferences, setPreferences] = useState(codeEditorPreferences);
+const CodeEditor: FC<DataDrivenFormFieldProps> = (props) => {
+    const [preferences, setPreferences] = useState(props.preferences);
     const [loading, setLoading] = useState(true);
     const [ace, setAce] = useState<object>();
     const resourceStrings = useMemo(() => {
         return {
             ...DEFAULT_RESOURCE_STRINGS,
-            ...i18nStrings,
+            ...props.i18nStrings,
         };
-    }, [i18nStrings]);
+    }, [props.i18nStrings]);
 
     const loadAce = useCallback(() => {
         return import('ace-builds')
@@ -92,35 +70,20 @@ const CodeEditor: FC<UseFieldApiConfig> = (props) => {
         loadAce();
     }, [loadAce]);
 
-    const controlId = useUniqueId(input.name);
-    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     return (
-        <FormField
-            controlId={controlId}
-            label={label}
-            description={description}
-            errorText={errorText}
-            constraintText={helperText}
-            info={info}
-            i18nStrings={i18nStrings}
-            stretch={stretch}
-            secondaryControl={secondaryControl}
-        >
-            <CodeEditorComponent
-                {...rest}
-                {...input}
-                loading={loading}
-                ace={ace}
-                language={language}
-                i18nStrings={resourceStrings}
-                preferences={preferences}
-                onPreferencesChange={(e) => setPreferences(e.detail)}
-                controlId={controlId}
-                onChange={({ detail }) => input.onChange(detail.value)}
-                onRecoveryClick={loadAce}
-            />
-        </FormField>
+        <CodeEditorComponent
+            {...props}
+            {...props.input}
+            loading={loading}
+            ace={ace}
+            language={props.language}
+            i18nStrings={resourceStrings}
+            preferences={preferences}
+            onPreferencesChange={(e) => setPreferences(e.detail)}
+            onChange={({ detail }) => props.input.onChange(detail.value)}
+            onRecoveryClick={loadAce}
+        />
     );
 };
 
-export default memo(CodeEditor);
+export default memo(withDataDrivenFormField(CodeEditor));

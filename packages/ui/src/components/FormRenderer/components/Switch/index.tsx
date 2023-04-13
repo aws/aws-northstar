@@ -15,56 +15,24 @@
  ******************************************************************************************************************** */
 import { FC, memo } from 'react';
 import Toggle from '@cloudscape-design/components/toggle';
-import FormField from '@cloudscape-design/components/form-field';
-import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import useUniqueId from '../../../../hooks/useUniqueId';
-import getErrorText from '../../utils/getErrorText';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
-const Switch: FC<UseFieldApiConfig> = (props) => {
-    const {
-        label,
-        description,
-        helperText,
-        info,
-        i18nStrings,
-        stretch,
-        secondaryControl,
+const Switch: FC<DataDrivenFormFieldProps> = (props) => {
+    const { label, description, input, onBlur, onFocus, ...rest } = props;
 
-        input,
-        isDisabled,
-
-        validateOnMount,
-        meta: { error, submitFailed },
-        showError,
-
-        ...rest
-    } = useFieldApi(props);
-    const controlId = useUniqueId(input.name);
-    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     return (
-        <FormField
-            controlId={controlId}
-            errorText={errorText}
-            constraintText={helperText}
-            i18nStrings={i18nStrings}
-            stretch={stretch}
-            secondaryControl={secondaryControl}
+        <Toggle
+            {...rest}
+            {...input}
+            description={description}
+            checked={input.value || false}
+            onChange={({ detail }) => input.onChange(detail.checked)}
+            onBlur={onBlur}
+            onFocus={onFocus}
         >
-            <Toggle
-                {...rest}
-                {...input}
-                description={description}
-                checked={input.value || false}
-                controlId={controlId}
-                disabled={isDisabled}
-                onChange={({ detail }) => input.onChange(detail.checked)}
-                onBlur={() => input.onBlur()}
-                onFocus={() => input.onFocus()}
-            >
-                {label}
-            </Toggle>
-        </FormField>
+            {label}
+        </Toggle>
     );
 };
 
-export default memo(Switch);
+export default memo(withDataDrivenFormField(Switch, false, ['label', 'description', 'info']));

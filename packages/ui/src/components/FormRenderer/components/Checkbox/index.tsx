@@ -15,22 +15,18 @@
  ******************************************************************************************************************** */
 import { FC, memo } from 'react';
 import CheckboxComponent from '@cloudscape-design/components/checkbox';
-import FormField from '@cloudscape-design/components/form-field';
 import SpaceBetween from '@cloudscape-design/components/space-between';
-import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import { FieldInputProps } from 'react-final-form';
-import useUniqueId from '../../../../hooks/useUniqueId';
-import getErrorText from '../../utils/getErrorText';
+import { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
 import { Option } from '../../types';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
-interface CheckboxMappingProps {
-    input: FieldInputProps<any, HTMLInputElement>;
+interface CheckboxMappingProps extends DataDrivenFormFieldProps {
     option: Option;
     value?: Option['value'][];
     isDisabled?: boolean;
 }
 
-const CheckboxMapping: FC<CheckboxMappingProps> = ({ input, option, isDisabled, ...rest }) => {
+const CheckboxMapping: FC<CheckboxMappingProps> = ({ input, option, isDisabled, onBlur, onFocus, ...rest }) => {
     return (
         <CheckboxComponent
             disabled={isDisabled}
@@ -38,15 +34,13 @@ const CheckboxMapping: FC<CheckboxMappingProps> = ({ input, option, isDisabled, 
             {...option}
             checked={(input.value || []).includes(option.value)}
             controlId={`${input.name}-${option.value}`}
-            onBlur={() => input.onBlur()}
-            onFocus={() => input.onFocus()}
+            onBlur={onBlur}
+            onFocus={onFocus}
             onChange={({ detail }) => {
-                if (detail.checked) {
-                    input.onChange([...input.value, option.value]);
-                } else {
-                    const newValue = (input.value || []).filter((v: string) => v !== option.value);
-                    input.onChange(newValue);
-                }
+                const newValue = detail.checked
+                    ? [...input.value, option.value]
+                    : (input.value || []).filter((v: string) => v !== option.value);
+                input.onChange(newValue);
             }}
             data-testid={rest['data-testid'] ? `${rest['data-testid']}-${option.value}` : undefined}
         >
@@ -55,82 +49,40 @@ const CheckboxMapping: FC<CheckboxMappingProps> = ({ input, option, isDisabled, 
     );
 };
 
-const Checkbox: FC<UseFieldApiConfig> = ({ component, ...props }) => {
-    const {
-        label,
-        description,
-        helperText,
-        info,
-        i18nStrings,
-        stretch,
-        secondaryControl,
-
-        options,
-        input,
-        isRequired,
-        isDisabled,
-        isReadOnly,
-
-        validateOnMount,
-        meta: { error, submitFailed },
-        showError,
-
-        ...rest
-    } = useFieldApi(props);
-    const controlId = useUniqueId(input.name);
-    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
-    if (options?.length > 0) {
-        return (
-            <FormField
-                label={label}
-                description={description}
-                errorText={errorText}
-                constraintText={helperText}
-                info={info}
-                i18nStrings={i18nStrings}
-                stretch={stretch}
-                secondaryControl={secondaryControl}
-            >
-                <SpaceBetween direction="vertical" size="xs">
-                    {options.map((option: Option) => (
-                        <CheckboxMapping
-                            isDisabled={isDisabled}
-                            {...rest}
-                            input={input}
-                            option={option}
-                            key={option.value}
-                        />
-                    ))}
-                </SpaceBetween>
-            </FormField>
-        );
-    }
-
+const MultipleCheckbox: FC<DataDrivenFormFieldProps> = (props) => {
+    const { options, input, ...rest } = props;
     return (
-        <FormField
-            controlId={controlId}
-            errorText={errorText}
-            constraintText={helperText}
-            i18nStrings={i18nStrings}
-            stretch={stretch}
-            secondaryControl={secondaryControl}
-        >
-            <CheckboxComponent
-                {...rest}
-                {...input}
-                controlId={controlId}
-                name={input.name}
-                disabled={isDisabled}
-                checked={input.value || false}
-                description={description}
-                onBlur={() => input.onBlur()}
-                onFocus={() => input.onFocus()}
-                onChange={({ detail }) => input.onChange(detail.checked)}
-            >
-                {label}
-            </CheckboxComponent>
-        </FormField>
+        <SpaceBetween direction="vertical" size="xs">
+            {options.map((option: Option) => (
+                <CheckboxMapping {...rest} input={input} option={option} key={option.value} />
+            ))}
+        </SpaceBetween>
     );
+};
+
+const WrappedMultipleCheckbox = memo(withDataDrivenFormField(MultipleCheckbox));
+
+const SingleCheckbox: FC<DataDrivenFormFieldProps> = (props) => {
+    const { options, input, label, onBlur, onFocus, ...rest } = props;
+    return (
+        <CheckboxComponent
+            {...rest}
+            {...input}
+            name={input.name}
+            checked={input.value || false}
+            onBlur={onBlur}
+            onFocus={onFocus}
+            onChange={({ detail }) => input.onChange(detail.checked)}
+        >
+            {label}
+        </CheckboxComponent>
+    );
+};
+
+const WrappedSingleCheckbox = memo(withDataDrivenFormField(SingleCheckbox, true, ['label', 'description', 'info']));
+
+const Checkbox: FC<UseFieldApiConfig> = ({ component, ...props }) => {
+    return props.options?.length > 0 ? <WrappedMultipleCheckbox {...props} /> : <WrappedSingleCheckbox {...props} />;
 };
 
 export default memo(Checkbox);

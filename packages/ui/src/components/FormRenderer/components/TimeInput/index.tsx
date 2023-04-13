@@ -15,66 +15,25 @@
  ******************************************************************************************************************** */
 import { FC, memo } from 'react';
 import TimeInputComponent from '@cloudscape-design/components/time-input';
-import FormField from '@cloudscape-design/components/form-field';
-import useFieldApi, { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer/use-field-api';
-import useUniqueId from '../../../../hooks/useUniqueId';
-import getErrorText from '../../utils/getErrorText';
+import withDataDrivenFormField, { DataDrivenFormFieldProps } from '../../hoc/withDataDrivenFormField';
 
 const DEFAULT_FORMAT = 'hh:mm';
 const DEFAULT_PLACEHOLDER = 'hh:mm';
 
-const TimeInput: FC<UseFieldApiConfig> = (props) => {
-    const {
-        label,
-        description,
-        helperText,
-        info,
-        i18nStrings,
-        stretch,
-        secondaryControl,
+const TimeInput: FC<DataDrivenFormFieldProps> = (props) => {
+    const { input, onBlur, onFocus, ...rest } = props;
 
-        type,
-        input,
-        isRequired,
-        isDisabled,
-        isReadOnly,
-
-        validateOnMount,
-        meta: { error, submitFailed },
-        showError,
-
-        ...rest
-    } = useFieldApi(props);
-    const controlId = useUniqueId(input.name);
-    const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
     return (
-        <FormField
-            controlId={controlId}
-            label={label}
-            description={description}
-            errorText={errorText}
-            constraintText={helperText}
-            info={info}
-            i18nStrings={i18nStrings}
-            stretch={stretch}
-            secondaryControl={secondaryControl}
-        >
-            <TimeInputComponent
-                format={DEFAULT_FORMAT}
-                placeholder={DEFAULT_PLACEHOLDER}
-                {...rest}
-                {...input}
-                controlId={controlId}
-                disabled={isDisabled}
-                readOnly={isReadOnly}
-                ariaRequired={isRequired}
-                invalid={!!errorText}
-                onChange={({ detail }: any) => input.onChange(detail.value)}
-                onBlur={() => input.onBlur()}
-                onFocus={() => input.onFocus()}
-            />
-        </FormField>
+        <TimeInputComponent
+            format={DEFAULT_FORMAT}
+            placeholder={DEFAULT_PLACEHOLDER}
+            {...rest}
+            {...input}
+            onChange={({ detail }) => input.onChange(detail.value)}
+            onBlur={onBlur}
+            onFocus={onFocus}
+        />
     );
 };
 
-export default memo(TimeInput);
+export default memo(withDataDrivenFormField(TimeInput));
