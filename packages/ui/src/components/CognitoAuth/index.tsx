@@ -45,6 +45,14 @@ export interface CognitoAuthProps {
      */
     requiredSignUpAttributes?: string[];
     /**
+     * The header title.
+     */
+    header?: string;
+    /**
+     * A logo displayed next to the header title.
+     */
+    logo?: string | ReactNode;
+    /**
      * Main content show post authentication flow
      */
     children?: ReactNode | ((signOut: () => void, user: CognitoUser) => ReactNode);
@@ -78,6 +86,8 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
     clientId,
     allowSignup,
     requiredSignUpAttributes,
+    logo,
+    header,
 }) => {
     const [transition, setTransition] = useState<ReactNode>();
     const [, forceUpdate] = useReducer((x) => x + 1, 0);
@@ -194,7 +204,7 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
     }
 
     return (
-        <Container>
+        <Container header={header} logo={logo}>
             {transition ??
                 (allowSignup ? (
                     <Tabs

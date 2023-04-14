@@ -18,13 +18,13 @@ import { useCallback, FC, useState } from 'react';
 import SignUpView, { SignUpFormData } from '../SignUpView';
 import SignUpVerificationView, { SignUpVerificationViewFormData } from '../SignUpVerificationView';
 
-export interface SignInProps {
+export interface SignUpProps {
     userPool: CognitoUserPool;
     resetView: () => void;
     requiredAttributes?: string[];
 }
 
-const SignUp: FC<SignInProps> = ({ userPool, resetView, requiredAttributes }) => {
+const SignUp: FC<SignUpProps> = ({ userPool, resetView, requiredAttributes }) => {
     const [cognitoUser, setCognitoUser] = useState<CognitoUser>();
 
     const handleSignUp = useCallback(

@@ -13,41 +13,24 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, PropsWithChildren, ReactNode } from 'react';
-import ContainerComponent from '@cloudscape-design/components/container';
+import { FC, ReactNode } from 'react';
+import HeaderComponent from '@cloudscape-design/components/header';
 import SpaceBetween from '@cloudscape-design/components/space-between';
-import Header from '../Header';
 
-export interface ContainerProps {
+export interface HeaderProps {
     logo?: string | ReactNode;
-    header?: string;
+    children: string;
 }
 
-const Container: FC<PropsWithChildren<ContainerProps>> = ({ children, header, logo }) => {
+const Header: FC<HeaderProps> = ({ children, logo }) => {
     return (
-        <div
-            style={{
-                width: '100%',
-                height: '100vh',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}
-        >
-            <ContainerComponent>
-                <SpaceBetween direction="vertical" size="xxs">
-                    {(header || logo) && <Header logo={logo}>{header || ''}</Header>}
-                    <div
-                        style={{
-                            width: '480px',
-                        }}
-                    >
-                        {children}
-                    </div>
-                </SpaceBetween>
-            </ContainerComponent>
-        </div>
+        <HeaderComponent variant="h1">
+            <SpaceBetween direction="horizontal" size="s">
+                {typeof logo === 'string' ? <img src={logo} alt={children} width="100px" /> : logo}
+                {children}
+            </SpaceBetween>
+        </HeaderComponent>
     );
 };
 
-export default Container;
+export default Header;
