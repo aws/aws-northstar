@@ -47,7 +47,7 @@ const MFATotpView: FC<MFATotpViewProps> = ({ secretCode, onConfirm, onBackToSign
                     <SpaceBetween size={'xl'} direction={'horizontal'}>
                         <span>2.</span>
                         <QRCode size={75} value={`otpauth://totp/${window.location.origin}?secret=${secretCode}`} />
-                        <span style={{ display: 'block', width: '320px' }}>
+                        <span style={{ display: 'block', maxWidth: '320px' }}>
                             Scan this QR code with your authenticator app. Alternatively, you can copy the secret key
                             below and enter it in your authenticator app.
                         </span>
@@ -59,17 +59,7 @@ const MFATotpView: FC<MFATotpViewProps> = ({ secretCode, onConfirm, onBackToSign
                                 triggerType="custom"
                                 content={<StatusIndicator type="success">Secret key copied</StatusIndicator>}
                             >
-                                <Button
-                                    iconName="copy"
-                                    onClick={() => {
-                                        void (
-                                            navigator &&
-                                            navigator.clipboard &&
-                                            navigator.clipboard.writeText &&
-                                            navigator.clipboard.writeText(secretCode)
-                                        );
-                                    }}
-                                >
+                                <Button iconName="copy" onClick={() => navigator?.clipboard?.writeText?.(secretCode)}>
                                     Copy secret key
                                 </Button>
                             </Popover>

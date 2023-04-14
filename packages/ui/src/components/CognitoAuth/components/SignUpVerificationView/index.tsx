@@ -69,12 +69,14 @@ const SignUpVerificationView: FC<SignUpVerificationViewProps> = ({ onConfirm, on
                     gridDefinition: [
                         {
                             colspan: {
-                                default: 9,
+                                default: 12,
+                                xxs: 9,
                             },
                         },
                         {
                             colspan: {
-                                default: 3,
+                                default: 12,
+                                xxs: 3,
                             },
                         },
                     ],

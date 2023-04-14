@@ -54,6 +54,11 @@ const MFASetupView: FC<MFASetupViewProps> = ({ challengeName, challengeParams, o
             submitLabel: 'Continue',
             fields: [
                 {
+                    component: componentTypes.PLAIN_TEXT,
+                    label: 'You must configure MFA before you can sign in. Choose how you want to authenticate.',
+                    name: 'description',
+                },
+                {
                     component: componentTypes.RADIO,
                     label: 'MFA Methods',
                     name: 'mfaMethod',

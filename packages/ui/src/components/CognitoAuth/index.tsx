@@ -90,6 +90,7 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
     header,
 }) => {
     const [transition, setTransition] = useState<ReactNode>();
+    const [activeTab, setActiveTab] = useState('signIn');
     const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
     const userPool = useMemo(() => {
@@ -109,6 +110,7 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
     }, [userPoolId, clientId]);
 
     const resetView = useCallback(() => {
+        setActiveTab('signIn');
         setTransition(undefined);
         forceUpdate();
     }, [forceUpdate]);
@@ -208,6 +210,8 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
             {transition ??
                 (allowSignup ? (
                     <Tabs
+                        activeTabId={activeTab}
+                        onChange={({ detail }) => setActiveTab(detail.activeTabId)}
                         tabs={[
                             {
                                 label: 'Sign In',

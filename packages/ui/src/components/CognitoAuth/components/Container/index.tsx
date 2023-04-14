@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, PropsWithChildren, ReactNode } from 'react';
+import { FC, PropsWithChildren, ReactNode, useState, useEffect } from 'react';
 import ContainerComponent from '@cloudscape-design/components/container';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Header from '../Header';
@@ -23,27 +23,42 @@ export interface ContainerProps {
     header?: string;
 }
 
+const mediaMatch = window.matchMedia('(max-width: 600px)');
+
+const styles = {
+    container: (isMobileView: boolean) =>
+        isMobileView
+            ? {}
+            : {
+                  width: '100%',
+                  height: '100vh',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+              },
+    content: (isMobileView: boolean) =>
+        isMobileView
+            ? {}
+            : {
+                  width: '480px',
+              },
+};
+
 const Container: FC<PropsWithChildren<ContainerProps>> = ({ children, header, logo }) => {
+    const [matches, setMatches] = useState(mediaMatch.matches);
+
+    useEffect(() => {
+        const handler = (e: { matches: boolean }) => setMatches(e.matches);
+        mediaMatch.addEventListener('change', handler);
+        return () => mediaMatch.removeEventListener('change', handler);
+    });
+
     return (
-        <div
-            style={{
-                width: '100%',
-                height: '100vh',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}
-        >
+        <div style={styles.container(matches)}>
             <ContainerComponent>
                 <SpaceBetween direction="vertical" size="xxs">
                     {(header || logo) && <Header logo={logo}>{header || ''}</Header>}
-                    <div
-                        style={{
-                            width: '480px',
-                        }}
-                    >
-                        {children}
-                    </div>
+                    <div style={styles.content(matches)}>{children}</div>
                 </SpaceBetween>
             </ContainerComponent>
         </div>
