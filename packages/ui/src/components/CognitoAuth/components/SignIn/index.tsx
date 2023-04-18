@@ -22,13 +22,13 @@ import {
 } from 'amazon-cognito-identity-js';
 import SignInView from '../SignInView';
 import { useCallback, FC } from 'react';
-import { MFAEventHandler } from '../../types';
+import { MFAEventHandler, MFASetupEventHandler } from '../../types';
 
 export interface SignInProps {
     userPool: CognitoUserPool;
     onMFARequired: MFAEventHandler;
     onNewPasswordRequired: (cognitoUser: CognitoUser, userAttributes: any, requiredAttributes: any) => void;
-    onMFASetup: MFAEventHandler;
+    onMFASetup: MFASetupEventHandler;
     onForgotPassword: () => void;
     resetView: () => void;
 }
@@ -60,20 +60,20 @@ const SignIn: FC<SignInProps> = ({
                             console.error('Congnito Auth Failure', err);
                             reject(err);
                         },
+                        newPasswordRequired(userAttributes, requiredAttributes) {
+                            onNewPasswordRequired(cognitoUser, userAttributes, requiredAttributes);
+                            resolve({});
+                        },
                         selectMFAType(challengeName, challengeParams) {
-                            onMFASetup(cognitoUser, challengeName, challengeParams);
+                            onMFASetup(cognitoUser, false, challengeName, challengeParams);
                             resolve({});
                         },
                         mfaSetup(challengeName, challengeParams) {
-                            onMFASetup(cognitoUser, challengeName, challengeParams);
+                            onMFASetup(cognitoUser, true, challengeName, challengeParams);
                             resolve({});
                         },
                         totpRequired(challengeName, challengeParams) {
                             onMFARequired(cognitoUser, challengeName, challengeParams);
-                            resolve({});
-                        },
-                        newPasswordRequired(userAttributes, requiredAttributes) {
-                            onNewPasswordRequired(cognitoUser, userAttributes, requiredAttributes);
                             resolve({});
                         },
                         mfaRequired(challengeName, challengeParams) {

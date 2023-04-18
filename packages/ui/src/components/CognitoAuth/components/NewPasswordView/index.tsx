@@ -35,6 +35,7 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChang
     const schema = useMemo(() => {
         const formSchema: Schema = {
             header: 'Change Password',
+            headerVariant: 'h2',
             variant: 'embedded',
             canCancel: false,
             submitLabel: 'Confirm',

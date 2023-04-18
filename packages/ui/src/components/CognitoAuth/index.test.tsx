@@ -175,7 +175,7 @@ describe('CognitoAuth', () => {
 
     it('should handle MFASetup flow', async () => {
         mockAuthenticateUser.mockImplementation((_authDetail, callback) => {
-            callback.mfaSetup('SMS_MFA', MFA_SETUP_CHALLENGE_PARAM);
+            callback.mfaSetup('MFA_SETUP', MFA_SETUP_CHALLENGE_PARAM);
         });
 
         mockAssociateSoftwareToken.mockImplementation((callback) => {

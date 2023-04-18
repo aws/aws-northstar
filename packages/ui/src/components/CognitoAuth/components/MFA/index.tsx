@@ -28,19 +28,23 @@ const MFA: FC<MFAProps> = ({ cognitoUser, resetView, challengeName, challengePar
     const handleMFA = useCallback(
         async (data: MFAViewFormData) => {
             return new Promise((resolve, reject) => {
-                cognitoUser.sendMFACode(data.confirmationCode, {
-                    onSuccess(result: CognitoUserSession) {
-                        resolve(result);
-                        resetView();
+                cognitoUser.sendMFACode(
+                    data.confirmationCode,
+                    {
+                        onSuccess(result: CognitoUserSession) {
+                            resolve(result);
+                            resetView();
+                        },
+                        onFailure(err: any) {
+                            console.error('Cognito sendMFACode Failure', err);
+                            reject(err);
+                        },
                     },
-                    onFailure(err: any) {
-                        console.error('Cognito sendMFACode Failure', err);
-                        reject(err);
-                    },
-                });
+                    challengeName
+                );
             });
         },
-        [resetView, cognitoUser]
+        [resetView, cognitoUser, challengeName]
     );
 
     return (

@@ -73,6 +73,7 @@ const MFATotpView: FC<MFATotpViewProps> = ({ secretCode, onConfirm, onBackToSign
     const schema: Schema = useMemo(() => {
         return {
             header: 'Set Up Authenticator',
+            headerVariant: 'h2',
             variant: 'embedded',
             canCancel: false,
             submitLabel: 'Continue',

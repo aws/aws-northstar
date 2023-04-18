@@ -21,3 +21,9 @@ export const MFA_METHODS = {
 };
 
 export type MFAEventHandler = (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
+export type MFASetupEventHandler = (
+    cognitoUser: CognitoUser,
+    setupMode: boolean,
+    challengeName: ChallengeName,
+    challengeParams: any
+) => void;

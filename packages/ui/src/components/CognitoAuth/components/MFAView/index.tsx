@@ -33,9 +33,10 @@ export interface MFAViewProps {
 const MFAView: FC<MFAViewProps> = ({ challengeName, challengeParams, onConfirm, onBackToSignIn }) => {
     const schema: Schema = useMemo(() => {
         return {
-            header: `Confirm ${challengeParams?.CODE_DELIVERY_MEDIUM || ''} Code`,
+            header: `Confirm ${challengeParams?.CODE_DELIVERY_DELIVERY_MEDIUM || ''} Code`,
             variant: 'embedded',
             canCancel: false,
+            headerVariant: 'h2',
             submitLabel: 'Confirm',
             fields: [
                 {

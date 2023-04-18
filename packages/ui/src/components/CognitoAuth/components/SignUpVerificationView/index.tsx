@@ -59,6 +59,7 @@ const SignUpVerificationView: FC<SignUpVerificationViewProps> = ({ onConfirm, on
     const schema: Schema = useMemo(() => {
         return {
             header: 'Confirm Registration',
+            headerVariant: 'h2',
             variant: 'embedded',
             canCancel: false,
             submitLabel: 'Confirm',

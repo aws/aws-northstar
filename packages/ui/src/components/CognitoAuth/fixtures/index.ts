@@ -27,7 +27,7 @@ export const REQUIRED_ATTRIBUTES = ['family_name', 'given_name'];
 export const REQUIRED_SIGNUP_ATTRIBUTES = ['family_name', 'given_name', 'email', 'phone_number'];
 
 export const MFA_CHALLENGE_PARAMS = {
-    CODE_DELIVERY_MEDIUM: 'SMS',
+    CODE_DELIVERY_DELIVERY_MEDIUM: 'SMS',
     CODE_DELIVERY_DESTINATION: '+0123456789',
 };
 

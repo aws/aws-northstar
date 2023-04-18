@@ -16,27 +16,17 @@
 import { render, act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MFASetup from '.';
-import { MFA_SETUP_CHALLENGE_PARAM } from '../../fixtures';
+import { MFA_CHALLENGE_PARAMS, MFA_SETUP_CHALLENGE_PARAM } from '../../fixtures';
 
 const challengeName = 'SMS_MFA';
 const secretCode = '12345678';
 
 describe('MFASetup', () => {
     it('should handle SMS_MFA flow', async () => {
-        const mockCognitoUser: any = {};
-
-        const handleResetView = jest.fn();
-        const handleAssociateSecretCode = jest.fn();
-        const handleMFARequired = jest.fn();
-
-        await testMFASetup(handleAssociateSecretCode, handleMFARequired, handleResetView, mockCognitoUser, 'SMS');
-        expect(handleMFARequired).toHaveBeenCalledWith(mockCognitoUser, challengeName, MFA_SETUP_CHALLENGE_PARAM);
-    });
-
-    it('should handle SOFTWARE_TOKEN_MFA associateSecretCode flow', async () => {
         const mockCognitoUser: any = {
-            associateSoftwareToken: jest.fn().mockImplementation((callback) => {
-                callback.associateSecretCode(secretCode);
+            sendMFASelectionAnswer: jest.fn().mockImplementation((mfaMethod, callback) => {
+                expect(mfaMethod).toBe('SMS_MFA');
+                callback.mfaRequired(challengeName, MFA_CHALLENGE_PARAMS);
             }),
         };
 
@@ -49,17 +39,66 @@ describe('MFASetup', () => {
             handleMFARequired,
             handleResetView,
             mockCognitoUser,
-            'Authenticator app'
+            'SMS',
+            false
         );
-
-        expect(handleAssociateSecretCode).toHaveBeenCalled();
+        expect(handleMFARequired).toHaveBeenCalledWith(mockCognitoUser, challengeName, MFA_CHALLENGE_PARAMS);
     });
 
-    it('should handle SOFTWARE_TOKEN_MFA onFailure flow', async () => {
+    it('should handle SOFTWARE_TOKEN_MFA flow', async () => {
+        const mockCognitoUser: any = {
+            sendMFASelectionAnswer: jest.fn().mockImplementation((mfaMethod, callback) => {
+                expect(mfaMethod).toBe('SOFTWARE_TOKEN_MFA');
+                callback.totpRequired(challengeName, MFA_CHALLENGE_PARAMS);
+            }),
+        };
+
+        const handleResetView = jest.fn();
+        const handleAssociateSecretCode = jest.fn();
+        const handleMFARequired = jest.fn();
+
+        await testMFASetup(
+            handleAssociateSecretCode,
+            handleMFARequired,
+            handleResetView,
+            mockCognitoUser,
+            'Authenticator app',
+            false
+        );
+
+        expect(handleMFARequired).toHaveBeenCalled();
+    });
+
+    it('should handle sendMFASelectionAnswer onSuccess flow', async () => {
+        const mockCognitoUser: any = {
+            sendMFASelectionAnswer: jest.fn().mockImplementation((mfaMethod, callback) => {
+                expect(mfaMethod).toBe('SOFTWARE_TOKEN_MFA');
+                callback.onSuccess();
+            }),
+        };
+
+        const handleResetView = jest.fn();
+        const handleAssociateSecretCode = jest.fn();
+        const handleMFARequired = jest.fn();
+
+        await testMFASetup(
+            handleAssociateSecretCode,
+            handleMFARequired,
+            handleResetView,
+            mockCognitoUser,
+            'Authenticator app',
+            false
+        );
+
+        expect(handleResetView).toHaveBeenCalled();
+    });
+
+    it('should handle sendMFASelectionAnswer onFailure flow', async () => {
         const errMsg = 'Error Message';
 
         const mockCognitoUser: any = {
-            associateSoftwareToken: jest.fn().mockImplementation((callback) => {
+            sendMFASelectionAnswer: jest.fn().mockImplementation((mfaMethod, callback) => {
+                expect(mfaMethod).toBe('SOFTWARE_TOKEN_MFA');
                 callback.onFailure({
                     message: errMsg,
                 });
@@ -75,10 +114,34 @@ describe('MFASetup', () => {
             handleMFARequired,
             handleResetView,
             mockCognitoUser,
-            'Authenticator app'
+            'Authenticator app',
+            false
         );
 
         expect(await screen.findByText(errMsg)).toBeVisible();
+    });
+
+    it('should handle SOFTWARE_TOKEN_MFA setup flow', async () => {
+        const mockCognitoUser: any = {
+            associateSoftwareToken: jest.fn().mockImplementation((callback) => {
+                callback.associateSecretCode(secretCode);
+            }),
+        };
+
+        const handleResetView = jest.fn();
+        const handleAssociateSecretCode = jest.fn();
+        const handleMFARequired = jest.fn();
+
+        await testMFASetup(
+            handleAssociateSecretCode,
+            handleMFARequired,
+            handleResetView,
+            mockCognitoUser,
+            'Authenticator app',
+            true
+        );
+
+        expect(handleAssociateSecretCode).toHaveBeenCalledWith(mockCognitoUser, secretCode);
     });
 });
 
@@ -87,16 +150,18 @@ const testMFASetup = async (
     handleMFARequired: jest.Mock<any, any>,
     handleResetView: jest.Mock<any, any>,
     mockCognitoUser: any,
-    mfaMethod: string
+    mfaMethod: string,
+    setupMode: boolean
 ) => {
     render(
         <MFASetup
             cognitoUser={mockCognitoUser}
             resetView={handleResetView}
-            challengeName={challengeName}
+            challengeName={setupMode ? 'MFA_SETUP' : 'SELECT_MFA_TYPE'}
             challengeParams={MFA_SETUP_CHALLENGE_PARAM}
             onAssociateSecretCode={handleAssociateSecretCode}
             onMFARequired={handleMFARequired}
+            setupMode={setupMode}
         />
     );
 

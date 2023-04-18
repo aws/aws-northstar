@@ -34,6 +34,7 @@ const ForgotPasswordView: FC<ForgotPasswordViewProps> = ({ onResetPassword, onBa
 
         const formSchema: Schema = {
             header: 'Reset Password',
+            headerVariant: 'h2',
             variant: 'embedded',
             canCancel: false,
             submitLabel: 'Confirm',

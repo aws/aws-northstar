@@ -83,7 +83,25 @@ describe('NewPassword', () => {
 
         await testNewPasswordChallenge(handleMFARequired, handleMFASetup, handleResetView, mockCognitoUser);
 
-        expect(handleMFASetup).toHaveBeenCalledWith(mockCognitoUser, challengeName, MFA_CHALLENGE_PARAMS);
+        expect(handleMFASetup).toHaveBeenCalledWith(mockCognitoUser, true, challengeName, MFA_CHALLENGE_PARAMS);
+    });
+
+    it('should handle selectMFAType flow', async () => {
+        const mockCognitoUser: any = {
+            completeNewPasswordChallenge: jest.fn().mockImplementation((newPassword, attributes, callback) => {
+                expect(newPassword).toBe(password);
+                expect(attributes).toEqual(attrValues);
+                callback.selectMFAType(challengeName, MFA_CHALLENGE_PARAMS);
+            }),
+        };
+
+        const handleResetView = jest.fn();
+        const handleMFARequired = jest.fn();
+        const handleMFASetup = jest.fn();
+
+        await testNewPasswordChallenge(handleMFARequired, handleMFASetup, handleResetView, mockCognitoUser);
+
+        expect(handleMFASetup).toHaveBeenCalledWith(mockCognitoUser, false, challengeName, MFA_CHALLENGE_PARAMS);
     });
 
     it('should handle mfaRequired flow', async () => {

@@ -71,5 +71,5 @@ const testSendMFACode = async (handleResetView: jest.Mock<any, any>, mockCognito
         userEvent.click(screen.getByText('Confirm'));
     });
 
-    expect(mockCognitoUser.sendMFACode).toHaveBeenCalledWith(mfaCode, expect.any(Object));
+    expect(mockCognitoUser.sendMFACode).toHaveBeenCalledWith(mfaCode, expect.any(Object), 'SMS_MFA');
 };

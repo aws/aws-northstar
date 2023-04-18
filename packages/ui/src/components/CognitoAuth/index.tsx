@@ -25,7 +25,7 @@ import NewPassword from './components/NewPassword';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import ForgotPassword from './components/ForgotPassword';
-import { MFAEventHandler } from './types';
+import { MFAEventHandler, MFASetupEventHandler } from './types';
 
 export interface CognitoAuthProps {
     /**
@@ -53,6 +53,10 @@ export interface CognitoAuthProps {
      */
     logo?: string | ReactNode;
     /**
+     * Url for Terms and Conditions to display at the bottom of SignUp component.
+     */
+    hrefTermsAndConditions?: string;
+    /**
      * Main content show post authentication flow
      */
     children?: ReactNode | ((signOut: () => void, user: CognitoUser) => ReactNode);
@@ -78,6 +82,7 @@ export const CognitoAuthContext = createContext<CognitoAuthContextAPI>(initialSt
  * **Limitations:**
  * The following authentication flows are not supported in the current version of CognitoAuth component:
  * * Cognito Federated SignIn
+ * * App Client with Client Secret
  * * [Cognito hosted UI](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-app-integration.html)
  */
 const CognitoAuth: FC<CognitoAuthProps> = ({
@@ -88,6 +93,7 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
     requiredSignUpAttributes,
     logo,
     header,
+    hrefTermsAndConditions,
 }) => {
     const [transition, setTransition] = useState<ReactNode>();
     const [activeTab, setActiveTab] = useState('signIn');
@@ -146,8 +152,8 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
         [resetView]
     );
 
-    const handleMFASetup: MFAEventHandler = useCallback(
-        (cognitoUser, challengeName, challengeParams) => {
+    const handleMFASetup: MFASetupEventHandler = useCallback(
+        (cognitoUser, setupMode, challengeName, challengeParams) => {
             setTransition(
                 <MFASetup
                     cognitoUser={cognitoUser}
@@ -156,6 +162,7 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
                     resetView={resetView}
                     onAssociateSecretCode={handleAssociateSecretCode}
                     onMFARequired={handleMFARequired}
+                    setupMode={setupMode}
                 />
             );
         },
@@ -235,6 +242,7 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
                                         userPool={userPool}
                                         resetView={resetView}
                                         requiredAttributes={requiredSignUpAttributes}
+                                        hrefTermsAndConditions={hrefTermsAndConditions}
                                     />
                                 ),
                             },

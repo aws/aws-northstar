@@ -45,10 +45,11 @@ const MFA_LITERALS: Record<string, { key: string; value: string; img: string }> 
     },
 };
 
-const MFASetupView: FC<MFASetupViewProps> = ({ challengeName, challengeParams, onConfirm, onBackToSignIn }) => {
+const MFASetupView: FC<MFASetupViewProps> = ({ challengeParams, onConfirm, onBackToSignIn }) => {
     const schema: Schema = useMemo(() => {
         return {
             header: 'Choose a MFA method',
+            headerVariant: 'h2',
             variant: 'embedded',
             canCancel: false,
             submitLabel: 'Continue',

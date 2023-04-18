@@ -15,6 +15,7 @@
  ******************************************************************************************************************** */
 import { FC, useMemo } from 'react';
 import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
+import Link from '@cloudscape-design/components/link';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import useSubmitCallback from '../../hooks/useSubmitCallback';
 import AttributeMapping from '../../attributeMapping';
@@ -29,14 +30,15 @@ export interface SignUpFormData {
 export interface SignUpViewProps {
     requiredAttributes?: string[];
     onSignUp: (data: SignUpFormData) => Promise<unknown>;
+    hrefTermsAndConditions?: string;
 }
 
-const SignUpView: FC<SignUpViewProps> = ({ requiredAttributes, onSignUp }) => {
+const SignUpView: FC<SignUpViewProps> = ({ requiredAttributes, onSignUp, hrefTermsAndConditions }) => {
     const schema = useMemo(() => {
         const formSchema: Schema = {
-            header: 'Sign Up',
             variant: 'embedded',
             canCancel: false,
+            headerVariant: 'h2',
             submitLabel: 'Sign up',
             fields: [
                 {
@@ -110,6 +112,18 @@ const SignUpView: FC<SignUpViewProps> = ({ requiredAttributes, onSignUp }) => {
                 isSubmitting={isSubmitting}
                 validate={validatePasswords}
             />
+            {hrefTermsAndConditions && (
+                <div
+                    style={{
+                        width: '100%',
+                        textAlign: 'center',
+                    }}
+                >
+                    <Link href={hrefTermsAndConditions} external>
+                        Terms and Conditions
+                    </Link>
+                </div>
+            )}
         </SpaceBetween>
     );
 };

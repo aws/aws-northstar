@@ -56,7 +56,7 @@ const Container: FC<PropsWithChildren<ContainerProps>> = ({ children, header, lo
     return (
         <div style={styles.container(matches)}>
             <ContainerComponent>
-                <SpaceBetween direction="vertical" size="xxs">
+                <SpaceBetween direction="vertical" size="m">
                     {(header || logo) && <Header logo={logo}>{header || ''}</Header>}
                     <div style={styles.content(matches)}>{children}</div>
                 </SpaceBetween>

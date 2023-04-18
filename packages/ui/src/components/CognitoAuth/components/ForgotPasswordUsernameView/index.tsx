@@ -28,6 +28,7 @@ export interface ForgotPasswordUsernameViewProps {
 
 const schema: Schema = {
     header: 'Reset Password',
+    headerVariant: 'h2',
     variant: 'embedded',
     canCancel: false,
     submitLabel: 'Send code',

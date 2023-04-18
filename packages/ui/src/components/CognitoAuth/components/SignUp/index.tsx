@@ -22,9 +22,10 @@ export interface SignUpProps {
     userPool: CognitoUserPool;
     resetView: () => void;
     requiredAttributes?: string[];
+    hrefTermsAndConditions?: string;
 }
 
-const SignUp: FC<SignUpProps> = ({ userPool, resetView, requiredAttributes }) => {
+const SignUp: FC<SignUpProps> = ({ userPool, resetView, requiredAttributes, hrefTermsAndConditions }) => {
     const [cognitoUser, setCognitoUser] = useState<CognitoUser>();
 
     const handleSignUp = useCallback(
@@ -96,7 +97,11 @@ const SignUp: FC<SignUpProps> = ({ userPool, resetView, requiredAttributes }) =>
     return cognitoUser ? (
         <SignUpVerificationView onConfirm={handleConfirmRegistration} onResendCode={handleResendCode} />
     ) : (
-        <SignUpView onSignUp={handleSignUp} requiredAttributes={requiredAttributes} />
+        <SignUpView
+            onSignUp={handleSignUp}
+            requiredAttributes={requiredAttributes}
+            hrefTermsAndConditions={hrefTermsAndConditions}
+        />
     );
 };
 

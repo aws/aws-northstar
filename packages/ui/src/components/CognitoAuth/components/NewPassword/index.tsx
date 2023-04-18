@@ -16,12 +16,12 @@
 import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
 import { useCallback, FC } from 'react';
 import NewPasswordView, { NewPasswordViewFormData } from '../NewPasswordView';
-import { MFAEventHandler } from '../../types';
+import { MFAEventHandler, MFASetupEventHandler } from '../../types';
 
 export interface NewPasswordProps {
     cognitoUser: CognitoUser;
     onMFARequired: MFAEventHandler;
-    onMFASetup: MFAEventHandler;
+    onMFASetup: MFASetupEventHandler;
     resetView: () => void;
     userAttributes: any;
     requiredAttributes: any;
@@ -47,10 +47,18 @@ const NewPassword: FC<NewPasswordProps> = ({
                         reject(err);
                     },
                     mfaSetup(challengeName, challengeParams) {
-                        onMFASetup(cognitoUser, challengeName, challengeParams);
+                        onMFASetup(cognitoUser, true, challengeName, challengeParams);
+                        resolve({});
+                    },
+                    selectMFAType(challengeName, challengeParams) {
+                        onMFASetup(cognitoUser, false, challengeName, challengeParams);
                         resolve({});
                     },
                     mfaRequired(challengeName, challengeParams) {
+                        onMFARequired(cognitoUser, challengeName, challengeParams);
+                        resolve({});
+                    },
+                    totpRequired(challengeName, challengeParams) {
                         onMFARequired(cognitoUser, challengeName, challengeParams);
                         resolve({});
                     },

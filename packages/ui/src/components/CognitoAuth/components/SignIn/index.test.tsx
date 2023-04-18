@@ -178,10 +178,10 @@ describe('SignIn', () => {
             handleForgotPassword,
             handleNewPasswordRequired
         );
-        expect(handleMFASetup).toHaveBeenCalledWith(expect.any(Object), challengeName, MFA_CHALLENGE_PARAMS);
+        expect(handleMFASetup).toHaveBeenCalledWith(expect.any(Object), true, challengeName, MFA_CHALLENGE_PARAMS);
     });
 
-    it('should handle mfaSetup flow', async () => {
+    it('should handle selectMFAType flow', async () => {
         mockAuthenticateUser.mockImplementation((authDetails, callback) => {
             expect(authDetails).toEqual({
                 Username: username,
@@ -203,7 +203,7 @@ describe('SignIn', () => {
             handleForgotPassword,
             handleNewPasswordRequired
         );
-        expect(handleMFASetup).toHaveBeenCalledWith(expect.any(Object), challengeName, MFA_CHALLENGE_PARAMS);
+        expect(handleMFASetup).toHaveBeenCalledWith(expect.any(Object), false, challengeName, MFA_CHALLENGE_PARAMS);
     });
 
     it('should handle newPasswordRequired flow', async () => {

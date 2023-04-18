@@ -25,6 +25,7 @@ export interface MFASetupProps {
     challengeParams: any;
     onAssociateSecretCode: (cognitoUser: CognitoUser, secretCode: string) => void;
     onMFARequired: MFAEventHandler;
+    setupMode?: boolean;
 }
 
 const MFASetup: FC<MFASetupProps> = ({
@@ -32,13 +33,14 @@ const MFASetup: FC<MFASetupProps> = ({
     resetView,
     challengeName,
     challengeParams,
-    onAssociateSecretCode,
     onMFARequired,
+    onAssociateSecretCode,
+    setupMode,
 }) => {
     const handleMFASetup = useCallback(
         async (data: MFASetupViewFormData) => {
             return new Promise((resolve, reject) => {
-                if (data.mfaMethod === MFA_METHODS.SOFTWARE_TOKEN_MFA) {
+                if (setupMode && data.mfaMethod === MFA_METHODS.SOFTWARE_TOKEN_MFA) {
                     cognitoUser.associateSoftwareToken({
                         associateSecretCode(secretCode: string): void {
                             onAssociateSecretCode(cognitoUser, secretCode);
@@ -49,18 +51,31 @@ const MFASetup: FC<MFASetupProps> = ({
                             reject(err);
                         },
                     });
-                } else if (data.mfaMethod === MFA_METHODS.SMS_MFA) {
-                    onMFARequired(cognitoUser, challengeName, challengeParams);
-                    resolve({});
-                } else {
-                    console.error('Unhandled mfaMethod', data.mfaMethod);
-                    reject({
-                        message: `Unhandled mfaMethod ${data.mfaMethod}`,
+                } else if (!setupMode) {
+                    cognitoUser.sendMFASelectionAnswer(data.mfaMethod, {
+                        onSuccess() {
+                            resolve({});
+                            resetView();
+                        },
+                        onFailure(err: any) {
+                            console.error('Cognito sendMFASelectionAnswer Failure', err);
+                            reject(err);
+                        },
+                        mfaRequired(challengeName, challengeParams) {
+                            onMFARequired(cognitoUser, challengeName, challengeParams);
+                            resolve({});
+                        },
+                        totpRequired(challengeName, challengeParams) {
+                            onMFARequired(cognitoUser, challengeName, challengeParams);
+                            resolve({});
+                        },
                     });
+                } else {
+                    resolve({});
                 }
             });
         },
-        [cognitoUser, challengeName, challengeParams, onAssociateSecretCode, onMFARequired]
+        [cognitoUser, onMFARequired, onAssociateSecretCode, resetView, setupMode]
     );
 
     return (
