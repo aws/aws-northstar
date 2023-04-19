@@ -21,9 +21,19 @@ export const MFA_METHODS = {
 };
 
 export type MFAEventHandler = (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
-export type MFASetupEventHandler = (
-    cognitoUser: CognitoUser,
-    setupMode: boolean,
-    challengeName: ChallengeName,
-    challengeParams: any
-) => void;
+export type NewPasswordEventHandler = (cognitoUser: CognitoUser, userAttributes: any, requiredAttributes: any) => void;
+
+export interface SignUpAttribute {
+    /**
+     * The name of the attribute. If it is a custom attribute, include custom: as prefix in the name
+     */
+    name: string;
+    /**
+     * The display name of the attribute.
+     */
+    displayName?: string;
+    /**
+     * Whether the attribute is required.
+     */
+    required?: boolean;
+}

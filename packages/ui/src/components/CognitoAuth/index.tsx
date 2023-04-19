@@ -19,13 +19,14 @@ import Tabs from '@cloudscape-design/components/tabs';
 import Container from './components/Container';
 import ConfigError from './components/ConfigError';
 import MFA from './components/MFA';
-import MFASetup from './components/MFASetup';
-import MFATotp from './components/MFATotp';
+import MFASelection from './components/MFASelection';
+import MFATotpSetup from './components/MFATotpSetup';
 import NewPassword from './components/NewPassword';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import ForgotPassword from './components/ForgotPassword';
-import { MFAEventHandler, MFASetupEventHandler } from './types';
+import { MFAEventHandler, SignUpAttribute } from './types';
+import ErrorMessage from './components/ErrorMessage';
 
 export interface CognitoAuthProps {
     /**
@@ -41,9 +42,9 @@ export interface CognitoAuthProps {
      */
     allowSignup?: boolean;
     /**
-     * Specifies the required attributes for sign up flow if allowSignup is true
+     * Specifies the user attributes for sign up flow if allowSignup is true
      */
-    requiredSignUpAttributes?: string[];
+    signUpAttributes?: SignUpAttribute[];
     /**
      * The header title.
      */
@@ -90,7 +91,7 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
     userPoolId,
     clientId,
     allowSignup,
-    requiredSignUpAttributes,
+    signUpAttributes,
     logo,
     header,
     hrefTermsAndConditions,
@@ -145,28 +146,35 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
         [resetView]
     );
 
-    const handleAssociateSecretCode = useCallback(
-        (cognitoUser: CognitoUser, secretCode: string) => {
-            setTransition(<MFATotp cognitoUser={cognitoUser} secretCode={secretCode} resetView={resetView} />);
+    const handleMFATotpSetup = useCallback(
+        (cognitoUser: CognitoUser) => {
+            cognitoUser.associateSoftwareToken({
+                associateSecretCode(secretCode) {
+                    setTransition(
+                        <MFATotpSetup secretCode={secretCode} cognitoUser={cognitoUser} resetView={resetView} />
+                    );
+                },
+                onFailure(err) {
+                    setTransition(<ErrorMessage onBackToSignIn={resetView}>{err.message}</ErrorMessage>);
+                },
+            });
         },
         [resetView]
     );
 
-    const handleMFASetup: MFASetupEventHandler = useCallback(
-        (cognitoUser, setupMode, challengeName, challengeParams) => {
+    const handleMFASelection: MFAEventHandler = useCallback(
+        (cognitoUser, challengeName, challengeParams) => {
             setTransition(
-                <MFASetup
-                    cognitoUser={cognitoUser}
+                <MFASelection
                     challengeName={challengeName}
                     challengeParams={challengeParams}
-                    resetView={resetView}
-                    onAssociateSecretCode={handleAssociateSecretCode}
                     onMFARequired={handleMFARequired}
-                    setupMode={setupMode}
+                    cognitoUser={cognitoUser}
+                    resetView={resetView}
                 />
             );
         },
-        [resetView, handleAssociateSecretCode, handleMFARequired]
+        [resetView, handleMFARequired]
     );
 
     const handleNewPasswordRequired = useCallback(
@@ -178,11 +186,12 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
                     requiredAttributes={requiredAttributes}
                     resetView={resetView}
                     onMFARequired={handleMFARequired}
-                    onMFASetup={handleMFASetup}
+                    onMFASelection={handleMFASelection}
+                    onMFASetup={handleMFATotpSetup}
                 />
             );
         },
-        [handleMFARequired, handleMFASetup, resetView]
+        [handleMFARequired, handleMFATotpSetup, handleMFASelection, resetView]
     );
 
     const handleForgotPassword = useCallback(() => {
@@ -227,7 +236,8 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
                                     <SignIn
                                         userPool={userPool}
                                         onMFARequired={handleMFARequired}
-                                        onMFASetup={handleMFASetup}
+                                        onMFASelection={handleMFASelection}
+                                        onMFASetup={handleMFATotpSetup}
                                         onNewPasswordRequired={handleNewPasswordRequired}
                                         resetView={resetView}
                                         onForgotPassword={handleForgotPassword}
@@ -241,7 +251,7 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
                                     <SignUp
                                         userPool={userPool}
                                         resetView={resetView}
-                                        requiredAttributes={requiredSignUpAttributes}
+                                        attributes={signUpAttributes}
                                         hrefTermsAndConditions={hrefTermsAndConditions}
                                     />
                                 ),
@@ -252,7 +262,8 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
                     <SignIn
                         userPool={userPool}
                         onMFARequired={handleMFARequired}
-                        onMFASetup={handleMFASetup}
+                        onMFASelection={handleMFASelection}
+                        onMFASetup={handleMFATotpSetup}
                         onNewPasswordRequired={handleNewPasswordRequired}
                         resetView={resetView}
                         onForgotPassword={handleForgotPassword}
@@ -265,3 +276,4 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
 export const useCognitoAuthContext = () => useContext(CognitoAuthContext);
 
 export default CognitoAuth;
+export * from './types';

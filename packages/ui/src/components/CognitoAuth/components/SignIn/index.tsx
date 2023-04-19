@@ -22,13 +22,14 @@ import {
 } from 'amazon-cognito-identity-js';
 import SignInView from '../SignInView';
 import { useCallback, FC } from 'react';
-import { MFAEventHandler, MFASetupEventHandler } from '../../types';
+import { MFAEventHandler, NewPasswordEventHandler } from '../../types';
 
 export interface SignInProps {
     userPool: CognitoUserPool;
     onMFARequired: MFAEventHandler;
-    onNewPasswordRequired: (cognitoUser: CognitoUser, userAttributes: any, requiredAttributes: any) => void;
-    onMFASetup: MFASetupEventHandler;
+    onMFASelection: MFAEventHandler;
+    onMFASetup: MFAEventHandler;
+    onNewPasswordRequired: NewPasswordEventHandler;
     onForgotPassword: () => void;
     resetView: () => void;
 }
@@ -36,8 +37,9 @@ export interface SignInProps {
 const SignIn: FC<SignInProps> = ({
     userPool,
     onMFARequired,
-    onNewPasswordRequired,
+    onMFASelection,
     onMFASetup,
+    onNewPasswordRequired,
     resetView,
     onForgotPassword,
 }) => {
@@ -65,11 +67,11 @@ const SignIn: FC<SignInProps> = ({
                             resolve({});
                         },
                         selectMFAType(challengeName, challengeParams) {
-                            onMFASetup(cognitoUser, false, challengeName, challengeParams);
+                            onMFASelection(cognitoUser, challengeName, challengeParams);
                             resolve({});
                         },
                         mfaSetup(challengeName, challengeParams) {
-                            onMFASetup(cognitoUser, true, challengeName, challengeParams);
+                            onMFASetup(cognitoUser, challengeName, challengeParams);
                             resolve({});
                         },
                         totpRequired(challengeName, challengeParams) {
@@ -84,7 +86,7 @@ const SignIn: FC<SignInProps> = ({
                 });
             }
         },
-        [userPool, onMFARequired, onNewPasswordRequired, onMFASetup, resetView]
+        [userPool, onMFARequired, onNewPasswordRequired, onMFASetup, onMFASelection, resetView]
     );
 
     return <SignInView onSignIn={handleSignIn} onForgotPassword={onForgotPassword} />;

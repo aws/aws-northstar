@@ -20,7 +20,7 @@ import * as stories from './index.stories';
 
 const { Default } = composeStories(stories);
 
-describe('MFATotp', () => {
+describe('MFATotpSetup', () => {
     beforeAll(() => {
         jest.spyOn(navigator.clipboard, 'writeText').mockImplementation(async (secretCode: any) => {
             expect(secretCode).toBe(Default.args?.secretCode);
@@ -31,7 +31,7 @@ describe('MFATotp', () => {
         (navigator.clipboard.writeText as jest.Mock).mockRestore();
     });
 
-    it('should render MFATotp form', async () => {
+    it('should render MFATotpSetup form', async () => {
         const handleConfirm = jest.fn();
         render(<Default onConfirm={handleConfirm} />);
 

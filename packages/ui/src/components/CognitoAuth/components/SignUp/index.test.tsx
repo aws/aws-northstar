@@ -18,7 +18,7 @@ import userEvent from '@testing-library/user-event';
 import wrapper from '@cloudscape-design/components/test-utils/dom';
 import SignUp from '.';
 import { TEST_ATTRIBUTES } from '../SignUpView/index.test';
-import { REQUIRED_SIGNUP_ATTRIBUTES } from '../../fixtures';
+import { REQUIRED_SIGNUP_ATTRIBUTES, TEST_SIGNUP_RESULT } from '../../fixtures';
 
 const testUsername = 'TestUsername';
 const testPassword = 'TestPassword';
@@ -58,10 +58,12 @@ describe('SignUp', () => {
     it('should handle Success flow', async () => {
         const handleResetView = jest.fn();
         mockConfirmRegistration.mockImplementation((_data, _forceAliasCreation, callback) => {
-            callback(undefined, 'Success');
+            callback(undefined, 'SUCCESS');
         });
 
-        testSignUp(handleResetView, (callback) => callback(undefined, 'Success'));
+        testSignUp(handleResetView, (callback) => {
+            callback(undefined, TEST_SIGNUP_RESULT);
+        });
 
         expect(screen.getByText('Confirm Registration')).toBeVisible();
 
@@ -99,7 +101,7 @@ describe('SignUp', () => {
             );
         });
 
-        testSignUp(handleResetView, (callback) => callback(undefined, 'Success'));
+        testSignUp(handleResetView, (callback) => callback(undefined, TEST_SIGNUP_RESULT));
 
         expect(screen.getByText('Confirm Registration')).toBeVisible();
 
@@ -188,7 +190,7 @@ const testSignUp = async (
     };
 
     const { container } = render(
-        <SignUp userPool={userPool} resetView={handleResetView} requiredAttributes={REQUIRED_SIGNUP_ATTRIBUTES} />
+        <SignUp userPool={userPool} resetView={handleResetView} attributes={REQUIRED_SIGNUP_ATTRIBUTES} />
     );
 
     act(() => {

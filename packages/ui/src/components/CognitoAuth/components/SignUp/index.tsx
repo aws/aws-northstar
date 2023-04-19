@@ -13,20 +13,22 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { CognitoUserAttribute, CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
+import { CognitoUserAttribute, CognitoUserPool, CognitoUser, ISignUpResult } from 'amazon-cognito-identity-js';
 import { useCallback, FC, useState } from 'react';
 import SignUpView, { SignUpFormData } from '../SignUpView';
 import SignUpVerificationView, { SignUpVerificationViewFormData } from '../SignUpVerificationView';
+import { SignUpAttribute } from '../../types';
 
 export interface SignUpProps {
     userPool: CognitoUserPool;
     resetView: () => void;
-    requiredAttributes?: string[];
+    attributes?: SignUpAttribute[];
     hrefTermsAndConditions?: string;
 }
 
-const SignUp: FC<SignUpProps> = ({ userPool, resetView, requiredAttributes, hrefTermsAndConditions }) => {
+const SignUp: FC<SignUpProps> = ({ userPool, resetView, attributes, hrefTermsAndConditions }) => {
     const [cognitoUser, setCognitoUser] = useState<CognitoUser>();
+    const [signUpResult, setSignUpResult] = useState<ISignUpResult>();
 
     const handleSignUp = useCallback(
         async (data: SignUpFormData) => {
@@ -45,19 +47,25 @@ const SignUp: FC<SignUpProps> = ({ userPool, resetView, requiredAttributes, href
                             console.error('Congnito Signup Failure', err);
                             reject(err);
                         } else {
-                            resolve(result);
-                            setCognitoUser(
-                                new CognitoUser({
-                                    Username: data.username,
-                                    Pool: userPool,
-                                })
-                            );
+                            if (signUpResult?.userConfirmed) {
+                                resetView();
+                            } else {
+                                setSignUpResult(result);
+                                setCognitoUser(
+                                    new CognitoUser({
+                                        Username: data.username,
+                                        Pool: userPool,
+                                    })
+                                );
+                            }
                         }
+
+                        resolve(result);
                     });
                 });
             }
         },
-        [userPool]
+        [userPool, resetView, signUpResult?.userConfirmed]
     );
 
     const handleConfirmRegistration = useCallback(
@@ -95,13 +103,13 @@ const SignUp: FC<SignUpProps> = ({ userPool, resetView, requiredAttributes, href
     }, [cognitoUser]);
 
     return cognitoUser ? (
-        <SignUpVerificationView onConfirm={handleConfirmRegistration} onResendCode={handleResendCode} />
-    ) : (
-        <SignUpView
-            onSignUp={handleSignUp}
-            requiredAttributes={requiredAttributes}
-            hrefTermsAndConditions={hrefTermsAndConditions}
+        <SignUpVerificationView
+            onConfirm={handleConfirmRegistration}
+            onResendCode={handleResendCode}
+            signUpResult={signUpResult}
         />
+    ) : (
+        <SignUpView onSignUp={handleSignUp} attributes={attributes} hrefTermsAndConditions={hrefTermsAndConditions} />
     );
 };
 

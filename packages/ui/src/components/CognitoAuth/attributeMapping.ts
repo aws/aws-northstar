@@ -13,25 +13,86 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
+import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
+
 const AttributeMapping = {
-    address: 'Address',
-    birthdate: 'Birthdate',
-    email: 'Email',
-    family_name: 'Family Name',
-    gender: 'Gender',
-    given_name: 'Given Name(s)',
-    locale: 'Locale',
-    middle_name: 'Middle Name',
-    name: 'Name',
-    nickname: 'Nickname',
-    phone_number: 'Phone Number',
-    picture: 'Picture',
-    preferred_username: 'Preferred Username',
-    profile: 'Profile',
-    sub: 'Sub',
-    updated_at: 'Updated at',
-    website: 'Website',
-    zoneinfo: 'Zone Info',
+    address: {
+        displayName: 'Address',
+    },
+    birthdate: {
+        displayName: 'Birthdate',
+        componentSettingsOverride: {
+            component: componentTypes.DATE_PICKER,
+        },
+    },
+    email: {
+        displayName: 'Email',
+        componentSettingsOverride: {
+            type: 'email',
+            validate: [
+                {
+                    type: validatorTypes.PATTERN,
+                    message: 'Invalid email address',
+                    // eslint-disable-next-line
+                    pattern: /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i,
+                },
+            ],
+        },
+    },
+    family_name: {
+        displayName: 'Family Name',
+    },
+    gender: {
+        displayName: 'Gender',
+    },
+    given_name: {
+        displayName: 'Given Name(s)',
+    },
+    locale: {
+        displayName: 'Locale',
+    },
+    middle_name: {
+        displayName: 'Middle Name',
+    },
+    name: {
+        displayName: 'Name',
+    },
+    nickname: {
+        displayName: 'Nickname',
+    },
+    phone_number: {
+        displayName: 'Phone Number',
+        componentSettingsOverride: {
+            validate: [
+                {
+                    type: validatorTypes.PATTERN,
+                    message: 'Must be a valid phone number in E.164 format, e.g. +15555550123',
+                    pattern: /^\+[1-9]\d{1,14}$/i,
+                },
+            ],
+        },
+    },
+    picture: {
+        displayName: 'Picture',
+    },
+    preferred_username: {
+        displayName: 'Preferred Username',
+    },
+    profile: {
+        displayName: 'Profile',
+    },
+    sub: {
+        displayName: 'Sub',
+    },
+    updated_at: {
+        displayName: 'Updated at',
+    },
+    website: {
+        displayName: 'Website',
+    },
+    zoneinfo: {
+        displayName: 'Zone Info',
+    },
 };
 
 export default AttributeMapping;

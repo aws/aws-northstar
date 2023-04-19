@@ -18,7 +18,7 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './index.stories';
 import CognitoAuth from '.';
-import { MFA_SETUP_CHALLENGE_PARAM, REQUIRED_SIGNUP_ATTRIBUTES } from './fixtures';
+import { MFA_SELECTION_CHALLENGE_PARAM, TEST_SIGNUP_ATTRIBUTES } from './fixtures';
 
 const { CognitoAuthFlow } = composeStories(stories);
 const mockGetCurrentUser = jest.fn();
@@ -27,6 +27,7 @@ const mockCompleteNewPasswordChallenge = jest.fn();
 const mockSendMFACode = jest.fn();
 const mockAssociateSoftwareToken = jest.fn();
 const mockVerifySoftwareToken = jest.fn();
+const mockSendMFASelectionAnswer = jest.fn();
 
 jest.mock('amazon-cognito-identity-js', () => ({
     CognitoUserPool: jest.fn().mockImplementation(() => {
@@ -41,6 +42,7 @@ jest.mock('amazon-cognito-identity-js', () => ({
             sendMFACode: mockSendMFACode,
             associateSoftwareToken: mockAssociateSoftwareToken,
             verifySoftwareToken: mockVerifySoftwareToken,
+            sendMFASelectionAnswer: mockSendMFASelectionAnswer,
         };
     }),
     AuthenticationDetails: function (authDetails: any) {
@@ -173,9 +175,9 @@ describe('CognitoAuth', () => {
         expect(await screen.findByText('Main Content')).toBeVisible();
     });
 
-    it('should handle MFASetup flow', async () => {
+    it('should handle MFATotpSetup flow', async () => {
         mockAuthenticateUser.mockImplementation((_authDetail, callback) => {
-            callback.mfaSetup('MFA_SETUP', MFA_SETUP_CHALLENGE_PARAM);
+            callback.mfaSetup('MFA_SETUP');
         });
 
         mockAssociateSoftwareToken.mockImplementation((callback) => {
@@ -197,11 +199,74 @@ describe('CognitoAuth', () => {
 
         expect(screen.queryByText('Main Content')).toBeNull();
 
-        setupMFA();
+        inputTotp(() => {
+            mockGetCurrentUser.mockReturnValue({});
+        });
+
+        expect(await screen.findByText('Main Content')).toBeVisible();
+    });
+
+    it('should handle MFATotpSetup onFailure flow', async () => {
+        const errMessage = 'Error Message';
+        mockAuthenticateUser.mockImplementation((_authDetail, callback) => {
+            callback.mfaSetup('MFA_SETUP');
+        });
+
+        mockAssociateSoftwareToken.mockImplementation((callback) => {
+            callback.onFailure({
+                message: errMessage,
+            });
+        });
+
+        render(
+            <CognitoAuth clientId="TestClientId" userPoolId="TestUserPoolId">
+                Main Content
+            </CognitoAuth>
+        );
+        expect(screen.queryByText('Main Content')).toBeNull();
+
+        signIn();
+
+        expect(screen.queryByText('Main Content')).toBeNull();
+        expect(screen.getByText(errMessage)).toBeVisible();
+
+        act(() => {
+            userEvent.click(screen.getByText('Back to Sign In'));
+        });
+
+        expect(screen.getByText('Sign in')).toBeVisible();
+    });
+
+    it('should handle MFASelection flow - TOTP', async () => {
+        mockAuthenticateUser.mockImplementation((_authDetail, callback) => {
+            callback.selectMFAType('SELECT_MFA_TYPE', MFA_SELECTION_CHALLENGE_PARAM);
+        });
+
+        mockSendMFASelectionAnswer.mockImplementation((_mfaMethod, callback) => {
+            callback.totpRequired();
+        });
+
+        mockSendMFACode.mockImplementation((_mfaCode, callback) => {
+            callback.onSuccess();
+        });
+
+        render(
+            <CognitoAuth clientId="TestClientId" userPoolId="TestUserPoolId">
+                Main Content
+            </CognitoAuth>
+        );
 
         expect(screen.queryByText('Main Content')).toBeNull();
 
-        inputTotp(() => {
+        signIn();
+
+        expect(screen.queryByText('Main Content')).toBeNull();
+
+        selectMFA();
+
+        expect(screen.queryByText('Main Content')).toBeNull();
+
+        inputMfa(() => {
             mockGetCurrentUser.mockReturnValue({});
         });
 
@@ -230,7 +295,7 @@ describe('CognitoAuth', () => {
                 clientId="TestClientId"
                 userPoolId="TestUserPoolId"
                 allowSignup={true}
-                requiredSignUpAttributes={REQUIRED_SIGNUP_ATTRIBUTES}
+                signUpAttributes={TEST_SIGNUP_ATTRIBUTES}
             >
                 Main Content
             </CognitoAuth>
@@ -263,8 +328,8 @@ const signIn = (preSubmitCallback?: () => void) => {
 
 const setNewPassword = (preSubmitCallback?: () => void) => {
     act(() => {
-        userEvent.type(screen.getByLabelText('Password'), 'NewPassword');
-        userEvent.type(screen.getByLabelText('Confirm Password'), 'NewPassword');
+        userEvent.type(screen.getByLabelText('New Password'), 'NewPassword');
+        userEvent.type(screen.getByLabelText('Confirm New Password'), 'NewPassword');
     });
 
     preSubmitCallback?.();
@@ -286,7 +351,7 @@ const inputMfa = (preSubmitCallback?: () => void) => {
     });
 };
 
-const setupMFA = () => {
+const selectMFA = () => {
     act(() => {
         userEvent.click(screen.getByText('Authenticator app'));
         userEvent.click(screen.getByText('Continue'));

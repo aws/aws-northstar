@@ -17,14 +17,14 @@ import { render, act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MFATotp from '.';
 
-const mfaCode = '123456';
+const testMfaCode = '123456';
 const secretCode = '12345678';
 
-describe('MFATotp', () => {
+describe('MFATotpSetup', () => {
     it('should handle onSuccess flow', async () => {
         const mockCognitoUser: any = {
             verifySoftwareToken: jest.fn().mockImplementation((mfaCode, _deviceName, callback) => {
-                expect(mfaCode).toBe(mfaCode);
+                expect(mfaCode).toBe(testMfaCode);
                 callback.onSuccess();
             }),
         };
@@ -40,7 +40,7 @@ describe('MFATotp', () => {
 
         const mockCognitoUser: any = {
             verifySoftwareToken: jest.fn().mockImplementation((mfaCode, _deviceName, callback) => {
-                expect(mfaCode).toBe(mfaCode);
+                expect(mfaCode).toBe(testMfaCode);
                 callback.onFailure({
                     message: errMsg,
                 });
@@ -56,12 +56,12 @@ describe('MFATotp', () => {
 });
 
 const testVerifySoftwareToken = async (handleResetView: jest.Mock<any, any>, mockCognitoUser: any) => {
-    render(<MFATotp cognitoUser={mockCognitoUser} secretCode={secretCode} resetView={handleResetView} />);
+    render(<MFATotp secretCode={secretCode} cognitoUser={mockCognitoUser} resetView={handleResetView} />);
 
     act(() => {
-        userEvent.type(screen.getByLabelText('Code'), mfaCode);
+        userEvent.type(screen.getByLabelText('Code'), testMfaCode);
         userEvent.click(screen.getByText('Continue'));
     });
 
-    expect(mockCognitoUser.verifySoftwareToken).toHaveBeenCalledWith(mfaCode, '', expect.any(Object));
+    expect(mockCognitoUser.verifySoftwareToken).toHaveBeenCalledWith(testMfaCode, '', expect.any(Object));
 };

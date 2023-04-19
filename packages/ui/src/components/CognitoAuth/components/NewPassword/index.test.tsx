@@ -41,8 +41,15 @@ describe('NewPassword', () => {
         const handleResetView = jest.fn();
         const handleMFARequired = jest.fn();
         const handleMFASetup = jest.fn();
+        const handleMFASelection = jest.fn();
 
-        await testNewPasswordChallenge(handleMFARequired, handleMFASetup, handleResetView, mockCognitoUser);
+        await testNewPasswordChallenge(
+            handleMFARequired,
+            handleMFASetup,
+            handleMFASelection,
+            handleResetView,
+            mockCognitoUser
+        );
         expect(handleResetView).toHaveBeenCalled();
     });
 
@@ -62,8 +69,15 @@ describe('NewPassword', () => {
         const handleResetView = jest.fn();
         const handleMFARequired = jest.fn();
         const handleMFASetup = jest.fn();
+        const handleMFASelection = jest.fn();
 
-        await testNewPasswordChallenge(handleMFARequired, handleMFASetup, handleResetView, mockCognitoUser);
+        await testNewPasswordChallenge(
+            handleMFARequired,
+            handleMFASetup,
+            handleMFASelection,
+            handleResetView,
+            mockCognitoUser
+        );
 
         expect(screen.getByText(errMsg)).toBeVisible();
     });
@@ -80,10 +94,17 @@ describe('NewPassword', () => {
         const handleResetView = jest.fn();
         const handleMFARequired = jest.fn();
         const handleMFASetup = jest.fn();
+        const handleMFASelection = jest.fn();
 
-        await testNewPasswordChallenge(handleMFARequired, handleMFASetup, handleResetView, mockCognitoUser);
+        await testNewPasswordChallenge(
+            handleMFARequired,
+            handleMFASetup,
+            handleMFASelection,
+            handleResetView,
+            mockCognitoUser
+        );
 
-        expect(handleMFASetup).toHaveBeenCalledWith(mockCognitoUser, true, challengeName, MFA_CHALLENGE_PARAMS);
+        expect(handleMFASetup).toHaveBeenCalledWith(mockCognitoUser, challengeName, MFA_CHALLENGE_PARAMS);
     });
 
     it('should handle selectMFAType flow', async () => {
@@ -98,10 +119,17 @@ describe('NewPassword', () => {
         const handleResetView = jest.fn();
         const handleMFARequired = jest.fn();
         const handleMFASetup = jest.fn();
+        const handleMFASelection = jest.fn();
 
-        await testNewPasswordChallenge(handleMFARequired, handleMFASetup, handleResetView, mockCognitoUser);
+        await testNewPasswordChallenge(
+            handleMFARequired,
+            handleMFASetup,
+            handleMFASelection,
+            handleResetView,
+            mockCognitoUser
+        );
 
-        expect(handleMFASetup).toHaveBeenCalledWith(mockCognitoUser, false, challengeName, MFA_CHALLENGE_PARAMS);
+        expect(handleMFASelection).toHaveBeenCalledWith(mockCognitoUser, challengeName, MFA_CHALLENGE_PARAMS);
     });
 
     it('should handle mfaRequired flow', async () => {
@@ -116,8 +144,15 @@ describe('NewPassword', () => {
         const handleResetView = jest.fn();
         const handleMFARequired = jest.fn();
         const handleMFASetup = jest.fn();
+        const handleMFASelection = jest.fn();
 
-        await testNewPasswordChallenge(handleMFARequired, handleMFASetup, handleResetView, mockCognitoUser);
+        await testNewPasswordChallenge(
+            handleMFARequired,
+            handleMFASetup,
+            handleMFASelection,
+            handleResetView,
+            mockCognitoUser
+        );
 
         expect(handleMFARequired).toHaveBeenCalledWith(mockCognitoUser, challengeName, MFA_CHALLENGE_PARAMS);
     });
@@ -126,6 +161,7 @@ describe('NewPassword', () => {
 const testNewPasswordChallenge = async (
     handleMFARequired: jest.Mock<any, any>,
     handleMFASetup: jest.Mock<any, any>,
+    handleMFASelection: jest.Mock<any, any>,
     handleResetView: jest.Mock<any, any>,
     mockCognitoUser: any
 ) => {
@@ -136,6 +172,7 @@ const testNewPasswordChallenge = async (
             userAttributes={TEST_USER_ATTRIBUTES}
             onMFARequired={handleMFARequired}
             onMFASetup={handleMFASetup}
+            onMFASelection={handleMFASelection}
             resetView={handleResetView}
         />
     );
@@ -143,8 +180,8 @@ const testNewPasswordChallenge = async (
     const submitBtn = wrapper(container).findButton("[type='submit']");
 
     act(() => {
-        userEvent.type(screen.getByLabelText('Password'), password);
-        userEvent.type(screen.getByLabelText('Confirm Password'), password);
+        userEvent.type(screen.getByLabelText('New Password'), password);
+        userEvent.type(screen.getByLabelText('Confirm New Password'), password);
         userEvent.type(screen.getByLabelText('Family Name'), attrValues.family_name);
         userEvent.type(screen.getByLabelText('Given Name(s)'), attrValues.given_name);
         userEvent.click(screen.getByText('Confirm'));

@@ -37,6 +37,13 @@ jest.mock('amazon-cognito-identity-js', () => ({
     },
 }));
 
+const handleResetView = jest.fn();
+const handleMFARequired = jest.fn();
+const handleMFASetup = jest.fn();
+const handleMFASelection = jest.fn();
+const handleForgotPassword = jest.fn();
+const handleNewPasswordRequired = jest.fn();
+
 describe('SignIn', () => {
     beforeAll(() => {
         jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -50,6 +57,12 @@ describe('SignIn', () => {
 
     afterEach(() => {
         mockAuthenticateUser.mockClear();
+        mockAuthenticateUser.mockReset();
+        handleMFARequired.mockReset();
+        handleMFASetup.mockReset();
+        handleMFASelection.mockReset();
+        handleForgotPassword.mockReset();
+        handleNewPasswordRequired.mockReset();
     });
 
     it('should handle onSuccess flow', async () => {
@@ -61,15 +74,10 @@ describe('SignIn', () => {
             callback.onSuccess();
         });
 
-        const handleResetView = jest.fn();
-        const handleMFARequired = jest.fn();
-        const handleMFASetup = jest.fn();
-        const handleForgotPassword = jest.fn();
-        const handleNewPasswordRequired = jest.fn();
-
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
+            handleMFASelection,
             handleResetView,
             handleForgotPassword,
             handleNewPasswordRequired
@@ -90,15 +98,10 @@ describe('SignIn', () => {
             });
         });
 
-        const handleResetView = jest.fn();
-        const handleMFARequired = jest.fn();
-        const handleMFASetup = jest.fn();
-        const handleForgotPassword = jest.fn();
-        const handleNewPasswordRequired = jest.fn();
-
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
+            handleMFASelection,
             handleResetView,
             handleForgotPassword,
             handleNewPasswordRequired
@@ -115,15 +118,10 @@ describe('SignIn', () => {
             callback.mfaRequired(challengeName, MFA_CHALLENGE_PARAMS);
         });
 
-        const handleResetView = jest.fn();
-        const handleMFARequired = jest.fn();
-        const handleMFASetup = jest.fn();
-        const handleForgotPassword = jest.fn();
-        const handleNewPasswordRequired = jest.fn();
-
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
+            handleMFASelection,
             handleResetView,
             handleForgotPassword,
             handleNewPasswordRequired
@@ -140,15 +138,10 @@ describe('SignIn', () => {
             callback.totpRequired(challengeName, MFA_CHALLENGE_PARAMS);
         });
 
-        const handleResetView = jest.fn();
-        const handleMFARequired = jest.fn();
-        const handleMFASetup = jest.fn();
-        const handleForgotPassword = jest.fn();
-        const handleNewPasswordRequired = jest.fn();
-
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
+            handleMFASelection,
             handleResetView,
             handleForgotPassword,
             handleNewPasswordRequired
@@ -165,20 +158,15 @@ describe('SignIn', () => {
             callback.mfaSetup(challengeName, MFA_CHALLENGE_PARAMS);
         });
 
-        const handleResetView = jest.fn();
-        const handleMFARequired = jest.fn();
-        const handleMFASetup = jest.fn();
-        const handleForgotPassword = jest.fn();
-        const handleNewPasswordRequired = jest.fn();
-
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
+            handleMFASelection,
             handleResetView,
             handleForgotPassword,
             handleNewPasswordRequired
         );
-        expect(handleMFASetup).toHaveBeenCalledWith(expect.any(Object), true, challengeName, MFA_CHALLENGE_PARAMS);
+        expect(handleMFASetup).toHaveBeenCalledWith(expect.any(Object), challengeName, MFA_CHALLENGE_PARAMS);
     });
 
     it('should handle selectMFAType flow', async () => {
@@ -190,20 +178,15 @@ describe('SignIn', () => {
             callback.selectMFAType(challengeName, MFA_CHALLENGE_PARAMS);
         });
 
-        const handleResetView = jest.fn();
-        const handleMFARequired = jest.fn();
-        const handleMFASetup = jest.fn();
-        const handleForgotPassword = jest.fn();
-        const handleNewPasswordRequired = jest.fn();
-
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
+            handleMFASelection,
             handleResetView,
             handleForgotPassword,
             handleNewPasswordRequired
         );
-        expect(handleMFASetup).toHaveBeenCalledWith(expect.any(Object), false, challengeName, MFA_CHALLENGE_PARAMS);
+        expect(handleMFASelection).toHaveBeenCalledWith(expect.any(Object), challengeName, MFA_CHALLENGE_PARAMS);
     });
 
     it('should handle newPasswordRequired flow', async () => {
@@ -215,15 +198,10 @@ describe('SignIn', () => {
             callback.newPasswordRequired(TEST_USER_ATTRIBUTES, REQUIRED_ATTRIBUTES);
         });
 
-        const handleResetView = jest.fn();
-        const handleMFARequired = jest.fn();
-        const handleMFASetup = jest.fn();
-        const handleForgotPassword = jest.fn();
-        const handleNewPasswordRequired = jest.fn();
-
         await testAuthenciateUser(
             handleMFARequired,
             handleMFASetup,
+            handleMFASelection,
             handleResetView,
             handleForgotPassword,
             handleNewPasswordRequired
@@ -239,6 +217,7 @@ describe('SignIn', () => {
 const testAuthenciateUser = async (
     handleMFARequired: jest.Mock<any, any>,
     handleMFASetup: jest.Mock<any, any>,
+    handleMFASelection: jest.Mock<any, any>,
     handleResetView: jest.Mock<any, any>,
     handleForgotPassword: jest.Mock<any, any>,
     handleNewPasswordRequired: jest.Mock<any, any>
@@ -253,6 +232,7 @@ const testAuthenciateUser = async (
             userPool={userPool}
             onMFARequired={handleMFARequired}
             onMFASetup={handleMFASetup}
+            onMFASelection={handleMFASelection}
             resetView={handleResetView}
             onForgotPassword={handleForgotPassword}
             onNewPasswordRequired={handleNewPasswordRequired}

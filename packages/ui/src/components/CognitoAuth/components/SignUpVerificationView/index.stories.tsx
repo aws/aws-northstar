@@ -16,6 +16,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SignUpVerificationView, { SignUpVerificationViewProps } from '.';
 import Container from '../Container';
+import { TEST_SIGNUP_RESULT } from '../../fixtures';
 
 export default {
     component: SignUpVerificationView,
@@ -31,3 +32,6 @@ const Template: ComponentStory<typeof SignUpVerificationView> = (args: SignUpVer
 };
 
 export const Default = Template.bind({});
+Default.args = {
+    signUpResult: TEST_SIGNUP_RESULT,
+};

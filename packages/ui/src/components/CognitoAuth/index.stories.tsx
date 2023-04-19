@@ -55,13 +55,13 @@ export const CognitoAuthFlow = Template.bind({});
 export const CognitoAuthFlowWithSignUp = Template.bind({});
 CognitoAuthFlowWithSignUp.args = {
     allowSignup: true,
-    requiredSignUpAttributes: REQUIRED_SIGNUP_ATTRIBUTES,
+    signUpAttributes: REQUIRED_SIGNUP_ATTRIBUTES,
 };
 
 export const CognitoAuthFlowWithLogo = Template.bind({});
 CognitoAuthFlowWithLogo.args = {
     allowSignup: true,
-    requiredSignUpAttributes: REQUIRED_SIGNUP_ATTRIBUTES,
+    signUpAttributes: REQUIRED_SIGNUP_ATTRIBUTES,
     logo: 'img/logo-full.png',
     header: 'HelloWorld App',
 };

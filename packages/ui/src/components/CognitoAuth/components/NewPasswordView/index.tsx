@@ -43,7 +43,7 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChang
                 {
                     component: componentTypes.TEXT_FIELD,
                     isRequired: true,
-                    label: 'Password',
+                    label: 'New Password',
                     name: 'password',
                     type: 'password',
                     placeholder: 'Enter your Password',
@@ -56,7 +56,7 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChang
                 {
                     component: componentTypes.TEXT_FIELD,
                     isRequired: true,
-                    label: 'Confirm Password',
+                    label: 'Confirm New Password',
                     name: 'confirmPassword',
                     type: 'password',
                     placeholder: 'Confirm your Password',
@@ -74,13 +74,15 @@ const NewPasswordView: FC<NewPasswordViewProps> = ({ requiredAttributes, onChang
                 ...requiredAttributes.map((attr) => ({
                     component: componentTypes.TEXT_FIELD,
                     isRequired: true,
-                    label: AttributeMapping[attr] || attr,
-                    placeholder: `Enter ${AttributeMapping[attr] || attr}`,
+                    label: AttributeMapping[attr]?.displayName || attr,
+                    placeholder: `Enter ${AttributeMapping[attr].displayName || attr}`,
                     name: `attributes[${attr}]`,
+                    ...AttributeMapping[attr]?.componentSettingsOverride,
                     validate: [
                         {
                             type: 'required',
                         },
+                        ...(AttributeMapping[attr]?.componentSettingsOverride?.validate || []),
                     ],
                 }))
             );

@@ -21,14 +21,14 @@ import { ChallengeName } from 'amazon-cognito-identity-js';
 import { IMAGE_AUTH_APP, IMAGE_SMS_MFA } from '../../assets/images';
 import GenericView from '../GenericView';
 
-export interface MFASetupViewFormData {
+export interface MFASelectionViewFormData {
     mfaMethod: string;
 }
 
-export interface MFASetupViewProps {
+export interface MFASelectionViewProps {
     challengeName: ChallengeName;
     challengeParams: any;
-    onConfirm: (data: MFASetupViewFormData) => Promise<unknown>;
+    onConfirm: (data: MFASelectionViewFormData) => Promise<unknown>;
     onBackToSignIn: () => void;
 }
 
@@ -45,7 +45,7 @@ const MFA_LITERALS: Record<string, { key: string; value: string; img: string }> 
     },
 };
 
-const MFASetupView: FC<MFASetupViewProps> = ({ challengeParams, onConfirm, onBackToSignIn }) => {
+const MFASelectionView: FC<MFASelectionViewProps> = ({ challengeParams, onConfirm, onBackToSignIn }) => {
     const schema: Schema = useMemo(() => {
         return {
             header: 'Choose a MFA method',
@@ -106,4 +106,4 @@ const MFASetupView: FC<MFASetupViewProps> = ({ challengeParams, onConfirm, onBac
     return <GenericView schema={schema} onSubmit={onConfirm} onBackToSignIn={onBackToSignIn} />;
 };
 
-export default MFASetupView;
+export default MFASelectionView;

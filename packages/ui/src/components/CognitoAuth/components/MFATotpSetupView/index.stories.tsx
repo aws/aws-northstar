@@ -19,7 +19,7 @@ import Container from '../Container';
 
 export default {
     component: MFATotpView,
-    title: 'Components/CognitoAuth/MFATOTP',
+    title: 'Components/CognitoAuth/MFATOTPSetup',
 } as ComponentMeta<typeof MFATotpView>;
 
 const Template: ComponentStory<typeof MFATotpView> = (args: MFATotpViewProps) => {

@@ -27,8 +27,8 @@ describe('NewPassword', () => {
         render(<Default onChangePassword={handleChangePassword} onBackToSignIn={handleBackToSignIn} />);
 
         act(() => {
-            userEvent.type(screen.getByLabelText('Password'), 'Password');
-            userEvent.type(screen.getByLabelText('Confirm Password'), 'Password');
+            userEvent.type(screen.getByLabelText('New Password'), 'Password');
+            userEvent.type(screen.getByLabelText('Confirm New Password'), 'Password');
             userEvent.click(screen.getByText('Confirm'));
         });
 
@@ -56,8 +56,8 @@ describe('NewPassword', () => {
         render(<Default onChangePassword={handleChangePassword} onBackToSignIn={handleBackToSignIn} />);
 
         act(() => {
-            userEvent.type(screen.getByLabelText('Password'), 'Password1');
-            userEvent.type(screen.getByLabelText('Confirm Password'), 'Password2');
+            userEvent.type(screen.getByLabelText('New Password'), 'Password1');
+            userEvent.type(screen.getByLabelText('Confirm New Password'), 'Password2');
             userEvent.click(screen.getByText('Confirm'));
         });
 
@@ -70,8 +70,8 @@ describe('NewPassword', () => {
         render(<WithRequiredAttributes onChangePassword={handleChangePassword} onBackToSignIn={handleBackToSignIn} />);
 
         act(() => {
-            userEvent.type(screen.getByLabelText('Password'), 'Password');
-            userEvent.type(screen.getByLabelText('Confirm Password'), 'Password');
+            userEvent.type(screen.getByLabelText('New Password'), 'Password');
+            userEvent.type(screen.getByLabelText('Confirm New Password'), 'Password');
             userEvent.type(screen.getByLabelText('Family Name'), 'Name1');
             userEvent.type(screen.getByLabelText('Given Name(s)'), 'Name2');
             userEvent.click(screen.getByText('Confirm'));

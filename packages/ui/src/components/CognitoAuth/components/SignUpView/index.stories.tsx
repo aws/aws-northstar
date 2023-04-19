@@ -16,7 +16,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SignUpView, { SignUpViewProps } from '.';
 import Container from '../Container';
-import { REQUIRED_SIGNUP_ATTRIBUTES } from '../../fixtures';
+import { TEST_SIGNUP_ATTRIBUTES } from '../../fixtures';
 
 export default {
     component: SignUpView,
@@ -33,8 +33,8 @@ const Template: ComponentStory<typeof SignUpView> = (args: SignUpViewProps) => {
 
 export const Default = Template.bind({});
 
-export const WithRequiredAttributes = Template.bind({});
-WithRequiredAttributes.args = {
+export const WithSignUpAttributes = Template.bind({});
+WithSignUpAttributes.args = {
     ...Default.args,
-    requiredAttributes: REQUIRED_SIGNUP_ATTRIBUTES,
+    attributes: TEST_SIGNUP_ATTRIBUTES,
 };

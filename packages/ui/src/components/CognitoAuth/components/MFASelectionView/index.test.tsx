@@ -20,8 +20,8 @@ import * as stories from './index.stories';
 
 const { Default } = composeStories(stories);
 
-describe('MFASetup', () => {
-    it('should render MFASetup form', async () => {
+describe('MFASelectionView', () => {
+    it('should render MFASelection form and select SMS_MFA', async () => {
         const handleConfirm = jest.fn();
         render(<Default onConfirm={handleConfirm} />);
 
@@ -35,7 +35,7 @@ describe('MFASetup', () => {
         });
     });
 
-    it('should render MFASetup form', async () => {
+    it('should render MFASelection form and select SOFTWARE_TOKEN_MFA', async () => {
         const handleConfirm = jest.fn();
         render(<Default onConfirm={handleConfirm} />);
 

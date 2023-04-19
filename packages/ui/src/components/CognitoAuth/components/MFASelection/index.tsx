@@ -13,48 +13,37 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
-import { useCallback, FC } from 'react';
-import NewPasswordView, { NewPasswordViewFormData } from '../NewPasswordView';
+import { CognitoUser, ChallengeName } from 'amazon-cognito-identity-js';
+import MFASelectionView, { MFASelectionViewFormData } from '../MFASelectionView';
 import { MFAEventHandler } from '../../types';
+import { useCallback, FC } from 'react';
 
-export interface NewPasswordProps {
+export interface MFASelectionProps {
     cognitoUser: CognitoUser;
-    onMFARequired: MFAEventHandler;
-    onMFASelection: MFAEventHandler;
-    onMFASetup: MFAEventHandler;
     resetView: () => void;
-    userAttributes: any;
-    requiredAttributes: any;
+    challengeName: ChallengeName;
+    challengeParams: any;
+    onMFARequired: MFAEventHandler;
 }
 
-const NewPassword: FC<NewPasswordProps> = ({
-    onMFARequired,
-    onMFASelection,
-    onMFASetup,
-    resetView,
+const MFASelection: FC<MFASelectionProps> = ({
     cognitoUser,
-    userAttributes,
-    requiredAttributes,
+    resetView,
+    challengeName,
+    challengeParams,
+    onMFARequired,
 }) => {
-    const handleChangePassword = useCallback(
-        async (data: NewPasswordViewFormData) => {
+    const handleMFASetup = useCallback(
+        async (data: MFASelectionViewFormData) => {
             return new Promise((resolve, reject) => {
-                return cognitoUser.completeNewPasswordChallenge(data.password, data.attributes, {
-                    onSuccess(result: CognitoUserSession) {
-                        resolve(result);
+                cognitoUser.sendMFASelectionAnswer(data.mfaMethod, {
+                    onSuccess() {
+                        resolve({});
                         resetView();
                     },
-                    onFailure(err) {
+                    onFailure(err: any) {
+                        console.error('Cognito sendMFASelectionAnswer Failure', err);
                         reject(err);
-                    },
-                    mfaSetup(challengeName, challengeParams) {
-                        onMFASetup(cognitoUser, challengeName, challengeParams);
-                        resolve({});
-                    },
-                    selectMFAType(challengeName, challengeParams) {
-                        onMFASelection(cognitoUser, challengeName, challengeParams);
-                        resolve({});
                     },
                     mfaRequired(challengeName, challengeParams) {
                         onMFARequired(cognitoUser, challengeName, challengeParams);
@@ -67,17 +56,17 @@ const NewPassword: FC<NewPasswordProps> = ({
                 });
             });
         },
-        [onMFARequired, resetView, cognitoUser, onMFASetup, onMFASelection]
+        [cognitoUser, onMFARequired, resetView]
     );
 
     return (
-        <NewPasswordView
-            userAttributes={userAttributes}
-            requiredAttributes={requiredAttributes}
-            onChangePassword={handleChangePassword}
+        <MFASelectionView
+            challengeName={challengeName}
+            challengeParams={challengeParams}
+            onConfirm={handleMFASetup}
             onBackToSignIn={resetView}
         />
     );
 };
 
-export default NewPassword;
+export default MFASelection;

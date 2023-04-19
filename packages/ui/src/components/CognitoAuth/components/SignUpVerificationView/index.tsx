@@ -17,17 +17,19 @@ import { FC, useMemo } from 'react';
 import Button from '@cloudscape-design/components/button';
 import FormRenderer, { Schema, componentTypes } from '../../../FormRenderer';
 import useSubmitCallback from '../../hooks/useSubmitCallback';
+import { ISignUpResult } from 'amazon-cognito-identity-js';
 
 export interface SignUpVerificationViewFormData {
     verificationCode: string;
 }
 
 export interface SignUpVerificationViewProps {
+    signUpResult?: ISignUpResult;
     onConfirm: (data: SignUpVerificationViewFormData) => Promise<unknown>;
     onResendCode: () => Promise<unknown>;
 }
 
-const SignUpVerificationView: FC<SignUpVerificationViewProps> = ({ onConfirm, onResendCode }) => {
+const SignUpVerificationView: FC<SignUpVerificationViewProps> = ({ onConfirm, onResendCode, signUpResult }) => {
     const { handleSubmit, isSubmitting, errorMessage } = useSubmitCallback(onConfirm);
 
     const {
@@ -64,6 +66,15 @@ const SignUpVerificationView: FC<SignUpVerificationViewProps> = ({ onConfirm, on
             canCancel: false,
             submitLabel: 'Confirm',
             fields: [
+                ...(signUpResult
+                    ? [
+                          {
+                              component: componentTypes.PLAIN_TEXT,
+                              name: 'description',
+                              label: `A code has been sent to ${signUpResult?.codeDeliveryDetails?.DeliveryMedium} ${signUpResult?.codeDeliveryDetails?.Destination}`,
+                          },
+                      ]
+                    : []),
                 {
                     component: componentTypes.CUSTOM_LAYOUT,
                     name: 'layout',
@@ -103,7 +114,7 @@ const SignUpVerificationView: FC<SignUpVerificationViewProps> = ({ onConfirm, on
                 },
             ],
         };
-    }, [CustomComponent]);
+    }, [CustomComponent, signUpResult]);
 
     return (
         <FormRenderer

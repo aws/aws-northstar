@@ -24,14 +24,52 @@ export const TEST_USER_ATTRIBUTES = {
 
 export const REQUIRED_ATTRIBUTES = ['family_name', 'given_name'];
 
-export const REQUIRED_SIGNUP_ATTRIBUTES = ['family_name', 'given_name', 'email', 'phone_number'];
+export const REQUIRED_SIGNUP_ATTRIBUTES = [
+    {
+        name: 'family_name',
+        required: true,
+    },
+    {
+        name: 'given_name',
+        required: true,
+    },
+    {
+        name: 'email',
+        required: true,
+    },
+    {
+        name: 'phone_number',
+        required: true,
+    },
+];
+
+export const TEST_SIGNUP_ATTRIBUTES = [
+    ...REQUIRED_SIGNUP_ATTRIBUTES,
+    {
+        name: 'birthdate',
+    },
+    {
+        name: 'custom:foo',
+        displayName: 'Custom Attribute',
+    },
+];
+
+export const TEST_SIGNUP_RESULT: any = {
+    codeDeliveryDetails: {
+        attributeName: 'email',
+        deliveryMedium: 'EMAIL',
+        destination: 't***@t***',
+    },
+    userConfirmed: false,
+    userSub: '******',
+};
 
 export const MFA_CHALLENGE_PARAMS = {
     CODE_DELIVERY_DELIVERY_MEDIUM: 'SMS',
     CODE_DELIVERY_DESTINATION: '+0123456789',
 };
 
-export const MFA_SETUP_CHALLENGE_PARAM = {
+export const MFA_SELECTION_CHALLENGE_PARAM = {
     MFAS_CAN_SETUP: JSON.stringify(['SMS_MFA', 'SOFTWARE_TOKEN_MFA']),
 };
 

@@ -14,19 +14,19 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import MFASetupView, { MFASetupViewProps } from '.';
+import MFASelectionView, { MFASelectionViewProps } from '.';
 import Container from '../Container';
-import { MFA_SETUP_CHALLENGE_PARAM } from '../../fixtures';
+import { MFA_SELECTION_CHALLENGE_PARAM } from '../../fixtures';
 
 export default {
-    component: MFASetupView,
-    title: 'Components/CognitoAuth/MFASetup',
-} as ComponentMeta<typeof MFASetupView>;
+    component: MFASelectionView,
+    title: 'Components/CognitoAuth/MFASelection',
+} as ComponentMeta<typeof MFASelectionView>;
 
-const Template: ComponentStory<typeof MFASetupView> = (args: MFASetupViewProps) => {
+const Template: ComponentStory<typeof MFASelectionView> = (args: MFASelectionViewProps) => {
     return (
         <Container>
-            <MFASetupView {...args} />
+            <MFASelectionView {...args} />
         </Container>
     );
 };
@@ -34,5 +34,5 @@ const Template: ComponentStory<typeof MFASetupView> = (args: MFASetupViewProps) 
 export const Default = Template.bind({});
 Default.args = {
     challengeName: 'SELECT_MFA_TYPE',
-    challengeParams: MFA_SETUP_CHALLENGE_PARAM,
+    challengeParams: MFA_SELECTION_CHALLENGE_PARAM,
 };

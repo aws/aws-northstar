@@ -20,6 +20,7 @@ import SpaceBetween from '@cloudscape-design/components/space-between';
 import useSubmitCallback from '../../hooks/useSubmitCallback';
 import AttributeMapping from '../../attributeMapping';
 import validatePasswords from '../../utils/validatePasswords';
+import { SignUpAttribute } from '../../types';
 
 export interface SignUpFormData {
     username: string;
@@ -28,12 +29,12 @@ export interface SignUpFormData {
 }
 
 export interface SignUpViewProps {
-    requiredAttributes?: string[];
+    attributes?: SignUpAttribute[];
     onSignUp: (data: SignUpFormData) => Promise<unknown>;
     hrefTermsAndConditions?: string;
 }
 
-const SignUpView: FC<SignUpViewProps> = ({ requiredAttributes, onSignUp, hrefTermsAndConditions }) => {
+const SignUpView: FC<SignUpViewProps> = ({ attributes, onSignUp, hrefTermsAndConditions }) => {
     const schema = useMemo(() => {
         const formSchema: Schema = {
             variant: 'embedded',
@@ -82,24 +83,33 @@ const SignUpView: FC<SignUpViewProps> = ({ requiredAttributes, onSignUp, hrefTer
             ],
         };
 
-        requiredAttributes &&
+        attributes &&
             formSchema.fields.push(
-                ...requiredAttributes.map((attr) => ({
-                    component: componentTypes.TEXT_FIELD,
-                    isRequired: true,
-                    label: AttributeMapping[attr] || attr,
-                    placeholder: `Enter ${AttributeMapping[attr] || attr}`,
-                    name: `attributes[${attr}]`,
-                    validate: [
-                        {
-                            type: 'required',
-                        },
-                    ],
-                }))
+                ...attributes.map((attr) => {
+                    const displayName = attr.displayName || AttributeMapping[attr.name]?.displayName || attr.name;
+                    return {
+                        component: componentTypes.TEXT_FIELD,
+                        isRequired: true,
+                        label: displayName,
+                        placeholder: `Enter ${displayName}`,
+                        name: `attributes[${attr.name}]`,
+                        ...AttributeMapping[attr.name]?.componentSettingsOverride,
+                        validate: [
+                            ...(attr.required
+                                ? [
+                                      {
+                                          type: 'required',
+                                      },
+                                  ]
+                                : []),
+                            ...(AttributeMapping[attr.name]?.componentSettingsOverride?.validate || []),
+                        ],
+                    };
+                })
             );
 
         return formSchema;
-    }, [requiredAttributes]);
+    }, [attributes]);
 
     const { handleSubmit, isSubmitting, errorMessage } = useSubmitCallback(onSignUp);
 
