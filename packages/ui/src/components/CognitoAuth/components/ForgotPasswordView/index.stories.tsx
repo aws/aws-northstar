@@ -13,13 +13,25 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import ForgotPasswordView, { ForgotPasswordViewProps } from '.';
+import Container from '../Container';
+import { FORGOT_PASSWORD_DATA } from '../../fixtures';
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
-}
+export default {
+    component: ForgotPasswordView,
+    title: 'Components/CognitoAuth/ForgotPassword',
+} as ComponentMeta<typeof ForgotPasswordView>;
 
-export const FormRendererContext = createContext<FormRendererContextProps>({});
+const Template: ComponentStory<typeof ForgotPasswordView> = (args: ForgotPasswordViewProps) => {
+    return (
+        <Container>
+            <ForgotPasswordView {...args} />
+        </Container>
+    );
+};
 
-export const useFormRendererContext = () => useContext(FormRendererContext);
+export const Default = Template.bind({});
+Default.args = {
+    data: FORGOT_PASSWORD_DATA,
+};

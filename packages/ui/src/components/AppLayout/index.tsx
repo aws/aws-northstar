@@ -81,6 +81,9 @@ const initialState = {
 
 export const AppLayoutContext = createContext<AppLayoutContextApi>(initialState);
 
+/**
+ * Provides the basic layout for all types of pages, including collapsible side navigation, tools panel, and split panel.
+ */
 const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
     title,
     defaultBreadcrumb = 'home',

@@ -13,13 +13,28 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import SignUpView, { SignUpViewProps } from '.';
+import Container from '../Container';
+import { TEST_SIGNUP_ATTRIBUTES } from '../../fixtures';
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
-}
+export default {
+    component: SignUpView,
+    title: 'Components/CognitoAuth/SignUp',
+} as ComponentMeta<typeof SignUpView>;
 
-export const FormRendererContext = createContext<FormRendererContextProps>({});
+const Template: ComponentStory<typeof SignUpView> = (args: SignUpViewProps) => {
+    return (
+        <Container>
+            <SignUpView {...args} />
+        </Container>
+    );
+};
 
-export const useFormRendererContext = () => useContext(FormRendererContext);
+export const Default = Template.bind({});
+
+export const WithSignUpAttributes = Template.bind({});
+WithSignUpAttributes.args = {
+    ...Default.args,
+    attributes: TEST_SIGNUP_ATTRIBUTES,
+};

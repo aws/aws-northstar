@@ -13,13 +13,27 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+import { CognitoUser, ChallengeName } from 'amazon-cognito-identity-js';
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
+export const MFA_METHODS = {
+    SOFTWARE_TOKEN_MFA: 'SOFTWARE_TOKEN_MFA',
+    SMS_MFA: 'SMS_MFA',
+};
+
+export type MFAEventHandler = (cognitoUser: CognitoUser, challengeName: ChallengeName, challengeParams: any) => void;
+export type NewPasswordEventHandler = (cognitoUser: CognitoUser, userAttributes: any, requiredAttributes: any) => void;
+
+export interface SignUpAttribute {
+    /**
+     * The name of the attribute. If it is a custom attribute, include custom: as prefix in the name
+     */
+    name: string;
+    /**
+     * The display name of the attribute.
+     */
+    displayName?: string;
+    /**
+     * Whether the attribute is required.
+     */
+    required?: boolean;
 }
-
-export const FormRendererContext = createContext<FormRendererContextProps>({});
-
-export const useFormRendererContext = () => useContext(FormRendererContext);

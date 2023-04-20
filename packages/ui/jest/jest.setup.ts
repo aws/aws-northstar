@@ -29,5 +29,13 @@ window.document.createRange = () => ({
         ownerDocument: document,
     },
 });
+window.navigator.clipboard = {
+    writeText: () => {},
+};
+window.matchMedia = () => ({
+    matches: false,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+});
 
 expect.extend(toHaveNoViolations);

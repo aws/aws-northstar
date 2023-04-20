@@ -13,13 +13,26 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import MFASelectionView, { MFASelectionViewProps } from '.';
+import Container from '../Container';
+import { MFA_SELECTION_CHALLENGE_PARAM } from '../../fixtures';
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
-}
+export default {
+    component: MFASelectionView,
+    title: 'Components/CognitoAuth/MFASelection',
+} as ComponentMeta<typeof MFASelectionView>;
 
-export const FormRendererContext = createContext<FormRendererContextProps>({});
+const Template: ComponentStory<typeof MFASelectionView> = (args: MFASelectionViewProps) => {
+    return (
+        <Container>
+            <MFASelectionView {...args} />
+        </Container>
+    );
+};
 
-export const useFormRendererContext = () => useContext(FormRendererContext);
+export const Default = Template.bind({});
+Default.args = {
+    challengeName: 'SELECT_MFA_TYPE',
+    challengeParams: MFA_SELECTION_CHALLENGE_PARAM,
+};

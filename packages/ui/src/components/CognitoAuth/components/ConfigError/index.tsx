@@ -13,13 +13,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+import { FC } from 'react';
+import Alert from '@cloudscape-design/components/alert';
+import Box from '@cloudscape-design/components/box';
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
-}
+const ConfigError: FC = () => {
+    return (
+        <Box padding="xl">
+            <Alert statusIconAriaLabel="Warning" type="warning">
+                Missing or invalid Cognito User Pool Id or App Client Id.
+            </Alert>
+        </Box>
+    );
+};
 
-export const FormRendererContext = createContext<FormRendererContextProps>({});
-
-export const useFormRendererContext = () => useContext(FormRendererContext);
+export default ConfigError;

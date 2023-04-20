@@ -13,13 +13,24 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+import { FC, ReactNode } from 'react';
+import HeaderComponent from '@cloudscape-design/components/header';
+import SpaceBetween from '@cloudscape-design/components/space-between';
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
+export interface HeaderProps {
+    logo?: string | ReactNode;
+    children: string;
 }
 
-export const FormRendererContext = createContext<FormRendererContextProps>({});
+const Header: FC<HeaderProps> = ({ children, logo }) => {
+    return (
+        <HeaderComponent variant="h1">
+            <SpaceBetween direction="horizontal" size="s">
+                {typeof logo === 'string' ? <img src={logo} alt={children} width="100px" /> : logo}
+                {children}
+            </SpaceBetween>
+        </HeaderComponent>
+    );
+};
 
-export const useFormRendererContext = () => useContext(FormRendererContext);
+export default Header;

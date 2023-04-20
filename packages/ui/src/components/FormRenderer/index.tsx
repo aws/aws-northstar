@@ -37,6 +37,8 @@ export interface FormRendererProps {
     onCancel?: () => void;
     /** When true, the submit button is disabled with a loading spinner */
     isSubmitting?: boolean;
+    /** Specifies a form-level validation message */
+    errorText?: string;
     /** The subscription for the formstate change so the form is rerendered each time the subscription value changed*/
     subscription?: ReactFormSubscription;
     /** Custom component wrappers*/
@@ -45,6 +47,10 @@ export interface FormRendererProps {
     };
     /** Custom validator mapper */
     validatorMapper?: ValidatorMapper;
+    /**
+     * Record level validation enables you to create validation function for whole form. It is useful for some cross validation between multiple fields etc
+     */
+    validate?: ReactFormRendererProps['validate'];
 }
 
 /**
@@ -58,13 +64,16 @@ const FormRenderer: FC<FormRendererProps> = ({
     onSubmit,
     onCancel,
     isSubmitting,
+    errorText,
     initialValues,
     subscription,
     customComponentWrapper,
+    ...rest
 }) => {
     return (
-        <FormRendererContext.Provider value={{ isSubmitting }}>
+        <FormRendererContext.Provider value={{ isSubmitting, errorText }}>
             <ReactFormRenderer
+                {...rest}
                 componentMapper={{ ...basicComponentMapper, ...customComponentWrapper }}
                 FormTemplate={FormTemplate}
                 validatorMapper={validatorMapper}

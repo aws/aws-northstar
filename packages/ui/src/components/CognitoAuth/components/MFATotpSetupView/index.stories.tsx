@@ -13,13 +13,24 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import MFATotpView, { MFATotpViewProps } from '.';
+import Container from '../Container';
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
-}
+export default {
+    component: MFATotpView,
+    title: 'Components/CognitoAuth/MFATOTPSetup',
+} as ComponentMeta<typeof MFATotpView>;
 
-export const FormRendererContext = createContext<FormRendererContextProps>({});
+const Template: ComponentStory<typeof MFATotpView> = (args: MFATotpViewProps) => {
+    return (
+        <Container>
+            <MFATotpView {...args} />
+        </Container>
+    );
+};
 
-export const useFormRendererContext = () => useContext(FormRendererContext);
+export const Default = Template.bind({});
+Default.args = {
+    secretCode: '12345678',
+};

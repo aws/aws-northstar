@@ -13,13 +13,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+const validatePasswords = (values: Record<string, any>) => {
+    const errors: any = {};
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
-}
+    if (values.password !== values.confirmPassword) {
+        errors.confirmPassword = 'Passwords do NOT match';
+    }
 
-export const FormRendererContext = createContext<FormRendererContextProps>({});
+    return errors;
+};
 
-export const useFormRendererContext = () => useContext(FormRendererContext);
+export default validatePasswords;

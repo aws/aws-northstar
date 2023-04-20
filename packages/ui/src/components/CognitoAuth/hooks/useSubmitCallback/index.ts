@@ -13,13 +13,32 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+import { useCallback, useState } from 'react';
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
-}
+const useSubmitCallback = <T extends Record<string, any>>(onSubmitCallback: (data: T) => Promise<unknown>) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMessage, setErrorMessage] = useState();
+    const handleSubmit = useCallback(
+        async (data: Record<string, any>) => {
+            try {
+                setIsSubmitting(true);
+                await onSubmitCallback(data as T);
+            } catch (err: any) {
+                setErrorMessage(err.message);
+            } finally {
+                setIsSubmitting(false);
+            }
+        },
+        [onSubmitCallback]
+    );
 
-export const FormRendererContext = createContext<FormRendererContextProps>({});
+    return {
+        handleSubmit,
+        isSubmitting,
+        setIsSubmitting,
+        errorMessage,
+        setErrorMessage,
+    };
+};
 
-export const useFormRendererContext = () => useContext(FormRendererContext);
+export default useSubmitCallback;

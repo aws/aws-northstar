@@ -13,13 +13,28 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import NewPasswordView, { NewPasswordViewProps } from '.';
+import Container from '../Container';
+import { REQUIRED_ATTRIBUTES } from '../../fixtures';
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
-}
+export default {
+    component: NewPasswordView,
+    title: 'Components/CognitoAuth/NewPassword',
+} as ComponentMeta<typeof NewPasswordView>;
 
-export const FormRendererContext = createContext<FormRendererContextProps>({});
+const Template: ComponentStory<typeof NewPasswordView> = (args: NewPasswordViewProps) => {
+    return (
+        <Container>
+            <NewPasswordView {...args} />
+        </Container>
+    );
+};
 
-export const useFormRendererContext = () => useContext(FormRendererContext);
+export const Default = Template.bind({});
+
+export const WithRequiredAttributes = Template.bind({});
+WithRequiredAttributes.args = {
+    ...Default.args,
+    requiredAttributes: REQUIRED_ATTRIBUTES,
+};

@@ -13,13 +13,31 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { createContext, useContext } from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import MFAView, { MFAViewProps } from '.';
+import { MFA_CHALLENGE_PARAMS } from '../../fixtures';
+import Container from '../Container';
 
-export interface FormRendererContextProps {
-    isSubmitting?: boolean;
-    errorText?: string;
-}
+export default {
+    component: MFAView,
+    title: 'Components/CognitoAuth/MFA',
+} as ComponentMeta<typeof MFAView>;
 
-export const FormRendererContext = createContext<FormRendererContextProps>({});
+const Template: ComponentStory<typeof MFAView> = (args: MFAViewProps) => {
+    return (
+        <Container>
+            <MFAView {...args} />
+        </Container>
+    );
+};
 
-export const useFormRendererContext = () => useContext(FormRendererContext);
+export const Default = Template.bind({});
+Default.args = {
+    challengeName: 'SMS_MFA',
+    challengeParams: MFA_CHALLENGE_PARAMS,
+};
+
+export const AuthApp = Template.bind({});
+AuthApp.args = {
+    challengeName: 'SOFTWARE_TOKEN_MFA',
+};
