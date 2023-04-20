@@ -1,0 +1,1 @@
+ace.require(["ace/snippets/asl"],(function(m){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=m)}));
