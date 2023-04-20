@@ -179,7 +179,7 @@ describe('FormRenderer', () => {
     it('should render form in submitting state', async () => {
         render(<Submitting onSubmit={handleSubmit} onCancel={handleCancel} />);
 
-        expect(screen.getByText('Submit').parentElement).toBeDisabled();
+        expect(screen.getByText('Submit').parentElement).toHaveAttribute('aria-disabled', 'true');
     });
 
     it('should reset the form when reset button is clicked', async () => {

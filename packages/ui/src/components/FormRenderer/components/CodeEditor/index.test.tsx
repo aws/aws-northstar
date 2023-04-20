@@ -18,6 +18,7 @@ import userEvent from '@testing-library/user-event';
 import wrapper from '@cloudscape-design/components/test-utils/dom';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './index.stories';
+import delay from '../../../../utils/delay';
 
 const { Default } = composeStories(stories);
 
@@ -39,6 +40,8 @@ describe('CodeEditor', () => {
         const codeEditor = wrapper(container).findCodeEditor();
 
         await waitFor(() => expect(codeEditor?.findEditor()).not.toBeNull());
+
+        await delay(3000);
 
         await act(async () => {
             codeEditor?.setValue(stories.TEXT_CONTENT);

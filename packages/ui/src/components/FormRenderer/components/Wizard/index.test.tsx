@@ -142,7 +142,7 @@ describe('Wizard', () => {
     it('should display button in submitting state', async () => {
         render(<Submittting />);
 
-        expect(screen.getByText('Submit').parentElement).toBeDisabled();
+        expect(screen.getByText('Submit').parentElement).toHaveAttribute('aria-disabled', 'true');
         expect(screen.getByText('Previous').parentElement).toBeDisabled();
     });
 });
