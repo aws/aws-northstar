@@ -91,7 +91,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.21.4
     "@cloudscape-design/collection-hooks": ^1.0.20
-    "@cloudscape-design/components": ^3.0.112
+    "@cloudscape-design/components": ^3.0.248
     "@cloudscape-design/design-tokens": ^3.0.7
     "@cloudscape-design/global-styles": ^1.0.1
     "@cloudscape-design/jest-preset": ^2.0.6
@@ -121,6 +121,7 @@ __metadata:
     babel-jest: ^29.5.0
     babel-loader: ^9.1.2
     babel-preset-jest: ^29.2.0
+    file-loader: ^6.2.0
     identity-obj-proxy: ^3.0.0
     jest: 29.3.1
     jest-axe: ^7.0.0
@@ -2591,9 +2592,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudscape-design/components@npm:^3.0.209":
-  version: 3.0.233
-  resolution: "@cloudscape-design/components@npm:3.0.233"
+"@cloudscape-design/components@npm:^3.0.248":
+  version: 3.0.248
+  resolution: "@cloudscape-design/components@npm:3.0.248"
   dependencies:
     "@cloudscape-design/collection-hooks": ^1.0.0
     "@cloudscape-design/component-toolkit": ^1.0.0-beta
@@ -2616,7 +2617,7 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17 || ^18
     react-dom: ^16.8 || ^17 || ^18
-  checksum: fa4c6d81a93696c4243ca1b8c12c095563a772e69da0005133cba38662370795f7e86487b664e15f2b4ba48754532edefff95fce646519dfd51256aa7e8f6828
+  checksum: 28e84529a89b2c96122e756d4ebda4ef885f3df0624a94330376b77fdca517bbde0cd82e54e9b0d9b2c7d6b6e17799e36d785a1155969c6b726153ccdf85e931
   languageName: node
   linkType: hard
 
@@ -11524,7 +11525,7 @@ __metadata:
   resolution: "aws-northstar-demo-ui@workspace:packages/examples/ui"
   dependencies:
     "@aws-northstar/ui": latest
-    "@cloudscape-design/components": ^3.0.209
+    "@cloudscape-design/components": ^3.0.248
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
     "@testing-library/user-event": ^13.5.0

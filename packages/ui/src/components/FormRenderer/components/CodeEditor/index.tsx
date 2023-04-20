@@ -53,15 +53,18 @@ const CodeEditor: FC<DataDrivenFormFieldProps> = (props) => {
     }, [props.i18nStrings]);
 
     const loadAce = useCallback(() => {
+        setLoading(true);
         return import('ace-builds')
             .then((ace) => {
                 ace.config.set('useStrictCSP', true);
                 ace.config.set('loadWorkerFromBlob', false);
                 setAce(ace);
-                setLoading(false);
             })
+            .then(() => import('ace-builds/webpack-resolver'))
             .catch((e) => {
                 console.log('Error in importing ace-builds', e);
+            })
+            .finally(() => {
                 setLoading(false);
             });
     }, []);

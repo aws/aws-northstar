@@ -63,6 +63,7 @@
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "babel-preset-jest": "^29.2.0",
+    "file-loader": "^6.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "29.3.1",
     "jest-axe": "^7.0.0",
@@ -81,7 +82,7 @@
   },
   "dependencies": {
     "@cloudscape-design/collection-hooks": "^1.0.20",
-    "@cloudscape-design/components": "^3.0.112",
+    "@cloudscape-design/components": "^3.0.248",
     "@cloudscape-design/design-tokens": "^3.0.7",
     "@cloudscape-design/global-styles": "^1.0.1",
     "@data-driven-forms/react-form-renderer": "^3.19.0",
