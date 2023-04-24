@@ -2,7 +2,7 @@
 
 **<span style="color:red">NOTES<span>**
 
-This package NorthStar legacy (**aws-northstar**) will enter maintenance on April 1, 2023. On April 1, 2024, support will end for NorthStar legacy. 
+**This package NorthStar legacy (aws-northstar) entered maintenance on April 1, 2023. On April 1, 2024, support will end for NorthStar legacy.** 
 
 A new version of NorthStar, [NorthStar v2 (**@aws-northstar/ui**)](https://www.npmjs.com/package/@aws-northstar/ui) has been released and improves upon the previous version by leveraging [Cloudscape Design System](https://cloudscape.design/) and with updates to the existing components with new features that make the development experience even better.
 
