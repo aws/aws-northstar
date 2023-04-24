@@ -1,3 +1,22 @@
+```jsx
+import React from 'react';
+import Stack from 'aws-northstar/layouts/Stack';
+import Alert from 'aws-northstar/components/Alert';
+
+<Stack>
+  <Alert type="warning" header='Deprecation Notice'>
+    The package NorthStar legacy (aws-northstar) entered maintenance on April 1, 2023. On April 1, 2024, support will end for NorthStar legacy.
+  </Alert>
+
+  <Alert type="info" header='NorthStar V2'>
+    A new version of NorthStar, <a href='https://www.npmjs.com/package/@aws-northstar/ui' target="_blank" rel="noreferrer noopener">NorthStar v2 <b>@aws-northstar/ui</b></a> has been released and improves upon the previous version by leveraging <a href='https://cloudscape.design/' target="_blank" rel="noreferrer noopener">Cloudscape Design System</a> and with updates to the existing components with new features that make the development experience even better. <a href='https://aws.github.io/aws-northstar' target="_blank" rel="noreferrer noopener">Click here for the v2 documentation website</a>.
+    <br/>
+    <br/>
+    Please refer to <a href='https://aws.github.io/aws-northstar/?path=/story/migration-migratingfromlegacy--page' target="_blank" rel="noreferrer noopener">migration guides on the NorthStar v2 website</a> for information how to migrate you applications from NorthStar legacy to NorthStar v2.
+  </Alert>
+</Stack>
+```
+
 ## NorthStar empowers you to rapidly prototype intuitive, meaningful and accessible user experiences at scale
 
 NorthStar aims to be the standard for rapidly prototyping intuitive, meaningful and accessible user experiences. It simplifies your work and ensures consistent, predictable experiences at scale for your customers. With NorthStar, you can focus on innovation and do more with less.
