@@ -81,6 +81,14 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
+    "@aws-crypto/sha256-js": "^2.0.2",
+    "@aws-sdk/client-cognito-identity": "^3.165.0",
+    "@aws-sdk/client-cognito-identity-provider": "^3.165.0",
+    "@aws-sdk/credential-provider-cognito-identity": "^3.165.0",
+    "@aws-sdk/protocol-http": "^3.165.0",
+    "@aws-sdk/querystring-parser": "^3.165.0",
+    "@aws-sdk/signature-v4": "^3.165.0",
+    "@aws-sdk/types": "^3.165.0",
     "@cloudscape-design/collection-hooks": "^1.0.20",
     "@cloudscape-design/components": "^3.0.248",
     "@cloudscape-design/design-tokens": "^3.0.7",
@@ -88,6 +96,7 @@
     "@data-driven-forms/react-form-renderer": "^3.19.0",
     "@types/uuid": "^9.0.0",
     "amazon-cognito-identity-js": "^6.2.0",
+    "cross-fetch": "^3.1.5",
     "react-qr-code": "^2.0.11",
     "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",

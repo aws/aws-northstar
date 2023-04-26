@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, ReactNode, useState, createContext, useCallback, useMemo, useContext, useReducer } from 'react';
+import { FC, ReactNode, useState, useCallback, useMemo, useReducer } from 'react';
 import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
 import Tabs from '@cloudscape-design/components/tabs';
 import Container from './components/Container';
@@ -27,6 +27,7 @@ import SignUp from './components/SignUp';
 import ForgotPassword from './components/ForgotPassword';
 import { MFAEventHandler, SignUpAttribute } from './types';
 import ErrorMessage from './components/ErrorMessage';
+import { CognitoAuthContext } from './context';
 
 export interface CognitoAuthProps {
     /**
@@ -37,6 +38,14 @@ export interface CognitoAuthProps {
      * Cognito App client Id
      */
     clientId: string;
+    /**
+     * Cognito Identity Pool Id
+     */
+    identityPoolId?: string;
+    /**
+     * AWS Region
+     */
+    region?: string;
     /**
      * Whether to allow users to sign up.
      */
@@ -63,20 +72,6 @@ export interface CognitoAuthProps {
     children?: ReactNode | ((signOut: () => void, user: CognitoUser) => ReactNode);
 }
 
-export interface CognitoAuthContextAPI {
-    userPool: CognitoUserPool | null;
-    onSignOut: () => void;
-    getAuthenticatedUser?: () => CognitoUser | null;
-}
-
-const initialState = {
-    userPool: null,
-    onSignOut: () => {},
-    getAuthenticatedUser: () => null,
-};
-
-export const CognitoAuthContext = createContext<CognitoAuthContextAPI>(initialState);
-
 /**
  * Support Cognito authentication flows.
  *
@@ -90,6 +85,8 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
     children,
     userPoolId,
     clientId,
+    region,
+    identityPoolId,
     allowSignup,
     signUpAttributes,
     logo,
@@ -211,7 +208,10 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
         return (
             <CognitoAuthContext.Provider
                 value={{
+                    userPoolId,
                     userPool,
+                    region,
+                    identityPoolId,
                     onSignOut: handleSignOut,
                     getAuthenticatedUser,
                 }}
@@ -273,7 +273,7 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
     );
 };
 
-export const useCognitoAuthContext = () => useContext(CognitoAuthContext);
-
 export default CognitoAuth;
+export { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
 export * from './types';
+export * from './context';
