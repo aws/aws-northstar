@@ -20,7 +20,8 @@ import Button from '@cloudscape-design/components/button';
 import FormField from '@cloudscape-design/components/form-field';
 import Box from '@cloudscape-design/components/box';
 import SpaceBetween from '@cloudscape-design/components/space-between';
-import CognitoAuth, { CognitoAuthProps, useCognitoAuthContext, useSigv4Client } from '../../';
+import CognitoAuth, { CognitoAuthProps, useCognitoAuthContext } from '../../';
+import useSigv4Client from '.';
 import Container from '../../components/Container';
 import Alert from '@cloudscape-design/components/alert';
 
@@ -36,9 +37,9 @@ const AuthenticatedContent = () => {
     const [responseError, setResponseError] = useState<Error>();
     const { client, error } = useSigv4Client();
     const handleFetch = useCallback(async () => {
-        if (client) {
+        if (client.current) {
             try {
-                const response = await client(value);
+                const response = await client.current(value);
                 setResponse(await response.json());
             } catch (err) {
                 setResponseError(err);
@@ -49,6 +50,11 @@ const AuthenticatedContent = () => {
     return (
         <Container>
             <SpaceBetween direction="vertical" size="l">
+                <Alert type="warning">
+                    The fetch call below will fail due to CORS error because storybook is running the call in a iframe.
+                    However, you can use this function to check whether the API call is created correctly from develop
+                    tool.
+                </Alert>
                 <Box>
                     <FormField label="Fetch Url">
                         <Input
@@ -75,7 +81,7 @@ const AuthenticatedContent = () => {
                 )}
                 <SpaceBetween direction="horizontal" size="l">
                     <Button onClick={onSignOut}>Sign Out</Button>
-                    <Button variant="primary" onClick={handleFetch}>
+                    <Button variant="primary" onClick={handleFetch} disabled={!value}>
                         Fetch
                     </Button>
                 </SpaceBetween>

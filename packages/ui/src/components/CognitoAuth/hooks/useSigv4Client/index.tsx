@@ -17,33 +17,32 @@ import { useState, useEffect, useRef } from 'react';
 import { createSignedFetcher } from './utils/awsSigv4Fetch';
 import { useCognitoAuthContext } from '../../context';
 import getCredentials from './utils/getCredentials';
+import EmptyArgumentError from './EmptyArgumentError';
 
 const useSigv4Client = (service: string = 'execute-api') => {
     const { getAuthenticatedUser, region, identityPoolId, userPoolId } = useCognitoAuthContext();
-    const [error, SetError] = useState<Error>();
+    const [error, setError] = useState<Error>();
     const client = useRef<(input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response>>();
 
     useEffect(() => {
         const getClient = async () => {
-            SetError(undefined);
+            setError(undefined);
             try {
                 const cognitoUser = getAuthenticatedUser?.();
 
                 if (!cognitoUser) {
-                    throw new Error('CognitoUser is empty');
+                    throw new EmptyArgumentError('CognitoUser is empty');
                 }
-
-                const credentials = await getCredentials(cognitoUser, region, identityPoolId, userPoolId);
 
                 const fetcher = createSignedFetcher({
                     service,
                     region: region || 'ap-southeast-2',
-                    credentials,
+                    credentials: () => getCredentials(cognitoUser, region, identityPoolId, userPoolId),
                 });
 
                 client.current = fetcher;
             } catch (error: any) {
-                SetError(error);
+                setError(error);
             }
         };
 
@@ -51,7 +50,7 @@ const useSigv4Client = (service: string = 'execute-api') => {
     }, [getAuthenticatedUser, region, identityPoolId, userPoolId, service]);
 
     return {
-        client: client.current,
+        client,
         error,
     };
 };

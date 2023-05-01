@@ -17,21 +17,22 @@ import { AwsCredentialIdentity } from '@aws-sdk/types';
 import { CognitoUserSession, CognitoUser } from 'amazon-cognito-identity-js';
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity';
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-provider-cognito-identity';
+import EmptyArgumentError from '../../EmptyArgumentError';
 
 const getCredentials = (cognitoUser: CognitoUser, region?: string, identityPoolId?: string, userPoolId?: string) => {
     return new Promise<AwsCredentialIdentity>(async (resolve, reject) => {
         if (!region) {
-            reject(new Error('region is empty'));
+            reject(new EmptyArgumentError('region is empty'));
             return;
         }
 
         if (!identityPoolId) {
-            reject(new Error('identityPoolId is empty'));
+            reject(new EmptyArgumentError('identityPoolId is empty'));
             return;
         }
 
         if (!userPoolId) {
-            reject(new Error('userPoolId is empty'));
+            reject(new EmptyArgumentError('userPoolId is empty'));
             return;
         }
 

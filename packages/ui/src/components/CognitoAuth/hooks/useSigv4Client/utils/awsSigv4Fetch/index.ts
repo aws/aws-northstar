@@ -36,8 +36,7 @@ export const createSignedFetcher: CreateSignedFetcher = ({
     return async (input, init?) => {
         const url = new URL(typeof input === 'string' ? input : input instanceof URL ? input.href : input.url);
 
-        const headers = new Map<string, string>();
-        init?.headers && new Headers(init.headers).forEach((value, key) => headers.set(key, value));
+        const headers = new Map<string, string>((init?.headers && new Headers(init?.headers)) || []);
         headers.set('host', url.host);
 
         const request = new HttpRequest({

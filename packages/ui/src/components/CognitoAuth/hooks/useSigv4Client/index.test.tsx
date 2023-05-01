@@ -55,7 +55,7 @@ describe('useSigv4Client', () => {
         rerender();
 
         expect(result.current.error).toBeUndefined();
-        expect(result.current.client).toBe(mockFetcher);
+        expect(result.current.client.current).toBe(mockFetcher);
     });
 
     it('should throw error', async () => {
@@ -63,6 +63,6 @@ describe('useSigv4Client', () => {
         const { result } = renderHook(() => useSigv4Client());
 
         expect(result.current.error?.message).toBe('CognitoUser is empty');
-        expect(result.current.client).toBeUndefined();
+        expect(result.current.client.current).toBeUndefined();
     });
 });
