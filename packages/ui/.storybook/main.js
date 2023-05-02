@@ -13,12 +13,23 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
+
+const glob = require('glob');
+const path = require('path');
+
+const appDirectory = path.resolve(__dirname, '../');
+// Ignore dev testing stories from the documentation website
+const getStories = () => glob.sync(`${appDirectory}/{src,docs}/**/*.stories.@(js|jsx|ts|tsx|mdx)`, {
+        ignore: `${appDirectory}/**/devStories/*.stories.@(js|jsx|ts|tsx|mdx)`,
+    });
+
 module.exports = {
-    stories: [
+    stories: process.env.NODE_ENV === 'development' ? [
         '../docs/**/*.stories.mdx',
         '../src/**/*.stories.mdx',
         '../src/**/*.stories.@(js|jsx|ts|tsx)'
-    ],
+        ] :
+        (async list => [...list, ...getStories()]),
     addons: [
         '@storybook/addon-links',
         '@storybook/addon-essentials',

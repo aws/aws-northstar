@@ -20,14 +20,15 @@ import Button from '@cloudscape-design/components/button';
 import FormField from '@cloudscape-design/components/form-field';
 import Box from '@cloudscape-design/components/box';
 import SpaceBetween from '@cloudscape-design/components/space-between';
-import CognitoAuth, { CognitoAuthProps, useCognitoAuthContext } from '../../';
-import useSigv4Client from '.';
-import Container from '../../components/Container';
+import CognitoAuth, { CognitoAuthProps, useCognitoAuthContext } from '..';
+import useSigv4Client from '../hooks/useSigv4Client';
+import Container from '../components/Container';
 import Alert from '@cloudscape-design/components/alert';
 
 export default {
     component: CognitoAuth,
     title: 'Components/CognitoAuth/Sigv4Client',
+    hidden: process.env.NODE_ENV !== 'development',
 } as ComponentMeta<typeof CognitoAuth>;
 
 const AuthenticatedContent = () => {

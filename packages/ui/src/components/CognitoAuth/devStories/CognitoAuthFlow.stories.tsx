@@ -19,14 +19,18 @@ import { CognitoUser } from 'amazon-cognito-identity-js';
 import Button from '@cloudscape-design/components/button';
 import Box from '@cloudscape-design/components/box';
 import SpaceBetween from '@cloudscape-design/components/space-between';
-import CognitoAuth, { CognitoAuthProps } from '.';
-import Container from './components/Container';
-import { REQUIRED_SIGNUP_ATTRIBUTES } from './fixtures';
+import CognitoAuth, { CognitoAuthProps } from '..';
+import Container from '../components/Container';
+import { REQUIRED_SIGNUP_ATTRIBUTES } from '../fixtures';
 
 export default {
     component: CognitoAuth,
     title: 'Components/CognitoAuth',
     excludeStories: ['Template'],
+    parameters: {
+        disable: true,
+        hidden: process.env.NODE_ENV !== 'development',
+    },
 } as ComponentMeta<typeof CognitoAuth>;
 
 const AuthenticatedContent: FC<{
