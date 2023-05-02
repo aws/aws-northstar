@@ -26,6 +26,7 @@ import { REQUIRED_SIGNUP_ATTRIBUTES } from './fixtures';
 export default {
     component: CognitoAuth,
     title: 'Components/CognitoAuth',
+    excludeStories: ['Template'],
 } as ComponentMeta<typeof CognitoAuth>;
 
 const AuthenticatedContent: FC<{
@@ -42,7 +43,7 @@ const AuthenticatedContent: FC<{
     );
 };
 
-const Template: ComponentStory<typeof CognitoAuth> = (args: CognitoAuthProps) => {
+export const Template: ComponentStory<typeof CognitoAuth> = (args: CognitoAuthProps) => {
     return (
         <CognitoAuth {...args}>
             {(signOut, user) => <AuthenticatedContent onSignOut={signOut} user={user} />}

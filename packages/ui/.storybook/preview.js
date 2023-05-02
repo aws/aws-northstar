@@ -39,7 +39,7 @@ export const parameters = {
     },
     options: {
         storySort: {
-            order: ['About NorthStar V2', 'Getting Started', 'Components', 'Migration', ['Default', 'MigratingFromLegacy']]
+            order: ['About NorthStar V2', 'Getting Started', 'Components', ['Docs', 'Default' ], 'Migration', ['MigratingFromLegacy']]
         }
     }
 };

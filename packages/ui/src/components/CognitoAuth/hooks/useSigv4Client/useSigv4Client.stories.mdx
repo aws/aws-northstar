@@ -1,0 +1,36 @@
+import { Meta, Primary, Controls, Story, Canvas } from '@storybook/blocks';
+import * as Sigv4ClientStories from './index.stories';
+
+<Meta title='Components/CognitoAuth/Sigv4Client/Docs' />
+
+# useSigv4Client
+
+A React hook returning an instance of Sigv4Client to be used to run fetch call with AWS signed API requests.
+
+## Usage 
+
+useSigv4Client should be used within **CognitoAuth** context. 
+
+**identityPoolId** and **region** should be provided as props of CognitoAuth component. 
+
+```jsx
+// Get Sigv4Client and error (if there is any) object
+const { client, error } = useSigv4Client();
+const [response, setResponse] = useState();
+const [responseError, setResponseError] = useState<Error>();
+
+// Use the client in the fetch call.
+const handleFetch = useCallback(async () => {
+    if (client.current) {
+        try {
+            // The client object returned is a React.Ref object, so use the client.current to retrieve the latest fetch client. 
+            const response = await client.current(value);
+            setResponse(await response.json());
+        } catch (err) {
+            setResponseError(err);
+        }
+    }
+}, [client, value]);
+```
+
+

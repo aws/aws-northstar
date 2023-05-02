@@ -45,6 +45,7 @@
     "@storybook/addon-essentials": "6.5.9",
     "@storybook/addon-interactions": "6.5.9",
     "@storybook/addon-links": "6.5.9",
+    "@storybook/blocks": "6.5.9",
     "@storybook/builder-webpack5": "6.5.9",
     "@storybook/jest": "^0.0.10",
     "@storybook/manager-webpack5": "6.5.9",

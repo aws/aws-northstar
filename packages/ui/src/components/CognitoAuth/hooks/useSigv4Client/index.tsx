@@ -36,7 +36,7 @@ const useSigv4Client = (service: string = 'execute-api') => {
 
                 const fetcher = createSignedFetcher({
                     service,
-                    region: region || 'ap-southeast-2',
+                    region: region || 'us-east-1',
                     credentials: () => getCredentials(cognitoUser, region, identityPoolId, userPoolId),
                 });
 

@@ -80,7 +80,12 @@ export interface CognitoAuthProps {
  * * Cognito Federated SignIn
  * * App Client with Client Secret
  * * [Cognito hosted UI](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-app-integration.html)
- */
+ *
+ * **useSigv4Client**
+ *
+ * A React hook returning an instance of Sigv4Client to be used to run fetch call with AWS signed API requests.
+ * Refer to [Docs](https://aws.github.io/aws-northstar/?path=/docs/components-cognitoauth-sigv4client-docs--page) for more details.
+ **/
 const CognitoAuth: FC<CognitoAuthProps> = ({
     children,
     userPoolId,
