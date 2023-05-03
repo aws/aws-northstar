@@ -16,7 +16,7 @@
 import { render, screen, act } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
-import * as stories from './index.stories';
+import * as stories from './devStories/CognitoAuthFlow.stories';
 import CognitoAuth from '.';
 import { MFA_SELECTION_CHALLENGE_PARAM, TEST_SIGNUP_ATTRIBUTES } from './fixtures';
 
