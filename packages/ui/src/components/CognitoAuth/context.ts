@@ -17,11 +17,31 @@ import { createContext, useContext } from 'react';
 import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
 
 export interface CognitoAuthContextAPI {
+    /**
+     * AWS region.
+     */
     region?: string;
+    /**
+     * Cognito Identity Pool Id
+     */
     identityPoolId?: string;
+    /**
+     * Cognito User Pool Id
+     */
     userPoolId: string;
+    /**
+     * CognitoUserPool object
+     */
     userPool: CognitoUserPool | null;
+    /**
+     * SignOut event handler
+     */
     onSignOut: () => void;
+    /**
+     * Returns an instance of current authenticated CognitoUser.
+     * The returned cognitoUser object does not include session.
+     * Use <cognitoUser>.getSession callback to retrieve session tokens.
+     */
     getAuthenticatedUser?: () => CognitoUser | null;
 }
 

@@ -13,8 +13,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { FC, useState, useCallback, createContext, PropsWithChildren, ReactElement, useContext, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {
+    FC,
+    useState,
+    useCallback,
+    createContext,
+    PropsWithChildren,
+    ReactElement,
+    useContext,
+    useMemo,
+    useEffect,
+} from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import BreadcrumbGroup, { BreadcrumbGroupProps } from '@cloudscape-design/components/breadcrumb-group';
 import SideNavigation, { SideNavigationProps } from '@cloudscape-design/components/side-navigation';
 import SplitPanel, { SplitPanelProps as SplitPanelComponentProps } from '@cloudscape-design/components/split-panel';
@@ -26,16 +36,42 @@ import NavHeader, { NavHeaderProps } from './components/NavHeader';
 import { CancelableEventHandler } from '@cloudscape-design/components/internal/events';
 import { TopNavigationProps } from '@cloudscape-design/components/top-navigation';
 import { splitPanelI18nStrings } from './constants';
+import getBreadcrumbs from './utils/getBreadcrumbs';
 
 export type AppLayoutProps = (NavHeaderProps | { header: ReactElement<TopNavigationProps> }) &
     (
         | {
+              /**
+               * Specifies the items to be displayed in the navigation
+               */
               navigationItems: SideNavigationProps.Item[];
           }
         | { navigation: ReactElement<SideNavigationProps> }
-    ) & { breadcrumbGroup?: ReactElement<BreadcrumbGroupProps> } & {
+    ) & {
+        /***
+         * Use this slot to add the breadcrumb group component to the app layout.
+         * If this is not provided, the AppLayout will automatically generate a breadcrumb group
+         * based on the current url unless breadcrumbGroupHide is set to false.
+         */
+        breadcrumbGroup?: ReactElement<BreadcrumbGroupProps>;
+    } & {
+        /**
+         * The header title displayed on both TopNavigation and SideNavigation panel.
+         */
         title: string;
+        /**
+         * The default breadcrumb displayed for / path.
+         */
         defaultBreadcrumb?: string;
+        /**
+         * The available route paths. If this prop is provided, the breadcrumb will show # as href
+         * if the href is not matched to any available route path.
+         */
+        availableRoutes?: string[];
+        /**
+         *  If true, the breadcrumb group is not displayed at all.
+         * */
+        breadcrumbGroupHide?: boolean;
     } & AppLayoutComponentProps;
 
 export type SplitPanelProps = Pick<
@@ -87,6 +123,8 @@ export const AppLayoutContext = createContext<AppLayoutContextApi>(initialState)
 const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
     title,
     defaultBreadcrumb = 'home',
+    availableRoutes,
+    breadcrumbGroupHide,
     children,
     ...props
 }) => {
@@ -115,39 +153,26 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
         { text: defaultBreadcrumb, href: '/' },
     ]);
 
+    const location = useLocation();
+    useEffect(() => {
+        setActiveHref(location.pathname);
+        const breadcrumbs = getBreadcrumbs(location.pathname, location.search, defaultBreadcrumb, availableRoutes);
+        setActiveBreadcrumbs(breadcrumbs);
+    }, [location, defaultBreadcrumb, availableRoutes]);
+
     const onNavigate: CancelableEventHandler<BreadcrumbGroupProps.ClickDetail | SideNavigationProps.FollowDetail> =
         useCallback(
             (e) => {
                 if (!e.detail.external) {
                     e.preventDefault();
                     setContentType(undefined);
-
                     setSplitPanelOpen(false);
                     setSplitPanelSize(undefined);
                     setSplitPanelProps(undefined);
-
-                    setActiveHref(e.detail.href);
-
-                    const segments = [
-                        defaultBreadcrumb,
-                        ...e.detail.href.split('/').filter((segment) => segment !== ''),
-                    ];
-                    setActiveBreadcrumbs(
-                        segments.map((segment, i) => {
-                            const href = segments
-                                .slice(0, i + 1)
-                                .join('/')
-                                .replace('//', '/');
-                            return {
-                                href,
-                                text: segment,
-                            };
-                        })
-                    );
                     navigate(e.detail.href);
                 }
             },
-            [navigate, setActiveBreadcrumbs, defaultBreadcrumb]
+            [navigate]
         );
 
     const splitPanel = useMemo(() => {
@@ -191,7 +216,7 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
             )}
             <AppLayoutComponent
                 breadcrumbs={
-                    'breadcrumbGroup' in props ? (
+                    breadcrumbGroupHide ? undefined : 'breadcrumbGroup' in props ? (
                         props.breadcrumbGroup
                     ) : (
                         <BreadcrumbGroup onFollow={onNavigate} items={activeBreadcrumbs} />
@@ -230,7 +255,6 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
                 toolsWidth={toolsWidth}
                 onToolsChange={({ detail }) => setToolsOpen(detail.open)}
             />
-            {}
         </AppLayoutContext.Provider>
     );
 };
