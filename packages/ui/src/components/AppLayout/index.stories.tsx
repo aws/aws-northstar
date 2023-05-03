@@ -31,6 +31,7 @@ import shortData from '../Table/data/short';
 import FormRenderer, { Schema } from '../FormRenderer';
 import { Default as FormRendererDefault, TEST_DATA } from '../FormRenderer/index.stories';
 import { action } from '@storybook/addon-actions';
+import { Route, RouteProps, Routes } from 'react-router-dom';
 
 export const TEST_NAV_ITEMS: SideNavigationProps.Item[] = [
     { type: 'link', text: 'home', href: '/' },
@@ -188,16 +189,7 @@ const SplitPanelInner = () => {
 
 export const SplitPanel = () => {
     return (
-        <AppLayout
-            title="HelloWorld App"
-            navigationItems={[
-                { type: 'link', text: 'home', href: '/' },
-                { type: 'link', text: 'Page 1', href: '/page1' },
-                { type: 'link', text: 'Page 2', href: '/page2' },
-                { type: 'link', text: 'Page 3', href: '/page3' },
-                { type: 'link', text: 'Page 4', href: '/page4' },
-            ]}
-        >
+        <AppLayout title="HelloWorld App" navigationItems={TEST_NAV_ITEMS}>
             <SplitPanelInner />
         </AppLayout>
     );
@@ -234,18 +226,50 @@ const ToolsInner = () => {
 
 export const ToolsPanel = () => {
     return (
+        <AppLayout title="HelloWorld App" toolsHide={false} navigationItems={TEST_NAV_ITEMS}>
+            <ToolsInner />
+        </AppLayout>
+    );
+};
+
+const TEST_ROUTES: RouteProps[] = [
+    {
+        path: '/domain1/:domain1Id/domain2/:domain2Id',
+        element: <div>Domain 2 Details</div>,
+    },
+    {
+        path: '/domain1/:domain1Id',
+        element: <div>Domain 1 Details</div>,
+    },
+    {
+        path: '/domain1',
+        element: <div>Domain 1</div>,
+    },
+    {
+        path: '/',
+        element: <div>Home</div>,
+    },
+];
+
+const TEST_NAV_ITEMS_WITH_ROUTES: SideNavigationProps.Item[] = [
+    { type: 'link', text: 'home', href: '/' },
+    { type: 'link', text: 'Domain1', href: '/domain1' },
+    { type: 'link', text: 'Domain 1 Details', href: '/domain1/id1' },
+    { type: 'link', text: 'Domain 2 Details', href: '/domain1/id1/domain2/id2' },
+];
+
+export const WithRoutes = () => {
+    return (
         <AppLayout
             title="HelloWorld App"
-            toolsHide={false}
-            navigationItems={[
-                { type: 'link', text: 'home', href: '/' },
-                { type: 'link', text: 'Page 1', href: '/page1' },
-                { type: 'link', text: 'Page 2', href: '/page2' },
-                { type: 'link', text: 'Page 3', href: '/page3' },
-                { type: 'link', text: 'Page 4', href: '/page4' },
-            ]}
+            navigationItems={TEST_NAV_ITEMS_WITH_ROUTES}
+            availableRoutes={TEST_ROUTES.map((x) => x.path || '')}
         >
-            <ToolsInner />
+            <Routes>
+                {TEST_ROUTES.map((r, i) => (
+                    <Route key={i} {...r} />
+                ))}
+            </Routes>
         </AppLayout>
     );
 };
