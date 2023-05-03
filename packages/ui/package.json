@@ -91,7 +91,7 @@
     "@aws-sdk/types": "^3.165.0",
     "@cloudscape-design/collection-hooks": "^1.0.20",
     "@cloudscape-design/components": "^3.0.248",
-    "@cloudscape-design/design-tokens": "^3.0.7",
+    "@cloudscape-design/design-tokens": "^3.0.11",
     "@cloudscape-design/global-styles": "^1.0.1",
     "@data-driven-forms/react-form-renderer": "^3.19.0",
     "@types/uuid": "^9.0.0",
