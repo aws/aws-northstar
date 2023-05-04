@@ -178,7 +178,7 @@ __metadata:
     "@babel/core": ^7.21.4
     "@cloudscape-design/collection-hooks": ^1.0.20
     "@cloudscape-design/components": ^3.0.248
-    "@cloudscape-design/design-tokens": ^3.0.7
+    "@cloudscape-design/design-tokens": ^3.0.11
     "@cloudscape-design/global-styles": ^1.0.1
     "@cloudscape-design/jest-preset": ^2.0.6
     "@data-driven-forms/react-form-renderer": ^3.19.0
@@ -3515,6 +3515,13 @@ __metadata:
     react: ^16.8 || ^17 || ^18
     react-dom: ^16.8 || ^17 || ^18
   checksum: 28e84529a89b2c96122e756d4ebda4ef885f3df0624a94330376b77fdca517bbde0cd82e54e9b0d9b2c7d6b6e17799e36d785a1155969c6b726153ccdf85e931
+  languageName: node
+  linkType: hard
+
+"@cloudscape-design/design-tokens@npm:^3.0.11":
+  version: 3.0.11
+  resolution: "@cloudscape-design/design-tokens@npm:3.0.11"
+  checksum: d8e44c03c172b4c0167383c659b9a851b52659057aa464cd538d919f09424d0ec56e14f91dd4bfe57a78b887dcf1c046b41f41b86d1d9df830e377ee598f2f7e
   languageName: node
   linkType: hard
 
