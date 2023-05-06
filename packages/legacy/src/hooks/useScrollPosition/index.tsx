@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import { useRef } from 'react';
 
-const isBrowser = typeof window != undefined;
+const isBrowser = typeof window !== 'undefined';
 
 export interface ScrollPosition {
     x: number;
