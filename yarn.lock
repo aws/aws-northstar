@@ -10222,7 +10222,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^18.11.17":
+"@types/node@npm:*":
   version: 18.11.17
   resolution: "@types/node@npm:18.11.17"
   checksum: 1933afd068d5c75c068c6c4df6d10edb3b0b2bb6503d544e2f0496ac007c90596e6a5e284a8ef032451bc16f871b7e46719d7d2bea60e9b25d13a77d52161cac
@@ -10236,10 +10236,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^16.18.12, @types/node@npm:^16.18.3":
-  version: 16.18.18
-  resolution: "@types/node@npm:16.18.18"
-  checksum: 021936e4fcd5cb038cd5d2d26328c7c0bf501d15793e48a12501129cf8770cbbe9a6936fcb64eeb10a102ff273c2606b75c1635a5834abd786014c98c112aaee
+"@types/node@npm:^20.1.0":
+  version: 20.1.0
+  resolution: "@types/node@npm:20.1.0"
+  checksum: c6d9afa9aa78b4b4348c69ece94975be70346b144c278f1395694a10ef919d7db300018101b6f9245e6bdd76674a5327d2d14829092f3d5295e858cff5f22a66
   languageName: node
   linkType: hard
 
@@ -12407,7 +12407,7 @@ __metadata:
     "@testing-library/react": ^13.4.0
     "@testing-library/user-event": ^13.5.0
     "@types/jest": ^27.5.2
-    "@types/node": ^16.18.3
+    "@types/node": ^20.1.0
     "@types/react": ^17
     "@types/react-dom": ^17
     "@types/react-router-dom": ^5
@@ -12434,7 +12434,7 @@ __metadata:
     "@testing-library/react": ^13.4.0
     "@testing-library/user-event": ^13.5.0
     "@types/jest": ^27.5.2
-    "@types/node": ^16.18.12
+    "@types/node": ^20.1.0
     "@types/react": ^18.0.28
     "@types/react-dom": ^18.0.11
     "@types/react-router-dom": ^5.3.3
@@ -12553,7 +12553,7 @@ __metadata:
     "@testing-library/react-hooks": ^8.0.1
     "@types/jest-axe": ^3.5.3
     "@types/lodash.orderby": ^4.6.7
-    "@types/node": ^18.11.17
+    "@types/node": ^20.1.0
     "@types/plotly.js": ^2.12.10
     "@types/react": ^17.0.27
     "@types/react-dom": ^17.0.9
