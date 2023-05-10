@@ -14,13 +14,14 @@ The following authentication flows are not supported in the current version of C
 * [Cognito hosted UI](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-app-integration.html)
 
 ## useSigv4Client
-
 A React hook returning an instance of Sigv4Client to be used to run fetch call with AWS signed API requests.
 Refer to [Docs](https://aws.github.io/aws-northstar/?path=/docs/components-cognitoauth-sigv4client-docs--page) for more details.
 
 ## Usage
 
 ```jsx
+import CognitoAuth from '@aws-northstar/ui/components/CognitoAuth';
+
 export const MyComponent = (args: CognitoAuthProps) => {
     return (
         <CognitoAuth {...args}>

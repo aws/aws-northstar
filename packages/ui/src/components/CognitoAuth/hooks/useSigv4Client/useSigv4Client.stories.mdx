@@ -13,23 +13,24 @@ useSigv4Client should be used within **CognitoAuth** context.
 **identityPoolId** and **region** should be provided as props of CognitoAuth component. 
 
 ```jsx
-// Get Sigv4Client and error (if there is any) object
-const { client, error } = useSigv4Client();
-const [response, setResponse] = useState();
-const [responseError, setResponseError] = useState<Error>();
+import useSigv4Client from '@aws-northstar/ui/components/CognitoAuth/hooks/useSigv4Client';
 
-// Use the client in the fetch call.
-const handleFetch = useCallback(async () => {
-    if (client.current) {
+...
+    // Get Sigv4Client fetch callback
+    const client = useSigv4Client();
+    const [response, setResponse] = useState();
+    const [error, setError] = useState<Error>();
+    
+    const handleFetch = useCallback(async () => {
         try {
-            // The client object returned is a React.Ref object, so use the client.current to retrieve the latest fetch client. 
-            const response = await client.current(value);
+            const response = await client(<url>, <RequestInit>);
             setResponse(await response.json());
         } catch (err) {
-            setResponseError(err);
+            setError(err);
         }
-    }
-}, [client, value]);
+    }, [client, url]);
+...
+
 ```
 
 

@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-import { useState, useEffect, useRef } from 'react';
+import { useCallback } from 'react';
 import { createSignedFetcher } from './utils/awsSigv4Fetch';
 import { useCognitoAuthContext } from '../../context';
 import getCredentials from './utils/getCredentials';
@@ -21,38 +21,25 @@ import EmptyArgumentError from './EmptyArgumentError';
 
 const useSigv4Client = (service: string = 'execute-api') => {
     const { getAuthenticatedUser, region, identityPoolId, userPoolId } = useCognitoAuthContext();
-    const [error, setError] = useState<Error>();
-    const client = useRef<(input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response>>();
 
-    useEffect(() => {
-        const getClient = async () => {
-            setError(undefined);
-            try {
-                const cognitoUser = getAuthenticatedUser?.();
+    return useCallback(
+        async (input: RequestInfo | URL, init?: RequestInit | undefined) => {
+            const cognitoUser = getAuthenticatedUser?.();
 
-                if (!cognitoUser) {
-                    throw new EmptyArgumentError('CognitoUser is empty');
-                }
-
-                const fetcher = createSignedFetcher({
-                    service,
-                    region: region || 'us-east-1',
-                    credentials: () => getCredentials(cognitoUser, region, identityPoolId, userPoolId),
-                });
-
-                client.current = fetcher;
-            } catch (error: any) {
-                setError(error);
+            if (!cognitoUser) {
+                throw new EmptyArgumentError('CognitoUser is empty');
             }
-        };
 
-        getClient();
-    }, [getAuthenticatedUser, region, identityPoolId, userPoolId, service]);
+            const fetcher = createSignedFetcher({
+                service,
+                region: region || 'us-east-1',
+                credentials: () => getCredentials(cognitoUser, region, identityPoolId, userPoolId),
+            });
 
-    return {
-        client,
-        error,
-    };
+            return fetcher(input, init);
+        },
+        [getAuthenticatedUser, region, identityPoolId, userPoolId, service]
+    );
 };
 
 export default useSigv4Client;

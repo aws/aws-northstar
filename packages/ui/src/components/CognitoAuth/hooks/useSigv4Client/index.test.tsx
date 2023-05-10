@@ -15,13 +15,16 @@
  ******************************************************************************************************************** */
 import useSigv4Client from '.';
 import { renderHook } from '@testing-library/react-hooks';
-import delay from '../../../../utils/delay';
 
 const mockGetAuthenticatedUser = jest.fn();
 const mockFetcher = jest.fn();
 const testRegion = 'ap-southeast-2';
 const testIdentityPoolId = 'testIdentityPoolId';
 const testUserPoolId = 'testUserPoolId';
+const testUrl = 'http://test.com';
+const testOption = {
+    method: 'POST',
+};
 
 jest.mock('../../context', () => ({
     useCognitoAuthContext: jest.fn().mockImplementation(() => {
@@ -49,20 +52,17 @@ describe('useSigv4Client', () => {
 
     it('should return fetch client', async () => {
         mockGetAuthenticatedUser.mockReturnValue('testCognitoUser');
-        const { result, rerender } = renderHook(() => useSigv4Client());
+        const { result } = renderHook(() => useSigv4Client());
 
-        await delay(1000);
-        rerender();
+        await result.current(testUrl, testOption);
 
-        expect(result.current.error).toBeUndefined();
-        expect(result.current.client.current).toBe(mockFetcher);
+        expect(mockFetcher).toHaveBeenCalledWith(testUrl, testOption);
     });
 
     it('should throw error', async () => {
         mockGetAuthenticatedUser.mockReturnValue(undefined);
         const { result } = renderHook(() => useSigv4Client());
 
-        expect(result.current.error?.message).toBe('CognitoUser is empty');
-        expect(result.current.client.current).toBeUndefined();
+        await expect(result.current(testUrl, testOption)).rejects.toThrow('CognitoUser is empty');
     });
 });
