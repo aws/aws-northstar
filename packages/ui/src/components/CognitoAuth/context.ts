@@ -14,7 +14,13 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { createContext, useContext } from 'react';
-import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
+import {
+    CognitoUserPool,
+    CognitoUser,
+    CognitoUserSession,
+    CognitoUserAttribute,
+    GetSessionOptions,
+} from 'amazon-cognito-identity-js';
 
 export interface CognitoAuthContextAPI {
     /**
@@ -38,11 +44,19 @@ export interface CognitoAuthContextAPI {
      */
     onSignOut: () => void;
     /**
-     * Returns an instance of current authenticated CognitoUser.
+     * Returns current authenticated CognitoUser.
      * The returned cognitoUser object does not include session.
-     * Use <cognitoUser>.getSession callback to retrieve session tokens.
+     * Use getAuthenticatedUserSession to retrieve session tokens.
      */
-    getAuthenticatedUser?: () => CognitoUser | null;
+    getAuthenticatedUser: () => CognitoUser | null;
+    /**
+     * Returns current authenticated CognitoUser user session.
+     */
+    getAuthenticatedUserSession: (options?: GetSessionOptions) => Promise<CognitoUserSession | undefined>;
+    /**
+     * Returns urrent authenticated CongitoUser user attributes.
+     */
+    getAuthenticatedUserAttributes: () => Promise<CognitoUserAttribute[] | undefined>;
 }
 
 const initialState = {
@@ -50,6 +64,8 @@ const initialState = {
     userPool: null,
     onSignOut: () => {},
     getAuthenticatedUser: () => null,
+    getAuthenticatedUserSession: () => Promise.resolve(undefined),
+    getAuthenticatedUserAttributes: () => Promise.resolve(undefined),
 };
 
 export const CognitoAuthContext = createContext<CognitoAuthContextAPI>(initialState);

@@ -14,7 +14,13 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { FC, ReactNode, useState, useCallback, useMemo, useReducer } from 'react';
-import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
+import {
+    CognitoUserPool,
+    CognitoUser,
+    CognitoUserSession,
+    GetSessionOptions,
+    CognitoUserAttribute,
+} from 'amazon-cognito-identity-js';
 import Tabs from '@cloudscape-design/components/tabs';
 import Container from './components/Container';
 import ConfigError from './components/ConfigError';
@@ -134,6 +140,53 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
         return userPool?.getCurrentUser() || null;
     }, [userPool]);
 
+    const getAuthenticatedUserSession: (options?: GetSessionOptions) => Promise<CognitoUserSession | undefined> =
+        useCallback(
+            (options?: GetSessionOptions) => {
+                return new Promise((resolve, reject) => {
+                    const cognitoUser = userPool?.getCurrentUser();
+                    if (!cognitoUser) {
+                        resolve(undefined);
+                    } else {
+                        cognitoUser.getSession((error: Error | null, session: CognitoUserSession | null) => {
+                            if (error) {
+                                reject(error);
+                            } else {
+                                resolve(session || undefined);
+                            }
+                        }, options);
+                    }
+                });
+            },
+            [userPool]
+        );
+
+    const getAuthenticatedUserAttributes: () => Promise<CognitoUserAttribute[] | undefined> = useCallback(() => {
+        return new Promise((resolve, reject) => {
+            const cognitoUser = userPool?.getCurrentUser();
+            if (!cognitoUser) {
+                resolve(undefined);
+            } else {
+                cognitoUser.getSession((errorGetSession: Error | null, _session: CognitoUserSession | null) => {
+                    if (errorGetSession) {
+                        reject(errorGetSession);
+                        return;
+                    }
+
+                    cognitoUser.getUserAttributes(
+                        (error: Error | undefined, result: CognitoUserAttribute[] | undefined) => {
+                            if (error) {
+                                reject(error);
+                            } else {
+                                resolve(result || undefined);
+                            }
+                        }
+                    );
+                });
+            }
+        });
+    }, [userPool]);
+
     const handleMFARequired: MFAEventHandler = useCallback(
         (cognitoUser, challengeName, challengeParams) => {
             setTransition(
@@ -219,6 +272,8 @@ const CognitoAuth: FC<CognitoAuthProps> = ({
                     identityPoolId,
                     onSignOut: handleSignOut,
                     getAuthenticatedUser,
+                    getAuthenticatedUserAttributes,
+                    getAuthenticatedUserSession,
                 }}
             >
                 {typeof children === 'function' ? children(handleSignOut, user) : children}

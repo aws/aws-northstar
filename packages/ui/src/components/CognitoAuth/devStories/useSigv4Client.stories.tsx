@@ -35,16 +35,14 @@ const AuthenticatedContent = () => {
     const { onSignOut } = useCognitoAuthContext();
     const [value, setValue] = useState('');
     const [response, setResponse] = useState();
-    const [responseError, setResponseError] = useState<Error>();
-    const { client, error } = useSigv4Client();
+    const [error, setError] = useState<Error>();
+    const client = useSigv4Client();
     const handleFetch = useCallback(async () => {
-        if (client.current) {
-            try {
-                const response = await client.current(value);
-                setResponse(await response.json());
-            } catch (err) {
-                setResponseError(err);
-            }
+        try {
+            const response = await client(value);
+            setResponse(await response.json());
+        } catch (err) {
+            setError(err);
         }
     }, [client, value]);
 
@@ -68,11 +66,6 @@ const AuthenticatedContent = () => {
                 {error && (
                     <Alert type="error" header="Error">
                         {error.message}
-                    </Alert>
-                )}
-                {responseError && (
-                    <Alert type="error" header="Error">
-                        {responseError.message}
                     </Alert>
                 )}
                 {response && (
