@@ -13099,7 +13099,7 @@ __metadata:
     eslint-plugin-react: ^7.31.11
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-storybook: ^0.6.8
-    git-conventional-commits: ^2.4.0
+    git-conventional-commits: ^2.6.3
     husky: ^8.0.3
     license-checker: ^25.0.1
     lint-staged: ^13.1.0
@@ -13199,7 +13199,6 @@ __metadata:
     copy-webpack-plugin: ^11.0.0
     css-loader: ^6.7.3
     date-fns: ^2.29.3
-    git-conventional-commits: ^2.4.0
     html-react-parser: ^3.0.9
     jest: 29.3.1
     jest-axe: ^7.0.0
@@ -19706,15 +19705,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"git-conventional-commits@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "git-conventional-commits@npm:2.4.0"
+"git-conventional-commits@npm:^2.6.3":
+  version: 2.6.3
+  resolution: "git-conventional-commits@npm:2.6.3"
   dependencies:
     yaml: ^2.1.3
     yargs: ^17.6.2
   bin:
     git-conventional-commits: cli.js
-  checksum: b962e3135c7c22e348f0a7373c18072e012764bf537605b1a6f7df34bfd60d75b04f8bc40df777024df85ce566793b50010825cf3ca12c54d64571f74b898f8b
+  checksum: b44610443b3fad45f400c743521a27e48f2c2300ae8e37f466fb931dd2ec5b2efa02c4e7d2256fb4cef1b88c08c2ae0ba3899a06a966dfbf17e9884af1e8a9fa
   languageName: node
   linkType: hard
 
@@ -36840,17 +36839,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^1.10.0, yaml@npm:^1.10.2, yaml@npm:^1.7.2":
-  version: 1.10.2
-  resolution: "yaml@npm:1.10.2"
-  checksum: ce4ada136e8a78a0b08dc10b4b900936912d15de59905b2bf415b4d33c63df1d555d23acb2a41b23cf9fb5da41c256441afca3d6509de7247daa062fd2c5ea5f
-  languageName: node
-  linkType: hard
-
-"yaml@npm:^2.1.3":
-  version: 2.1.3
-  resolution: "yaml@npm:2.1.3"
-  checksum: 91316062324a93f9cb547469092392e7d004ff8f70c40fecb420f042a4870b2181557350da56c92f07bd44b8f7a252b0be26e6ade1f548e1f4351bdd01c9d3c7
+"yaml@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "yaml@npm:2.2.2"
+  checksum: d90c235e099e30094dcff61ba3350437aef53325db4a6bcd04ca96e1bfe7e348b191f6a7a52b5211e2dbc4eeedb22a00b291527da030de7c189728ef3f2b4eb3
   languageName: node
   linkType: hard
 
