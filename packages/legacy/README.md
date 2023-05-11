@@ -17,4 +17,3 @@ NorthStar is an open source design system with reusable React components for rap
 Whether you are a developer or a designer, NorthStar will help you delight your customers from inception to prototype.
 
 [//]: <> (The README will be generated in the pipeline during build time. This is a placeholder.)
-
