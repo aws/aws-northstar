@@ -86,7 +86,8 @@
         "nth-check": "^2.0.1",
         "deep-extend": "^0.5.1",
         "debug": "^2.6.9",
-        "@semantic-release/npm": "patch:@semantic-release/npm@9.0.2#./patches/@semantic-release+npm.9.0.2.patch"
+        "@semantic-release/npm": "patch:@semantic-release/npm@9.0.2#./patches/@semantic-release+npm.9.0.2.patch",
+        "yaml": "^2.2.2"
     },
     "workspaces": {
         "packages": [
