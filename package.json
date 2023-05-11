@@ -63,7 +63,7 @@
         "eslint-plugin-react": "^7.31.11",
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-storybook": "^0.6.8",
-        "git-conventional-commits": "^2.4.0",
+        "git-conventional-commits": "^2.6.3",
         "husky": "^8.0.3",
         "license-checker": "^25.0.1",
         "lint-staged": "^13.1.0",
