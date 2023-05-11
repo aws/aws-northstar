@@ -13199,7 +13199,6 @@ __metadata:
     copy-webpack-plugin: ^11.0.0
     css-loader: ^6.7.3
     date-fns: ^2.29.3
-    git-conventional-commits: ^2.6.3
     html-react-parser: ^3.0.9
     jest: 29.3.1
     jest-axe: ^7.0.0
