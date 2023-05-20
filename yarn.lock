@@ -176,7 +176,7 @@ __metadata:
     "@aws-sdk/signature-v4": ^3.328.0
     "@aws-sdk/types": ^3.328.0
     "@babel/core": ^7.21.4
-    "@cloudscape-design/collection-hooks": ^1.0.20
+    "@cloudscape-design/collection-hooks": ^1.0.21
     "@cloudscape-design/components": ^3.0.248
     "@cloudscape-design/design-tokens": ^3.0.11
     "@cloudscape-design/global-styles": ^1.0.1
@@ -4072,12 +4072,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudscape-design/collection-hooks@npm:^1.0.20":
-  version: 1.0.20
-  resolution: "@cloudscape-design/collection-hooks@npm:1.0.20"
+"@cloudscape-design/collection-hooks@npm:^1.0.21":
+  version: 1.0.21
+  resolution: "@cloudscape-design/collection-hooks@npm:1.0.21"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: bc29fc44467af4f216f0d54ecf4b3f7dbda3cc6ecedc9f6cdc75d3193a8ed89aa175f6b681ab49cac721bfb3f989c868df14cee73292f173d69a53147093aec0
+  checksum: 5b99aa7773d02d2a3a7a44b2c66f9739074bd0e2ab6be0ec4f30ad65bdd03a9ab24214e6ff5dfcd5a866dccaa9b7182e8b852313f17d2af347e19dded6858406
   languageName: node
   linkType: hard
 
