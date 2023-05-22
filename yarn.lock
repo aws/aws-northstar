@@ -182,7 +182,7 @@ __metadata:
     "@cloudscape-design/global-styles": ^1.0.1
     "@cloudscape-design/jest-preset": ^2.0.6
     "@data-driven-forms/react-form-renderer": ^3.19.0
-    "@storybook/addon-a11y": 6.5.9
+    "@storybook/addon-a11y": 6.5.16
     "@storybook/addon-actions": 6.5.9
     "@storybook/addon-essentials": 6.5.9
     "@storybook/addon-interactions": 6.5.9
@@ -6542,39 +6542,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-a11y@npm:6.5.9":
-  version: 6.5.9
-  resolution: "@storybook/addon-a11y@npm:6.5.9"
-  dependencies:
-    "@storybook/addons": 6.5.9
-    "@storybook/api": 6.5.9
-    "@storybook/channels": 6.5.9
-    "@storybook/client-logger": 6.5.9
-    "@storybook/components": 6.5.9
-    "@storybook/core-events": 6.5.9
-    "@storybook/csf": 0.0.2--canary.4566f4d.1
-    "@storybook/theming": 6.5.9
-    axe-core: ^4.2.0
-    core-js: ^3.8.2
-    global: ^4.4.0
-    lodash: ^4.17.21
-    react-sizeme: ^3.0.1
-    regenerator-runtime: ^0.13.7
-    ts-dedent: ^2.0.0
-    util-deprecate: ^1.0.2
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  peerDependenciesMeta:
-    react:
-      optional: true
-    react-dom:
-      optional: true
-  checksum: c43a7ea0c1aca0174c1098e2be6a5abdb684943180dde297b7a4936ac3e8fe329603ee0fb9329bcdadc15b749ceedc70b26596bc77070847a9c4eb8c9f7b5df7
-  languageName: node
-  linkType: hard
-
-"@storybook/addon-a11y@npm:^6.5.16":
+"@storybook/addon-a11y@npm:6.5.16, @storybook/addon-a11y@npm:^6.5.16":
   version: 6.5.16
   resolution: "@storybook/addon-a11y@npm:6.5.16"
   dependencies:
