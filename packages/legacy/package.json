@@ -104,7 +104,7 @@
         "@types/react-table": "7.7.14",
         "@types/uuid": "^9.0.1",
         "clsx": "^1.2.1",
-        "date-fns": "^2.29.3",
+        "date-fns": "^2.30.0",
         "html-react-parser": "^3.0.9",
         "react-markdown": "^6.0.3",
         "react-syntax-highlighter": "^15.5.0",
