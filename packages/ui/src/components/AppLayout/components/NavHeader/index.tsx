@@ -33,6 +33,24 @@ export interface User {
 }
 
 /**
+ * Notification Utility Button setup
+ */
+export interface NotificationsUtility {
+    /**
+     * Adds a badge to the corner of the icon to indicate a state change. For example: Unread notifications.
+     */
+    badge: boolean;
+    /**
+     * Prevents the utility from being moved to an overflow menu on smaller screens.
+     */
+    disableUtilityCollapse?: boolean;
+    /**
+     * Specifies the event handler called when the utility is clicked.
+     */
+    onClick: () => void;
+}
+
+/**
  * Props for Top Navigation Header
  */
 export interface NavHeaderProps {
@@ -53,6 +71,10 @@ export interface NavHeaderProps {
      */
     user?: User;
     /**
+     * Specifies how the notification utility button display
+     */
+    notificationsUtility?: NotificationsUtility;
+    /**
      * The callback for User Sign out
      */
     onSignout?: () => Promise<void>;
@@ -61,74 +83,84 @@ export interface NavHeaderProps {
 /**
  * Top Navigation Header displayed on AppLayout.
  */
-const NavHeader: FC<NavHeaderProps> = ({ title, href = '/', logo, user, onSignout }) => {
+const NavHeader: FC<NavHeaderProps> = ({ title, href = '/', logo, user, onSignout, notificationsUtility }) => {
     const { theme, density, setTheme, setDensity } = useNorthStarThemeContext();
 
     const utilities: TopNavigationProps.Utility[] = useMemo(() => {
-        const menu: TopNavigationProps.Utility[] = [
-            {
-                type: 'menu-dropdown',
-                iconName: 'settings',
-                ariaLabel: 'Settings',
-                title: 'Settings',
-                items: [
-                    {
-                        id: 'theme',
-                        text: 'Theme',
-                        items: [
-                            {
-                                id: 'theme.light',
-                                text: 'Light',
-                                disabled: theme === Mode.Light,
-                                disabledReason: 'currently selected',
-                            },
-                            {
-                                id: 'theme.dark',
-                                text: 'Dark',
-                                disabled: theme === Mode.Dark,
-                                disabledReason: 'currently selected',
-                            },
-                        ],
-                    },
-                    {
-                        id: 'density',
-                        text: 'Density',
-                        items: [
-                            {
-                                id: 'density.comfortable',
-                                text: 'Comfortable',
-                                disabled: density === Density.Comfortable,
-                                disabledReason: 'currently selected',
-                            },
-                            {
-                                id: 'density.compact',
-                                text: 'Compact',
-                                disabled: density === Density.Compact,
-                                disabledReason: 'currently selected',
-                            },
-                        ],
-                    },
-                ],
-                onItemClick: (e) => {
-                    switch (e.detail.id) {
-                        case 'theme.light':
-                            setTheme(Mode.Light);
-                            break;
-                        case 'theme.dark':
-                            setTheme(Mode.Dark);
-                            break;
-                        case 'density.comfortable':
-                            setDensity(Density.Comfortable);
-                            break;
-                        case 'density.compact':
-                            setDensity(Density.Compact);
-                            break;
-                        default:
-                            break;
-                    }
+        const menu: TopNavigationProps.Utility[] = [];
+
+        notificationsUtility &&
+            menu.push({
+                type: 'button',
+                iconName: 'notification',
+                title: 'Notifications',
+                ariaLabel: 'Notifications (unread)',
+                disableUtilityCollapse: false,
+                ...notificationsUtility,
+            });
+
+        menu.push({
+            type: 'menu-dropdown',
+            iconName: 'settings',
+            ariaLabel: 'Settings',
+            title: 'Settings',
+            items: [
+                {
+                    id: 'theme',
+                    text: 'Theme',
+                    items: [
+                        {
+                            id: 'theme.light',
+                            text: 'Light',
+                            disabled: theme === Mode.Light,
+                            disabledReason: 'currently selected',
+                        },
+                        {
+                            id: 'theme.dark',
+                            text: 'Dark',
+                            disabled: theme === Mode.Dark,
+                            disabledReason: 'currently selected',
+                        },
+                    ],
                 },
+                {
+                    id: 'density',
+                    text: 'Density',
+                    items: [
+                        {
+                            id: 'density.comfortable',
+                            text: 'Comfortable',
+                            disabled: density === Density.Comfortable,
+                            disabledReason: 'currently selected',
+                        },
+                        {
+                            id: 'density.compact',
+                            text: 'Compact',
+                            disabled: density === Density.Compact,
+                            disabledReason: 'currently selected',
+                        },
+                    ],
+                },
+            ],
+            onItemClick: (e) => {
+                switch (e.detail.id) {
+                    case 'theme.light':
+                        setTheme(Mode.Light);
+                        break;
+                    case 'theme.dark':
+                        setTheme(Mode.Dark);
+                        break;
+                    case 'density.comfortable':
+                        setDensity(Density.Comfortable);
+                        break;
+                    case 'density.compact':
+                        setDensity(Density.Compact);
+                        break;
+                    default:
+                        break;
+                }
             },
-        ];
+        });
 
         user &&
             menu.push({
@@ -141,7 +173,7 @@ const NavHeader: FC<NavHeaderProps> = ({ title, href = '/', logo, user, onSignou
             });
 
         return menu;
-    }, [theme, density, setDensity, setTheme, user, onSignout]);
+    }, [theme, density, setDensity, setTheme, user, onSignout, notificationsUtility]);
 
     return (
         <div style={{ position: 'sticky', top: 0, zIndex: 1002 }}>
