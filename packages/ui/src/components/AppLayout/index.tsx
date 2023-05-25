@@ -183,6 +183,10 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
         ) : null;
     }, [splitPanelProps]);
 
+    useEffect(() => {
+        setNotifications(props.notifications);
+    }, [props.notifications]);
+
     return (
         <AppLayoutContext.Provider
             value={{
@@ -211,6 +215,7 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
                     href={props.href}
                     logo={props.logo}
                     user={props.user}
+                    notificationsUtility={props.notificationsUtility}
                     onSignout={props.onSignout}
                 />
             )}

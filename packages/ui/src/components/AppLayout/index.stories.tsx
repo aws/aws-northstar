@@ -116,6 +116,10 @@ WithUser.args = {
         username: 'Username',
         email: 'test@test.com',
     },
+    notificationsUtility: {
+        badge: true,
+        onClick: console.log,
+    },
 };
 
 const CustomHeader = (
