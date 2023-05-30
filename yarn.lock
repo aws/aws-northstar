@@ -13368,7 +13368,7 @@ __metadata:
     react-docgen-typescript-loader: ^3.6.0
     react-docgen-typescript-plugin: ^1.0.2
     react-dom: ^17.0.2
-    react-map-gl: ^6.1.20
+    react-map-gl: ^6.1.21
     react-markdown: ^6.0.3
     react-pivottable: ^0.11.0
     react-plotly.js: ^2.6.0
@@ -13402,7 +13402,7 @@ __metadata:
     plotly.js: ^2.16.4
     react: ^16.12.0 || ^17.0.0
     react-dom: ^16.12.0 || ^17.0.0
-    react-map-gl: ^6.1.20
+    react-map-gl: ^6.1.21
     react-pivottable: ^0.11.0
     react-plotly.js: ^2.6.0
     react-router: ^5.1.2
@@ -30289,9 +30289,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-map-gl@npm:^6.1.20":
-  version: 6.1.20
-  resolution: "react-map-gl@npm:6.1.20"
+"react-map-gl@npm:^6.1.21":
+  version: 6.1.21
+  resolution: "react-map-gl@npm:6.1.21"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@types/geojson": ^7946.0.7
@@ -30303,7 +30303,7 @@ __metadata:
     viewport-mercator-project: ^7.0.4
   peerDependencies:
     react: ">=16.3.0"
-  checksum: 18ffe39a30d6165e1e72edfabb0253ea20e2e347a27cc62d64d1914470fe2e403f2019d0c1d0c788f2e4863f5866d06c7d49e3694bf37fccc522eb05dc4bec9d
+  checksum: 09edfaf105bbc1413d02ae77accec88d6d937160c48ef05a7c06eded3a3288a86ce9ecc8da19c38f21e6242c4b8687737e69935ddbe2e86e7b390731d05b09c5
   languageName: node
   linkType: hard
 
