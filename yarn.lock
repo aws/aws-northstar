@@ -11012,10 +11012,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.1.2":
-  version: 20.1.2
-  resolution: "@types/node@npm:20.1.2"
-  checksum: 9bb2cf0a846e60cc06c44a5622c1998d8373c8675b24d11c86845a29f32c60f5bca9627f2a2535640f902be3dbcc60f126a895abe8e10f12e1467ae3deaba56d
+"@types/node@npm:^20.2.5":
+  version: 20.2.5
+  resolution: "@types/node@npm:20.2.5"
+  checksum: 38ce7c7e9d76880dc632f71d71e0d5914fcda9d5e9a7095d6c339abda55ca4affb0f2a882aeb29398f8e09d2c5151f0b6586c81c8ccdfe529c34b1ea3337425e
   languageName: node
   linkType: hard
 
@@ -13193,7 +13193,7 @@ __metadata:
     "@testing-library/react": ^13.4.0
     "@testing-library/user-event": ^13.5.0
     "@types/jest": ^27.5.2
-    "@types/node": ^20.1.2
+    "@types/node": ^20.2.5
     "@types/react": ^17
     "@types/react-dom": ^17
     "@types/react-router-dom": ^5
@@ -13220,7 +13220,7 @@ __metadata:
     "@testing-library/react": ^13.4.0
     "@testing-library/user-event": ^13.5.0
     "@types/jest": ^27.5.2
-    "@types/node": ^20.1.2
+    "@types/node": ^20.2.5
     "@types/react": ^18.0.28
     "@types/react-dom": ^18.0.11
     "@types/react-router-dom": ^5.3.3
@@ -13339,7 +13339,7 @@ __metadata:
     "@testing-library/react-hooks": ^8.0.1
     "@types/jest-axe": ^3.5.3
     "@types/lodash.orderby": ^4.6.7
-    "@types/node": ^20.1.2
+    "@types/node": ^20.2.5
     "@types/plotly.js": ^2.12.10
     "@types/react": ^17.0.27
     "@types/react-dom": ^17.0.9
