@@ -171,7 +171,7 @@ __metadata:
     "@aws-sdk/client-cognito-identity": ^3.328.0
     "@aws-sdk/client-cognito-identity-provider": ^3.328.0
     "@aws-sdk/credential-provider-cognito-identity": ^3.328.0
-    "@aws-sdk/protocol-http": ^3.328.0
+    "@aws-sdk/protocol-http": ^3.342.0
     "@aws-sdk/querystring-parser": ^3.328.0
     "@aws-sdk/signature-v4": ^3.328.0
     "@aws-sdk/types": ^3.328.0
@@ -1237,13 +1237,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/protocol-http@npm:3.329.0, @aws-sdk/protocol-http@npm:^3.328.0":
+"@aws-sdk/protocol-http@npm:3.329.0":
   version: 3.329.0
   resolution: "@aws-sdk/protocol-http@npm:3.329.0"
   dependencies:
     "@aws-sdk/types": 3.329.0
     tslib: ^2.5.0
   checksum: 6b88be86283c67fd6fc9c3f8260c02e916f6f9b4c2a554a261809d6e48ef3dbae0a6c02ecde90cbfcd77f8066dbb37c2263e22fbeb20c2a5ac19e3ffc2582b67
+  languageName: node
+  linkType: hard
+
+"@aws-sdk/protocol-http@npm:^3.342.0":
+  version: 3.342.0
+  resolution: "@aws-sdk/protocol-http@npm:3.342.0"
+  dependencies:
+    "@aws-sdk/types": 3.342.0
+    tslib: ^2.5.0
+  checksum: f6910fa4880780d224cb5f78eb501cbc900a51b33be4727e734f2ea63e3bbdc7d581bf53e77ba3fa3a569055ba261750d0623e5c95b5ad510d11b4959166b00d
   languageName: node
   linkType: hard
 
@@ -1416,6 +1426,15 @@ __metadata:
   dependencies:
     tslib: ^2.5.0
   checksum: 2bbcd8e6ba2f813dc220c60e7ac0fa0d0990d49f88030fd8235479586716016c8f9d7aeaf1f4c1a64694275f33690bd1dd4ed46e127983201061e063da73f426
+  languageName: node
+  linkType: hard
+
+"@aws-sdk/types@npm:3.342.0":
+  version: 3.342.0
+  resolution: "@aws-sdk/types@npm:3.342.0"
+  dependencies:
+    tslib: ^2.5.0
+  checksum: c9ec0873304548696deb604fcc4fcdacb726c9e03a65cdb4e9d8643a24ddf83ea32aa9d85b801406670526ca210131d5a8842d3674c73757c03ca5329ed2d13a
   languageName: node
   linkType: hard
 
