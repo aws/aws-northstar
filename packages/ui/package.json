@@ -41,7 +41,7 @@
     "@babel/core": "^7.21.4",
     "@cloudscape-design/jest-preset": "^2.0.6",
     "@storybook/addon-a11y": "6.5.9",
-    "@storybook/addon-actions": "6.5.9",
+    "@storybook/addon-actions": "7.0.20",
     "@storybook/addon-essentials": "6.5.9",
     "@storybook/addon-interactions": "6.5.9",
     "@storybook/addon-links": "6.5.9",
