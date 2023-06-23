@@ -36,20 +36,22 @@ const FieldArray: FC<DataDrivenFormFieldProps> = ({ ...props }) => {
         defaultItem,
         'data-testid': testId = 'field-array',
         controlId,
+        showError,
         ...rest
     } = props;
 
     const definition = useMemo(() => {
         return fields.map((field: Field) => {
-            const { label, name, ...rest } = field;
+            const { label, name, ...fieldRest } = field;
             return {
                 label: label,
                 control: (_item: any, itemIndex: number) => {
                     return renderForm([
                         {
-                            ...rest,
+                            ...fieldRest,
                             isReadOnly,
                             isDisabled,
+                            showError,
                             name: `${input.name}[${itemIndex}].${name}`,
                             'data-testid': `${testId}[${itemIndex}].${name}`,
                         },
@@ -57,7 +59,7 @@ const FieldArray: FC<DataDrivenFormFieldProps> = ({ ...props }) => {
                 },
             };
         });
-    }, [fields, renderForm, input.name, isReadOnly, isDisabled, testId]);
+    }, [fields, renderForm, input.name, isReadOnly, isDisabled, testId, showError]);
 
     return (
         <FieldArrayBase key={controlId} name={controlId} validate={arrayValidator}>
