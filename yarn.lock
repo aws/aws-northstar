@@ -13257,7 +13257,7 @@ __metadata:
     babel-eslint: ^10.1.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.5.0
-    eslint-config-react-app: ^6.0.0
+    eslint-config-react-app: ^7.0.1
     eslint-plugin-flowtype: ^7.0.0
     eslint-plugin-header: ^3.0.0
     eslint-plugin-import: ^2.27.5
@@ -15541,7 +15541,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"confusing-browser-globals@npm:^1.0.10, confusing-browser-globals@npm:^1.0.11":
+"confusing-browser-globals@npm:^1.0.11":
   version: 1.0.11
   resolution: "confusing-browser-globals@npm:1.0.11"
   checksum: 3afc635abd37e566477f610e7978b15753f0e84025c25d49236f1f14d480117185516bdd40d2a2167e6bed8048641a9854964b9c067e3dcdfa6b5d0ad3c3a5ef
@@ -18078,32 +18078,6 @@ __metadata:
   bin:
     eslint-config-prettier: bin/cli.js
   checksum: 0d0f5c32e7a0ad91249467ce71ca92394ccd343178277d318baf32063b79ea90216f4c81d1065d60f96366fdc60f151d4d68ae7811a58bd37228b84c2083f893
-  languageName: node
-  linkType: hard
-
-"eslint-config-react-app@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "eslint-config-react-app@npm:6.0.0"
-  dependencies:
-    confusing-browser-globals: ^1.0.10
-  peerDependencies:
-    "@typescript-eslint/eslint-plugin": ^4.0.0
-    "@typescript-eslint/parser": ^4.0.0
-    babel-eslint: ^10.0.0
-    eslint: ^7.5.0
-    eslint-plugin-flowtype: ^5.2.0
-    eslint-plugin-import: ^2.22.0
-    eslint-plugin-jest: ^24.0.0
-    eslint-plugin-jsx-a11y: ^6.3.1
-    eslint-plugin-react: ^7.20.3
-    eslint-plugin-react-hooks: ^4.0.8
-    eslint-plugin-testing-library: ^3.9.0
-  peerDependenciesMeta:
-    eslint-plugin-jest:
-      optional: true
-    eslint-plugin-testing-library:
-      optional: true
-  checksum: b265852455b1c10e9c5f0cebe199306fffc7f8e1b6548fcb0bccdc4415c288dfee8ab10717122a32275b91130dfb482dcbbc87d2fb79d8728d4c2bfa889f0915
   languageName: node
   linkType: hard
 
