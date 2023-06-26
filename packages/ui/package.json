@@ -84,7 +84,7 @@
     "@aws-crypto/sha256-js": "^2.0.2",
     "@aws-sdk/client-cognito-identity": "^3.328.0",
     "@aws-sdk/client-cognito-identity-provider": "^3.328.0",
-    "@aws-sdk/credential-provider-cognito-identity": "^3.328.0",
+    "@aws-sdk/credential-provider-cognito-identity": "^3.359.0",
     "@aws-sdk/protocol-http": "^3.328.0",
     "@aws-sdk/querystring-parser": "^3.328.0",
     "@aws-sdk/signature-v4": "^3.328.0",
