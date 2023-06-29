@@ -23,9 +23,11 @@ Before you start using NorthStar for your project, please note that:
 ```bash 
 // with npm
 npm install @aws-northstar/ui
+npm install @cloudscape-design/components
 
 // with yarn
 yarn add @aws-northstar/ui
+yarn add @cloudscape-design/components
 ```
 
 ## Setup
