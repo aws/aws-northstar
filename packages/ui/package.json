@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
+    "@cloudscape-design/components": "^3.0.321",
     "@cloudscape-design/jest-preset": "^2.0.6",
     "@storybook/addon-a11y": "6.5.9",
     "@storybook/addon-actions": "6.5.9",
@@ -73,7 +74,6 @@
     "merge": "^2.1.1",
     "react": "^18",
     "react-dom": "^18",
-    "react-markdown": "^8.0.5",
     "react-router-dom": "^6",
     "react-syntax-highlighter": "^15.5.0",
     "storybook-addon-react-router-v6": "^0.2.1",
@@ -90,13 +90,13 @@
     "@aws-sdk/signature-v4": "^3.328.0",
     "@aws-sdk/types": "^3.328.0",
     "@cloudscape-design/collection-hooks": "^1.0.21",
-    "@cloudscape-design/components": "^3.0.321",
     "@cloudscape-design/design-tokens": "^3.0.11",
     "@cloudscape-design/global-styles": "^1.0.11",
     "@data-driven-forms/react-form-renderer": "^3.19.0",
     "@types/uuid": "^9.0.0",
     "amazon-cognito-identity-js": "^6.2.0",
     "cross-fetch": "^3.1.6",
+    "react-markdown": "^8.0.5",
     "react-qr-code": "^2.0.11",
     "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",
@@ -104,15 +104,13 @@
     "uuid": "^9.0.0"
   },
   "peerDependencies": {
+    "@cloudscape-design/components": "^3",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-router-dom": "^5",
     "react": "^18",
     "react-dom": "^18",
-    "react-markdown": "^8.0.5",
-    "react-router-dom": "^6",
-    "remark-frontmatter": "^4.0.1",
-    "remark-gfm": "^3.0.1"
+    "react-router-dom": "^6"
   },
   "browserslist": {
     "production": [
