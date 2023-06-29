@@ -176,7 +176,7 @@ const NavHeader: FC<NavHeaderProps> = ({ title, href = '/', logo, user, onSignou
     }, [theme, density, setDensity, setTheme, user, onSignout, notificationsUtility]);
 
     return (
-        <div style={{ position: 'sticky', top: 0, zIndex: 1002 }}>
+        <div id="northstar_applayout_header" style={{ position: 'sticky', top: 0, zIndex: 1002 }}>
             <TopNavigation
                 utilities={utilities}
                 i18nStrings={{ overflowMenuTitleText: title, overflowMenuTriggerText: title }}
