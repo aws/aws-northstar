@@ -100,7 +100,7 @@
     "react-qr-code": "^2.0.11",
     "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",
-    "use-debounce": "^9.0.3",
+    "use-debounce": "^9.0.4",
     "uuid": "^9.0.0"
   },
   "peerDependencies": {

@@ -227,7 +227,7 @@ __metadata:
     storybook-addon-react-router-v6: ^0.2.1
     ts-jest: ^29.1.0
     typescript: ^4.9.3
-    use-debounce: ^9.0.3
+    use-debounce: ^9.0.4
     uuid: ^9.0.0
   peerDependencies:
     "@cloudscape-design/components": ^3
@@ -13447,7 +13447,7 @@ __metadata:
     ts-loader: ^9.4.1
     typescript: ^4.8.4
     url-loader: ^4.1.1
-    use-debounce: ^9.0.2
+    use-debounce: ^9.0.4
     uuid: ^9.0.0
     webpack: ^5.69.1
   peerDependencies:
@@ -35498,21 +35498,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-debounce@npm:^9.0.2":
-  version: 9.0.2
-  resolution: "use-debounce@npm:9.0.2"
-  peerDependencies:
-    react: ">=16.8.0"
-  checksum: fb7d9a263e6d5e9d246118b90f11298156b7973aaff315d70bfeb154de5fb8c8bcdde3058da2f57d40a014eec6545c3e3a00cb4dbb2d9323adf2a169f8a492bb
-  languageName: node
-  linkType: hard
-
 "use-debounce@npm:^9.0.3":
   version: 9.0.3
   resolution: "use-debounce@npm:9.0.3"
   peerDependencies:
     react: ">=16.8.0"
   checksum: e9aa3b89abe28bd746cfb5e7edc281d786788b6afe4063cfd8e34c4fff58af212809f13bffa16ff291bead199abb497325330e66d1e772d1843853edbd4646ba
+  languageName: node
+  linkType: hard
+
+"use-debounce@npm:^9.0.4":
+  version: 9.0.4
+  resolution: "use-debounce@npm:9.0.4"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 37da4ecbe4e10a6230580cac03a8cae1788ea3e417dfdd92fcf654325458cf1b4567fd57bebf888edab62701a6abe47059a585008fd04228784f223f94d66ce4
   languageName: node
   linkType: hard
 
