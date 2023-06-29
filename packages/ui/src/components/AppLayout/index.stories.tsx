@@ -21,6 +21,10 @@ import Box from '@cloudscape-design/components/box';
 import Button from '@cloudscape-design/components/button';
 import Container from '@cloudscape-design/components/container';
 import TopNavigation from '@cloudscape-design/components/top-navigation';
+import ContentLayout from '@cloudscape-design/components/content-layout';
+import Link from '@cloudscape-design/components/link';
+import Alert from '@cloudscape-design/components/alert';
+import Header from '@cloudscape-design/components/header';
 import { SideNavigationProps } from '@cloudscape-design/components/side-navigation';
 import AppLayout, { useAppLayoutContext } from '.';
 import { KEY_VALUE_PAIR_ITEMS } from '../KeyValuePairs/index.stories';
@@ -139,6 +143,39 @@ export const WithCustomHeader = Template.bind({});
 WithCustomHeader.args = {
     ...Default.args,
     header: CustomHeader,
+};
+
+export const WithContentLayout = Template.bind({});
+WithContentLayout.args = {
+    ...Default.args,
+    children: (
+        <ContentLayout
+            header={
+                <SpaceBetween size="m">
+                    <Header
+                        variant="h1"
+                        info={<Link>Info</Link>}
+                        description="This is a generic description used in the header."
+                        actions={<Button variant="primary">Button</Button>}
+                    >
+                        Header
+                    </Header>
+
+                    <Alert>This is a generic alert.</Alert>
+                </SpaceBetween>
+            }
+        >
+            <Container
+                header={
+                    <Header variant="h2" description="Container description">
+                        Container header
+                    </Header>
+                }
+            >
+                Container content
+            </Container>
+        </ContentLayout>
+    ),
 };
 
 export const FormContentType = Template.bind({});

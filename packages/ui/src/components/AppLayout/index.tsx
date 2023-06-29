@@ -23,6 +23,8 @@ import {
     useContext,
     useMemo,
     useEffect,
+    createElement,
+    isValidElement,
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import BreadcrumbGroup, { BreadcrumbGroupProps } from '@cloudscape-design/components/breadcrumb-group';
@@ -32,6 +34,7 @@ import Box from '@cloudscape-design/components/box';
 import AppLayoutComponent, {
     AppLayoutProps as AppLayoutComponentProps,
 } from '@cloudscape-design/components/app-layout';
+import ContentLayout from '@cloudscape-design/components/content-layout';
 import NavHeader, { NavHeaderProps } from './components/NavHeader';
 import { CancelableEventHandler } from '@cloudscape-design/components/internal/events';
 import { TopNavigationProps } from '@cloudscape-design/components/top-navigation';
@@ -116,6 +119,8 @@ const initialState = {
 };
 
 export const AppLayoutContext = createContext<AppLayoutContextApi>(initialState);
+
+const ContentLayoutType = createElement(ContentLayout).type;
 
 /**
  * Provides the basic layout for all types of pages, including collapsible side navigation, tools panel, and split panel.
@@ -220,6 +225,7 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
                 />
             )}
             <AppLayoutComponent
+                headerSelector={'header' in props ? undefined : '#northstar_applayout_header'}
                 breadcrumbs={
                     breadcrumbGroupHide ? undefined : 'breadcrumbGroup' in props ? (
                         props.breadcrumbGroup
@@ -240,7 +246,12 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
                     )
                 }
                 content={
-                    !contentType || contentType === 'default' ? <Box padding={{ top: 'l' }}>{children}</Box> : children
+                    (!contentType || contentType === 'default') &&
+                    !(children && isValidElement(children) && children.type === ContentLayoutType) ? (
+                        <Box padding={{ top: 'l' }}>{children}</Box>
+                    ) : (
+                        children
+                    )
                 }
                 {...props}
                 contentType={contentType}
