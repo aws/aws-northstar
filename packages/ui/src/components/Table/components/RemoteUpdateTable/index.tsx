@@ -17,13 +17,13 @@ import { FC, useMemo, useState, useCallback, useEffect } from 'react';
 import TableComponent, { TableProps as CloudscapeTableProps } from '@cloudscape-design/components/table';
 import Pagination, { PaginationProps } from '@cloudscape-design/components/pagination';
 import TextFilter, { TextFilterProps } from '@cloudscape-design/components/text-filter';
-import Header from '@cloudscape-design/components/header';
 import Button from '@cloudscape-design/components/button';
 import { NonCancelableEventHandler } from '@cloudscape-design/components/internal/events';
 import { useDebouncedCallback } from 'use-debounce';
 import getPageCount from '../../utils/getPageCount';
 
 import EmptyState from '../EmptyState';
+import Header from '../Header';
 import { RemoteUpdateTableProps, InternalTableProps, FetchDataOptions } from '../../types';
 import {
     DEFAULT_TRACK_BY,
@@ -184,18 +184,17 @@ const RemoteUpdateTable: FC<RemoteUpdateTableProps & InternalTableProps> = ({
                 ))
             }
             header={
-                header && typeof header === 'string' ? (
+                header && (
                     <Header
-                        counter={
-                            selectedItems.length
-                                ? `(${selectedItems.length}/${totalItemsCount})`
-                                : `(${totalItemsCount})`
-                        }
+                        actions={props.actions}
+                        info={props.info}
+                        variant={props.headerVariant}
+                        description={props.description}
+                        allItemsLength={totalItemsCount}
+                        selectedItemsLength={selectedItems.length}
                     >
                         {header}
                     </Header>
-                ) : (
-                    header
                 )
             }
         />

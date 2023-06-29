@@ -14,9 +14,10 @@
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
 import { TableProps as CloudscapeTableProps } from '@cloudscape-design/components/table';
+import { HeaderProps } from '@cloudscape-design/components/header';
 import { CollectionPreferencesProps } from '@cloudscape-design/components/collection-preferences';
 
-export interface BaseTableProps extends CloudscapeTableProps {
+export interface BaseTableProps extends CloudscapeTableProps, Pick<HeaderProps, 'actions' | 'info' | 'description'> {
     /**
      * Disable pagination
      * */
@@ -46,9 +47,14 @@ export interface BaseTableProps extends CloudscapeTableProps {
      * */
     defaultPageIndex?: number;
     /**
-     * The actions displayed on the header
+     * The heading text (use actions, info and description to form a Table header) <br/>
+     * Or the heading element of the table container (use the [header component](/components/header/).
      */
-    actions?: React.ReactNode;
+    header?: React.ReactNode;
+    /**
+     * The variant of the table header.
+     */
+    headerVariant?: HeaderProps['variant'];
 }
 
 export interface FetchDataOptions {

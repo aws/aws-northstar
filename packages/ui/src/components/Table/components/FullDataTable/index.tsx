@@ -17,11 +17,10 @@ import { FC, useCallback } from 'react';
 import TableComponent, { TableProps as CloudscapeTableProps } from '@cloudscape-design/components/table';
 import Pagination from '@cloudscape-design/components/pagination';
 import { useCollection } from '@cloudscape-design/collection-hooks';
-
 import TextFilter from '@cloudscape-design/components/text-filter';
-import Header from '@cloudscape-design/components/header';
 import Button from '@cloudscape-design/components/button';
 import { NonCancelableEventHandler } from '@cloudscape-design/components/internal/events';
+import Header from '../Header';
 import EmptyState from '../EmptyState';
 import { BaseTableProps, InternalTableProps } from '../../types';
 import {
@@ -118,16 +117,18 @@ const FullDataTable: FC<BaseTableProps & InternalTableProps> = ({
                 ))
             }
             header={
-                <Header
-                    counter={
-                        collectionProps.selectedItems?.length
-                            ? `(${collectionProps.selectedItems.length}/${allItems.length})`
-                            : `(${allItems.length})`
-                    }
-                    actions={props.actions}
-                >
-                    {header}
-                </Header>
+                header && (
+                    <Header
+                        actions={props.actions}
+                        info={props.info}
+                        variant={props.headerVariant}
+                        description={props.description}
+                        allItemsLength={allItems.length}
+                        selectedItemsLength={collectionProps?.selectedItems?.length}
+                    >
+                        {header}
+                    </Header>
+                )
             }
         />
     );
