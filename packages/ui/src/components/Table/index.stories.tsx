@@ -22,6 +22,10 @@ import shortData from './data/short';
 import longData from './data/long';
 import { DataType } from './data/type';
 import { NonCancelableEventHandler } from '@cloudscape-design/components/internal/events';
+import Header from '@cloudscape-design/components/header';
+import Button from '@cloudscape-design/components/button';
+import Link from '@cloudscape-design/components/link';
+import SpaceBetween from '@cloudscape-design/components/space-between';
 
 export default {
     component: Table,
@@ -49,6 +53,14 @@ Default.args = {
     columnDefinitions: columnDefinition,
     items: shortData,
     header: 'Table Title',
+    actions: (
+        <SpaceBetween direction="horizontal" size="xs">
+            <Button>Secondary button</Button>
+            <Button variant="primary">Primary button</Button>
+        </SpaceBetween>
+    ),
+    info: <Link variant="info">Info</Link>,
+    description: 'Table description',
     onFetchData: undefined,
 };
 
@@ -108,6 +120,12 @@ DisableFilters.args = {
     disableFilters: true,
 };
 
+export const DisableSelect = Template.bind({});
+DisableSelect.args = {
+    ...Default.args,
+    disableRowSelect: true,
+};
+
 export const PureTable = Template.bind({});
 PureTable.args = {
     ...Default.args,
@@ -131,6 +149,26 @@ DefaultSingleSelect.args = {
             id: 'id0000016',
         },
     ],
+};
+
+export const CustomHeader = Template.bind({});
+CustomHeader.args = {
+    columnDefinitions: columnDefinition,
+    items: shortData,
+    header: (
+        <Header
+            variant="h2"
+            info={<Link variant="info">Info</Link>}
+            actions={
+                <SpaceBetween direction="horizontal" size="xs">
+                    <Button>Secondary button</Button>
+                    <Button variant="primary">Create</Button>
+                </SpaceBetween>
+            }
+        >
+            Custom Header
+        </Header>
+    ),
 };
 
 interface TestDataType {
