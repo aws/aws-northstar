@@ -47,8 +47,8 @@ export interface BaseTableProps extends CloudscapeTableProps, Pick<HeaderProps, 
      * */
     defaultPageIndex?: number;
     /**
-     * The heading text (use actions, info and description to form a Table header) <br/>
-     * Or the heading element of the table container (use the [header component](/components/header/).
+     * The heading text (together with actions, info and description props to form a Table header) <br/>
+     * or the Cloudscape header component.
      */
     header?: React.ReactNode;
     /**
