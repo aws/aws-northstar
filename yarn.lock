@@ -181,7 +181,7 @@ __metadata:
     "@cloudscape-design/design-tokens": ^3.0.11
     "@cloudscape-design/global-styles": ^1.0.11
     "@cloudscape-design/jest-preset": ^2.0.6
-    "@data-driven-forms/react-form-renderer": ^3.19.0
+    "@data-driven-forms/react-form-renderer": ^3.20.13
     "@storybook/addon-a11y": 6.5.9
     "@storybook/addon-actions": 6.5.9
     "@storybook/addon-essentials": 6.5.9
@@ -4413,6 +4413,24 @@ __metadata:
     react: ^16.13.1 || ^17.0.2 || ^18.0.0
     react-dom: ^16.13.1 || ^17.0.2 || ^18.0.0
   checksum: 93e238cdf79e1bf2f4ea169939320ee17b12928341631c0d561fc5bbdf179f7a93c3885d9f9fd69afd757d903a648d8c29899bdc2dfe66879dd4fa47f794c745
+  languageName: node
+  linkType: hard
+
+"@data-driven-forms/react-form-renderer@npm:^3.20.13":
+  version: 3.20.13
+  resolution: "@data-driven-forms/react-form-renderer@npm:3.20.13"
+  dependencies:
+    final-form: ^4.20.4
+    final-form-arrays: ^3.0.2
+    final-form-focus: ^1.1.2
+    lodash: ^4.17.15
+    prop-types: ^15.7.2
+    react-final-form: ^6.5.0
+    react-final-form-arrays: ^3.1.1
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.2 || ^18.0.0
+    react-dom: ^16.13.1 || ^17.0.2 || ^18.0.0
+  checksum: 163e574e9595297d391f162be255218e49cda058eceda901c7708c9a5ec572f4c3432c81445288c93db719186c7eb87e2d7ef46188c70d6d8b9cae6991b72763
   languageName: node
   linkType: hard
 
