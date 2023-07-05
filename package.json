@@ -87,7 +87,8 @@
         "deep-extend": "^0.5.1",
         "debug": "^2.6.9",
         "@semantic-release/npm": "patch:@semantic-release/npm@9.0.2#./patches/@semantic-release+npm.9.0.2.patch",
-        "yaml": "^2.2.2"
+        "yaml": "^2.2.2",
+        "semver": "^7.5.3"
     },
     "workspaces": {
         "packages": [
