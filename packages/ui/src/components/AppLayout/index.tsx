@@ -144,7 +144,7 @@ const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
         props.splitPanelPreferences ?? ({ position: 'bottom' } as AppLayoutComponentProps.SplitPanelPreferences)
     );
 
-    const [navigationOpen, setNavigationOpen] = useState(props.navigationOpen ?? true);
+    const [navigationOpen, setNavigationOpen] = useState(props.navigationOpen ?? false);
 
     const [notifications, setNotifications] = useState(props.notifications);
 
