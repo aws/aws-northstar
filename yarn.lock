@@ -242,7 +242,7 @@ __metadata:
     react-syntax-highlighter: ^15.5.0
     remark-frontmatter: ^4.0.1
     remark-gfm: ^3.0.1
-    storybook-addon-react-router-v6: ^0.2.1
+    storybook-addon-react-router-v6: ^1.0.2
     ts-jest: ^29.1.1
     typescript: ^4.9.3
     use-debounce: ^9.0.4
@@ -29831,7 +29831,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-inspector@npm:^5.1.0, react-inspector@npm:^5.1.1":
+"react-inspector@npm:^5.1.0":
   version: 5.1.1
   resolution: "react-inspector@npm:5.1.1"
   dependencies:
@@ -29841,6 +29841,15 @@ __metadata:
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
   checksum: ca9e4c1fedb94e4e956dd3142838c5a25a9d61375aee5e8a74dd623bae09a263098a93f220e8d84c7fd39e569e1fa4297d363ddbc91b15bca91baeb7281d7f4f
+  languageName: node
+  linkType: hard
+
+"react-inspector@npm:^6.0.1":
+  version: 6.0.2
+  resolution: "react-inspector@npm:6.0.2"
+  peerDependencies:
+    react: ^16.8.4 || ^17.0.0 || ^18.0.0
+  checksum: dab7a7daf570c283fdc5d4e07ee8941ee8670af698ab5a27a704602b248e29ab911b117310d64c30a4af93931b2d6ee2a729369e3f5ab7f02df4651692e195a5
   languageName: node
   linkType: hard
 
@@ -32845,17 +32854,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-react-router-v6@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "storybook-addon-react-router-v6@npm:0.2.1"
+"storybook-addon-react-router-v6@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "storybook-addon-react-router-v6@npm:1.0.2"
   dependencies:
-    react-inspector: ^5.1.1
+    react-inspector: ^6.0.1
   peerDependencies:
-    "@storybook/addons": ^6.4.0
-    "@storybook/api": ^6.4.0
-    "@storybook/components": ^6.4.0
-    "@storybook/core-events": ^6.4.0
-    "@storybook/theming": ^6.4.0
+    "@storybook/blocks": ^7.0.0
+    "@storybook/components": ^7.0.0
+    "@storybook/core-events": ^7.0.0
+    "@storybook/manager-api": ^7.0.0
+    "@storybook/preview-api": ^7.0.0
+    "@storybook/theming": ^7.0.0
+    "@storybook/types": ^7.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-router: ^6.3.0
@@ -32865,7 +32876,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 6e1e858fa66e79da36dffc77dfa9b48298a31ca2797389926e7b7a6dafc5919673eda7a19eb882a71085a2eb2dce69811616b6a06cfbe0f9c112ea268a5d9ebb
+  checksum: 1a786c3d16c21b1f4408145b4f86bb4fe9a5c8627d9d60152380de53e7f9497540c68d8112eb2e9ade1ba3138bb7671630afef65c13bd430243211fe6516ee9b
   languageName: node
   linkType: hard
 
