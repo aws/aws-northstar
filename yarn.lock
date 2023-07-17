@@ -192,7 +192,7 @@ __metadata:
     "@aws-sdk/protocol-http": ^3.357.0
     "@aws-sdk/querystring-parser": ^3.357.0
     "@aws-sdk/signature-v4": ^3.357.0
-    "@aws-sdk/types": ^3.357.0
+    "@aws-sdk/types": ^3.370.0
     "@babel/core": ^7.21.4
     "@cloudscape-design/collection-hooks": ^1.0.21
     "@cloudscape-design/components": ^3.0.321
@@ -721,7 +721,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/types@npm:3.357.0, @aws-sdk/types@npm:^3.357.0":
+"@aws-sdk/types@npm:3.357.0":
   version: 3.357.0
   resolution: "@aws-sdk/types@npm:3.357.0"
   dependencies:
@@ -736,6 +736,16 @@ __metadata:
   dependencies:
     tslib: ^2.5.0
   checksum: b11a91899614e14d40081ceab39cd3702254a5658c7b5e8862ef0d66dbffaa41c9a0f0d31e415d22f31c791b507699ba3a5fc7d87a540273386eb779be3807e4
+  languageName: node
+  linkType: hard
+
+"@aws-sdk/types@npm:^3.370.0":
+  version: 3.370.0
+  resolution: "@aws-sdk/types@npm:3.370.0"
+  dependencies:
+    "@smithy/types": ^1.1.0
+    tslib: ^2.5.0
+  checksum: 105a5768f20075035c2250de69f782ea4219c9ed8cd426c9ab57605616c8b1d534764d3c5b29e9715eb68a0e3f99b27ed463c410a3d728abf3c4ad59347e9f4e
   languageName: node
   linkType: hard
 
