@@ -10782,6 +10782,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-router@npm:^5.1.0":
+  version: 5.1.20
+  resolution: "@types/react-router@npm:5.1.20"
+  dependencies:
+    "@types/history": ^4.7.11
+    "@types/react": "*"
+  checksum: 128764143473a5e9457ddc715436b5d49814b1c214dde48939b9bef23f0e77f52ffcdfa97eb8d3cc27e2c229869c0cdd90f637d887b62f2c9f065a87d6425419
+  languageName: node
+  linkType: hard
+
 "@types/react-syntax-highlighter@npm:11.0.5":
   version: 11.0.5
   resolution: "@types/react-syntax-highlighter@npm:11.0.5"
@@ -10940,15 +10950,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/storybook-react-router@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@types/storybook-react-router@npm:1.0.2"
+"@types/storybook-react-router@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@types/storybook-react-router@npm:1.0.3"
   dependencies:
     "@storybook/addons": ^6.5.9
     "@storybook/react": ^6.5.9
     "@types/react": "*"
-    "@types/react-router": "*"
-  checksum: e7daa7c89e78ccb8c1c438732ccc9ee3dfcb6981930cde47650c095bf60501d01f120a4f06f624e8849e6a0ff27db22e609284d3fddb98a7af2f7ddaa1991bc4
+    "@types/react-router": ^5.1.0
+  checksum: 5edc10976aff222b3d4376dcbfbdbd2841ce3fc218261efccaaf1faec68c945fbe806364e3d8749d1e2158e643c9c70d8df4dc75712f0fd70a99418e05edb0f0
   languageName: node
   linkType: hard
 
@@ -12995,7 +13005,7 @@ __metadata:
     "@types/react-syntax-highlighter": 13.5.2
     "@types/react-table": 7.7.14
     "@types/react-test-renderer": ^17.0.2
-    "@types/storybook-react-router": ^1.0.2
+    "@types/storybook-react-router": ^1.0.3
     "@types/testing-library__jest-dom": ^5.14.5
     "@types/uuid": ^9.0.1
     babel-loader: ^9.1.3
