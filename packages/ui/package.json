@@ -82,7 +82,7 @@
   },
   "dependencies": {
     "@aws-crypto/sha256-js": "^2.0.2",
-    "@aws-sdk/client-cognito-identity": "^3.357.0",
+    "@aws-sdk/client-cognito-identity": "^3.370.0",
     "@aws-sdk/client-cognito-identity-provider": "^3.357.0",
     "@aws-sdk/credential-provider-cognito-identity": "^3.357.0",
     "@aws-sdk/protocol-http": "^3.357.0",
