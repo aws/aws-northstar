@@ -38,7 +38,7 @@
     "url": "https://github.com/aws/aws-northstar"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
+    "@babel/core": "^7.22.9",
     "@cloudscape-design/components": "^3.0.338",
     "@cloudscape-design/jest-preset": "^2.0.6",
     "@storybook/addon-a11y": "6.5.9",
