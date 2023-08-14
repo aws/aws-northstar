@@ -211,7 +211,7 @@ __metadata:
     "@storybook/react": 6.5.9
     "@storybook/testing-library": ^0.2.0
     "@storybook/testing-react": ^1.3.0
-    "@testing-library/jest-dom": ^5.16.5
+    "@testing-library/jest-dom": ^6.0.0
     "@testing-library/react": ^13.4.0
     "@testing-library/react-hooks": ^8.0.1
     "@testing-library/user-event": ^13.5.0
@@ -10011,7 +10011,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:^5.16.2, @testing-library/jest-dom@npm:^5.16.5":
+"@testing-library/jest-dom@npm:^5.16.2":
   version: 5.16.5
   resolution: "@testing-library/jest-dom@npm:5.16.5"
   dependencies:
@@ -10025,6 +10025,36 @@ __metadata:
     lodash: ^4.17.15
     redent: ^3.0.0
   checksum: 94911f901a8031f3e489d04ac057cb5373621230f5d92bed80e514e24b069fb58a3166d1dd86963e55f078a1bd999da595e2ab96ed95f452d477e272937d792a
+  languageName: node
+  linkType: hard
+
+"@testing-library/jest-dom@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@testing-library/jest-dom@npm:6.0.0"
+  dependencies:
+    "@adobe/css-tools": ^4.0.1
+    "@babel/runtime": ^7.9.2
+    aria-query: ^5.0.0
+    chalk: ^3.0.0
+    css.escape: ^1.5.1
+    dom-accessibility-api: ^0.5.6
+    lodash: ^4.17.15
+    redent: ^3.0.0
+  peerDependencies:
+    "@jest/globals": ">= 28"
+    "@types/jest": ">= 28"
+    jest: ">= 28"
+    vitest: ">= 0.32"
+  peerDependenciesMeta:
+    "@jest/globals":
+      optional: true
+    "@types/jest":
+      optional: true
+    jest:
+      optional: true
+    vitest:
+      optional: true
+  checksum: 9b978e993f084553f8e39215b08f6e09e84a4c78e578db35d361bb4259aed84418f1b17ce52f23ead4d81cc7cad5ae5b18a6596d6d531a6d2252be66409e7167
   languageName: node
   linkType: hard
 
@@ -13007,7 +13037,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aws-northstar-demo-legacy@workspace:packages/examples/legacy"
   dependencies:
-    "@testing-library/jest-dom": ^5.16.5
+    "@testing-library/jest-dom": ^6.0.0
     "@testing-library/react": ^13.4.0
     "@testing-library/user-event": ^13.5.0
     "@types/jest": ^27.5.2
@@ -13034,7 +13064,7 @@ __metadata:
   dependencies:
     "@aws-northstar/ui": latest
     "@cloudscape-design/components": ^3.0.338
-    "@testing-library/jest-dom": ^5.16.5
+    "@testing-library/jest-dom": ^6.0.0
     "@testing-library/react": ^13.4.0
     "@testing-library/user-event": ^13.5.0
     "@types/jest": ^27.5.2
@@ -13152,7 +13182,7 @@ __metadata:
     "@storybook/manager-webpack5": ^6.5.16
     "@storybook/react": ^6.5.16
     "@storybook/testing-library": ^0.2.0
-    "@testing-library/jest-dom": ^5.16.5
+    "@testing-library/jest-dom": ^6.0.0
     "@testing-library/react": ^12.1.5
     "@testing-library/react-hooks": ^8.0.1
     "@types/jest-axe": ^3.5.3
