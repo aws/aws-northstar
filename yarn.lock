@@ -100,14 +100,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/sha256-js@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@aws-crypto/sha256-js@npm:2.0.2"
+"@aws-crypto/sha256-js@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/sha256-js@npm:5.0.0"
   dependencies:
-    "@aws-crypto/util": ^2.0.2
-    "@aws-sdk/types": ^3.110.0
+    "@aws-crypto/util": ^5.0.0
+    "@aws-sdk/types": ^3.222.0
     tslib: ^1.11.1
-  checksum: 9125ec65a2b05fce908ac2289ba97b995a299f2d717684804211df8e8bcffd8cd9b8861582240655b88f2255c46fcee34026f75c057ffb22f44b6a76cd43f65a
+  checksum: 0c312132538abd4c1dc1b484e76df70a24c5106fd9fa79cdbdbdf1aec970806c0b7817601c03f370d0617b72a70c14c812572efdeef84b7d4efd0e7db19c38fd
   languageName: node
   linkType: hard
 
@@ -131,17 +131,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/util@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@aws-crypto/util@npm:2.0.2"
-  dependencies:
-    "@aws-sdk/types": ^3.110.0
-    "@aws-sdk/util-utf8-browser": ^3.0.0
-    tslib: ^1.11.1
-  checksum: 13cb33a39005b09c062398d361043c2224bc8ba42b1432bad52e15bc4bf9ffad4facdddc394b3cc71b3fb8d86a7ec325fd1afa107b5fde0dab84a7e32d311d7f
-  languageName: node
-  linkType: hard
-
 "@aws-crypto/util@npm:^3.0.0":
   version: 3.0.0
   resolution: "@aws-crypto/util@npm:3.0.0"
@@ -150,6 +139,17 @@ __metadata:
     "@aws-sdk/util-utf8-browser": ^3.0.0
     tslib: ^1.11.1
   checksum: d29d5545048721aae3d60b236708535059733019a105f8a64b4e4a8eab7cf8dde1546dc56bff7de20d36140a4d1f0f4693e639c5732a7059273a7b1e56354776
+  languageName: node
+  linkType: hard
+
+"@aws-crypto/util@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@aws-crypto/util@npm:5.0.0"
+  dependencies:
+    "@aws-sdk/types": ^3.222.0
+    "@aws-sdk/util-utf8-browser": ^3.0.0
+    tslib: ^1.11.1
+  checksum: 3416ed5865ee95ffb78aaeb7ac301861a54aede2bdb0565fbaf6ef6a4635eba5e06ed36ea377fc3bf89a075c28f64830b108e5188042fcac5d5ebf9cff3175d2
   languageName: node
   linkType: hard
 
@@ -185,7 +185,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@aws-northstar/ui@workspace:packages/ui"
   dependencies:
-    "@aws-crypto/sha256-js": ^2.0.2
+    "@aws-crypto/sha256-js": ^5.0.0
     "@aws-sdk/client-cognito-identity": ^3.357.0
     "@aws-sdk/client-cognito-identity-provider": ^3.357.0
     "@aws-sdk/credential-provider-cognito-identity": ^3.357.0
@@ -730,7 +730,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/types@npm:^3.1.0, @aws-sdk/types@npm:^3.110.0, @aws-sdk/types@npm:^3.222.0":
+"@aws-sdk/types@npm:^3.1.0, @aws-sdk/types@npm:^3.222.0":
   version: 3.310.0
   resolution: "@aws-sdk/types@npm:3.310.0"
   dependencies:
