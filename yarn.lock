@@ -4967,7 +4967,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@material-ui/system@npm:^4.11.3":
+"@material-ui/system@npm:4.12.2, @material-ui/system@npm:^4.11.3":
   version: 4.12.2
   resolution: "@material-ui/system@npm:4.12.2"
   dependencies:
@@ -13112,7 +13112,7 @@ __metadata:
     "@material-ui/icons": ^4.11.3
     "@material-ui/lab": 4.0.0-alpha.58
     "@material-ui/pickers": ^3.3.10
-    "@material-ui/system": 4.11.3
+    "@material-ui/system": 4.12.2
     "@storybook/addon-a11y": ^6.5.16
     "@storybook/addon-actions": ^6.5.16
     "@storybook/addon-essentials": ^6.5.16

@@ -99,7 +99,7 @@
         "@material-ui/icons": "^4.11.3",
         "@material-ui/lab": "4.0.0-alpha.58",
         "@material-ui/pickers": "^3.3.10",
-        "@material-ui/system": "4.11.3",
+        "@material-ui/system": "4.12.2",
         "@types/react-syntax-highlighter": "13.5.2",
         "@types/react-table": "7.7.14",
         "@types/uuid": "^9.0.1",
