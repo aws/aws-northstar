@@ -197,7 +197,7 @@ __metadata:
     "@cloudscape-design/collection-hooks": ^1.0.21
     "@cloudscape-design/components": ^3.0.338
     "@cloudscape-design/design-tokens": ^3.0.11
-    "@cloudscape-design/global-styles": ^1.0.11
+    "@cloudscape-design/global-styles": ^1.0.12
     "@cloudscape-design/jest-preset": ^2.0.6
     "@data-driven-forms/react-form-renderer": ^3.21.4
     "@storybook/addon-a11y": 6.5.9
@@ -3436,10 +3436,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudscape-design/global-styles@npm:^1.0.11":
-  version: 1.0.11
-  resolution: "@cloudscape-design/global-styles@npm:1.0.11"
-  checksum: 7d4babf156590f279c81bf4198bf39554e9cbf8895a1db6665279632f1e27e5169b74606a75aff2930a3009f5004d840558fe61fe1b42fe6d83355382238bd72
+"@cloudscape-design/global-styles@npm:^1.0.12":
+  version: 1.0.12
+  resolution: "@cloudscape-design/global-styles@npm:1.0.12"
+  checksum: 92b1b4c563aabca21e7f1663fa61f75b6412913bd81cca19ce9cded5ac76735a650d4675243c7e3b155860083a77ca4a415ef6bf07adee8c57000a1384a7c6b4
   languageName: node
   linkType: hard
 
