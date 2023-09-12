@@ -18,9 +18,24 @@ import { CognitoUserSession, CognitoUser } from 'amazon-cognito-identity-js';
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity';
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-provider-cognito-identity';
 import EmptyArgumentError from '../../EmptyArgumentError';
+import { getCachedCredentials, setCachedCredentials } from './cache';
 
-const getCredentials = (cognitoUser: CognitoUser, region?: string, identityPoolId?: string, userPoolId?: string) => {
+const getCredentials = (
+    cognitoUser: CognitoUser,
+    region?: string,
+    identityPoolId?: string,
+    userPoolId?: string,
+    disableCache?: boolean
+) => {
     return new Promise<AwsCredentialIdentity>(async (resolve, reject) => {
+        if (!disableCache) {
+            const cachedCredentials = getCachedCredentials();
+            if (cachedCredentials) {
+                resolve(cachedCredentials);
+                return;
+            }
+        }
+
         if (!region) {
             reject(new EmptyArgumentError('region is empty'));
             return;
@@ -48,6 +63,9 @@ const getCredentials = (cognitoUser: CognitoUser, region?: string, identityPoolI
                 credentials: credentialsFromCognitoIdentityPool,
             });
             const credential = await cognitoidentity.config.credentials();
+            if (!disableCache) {
+                setCachedCredentials(credential);
+            }
             resolve(credential);
         });
     });

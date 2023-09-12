@@ -19,7 +19,7 @@ import { useCognitoAuthContext } from '../../context';
 import getCredentials from './utils/getCredentials';
 import EmptyArgumentError from './EmptyArgumentError';
 
-const useSigv4Client = (service: string = 'execute-api') => {
+const useSigv4Client = (service: string = 'execute-api', disableCache?: boolean) => {
     const { getAuthenticatedUser, region, identityPoolId, userPoolId } = useCognitoAuthContext();
 
     return useCallback(
@@ -33,12 +33,12 @@ const useSigv4Client = (service: string = 'execute-api') => {
             const fetcher = createSignedFetcher({
                 service,
                 region: region || 'us-east-1',
-                credentials: () => getCredentials(cognitoUser, region, identityPoolId, userPoolId),
+                credentials: () => getCredentials(cognitoUser, region, identityPoolId, userPoolId, disableCache),
             });
 
             return fetcher(input, init);
         },
-        [getAuthenticatedUser, region, identityPoolId, userPoolId, service]
+        [getAuthenticatedUser, region, identityPoolId, userPoolId, service, disableCache]
     );
 };
 
