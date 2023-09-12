@@ -199,7 +199,7 @@ __metadata:
     "@cloudscape-design/design-tokens": ^3.0.11
     "@cloudscape-design/global-styles": ^1.0.11
     "@cloudscape-design/jest-preset": ^2.0.6
-    "@data-driven-forms/react-form-renderer": ^3.20.13
+    "@data-driven-forms/react-form-renderer": ^3.21.4
     "@storybook/addon-a11y": 6.5.9
     "@storybook/addon-actions": 6.5.9
     "@storybook/addon-essentials": 6.5.9
@@ -3685,9 +3685,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@data-driven-forms/react-form-renderer@npm:^3.20.13":
-  version: 3.20.13
-  resolution: "@data-driven-forms/react-form-renderer@npm:3.20.13"
+"@data-driven-forms/react-form-renderer@npm:^3.21.4":
+  version: 3.21.4
+  resolution: "@data-driven-forms/react-form-renderer@npm:3.21.4"
   dependencies:
     final-form: ^4.20.4
     final-form-arrays: ^3.0.2
@@ -3699,25 +3699,7 @@ __metadata:
   peerDependencies:
     react: ^16.13.1 || ^17.0.2 || ^18.0.0
     react-dom: ^16.13.1 || ^17.0.2 || ^18.0.0
-  checksum: 163e574e9595297d391f162be255218e49cda058eceda901c7708c9a5ec572f4c3432c81445288c93db719186c7eb87e2d7ef46188c70d6d8b9cae6991b72763
-  languageName: node
-  linkType: hard
-
-"@data-driven-forms/react-form-renderer@npm:^3.20.2":
-  version: 3.20.2
-  resolution: "@data-driven-forms/react-form-renderer@npm:3.20.2"
-  dependencies:
-    final-form: ^4.20.4
-    final-form-arrays: ^3.0.2
-    final-form-focus: ^1.1.2
-    lodash: ^4.17.15
-    prop-types: ^15.7.2
-    react-final-form: ^6.5.0
-    react-final-form-arrays: ^3.1.1
-  peerDependencies:
-    react: ^16.13.1 || ^17.0.2 || ^18.0.0
-    react-dom: ^16.13.1 || ^17.0.2 || ^18.0.0
-  checksum: 024d79320779e341857c36e19a8066e6b6baf987a56e2a7501538db6d6ae2e026d48412c61de275b9fbc8063d80098ae12ef5cafe84b2c784de4bd75a6446076
+  checksum: 00acaa152641c4072638c864b45be8094b9117dd147b2a315eb04169efd6ab15092901c5b4b0815b7bac014d1b7337708069fbb4fbd24267b85df7ab382e441e
   languageName: node
   linkType: hard
 
@@ -13107,7 +13089,7 @@ __metadata:
   resolution: "aws-northstar@workspace:packages/legacy"
   dependencies:
     "@babel/core": ^7.22.9
-    "@data-driven-forms/react-form-renderer": ^3.20.2
+    "@data-driven-forms/react-form-renderer": ^3.21.4
     "@date-io/date-fns": ^1.3.1
     "@material-ui/core": 4.11.4
     "@material-ui/icons": ^4.11.3
