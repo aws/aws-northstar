@@ -19,7 +19,7 @@ import wrapper from '@cloudscape-design/components/test-utils/dom';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './index.stories';
 
-const { Default, WithInitialValue, Submittting } = composeStories(stories);
+const { Default, WithInitialValue, Submittting, NavigatingEvent } = composeStories(stories);
 
 const handleCancel = jest.fn();
 const handleSubmit = jest.fn();
@@ -144,5 +144,39 @@ describe('Wizard', () => {
 
         expect(screen.getByText('Submit').parentElement).toHaveAttribute('aria-disabled', 'true');
         expect(screen.getByText('Previous').parentElement).toBeDisabled();
+    });
+
+    it('should render wizard with onNavigating event handler', async () => {
+        render(<NavigatingEvent onSubmit={handleSubmit} onCancel={handleCancel} />);
+
+        const element = await screen.findByTestId('form-renderer');
+        const wizard = wrapper(element).findWizard();
+
+        expect(wizard?.findHeader()?.getElement()).toHaveTextContent('Step 1');
+
+        await act(async () => {
+            await userEvent.click(wizard?.findPrimaryButton().getElement()!);
+        });
+        expect(screen.getByText('Required')).toBeVisible();
+
+        await act(async () => {
+            await userEvent.type(screen.getByLabelText('Config 1'), 'Config 1 Content');
+            await userEvent.click(wizard?.findPrimaryButton().getElement()!);
+        });
+
+        expect(wizard?.findPrimaryButton().findLoadingIndicator()).not.toBeNull();
+
+        await waitFor(() => expect(wizard?.findHeader()?.getElement()).toHaveTextContent('Step 2'), {
+            timeout: 3000,
+        });
+
+        await act(async () => {
+            await userEvent.type(screen.getByLabelText('Config 2'), 'Config 2 Content');
+            await userEvent.click(wizard?.findPrimaryButton().getElement()!);
+        });
+
+        await waitFor(() => expect(screen.getByText('Unable to proceed')).toBeVisible(), {
+            timeout: 3000,
+        });
     });
 });

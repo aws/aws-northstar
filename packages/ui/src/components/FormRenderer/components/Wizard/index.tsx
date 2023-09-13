@@ -16,9 +16,15 @@
 import { FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import WizardComponent, { WizardProps as WizardComponentProps } from '@cloudscape-design/components/wizard';
+import { NonCancelableCustomEvent, NonCancelableEventHandler } from '@cloudscape-design/components/internal/events';
 import { Field } from '../../types';
 import WizardSteps from './components/WizardSteps';
 import { useFormRendererContext } from '../../formRendererContext';
+
+export interface NavigatingEventResponse {
+    continued: boolean;
+    errorText?: string;
+}
 
 export interface WizardProps {
     fields: Field[];
@@ -27,6 +33,10 @@ export interface WizardProps {
     activeStepIndex: WizardComponentProps['activeStepIndex'];
     isReadOnly?: boolean;
     isDisabled?: boolean;
+    onNavigating?: (
+        event: NonCancelableCustomEvent<WizardComponentProps.NavigateDetail>
+    ) => Promise<NavigatingEventResponse>;
+    isLoadingNextStep?: WizardComponentProps['isLoadingNextStep'];
 }
 
 const DEFAULT_RESOURCE_STRINGS: WizardComponentProps.I18nStrings = {
@@ -41,11 +51,25 @@ const DEFAULT_RESOURCE_STRINGS: WizardComponentProps.I18nStrings = {
     optional: 'optional',
 };
 
-const Wizard: FC<WizardProps> = ({ i18nStrings, allowSkipTo, fields, isReadOnly, isDisabled, ...props }) => {
+const Wizard: FC<WizardProps> = ({
+    i18nStrings,
+    allowSkipTo,
+    fields,
+    isReadOnly,
+    isDisabled,
+    onNavigating,
+    ...props
+}) => {
     const [showError, setShowError] = useState(false);
     const formOptions = useFormApi();
     const { isSubmitting } = useFormRendererContext();
     const [activeStepIndex, setActiveStepIndex] = useState(props.activeStepIndex || 0);
+    const [isLoadingNextStep, setIsLoadingNextStep] = useState(props.isLoadingNextStep || isSubmitting);
+    const [errorText, setErrorText] = useState<string>();
+
+    useEffect(() => {
+        setIsLoadingNextStep(props.isLoadingNextStep || isSubmitting);
+    }, [props.isLoadingNextStep, isSubmitting]);
 
     const resourceStrings = useMemo(() => {
         return {
@@ -56,13 +80,13 @@ const Wizard: FC<WizardProps> = ({ i18nStrings, allowSkipTo, fields, isReadOnly,
 
     const steps = useMemo(() => {
         return fields.map((field) => {
-            const { title, info, description, isOptional, errorText, fields: fieldFields, ...rest } = field;
+            const { title, info, description, isOptional, fields: fieldFields, ...rest } = field;
             return {
                 title: title,
                 info: info,
                 description: field.description,
                 isOptional: field.isOptional,
-                errorText: field.errorText,
+                errorText: field.errorText || errorText,
                 content: (
                     <WizardSteps
                         isReadOnly={isReadOnly}
@@ -74,26 +98,57 @@ const Wizard: FC<WizardProps> = ({ i18nStrings, allowSkipTo, fields, isReadOnly,
                 ),
             };
         });
-    }, [fields, showError, isReadOnly, isDisabled]);
+    }, [fields, showError, isReadOnly, isDisabled, errorText]);
 
     useEffect(() => {
         setShowError(false); // When steps change
     }, [activeStepIndex]);
 
-    const handleNavigation = useCallback(
-        ({ detail }: { detail: WizardComponentProps.NavigateDetail }) => {
-            const requestedStepIndex = detail.requestedStepIndex;
-            if (activeStepIndex < detail.requestedStepIndex) {
+    const handleNavigating = useCallback(
+        async (event: NonCancelableCustomEvent<WizardComponentProps.NavigateDetail>) => {
+            if (onNavigating) {
+                setIsLoadingNextStep(true);
+                const response = await onNavigating(event);
+                setIsLoadingNextStep(false);
+                return response;
+            }
+
+            return {
+                continued: true,
+                errorText: undefined,
+            };
+        },
+        [onNavigating]
+    );
+
+    const processNavigate = useCallback(
+        async (requestedStepIndex: number, event: NonCancelableCustomEvent<WizardComponentProps.NavigateDetail>) => {
+            const response = await handleNavigating(event);
+            if (response.continued) {
+                setActiveStepIndex(requestedStepIndex);
+            } else {
+                setErrorText(response.errorText);
+            }
+        },
+        [handleNavigating]
+    );
+
+    const handleNavigation: NonCancelableEventHandler<WizardComponentProps.NavigateDetail> = useCallback(
+        async (event) => {
+            setErrorText(undefined);
+            const requestedStepIndex = event.detail.requestedStepIndex;
+
+            if (activeStepIndex < event.detail.requestedStepIndex) {
                 const state = formOptions.getState();
                 setShowError(true);
                 if (!(state.invalid || state.validating || state.submitting)) {
-                    setActiveStepIndex(requestedStepIndex);
+                    processNavigate(requestedStepIndex, event);
                 }
             } else {
-                setActiveStepIndex(requestedStepIndex);
+                processNavigate(requestedStepIndex, event);
             }
         },
-        [activeStepIndex, formOptions]
+        [activeStepIndex, formOptions, processNavigate]
     );
 
     return (
@@ -103,7 +158,7 @@ const Wizard: FC<WizardProps> = ({ i18nStrings, allowSkipTo, fields, isReadOnly,
             onNavigate={handleNavigation}
             activeStepIndex={activeStepIndex}
             allowSkipTo={allowSkipTo}
-            isLoadingNextStep={isSubmitting}
+            isLoadingNextStep={isLoadingNextStep}
             steps={steps}
             onSubmit={formOptions.handleSubmit}
             onCancel={formOptions.onCancel}
