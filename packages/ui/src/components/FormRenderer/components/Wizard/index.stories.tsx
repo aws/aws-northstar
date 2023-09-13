@@ -15,6 +15,8 @@
  ******************************************************************************************************************** */
 import { ComponentMeta } from '@storybook/react';
 import Box from '@cloudscape-design/components/box';
+import { WizardProps as WizardComponentProps } from '@cloudscape-design/components/wizard';
+import { NonCancelableCustomEvent } from '@cloudscape-design/components/internal/events';
 import FormRenderer, { componentTypes, validatorTypes } from '../..';
 import { Template, DEFAULT_ARGS } from '../../index.stories';
 
@@ -156,5 +158,34 @@ Disabled.args = {
             ...field,
             isDisabled: true,
         })),
+    },
+};
+
+export const NavigatingEvent = Template.bind({});
+NavigatingEvent.args = {
+    ...Default.args,
+    schema: {
+        ...Default.args.schema,
+        fields: [
+            {
+                ...Default.args.schema!.fields[0],
+                onNavigating: (event: NonCancelableCustomEvent<WizardComponentProps.NavigateDetail>) => {
+                    return new Promise((resolve) => {
+                        window.setTimeout(() => {
+                            if (event.detail.requestedStepIndex >= 2) {
+                                resolve({
+                                    continued: false,
+                                    errorText: 'Unable to proceed',
+                                });
+                            } else {
+                                resolve({
+                                    continued: true,
+                                });
+                            }
+                        }, 2000);
+                    });
+                },
+            },
+        ],
     },
 };
