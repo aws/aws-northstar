@@ -15,7 +15,7 @@
  ******************************************************************************************************************** */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useState, useCallback, useRef } from 'react';
-import orderBy from 'lodash.orderby';
+import orderBy from 'lodash/orderBy';
 import Table, { TableProps, FetchDataOptions, SelectionChangeDetail } from '.';
 import columnDefinition from './data/columnDefinitions';
 import shortData from './data/short';

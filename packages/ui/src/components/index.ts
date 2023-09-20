@@ -29,5 +29,7 @@ export { default as NorthStarThemeProvider } from './NorthStarThemeProvider';
 export * from './NorthStarThemeProvider';
 export { default as Table } from './Table';
 export * from './Table';
+export { default as InfiniteQueryTable } from './InfiniteQueryTable';
+export * from './InfiniteQueryTable';
 export { default as CognitoAuth } from './CognitoAuth';
 export * from './CognitoAuth';
