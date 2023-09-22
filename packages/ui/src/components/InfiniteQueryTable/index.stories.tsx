@@ -99,6 +99,35 @@ const Template: ComponentStory<typeof InfiniteQueryTable<TestDataItem, 'items', 
 
 export const Default = Template.bind({});
 Default.args = {};
+Default.parameters = {
+    docs: {
+        source: {
+            code: `// Generated hook from Type Safe API, or your custom tanstack react-query "useInfiniteQuery" hook
+const items = useListItems();
+
+return (
+    <InfiniteQueryTable
+        // Pass in your query hook
+        query={items}
+        // Pass in the key in infinite query page response containing the list of items
+        itemsKey="items"
+        columnDefinitions={[
+            {
+                id: 'name',
+                header: 'Name',
+                cell: (item) => item.name,
+            },
+            {
+                id: 'type',
+                header: 'Type',
+                cell: (item) => item.type,
+            },
+        ]}
+    />
+);`,
+        },
+    },
+};
 
 export const ClientSideTextFilter = Template.bind({});
 ClientSideTextFilter.args = {
@@ -107,12 +136,81 @@ ClientSideTextFilter.args = {
         placeholder: 'Find items...',
     },
 };
+ClientSideTextFilter.parameters = {
+    docs: {
+        source: {
+            code: `// Generated hook from Type Safe API, or your custom tanstack react-query "useInfiniteQuery" hook
+const items = useListItems();
+
+return (
+    <InfiniteQueryTable
+        // Pass in your query hook
+        query={items}
+        // Pass in the key in infinite query page response containing the list of items
+        itemsKey="items"
+        // Filter items which have been loaded client side
+        clientSideTextFilter={{
+            filterFunction: (filterText, item) => item.name.includes(filterText),
+            placeholder: 'Find items...',
+        }}
+        columnDefinitions={[
+            {
+                id: 'name',
+                header: 'Name',
+                cell: (item) => item.name,
+            },
+            {
+                id: 'type',
+                header: 'Type',
+                cell: (item) => item.type,
+            },
+        ]}
+    />
+);`,
+        },
+    },
+};
 
 export const ClientSideSort = Template.bind({});
 ClientSideSort.args = {
     clientSideSort: {
         defaultSortingColumn: {
             sortingField: 'name',
+        },
+    },
+};
+ClientSideSort.parameters = {
+    docs: {
+        source: {
+            code: `// Generated hook from Type Safe API, or your custom tanstack react-query "useInfiniteQuery" hook
+const items = useListItems();
+
+return (
+    <InfiniteQueryTable
+        // Pass in your query hook
+        query={items}
+        // Pass in the key in infinite query page response containing the list of items
+        itemsKey="items"
+        // Sort items which have been loaded client side
+        clientSideSort={{
+            defaultSortingColumn: {
+                sortingField: 'name',
+            },
+        }}
+        columnDefinitions={[
+            {
+                id: 'name',
+                header: 'Name',
+                cell: (item) => item.name,
+            },
+            {
+                id: 'type',
+                header: 'Type',
+                cell: (item) => item.type,
+            },
+        ]}
+    />
+);`,
         },
     },
 };
