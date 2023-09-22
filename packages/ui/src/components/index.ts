@@ -31,5 +31,7 @@ export { default as Table } from './Table';
 export * from './Table';
 export { default as InfiniteQueryTable } from './InfiniteQueryTable';
 export * from './InfiniteQueryTable';
+export { default as InfiniteQuerySelect } from './InfiniteQuerySelect';
+export * from './InfiniteQuerySelect';
 export { default as CognitoAuth } from './CognitoAuth';
 export * from './CognitoAuth';
