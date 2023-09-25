@@ -113,7 +113,7 @@
         "recharts": "^2.1.16",
         "remark-code-blocks": "^2.0.1",
         "remark-frontmatter": "^3.0.0",
-        "remark-gfm": "^1.0.0",
+        "remark-gfm": "^4.0.0",
         "use-debounce": "^9.0.4",
         "uuid": "^9.0.0"
     },
