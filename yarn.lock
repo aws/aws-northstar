@@ -195,7 +195,7 @@ __metadata:
     "@aws-sdk/types": ^3.357.0
     "@babel/core": ^7.22.20
     "@cloudscape-design/collection-hooks": ^1.0.21
-    "@cloudscape-design/components": ^3.0.338
+    "@cloudscape-design/components": ^3.0.391
     "@cloudscape-design/design-tokens": ^3.0.11
     "@cloudscape-design/global-styles": ^1.0.12
     "@cloudscape-design/jest-preset": ^2.0.6
@@ -3443,9 +3443,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudscape-design/components@npm:^3.0.338":
-  version: 3.0.338
-  resolution: "@cloudscape-design/components@npm:3.0.338"
+"@cloudscape-design/components@npm:^3.0.391":
+  version: 3.0.391
+  resolution: "@cloudscape-design/components@npm:3.0.391"
   dependencies:
     "@cloudscape-design/collection-hooks": ^1.0.0
     "@cloudscape-design/component-toolkit": ^1.0.0-beta
@@ -3470,7 +3470,7 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17 || ^18
     react-dom: ^16.8 || ^17 || ^18
-  checksum: 1e4505662ccd6fa615780f2283c574c4314f8f7bae2540388ada8f8184550b48a25630d28e37db3ee9895191d5badeb03218dc1be31dafc2a71e429898fedc86
+  checksum: 04ee6ce7fd67eaec3ba1a167e851c4f495bc18c764fb27235efbee0381958d85acce861320170f64ba051059c01f566d1d429a21e3583d2d652cb151a7663de1
   languageName: node
   linkType: hard
 
@@ -13010,7 +13010,7 @@ __metadata:
   resolution: "aws-northstar-demo-ui@workspace:packages/examples/ui"
   dependencies:
     "@aws-northstar/ui": latest
-    "@cloudscape-design/components": ^3.0.338
+    "@cloudscape-design/components": ^3.0.391
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
     "@testing-library/user-event": ^13.5.0

@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.22.20",
-    "@cloudscape-design/components": "^3.0.338",
+    "@cloudscape-design/components": "^3.0.391",
     "@cloudscape-design/jest-preset": "^2.0.6",
     "@storybook/addon-a11y": "6.5.9",
     "@storybook/addon-actions": "6.5.9",
