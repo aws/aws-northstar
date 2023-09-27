@@ -21,6 +21,8 @@ import { Field } from '../../types';
 import WizardSteps from './components/WizardSteps';
 import { useFormRendererContext } from '../../formRendererContext';
 
+export type NavigatingEventDetail = WizardComponentProps.NavigateDetail & { values: Record<string, any> };
+
 export interface NavigatingEventResponse {
     continued: boolean;
     errorText?: string;
@@ -33,9 +35,7 @@ export interface WizardProps {
     activeStepIndex: WizardComponentProps['activeStepIndex'];
     isReadOnly?: boolean;
     isDisabled?: boolean;
-    onNavigating?: (
-        event: NonCancelableCustomEvent<WizardComponentProps.NavigateDetail>
-    ) => Promise<NavigatingEventResponse>;
+    onNavigating?: (event: NonCancelableCustomEvent<NavigatingEventDetail>) => Promise<NavigatingEventResponse>;
     isLoadingNextStep?: WizardComponentProps['isLoadingNextStep'];
 }
 
@@ -108,7 +108,13 @@ const Wizard: FC<WizardProps> = ({
         async (event: NonCancelableCustomEvent<WizardComponentProps.NavigateDetail>) => {
             if (onNavigating) {
                 setIsLoadingNextStep(true);
-                const response = await onNavigating(event);
+                const response = await onNavigating({
+                    ...event,
+                    detail: {
+                        ...event.detail,
+                        values: formOptions.getState().values,
+                    },
+                });
                 setIsLoadingNextStep(false);
                 return response;
             }
@@ -118,7 +124,7 @@ const Wizard: FC<WizardProps> = ({
                 errorText: undefined,
             };
         },
-        [onNavigating]
+        [onNavigating, formOptions]
     );
 
     const processNavigate = useCallback(
