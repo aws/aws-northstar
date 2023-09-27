@@ -15,9 +15,9 @@
  ******************************************************************************************************************** */
 import { ComponentMeta } from '@storybook/react';
 import Box from '@cloudscape-design/components/box';
-import { WizardProps as WizardComponentProps } from '@cloudscape-design/components/wizard';
 import { NonCancelableCustomEvent } from '@cloudscape-design/components/internal/events';
 import FormRenderer, { componentTypes, validatorTypes } from '../..';
+import { NavigatingEventDetail } from '.';
 import { Template, DEFAULT_ARGS } from '../../index.stories';
 
 export default {
@@ -169,7 +169,7 @@ NavigatingEvent.args = {
         fields: [
             {
                 ...Default.args.schema!.fields[0],
-                onNavigating: (event: NonCancelableCustomEvent<WizardComponentProps.NavigateDetail>) => {
+                onNavigating: (event: NonCancelableCustomEvent<NavigatingEventDetail>) => {
                     return new Promise((resolve) => {
                         window.setTimeout(() => {
                             if (event.detail.requestedStepIndex >= 2) {
