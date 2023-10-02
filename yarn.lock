@@ -10985,6 +10985,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-test-renderer@npm:^18.0.0":
+  version: 18.0.3
+  resolution: "@types/react-test-renderer@npm:18.0.3"
+  dependencies:
+    "@types/react": "*"
+  checksum: 6834c7c998d9e699b7b9aca31ce0f550a29a63526a9ab15f62764eeade28fcce634030e5cfd223a8417e8c53234e01bfb961906b35fd9a72dd513aba549181f0
+  languageName: node
+  linkType: hard
+
 "@types/react-transition-group@npm:^4.2.0":
   version: 4.4.5
   resolution: "@types/react-transition-group@npm:4.4.5"
@@ -13169,7 +13178,7 @@ __metadata:
     react-plotly.js: ^2.6.0
     react-router: ^5.1.2
     react-router-dom: ^5.1.2
-    react-styleguidist: ^12.0.1
+    react-styleguidist: ^13.1.1
     react-syntax-highlighter: ^15.5.0
     react-table: 7.8.0
     react-test-renderer: ^17.0.1
@@ -30581,13 +30590,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-simple-code-editor@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "react-simple-code-editor@npm:0.10.0"
+"react-simple-code-editor@npm:^0.13.1":
+  version: 0.13.1
+  resolution: "react-simple-code-editor@npm:0.13.1"
   peerDependencies:
-    react: ^16.0.0
-    react-dom: ^16.0.0
-  checksum: d9f448c5d1ba1b630ad6d9d775b5fa651ad1144eb5850fed3831b97d9da6da1daced37301c09946ff3a586f1f0f488f314cc81b744a1b60a343f30517c0767e9
+    react: "*"
+    react-dom: "*"
+  checksum: 1d223e34ccac5d7f91318f28d5edab6ccb13c51b1afb502094b8475214321263bb44258d355978e1714e9360c9081fb9f38d3ae89071a06628407627c362cc45
   languageName: node
   linkType: hard
 
@@ -30644,11 +30653,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-styleguidist@npm:^12.0.1":
-  version: 12.0.1
-  resolution: "react-styleguidist@npm:12.0.1"
+"react-styleguidist@npm:^13.1.1":
+  version: 13.1.1
+  resolution: "react-styleguidist@npm:13.1.1"
   dependencies:
     "@tippyjs/react": 4.1.0
+    "@types/react-test-renderer": ^18.0.0
     "@vxna/mini-html-webpack-template": ^2.0.0
     acorn: ^6.4.1
     acorn-jsx: ^5.1.0
@@ -30664,6 +30674,7 @@ __metadata:
     doctrine: ^3.0.0
     es6-object-assign: ~1.1.0
     es6-promise: ^4.2.8
+    escape-string-regexp: ^1.0.5
     escodegen: ^1.12.0
     estree-walker: ~0.9.0
     fastest-levenshtein: ^1.0.9
@@ -30673,6 +30684,7 @@ __metadata:
     glob: ^7.1.5
     glogg: ^1.0.2
     hash-sum: ^2.0.0
+    is-plain-obj: ^1.1.0
     javascript-stringify: ^2.0.0
     jss: ^10.9.0
     jss-plugin-camel-case: ^10.9.0
@@ -30699,7 +30711,7 @@ __metadata:
     react-docgen-displayname-handler: ^3.0.0
     react-group: ^3.0.2
     react-icons: ^3.8.0
-    react-simple-code-editor: ^0.10.0
+    react-simple-code-editor: ^0.13.1
     recast: ~0.18.5
     remark: ^13.0.0
     strip-html-comments: ^1.0.0
@@ -30710,11 +30722,11 @@ __metadata:
     webpack-dev-server: ^4.9.2
     webpack-merge: ^4.2.2
   peerDependencies:
-    react: ">=16.8"
-    react-dom: ">=16.8"
+    react: ">=18.0"
+    react-dom: ">=18.0"
   bin:
     styleguidist: lib/bin/styleguidist.js
-  checksum: 627a9acab023497c31535e00a9718c8229acc27a679b8b67c4ae36aa211b282062db08f592daae57ab2c5b7952b826eb1aecce27f389cd53f8ff9aec69b93f18
+  checksum: 1903811f776dbe30e33fcf229b5c790b013d7a936e28d65c5355cff7663bc91f07d9fbf3abce80758db91e968b7c9d33e8fabc3db472fbfa85b4374e83c6c73f
   languageName: node
   linkType: hard
 
