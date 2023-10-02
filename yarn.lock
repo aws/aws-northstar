@@ -210,7 +210,7 @@ __metadata:
     "@storybook/manager-webpack5": 6.5.9
     "@storybook/react": 6.5.9
     "@storybook/testing-library": ^0.2.0
-    "@storybook/testing-react": ^1.3.0
+    "@storybook/testing-react": ^2.0.1
     "@tanstack/react-query": ^4.35.3
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
@@ -8628,21 +8628,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/csf@npm:0.0.2--canary.87bc651.0":
-  version: 0.0.2--canary.87bc651.0
-  resolution: "@storybook/csf@npm:0.0.2--canary.87bc651.0"
-  dependencies:
-    lodash: ^4.17.15
-  checksum: 1533ff81f7fb59c06fc608f452de3cfcafba5806da68dd2c88813e8284a7aa1c158daee6a58b028b7ccd03d96974b5d3727deaae1d1d38e304b2a7cdcd8a678d
-  languageName: node
-  linkType: hard
-
 "@storybook/csf@npm:^0.0.1":
   version: 0.0.1
   resolution: "@storybook/csf@npm:0.0.1"
   dependencies:
     lodash: ^4.17.15
   checksum: fb57fa028b08a51edf44e1a2bf4be40a4607f5c6ccb58aae8924f476a42b9bbd61a0ad521cfc82196f23e6a912caae0a615e70a755e6800b284c91c509fd2de6
+  languageName: node
+  linkType: hard
+
+"@storybook/csf@npm:^0.1.0":
+  version: 0.1.1
+  resolution: "@storybook/csf@npm:0.1.1"
+  dependencies:
+    type-fest: ^2.19.0
+  checksum: 1fbb827b50f0c15f21026a95d02cc096be4f9f2705ad8fd29f0a99330233606e69f6af7551d844ace2a4b8f08fcc9f81496d4d69160ba8c458698291efb60954
   languageName: node
   linkType: hard
 
@@ -9614,18 +9614,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/testing-react@npm:^1.3.0":
-  version: 1.3.0
-  resolution: "@storybook/testing-react@npm:1.3.0"
+"@storybook/testing-react@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@storybook/testing-react@npm:2.0.1"
   dependencies:
-    "@storybook/csf": 0.0.2--canary.87bc651.0
+    "@storybook/csf": ^0.1.0
   peerDependencies:
-    "@storybook/addons": ">=6.4.0"
-    "@storybook/client-api": ">=6.4.0"
-    "@storybook/preview-web": ">=6.4.0"
-    "@storybook/react": ">=6.4.0"
+    "@storybook/client-logger": ^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0
+    "@storybook/preview-api": ^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0
+    "@storybook/react": ^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0
+    "@storybook/types": ^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: f7da948bfc100b7a3d8f3ddf02e8d610da80344904761ecdaa7a575dcc312c921ef4a28663edcc719aee587b14716643147b0e10414fa17abb740056cf9e80b5
+  checksum: efc32621c0b606409b622887832a2c86bc94f1d1012957f59c4d804d4b9414146dae7e50c8419bba1c85c0fc08feafbc4a4179a21cbda05fdb3ca4b891892dac
   languageName: node
   linkType: hard
 
@@ -34794,6 +34794,13 @@ __metadata:
   version: 1.4.0
   resolution: "type-fest@npm:1.4.0"
   checksum: b011c3388665b097ae6a109a437a04d6f61d81b7357f74cbcb02246f2f5bd72b888ae33631b99871388122ba0a87f4ff1c94078e7119ff22c70e52c0ff828201
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^2.19.0":
+  version: 2.19.0
+  resolution: "type-fest@npm:2.19.0"
+  checksum: a4ef07ece297c9fba78fc1bd6d85dff4472fe043ede98bd4710d2615d15776902b595abf62bd78339ed6278f021235fb28a96361f8be86ed754f778973a0d278
   languageName: node
   linkType: hard
 
