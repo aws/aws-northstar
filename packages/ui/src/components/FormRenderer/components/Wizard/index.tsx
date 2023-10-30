@@ -64,6 +64,7 @@ const Wizard: FC<WizardProps> = ({
     const formOptions = useFormApi();
     const { isSubmitting } = useFormRendererContext();
     const [activeStepIndex, setActiveStepIndex] = useState(props.activeStepIndex || 0);
+    const [maxStepIndex, setMaxStepIndex] = useState(0);
     const [isLoadingNextStep, setIsLoadingNextStep] = useState(props.isLoadingNextStep || isSubmitting);
     const [errorText, setErrorText] = useState<string>();
 
@@ -132,6 +133,7 @@ const Wizard: FC<WizardProps> = ({
             const response = await handleNavigating(event);
             if (response.continued) {
                 setActiveStepIndex(requestedStepIndex);
+                setMaxStepIndex((prev) => (requestedStepIndex > prev ? requestedStepIndex : prev));
             } else {
                 setErrorText(response.errorText);
             }
@@ -144,7 +146,7 @@ const Wizard: FC<WizardProps> = ({
             setErrorText(undefined);
             const requestedStepIndex = event.detail.requestedStepIndex;
 
-            if (activeStepIndex < event.detail.requestedStepIndex) {
+            if (activeStepIndex < event.detail.requestedStepIndex || activeStepIndex < maxStepIndex) {
                 const state = formOptions.getState();
                 setShowError(true);
                 if (!(state.invalid || state.validating || state.submitting)) {
@@ -154,7 +156,7 @@ const Wizard: FC<WizardProps> = ({
                 processNavigate(requestedStepIndex, event);
             }
         },
-        [activeStepIndex, formOptions, processNavigate]
+        [activeStepIndex, maxStepIndex, formOptions, processNavigate]
     );
 
     return (
