@@ -10966,15 +10966,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/storybook-react-router@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@types/storybook-react-router@npm:1.0.3"
+"@types/storybook-react-router@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@types/storybook-react-router@npm:1.0.6"
   dependencies:
     "@storybook/addons": ^6.5.9
     "@storybook/react": ^6.5.9
     "@types/react": "*"
     "@types/react-router": ^5.1.0
-  checksum: 5edc10976aff222b3d4376dcbfbdbd2841ce3fc218261efccaaf1faec68c945fbe806364e3d8749d1e2158e643c9c70d8df4dc75712f0fd70a99418e05edb0f0
+  checksum: a54f8fd3332f5db08d017cfae93a832f4a2f30eb2353ff855c9efc96777f59b76df854f4617fc33bc364b6b10985cab0da3eb21bad753bd4220e004d9e4183c4
   languageName: node
   linkType: hard
 
@@ -13022,7 +13022,7 @@ __metadata:
     "@types/react-syntax-highlighter": 13.5.2
     "@types/react-table": 7.7.14
     "@types/react-test-renderer": ^17.0.2
-    "@types/storybook-react-router": ^1.0.3
+    "@types/storybook-react-router": ^1.0.6
     "@types/testing-library__jest-dom": ^5.14.5
     "@types/uuid": ^9.0.1
     babel-loader: ^9.1.3
