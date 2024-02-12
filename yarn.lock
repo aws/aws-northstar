@@ -206,7 +206,7 @@ __metadata:
     "@storybook/addon-interactions": 6.5.9
     "@storybook/addon-links": 6.5.9
     "@storybook/builder-webpack5": 6.5.9
-    "@storybook/jest": ^0.2.2
+    "@storybook/jest": ^0.2.3
     "@storybook/manager-webpack5": 6.5.9
     "@storybook/react": 6.5.9
     "@storybook/testing-library": ^0.2.0
@@ -8652,15 +8652,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/jest@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "@storybook/jest@npm:0.2.2"
+"@storybook/jest@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "@storybook/jest@npm:0.2.3"
   dependencies:
     "@storybook/expect": storybook-jest
     "@testing-library/jest-dom": ^6.1.2
     "@types/jest": 28.1.3
     jest-mock: ^27.3.0
-  checksum: bff58ef0b5bed1f8a0a753c7d8861667f6ca8852671e06fa294af254511f6796057475c5788aecd5f9790366c8c46b504040121afb2e0ea714fa5ffa79bea220
+  checksum: 7b8231b6bbc62d1757071401adf4b575d58e23cff5922c2dae2716edb63c8c51d1a3e5179e4a0b2e7b2e591bec77dd622c0c78745ba1740a58fc2d2961bd2c99
   languageName: node
   linkType: hard
 
