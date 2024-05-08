@@ -105,7 +105,7 @@
         "@types/uuid": "^9.0.1",
         "clsx": "^2.0.0",
         "date-fns": "^2.30.0",
-        "html-react-parser": "^4.2.0",
+        "html-react-parser": "^5.1.10",
         "react-markdown": "^6.0.3",
         "react-syntax-highlighter": "^15.5.0",
         "react-table": "7.8.0",
