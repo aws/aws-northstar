@@ -58,7 +58,7 @@
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest-axe": "^3.5.3",
-    "@types/lodash": "^4.14.198",
+    "@types/lodash": "^4.17.1",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-router-dom": "^5",
