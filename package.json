@@ -88,7 +88,8 @@
         "debug": "^2.6.9",
         "@semantic-release/npm": "patch:@semantic-release/npm@9.0.2#./patches/@semantic-release+npm.9.0.2.patch",
         "yaml": "^2.2.2",
-        "semver": "^7.5.3"
+        "semver": "^7.5.3",
+        "postcss": "^8.4.38"
     },
     "workspaces": {
         "packages": [
