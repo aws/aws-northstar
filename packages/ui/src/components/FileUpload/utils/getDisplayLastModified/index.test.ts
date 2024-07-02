@@ -18,11 +18,11 @@ import getDisplayLastModified from '.';
 describe('getDisplayLastModified', () => {
     it('should return the displayed last modified date text of the date object', () => {
         const date = new Date(2022, 0, 1, 1, 1);
-        expect(getDisplayLastModified(date)).toBe('Last modified: 1/1/2022, 1:01:00 AM');
+        expect(getDisplayLastModified(date, 'en-US')).toBe('Last modified: 1/1/2022, 1:01:00 AM');
     });
 
     it('should return the displayed last modified date text of the date number', () => {
         const date = new Date(2022, 0, 1, 1, 1).getTime();
-        expect(getDisplayLastModified(date)).toBe('Last modified: 1/1/2022, 1:01:00 AM');
+        expect(getDisplayLastModified(date, 'en-US')).toBe('Last modified: 1/1/2022, 1:01:00 AM');
     });
 });

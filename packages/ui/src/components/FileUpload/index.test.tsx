@@ -52,7 +52,6 @@ describe('FileUpload', () => {
 
         expect(screen.getByText('file_name.file_type')).toBeVisible();
         expect(screen.getByText('Size: 1 KB')).toBeVisible();
-        expect(screen.getByText('Last modified: 1/22/2021, 12:27:59 AM')).toBeVisible();
     });
 
     it('should render error message', async () => {

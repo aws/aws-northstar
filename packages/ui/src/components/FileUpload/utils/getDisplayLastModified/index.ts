@@ -13,9 +13,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-const getDisplayLastModified = (lastModified: number | Date) => {
+const getDisplayLastModified = (lastModified: number | Date, locales?: string) => {
     const date = new Date(lastModified);
-    return `Last modified: ${date.toLocaleString()}`;
+    return `Last modified: ${date.toLocaleString(locales)}`;
 };
 
 export default getDisplayLastModified;
