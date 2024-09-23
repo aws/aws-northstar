@@ -33,7 +33,7 @@ find ./packages -type f -name "coverage-final.json" -path "*/coverage/*" -not \(
 npx nyc report --reporter lcov
 
 echo "Package the example app for legacy"
-./scripts/packageDemo.sh legacy ${PWD}/packages/examples/legacy ${STYLEGUIDE_FOLDER_LEGACY_EXAMPLE} ${PWD}/packages/legacy/build 4000000 1700000
+./scripts/packageDemo.sh legacy ${PWD}/packages/examples/legacy ${STYLEGUIDE_FOLDER_LEGACY_EXAMPLE} ${PWD}/packages/legacy/build 5000000 1700000
 
 echo "Package the example app for ui"
 
