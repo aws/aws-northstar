@@ -87,7 +87,9 @@
         "yaml": "^2.2.2",
         "semver": "^7.5.3",
         "postcss": "^8.4.38",
-        "braces": "^3.0.3"
+        "braces": "^3.0.3",
+        "micromatch": "^4.0.8",
+        "webpack-dev-middleware": "^5.3.4"
     },
     "workspaces": {
         "packages": [
