@@ -26,7 +26,7 @@
         "test:ci": "yarn lint && yarn workspaces foreach --exclude aws-northstar-demo-ui run test:ci && yarn license:check && git secrets --scan",
         "test": "yarn workspaces foreach --exclude aws-northstar-demo-ui run test",
         "prepare": "husky install",
-        "release": "yarn workspaces foreach --exclude aws-northstar-monorepo run semantic-release -e semantic-release-monorepo"
+        "release": "yarn workspace @aws-northstar/ui run semantic-release"
     },
     "lint-staged": {
         "**.(js|jsx|ts|tsx)": [
@@ -40,11 +40,6 @@
         "url": "https://github.com/aws/aws-northstar"
     },
     "devDependencies": {
-        "@semantic-release/commit-analyzer": "^9.0.2",
-        "@semantic-release/exec": "^6.0.3",
-        "@semantic-release/github": "^8.0.7",
-        "@semantic-release/npm": "patch:@semantic-release/npm@9.0.2#./patches/@semantic-release+npm.9.0.2.patch",
-        "@semantic-release/release-notes-generator": "^10.0.3",
         "@types/license-checker": "^25.0.3",
         "@typescript-eslint/eslint-plugin": "^5.60.1",
         "@typescript-eslint/parser": "6.6.0",
@@ -66,8 +61,6 @@
         "lint-staged": "^13.1.0",
         "oss-attribution-generator": "^1.7.1",
         "prettier": "^2.8.8",
-        "semantic-release": "^19.0.5",
-        "semantic-release-monorepo": "^7.0.5",
         "typescript": "^4.8.4"
     },
     "resolutions": {
@@ -83,7 +76,6 @@
         "nth-check": "^2.0.1",
         "deep-extend": "^0.5.1",
         "debug": "^2.6.9",
-        "@semantic-release/npm": "patch:@semantic-release/npm@9.0.2#./patches/@semantic-release+npm.9.0.2.patch",
         "yaml": "^2.2.2",
         "semver": "^7.5.3",
         "postcss": "^8.4.38",
