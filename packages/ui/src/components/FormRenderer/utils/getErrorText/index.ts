@@ -13,8 +13,17 @@
   See the License for the specific language governing permissions and
   limitations under the License.                                                                              *
  ******************************************************************************************************************** */
-const getErrorText = (validateOnMount: any, submitFailed: boolean | undefined, showError: any, error: any) => {
-    return (validateOnMount || submitFailed || showError) && error && typeof error === 'string' ? error : undefined;
+const getErrorText = (
+    validateOnMount: any,
+    submitFailed: boolean | undefined,
+    showError: any,
+    error: any,
+    submitError: any
+) => {
+    const err = error ?? submitError;
+    const shouldShowError = validateOnMount || submitFailed || showError;
+    const hasErrorText = err && typeof err === 'string';
+    return shouldShowError && hasErrorText ? err : undefined;
 };
 
 export default getErrorText;

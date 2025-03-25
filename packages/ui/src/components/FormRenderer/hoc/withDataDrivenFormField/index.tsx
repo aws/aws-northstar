@@ -67,11 +67,11 @@ function withDataDrivenFormField(
             input,
 
             validateOnMount,
-            meta: { error, submitFailed },
+            meta: { error, submitFailed, submitError },
             showError,
         } = useFieldApiProps;
         const controlId = useUniqueId(input.name);
-        const errorText = getErrorText(validateOnMount, submitFailed, showError, error);
+        const errorText = getErrorText(validateOnMount, submitFailed, showError, error, submitError);
 
         const onFocus = input.onFocus;
         const onBlur = input.onBlur;
