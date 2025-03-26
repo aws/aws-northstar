@@ -20,11 +20,16 @@ jobs:
       - run: npm install -g yarn
       - run: npm install -g oss-attribution-generator
       - run: PATH=/tmp/git-secrets/bin:$PATH bash ./scripts/build.sh
-      - name: Upload artifact
+      - name: Upload page artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: packages/ui/storybook.out
-  deploy:
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4.4.0
+        with:
+          name: build-artifact
+          path: packages/ui/build
+  deploy-pages:
     needs: build
     permissions:
       pages: write    
@@ -37,4 +42,28 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
+  release:
+    needs: deploy
+    permissions:
+      contents: read
+      id-token: write
+      issues: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifact
+          path: packages/ui/build
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          dry_run: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
