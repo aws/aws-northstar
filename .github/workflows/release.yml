@@ -45,7 +45,7 @@ jobs:
   release:
     needs: deploy-pages
     permissions:
-      contents: read
+      contents: write
       id-token: write
       issues: write
       pull-requests: write
