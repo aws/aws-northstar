@@ -19,14 +19,6 @@ if [ -d ${BUILD_FOLDER_UI} ]; then rm -rf ${BUILD_FOLDER_UI}; fi
 
 yarn build
 
-echo 'Merge coverage reports'
-if ! [ -d .nyc_output/ ]; then mkdir .nyc_output/; fi 
-find ./packages -type f -name "coverage-final.json" -path "*/coverage/*" -not \( -path "*/node_modules/*" -prune \) \
-| nl -bt -nln \
-| sed -re 's!^([0-9]+) +\t(.+)$!\2 .nyc_output/coverage-final-\1.json!' \
-| xargs -L 1 -t cp 
-npx nyc report --reporter lcov
-
 echo "Package the example app for ui"
 
 ./scripts/packageDemo.sh ui ${PWD}/packages/examples/ui ${STORYBOOK_FOLDER_UI_EXAMPLE} ${PWD}/packages/ui/build 1500000 1200000

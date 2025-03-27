@@ -1,6 +1,5 @@
 # NorthStar - Prototyping Design System
 
-[![CodeBuild Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiTm9JSkpnb2IrV09tcGcwU2E5c0diN1lJaVdkbEQza0FoeVVpWnljb3hSZHBEb09mS1pCMmwva3R5SXlYa2Fqem1NVVUrNGJaSFVMTCt5R1VKZ1hDRm5FPSIsIml2UGFyYW1ldGVyU3BlYyI6Ijkyd2FEMFc5cmlmN3hxUnYiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiTm9JSkpnb2IrV09tcGcwU2E5c0diN1lJaVdkbEQza0FoeVVpWnljb3hSZHBEb09mS1pCMmwva3R5SXlYa2Fqem1NVVUrNGJaSFVMTCt5R1VKZ1hDRm5FPSIsIml2UGFyYW1ldGVyU3BlYyI6Ijkyd2FEMFc5cmlmN3hxUnYiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
 [![Github Action Workflow - CI](https://github.com/aws/aws-northstar/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aws/aws-northstar/actions/workflows/ci.yml)
 [![NorthStar UI NPM latest version](https://img.shields.io/npm/v/@aws-northstar/ui)](https://www.npmjs.com/package/@aws-northstar/ui)
 [![Coverage Status](https://coveralls.io/repos/github/aws/aws-northstar/badge.svg?branch=main)](https://coveralls.io/github/aws/aws-northstar?branch=main)
@@ -35,13 +34,11 @@ Contribution guide are available at the [Contributing Guidelines](https://github
 
 ### Folder Structure
 
-This monorepo hosts source code for both NorthStar legacy and NorthStar v2. 
+This monorepo hosts source code for NorthStar v2 and its example project. 
 
 | Path                                  |                                                |
 | ------------------------------------- | ---------------------------------------------- |
-| **packages/legacy**                   | Source code for NorthStar legacy               |
 | **packages/ui**                       | Source code for NorthStar v2                   |
-| **packages/examples/legacy**          | Source code for NorthStar legacy demo app      |
 | **packages/examples/ui**              | Source code for NorthStar v2 demo app          |
 
 ### Prerequisites

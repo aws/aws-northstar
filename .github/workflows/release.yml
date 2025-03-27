@@ -24,11 +24,35 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: packages/ui/storybook.out
-      - name: Upload artifact
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4.4.0
         with:
           name: build-artifact
           path: packages/ui/build
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4.4.0
+        with:
+          name: coverage-artifact
+          path: packages/ui/coverage
+  publish-coverage: 
+    needs: build
+    permissions:
+      contents: read
+      id-token: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-artifact
+          path: packages/ui/coverage
+      - name: Publish Coverall coverage
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        uses: coverallsapp/github-action@v2
+        with:
+          file: package/ui/coverage/lcov.info
   deploy-pages:
     needs: build
     permissions:
