@@ -38,7 +38,7 @@ jobs:
     needs: build
     permissions:
       contents: read
-      id-token: read
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - name: Download coverage artifacts
