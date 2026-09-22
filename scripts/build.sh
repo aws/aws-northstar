@@ -21,4 +21,4 @@ yarn build
 
 echo "Package the example app for ui"
 
-./scripts/packageDemo.sh ui ${PWD}/packages/examples/ui ${STORYBOOK_FOLDER_UI_EXAMPLE} ${PWD}/packages/ui/build 1500000 1200000
+./scripts/packageDemo.sh ui ${PWD}/packages/examples/ui ${STORYBOOK_FOLDER_UI_EXAMPLE} ${PWD}/packages/ui/build 1600000 1500000

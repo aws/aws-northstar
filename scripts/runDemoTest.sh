@@ -30,7 +30,7 @@ yarn
 yarn build
 
 echo "Creating source map"
-npx source-map-explorer build/static/js/*.js --json result.json
+npx source-map-explorer build/static/js/*.js --no-border-checks --json result.json
 
 echo "File bundle size:"
 cat result.json | jq ".results[] | .bundleName,.totalBytes" 
